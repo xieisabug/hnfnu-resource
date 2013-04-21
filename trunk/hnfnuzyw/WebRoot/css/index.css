@@ -1,0 +1,22 @@
+body {
+    padding: 5px;
+    margin: 0;
+    padding-bottom: 15px;
+}
+
+#mainbody {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#toppage {
+    height: 20px;
+    background: #f8f8f8;
+    margin-bottom: 3px;
+}
+
+#mainmenu {
+    width: 200px;
+    overflow: hidden;
+}
