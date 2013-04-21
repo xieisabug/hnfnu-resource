@@ -1,22 +1,21 @@
-body {
-    padding: 5px;
-    margin: 0;
-    padding-bottom: 15px;
-}
-
-#mainbody {
-    width: 100%;
+*{
     margin: 0;
     padding: 0;
 }
+body {
+    padding: 5px 5px 0px 10px;
+}
 
-#toppage {
+#main_body {
+    width: 100%;
+}
+
+#top_page {
     height: 20px;
     background: #f8f8f8;
     margin-bottom: 3px;
 }
 
-#mainmenu {
+#main_menu {
     width:100%;
-    overflow: hidden;
 }

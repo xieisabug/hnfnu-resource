@@ -1,9 +1,14 @@
-$(function ()
-{
-    $("#mainbody").ligerLayout({leftWidth: 200});
+var tab,layout,accordion;
+
+$(function () {
+    layout = $("#main_body").ligerLayout({
+        height:'100%',
+        heightDiff:-3,
+        leftWidth:200
+    });
     var bodyHeight = $(".l-layout-center:first").height();
-    $("#mainmenu").ligerAccordion({height:bodyHeight-24});
-    $("#mainframe").ligerTab();
-
-
+    accordion = $("#main_menu").ligerAccordion({
+        height:bodyHeight - 25
+    });
+    tab = $("#mainframe").ligerTab();
 });
