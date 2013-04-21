@@ -1,14 +1,17 @@
-*{
+* {
     margin: 0;
     padding: 0;
 }
+
 body {
-    padding: 5px 5px 0px 10px;
+    padding-top: 5px;
 }
 
 #main_body {
-    width: 100%;
+    width: 99.2%;
+    margin: 0 auto;
 }
+
 
 #top_page {
     height: 20px;
@@ -17,5 +20,53 @@ body {
 }
 
 #main_menu {
-    width:100%;
+    width: 100%;
+}
+
+.menulist li img {
+    position: absolute;
+    left: 4px;
+    top: 4px;
+    width: 16px;
+    height: 16px;
+}
+
+.menulist li {
+    height: 24px;
+    line-height: 24px;
+    padding-left: 24px;
+    display: block;
+    position: relative;
+    cursor: pointer;
+    text-align: left;
+}
+
+.menulist li.over {
+    background: url('../App/Lib/images/index/menuitem.gif') repeat-x 0px 0px;
+}
+
+.menulist li.over .menuitem-l {
+    background: url('../App/Lib/images/index/menuitem.gif') repeat-x 0px -24px;
+    width: 2px;
+    height: 24px;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.menulist li.over .menuitem-r {
+    background: url('../App/Lib/images/index/menuitem.gif') repeat-x -1px -24px;
+    width: 2px;
+    height: 24px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.menulist {
+    margin-left: 2px;
+    margin-right: 2px;
+    margin-top: 2px;
+    text-align: left;
+    color: #000;
 }
