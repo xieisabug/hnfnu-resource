@@ -11,12 +11,14 @@ $(function () {
     layout = $("#main_body").ligerLayout({
         height:'100%',
         heightDiff:-3,
-        leftWidth:200,
+        leftWidth:'19%',
+        centerWidth:'80%',
+        space:10,
         onHeightChanged:f_heightChanged
     });
     var bodyHeight = $(".l-layout-center:first").height();
 
-    tab = $("#mainframe").ligerTab();
+    tab = $("#mainframe").ligerTab({contextmenu:true});
     var main_menu = $("#main_menu");
 
     $.get('welcome.html', function (data) {
