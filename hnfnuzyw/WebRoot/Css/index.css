@@ -23,14 +23,13 @@ body {
     width: 100%;
 }
 
-.menulist li img {
-    position: absolute;
-    left: 4px;
-    top: 4px;
-    width: 16px;
-    height: 16px;
+.menulist {
+    margin-left: 2px;
+    margin-right: 2px;
+    margin-top: 2px;
+    text-align: left;
+    color: #000;
 }
-
 .menulist li {
     height: 24px;
     line-height: 24px;
@@ -40,11 +39,16 @@ body {
     cursor: pointer;
     text-align: left;
 }
-
+.menulist li img {
+    position: absolute;
+    left: 4px;
+    top: 4px;
+    width: 16px;
+    height: 16px;
+}
 .menulist li.over {
     background: url('../App/Lib/images/index/menuitem.gif') repeat-x 0px 0px;
 }
-
 .menulist li.over .menuitem-l {
     background: url('../App/Lib/images/index/menuitem.gif') repeat-x 0px -24px;
     width: 2px;
@@ -53,7 +57,6 @@ body {
     left: 0;
     top: 0;
 }
-
 .menulist li.over .menuitem-r {
     background: url('../App/Lib/images/index/menuitem.gif') repeat-x -1px -24px;
     width: 2px;
@@ -61,12 +64,4 @@ body {
     position: absolute;
     right: 0;
     top: 0;
-}
-
-.menulist {
-    margin-left: 2px;
-    margin-right: 2px;
-    margin-top: 2px;
-    text-align: left;
-    color: #000;
 }
