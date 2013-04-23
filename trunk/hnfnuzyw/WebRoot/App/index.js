@@ -1,12 +1,45 @@
+//几个布局的对象
 var tab, layout, accordion;
-$(function () {
+//tabid计数器，保证tabid不会重复
+var tabidcounter = 0;
 
-    function f_heightChanged(options) {
-        if (tab)
-            tab.addHeight(options.diff);
-        if (accordion && options.middleHeight - 24 > 0)
-            accordion.setHeight(options.middleHeight - 24);
+function f_heightChanged(options) {
+    if (tab)
+        tab.addHeight(options.diff);
+    if (accordion && options.middleHeight - 24 > 0)
+        accordion.setHeight(options.middleHeight - 24);
+}
+//增加tab项的函数
+function f_addTab(tabid, text, url) {
+    if (!tab) return;
+    if (!tabid) {
+        tabidcounter++;
+        tabid = "tabid" + tabidcounter;
     }
+    tab.addTabItem({ tabid:tabid, text:text, url:url });
+}
+
+
+$(document).ready(function () {
+    //菜单初始化
+    $("ul.menulist li").live("click",function () {
+        var jitem = $(this);
+        var tabid = jitem.attr("tabid");
+        var url = jitem.attr("url");
+        if (!url)return;
+        if (!tabid) {
+            tabidcounter++;
+            tabid = "tabid" + tabidcounter;
+            jitem.attr("tabid", tabid);
+        }
+        f_addTab(tabid, $("span:first", jitem).html(), url);
+    }).live("mouseover",function () {
+            var item = $(this);
+            item.addClass("over");
+        }).live("mouseout", function () {
+            var item = $(this);
+            item.removeClass("over");
+        });
 
     layout = $("#main_body").ligerLayout({
         height:'100%',
@@ -24,20 +57,12 @@ $(function () {
     $.get('welcome.html', function (data) {
             $('#welcome').html(data)
         }
-    )
-
-    //菜单初始化
-    $("ul.menulist li").live("mouseover",function () {
-        $(this).addClass("over");
-    }).live("mouseout", function () {
-        $(this).removeClass("over");
-    });
-
+    );
 
     /* 数据库获得菜单*/
     $.getJSON('./Json/menu.json', function (menus) {
             $(menus).each(function (i, menu) {
-                var item = $('<div title="' + menu.name + '"> <ul class="menuList"></ul></div>');
+                var item = $('<div title="' + menu.name + '"> <ul class="menulist"></ul></div>');
                 $(menu.children).each(function (i, submenu) {
                     var subitem = $('<li><img/><span></span><div class="menuitem-l"></div><div class="menuitem-r"></div></li>');
                     subitem.attr({
