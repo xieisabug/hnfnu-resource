@@ -2,9 +2,10 @@
     {
         "name":" 管理系统",
         "children":[
-            {"id":"1","name":"菜单管理","url":"./welcome.html","icon":"./App/Lib/icons/32X32/product_169.gif" },
+            {"id":"1","name":"菜单管理","url":"App/System/Menu/MenuManage.html","icon":"./App/Lib/icons/32X32/product_169.gif" },
             {"id":"2","name":"角色管理","url":"./welcome.html","icon":"./App/Lib/icons/32X32/product_169.gif" },
-            {"id":"3","name":"用户管理","url":"./welcome.html","icon":"./App/Lib/icons/32X32/product_169.gif" }
+            {"id":"3","name":"用户管理","url":"./welcome.html","icon":"./App/Lib/icons/32X32/product_169.gif" },
+            {"id":"4","name":"功能管理","url":"App/System/Function/FunctionManage.html","icon":"./App/Lib/icons/32X32/product_169.gif" }
         ]
     },
     {
