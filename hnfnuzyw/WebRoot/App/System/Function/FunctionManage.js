@@ -1,14 +1,70 @@
 var functionGrid = null;
+var addFunctionForm = null;
+var functionWin = null;
+
 function add_function() {
-    $.ligerDialog.open({
+    if(!addFunctionForm){
+        addFunctionForm = $('<form></form>');
+        addFunctionForm.ligerForm({
+            inputWidth:280,
+            fields:[
+                {
+                    name:'id',
+                    display:'ID',
+                    type:'text'
+                },
+                {
+                    display:'功能名称',
+                    name:'name',
+                    type:'text',
+                    space:30,
+                    labelWidth:100,
+                    width:220,
+                    newline:true,
+                    validate:{
+                        required:true,
+                        maxlength:50
+                    }
+                },
+                {
+                    display:'备注',
+                    name:'remark',
+                    type:'text',
+                    space:30,
+                    labelWidth:100,
+                    width:220,
+                    newline:true,
+                    validate:{
+                        required:true,
+                        maxlength:50
+                    }
+                }
+            ]
+        });
+    }
+    functionWin = $.ligerDialog.open({
         width:500,
         height:500,
         title:'新增功能',
-        url:'FunctionAdd.html',
+        target:addFunctionForm,
         buttons:[
-            {text:'提交',width:80,onclick:function(a,b,c){console.log(a);console.log(b);console.log(c);}}
+            {text:'保存', width:150, onclick:add_save}
         ]
     });
+}
+function add_save() {
+    var data, form = addFunctionForm.formToArray();
+    var row = functionGrid.getSelectedRow(), len = form.length;
+    data = '{';
+    for (var i = 0; i < len; i++) {
+        data += form[i].name + ':"' + form[i].value + '"';
+        if (i != len - 1) {
+            data += ',';
+        }
+    }
+    data += '}';
+    var manager = $("#functionGrid").ligerGetGridManager();
+    manager.addRow($.parseJSON(data));
 }
 function edit_function() {
     $.ligerDialog.alert('edit');
