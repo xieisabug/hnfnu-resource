@@ -11,7 +11,11 @@ function add_function() {
                 {
                     name:'id',
                     display:'ID',
-                    type:'text'
+                    type:'text',
+                    space:30,
+                    labelWidth:100,
+                    newline:true,
+                    width:220
                 },
                 {
                     display:'功能名称',
@@ -41,6 +45,8 @@ function add_function() {
                 }
             ]
         });
+    } else {
+        addFunctionForm[0].reset();
     }
     functionWin = $.ligerDialog.open({
         width:500,
@@ -48,7 +54,8 @@ function add_function() {
         title:'新增功能',
         target:addFunctionForm,
         buttons:[
-            {text:'保存', width:150, onclick:add_save}
+            {text:'增加', width:80, onclick:add_save},
+            {text:'取消', width:80, onclick:add_cancel}
         ]
     });
 }
@@ -57,14 +64,17 @@ function add_save() {
     var row = functionGrid.getSelectedRow(), len = form.length;
     data = '{';
     for (var i = 0; i < len; i++) {
-        data += form[i].name + ':"' + form[i].value + '"';
+        data += '"' + form[i].name + '"' + ':"' + form[i].value + '"';
         if (i != len - 1) {
             data += ',';
         }
     }
     data += '}';
-    var manager = $("#functionGrid").ligerGetGridManager();
-    manager.addRow($.parseJSON(data));
+    functionGrid.addRow($.parseJSON(data));
+    functionWin.close();
+}
+function add_cancel() {
+    functionWin.close();
 }
 function edit_function() {
     $.ligerDialog.alert('edit');
