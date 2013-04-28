@@ -14,3 +14,25 @@ Form.parseJSON = function(f){
     data += '}';
     return $.parseJSON(data);
 }
+Form.loadForm = function(form,data){
+    console.log(form);
+    console.log(data);
+    for(var name in data){
+        var ele = $("[name=" + name + "]",form);
+        if(ele.is(":checkbox,:radio")) {
+            ele[0].checked = data[p] ? true : false;
+        } else {
+            ele.val(data[name]);
+        }
+    }
+    //下面是更新表单的样式
+    var managers = $.ligerui.find($.ligerui.controls.Input);
+    for (var i = 0, l = managers.length; i < l; i++)
+    {
+        //改变了表单的值，需要调用这个方法来更新ligerui样式
+        var o = managers[i];
+        o.updateStyle();
+        if (managers[i] instanceof $.ligerui.controls.TextBox)
+            o.checkValue();
+    }
+}

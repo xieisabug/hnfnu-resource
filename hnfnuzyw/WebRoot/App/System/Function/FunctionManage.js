@@ -4,80 +4,46 @@ var functionWin = null;
 
 function add_function() {
     if(!addFunctionForm){
-        addFunctionForm = $('<form></form>');
-        addFunctionForm.ligerForm({
-            inputWidth:280,
-            fields:[
-                {
-                    name:'id',
-                    display:'ID',
-                    type:'text',
-                    space:30,
-                    labelWidth:100,
-                    newline:true,
-                    width:220
-                },
-                {
-                    display:'功能名称',
-                    name:'name',
-                    type:'text',
-                    space:30,
-                    labelWidth:100,
-                    width:220,
-                    newline:true,
-                    validate:{
-                        required:true,
-                        maxlength:50
-                    }
-                },
-                {
-                    display:'备注',
-                    name:'remark',
-                    type:'text',
-                    space:30,
-                    labelWidth:100,
-                    width:220,
-                    newline:true,
-                    validate:{
-                        required:true,
-                        maxlength:50
-                    }
-                }
-            ]
-        });
+        formInit();
     } else {
         addFunctionForm[0].reset();
     }
     functionWin = $.ligerDialog.open({
-        width:500,
-        height:500,
+        width:400,
+        height:200,
         title:'新增功能',
         target:addFunctionForm,
         buttons:[
-            {text:'增加', width:80, onclick:add_save},
+            {text:'提交', width:80, onclick:add_save},
             {text:'取消', width:80, onclick:add_cancel}
         ]
     });
 }
 function add_save() {
-    var data, form = addFunctionForm.formToArray();
-    var row = functionGrid.getSelectedRow(), len = form.length;
-    data = '{';
-    for (var i = 0; i < len; i++) {
-        data += '"' + form[i].name + '"' + ':"' + form[i].value + '"';
-        if (i != len - 1) {
-            data += ',';
-        }
-    }
-    data += '}';
-    functionGrid.addRow($.parseJSON(data));
+    var data = Form.parseJSON(addFunctionForm);
+    //todo 需要发往服务器，返回成功后再添加到表格中
+    functionGrid.addRow(data);
     functionWin.close();
 }
 function add_cancel() {
     functionWin.close();
 }
 function edit_function() {
-    $.ligerDialog.alert('edit');
+    if(!addFunctionForm){
+        formInit();
+    }
+    Form.loadForm(addFunctionForm,functionGrid.getSelected());
+
+    functionWin = $.ligerDialog.open({
+        width:400,
+        height:200,
+        title:'编辑功能',
+        target:addFunctionForm,
+        buttons:[
+            {text:'提交', width:80, onclick:add_save},
+            {text:'取消', width:80, onclick:add_cancel}
+        ]
+    });
 }
 function delete_function() {
     var row = functionGrid.getSelected();
@@ -86,6 +52,49 @@ function delete_function() {
             //todo 进行ajax操作，成功后在回调函数里删除选择的行
             functionGrid.deleteSelectedRow();
         }
+    });
+}
+function formInit(){
+    addFunctionForm = $('<form></form>');
+    addFunctionForm.ligerForm({
+        inputWidth:280,
+        fields:[
+            {
+                name:'id',
+                display:'ID',
+                type:'text',
+                space:30,
+                labelWidth:100,
+                newline:true,
+                width:220
+            },
+            {
+                display:'功能名称',
+                name:'name',
+                type:'text',
+                space:30,
+                labelWidth:100,
+                width:220,
+                newline:true,
+                validate:{
+                    required:true,
+                    maxlength:50
+                }
+            },
+            {
+                display:'备注',
+                name:'remark',
+                type:'text',
+                space:30,
+                labelWidth:100,
+                width:220,
+                newline:true,
+                validate:{
+                    required:true,
+                    maxlength:50
+                }
+            }
+        ]
     });
 }
 $(function () {
