@@ -78,6 +78,7 @@ $(document).ready(function () {
             accordion = $("#main_menu").ligerAccordion({
                 height:bodyHeight - 25
             });
+            $('#pageloading').hide();
         }
     );
 
