@@ -1,6 +1,8 @@
 var roleGrid = null;//功能表格
 var roleForm = null;//功能表单
 var roleWin = null;//功能窗口
+var joinTree = null;//树
+var treeManager = null;//树的管理器
 
 //增加功能的函数
 function add_role() {
@@ -83,10 +85,10 @@ function role_menu_join() {
         $.ligerDialog.warn('请选择您要赋予权限的角色.');
         return;
     }
-    var row = roleGrid.getSelected();
+    //var row = roleGrid.getSelected();
     //todo tree需要发送上面获取row的信息到服务器，返回来一系列的数据来生成
-    var tree = $('<ul></ul>');
-    tree.ligerTree({
+    joinTree = $('<ul></ul>');
+    joinTree.ligerTree({
         data:[
             {
                 text:'test1',
@@ -102,11 +104,12 @@ function role_menu_join() {
             }
         ]
     });
+    treeManager = joinTree.ligerGetTreeManager();
     roleWin = $.ligerDialog.open({
         width:400,
         height:400,
         title:'权限赋予',
-        target:tree,
+        target:joinTree,
         buttons:[
             {text:'提交', width:80, onclick:join_save},
             {text:'取消', width:80, onclick:join_cancel}
@@ -115,6 +118,14 @@ function role_menu_join() {
 }
 function join_save(){
     //todo ajax发送数据后返回成功消息即可
+    var checked = treeManager.getChecked();
+    var len = checked.length;
+    var data = "";
+    for(var i = 0; i < len; i++){
+        data  += checked[i].data.text;
+    }
+    //console.log(data);
+    roleWin.close();
 }
 function join_cancel(){
     roleWin.close();

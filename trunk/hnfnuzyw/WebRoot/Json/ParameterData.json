@@ -1,0 +1,33 @@
+{
+    "Rows":[
+        {
+            "id":"1",
+            "name":"maxAge",
+            "value":"150",
+            "type":"number",
+            "remark":"呵呵呵而后"
+        },
+        {
+            "id":"2",
+            "name":"minAge",
+            "value":"10",
+            "type":"number",
+            "remark":"呵呵呵而后"
+        },
+        {
+            "id":"3",
+            "name":"welcome",
+            "value":"欢迎访问",
+            "type":"string",
+            "remark":"呵呵呵而后"
+        },
+        {
+            "id":"4",
+            "name":"menu",
+            "value":"Function,Menu,Parameter,Role,User",
+            "type":"array",
+            "remark":"呵呵呵而后"
+        }
+    ],
+    "total":4
+}
