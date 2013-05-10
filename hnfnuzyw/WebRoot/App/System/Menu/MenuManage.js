@@ -19,7 +19,7 @@ function add_menu() {
                     {name:"id", type:"hidden"},
                     {display:"菜单名字", name:"name", newline:true, type:"text", group:"必填信息", groupicon:groupicon},
                     {display:"菜单链接", name:"url", newline:true, type:"text"},
-                    {display:"功能列表", name:"functionId", type:"select", comboboxName:"functionIdList", options:{valueFieldID:"functionId", url:"../../../Json/Function.json"}},
+                    {display:"功能列表", name:"functionId", type:"select", comboboxName:"functionIdList", options:{isShowCheckBox: true, isMultiSelect: true,valueFieldID:"functionId", url:"../../../Json/Function.json"}},
                     {display:"图标链接", name:"icon", type:"text", group:"可选信息", groupicon:groupicon},
                     {display:"上级菜单", name:"parentId", type:"select", comboboxName:"parentIdList", options:{valueFieldID:"parentId", url:"../../../Json/ParentMenu.json"}}
                 ]
