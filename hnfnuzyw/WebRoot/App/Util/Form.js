@@ -13,14 +13,14 @@ Form.parseJSON = function(f){
     }
     data += '}';
     return $.parseJSON(data);
-}
+};
 Form.loadForm = function(form,data){
-    console.log(form);
-    console.log(data);
+    //console.log(form);
+    //console.log(data);
     for(var name in data){
         var ele = $("[name=" + name + "]",form);
         if(ele.is(":checkbox,:radio")) {
-            ele[0].checked = data[p] ? true : false;
+            ele[0].checked = data[name] ? true : false;
         } else {
             ele.val(data[name]);
         }
@@ -35,4 +35,4 @@ Form.loadForm = function(form,data){
         if (managers[i] instanceof $.ligerui.controls.TextBox)
             o.checkValue();
     }
-}
+};

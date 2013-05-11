@@ -9,11 +9,13 @@ function add_parameter() {
     } else {
         parameterForm[0].reset();
     }
+    console.log(parameterForm);
     parameterWin = $.ligerDialog.open({
         width:400,
         height:200,
         title:'新增功能',
         target:parameterForm,
+        isHidden:false,
         buttons:[
             {text:'提交', width:80, onclick:add_save},
             {text:'取消', width:80, onclick:add_cancel}
@@ -23,6 +25,7 @@ function add_parameter() {
 //增加功能的保存按钮事件
 function add_save() {
     var data = Form.parseJSON(parameterForm);
+    //console.log(data);
     //todo 需要发往服务器，返回成功后再添加到表格中
     parameterGrid.addRow(data);
     parameterWin.close();
@@ -46,6 +49,7 @@ function edit_parameter() {
         height:200,
         title:'编辑功能',
         target:parameterForm,
+        isHidden:false,
         buttons:[
             {text:'提交', width:80, onclick:edit_save},
             {text:'取消', width:80, onclick:edit_cancel}
@@ -55,6 +59,7 @@ function edit_parameter() {
 //修改功能的保存按钮事件
 function edit_save() {
     var data = Form.parseJSON(parameterForm);
+    //console.log(data);
     //todo 需要发往服务器，返回成功后再修改到表格中
     parameterGrid.update(parameterGrid.getSelected(), data);
     parameterWin.close();
@@ -129,10 +134,11 @@ function formInit() {
                 newline:true,
                 options:{
                     valueFieldID:"type",
+                    valueField:"value",
                     data:[
-                        {"text":"array","value":"array"},
-                        {"text":"number","value":"number"},
-                        {"text":"string","value":"string"}
+                        {"id":0,"text":"array","value":"array"},
+                        {"id":1,"text":"number","value":"number"},
+                        {"id":2,"text":"string","value":"string"}
                     ]
                 },
                 validate:{
@@ -155,6 +161,7 @@ function formInit() {
             }
         ]
     });
+    console.log(parameterForm);
 }
 //初始化表格
 $(function () {
