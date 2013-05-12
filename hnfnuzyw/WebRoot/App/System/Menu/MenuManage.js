@@ -7,24 +7,11 @@ function itemclick(item) {
 }
 //增加菜单的函数
 function add_menu() {
-    var groupicon = "../../../App/Lib/ligerUI/skins/icons/communication.gif";
+
     if (!addMenuForm) {
-        addMenuForm = $('<form></form>');
-        addMenuForm.ligerForm(
-            {
-                inputWidth:200,
-                labelWidth:90,
-                space:40,
-                fields:[
-                    {name:"id", type:"hidden"},
-                    {display:"菜单名字", name:"name", newline:true, type:"text", group:"必填信息", groupicon:groupicon},
-                    {display:"菜单链接", name:"url", newline:true, type:"text"},
-                    {display:"功能列表", name:"functionId", type:"select", comboboxName:"functionIdList", options:{isShowCheckBox: true, isMultiSelect: true,valueFieldID:"functionId", url:"../../../Json/Function.json"}},
-                    {display:"图标链接", name:"icon", type:"text", group:"可选信息", groupicon:groupicon},
-                    {display:"上级菜单", name:"parentId", type:"select", comboboxName:"parentIdList", options:{valueFieldID:"parentId", url:"../../../Json/ParentMenu.json"}}
-                ]
-            }
-        );
+       formInit();
+    }else{
+        addMenuForm[0].reset();
     }
 
     menuFormWin = $.ligerDialog.open(
@@ -102,8 +89,9 @@ function edit_save() {
 function edit_cancel() {
     menuFormWin.close();
 }
-/*//初始化表单，生成form标签
+//初始化表单，生成form标签
 function formInit() {
+    var groupicon = "../../../App/Lib/ligerUI/skins/icons/communication.gif";
     addMenuForm = $('<form></form>');
     addMenuForm.ligerForm(
         {
@@ -120,7 +108,7 @@ function formInit() {
             ]
         }
     );
-}*/
+}
 
 //页面加载完成后就开始调用
 $(function () {

@@ -1,88 +1,10 @@
 var userGrid = null;//用户表格
 var userForm = null;//用户表单
 var userWin = null;//用户窗口
-
-//增加用户的函数
-function add_user() {
-    if(!userForm){
-        userForm = fromInit();
-    }else {
-        userForm[0].reset();
-    }
-
-   userWin = $.ligerDialog.open({
-        width:400,
-        height:200,
-        title:'新增功能',
-        target:userForm,
-        buttons:[
-            {text:'提交', width:80, onclick:add_save},
-            {text:'取消', width:80, onclick:add_cancel}
-        ]
-    });
-}
-//增加用户的保存按钮事件
-function add_save() {
-    var data = Form.parseJSON(userForm);
-    //todo 需要发往服务器，返回成功后再添加到表格中
-    userGrid.addRow(data);
-    userWin.close();
-}
-//增加功能的取消按钮事件
-function add_cancel() {
-    userWin.close();
-}
-
-//删除用户的函数
-function delete_user() {
-    if (!userGrid.getSelected()) {
-        $.ligerDialog.warn('请选择您要删除的行.');
-        return;
-    }
-    var row = userGrid.getSelected();
-    $.ligerDialog.confirm('确认删除' + row.name + '？', '删除功能', function (r) {
-        if (r) {
-            //todo 进行ajax操作，成功后在回调函数里删除选择的行
-            userGrid.deleteSelectedRow();
-        }
-    });
-}
-function edit_user() {
-    if (!userForm) {
-        formInit();
-    }
-    if (!userGrid.getSelected()) {
-        $.ligerDialog.warn('请选择您要修改的行.');
-        return;
-    }
-    Form.loadForm(userForm, userGrid.getSelected());
-    userWin = $.ligerDialog.open({
-        width:400,
-        height:200,
-        title:'编辑功能',
-        target:userForm,
-        buttons:[
-            {text:'提交', width:80, onclick:edit_save},
-            {text:'取消', width:80, onclick:edit_cancel}
-        ]
-    });
-}
-//修改用户的保存按钮事件
-function edit_save() {
-    var data = Form.parseJSON(userForm);
-    //todo 需要发往服务器，返回成功后再修改到表格中
-    userGrid.update(userGrid.getSelected(), data);
-    userWin.close();
-}
-//修改功能的取消按钮事件
-function edit_cancel() {
-    userWin.close();
-}
-
 //初始化表单
-function fromInit() {
+function formInit() {
     var groupicon = "../../../App/Lib/ligerUI/skins/icons/communication.gif";
-    userForm = $("<form></form>");
+    userForm = $('<form></form>');
     userForm.ligerForm(
         {
             inputWidth:280,
@@ -160,16 +82,15 @@ function fromInit() {
                     labelWidth:100,
                     newline:true,
                     width:200,
-                    group:'选填信息',
-                    groupicon:groupicon
+                   group:'选填信息',
+                   groupicon:groupicon
                 },
                 {
                     name:'sex',
                     display:'性别',
                     type:'select',
                     comboboxName:'sex',
-                    space:30,
-                    options:{url:"../../../Json/Sex.json"}
+                    options:{isShowCheckBox:true,data:[{text:'男',id:'1'},{text:'女',id:'0'}],valueFieldID:'sexId'}
                 },
                 {
                     name:'qq',
@@ -198,11 +119,88 @@ function fromInit() {
                     newline:true,
                     width:200
                 }
-
             ]
         }
     );
 }
+//增加用户的函数
+function add_user() {
+    if(!userForm){
+        formInit();
+    }else {
+        userForm[0].reset();
+    }
+
+   userWin = $.ligerDialog.open({
+        width:400,
+        height:600,
+        title:'新增功能',
+        target:userForm,
+        buttons:[
+            {text:'提交', width:80, onclick:add_save},
+            {text:'取消', width:80, onclick:add_cancel}
+        ]
+    });
+}
+//增加用户的保存按钮事件
+function add_save() {
+    var data = Form.parseJSON(userForm);
+    //todo 需要发往服务器，返回成功后再添加到表格中
+    userGrid.addRow(data);
+    userWin.close();
+}
+//增加功能的取消按钮事件
+function add_cancel() {
+    userWin.close();
+}
+
+//删除用户的函数
+function delete_user() {
+    if (!userGrid.getSelected()) {
+        $.ligerDialog.warn('请选择您要删除的行.');
+        return;
+    }
+    var row = userGrid.getSelected();
+    $.ligerDialog.confirm('确认删除' + row.name + '？', '删除功能', function (r) {
+        if (r) {
+            //todo 进行ajax操作，成功后在回调函数里删除选择的行
+            userGrid.deleteSelectedRow();
+        }
+    });
+}
+function edit_user() {
+    if (!userForm) {
+        formInit();
+    }
+    if (!userGrid.getSelected()) {
+        $.ligerDialog.warn('请选择您要修改的行.');
+        return;
+    }
+    Form.loadForm(userForm, userGrid.getSelected());
+    userWin = $.ligerDialog.open({
+        width:400,
+        height:500,
+        title:'编辑功能',
+        target:userForm,
+        buttons:[
+            {text:'提交', width:80, onclick:edit_save},
+            {text:'取消', width:80, onclick:edit_cancel}
+        ]
+    });
+}
+//修改用户的保存按钮事件
+function edit_save() {
+    var data = Form.parseJSON(userForm);
+    //todo 需要发往服务器，返回成功后再修改到表格中
+    userGrid.update(userGrid.getSelected(), data);
+    userWin.close();
+}
+//修改功能的取消按钮事件
+function edit_cancel() {
+    userWin.close();
+}
+
+
 
 
 //初始化表格
@@ -217,7 +215,7 @@ $(function () {
         var ajaxToolbar = [
             {name:'add'},
             {name:'delete'}
-        ]
+        ];
         //确认权限的是否有这个功能
         toolbarItems = Toolbar.confirmToolbar(toolbarItems, ajaxToolbar);
         userGrid = $("#userGrid").ligerGrid(
@@ -228,7 +226,7 @@ $(function () {
                     {display:'姓名', name:'name', align:'left', width:80},
                     {display:'身份证号码', name:'idcard', align:'left', width:100},
                     {display:'性别', name:'sex', align:'left', width:50},
-                    {display:'QQ', name:'sex', align:'left', width:100},
+                    {display:'QQ', name:'qq', align:'left', width:100},
                     {display:'电话号码', name:'telephone', align:'left', width:120},
                     {display:'生日', name:'birth', align:'left', width:100},
                     {display:'部门', name:'department', align:'left', width:80},
