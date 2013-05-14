@@ -4,11 +4,7 @@ var functionWin = null;//功能窗口
 
 //增加功能的函数
 function add_function() {
-    if (!functionForm) {
-        formInit();
-    } else {
-        functionForm[0].reset();
-    }
+    formInit();
     functionWin = $.ligerDialog.open({
         width:400,
         height:200,
@@ -33,9 +29,7 @@ function add_cancel() {
 }
 //修改功能的函数
 function edit_function() {
-    if (!functionForm) {
-        formInit();
-    }
+    formInit();
     if (!functionGrid.getSelected()) {
         $.ligerDialog.warn('请选择您要修改的行.');
         return;
@@ -125,7 +119,7 @@ function formInit() {
 $(function () {
     var toolbarItems = [
         {text:'新增功能', click:add_function, icon:'add', key:'add'},
-        {text:'修改功能', click:edit_function, icon:'modify', key:'edit'},
+        {text:'修改功能', click:edit_function, icon:'modify', key:'modify'},
         {text:'删除功能', click:delete_function, icon:'delete', key:'delete'}
     ];
     //todo 以后这个ajaxToolbar要通过ajax取过来

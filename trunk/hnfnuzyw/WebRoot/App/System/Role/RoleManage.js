@@ -6,11 +6,7 @@ var treeManager = null;//树的管理器
 
 //增加功能的函数
 function add_role() {
-    if (!roleForm) {
-        formInit();
-    } else {
-        roleForm[0].reset();
-    }
+    formInit();
     roleWin = $.ligerDialog.open({
         width:400,
         height:200,
@@ -35,9 +31,7 @@ function add_cancel() {
 }
 //修改功能的函数
 function edit_role() {
-    if (!roleForm) {
-        formInit();
-    }
+    formInit();
     if (!roleGrid.getSelected()) {
         $.ligerDialog.warn('请选择您要修改的行.');
         return;
@@ -191,7 +185,7 @@ function formInit() {
 $(function () {
     var toolbarItems = [
         {text:'新增角色', click:add_role, icon:'add', key:'add'},
-        {text:'修改角色', click:edit_role, icon:'modify', key:'edit'},
+        {text:'修改角色', click:edit_role, icon:'modify', key:'modify'},
         {text:'删除角色', click:delete_role, icon:'delete', key:'delete'},
         {line:true },
         {text:'权限赋予', click:role_menu_join, icon:'config', key:'join'}
@@ -199,7 +193,7 @@ $(function () {
     //todo 以后这个ajaxToolbar要通过ajax取过来
     var ajaxToolbar = [
         {name:'add'},
-        {name:'edit'},
+        {name:'modify'},
         {name:'delete'},
         {name:'join'}
     ];
