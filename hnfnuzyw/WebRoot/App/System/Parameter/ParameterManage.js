@@ -5,13 +5,6 @@ var id = 5000;
 
 //增加功能的函数
 function add_parameter() {
-/*
-    if (!parameterForm) {
-        formInit();
-    } else {
-        parameterForm[0].reset();
-    }
-*/
     formInit();
     parameterWin = $.ligerDialog.open({
         width:400,
@@ -37,11 +30,6 @@ function add_cancel() {
 }
 //修改功能的函数
 function edit_parameter() {
-    /*
-    if (!parameterForm) {
-     formInit();
-     }
-     */
     formInit();
     if (!parameterGrid.getSelected()) {
         $.ligerDialog.warn('请选择您要修改的行.');
@@ -175,13 +163,13 @@ function formInit() {
 $(function () {
     var toolbarItems = [
         {text:'新增参数', click:add_parameter, icon:'add', key:'add'},
-        {text:'修改参数', click:edit_parameter, icon:'modify', key:'edit'},
+        {text:'修改参数', click:edit_parameter, icon:'modify', key:'modify'},
         {text:'删除参数', click:delete_parameter, icon:'delete', key:'delete'}
     ];
     //todo 以后这个ajaxToolbar要通过ajax取过来
     var ajaxToolbar = [
         {name:'add'},
-        {name:'edit'},
+        {name:'modify'},
         {name:'delete'}
     ];
     toolbarItems = Toolbar.confirmToolbar(toolbarItems,ajaxToolbar);
