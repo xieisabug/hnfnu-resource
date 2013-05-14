@@ -1,21 +1,23 @@
 var parameterGrid = null;//功能表格
 var parameterForm = null;//功能表单
 var parameterWin = null;//功能窗口
+var id = 5000;
 
 //增加功能的函数
 function add_parameter() {
+/*
     if (!parameterForm) {
         formInit();
     } else {
         parameterForm[0].reset();
     }
-    console.log(parameterForm);
+*/
+    formInit();
     parameterWin = $.ligerDialog.open({
         width:400,
         height:200,
         title:'新增功能',
         target:parameterForm,
-        isHidden:false,
         buttons:[
             {text:'提交', width:80, onclick:add_save},
             {text:'取消', width:80, onclick:add_cancel}
@@ -25,7 +27,6 @@ function add_parameter() {
 //增加功能的保存按钮事件
 function add_save() {
     var data = Form.parseJSON(parameterForm);
-    //console.log(data);
     //todo 需要发往服务器，返回成功后再添加到表格中
     parameterGrid.addRow(data);
     parameterWin.close();
@@ -36,9 +37,12 @@ function add_cancel() {
 }
 //修改功能的函数
 function edit_parameter() {
+    /*
     if (!parameterForm) {
-        formInit();
-    }
+     formInit();
+     }
+     */
+    formInit();
     if (!parameterGrid.getSelected()) {
         $.ligerDialog.warn('请选择您要修改的行.');
         return;
@@ -49,7 +53,7 @@ function edit_parameter() {
         height:200,
         title:'编辑功能',
         target:parameterForm,
-        isHidden:false,
+        //isHidden:false,
         buttons:[
             {text:'提交', width:80, onclick:edit_save},
             {text:'取消', width:80, onclick:edit_cancel}
@@ -84,8 +88,11 @@ function delete_parameter() {
 }
 //初始化表单，生成form标签
 function formInit() {
-    parameterForm = $('<form></form>');
+    parameterForm = $('<form id="Form'+id+'"></form>');
     parameterForm.ligerForm({
+        options:{
+            id:id
+        },
         inputWidth:280,
         fields:[
             {
@@ -161,7 +168,8 @@ function formInit() {
             }
         ]
     });
-    console.log(parameterForm);
+    id++;
+    //console.log(parameterForm);
 }
 //初始化表格
 $(function () {
