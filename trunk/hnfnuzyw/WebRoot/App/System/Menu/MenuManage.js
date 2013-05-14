@@ -2,17 +2,13 @@ var grid = null;
 var addMenuForm = null;
 var menuFormWin = null;
 //按钮的click事件
-function itemclick(item) {
+function item_click(item) {
     $.ligerDialog.alert(item.text);
 }
 //增加菜单的函数
 function add_menu() {
 
-    if (!addMenuForm) {
-       formInit();
-    }else{
-        addMenuForm[0].reset();
-    }
+    formInit();
 
     menuFormWin = $.ligerDialog.open(
         {
@@ -59,9 +55,7 @@ function delete_menu() {
 
 //修改菜单的函数
 function edit_menu() {
-    if (!addMenuForm) {
-        formInit();
-    }
+    formInit();
     if (!grid.getSelected()) {
         $.ligerDialog.warn("请选择您要修改的行！");
         return;
@@ -77,7 +71,6 @@ function edit_menu() {
             {text:"提交", width:80, onclick:edit_save},
             {text:"取消", width:80, onclick:edit_cancel}
         ]
-
     });
 }
 function edit_save() {
@@ -122,7 +115,7 @@ $(function () {
             {display:'上级菜单', name:'parentId', align:'left', minWidth:100}
         ],
         url:'../../../Json/MenuData.json',
-        height:'100%', width:'100%',
+        height:'98%', width:'100%',
         toolbar:{
             items:[
                 {text:'增加', click:add_menu, icon:'add' },
@@ -131,7 +124,7 @@ $(function () {
                 {line:true},
                 {text:'修改', click:edit_menu, icon:'modify'},
                 {line:true},
-                {text:'刷新', click:itemclick, icon:'refresh'}
+                {text:'刷新', click:item_click, icon:'refresh'}
             ]
         }
     });
