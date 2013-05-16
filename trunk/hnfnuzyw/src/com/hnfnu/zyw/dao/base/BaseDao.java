@@ -36,25 +36,25 @@ public class BaseDao<T> extends HibernateDaoSupport implements IBaseDao<T>{
 		return clz;
 	}
 
-	public void add(T t) {
+	public void add(T t) throws Exception{
 		this.getHibernateTemplate().save(t);
 	}
 
-	public void delete(int id) {
+	public void delete(int id) throws Exception{
 		this.getHibernateTemplate().delete(this.load(id));
 	}
 
-	public void update(T t) {
+	public void update(T t) throws Exception{
 		this.getHibernateTemplate().update(t);
 	}
 
-	public T load(int id) {
+	public T load(int id) throws Exception{
 //		return this.getHibernateTemplate().load(T.c, id);
 		return this.getHibernateTemplate().load(getClz(), id);
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<T> list(String hql, Object[] args) {
+	public List<T> list(String hql, Object[] args) throws Exception{
 		Query u = this.getSession().createQuery(hql);
 		for(int i=0;i<args.length;i++) {
 			u.setParameter(0, args[0]);
@@ -63,11 +63,11 @@ public class BaseDao<T> extends HibernateDaoSupport implements IBaseDao<T>{
 		return list;
 	}
 
-	public List<T> list(String hql) {
+	public List<T> list(String hql) throws Exception{
 		return this.list(hql,null);
 	}
 
-	public List<T> list(String hql, Object arg) {
+	public List<T> list(String hql, Object arg) throws Exception{
 		return this.list(hql,new Object[]{arg});
 	}
 }
