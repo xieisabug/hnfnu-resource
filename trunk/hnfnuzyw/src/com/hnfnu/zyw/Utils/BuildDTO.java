@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.Utils;
+package com.hnfnu.zyw.utils;
 
 import java.io.File;
 import java.io.PrintWriter;
