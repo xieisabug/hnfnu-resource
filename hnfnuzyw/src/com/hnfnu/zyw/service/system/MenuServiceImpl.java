@@ -21,9 +21,9 @@ public class MenuServiceImpl implements IMenuService {
 			menuDao.add(menu);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return true;
+			return false;
 		}
-		return false;
+		return true;
 	}
 
 	public boolean delete(int id) {
