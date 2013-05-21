@@ -57,9 +57,10 @@ public class BaseDao<T> extends HibernateDaoSupport implements IBaseDao<T>{
 	public List<T> list(String hql, Object[] args) throws Exception{
 		Query u = this.getSession().createQuery(hql);
 		for(int i=0;i<args.length;i++) {
-			u.setParameter(0, args[0]);
+			u.setParameter(i, args[0]);
 		}
 		List<T> list = u.list();
+		System.out.println(list.toString());
 		return list;
 	}
 
