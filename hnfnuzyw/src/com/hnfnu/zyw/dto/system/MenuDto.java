@@ -81,4 +81,13 @@ public class MenuDto
 	{
 		return this.icon;
 	}
+
+	@Override
+	public String toString() {
+		return "MenuDto [id=" + id + ", parentId=" + parentId + ", name="
+				+ name + ", url=" + url + ", functionIdList=" + functionIdList
+				+ ", icon=" + icon + "]";
+	}
+	
+	
 }
