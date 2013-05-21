@@ -37,6 +37,12 @@ public class ParameterDto
 	{
 		return this.id;
 	}
+	@Override
+	public String toString() {
+		return "ParameterDto [id=" + id + ", name=" + name + ", value=" + value
+				+ ", type=" + type + ", remark=" + remark + "]";
+	}
+
 	public void setName(String name)
 	{
 		this.name = name;
