@@ -56,8 +56,10 @@ public class BaseDao<T> extends HibernateDaoSupport implements IBaseDao<T>{
 	@SuppressWarnings("unchecked")
 	public List<T> list(String hql, Object[] args) throws Exception{
 		Query u = this.getSession().createQuery(hql);
+		if(args != null){
 		for(int i=0;i<args.length;i++) {
-			u.setParameter(i, args[0]);
+			u.setParameter(i, args[i]);
+		}
 		}
 		List<T> list = u.list();
 		System.out.println(list.toString());
