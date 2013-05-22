@@ -19,10 +19,21 @@ function add_parameter() {
 }
 //增加功能的保存按钮事件
 function add_save() {
-    var data = Form.parseJSON(parameterForm);
+    var row_data = Form.parseJSON(parameterForm);
+    console.log(row_data);
     //todo 需要发往服务器，返回成功后再添加到表格中
-    parameterGrid.addRow(data);
-    parameterWin.close();
+    $.ajax({
+        url:'/hnfnuzyw/system/addParameter.action',
+        data:row_data,
+        type:'post',
+        success:function(data){
+            console.log(data);
+            if(data.success){
+	            parameterGrid.addRow(data);
+	            parameterWin.close();
+            }
+        }
+    })
 }
 //增加功能的取消按钮事件
 function add_cancel() {
