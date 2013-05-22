@@ -55,14 +55,16 @@ public class MenuServiceImpl implements IMenuService {
 		return null;
 	}
 
-	public List<MenuDto> list(String hql, Object[] args) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<MenuDto> list() {
+		String hql = "from MenuDto";
+		List<MenuDto> menus = null;
+		try {
+			menus = menuDao.list(hql);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return menus;
 	}
 
-	public List<MenuDto> list(String hql) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }
