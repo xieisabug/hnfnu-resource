@@ -20,20 +20,20 @@ function add_parameter() {
 //增加功能的保存按钮事件
 function add_save() {
     var row_data = Form.parseJSON(parameterForm);
-    console.log(row_data);
-    //todo 需要发往服务器，返回成功后再添加到表格中
     $.ajax({
         url:'/hnfnuzyw/system/addParameter.action',
         data:row_data,
         type:'post',
         success:function(data){
-            console.log(data);
             if(data.success){
-	            parameterGrid.addRow(data);
+	            parameterGrid.addRow(data.model);
+	            $.ligerDialog.tip({title: '提示信息',content:data.message});
 	            parameterWin.close();
+            } else {
+            	$.ligerDialog.error(data.message);
             }
         }
-    })
+    });
 }
 //增加功能的取消按钮事件
 function add_cancel() {
@@ -61,11 +61,21 @@ function edit_parameter() {
 }
 //修改功能的保存按钮事件
 function edit_save() {
-    var data = Form.parseJSON(parameterForm);
-    //console.log(data);
-    //todo 需要发往服务器，返回成功后再修改到表格中
-    parameterGrid.update(parameterGrid.getSelected(), data);
-    parameterWin.close();
+    var row_data = Form.parseJSON(parameterForm);
+    $.ajax({
+        url:'/hnfnuzyw/system/updateParameter.action',
+        data:row_data,
+        type:'post',
+        success:function(data){
+            if(data.success){
+            	parameterGrid.update(parameterGrid.getSelected(), data.model);
+	            $.ligerDialog.tip({title: '提示信息',content:data.message});
+	            parameterWin.close();
+            } else {
+            	$.ligerDialog.error(data.message);
+            }
+        }
+    });
 }
 //修改功能的取消按钮事件
 function edit_cancel() {
@@ -77,11 +87,23 @@ function delete_parameter() {
         $.ligerDialog.warn('请选择您要删除的行.');
         return;
     }
-    var row = parameterGrid.getSelected();
-    $.ligerDialog.confirm('确认删除' + row.name + '？', '删除功能', function (r) {
+    var row_data = parameterGrid.getSelected();
+    $.ligerDialog.confirm('确认删除' + row_data.name + '？', '删除功能', function (r) {
         if (r) {
-            //todo 进行ajax操作，成功后在回调函数里删除选择的行
-            parameterGrid.deleteSelectedRow();
+        	$.ajax({
+                url:'/hnfnuzyw/system/deleteParameter.action',
+                data:row_data,
+                type:'post',
+                success:function(data){
+                    if(data.success){
+        	            $.ligerDialog.tip({title: '提示信息',content:data.message});
+        	            parameterGrid.deleteSelectedRow();
+        	            parameterWin.close();
+                    } else {
+                    	$.ligerDialog.error(data.message);
+                    }
+                }
+            });
         }
     });
 }
@@ -168,7 +190,6 @@ function formInit() {
         ]
     });
     id++;
-    //console.log(parameterForm);
 }
 //初始化表格
 $(function () {
@@ -184,21 +205,27 @@ $(function () {
         {name:'delete'}
     ];
     toolbarItems = Toolbar.confirmToolbar(toolbarItems,ajaxToolbar);
-    parameterGrid = $('#parameterGrid').ligerGrid({
-        columns:[
-            { display:'ID', name:'id', align:'left', width:100 },
-            { display:'参数名称', name:'name', width:200 },
-            { display:'参数值', name:'value', width:200 },
-            { display:'参数类型', name:'type', width:200 },
-            { display:'备注', name:'remark', align:'left', width:400 }
-        ],
-        width:'99%',
-        height:'98%',
-        pageSize:30,
-        url:'../../../Json/ParameterData.json',
-        toolbar:{
-            items:toolbarItems
+    $.ajax({
+        url:'/hnfnuzyw/system/listParameter.action',
+        type:'post',
+        success:function(data){
+            parameterGrid = $('#parameterGrid').ligerGrid({
+                columns:[
+                    { display:'ID', name:'id', align:'left', width:100 },
+                    { display:'参数名称', name:'name', width:200 },
+                    { display:'参数值', name:'value', width:200 },
+                    { display:'参数类型', name:'type', width:200 },
+                    { display:'备注', name:'remark', align:'left', width:400 }
+                ],
+                width:'99%',
+                height:'98%',
+                pageSize:30,
+                data:data.parameterList,
+                toolbar:{
+                    items:toolbarItems
+                }
+            });
+            $("#pageloading").hide();
         }
     });
-    $("#pageloading").hide();
 });
