@@ -1,5 +1,9 @@
 package com.hnfnu.zyw.action.system;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -30,28 +34,54 @@ public class ParameterAction extends ActionSupport implements ModelDriven<Parame
 	
 	private ParameterDto parameter = new ParameterDto();//获取页面提交参数
 	private boolean success;
+	private String message;
+	private Map<String,Object> parameterList;
 
 	@Action(value = "addParameter")
 	public String add(){
 		success = parameterService.add(parameter);
+		if(success) {
+			message = "添加参数成功！";
+		} else {
+			message = "添加参数失败！";
+		}
 		return SUCCESS;
 	}
 	
-	@Action(value = "updateParameter", results = { @Result(name = "success", type="json") })
+	@Action(value = "updateParameter")
 	public String update(){
 		success = parameterService.update(parameter);
+		if(success) {
+			message = "修改参数成功！";
+		} else {
+			message = "修改参数失败！";
+		}
 		return SUCCESS;
 	}
 	
-	@Action(value = "loadParameter", results = { @Result(name = "success", type="json") })
+	@Action(value = "loadParameter")
 	public String load(){
 		parameter = parameterService.load(parameter);
 		return SUCCESS;
 	}
 	
-	@Action(value = "deleteParameter", results = { @Result(name = "success", type="json") })
+	@Action(value = "deleteParameter")
 	public String delete(){
 		success = parameterService.delete(parameter);
+		if(success) {
+			message = "删除参数成功！";
+		} else {
+			message = "删除参数失败！";
+		}
+		return SUCCESS;
+	}
+	
+	@Action(value = "listParameter")
+	public String list(){
+		parameterList = new HashMap<String, Object>();
+		List<ParameterDto> l = parameterService.list();
+		parameterList.put("Rows", l);
+		parameterList.put("Total", l.size());
 		return SUCCESS;
 	}
 
@@ -76,7 +106,11 @@ public class ParameterAction extends ActionSupport implements ModelDriven<Parame
 		return success;
 	}
 	
-	public void setSuccess(boolean success) {
-		this.success = success;
+	public String getMessage() {
+		return message;
+	}
+	
+	public Map<String, Object> getParameterList() {
+		return parameterList;
 	}
 }

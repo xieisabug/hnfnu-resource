@@ -1,5 +1,7 @@
 package com.hnfnu.zyw.service.system;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -59,6 +61,17 @@ public class ParameterServiceImpl implements IParameterService {
 			return false;
 		}
 		return true;
+	}
+
+	public List<ParameterDto> list() {
+		List<ParameterDto> l = null;
+		try {
+			l = parameterDao.list("from ParameterDto");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		return l;
 	}
 
 }
