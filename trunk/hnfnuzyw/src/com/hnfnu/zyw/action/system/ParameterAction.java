@@ -4,6 +4,7 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
@@ -17,6 +18,7 @@ import com.opensymphony.xwork2.ModelDriven;
 @Controller("parameterAction")
 @Scope("prototype")
 @ParentPackage("json-default")
+@Results({ @Result(name = "success",type = "json",params = {"root","action"}) })
 @Namespace("/system")
 public class ParameterAction extends ActionSupport implements ModelDriven<ParameterDto> {
 
@@ -29,7 +31,7 @@ public class ParameterAction extends ActionSupport implements ModelDriven<Parame
 	private ParameterDto parameter = new ParameterDto();//获取页面提交参数
 	private boolean success;
 
-	@Action(value = "addParameter", results = { @Result(name = "success", type="json") })
+	@Action(value = "addParameter")
 	public String add(){
 		success = parameterService.add(parameter);
 		return SUCCESS;
@@ -74,4 +76,7 @@ public class ParameterAction extends ActionSupport implements ModelDriven<Parame
 		return success;
 	}
 	
+	public void setSuccess(boolean success) {
+		this.success = success;
+	}
 }
