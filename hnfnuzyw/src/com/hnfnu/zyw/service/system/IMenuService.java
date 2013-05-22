@@ -10,6 +10,9 @@ public interface IMenuService {
 	public boolean delete(int id);
 	public boolean update(MenuDto menu);
 	public MenuDto  load(int id);
-	public List<MenuDto> list(String hql,Object[] args);
-	public List<MenuDto> list(String hql);
+	/**
+	 * 查询数据库所有记录
+	 * @return
+	 */
+	public List<MenuDto> list();
 }
