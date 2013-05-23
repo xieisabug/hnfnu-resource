@@ -18,10 +18,22 @@ function add_function() {
 }
 //增加功能的保存按钮事件
 function add_save() {
-    var data = Form.parseJSON(functionForm);
-    //todo 需要发往服务器，返回成功后再添加到表格中
-    functionGrid.addRow(data);
-    functionWin.close();
+    var row_data = Form.parseJSON(functionForm);
+    //发往服务器，返回成功后再添加到表格中
+    $.ajax({
+        url:'/hnfnuzyw/system/addFunction.action',
+        data:row_data,
+        type:'post',
+        success:function(data){
+            if(data.success){
+            	functionGrid.addRow(data.model);
+            	$.ligerDialog.tip({title: '提示信息',content:data.message});
+                functionWin.close();
+            } else {
+            	$.ligerDialog.error(data.message);
+            }
+        }
+    });
 }
 //增加功能的取消按钮事件
 function add_cancel() {
@@ -48,26 +60,58 @@ function edit_function() {
 }
 //修改功能的保存按钮事件
 function edit_save() {
-    var data = Form.parseJSON(functionForm);
+    var row_data = Form.parseJSON(functionForm);
     //todo 需要发往服务器，返回成功后再修改到表格中
-    functionGrid.update(functionGrid.getSelected(), data);
-    functionWin.close();
+    $.ajax({
+        url:'/hnfnuzyw/system/updateFunction.action',
+        data:row_data,
+        type:'post',
+        success:function(data){
+            if(data.success){
+            	functionGrid.update(functionGrid.getSelected(), data.model);
+	            $.ligerDialog.tip({title: '提示信息',content:data.message});
+	            functionWin.close();
+            } else {
+            	$.ligerDialog.error(data.message);
+            }
+        }
+    });
+    
+    
+    
+    
+    
 }
 //修改功能的取消按钮事件
 function edit_cancel() {
     functionWin.close();
 }
+
+
+
 //删除功能的函数
 function delete_function() {
     if (!functionGrid.getSelected()) {
         $.ligerDialog.warn('请选择您要删除的行.');
         return;
     }
-    var row = functionGrid.getSelected();
-    $.ligerDialog.confirm('确认删除' + row.name + '？', '删除功能', function (r) {
+    var row_data= functionGrid.getSelected();
+    $.ligerDialog.confirm('确认删除' + row_data.name + '？', '删除功能', function (r) {
         if (r) {
-            //todo 进行ajax操作，成功后在回调函数里删除选择的行
-            functionGrid.deleteSelectedRow();
+        	$.ajax({
+                url:'/hnfnuzyw/system/deleteFunction.action',
+                data:row_data,
+                type:'post',
+                success:function(data){
+                    if(data.success){
+        	            $.ligerDialog.tip({title: '提示信息',content:data.message});
+        	            functionGrid.deleteSelectedRow();
+        	            parameterWin.close();
+                    } else {
+                    	$.ligerDialog.error(data.message);
+                    }
+                }
+            });
         }
     });
 }
@@ -79,15 +123,10 @@ function formInit() {
         fields:[
             {
                 name:'id',
-                display:'ID',
-                type:'text',
-                space:30,
-                labelWidth:100,
-                newline:true,
-                width:220
+                type : "hidden"
             },
             {
-                display:'功能名称',
+                display:'功能名称简写',
                 name:'name',
                 type:'text',
                 space:30,
@@ -100,7 +139,7 @@ function formInit() {
                 }
             },
             {
-                display:'备注',
+                display:'功能名称',
                 name:'remark',
                 type:'text',
                 space:30,
@@ -125,22 +164,30 @@ $(function () {
     //todo 以后这个ajaxToolbar要通过ajax取过来
     var ajaxToolbar = [
         {name:'add'},
-        {name:'delete'}
+        {name:'delete'},
+        {name:'modify'}
     ];
     toolbarItems = Toolbar.confirmToolbar(toolbarItems,ajaxToolbar);
-    functionGrid = $('#functionGrid').ligerGrid({
-        columns:[
-            { display:'ID', name:'id', align:'left', width:100 },
-            { display:'功能名称', name:'name', width:200 },
-            { display:'备注', name:'remark', align:'left', width:400 }
-        ],
-        width:'99%',
-        height:'98%',
-        pageSize:30,
-        url:'../../../Json/FunctionData.json',
-        toolbar:{
-            items:toolbarItems
+    
+    $.ajax({
+        url:'/hnfnuzyw/system/listFunction.action',
+        type:'post',
+        success:function(data){
+        	 functionGrid = $('#functionGrid').ligerGrid({
+        	        columns:[
+        	            { display:'ID', name:'id', align:'left', width:100 },
+        	            { display:'功能名称简写', name:'name', width:200 },
+        	            { display:'功能名称', name:'remark', align:'left', width:400 }
+        	        ],
+        	        width:'99%',
+        	        height:'98%',
+        	        pageSize:30,
+        	        data:data.functionList,
+        	        toolbar:{
+        	            items:toolbarItems
+        	        }
+        	    });
+            $("#pageloading").hide();
         }
     });
-    $("#pageloading").hide();
 });

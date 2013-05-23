@@ -6,19 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.hnfnu.zyw.dao.system.IMenuDao;
-import com.hnfnu.zyw.dto.system.MenuDto;
+import com.hnfnu.zyw.dao.system.IFunctionDao;
+import com.hnfnu.zyw.dto.system.FunctionDto;
 
-@Service("menuService")
-public class MenuServiceImpl implements IMenuService {
+@Service("functionService")
+public class FunctionServiceIpml implements IFunctionService {
 
 	@Autowired
-	@Qualifier("menuDao")
-	public IMenuDao menuDao;
+	@Qualifier("functionDao")
+	public IFunctionDao functionDao;
 
-	public boolean add(MenuDto menu) {
+	public boolean add(FunctionDto function) {
 		try {
-			menuDao.add(menu);
+			functionDao.add(function);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -28,7 +28,7 @@ public class MenuServiceImpl implements IMenuService {
 
 	public boolean delete(int id) {
 		try {
-			menuDao.delete(id);
+			functionDao.delete(id);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -36,9 +36,9 @@ public class MenuServiceImpl implements IMenuService {
 		return true;
 	}
 
-	public boolean update(MenuDto menu) {
+	public boolean update(FunctionDto function) {
 		try {
-			menuDao.update(menu);
+			functionDao.update(function);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -46,25 +46,23 @@ public class MenuServiceImpl implements IMenuService {
 		return true;
 	}
 
-	public MenuDto load(int id) {
+	public FunctionDto load(int id) {
 		try {
-			return menuDao.load(id);
+			return functionDao.load(id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 
-	public List<MenuDto> list() {
-		String hql = "from MenuDto";
-		List<MenuDto> menus = null;
+	public List<FunctionDto> list() {
+		String hql = "from FunctionDto";
+		List<FunctionDto> functions = null;
 		try {
-			menus = menuDao.list(hql);
+			functions = functionDao.list(hql);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return menus;
+		return functions;
 	}
-
-
 }

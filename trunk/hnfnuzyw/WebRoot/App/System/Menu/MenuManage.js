@@ -126,6 +126,65 @@ function edit_cancel() {
 function formInit() {
 	var groupicon = "../../../App/Lib/ligerUI/skins/icons/communication.gif";
 	addMenuForm = $('<form></form>');
+	
+	$.ajax({
+		url : '/hnfnuzyw/system/listFun.action',
+		type : 'post',
+		success : function(data) {
+			addMenuForm.ligerForm({
+				inputWidth : 200,
+				labelWidth : 90,
+				space : 40,
+				fields : [ {
+					name : "id",
+					type : "hidden"
+				}, {
+					display : "菜单名字",
+					name : "name",
+					newline : true,
+					type : "text",
+					group : "必填信息",
+					groupicon : groupicon
+				}, {
+					display : "菜单链接",
+					name : "url",
+					newline : true,
+					type : "text"
+				}, {
+					display : "功能列表",
+					name : "functionIdList",
+					type : "select",
+					comboboxName : "functionId",
+					options : {
+						textField : "remark",
+						valueField : "name",
+						isMultiSelect : true,
+						isShowCheckBox : true,
+						valueFieldID : "functionIdList",
+						data:data.list
+					}
+				}, {
+					display : "图标链接",
+					name : "icon",
+					type : "text",
+					group : "可选信息",
+					groupicon : groupicon
+				}, {
+					display : "上级菜单",
+					name : "parentId",
+					type : "select",
+					comboboxName : "parentIdList",
+					options : {
+						valueFieldID : "parentId",
+						url : "../../../Json/ParentMenu.json"
+					}
+				} ]
+			});
+			
+			
+		}
+	})
+	
 	addMenuForm.ligerForm({
 		inputWidth : 200,
 		labelWidth : 90,
@@ -156,7 +215,7 @@ function formInit() {
 				isMultiSelect : true,
 				isShowCheckBox : true,
 				valueFieldID : "functionIdList",
-				url : "../../../Json/Function.json"
+				url : "/hnfnuzyw/system/listFun.action"
 			}
 		}, {
 			display : "图标链接",
@@ -203,7 +262,7 @@ $(function() {
 		line : true
 	}, {
 		text : '刷新',
-		click : update_click,
+		click : update_menu,
 		icon : 'refresh',
 		key:'refresh'
 	} ];
