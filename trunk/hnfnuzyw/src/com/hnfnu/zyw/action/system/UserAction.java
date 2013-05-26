@@ -1,6 +1,5 @@
 package com.hnfnu.zyw.action.system;
 
-import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Action;
@@ -13,37 +12,43 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-import com.hnfnu.zyw.dto.system.FunctionDto;
-import com.hnfnu.zyw.service.system.IFunctionService;
+import com.hnfnu.zyw.dto.system.UserDto;
+import com.hnfnu.zyw.service.system.IUserService;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
-@Controller("functionAction")
+@Controller("userAction")
 @Scope("prototype")
 @ParentPackage("json-default")
 @Results({ @Result(name = "success", type = "json", params = { "root", "action" }) })
 @Namespace("/system")
-public class FunctionAction extends ActionSupport implements
-		ModelDriven<FunctionDto> {
+public class UserAction extends ActionSupport implements ModelDriven<UserDto> {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -7199971221300636848L;
-	private FunctionDto function = new FunctionDto();// 获取页面提交参数
+	private UserDto user = new UserDto();// 获取页面提交参数
 	private boolean success;
 	private String message;
-	private Map<String, Object> functionList;
-	List<FunctionDto> list;
+	private Map<String, Object> userList;
 
 	@Autowired
-	@Qualifier("functionService")
-	private IFunctionService functionService;
+	@Qualifier("userService")
+	private IUserService userService;
+	//private String bir;
 
-	// 添加菜单
-	@Action(value = "addFunction")
+	// 添加
+	@Action(value = "addUser")
 	public String add() {
-		success = functionService.add(function);
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//		Date date = null;
+//		try {
+//			date = sdf.parse(bir);
+//		} catch (ParseException e) {
+//			e.printStackTrace();
+//		}
+		success = userService.add(user);
 		if (success) {
 			message = "添加功能成功！";
 		} else {
@@ -52,26 +57,26 @@ public class FunctionAction extends ActionSupport implements
 		return SUCCESS;
 	}
 
-	// 修改菜单
-	@Action(value = "updateFunction")
+	// 修改
+	@Action(value = "updateUser")
 	public String update() {
-		success = functionService.update(function);
+		success = userService.update(user);
 		if (success) {
-			message = "修改功能成功！";
+			message = "修改成功！";
 		} else {
-			message = "修改功能失败！";
+			message = "修改失败！";
 		}
 		return SUCCESS;
 	}
 
 	/**
-	 * 根据菜单ID查询一个菜单
+	 * 根据菜单ID查询一个对象
 	 * 
 	 * @return
 	 */
-	@Action(value = "loadFunction")
+	@Action(value = "loadUser")
 	public String load() {
-		function = functionService.load(function.getId());
+		user = userService.load(user.getId());
 		return SUCCESS;
 	}
 
@@ -81,46 +86,40 @@ public class FunctionAction extends ActionSupport implements
 	 * @return
 	 */
 
-	@Action(value = "deleteFunction")
+	@Action(value = "deleteUser")
 	public String delete() {
-		success = functionService.delete(function.getId());
+		System.out.println("1111111111");
+		success = userService.delete(user.getId());
 		if (success) {
-			message = "删除功能成功！";
+			message = "删除成功！";
 		} else {
-			message = "删除功能失败！";
+			message = "删除失败！";
 		}
 		return SUCCESS;
 	}
 
 	// 获取表中所有功能，用Map装，为了分页的需要加上Rows和Total
-	@Action(value = "listFunction")
+	@Action(value = "listUser")
 	public String list() {
-		functionList = functionService.listFun();
-		return SUCCESS;
-	}
-
-	// 获取表中所有功能，是用List装的
-	@Action(value = "listFun")
-	public String listFun() {
-		list = functionService.list();
+		userList = userService.list();
 		return SUCCESS;
 	}
 
 	/* get set */
-	public IFunctionService getFunctionService() {
-		return functionService;
+	public IUserService getUserService() {
+		return userService;
 	}
 
-	public void setFunctionService(IFunctionService functionService) {
-		this.functionService = functionService;
+	public void setUserService(IUserService userService) {
+		this.userService = userService;
 	}
 
-	public FunctionDto getModel() {
-		return function;
+	public UserDto getModel() {
+		return user;
 	}
 
-	public FunctionDto getFunction() {
-		return function;
+	public UserDto getUser() {
+		return user;
 	}
 
 	public boolean isSuccess() {
@@ -131,12 +130,12 @@ public class FunctionAction extends ActionSupport implements
 		return message;
 	}
 
-	public Map<String, Object> getFunctionList() {
-		return functionList;
+	public Map<String, Object> getUserList() {
+		return userList;
 	}
 
-	public List<FunctionDto> getList() {
-		return list;
-	}
+	// public void setBir(String bir) {
+	// this.bir = bir;
+	// }
 
 }
