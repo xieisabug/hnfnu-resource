@@ -1,10 +1,17 @@
 package com.hnfnu.zyw.dto.system;
 
-import java.sql.Date;
+import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
 * 通过数据库内表的字段动态生成 UserDto
 **/
+@Entity
+@Table(name="s_user")
 public class UserDto 
 {	
 	private Integer id;
@@ -31,7 +38,7 @@ public class UserDto
 	//最后登录时间
 	private Date latestLoginDate;
 	//设置（用于涉及用户个人的设置）
-	private String set;
+	private String setting;
 	//备注
 	private String remark;
 
@@ -44,6 +51,8 @@ public class UserDto
 	{
 		this.id = id;
 	}
+	@Id
+	@GeneratedValue
 	public Integer getId()
 	{
 		return this.id;
@@ -136,13 +145,13 @@ public class UserDto
 	{
 		return this.latestLoginDate;
 	}
-	public void setSet(String set)
+	public void setSetting(String setting)
 	{
-		this.set = set;
+		this.setting = setting;
 	}
-	public String getSet()
+	public String getSetting()
 	{
-		return this.set;
+		return this.setting;
 	}
 	public void setRemark(String remark)
 	{

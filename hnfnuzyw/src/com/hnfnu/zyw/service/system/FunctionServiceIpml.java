@@ -1,6 +1,8 @@
 package com.hnfnu.zyw.service.system;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -64,5 +66,20 @@ public class FunctionServiceIpml implements IFunctionService {
 			e.printStackTrace();
 		}
 		return functions;
+	}
+
+	public Map<String, Object> listFun() {
+		String hql = "from FunctionDto";
+		Map<String, Object> functionList = new HashMap<String, Object>();
+		List<FunctionDto> l = null;
+		
+		try {
+			l = functionDao.list(hql);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		functionList.put("Rows", l);
+		functionList.put("Total", l.size());
+		return functionList;
 	}
 }

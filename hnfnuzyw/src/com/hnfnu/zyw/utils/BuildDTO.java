@@ -97,7 +97,7 @@ public class BuildDTO {
 					typeStr = "Integer";
 				} else if (Types.VARCHAR == type ||type == -1) {
 					typeStr = "String";
-				}else if (Types.DATE == type){//这是因为我没找到text的类型常量是什么。
+				}else if (Types.DATE == type || type == 93){//这是因为我没找到text的类型常量是什么。
 					typeStr = "Date";
 				}
 
@@ -141,7 +141,7 @@ public class BuildDTO {
 					typeStr = "Integer";
 				} else if (Types.VARCHAR == type ||type == -1) {
 					typeStr = "String";
-				}else if (Types.DATE == type){//这是因为我没找到text的类型常量是什么。
+				}else if (Types.DATE == type || type == 93){//这是因为我没找到text的类型常量是什么。
 					typeStr = "Date";
 				}
 				// 组装 set 的语句
