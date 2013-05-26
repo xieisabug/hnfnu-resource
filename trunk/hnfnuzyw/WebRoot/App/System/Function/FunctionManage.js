@@ -175,7 +175,7 @@ $(function () {
         success:function(data){
         	 functionGrid = $('#functionGrid').ligerGrid({
         	        columns:[
-        	            { display:'ID', name:'id', align:'left', width:100 },
+        	            //{ display:'ID', name:'id', align:'left', width:100 },
         	            { display:'功能名称简写', name:'name', width:200 },
         	            { display:'功能名称', name:'remark', align:'left', width:400 }
         	        ],
