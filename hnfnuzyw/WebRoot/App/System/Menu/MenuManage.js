@@ -283,12 +283,8 @@ $(function() {
         type:'post',
         success:function(data){
         	grid = $("#menuGrid").ligerGrid({
-        		columns : [ {
-        			display : '菜单id',
-        			name : 'id',
-        			align : 'left',
-        			width : 120
-        		}, {
+        		columns : [ 
+        		 {
         			display : '菜单名字',
         			name : 'name',
         			align : 'left',
