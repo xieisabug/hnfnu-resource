@@ -1,8 +1,15 @@
 package com.hnfnu.zyw.dto.system;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
 * 通过数据库内表的字段动态生成 RoleDto
 **/
+@Entity
+@Table(name="s_role")
 public class RoleDto 
 {	
 	private Integer id;
@@ -22,6 +29,8 @@ public class RoleDto
 	{
 		this.id = id;
 	}
+	@Id
+	@GeneratedValue
 	public Integer getId()
 	{
 		return this.id;
