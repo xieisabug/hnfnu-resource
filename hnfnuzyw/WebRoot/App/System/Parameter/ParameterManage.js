@@ -19,21 +19,30 @@ function add_parameter() {
 }
 //增加功能的保存按钮事件
 function add_save() {
-    var row_data = Form.parseJSON(parameterForm);
-    $.ajax({
-        url:'/hnfnuzyw/system/addParameter.action',
-        data:row_data,
-        type:'post',
-        success:function(data){
-            if(data.success){
-	            parameterGrid.addRow(data.model);
-	            $.ligerDialog.tip({title: '提示信息',content:data.message});
-	            parameterWin.close();
-            } else {
-            	$.ligerDialog.error(data.message);
+//    console.log(parameterForm.rules());
+//	parameterForm.validate({
+//		errorPlacement:function(error, element){
+//			console.log(error);
+//			console.log(element);
+//		}
+//	});
+    if(parameterForm.valid()){
+        var row_data = Form.parseJSON(parameterForm);
+        $.ajax({
+            url:'/hnfnuzyw/system/addParameter.action',
+            data:row_data,
+            type:'post',
+            success:function(data){
+                if(data.success){
+                    parameterGrid.addRow(data.model);
+                    $.ligerDialog.tip({title: '提示信息',content:data.message});
+                    parameterWin.close();
+                } else {
+                    $.ligerDialog.error(data.message);
+                }
             }
-        }
-    });
+        });
+    }
 }
 //增加功能的取消按钮事件
 function add_cancel() {
@@ -118,12 +127,7 @@ function formInit() {
         fields:[
             {
                 name:'id',
-                display:'ID',
-                type:'text',
-                space:30,
-                labelWidth:100,
-                newline:true,
-                width:220
+                type:'hidden'
             },
             {
                 display:'参数名称',
@@ -134,8 +138,7 @@ function formInit() {
                 width:220,
                 newline:true,
                 validate:{
-                    required:true,
-                    maxlength:50
+                    maxlength:100
                 }
             },
             {
@@ -147,8 +150,7 @@ function formInit() {
                 width:220,
                 newline:true,
                 validate:{
-                    required:true,
-                    maxlength:50
+                    maxlength:20
                 }
             },
             {
@@ -170,8 +172,7 @@ function formInit() {
                     ]
                 },
                 validate:{
-                    required:true,
-                    maxlength:50
+                    maxlength:20
                 }
             },
             {
@@ -181,15 +182,19 @@ function formInit() {
                 space:30,
                 labelWidth:100,
                 width:220,
-                newline:true,
-                validate:{
-                    required:true,
-                    maxlength:50
-                }
+                newline:true
             }
         ]
     });
     id++;
+    $.metadata.setType("attr", "validate");
+    parameterForm.validate({
+        debug: true,
+        onkeyup:false,
+        errorPlacement:function(error){
+            $.ligerDialog.error(error[0].innerHTML);
+        }
+    });
 }
 //初始化表格
 $(function () {
@@ -211,7 +216,7 @@ $(function () {
         success:function(data){
             parameterGrid = $('#parameterGrid').ligerGrid({
                 columns:[
-                    { display:'ID', name:'id', align:'left', width:100 },
+                    //{ display:'ID', name:'id', align:'left', width:100 },
                     { display:'参数名称', name:'name', width:200 },
                     { display:'参数值', name:'value', width:200 },
                     { display:'参数类型', name:'type', width:200 },
