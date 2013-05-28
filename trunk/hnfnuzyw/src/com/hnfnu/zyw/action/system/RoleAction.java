@@ -17,7 +17,7 @@ import com.hnfnu.zyw.service.system.IRoleService;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
-@Controller("parameterAction")
+@Controller("roleAction")
 @Scope("prototype")
 @ParentPackage("json-default")
 @Results({ @Result(name = "success",type = "json",params = {"root","action"}) })
@@ -35,7 +35,7 @@ public class RoleAction extends ActionSupport implements ModelDriven<RoleDto> {
 	private String message;
 	private Map<String,Object> roleList;
 
-	@Action(value = "addParameter")
+	@Action(value = "addRole")
 	public String add(){
 		success = roleService.add(role);
 		if(success) {
@@ -46,7 +46,7 @@ public class RoleAction extends ActionSupport implements ModelDriven<RoleDto> {
 		return SUCCESS;
 	}
 	
-	@Action(value = "updateParameter")
+	@Action(value = "updateRole")
 	public String update(){
 		success = roleService.update(role);
 		if(success) {
@@ -57,13 +57,13 @@ public class RoleAction extends ActionSupport implements ModelDriven<RoleDto> {
 		return SUCCESS;
 	}
 	
-	@Action(value = "loadParameter")
+	@Action(value = "loadRole")
 	public String load(){
 		role = roleService.load(role);
 		return SUCCESS;
 	}
 	
-	@Action(value = "deleteParameter")
+	@Action(value = "deleteRole")
 	public String delete(){
 		success = roleService.delete(role);
 		if(success) {
@@ -74,7 +74,7 @@ public class RoleAction extends ActionSupport implements ModelDriven<RoleDto> {
 		return SUCCESS;
 	}
 	
-	@Action(value = "listParameter")
+	@Action(value = "listRole")
 	public String list(){
 		roleList = roleService.list();
 		return SUCCESS;
