@@ -1,8 +1,15 @@
 package com.hnfnu.zyw.dto.system;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
 * 通过数据库内表的字段动态生成 UserRoleJoinDto
 **/
+@Entity
+@Table(name="s_user_role_join")
 public class UserRoleJoinDto 
 {	
 	private Integer id;
@@ -14,10 +21,21 @@ public class UserRoleJoinDto
 
 	}
 
+	
+	public UserRoleJoinDto(Integer id, Integer userId, Integer roleId) {
+		super();
+		this.id = id;
+		this.userId = userId;
+		this.roleId = roleId;
+	}
+
+
 	public void setId(Integer id)
 	{
 		this.id = id;
 	}
+	@Id
+	@GeneratedValue
 	public Integer getId()
 	{
 		return this.id;
@@ -38,4 +56,11 @@ public class UserRoleJoinDto
 	{
 		return this.roleId;
 	}
+
+	@Override
+	public String toString() {
+		return "UserRoleJoinDto [id=" + id + ", userId=" + userId + ", roleId="
+				+ roleId + "]";
+	}
+	
 }
