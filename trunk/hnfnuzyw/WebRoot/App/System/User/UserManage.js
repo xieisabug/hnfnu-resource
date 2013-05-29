@@ -3,6 +3,115 @@ var userForm = null;// 用户表单
 var userWin = null;// 用户窗口
 var listBox = null;// 用户角色列表
 var userRoleJoinWin = null;// 用户赋予角色窗口
+
+// 用户赋予角色listBox的初始化
+function listBoxInit() {
+	listBox = $('<div style="margin:4px;float:left;"><div id="listbox1"></div></div>'
+			+ '<div style="margin:4px;float:left;" class="middle">'
+			+ '<input type="button" onclick="moveToLeft()" value="<" />'
+			+ '<input type="button" onclick="moveToRight()" value=">" />'
+			+ '<input type="button" onclick="moveAllToLeft()" value="<<" /> '
+			+ '<input type="button" onclick="moveAllToRight()" value=">>" /> </div>'
+			+ '<div style="margin:4px;float:left;"><div id="listbox2"></div></div>');
+	listBox.find("#listbox1,#listbox2").ligerListBox({
+		textField:'name',
+		valueField:'id',
+		isShowCheckBox : true,
+		isMultiSelect : true,
+		height : 500,
+		width : 250
+	});
+
+}
+
+// 把左边的角色拉进右边的函数
+function moveToLeft() {
+	var box1 = liger.get("listbox1"), box2 = liger.get("listbox2");
+	var selecteds = box2.getSelectedItems();
+	if (!selecteds || !selecteds.length)
+		return;
+	box2.removeItems(selecteds);
+	box1.addItems(selecteds);
+}
+// 把右边的角色拉进左边的函数
+function moveToRight() {
+	var box1 = liger.get("listbox1"), box2 = liger.get("listbox2");
+	var selecteds = box1.getSelectedItems();
+	if (!selecteds || !selecteds.length)
+		return;
+	box1.removeItems(selecteds);
+	box2.addItems(selecteds);
+}
+// 把左边的角色全部拉进右边的函数
+function moveAllToLeft() {
+	var box1 = liger.get("listbox1"), box2 = liger.get("listbox2");
+	var selecteds = box2.data;
+	if (!selecteds || !selecteds.length)
+		return;
+	box1.addItems(selecteds);
+	box2.removeItems(selecteds);
+}
+// 把右边的角色全部拉进左边的函数
+function moveAllToRight() {
+	var box1 = liger.get("listbox1"), box2 = liger.get("listbox2");
+	var selecteds = box1.data;
+	//alert("selecteds"+selecteds);
+	if (!selecteds || !selecteds.length)
+		return;
+	box2.addItems(selecteds);
+	box1.removeItems(selecteds);
+
+}
+// 用户赋予角色的函数
+function user_role_join() {
+	if (!userGrid.getSelected()) {
+		$.ligerDialog.warn('请选择您要赋予角色的用户.');
+		return;
+	}
+	var user = userGrid.getSelected();
+	if (!listBox) {
+		listBoxInit();
+	}
+
+	$.ajax({
+		url : '/hnfnuzyw/system/roleByUser.action',
+		data : {
+			userId : user.id
+		},
+		type : 'post',
+		success : function(data) {
+				liger.get("listbox1").setData(data.roleByUser.unSelected);
+				liger.get("listbox2").setData(data.roleByUser.selected);
+				userRoleJoinWin = $.ligerDialog.open({
+					width : 600,
+					height : 600,
+					title : '赋予' + user.username + '角色',
+					target : listBox,
+					buttons : [ {
+						text : '提交',
+						width : 80,
+						onclick : join_sava
+					}, {
+						text : '取消',
+						width : 80,
+						onclick : join_cancel
+					} ]
+				});
+			
+		}
+	});
+
+}
+// 用户赋予角色提交函数
+function join_sava() {
+	var selecteds = liger.get("listbox1").data;
+	alert(selecteds.id);
+
+}// 用户赋予角色取消函数
+function join_cancel() {
+	listBox.close();
+}
+
 // 初始化表单
 function formInit() {
 	var groupicon = "../../../App/Lib/ligerUI/skins/icons/communication.gif";
@@ -80,19 +189,19 @@ function formInit() {
 			width : 200,
 			labelWidth : 100,
 			space : 30,
-			
+
 			options : {
 				textField : 'name',
 				valueFieldID : 'id',
 				valueField : 'id',
 				url : "../../../Json/Sex.json"
-//				data : [ {
-//					'text' : '男',
-//					'id' :'1'
-//				}, {
-//					'text' : '女',
-//					'id' : '0'
-//				} ]
+			// data : [ {
+			// 'text' : '男',
+			// 'id' :'1'
+			// }, {
+			// 'text' : '女',
+			// 'id' : '0'
+			// } ]
 			}
 		}, {
 			name : 'qq',
@@ -120,66 +229,6 @@ function formInit() {
 			width : 200
 		} ]
 	});
-}
-// 用户赋予角色的函数
-function user_role_join() {
-	if (!userGrid.getSelected()) {
-		$.ligerDialog.warn('请选择您要赋予角色的用户.');
-		return;
-	}
-
-	if (!listBox) {
-		listBoxInit();
-	}
-	// todo 这个数据要根据选择的用户得到两组数据，一组是该用户没有赋予的角色，左边的盒子，一组是该用户已经赋予的角色，放在右边的盒子里面。
-	var data = [ {
-		text : '张三jsadfajsgha',
-		id : '1'
-	}, {
-		text : '李四',
-		id : '2'
-	}, {
-		text : '赵武2',
-		id : '3'
-	}, {
-		text : '赵武3',
-		id : '4'
-	}, {
-		text : '赵武4',
-		id : '5'
-	}, {
-		text : '赵武5',
-		id : '6'
-	}, {
-		text : '赵武6',
-		id : '7'
-	}, {
-		text : '赵武7',
-		id : '8'
-	} ];
-	liger.get("listbox1").setData(data);
-	userRoleJoinWin = $.ligerDialog.open({
-		width : 600,
-		height : 600,
-		title : '赋予角色',
-		target : listBox,
-		buttons : [ {
-			text : '提交',
-			width : 80,
-			onclick : join_sava
-		}, {
-			text : '取消',
-			width : 80,
-			onclick : join_cancel
-		} ]
-	});
-}
-// 用户赋予角色提交函数
-function join_sava() {
-
-}// 用户赋予角色取消函数
-function join_cancel() {
-
 }
 
 // 增加用户的函数
@@ -243,7 +292,9 @@ function delete_user() {
 			// 进行ajax操作，成功后在回调函数里删除选择的行
 			$.ajax({
 				url : '/hnfnuzyw/system/deleteUser.action',
-				data : {id:row_data.id},
+				data : {
+					id : row_data.id
+				},
 				type : 'post',
 				success : function(data) {
 					if (data.success) {
@@ -262,43 +313,6 @@ function delete_user() {
 	});
 }
 
-// 把左边的角色拉进右边的函数
-function moveToLeft() {
-	var box1 = liger.get("listbox1"), box2 = liger.get("listbox2");
-	var selecteds = box2.getSelectedItems();
-	if (!selecteds || !selecteds.length)
-		return;
-	box2.removeItems(selecteds);
-	box1.addItems(selecteds);
-}
-// 把右边的角色拉进左边的函数
-function moveToRight() {
-	var box1 = liger.get("listbox1"), box2 = liger.get("listbox2");
-	var selecteds = box1.getSelectedItems();
-	if (!selecteds || !selecteds.length)
-		return;
-	box1.removeItems(selecteds);
-	box2.addItems(selecteds);
-}
-// 把左边的角色全部拉进右边的函数
-function moveAllToLeft() {
-	var box1 = liger.get("listbox1"), box2 = liger.get("listbox2");
-	var selecteds = box2.data;
-	if (!selecteds || !selecteds.length)
-		return;
-	box1.addItems(selecteds);
-	box2.removeItems(selecteds);
-}
-// 把右边的角色全部拉进左边的函数
-function moveAllToRight() {
-	var box1 = liger.get("listbox1"), box2 = liger.get("listbox2");
-	var selecteds = box1.data;
-	if (!selecteds || !selecteds.length)
-		return;
-	box2.addItems(selecteds);
-	box1.removeItems(selecteds);
-
-}
 // 修改用户函数
 function edit_user() {
 	formInit();
@@ -353,23 +367,6 @@ function edit_cancel() {
 	userWin.close();
 }
 
-// 用户赋予角色listBox的初始化
-function listBoxInit() {
-	listBox = $('<div style="margin:4px;float:left;"><div id="listbox1"></div></div>'
-			+ '<div style="margin:4px;float:left;" class="middle">'
-			+ '<input type="button" onclick="moveToLeft()" value="<" />'
-			+ '<input type="button" onclick="moveToRight()" value=">" />'
-			+ '<input type="button" onclick="moveAllToLeft()" value="<<" /> '
-			+ '<input type="button" onclick="moveAllToRight()" value=">>" /> </div>'
-			+ '<div style="margin:4px;float:left;"><div id="listbox2"></div></div>');
-	listBox.find("#listbox1,#listbox2").ligerListBox({
-		isShowCheckBox : true,
-		isMultiSelect : true,
-		height : 500,
-		width : 250
-	});
-
-}
 // 初始化表格
 $(function() {
 
@@ -466,8 +463,8 @@ $(function() {
 					items : toolbarItems
 				},
 				rowAttrRender : function(rowdata, rowid) {
-					if(rowdata.birth){
-					rowdata.birth = rowdata.birth.substring(0,10);
+					if (rowdata.birth) {
+						rowdata.birth = rowdata.birth.substring(0, 10);
 					}
 					return;
 				}

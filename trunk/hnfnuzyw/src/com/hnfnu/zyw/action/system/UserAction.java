@@ -88,7 +88,6 @@ public class UserAction extends ActionSupport implements ModelDriven<UserDto> {
 
 	@Action(value = "deleteUser")
 	public String delete() {
-		System.out.println("1111111111");
 		success = userService.delete(user.getId());
 		if (success) {
 			message = "É¾³ý³É¹¦£¡";
