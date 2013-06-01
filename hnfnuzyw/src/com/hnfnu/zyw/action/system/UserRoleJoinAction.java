@@ -29,6 +29,8 @@ public class UserRoleJoinAction extends ActionSupport implements
 	private boolean success;
 	private String message;
 	private Map<String, Object> userRoleJoinList;
+	//用户挂接角色，用；好隔开。
+	private String seletedRoleIds;
 
 	@Autowired
 	@Qualifier("userRoleJoinService")
@@ -87,13 +89,20 @@ public class UserRoleJoinAction extends ActionSupport implements
 		}
 		return SUCCESS;
 	}
-/*
-	// 获取表中所有功能，用Map装，为了分页的需要加上Rows和Total
-	@Action(value = "listUser")
-	public String list() {
-		userRoleJoinList = userRoleJoinService.list();
+	
+	@Action(value = "addUserRoleJoins")
+	public String addUserRoleJoins(){
+		success = userRoleJoinService.addUserRoleJoins(seletedRoleIds);
+		if (success) {
+			message = "用户添加角色成功！";
+		} else {
+			message = "用户添加角色失败！";
+		}
 		return SUCCESS;
-	}*/
+	}
+	
+	
+	
 
 	/* get set */
 	public IUserRoleJoinService getUserRoleJoinService() {
@@ -123,5 +132,10 @@ public class UserRoleJoinAction extends ActionSupport implements
 	public Map<String, Object> getUserList() {
 		return userRoleJoinList;
 	}
+	
+	public void setSeletedRoleIds(String seletedRoleIds) {
+		this.seletedRoleIds = seletedRoleIds;
+	}
+
 
 }

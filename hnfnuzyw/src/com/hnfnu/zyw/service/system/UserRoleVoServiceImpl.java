@@ -29,15 +29,11 @@ public class UserRoleVoServiceImpl implements IUserRoleVoService {
 
 	public Map<String, Object> roleByUser(int id) {
 		List<UserRoleVo> _selected = null;
-		List<RoleDto> selected = new ArrayList<RoleDto>();;
-		int selectedSize = 0;
-		// Map<String,Object> selected = new HashMap<String, Object>();;
-		List<RoleDto> unSelected = new ArrayList<RoleDto>();
-		// Map<String,Object> unSelected = new HashMap<String, Object>();;
-		Map<String, Object> result = new HashMap<String, Object>();
-
 		List<RoleDto> roles = null;
-		int unSelectedSize = 0;
+		
+		List<RoleDto> selected = new ArrayList<RoleDto>();;
+		List<RoleDto> unSelected = new ArrayList<RoleDto>();
+		Map<String, Object> result = new HashMap<String, Object>();
 		String sql = "from UserRoleVo where userId=" + id;
 		String hql = "from RoleDto";
 		try {
@@ -47,10 +43,12 @@ public class UserRoleVoServiceImpl implements IUserRoleVoService {
 			e.printStackTrace();
 		}
 
-		int i;
-		for (i = 0; i < roles.size(); i++) {
+		
+		for (int i = 0; i < roles.size(); i++) {
+			
+			int j;
 			int roleId = roles.get(i).getId();
-			for (int j = 0; j < _selected.size(); j++) {
+			for (j = 0; j < _selected.size(); j++) {
 				if (_selected.get(j).getRoleId() == roleId) {
 					selected.add(roles.get(i));
 					break;
@@ -59,8 +57,9 @@ public class UserRoleVoServiceImpl implements IUserRoleVoService {
 
 			System.out.println("selected = " + selected.size());
 			System.out.println("unselected" + unSelected.size());
-			if (i >= selected.size()) {
-				// System.out.println("没有被选的角色"+roles.get(i));
+			if (j >= _selected.size()) {
+				System.out.println("此时的i = "+ i);
+				System.out.println("没有被选的角色"+roles.get(i));
 				unSelected.add(roles.get(i));
 			}
 		}

@@ -1,5 +1,8 @@
 package com.hnfnu.zyw.service.system;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -54,17 +57,34 @@ public class UserRoleJoinServiceImpl implements IUserRoleJoinService {
 		return null;
 	}
 
-	/*
-	 * public Map<String, Object> list() { Map<String, Object> userRoleJoinList
-	 * = new HashMap<String, Object>();
-	 * 
-	 * String hql = "from UserRoleJoinDto"; List<UserRoleJoinDto> userRoleJoins
-	 * = null; try { userRoleJoins = userRoleJoinDao.list(hql); } catch
-	 * (Exception e) { e.printStackTrace(); }
-	 * 
-	 * userRoleJoinList.put("Rows", userRoleJoins);
-	 * userRoleJoinList.put("Total", userRoleJoins.size()); return
-	 * userRoleJoinList; }
-	 */
+	public boolean deleteByUserId(int userId) {
+		try {
+			return userRoleJoinDao.deleteByUserId(userId);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public boolean addUserRoleJoins(String userRoleIds) {
+		String[] ids = userRoleIds.split(";");
+		int userId = Integer.parseInt(ids[0]);
+		
+		List<UserRoleJoinDto> userRoleJoins = new ArrayList<UserRoleJoinDto>();
+		//当该用户没有角色时
+		if(ids.length < 2){
+			userRoleJoins = null;
+		}
+		for(int i = 1; i < ids.length;i++){
+			UserRoleJoinDto dto = new UserRoleJoinDto(null, userId,Integer.parseInt(ids[i]));
+			userRoleJoins.add(dto);
+		}
+		try {
+			return userRoleJoinDao.addUserRoleJoins(userId,userRoleJoins);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 
 }
