@@ -1,6 +1,8 @@
 package com.hnfnu.zyw.service.system;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -63,7 +65,8 @@ public class ParameterServiceImpl implements IParameterService {
 		return true;
 	}
 
-	public List<ParameterDto> list() {
+	public Map<String, Object> list() {
+		Map<String, Object> m = new HashMap<String, Object>();
 		List<ParameterDto> l = null;
 		try {
 			l = parameterDao.list("from ParameterDto");
@@ -71,7 +74,9 @@ public class ParameterServiceImpl implements IParameterService {
 			e.printStackTrace();
 			return null;
 		}
-		return l;
+		m.put("Rows", l);
+		m.put("Total", l.size());
+		return m;
 	}
 
 }

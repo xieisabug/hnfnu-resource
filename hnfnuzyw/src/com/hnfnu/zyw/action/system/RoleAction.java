@@ -39,9 +39,9 @@ public class RoleAction extends ActionSupport implements ModelDriven<RoleDto> {
 	public String add(){
 		success = roleService.add(role);
 		if(success) {
-			message = "添加参数成功！";
+			message = "添加角色成功！";
 		} else {
-			message = "添加参数失败！";
+			message = "添加角色失败！";
 		}
 		return SUCCESS;
 	}
@@ -50,9 +50,9 @@ public class RoleAction extends ActionSupport implements ModelDriven<RoleDto> {
 	public String update(){
 		success = roleService.update(role);
 		if(success) {
-			message = "修改参数成功！";
+			message = "修改角色成功！";
 		} else {
-			message = "修改参数失败！";
+			message = "修改角色失败！";
 		}
 		return SUCCESS;
 	}
@@ -67,9 +67,9 @@ public class RoleAction extends ActionSupport implements ModelDriven<RoleDto> {
 	public String delete(){
 		success = roleService.delete(role);
 		if(success) {
-			message = "删除参数成功！";
+			message = "删除角色成功！";
 		} else {
-			message = "删除参数失败！";
+			message = "删除角色失败！";
 		}
 		return SUCCESS;
 	}
