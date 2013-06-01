@@ -24,13 +24,7 @@ public class RoleDto
 	{
 
 	}
-	public RoleDto(Integer id, String name, Integer createUserId, String remark) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.createUserId = createUserId;
-		this.remark = remark;
-	}
+
 	public void setId(Integer id)
 	{
 		this.id = id;
@@ -66,10 +60,4 @@ public class RoleDto
 		return this.remark;
 	}
 
-	@Override
-	public String toString() {
-		return "RoleDto [id=" + id + ", name=" + name + ", createUserId="
-				+ createUserId + ", remark=" + remark + "]";
-	}
-	
 }

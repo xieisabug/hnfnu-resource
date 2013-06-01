@@ -19,23 +19,16 @@ function add_parameter() {
 }
 //增加功能的保存按钮事件
 function add_save() {
-//    console.log(parameterForm.rules());
-//	parameterForm.validate({
-//		errorPlacement:function(error, element){
-//			console.log(error);
-//			console.log(element);
-//		}
-//	});
-    if(parameterForm.valid()){
+    if (parameterForm.valid()) {
         var row_data = Form.parseJSON(parameterForm);
         $.ajax({
             url:'/hnfnuzyw/system/addParameter.action',
             data:row_data,
             type:'post',
-            success:function(data){
-                if(data.success){
+            success:function (data) {
+                if (data.success) {
                     parameterGrid.addRow(data.model);
-                    $.ligerDialog.tip({title: '提示信息',content:data.message});
+                    $.ligerDialog.tip({title:'提示信息', content:data.message});
                     parameterWin.close();
                 } else {
                     $.ligerDialog.error(data.message);
@@ -70,21 +63,23 @@ function edit_parameter() {
 }
 //修改功能的保存按钮事件
 function edit_save() {
-    var row_data = Form.parseJSON(parameterForm);
-    $.ajax({
-        url:'/hnfnuzyw/system/updateParameter.action',
-        data:row_data,
-        type:'post',
-        success:function(data){
-            if(data.success){
-            	parameterGrid.update(parameterGrid.getSelected(), data.model);
-	            $.ligerDialog.tip({title: '提示信息',content:data.message});
-	            parameterWin.close();
-            } else {
-            	$.ligerDialog.error(data.message);
+    if (parameterForm.valid()) {
+        var row_data = Form.parseJSON(parameterForm);
+        $.ajax({
+            url:'/hnfnuzyw/system/updateParameter.action',
+            data:row_data,
+            type:'post',
+            success:function (data) {
+                if (data.success) {
+                    parameterGrid.update(parameterGrid.getSelected(), data.model);
+                    $.ligerDialog.tip({title:'提示信息', content:data.message});
+                    parameterWin.close();
+                } else {
+                    $.ligerDialog.error(data.message);
+                }
             }
-        }
-    });
+        });
+    }
 }
 //修改功能的取消按钮事件
 function edit_cancel() {
@@ -99,17 +94,17 @@ function delete_parameter() {
     var row_data = parameterGrid.getSelected();
     $.ligerDialog.confirm('确认删除' + row_data.name + '？', '删除功能', function (r) {
         if (r) {
-        	$.ajax({
+            $.ajax({
                 url:'/hnfnuzyw/system/deleteParameter.action',
                 data:row_data,
                 type:'post',
-                success:function(data){
-                    if(data.success){
-        	            $.ligerDialog.tip({title: '提示信息',content:data.message});
-        	            parameterGrid.deleteSelectedRow();
-        	            parameterWin.close();
+                success:function (data) {
+                    if (data.success) {
+                        $.ligerDialog.tip({title:'提示信息', content:data.message});
+                        parameterGrid.deleteSelectedRow();
+                        parameterWin.close();
                     } else {
-                    	$.ligerDialog.error(data.message);
+                        $.ligerDialog.error(data.message);
                     }
                 }
             });
@@ -118,7 +113,7 @@ function delete_parameter() {
 }
 //初始化表单，生成form标签
 function formInit() {
-    parameterForm = $('<form id="Form'+id+'"></form>');
+    parameterForm = $('<form id="Form' + id + '"></form>');
     parameterForm.ligerForm({
         options:{
             id:id
@@ -138,6 +133,7 @@ function formInit() {
                 width:220,
                 newline:true,
                 validate:{
+                	required: true,
                     maxlength:100
                 }
             },
@@ -150,6 +146,7 @@ function formInit() {
                 width:220,
                 newline:true,
                 validate:{
+                	required: true,
                     maxlength:20
                 }
             },
@@ -165,11 +162,14 @@ function formInit() {
                 options:{
                     valueFieldID:"type",
                     valueField:"value",
+                    hideOnLoseFocus:true,
                     data:[
-                        {"id":0,"text":"array","value":"array"},
-                        {"id":1,"text":"number","value":"number"},
-                        {"id":2,"text":"string","value":"string"}
-                    ]
+                        {"id":0, "text":"array", "value":"array"},
+                        {"id":1, "text":"number", "value":"number"},
+                        {"id":2, "text":"string", "value":"string"}
+                    ],
+                    initValue:"array",
+                    initText:"array"
                 },
                 validate:{
                     maxlength:20
@@ -189,9 +189,9 @@ function formInit() {
     id++;
     $.metadata.setType("attr", "validate");
     parameterForm.validate({
-        debug: true,
+        debug:true,
         onkeyup:false,
-        errorPlacement:function(error){
+        errorPlacement:function (error) {
             $.ligerDialog.error(error[0].innerHTML);
         }
     });
@@ -209,11 +209,11 @@ $(function () {
         {name:'modify'},
         {name:'delete'}
     ];
-    toolbarItems = Toolbar.confirmToolbar(toolbarItems,ajaxToolbar);
+    toolbarItems = Toolbar.confirmToolbar(toolbarItems, ajaxToolbar);
     $.ajax({
         url:'/hnfnuzyw/system/listParameter.action',
         type:'post',
-        success:function(data){
+        success:function (data) {
             parameterGrid = $('#parameterGrid').ligerGrid({
                 columns:[
                     //{ display:'ID', name:'id', align:'left', width:100 },

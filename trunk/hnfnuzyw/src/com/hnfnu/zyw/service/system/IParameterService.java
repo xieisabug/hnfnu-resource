@@ -1,6 +1,7 @@
 package com.hnfnu.zyw.service.system;
 
-import java.util.List;
+import java.util.Map;
+
 import com.hnfnu.zyw.dto.system.ParameterDto;
 
 public interface IParameterService {
@@ -13,6 +14,6 @@ public interface IParameterService {
 
 	boolean delete(ParameterDto parameter);//删除一个参数
 
-	List<ParameterDto> list();
+	Map<String, Object> list();
 	
 }

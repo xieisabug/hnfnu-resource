@@ -1,7 +1,5 @@
 package com.hnfnu.zyw.action.system;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Action;
@@ -78,10 +76,7 @@ public class ParameterAction extends ActionSupport implements ModelDriven<Parame
 	
 	@Action(value = "listParameter")
 	public String list(){
-		parameterList = new HashMap<String, Object>();
-		List<ParameterDto> l = parameterService.list();
-		parameterList.put("Rows", l);
-		parameterList.put("Total", l.size());
+		parameterList = parameterService.list();
 		return SUCCESS;
 	}
 

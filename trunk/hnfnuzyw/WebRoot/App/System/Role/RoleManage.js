@@ -20,10 +20,23 @@ function add_role() {
 }
 //增加功能的保存按钮事件
 function add_save() {
-    var data = Form.parseJSON(roleForm);
-    //todo 需要发往服务器，返回成功后再添加到表格中
-    roleGrid.addRow(data);
-    roleWin.close();
+    if(roleForm.valid()){
+        var row_data = Form.parseJSON(roleForm);
+        $.ajax({
+            url:'/hnfnuzyw/system/addRole.action',
+            data:row_data,
+            type:'post',
+            success:function(data){
+                if(data.success){
+                    roleGrid.addRow(data.model);
+                    $.ligerDialog.tip({title: '提示信息',content:data.message});
+                    roleWin.close();
+                } else {
+                    $.ligerDialog.error(data.message);
+                }
+            }
+        });
+    }
 }
 //增加功能的取消按钮事件
 function add_cancel() {
@@ -50,10 +63,23 @@ function edit_role() {
 }
 //修改功能的保存按钮事件
 function edit_save() {
-    var data = Form.parseJSON(roleForm);
-    //todo 需要发往服务器，返回成功后再修改到表格中
-    roleGrid.update(roleGrid.getSelected(), data);
-    roleWin.close();
+	if(roleForm.valid()){
+	    var row_data = Form.parseJSON(roleForm);
+	    $.ajax({
+	        url:'/hnfnuzyw/system/updateRole.action',
+	        data:row_data,
+	        type:'post',
+	        success:function(data){
+	            if(data.success){
+	                roleGrid.update(roleGrid.getSelected(), data.model);
+	                $.ligerDialog.tip({title: '提示信息',content:data.message});
+	                roleWin.close();
+	            } else {
+	                $.ligerDialog.error(data.message);
+	            }
+	        }
+	    });
+	}
 }
 //修改功能的取消按钮事件
 function edit_cancel() {
@@ -65,11 +91,23 @@ function delete_role() {
         $.ligerDialog.warn('请选择您要删除的行.');
         return;
     }
-    var row = roleGrid.getSelected();
-    $.ligerDialog.confirm('确认删除' + row.name + '？', '删除功能', function (r) {
+    var row_data = roleGrid.getSelected();
+    $.ligerDialog.confirm('确认删除' + row_data.name + '？', '删除功能', function (r) {
         if (r) {
-            //todo 进行ajax操作，成功后在回调函数里删除选择的行
-            roleGrid.deleteSelectedRow();
+            $.ajax({
+                url:'/hnfnuzyw/system/deleteRole.action',
+                data:{id:row_data.id},
+                type:'post',
+                success:function (data) {
+                    if (data.success) {
+                        $.ligerDialog.tip({title:'提示信息', content:data.message});
+                        roleGrid.deleteSelectedRow();
+                        roleWin.close();
+                    } else {
+                        $.ligerDialog.error(data.message);
+                    }
+                }
+            });
         }
     });
 }
@@ -132,12 +170,7 @@ function formInit() {
         fields:[
             {
                 name:'id',
-                display:'ID',
-                type:'text',
-                space:30,
-                labelWidth:100,
-                newline:true,
-                width:220
+                type:'hidden'
             },
             {
                 display:'角色名称',
@@ -159,11 +192,7 @@ function formInit() {
                 space:30,
                 labelWidth:100,
                 width:220,
-                newline:true,
-                validate:{
-                    required:true,
-                    maxlength:50
-                }
+                newline:true
             },
             {
                 display:'备注',
@@ -172,13 +201,17 @@ function formInit() {
                 space:30,
                 labelWidth:100,
                 width:220,
-                newline:true,
-                validate:{
-                    required:true,
-                    maxlength:50
-                }
+                newline:true
             }
         ]
+    });
+    $.metadata.setType("attr", "validate");
+    roleForm.validate({
+        debug:true,
+        onkeyup:false,
+        errorPlacement:function (error) {
+            $.ligerDialog.error(error[0].innerHTML);
+        }
     });
 }
 //初始化表格
@@ -198,21 +231,28 @@ $(function () {
         {name:'join'}
     ];
     toolbarItems = Toolbar.confirmToolbar(toolbarItems, ajaxToolbar);
-    roleGrid = $('#roleGrid').ligerGrid({
-        columns:[
-            { display:'ID', name:'id', align:'left', width:100 },
-            { display:'角色名称', name:'name', width:200 },
-            //todo 注意这里是createUser，后台需要处理好user的名字后再显示到前台
-            { name:'createUserId', hide:true },
-            { display:'创建用户', name:'createUser', width:200 },
-            { display:'备注', name:'remark', align:'left', width:400 }
-        ],
-        width:'99%',
-        height:'98%',
-        pageSize:30,
-        url:'../../../Json/RoleData.json',
-        toolbar:{
-            items:toolbarItems
+    $.ajax({
+        url:'/hnfnuzyw/system/listRole.action',
+        type:'post',
+        success:function(data){
+            roleGrid = $('#roleGrid').ligerGrid({
+                columns:[
+                    //{ display:'ID', name:'id', align:'left', width:100 },
+                    { display:'角色名称', name:'name', width:200 },
+                    //todo 注意这里是createUser，后台需要处理好user的名字后再显示到前台
+                    { name:'createUserId', hide:true },
+                    { display:'创建用户', name:'createUser', width:200 },
+                    { display:'备注', name:'remark', align:'left', width:400 }
+                ],
+                width:'99%',
+                height:'98%',
+                pageSize:30,
+                data:data.roleList,
+                toolbar:{
+                    items:toolbarItems
+                }
+            });
+            $("#pageloading").hide();
         }
     });
     $("#pageloading").hide();
