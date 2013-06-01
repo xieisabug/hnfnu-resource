@@ -6,16 +6,16 @@ var userRoleJoinWin = null;// 用户赋予角色窗口
 
 // 用户赋予角色listBox的初始化
 function listBoxInit() {
-	listBox = $('<div style="margin:4px;float:left;"><div id="listbox1"></div></div>'
+	listBox = $('<div style="margin:4px;float:left;">未选角色：<div id="listbox1"></div></div>'
 			+ '<div style="margin:4px;float:left;" class="middle">'
 			+ '<input type="button" onclick="moveToLeft()" value="<" />'
 			+ '<input type="button" onclick="moveToRight()" value=">" />'
 			+ '<input type="button" onclick="moveAllToLeft()" value="<<" /> '
 			+ '<input type="button" onclick="moveAllToRight()" value=">>" /> </div>'
-			+ '<div style="margin:4px;float:left;"><div id="listbox2"></div></div>');
+			+ '<div style="margin:4px;float:left;">已选角色：<div id="listbox2"></div></div>');
 	listBox.find("#listbox1,#listbox2").ligerListBox({
-		textField:'name',
-		valueField:'id',
+		textField : 'name',
+		valueField : 'id',
 		isShowCheckBox : true,
 		isMultiSelect : true,
 		height : 500,
@@ -55,7 +55,7 @@ function moveAllToLeft() {
 function moveAllToRight() {
 	var box1 = liger.get("listbox1"), box2 = liger.get("listbox2");
 	var selecteds = box1.data;
-	//alert("selecteds"+selecteds);
+	// alert("selecteds"+selecteds);
 	if (!selecteds || !selecteds.length)
 		return;
 	box2.addItems(selecteds);
@@ -80,36 +80,60 @@ function user_role_join() {
 		},
 		type : 'post',
 		success : function(data) {
-				liger.get("listbox1").setData(data.roleByUser.unSelected);
-				liger.get("listbox2").setData(data.roleByUser.selected);
-				userRoleJoinWin = $.ligerDialog.open({
-					width : 600,
-					height : 600,
-					title : '赋予' + user.username + '角色',
-					target : listBox,
-					buttons : [ {
-						text : '提交',
-						width : 80,
-						onclick : join_sava
-					}, {
-						text : '取消',
-						width : 80,
-						onclick : join_cancel
-					} ]
-				});
-			
+			liger.get("listbox1").setData(data.roleByUser.unSelected);
+			liger.get("listbox2").setData(data.roleByUser.selected);
+			userRoleJoinWin = $.ligerDialog.open({
+				width : 600,
+				height : 600,
+				title : '赋予' + user.username + '角色',
+				target : listBox,
+				buttons : [ {
+					text : '提交',
+					width : 80,
+					onclick : join_sava
+				}, {
+					text : '取消',
+					width : 80,
+					onclick : join_cancel
+				} ]
+			});
+
 		}
 	});
 
 }
 // 用户赋予角色提交函数
 function join_sava() {
-	var selecteds = liger.get("listbox1").data;
-	alert(selecteds.id);
-
+	// 得到用户
+	var user = userGrid.getSelected();
+	var userRoleIds = user.id + "";
+	var selecteds = liger.get("listbox2").data;
+	for ( var i = 0; i < selecteds.length; i++) {
+		userRoleIds += ";";
+		userRoleIds += selecteds[i].id;
+	}
+	$.ajax({
+		url : '/hnfnuzyw/system/addUserRoleJoins.action',
+		data : {
+			seletedRoleIds : userRoleIds
+		},
+		type : 'post',
+		success : function(data) {
+			if (data.success) {
+				$.ligerDialog.tip({
+					title : '提示信息',
+					content : data.message
+				});
+				userRoleJoinWin.close();
+			} else {
+				$.ligerDialog.error(data.message);
+			}
+		}
+	});
 }// 用户赋予角色取消函数
+
 function join_cancel() {
-	listBox.close();
+	userRoleJoinWin.close();
 }
 
 // 初始化表单
@@ -120,7 +144,7 @@ function formInit() {
 		inputWidth : 280,
 		fields : [ {
 			name : 'id',
-			type : 'hidden',
+			type : 'hidden'
 		}, {
 			name : 'username',
 			display : '用户名',
@@ -181,7 +205,7 @@ function formInit() {
 			width : 200,
 			group : '选填信息',
 			groupicon : groupicon
-		}, {
+		}, /*{
 			display : '性别',
 			name : 'sex',
 			type : 'select',
@@ -189,7 +213,6 @@ function formInit() {
 			width : 200,
 			labelWidth : 100,
 			space : 30,
-
 			options : {
 				textField : 'name',
 				valueFieldID : 'id',
@@ -203,7 +226,7 @@ function formInit() {
 			// 'id' : '0'
 			// } ]
 			}
-		}, {
+		},*/ {
 			name : 'qq',
 			display : 'QQ',
 			type : 'text',
@@ -286,7 +309,6 @@ function delete_user() {
 		return;
 	}
 	var row_data = userGrid.getSelected();
-	console.log(row_data);
 	$.ligerDialog.confirm('确认删除' + row_data.name + '？', '删除功能', function(r) {
 		if (r) {
 			// 进行ajax操作，成功后在回调函数里删除选择的行
@@ -369,7 +391,6 @@ function edit_cancel() {
 
 // 初始化表格
 $(function() {
-
 	var toolbarItems = [ {
 		text : '新增用户',
 		click : add_user,
@@ -403,7 +424,6 @@ $(function() {
 	} ];
 	// 确认权限的是否有这个功能
 	toolbarItems = Toolbar.confirmToolbar(toolbarItems, ajaxToolbar);
-
 	$.ajax({
 		url : '/hnfnuzyw/system/listUser.action',
 		type : 'post',

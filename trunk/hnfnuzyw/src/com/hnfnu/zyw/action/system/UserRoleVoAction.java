@@ -29,8 +29,12 @@ public class UserRoleVoAction extends ActionSupport implements
 	private boolean success;
 	private String message;
 	private Map<String, Object> roleByUser;
-	//private UserDto user;
-
+	
+	
+	
+	/**
+	 * 通过用户id，得到该用户已经添加的角色和未添加的角色
+	 */
 	@Autowired
 	@Qualifier("userRoleVoService")
 	private IUserRoleVoService userRoleVoService;
@@ -40,6 +44,12 @@ public class UserRoleVoAction extends ActionSupport implements
 		roleByUser = userRoleVoService.roleByUser(userRoleVo.getUserId());
 		return SUCCESS;
 	}
+	
+	
+	
+	
+	
+	
 	public UserRoleVo getUserRoleVo() {
 		return userRoleVo;
 	}
@@ -80,4 +90,7 @@ public class UserRoleVoAction extends ActionSupport implements
 		return userRoleVo;
 	}
 
+	
+	
+	
 }
