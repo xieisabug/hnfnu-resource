@@ -1,8 +1,15 @@
 package com.hnfnu.zyw.dto.system;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
 * 通过数据库内表的字段动态生成 RoleMenuJoinDto
 **/
+@Entity
+@Table(name="s_role_menu_join")
 public class RoleMenuJoinDto 
 {	
 	private Integer id;
@@ -14,11 +21,27 @@ public class RoleMenuJoinDto
 	{
 
 	}
+	
+	
+
+	public RoleMenuJoinDto(Integer id, Integer roleId, Integer menuId,
+			String functionIdList) {
+		super();
+		this.id = id;
+		this.roleId = roleId;
+		this.menuId = menuId;
+		this.functionIdList = functionIdList;
+	}
+
+
 
 	public void setId(Integer id)
 	{
 		this.id = id;
 	}
+	
+	@Id
+	@GeneratedValue
 	public Integer getId()
 	{
 		return this.id;
@@ -47,4 +70,14 @@ public class RoleMenuJoinDto
 	{
 		return this.functionIdList;
 	}
+
+
+
+	@Override
+	public String toString() {
+		return "RoleMenuJoinDto [functionIdList=" + functionIdList + ", id="
+				+ id + ", menuId=" + menuId + ", roleId=" + roleId + "]";
+	}
+	
+	
 }
