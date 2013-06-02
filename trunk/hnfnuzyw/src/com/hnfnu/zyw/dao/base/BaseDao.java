@@ -52,6 +52,10 @@ public class BaseDao<T> extends HibernateDaoSupport implements IBaseDao<T>{
 //		return this.getHibernateTemplate().load(T.c, id);
 		return this.getHibernateTemplate().load(getClz(), id);
 	}
+	
+	public T get(int id) throws Exception {
+		return this.getHibernateTemplate().get(getClz(), id);
+	}
 
 	@SuppressWarnings("unchecked")
 	public List<T> list(String hql, Object[] args) throws Exception{
@@ -73,4 +77,6 @@ public class BaseDao<T> extends HibernateDaoSupport implements IBaseDao<T>{
 	public List<T> list(String hql, Object arg) throws Exception{
 		return this.list(hql,new Object[]{arg});
 	}
+
+	
 }
