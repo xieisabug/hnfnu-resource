@@ -36,6 +36,7 @@ public class RoleMenuJoinAction extends ActionSupport implements
 	private boolean success;
 	private String message;
 	List<Object> joinTree;
+	private String joinIds;
 
 	@Action(value = "joinTree")
 	public String joinTree() {
@@ -44,6 +45,17 @@ public class RoleMenuJoinAction extends ActionSupport implements
 			success = true;
 		}else{
 			success = false;
+		}
+		return SUCCESS;
+	}
+	
+	@Action(value = "addRoleMenuJoins")
+	public String addRoleMenuJoins() {
+		success= roleMenuJoinService.addRoleMenuJoins(joinIds);
+		if(success){
+			message = "角色挂接菜单成功";
+		}else{
+			message = "角色挂接菜单失败";
 		}
 		return SUCCESS;
 	}
@@ -80,4 +92,9 @@ public class RoleMenuJoinAction extends ActionSupport implements
 		return roleMenuJoin;
 	}
 
+	public void setJoinIds(String joinIds) {
+		this.joinIds = joinIds;
+	}
+
+	
 }
