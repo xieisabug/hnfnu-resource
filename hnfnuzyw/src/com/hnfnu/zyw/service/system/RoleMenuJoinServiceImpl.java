@@ -103,4 +103,34 @@ public class RoleMenuJoinServiceImpl implements IRoleMenuJoinService {
 		return false;
 	}
 
+	@Override
+	public boolean addRoleMenuJoins(String joinIds) {
+		System.out.println("joinIds"+joinIds);
+		List<RoleMenuJoinDto> roleMenuJoins = new ArrayList<RoleMenuJoinDto>();
+		RoleMenuJoinDto roleMenuJoin = null;
+		String[] f =  joinIds.split(":");
+		int roleId = Integer.parseInt(f[0]);
+		
+		if(f.length < 2){
+			roleMenuJoins = null;
+		}
+		for(int i = 1; i < f.length;i++){
+			roleMenuJoin = new RoleMenuJoinDto();
+			String[] t = f[i].split(",");
+			int menuId = Integer.parseInt(t[0]);
+			roleMenuJoin.setRoleId(roleId);
+			roleMenuJoin.setMenuId(menuId);
+			roleMenuJoin.setFunctionIdList(t[1]);	
+			roleMenuJoins.add(roleMenuJoin);
+		}
+		try {
+			roleMenuJoinDao.addRoleMenuJoins(roleId, roleMenuJoins);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		return true;
+	}
+
 }

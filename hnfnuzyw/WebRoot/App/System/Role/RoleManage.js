@@ -185,18 +185,46 @@ function role_menu_join() {
 }
 function join_save() {
 	// todo ajax发送数据后返回成功消息即可
+	var role = roleGrid.getSelected();
 	var checked = treeManager.getChecked();
-	var selected = treeManager.getSelected();
 	var len = checked.length;
-	var data = "";
+	var row_data = role.id + "";
+
+	var temp = -1;
 	for ( var i = 0; i < len; i++) {
-		data += checked[i].data.text;
+		var node = checked[i].data;
+		if(checked[i].data.pid === undefined){
+			continue;	
+		}
+		if (checked[i].data.pid == temp) {
+			row_data += ";";
+			row_data += checked[i].data.id;
+		} else {
+			temp = checked[i].data.pid;
+			row_data += ":";
+			row_data += temp;
+			row_data += ",";
+			row_data += checked[i].data.id;
+		}
 	}
-	console.log("selected");
-	console.log(selected);
-	console.log("checked");
-	console.log(checked);
-	roleWin.close();
+	$.ajax( {
+		url : '/hnfnuzyw/system/addRoleMenuJoins.action',
+		data : {
+			joinIds : row_data
+		},
+		type : 'post',
+		success : function(data) {
+			if (data.success) {
+				$.ligerDialog.tip( {
+					title : '提示信息',
+					content : data.message
+				});
+				roleWin.close();
+			} else {
+				$.ligerDialog.error(data.message);
+			}
+		}
+	});
 }
 function join_cancel() {
 	roleWin.close();

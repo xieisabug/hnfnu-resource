@@ -38,8 +38,7 @@ public class UserRoleJoinDaoImpl extends BaseDao<UserRoleJoinDto> implements
 
 	}
 
-	public boolean addUserRoleJoins(int userId,List<UserRoleJoinDto> userRoleJoins)
-			throws Exception {
+	public boolean addUserRoleJoins(int userId,List<UserRoleJoinDto> userRoleJoins) {
 		
 		String hql = "delete UserRoleJoinDto where userId=:userId";
 		// ´ò¿ªSession
