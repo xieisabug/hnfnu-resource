@@ -154,7 +154,11 @@ function formInit() {
 			newline : true,
 			group : '必填信息',
 			groupicon : groupicon,
-			width : 200
+			width : 200,
+			validate : {
+				required : true,
+				maxlength : 20
+			}
 		}, {
 			name : 'password',
 			display : '密码',
@@ -162,15 +166,23 @@ function formInit() {
 			space : 30,
 			labelWidth : 100,
 			newline : true,
-			width : 200
+			width : 200,
+			validate : {
+				required : true,
+				maxlength : 20
+			}
 		}, {
 			name : 'confirmPassword',
 			display : '密码确认',
-			type : 'text',
+			type : 'password',
 			space : 30,
 			labelWidth : 100,
 			newline : true,
-			width : 200
+			width : 200,
+			validate : {
+				required : true,
+				maxlength : 20
+			}
 		}, {
 			name : 'name',
 			display : '姓名',
@@ -178,7 +190,11 @@ function formInit() {
 			space : 30,
 			labelWidth : 100,
 			newline : true,
-			width : 200
+			width : 200,
+			validate : {
+				required : true,
+				maxlength : 10
+			}
 		}, {
 			name : 'idcard',
 			display : '身份证',
@@ -186,7 +202,11 @@ function formInit() {
 			space : 30,
 			labelWidth : 100,
 			newline : true,
-			width : 200
+			width : 200,
+			validate : {
+				required : true,
+				maxlength : 18
+			}
 		}, {
 			name : 'department',
 			display : '部门',
@@ -194,7 +214,11 @@ function formInit() {
 			space : 30,
 			labelWidth : 100,
 			newline : true,
-			width : 200
+			width : 200,
+			validate : {
+				required : true,
+				maxlength : 40
+			}
 		}, {
 			name : 'telephone',
 			display : '电话',
@@ -204,36 +228,45 @@ function formInit() {
 			newline : true,
 			width : 200,
 			group : '选填信息',
-			groupicon : groupicon
-		}, /*{
-			display : '性别',
-			name : 'sex',
-			type : 'select',
-			comboboxName : 'sex',
-			width : 200,
-			labelWidth : 100,
-			space : 30,
-			options : {
-				textField : 'name',
-				valueFieldID : 'id',
-				valueField : 'id',
-				url : "../../../Json/Sex.json"
-			// data : [ {
-			// 'text' : '男',
-			// 'id' :'1'
-			// }, {
-			// 'text' : '女',
-			// 'id' : '0'
-			// } ]
+			groupicon : groupicon,
+			validate : {
+				required : true,
+				maxlength : 15
 			}
-		},*/ {
+		}, {
+			display : "性别",
+			name : "sex",
+			type : "select",
+			width : 200,
+			space : 30,
+			labelWidth : 100,
+			comboboxName : "sex",
+			textField : "text",
+			valueField : "id",
+			newline : true,
+			options : {
+				hideOnLoseFocus : true,
+				valueFieldID : "id",
+				data : [ {
+					"id" : "1",
+					"text" : "男"
+				}, {
+					"id" : "0",
+					"text" : "女"
+				} ]
+
+			}
+		}, {
 			name : 'qq',
 			display : 'QQ',
 			type : 'text',
 			space : 30,
 			labelWidth : 100,
 			newline : true,
-			width : 200
+			width : 200,
+			validate : {
+				maxlength : 15
+			}
 		}, {
 			name : 'birth',
 			display : '生日',
@@ -252,6 +285,15 @@ function formInit() {
 			width : 200
 		} ]
 	});
+	
+	$.metadata.setType("attr", "validate");
+    userForm.validate({
+        debug:true,
+        onkeyup:false,
+        errorPlacement:function (error) {
+            $.ligerDialog.error(error[0].innerHTML);
+        }
+    });
 }
 
 // 增加用户的函数
@@ -276,25 +318,27 @@ function add_user() {
 }
 // 增加用户的保存按钮事件
 function add_save() {
-	var row_data = Form.parseJSON(userForm);
-	// 发往服务器，返回成功后再添加到表格中
-	$.ajax({
-		url : '/hnfnuzyw/system/addUser.action',
-		data : row_data,
-		type : 'post',
-		success : function(data) {
-			if (data.success) {
-				userGrid.addRow(data.model);
-				$.ligerDialog.tip({
-					title : '提示信息',
-					content : data.message
-				});
-				userWin.close();
-			} else {
-				$.ligerDialog.error(data.message);
+	if (userForm.valid()) {
+		var row_data = Form.parseJSON(userForm);
+		// 发往服务器，返回成功后再添加到表格中
+		$.ajax({
+			url : '/hnfnuzyw/system/addUser.action',
+			data : row_data,
+			type : 'post',
+			success : function(data) {
+				if (data.success) {
+					userGrid.addRow(data.model);
+					$.ligerDialog.tip({
+						title : '提示信息',
+						content : data.message
+					});
+					userWin.close();
+				} else {
+					$.ligerDialog.error(data.message);
+				}
 			}
-		}
-	});
+		});
+	}
 }
 
 // 增加功能的取消按钮事件
@@ -362,26 +406,29 @@ function edit_user() {
 
 // 修改用户的保存按钮事件
 function edit_save() {
-	var row_data = Form.parseJSON(userForm);
-	// 需要发往服务器，返回成功后再修改到表格中
 
-	$.ajax({
-		url : '/hnfnuzyw/system/updateUser.action',
-		data : row_data,
-		type : 'post',
-		success : function(data) {
-			if (data.success) {
-				userGrid.update(userGrid.getSelected(), data.model);
-				$.ligerDialog.tip({
-					title : '提示信息',
-					content : data.message
-				});
-				userWin.close();
-			} else {
-				$.ligerDialog.error(data.message);
+	if (userForm.valid()) {
+		var row_data = Form.parseJSON(userForm);
+		// 需要发往服务器，返回成功后再修改到表格中
+
+		$.ajax({
+			url : '/hnfnuzyw/system/updateUser.action',
+			data : row_data,
+			type : 'post',
+			success : function(data) {
+				if (data.success) {
+					userGrid.update(userGrid.getSelected(), data.model);
+					$.ligerDialog.tip({
+						title : '提示信息',
+						content : data.message
+					});
+					userWin.close();
+				} else {
+					$.ligerDialog.error(data.message);
+				}
 			}
-		}
-	});
+		});
+	}
 }
 
 // 修改功能的取消按钮事件

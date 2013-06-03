@@ -30,7 +30,7 @@ public class MenuAction extends ActionSupport implements ModelDriven<MenuDto> {
 	private MenuDto menu = new MenuDto();// 获取页面提交参数
 	private boolean success;
 	private Map<String, Object> menuList;
-
+	private String message;
 	@Autowired
 	@Qualifier("menuService")
 	private IMenuService menuService;
@@ -39,6 +39,11 @@ public class MenuAction extends ActionSupport implements ModelDriven<MenuDto> {
 	@Action(value = "addMenu")
 	public String add() {
 		success = menuService.add(menu);
+		if(success){
+			message = "菜单添加成功";
+		}else{
+			message = "菜单添加失败";
+		}
 		return SUCCESS;
 	}
 
@@ -46,6 +51,11 @@ public class MenuAction extends ActionSupport implements ModelDriven<MenuDto> {
 	@Action(value = "updateMenu")
 	public String update() {
 		success = menuService.update(menu);
+		if(success){
+			message = "菜单修改成功";
+		}else{
+			message = "菜单修改失败";
+		}
 		return SUCCESS;
 	}
 
@@ -57,6 +67,11 @@ public class MenuAction extends ActionSupport implements ModelDriven<MenuDto> {
 	@Action(value = "loadMenu")
 	public String load() {
 		menu = menuService.load(menu.getId());
+		if(menu != null){
+			message = "菜单查询成功";
+		}else{
+			message = "菜单查询失败";
+		}
 		return SUCCESS;
 	}
 
@@ -69,6 +84,11 @@ public class MenuAction extends ActionSupport implements ModelDriven<MenuDto> {
 	@Action(value = "deleteMenu")
 	public String delete() {
 		success = menuService.delete(menu.getId());
+		if(success){
+			message = "菜单删除成功";
+		}else{
+			message = "菜单删除失败";
+		}
 		return SUCCESS;
 	}
 
@@ -99,6 +119,10 @@ public class MenuAction extends ActionSupport implements ModelDriven<MenuDto> {
 
 	public Map<String, Object> getMenuList() {
 		return menuList;
+	}
+
+	public String getMessage() {
+		return message;
 	}
 
 }
