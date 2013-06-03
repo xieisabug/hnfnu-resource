@@ -51,8 +51,9 @@ public class MenuServiceImpl implements IMenuService {
 			return menuDao.load(id);
 		} catch (Exception e) {
 			e.printStackTrace();
+			return null;
 		}
-		return null;
+		
 	}
 
 	public List<MenuDto> list() {

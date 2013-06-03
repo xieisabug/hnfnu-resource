@@ -103,7 +103,6 @@ public class RoleMenuJoinServiceImpl implements IRoleMenuJoinService {
 		return false;
 	}
 
-	@Override
 	public boolean addRoleMenuJoins(String joinIds) {
 		System.out.println("joinIds"+joinIds);
 		List<RoleMenuJoinDto> roleMenuJoins = new ArrayList<RoleMenuJoinDto>();

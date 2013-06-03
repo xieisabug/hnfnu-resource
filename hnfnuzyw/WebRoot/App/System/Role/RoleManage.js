@@ -7,7 +7,7 @@ var treeManager = null;// 树的管理器
 // 增加功能的函数
 function add_role() {
 	formInit();
-	roleWin = $.ligerDialog.open( {
+	roleWin = $.ligerDialog.open({
 		width : 400,
 		height : 200,
 		title : '新增功能',
@@ -26,24 +26,26 @@ function add_role() {
 // 增加功能的保存按钮事件
 function add_save() {
 	if (roleForm.valid()) {
-		var row_data = Form.parseJSON(roleForm);
-		$.ajax( {
-			url : '/hnfnuzyw/system/addRole.action',
-			data : row_data,
-			type : 'post',
-			success : function(data) {
-				if (data.success) {
-					roleGrid.addRow(data.model);
-					$.ligerDialog.tip( {
-						title : '提示信息',
-						content : data.message
-					});
-					roleWin.close();
-				} else {
-					$.ligerDialog.error(data.message);
+		if (roleForm.valid()) {
+			var row_data = Form.parseJSON(roleForm);
+			$.ajax({
+				url : '/hnfnuzyw/system/addRole.action',
+				data : row_data,
+				type : 'post',
+				success : function(data) {
+					if (data.success) {
+						roleGrid.addRow(data.model);
+						$.ligerDialog.tip({
+							title : '提示信息',
+							content : data.message
+						});
+						roleWin.close();
+					} else {
+						$.ligerDialog.error(data.message);
+					}
 				}
-			}
-		});
+			});
+		}
 	}
 }
 // 增加功能的取消按钮事件
@@ -58,7 +60,7 @@ function edit_role() {
 		return;
 	}
 	Form.loadForm(roleForm, roleGrid.getSelected());
-	roleWin = $.ligerDialog.open( {
+	roleWin = $.ligerDialog.open({
 		width : 400,
 		height : 200,
 		title : '编辑功能',
@@ -77,24 +79,26 @@ function edit_role() {
 // 修改功能的保存按钮事件
 function edit_save() {
 	if (roleForm.valid()) {
-		var row_data = Form.parseJSON(roleForm);
-		$.ajax( {
-			url : '/hnfnuzyw/system/updateRole.action',
-			data : row_data,
-			type : 'post',
-			success : function(data) {
-				if (data.success) {
-					roleGrid.update(roleGrid.getSelected(), data.model);
-					$.ligerDialog.tip( {
-						title : '提示信息',
-						content : data.message
-					});
-					roleWin.close();
-				} else {
-					$.ligerDialog.error(data.message);
+		if (roleForm.valid()) {
+			var row_data = Form.parseJSON(roleForm);
+			$.ajax({
+				url : '/hnfnuzyw/system/updateRole.action',
+				data : row_data,
+				type : 'post',
+				success : function(data) {
+					if (data.success) {
+						roleGrid.update(roleGrid.getSelected(), data.model);
+						$.ligerDialog.tip({
+							title : '提示信息',
+							content : data.message
+						});
+						roleWin.close();
+					} else {
+						$.ligerDialog.error(data.message);
+					}
 				}
-			}
-		});
+			});
+		}
 	}
 }
 // 修改功能的取消按钮事件
@@ -110,7 +114,7 @@ function delete_role() {
 	var row_data = roleGrid.getSelected();
 	$.ligerDialog.confirm('确认删除' + row_data.name + '？', '删除功能', function(r) {
 		if (r) {
-			$.ajax( {
+			$.ajax({
 				url : '/hnfnuzyw/system/deleteRole.action',
 				data : {
 					id : row_data.id
@@ -118,7 +122,7 @@ function delete_role() {
 				type : 'post',
 				success : function(data) {
 					if (data.success) {
-						$.ligerDialog.tip( {
+						$.ligerDialog.tip({
 							title : '提示信息',
 							content : data.message
 						});
@@ -140,7 +144,7 @@ function role_menu_join() {
 	}
 	var role = roleGrid.getSelected();
 
-	$.ajax( {
+	$.ajax({
 		url : '/hnfnuzyw/system/joinTree.action',
 		data : {
 			roleId : role.id
@@ -149,7 +153,7 @@ function role_menu_join() {
 		success : function(data) {
 			if (data.success) {
 				joinTree = $('<ul></ul>');
-				joinTree.ligerTree( {
+				joinTree.ligerTree({
 					idFieldName : 'id',
 					textFieldName : 'name',
 					idFieldName : 'id',
@@ -158,7 +162,7 @@ function role_menu_join() {
 
 				});
 				treeManager = joinTree.ligerGetTreeManager();
-				roleWin = $.ligerDialog.open( {
+				roleWin = $.ligerDialog.open({
 					width : 400,
 					height : 400,
 					title : '权限赋予',
@@ -193,8 +197,8 @@ function join_save() {
 	var temp = -1;
 	for ( var i = 0; i < len; i++) {
 		var node = checked[i].data;
-		if(checked[i].data.pid === undefined){
-			continue;	
+		if (checked[i].data.pid === undefined) {
+			continue;
 		}
 		if (checked[i].data.pid == temp) {
 			row_data += ";";
@@ -207,7 +211,7 @@ function join_save() {
 			row_data += checked[i].data.id;
 		}
 	}
-	$.ajax( {
+	$.ajax({
 		url : '/hnfnuzyw/system/addRoleMenuJoins.action',
 		data : {
 			joinIds : row_data
@@ -215,7 +219,7 @@ function join_save() {
 		type : 'post',
 		success : function(data) {
 			if (data.success) {
-				$.ligerDialog.tip( {
+				$.ligerDialog.tip({
 					title : '提示信息',
 					content : data.message
 				});
@@ -232,7 +236,7 @@ function join_cancel() {
 // 初始化表单，生成form标签
 function formInit() {
 	roleForm = $('<form></form>');
-	roleForm.ligerForm( {
+	roleForm.ligerForm({
 		inputWidth : 280,
 		fields : [ {
 			name : 'id',
@@ -268,7 +272,7 @@ function formInit() {
 		} ]
 	});
 	$.metadata.setType("attr", "validate");
-	roleForm.validate( {
+	roleForm.validate({
 		debug : true,
 		onkeyup : false,
 		errorPlacement : function(error) {
@@ -312,32 +316,32 @@ $(function() {
 		name : 'join'
 	} ];
 	toolbarItems = Toolbar.confirmToolbar(toolbarItems, ajaxToolbar);
-	$.ajax( {
+	$.ajax({
 		url : '/hnfnuzyw/system/listRole.action',
 		type : 'post',
 		success : function(data) {
-			roleGrid = $('#roleGrid').ligerGrid( {
+			roleGrid = $('#roleGrid').ligerGrid({
 				columns : [
 				// { display:'ID', name:'id', align:'left', width:100 },
-						{
-							display : '角色名称',
-							name : 'name',
-							width : 200
-						},
-						// todo 注意这里是createUser，后台需要处理好user的名字后再显示到前台
-						{
-							name : 'createUserId',
-							hide : true
-						}, {
-							display : '创建用户',
-							name : 'createUser',
-							width : 200
-						}, {
-							display : '备注',
-							name : 'remark',
-							align : 'left',
-							width : 400
-						} ],
+				{
+					display : '角色名称',
+					name : 'name',
+					width : 200
+				},
+				// todo 注意这里是createUser，后台需要处理好user的名字后再显示到前台
+				{
+					name : 'createUserId',
+					hide : true
+				}, {
+					display : '创建用户',
+					name : 'createUser',
+					width : 200
+				}, {
+					display : '备注',
+					name : 'remark',
+					align : 'left',
+					width : 400
+				} ],
 				width : '99%',
 				height : '98%',
 				pageSize : 30,

@@ -20,7 +20,6 @@ public class RoleMenuJoinDaoImpl extends BaseDao<RoleMenuJoinDto> implements
 		return d;
 	}
 
-	@Override
 	public boolean addRoleMenuJoins(int roleId,
 			List<RoleMenuJoinDto> roleMenuJoins) {
 		String hql = "delete RoleMenuJoinDto where roleId=:roleId";
