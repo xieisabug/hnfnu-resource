@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
          http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
          http://www.springframework.org/schema/context
@@ -19,11 +18,47 @@
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-		<property name="url" value="jdbc:mysql://125.221.193.205:3306/hnfnuzyw"></property>
+		<property name="url" value="jdbc:mysql://localhost:3306/hnfnuzyw"></property>
 		<property name="username" value="root"></property>
-		<property name="password" value="640310"></property>
+		<property name="password" value="root"></property>
+		<property name="maxActive">
+			<value>100</value>
+		</property>
+
+
+		<property name="maxWait">
+
+			<value>1000</value>
+
+		</property>
+
+		<!--自动回收连接池，避免连接池泄露-->
+
+		<property name="removeAbandoned">
+
+			<value>true</value>
+
+		</property>
+
+		<!--超时时间(以秒数为单位)超时时间=现在的时间-程序中创建Connection的时间，如果
+		maxActive比较大，比如超过100，那么removeAbandonedTimeout可以设置长一点比如180，也就是三分钟无响应的连接进行回收，当然应用的不同设置长度也不同。-->
+
+		<property name="removeAbandonedTimeout">
+
+			<value>160</value>
+
+		</property>
+
+		<!--输出回收的日志，可以详细打印出异常从而发现是在那里发生了泄漏-->
+
+		<property name="logAbandoned">
+
+			<value>true</value>
+
+		</property>
+
 	</bean>
-<!-- 导入Src目录下的jdbc.properties文件 -->
+	<!-- 导入Src目录下的jdbc.properties文件 -->
 	<context:property-placeholder location="classpath:jdbc.properties" />
 	<!--hibernate sessionFactory 创建 -->
 	<bean id="sessionFactory"
@@ -35,7 +70,9 @@
 			<value>com.hnfnu.zyw.*</value>
 		</property>
 		<property name="hibernateProperties">
-			<!-- <value> hibernate.dialect=org.hibernate.dialect.HSQLDialect </value> -->
+			<!--
+				<value> hibernate.dialect=org.hibernate.dialect.HSQLDialect </value>
+			-->
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
@@ -45,33 +82,32 @@
 		</property>
 	</bean>
 
-	
+
 	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
-		<property name="sessionFactory" ref="sessionFactory">	
+		<property name="sessionFactory" ref="sessionFactory">
 		</property>
-	
+
 	</bean>
-	
-	
+
+
 	<!-- 配置Spring的事务处理 -->
 	<!-- 创建事务管理器-->
 	<bean id="txManager"
 		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-<!-- 配置AOP，Spring是通过AOP来进行事务管理的 -->
+	<!-- 配置AOP，Spring是通过AOP来进行事务管理的 -->
 	<aop:config>
-	<!-- 设置pointCut表示哪些方法要加入事务处理 -->
-		<aop:pointcut id="allMethods"
-			expression="execution(* com.hnfnu.zyw.dao.*.*(..))" />
+		<!-- 设置pointCut表示哪些方法要加入事务处理 -->
+		<aop:pointcut id="allMethods" expression="execution(* com.hnfnu.zyw.dao.*.*(..))" />
 		<!-- 通过advisor来确定具体要加入事务控制的方法 -->
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="allMethods" />
 	</aop:config>
-<!-- 配置哪些方法要加入事务控制 -->
+	<!-- 配置哪些方法要加入事务控制 -->
 	<tx:advice id="txAdvice" transaction-manager="txManager">
 		<tx:attributes>
-		<!-- 让所有的方法都加入事务管理 -->
-			<tx:method name="*" propagation="REQUIRED"/>
+			<!-- 让所有的方法都加入事务管理 -->
+			<tx:method name="*" propagation="REQUIRED" />
 		</tx:attributes>
 	</tx:advice>
 </beans>
