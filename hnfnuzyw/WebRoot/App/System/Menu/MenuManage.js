@@ -95,6 +95,7 @@ function edit_menu() {
 		return;
 	}
 	// 这个函数的参数为：form，data，作用就是把data放到from
+	console.log(grid.getSelected());
 	Form.loadForm(menuForm, grid.getSelected());
 	menuFormWin = $.ligerDialog.open({
 		width : 400,
@@ -143,7 +144,7 @@ function formInit() {
 	menuForm = $('<form></form>');
 
 	$.ajax({
-		url : '/hnfnuzyw/system/listFun.action',
+		url : '/hnfnuzyw/system/listFunAndMenu.action',
 		type : 'post',
 		success : function(data) {
 			menuForm.ligerForm({
@@ -171,7 +172,6 @@ function formInit() {
 					newline : true,
 					type : "text",
 					validate:{
-	                	required: true,
 	                    maxlength:50
 	                }
 				}, {
@@ -186,10 +186,9 @@ function formInit() {
 						isMultiSelect : true,
 						isShowCheckBox : true,
 						valueFieldID : "functionIdList",
-						data : data.list
+						data : data.functionList
 					},
 					validate:{
-	                	required: true,
 	                    maxlength:100
 	                }
 				}, {
@@ -210,7 +209,7 @@ function formInit() {
 					options : {
 						hideOnLoseFocus:true,
 						valueFieldID : "parentId",
-						url : "../../../Json/ParentMenu.json"
+						data : data.menus
 					}
 				} ]
 			});

@@ -1,6 +1,5 @@
 package com.hnfnu.zyw.action.system;
 
-import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Action;
@@ -34,7 +33,6 @@ public class FunctionAction extends ActionSupport implements
 	private boolean success;
 	private String message;
 	private Map<String, Object> functionList;
-	List<FunctionDto> list;
 
 	@Autowired
 	@Qualifier("functionService")
@@ -99,13 +97,7 @@ public class FunctionAction extends ActionSupport implements
 		return SUCCESS;
 	}
 
-	// 获取表中所有功能，是用List装的
-	@Action(value = "listFun")
-	public String listFun() {
-		list = functionService.list();
-		return SUCCESS;
-	}
-
+	
 	/* get set */
 	public IFunctionService getFunctionService() {
 		return functionService;
@@ -135,8 +127,5 @@ public class FunctionAction extends ActionSupport implements
 		return functionList;
 	}
 
-	public List<FunctionDto> getList() {
-		return list;
-	}
 
 }

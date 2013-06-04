@@ -14,7 +14,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.hnfnu.zyw.dto.system.FunctionDto;
 import com.hnfnu.zyw.dto.system.MenuDto;
+import com.hnfnu.zyw.service.system.IFunctionService;
 import com.hnfnu.zyw.service.system.IMenuService;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -30,10 +32,17 @@ public class MenuAction extends ActionSupport implements ModelDriven<MenuDto> {
 	private MenuDto menu = new MenuDto();// 获取页面提交参数
 	private boolean success;
 	private Map<String, Object> menuList;
+	
 	private String message;
 	@Autowired
 	@Qualifier("menuService")
 	private IMenuService menuService;
+	List<FunctionDto> functionList;
+	private List<MenuDto> menus;
+	
+	@Autowired
+	@Qualifier("functionService")
+	private IFunctionService functionService;
 
 	// 添加菜单
 	@Action(value = "addMenu")
@@ -92,6 +101,7 @@ public class MenuAction extends ActionSupport implements ModelDriven<MenuDto> {
 		return SUCCESS;
 	}
 
+	//
 	@Action(value = "listMenu")
 	public String list() {
 		menuList = new HashMap<String, Object>();
@@ -100,7 +110,16 @@ public class MenuAction extends ActionSupport implements ModelDriven<MenuDto> {
 		menuList.put("Total", l.size());
 		return SUCCESS;
 	}
+	
+	// 获取表中所有功能和所有一级菜单，是用List装的
+		@Action(value = "listFunAndMenu")
+		public String listFunAndMenu() {
+			functionList = functionService.list();
+			menus = menuService.getMenusByParentId(-1);
+			return SUCCESS;
+		}
 
+	
 	public MenuDto getModel() {
 		return menu;
 	}
@@ -123,6 +142,14 @@ public class MenuAction extends ActionSupport implements ModelDriven<MenuDto> {
 
 	public String getMessage() {
 		return message;
+	}
+
+	public List<MenuDto> getMenus() {
+		return menus;
+	}
+
+	public List<FunctionDto> getFunctionList() {
+		return functionList;
 	}
 
 }

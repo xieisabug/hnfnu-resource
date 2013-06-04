@@ -63,6 +63,19 @@ public class MenuServiceImpl implements IMenuService {
 			menus = menuDao.list(hql);
 		} catch (Exception e) {
 			e.printStackTrace();
+			return null;
+		}
+		return menus;
+	}
+
+	public List<MenuDto> getMenusByParentId(int parentId) {
+		String hql = "from MenuDto whewe parentId="+parentId; 
+		List<MenuDto> menus = null;
+		try {
+			menus =  menuDao.list(hql);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
 		}
 		return menus;
 	}

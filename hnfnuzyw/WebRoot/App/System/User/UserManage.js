@@ -162,7 +162,7 @@ function formInit() {
 		}, {
 			name : 'password',
 			display : '密码',
-			type : 'password',
+			type : 'password', 
 			space : 30,
 			labelWidth : 100,
 			newline : true,
