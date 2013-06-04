@@ -15,4 +15,6 @@ public interface IMenuService {
 	 * @return
 	 */
 	public List<MenuDto> list();
+	//根据parentId得到该菜单的所有子菜单，如果parentId是-1，则说明查找的事所有的一级菜单
+		public List<MenuDto> getMenusByParentId(int parentId);
 }
