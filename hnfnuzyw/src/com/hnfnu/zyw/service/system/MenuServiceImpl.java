@@ -18,6 +18,9 @@ public class MenuServiceImpl implements IMenuService {
 
 	public boolean add(MenuDto menu) {
 		try {
+			if(menu.getParentId() == null){
+				menu.setParentId(-1);
+			}
 			menuDao.add(menu);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -69,7 +72,7 @@ public class MenuServiceImpl implements IMenuService {
 	}
 
 	public List<MenuDto> getMenusByParentId(int parentId) {
-		String hql = "from MenuDto whewe parentId="+parentId; 
+		String hql = "from MenuDto where parentId="+parentId; 
 		List<MenuDto> menus = null;
 		try {
 			menus =  menuDao.list(hql);
