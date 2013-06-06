@@ -95,9 +95,9 @@ function edit_menu() {
 		return;
 	}
 	// 这个函数的参数为：form，data，作用就是把data放到from
-	console.log(menuForm);
-	Form.loadForm(menuForm, grid.getSelected());
-	menuFormWin = $.ligerDialog.open({
+    var gridData = grid.getSelected();
+	Form.loadForm(menuForm, gridData);
+    menuFormWin = $.ligerDialog.open({
 		width : 400,
 		height : 400,
 		title : "修改菜单",
@@ -146,6 +146,7 @@ function formInit() {
 	$.ajax({
 		url : '/hnfnuzyw/system/listFunAndMenu.action',
 		type : 'post',
+        async:false,
 		success : function(data) {
 			menuForm.ligerForm({
 				inputWidth : 200,
