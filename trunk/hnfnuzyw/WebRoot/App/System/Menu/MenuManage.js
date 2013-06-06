@@ -95,7 +95,7 @@ function edit_menu() {
 		return;
 	}
 	// 这个函数的参数为：form，data，作用就是把data放到from
-	console.log(grid.getSelected());
+	console.log(menuForm);
 	Form.loadForm(menuForm, grid.getSelected());
 	menuFormWin = $.ligerDialog.open({
 		width : 400,
@@ -207,6 +207,8 @@ function formInit() {
 					type : "select",
 					comboboxName : "parentIdList",
 					options : {
+						textField : "name",
+						valueField : "id",
 						hideOnLoseFocus:true,
 						valueFieldID : "parentId",
 						data : data.menus
@@ -223,7 +225,7 @@ function formInit() {
 		    });
 
 		}
-	})
+	});
 }
 
 // 页面加载完成后就开始调用
