@@ -2,6 +2,7 @@ package com.hnfnu.zyw.dto.system;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -65,10 +66,12 @@ public class UserDto
 	{
 		return this.username;
 	}
+	
 	public void setPassword(String password)
 	{
 		this.password = password;
 	}
+	@Column(updatable=false) 
 	public String getPassword()
 	{
 		return this.password;
