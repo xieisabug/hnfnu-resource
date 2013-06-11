@@ -3,6 +3,7 @@ package com.hnfnu.zyw.service.system;
 import java.util.Map;
 
 import com.hnfnu.zyw.dto.system.UserDto;
+import com.hnfnu.zyw.dto.system.ValidateMessege;
 
 public interface IUserService {
 	public boolean add(UserDto user);
@@ -19,4 +20,7 @@ public interface IUserService {
 	 * @return
 	 */
 	public Map<String, Object> list();
+	
+	//验证用户是否存在
+	public ValidateMessege validateUser(UserDto user);
 }

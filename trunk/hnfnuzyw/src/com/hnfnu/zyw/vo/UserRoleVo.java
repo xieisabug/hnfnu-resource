@@ -10,7 +10,7 @@ import javax.persistence.Table;
 import com.hnfnu.zyw.dto.system.pk.UserRolePK;
 
 @Entity
-@Table(name = "user_role")
+@Table(name = "v_user_role")
 @IdClass(UserRolePK.class)
 public class UserRoleVo {
 	private Integer userId;

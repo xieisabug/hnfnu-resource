@@ -85,8 +85,8 @@
 
 	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
 		<property name="sessionFactory" ref="sessionFactory">
+			<map resource="org/mxg/UserInfo.hbm.xml"/>
 		</property>
-
 	</bean>
 
 
