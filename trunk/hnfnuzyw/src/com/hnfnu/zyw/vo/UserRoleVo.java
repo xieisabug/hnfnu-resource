@@ -1,5 +1,6 @@
 package com.hnfnu.zyw.vo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -12,7 +13,8 @@ import com.hnfnu.zyw.dto.system.pk.UserRolePK;
 @Entity
 @Table(name = "v_user_role")
 @IdClass(UserRolePK.class)
-public class UserRoleVo {
+public class UserRoleVo implements Serializable{
+	private static final long serialVersionUID = 5319144941589358337L;
 	private Integer userId;
 	// ÓÃ»§Ãû
 	private String username;

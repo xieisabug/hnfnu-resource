@@ -32,7 +32,7 @@
 
 		</property>
 
-		<!--自动回收连接池，避免连接池泄露-->
+		<!--自动回收连接池，避免连接池泄露 -->
 
 		<property name="removeAbandoned">
 
@@ -40,8 +40,7 @@
 
 		</property>
 
-		<!--超时时间(以秒数为单位)超时时间=现在的时间-程序中创建Connection的时间，如果
-		maxActive比较大，比如超过100，那么removeAbandonedTimeout可以设置长一点比如180，也就是三分钟无响应的连接进行回收，当然应用的不同设置长度也不同。-->
+		<!--超时时间(以秒数为单位)超时时间=现在的时间-程序中创建Connection的时间，如果 maxActive比较大，比如超过100，那么removeAbandonedTimeout可以设置长一点比如180，也就是三分钟无响应的连接进行回收，当然应用的不同设置长度也不同。 -->
 
 		<property name="removeAbandonedTimeout">
 
@@ -49,7 +48,7 @@
 
 		</property>
 
-		<!--输出回收的日志，可以详细打印出异常从而发现是在那里发生了泄漏-->
+		<!--输出回收的日志，可以详细打印出异常从而发现是在那里发生了泄漏 -->
 
 		<property name="logAbandoned">
 
@@ -70,9 +69,7 @@
 			<value>com.hnfnu.zyw.*</value>
 		</property>
 		<property name="hibernateProperties">
-			<!--
-				<value> hibernate.dialect=org.hibernate.dialect.HSQLDialect </value>
-			-->
+			<!-- <value> hibernate.dialect=org.hibernate.dialect.HSQLDialect </value> -->
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
@@ -80,18 +77,25 @@
 				<prop key="hibernate.format_sql">false</prop>
 			</props>
 		</property>
+		<!-- 配置所有PO映射文件 -->
+		<!--
+		<property name="mappingResources">
+			<list>
+				<value>com/hnfnu/zyw/vo/RoleMenuVo.hbm.xml</value>
+			</list>
+		</property>
+		 -->
 	</bean>
 
 
 	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
 		<property name="sessionFactory" ref="sessionFactory">
-			<map resource="org/mxg/UserInfo.hbm.xml"/>
 		</property>
 	</bean>
 
 
 	<!-- 配置Spring的事务处理 -->
-	<!-- 创建事务管理器-->
+	<!-- 创建事务管理器 -->
 	<bean id="txManager"
 		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />

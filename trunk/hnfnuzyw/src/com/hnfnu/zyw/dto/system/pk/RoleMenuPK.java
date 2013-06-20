@@ -2,6 +2,7 @@ package com.hnfnu.zyw.dto.system.pk;
 
 import java.io.Serializable;
 
+
 public class RoleMenuPK implements Serializable {
 
 	private static final long serialVersionUID = -5261507671667300800L;
