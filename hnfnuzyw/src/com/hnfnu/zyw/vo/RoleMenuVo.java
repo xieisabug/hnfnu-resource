@@ -1,5 +1,7 @@
 package com.hnfnu.zyw.vo;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
@@ -10,12 +12,13 @@ import com.hnfnu.zyw.dto.system.pk.RoleMenuPK;
 @Entity
 @Table(name = "v_role_menu")
 @IdClass(RoleMenuPK.class)
-public class RoleMenuVo {
-	private Integer roleId;
+public class RoleMenuVo implements Serializable{
+	private static final long serialVersionUID = -7845996932250565865L;
 	// 角色名
 	private String roleName;
 	// 创建用户id
-
+	//private RoleMenuPK id;
+	private Integer roleId;
 	private Integer menuId;
 	// 父菜单的id，如果是-1，则表示当前为最高级菜单
 	private Integer parentId;
@@ -36,9 +39,7 @@ public class RoleMenuVo {
 			Integer parentId, String menuName, String url,
 			String functionIdList, String icon) {
 		super();
-		this.roleId = roleId;
 		this.roleName = roleName;
-		this.menuId = menuId;
 		this.parentId = parentId;
 		this.menuName = menuName;
 		this.url = url;
@@ -46,6 +47,7 @@ public class RoleMenuVo {
 		this.icon = icon;
 	}
 
+	
 	@Id
 	public Integer getRoleId() {
 		return roleId;
@@ -54,15 +56,6 @@ public class RoleMenuVo {
 	public void setRoleId(Integer roleId) {
 		this.roleId = roleId;
 	}
-
-	public String getRoleName() {
-		return roleName;
-	}
-
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
-	}
-
 	@Id
 	public Integer getMenuId() {
 		return menuId;
@@ -70,6 +63,14 @@ public class RoleMenuVo {
 
 	public void setMenuId(Integer menuId) {
 		this.menuId = menuId;
+	}
+
+	public String getRoleName() {
+		return roleName;
+	}
+
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
 	}
 
 	public Integer getParentId() {
@@ -112,13 +113,6 @@ public class RoleMenuVo {
 		this.icon = icon;
 	}
 
-	@Override
-	public String toString() {
-		return "RoleMenuVo [roleId=" + roleId + ", roleName=" + roleName
-				+ ", menuId=" + menuId + ", parentId=" + parentId
-				+ ", menuName=" + menuName + ", url=" + url
-				+ ", functionIdList=" + functionIdList + ", icon=" + icon + "]";
-	}
 	
 	
 
