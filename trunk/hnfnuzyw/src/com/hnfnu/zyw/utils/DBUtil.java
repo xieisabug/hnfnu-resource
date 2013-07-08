@@ -11,7 +11,7 @@ public class DBUtil {
 	public static Connection getConnection() throws ClassNotFoundException,
 			Exception {
 		Class.forName("com.mysql.jdbc.Driver");
-		String url = "jdbc:mysql://125.221.193.205:3306/hnfnuzyw"; // 这个没有验证，错误了要更正。
+		String url = "jdbc:mysql://localhost:3306/hnfnuzyw"; // 这个没有验证，错误了要更正。
 		String user = "root";
 		String password = "640310";
 
