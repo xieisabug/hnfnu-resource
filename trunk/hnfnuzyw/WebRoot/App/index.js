@@ -60,7 +60,8 @@ $(document).ready(function () {
     );
 
     /* 数据库获得菜单*/
-    $.getJSON('./Json/menu.json', function (menus) {
+    $.getJSON('website/index.action', function (menus) {
+    	menus = menus.menuList;
             $(menus).each(function (i, menu) {
                 var item = $('<div title="' + menu.name + '"> <ul class="menulist"></ul></div>');
                 $(menu.children).each(function (i, submenu) {
@@ -70,7 +71,7 @@ $(document).ready(function () {
                         menuno:submenu.id
                     });
                     $("img", subitem).attr("src", submenu.icon || submenu.menuicon);
-                    $("span", subitem).html(submenu.menuname || submenu.name || submenu.text);
+                    $("span", subitem).html(submenu.menuName || submenu.menuname || submenu.name || submenu.text);
                     $("ul:first", item).append(subitem);
                 });
                 main_menu.append(item);
