@@ -1,6 +1,9 @@
 package com.hnfnu.zyw.service.website;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,8 +19,9 @@ public class LoginServiceImpl implements ILoginService {
 	public ILoginDao loginDao;
 
 	public List<RoleMenuVo> getRoleMenusByUserId(int userId) {
-		String hql = "SELECT * FROM RoleMenuVo WHERE roleId IN (SELECT roleId FROM v_user_role WHERE userId = "
-				+ userId + ")";
+		String hql = "from roleMenuVo where roleId in (select roleId from v_user_role where userId = "
+				+ userId + ") order by parentId asc";
+		
 		List<RoleMenuVo> list;
 		try {
 			list =  loginDao.list(hql);
@@ -25,8 +29,30 @@ public class LoginServiceImpl implements ILoginService {
 			e.printStackTrace();
 			return null;
 		}
+		
+		Map<String, Object> oneMenu = null;
+		// {"id":"4","name":"专题管理","url":"./welcome.html","icon":"./App/Lib/icons/32X32/product_169.gif" },
+		List childList = null;
+		int parentId = -1;
+		for(int i = 0 ; i < list.size();i++){
+			RoleMenuVo roleMenu = list.get(i);
+			//如果不是同一个父亲就不在同一个list
+			if(roleMenu.getParentId() != parentId){
+				
+			
+				
+			childList = new ArrayList<RoleMenuVo>();
+			}
+			oneMenu = new HashMap<String, Object>();
+			
+			oneMenu.put("id",i);
+			oneMenu.put("name",roleMenu.getMenuName());
+			oneMenu.put("url",roleMenu.getUrl());
+			childList.add(oneMenu);
+		}
 
 		return list;
 	}
+
 
 }
