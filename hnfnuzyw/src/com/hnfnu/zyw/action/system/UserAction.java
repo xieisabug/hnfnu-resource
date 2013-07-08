@@ -102,13 +102,17 @@ public class UserAction extends ActionSupport implements ModelDriven<UserDto> {
 	// 登陆验证用户是否存在
 	@Action(value = "validateUser")
 	public String validateUser() {
+		System.out.println("++++++"+user.getUsername());
 		ValidateMessege vm = userService.validateUser(user);
 		if (vm.isResult()) {
 			message = vm.getMessege();
 			user = (UserDto) vm.getO();
+			success =true;
 		} else {
 			message = vm.getMessege();
+			success = false;
 		}
+		System.out.println(	message = vm.getMessege());
 		return SUCCESS;
 	}
 

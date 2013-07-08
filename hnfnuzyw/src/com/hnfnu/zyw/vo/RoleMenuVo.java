@@ -22,6 +22,8 @@ public class RoleMenuVo implements Serializable{
 	private Integer menuId;
 	// 父菜单的id，如果是-1，则表示当前为最高级菜单
 	private Integer parentId;
+	// 父菜单的名字
+	private String  parentName;
 	// 菜单的名字
 	private String menuName;
 	// 菜单点击后调用的链接
@@ -113,7 +115,12 @@ public class RoleMenuVo implements Serializable{
 		this.icon = icon;
 	}
 
-	
-	
+	public String getParentName() {
+		return parentName;
+	}
+
+	public void setParentName(String parentName) {
+		this.parentName = parentName;
+	}
 
 }

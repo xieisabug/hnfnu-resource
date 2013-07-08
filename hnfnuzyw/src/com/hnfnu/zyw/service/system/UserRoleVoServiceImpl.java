@@ -42,7 +42,7 @@ public class UserRoleVoServiceImpl implements IUserRoleVoService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		System.out.println("½ÇÉ«ÓÐ£º"+roles.size());
 		
 		for (int i = 0; i < roles.size(); i++) {
 			
@@ -63,6 +63,7 @@ public class UserRoleVoServiceImpl implements IUserRoleVoService {
 				unSelected.add(roles.get(i));
 			}
 		}
+	
 		result.put("selected", selected);
 		result.put("unSelected", unSelected);
 		return result;
