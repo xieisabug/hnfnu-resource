@@ -1,58 +1,50 @@
 package com.hnfnu.zyw.service.website;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.hnfnu.zyw.dao.system.IUserDao;
 import com.hnfnu.zyw.dao.website.ILoginDao;
-import com.hnfnu.zyw.vo.RoleMenuVo;
+import com.hnfnu.zyw.dto.system.UserDto;
+import com.hnfnu.zyw.dto.system.ValidateMessege;
 
 @Service("loginService")
 public class LoginServiceImpl implements ILoginService {
 	@Autowired
 	@Qualifier("loginDao")
 	public ILoginDao loginDao;
+	@Autowired
+	@Qualifier("userDao")
+	public IUserDao userDao;
 
-	public List<RoleMenuVo> getRoleMenusByUserId(int userId) {
-		String hql = "from roleMenuVo where roleId in (select roleId from v_user_role where userId = "
-				+ userId + ") order by parentId asc";
-		
-		List<RoleMenuVo> list;
+	public ValidateMessege validateUser(UserDto user) {
+		String hql = "from UserDto where username='" + user.getUsername() + "'";
+		UserDto u = null;
+		ValidateMessege messege = new ValidateMessege();
 		try {
-			list =  loginDao.list(hql);
+			u = userDao.getUser(hql);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return null;
+			messege.setResult(false);
+			messege.setMessege("登陆失败");
+			return messege;
 		}
-		
-		Map<String, Object> oneMenu = null;
-		// {"id":"4","name":"专题管理","url":"./welcome.html","icon":"./App/Lib/icons/32X32/product_169.gif" },
-		List childList = null;
-		int parentId = -1;
-		for(int i = 0 ; i < list.size();i++){
-			RoleMenuVo roleMenu = list.get(i);
-			//如果不是同一个父亲就不在同一个list
-			if(roleMenu.getParentId() != parentId){
-				
-			
-				
-			childList = new ArrayList<RoleMenuVo>();
+		if (u == null) {
+			messege.setResult(false);
+			messege.setMessege("用户名不存在");
+			return messege;
+		} else {
+			if (u.getPassword().equals(user.getPassword())) {
+				messege.setO(u);
+				messege.setResult(true);
+				messege.setMessege("登陆成功");
+				return messege;
+			} else {
+				messege.setResult(false);
+				messege.setMessege("密码不正确");
+				return messege;
 			}
-			oneMenu = new HashMap<String, Object>();
-			
-			oneMenu.put("id",i);
-			oneMenu.put("name",roleMenu.getMenuName());
-			oneMenu.put("url",roleMenu.getUrl());
-			childList.add(oneMenu);
 		}
-
-		return list;
 	}
-
-
 }

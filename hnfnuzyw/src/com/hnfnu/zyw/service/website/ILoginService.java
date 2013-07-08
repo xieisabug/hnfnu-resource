@@ -1,11 +1,8 @@
 package com.hnfnu.zyw.service.website;
 
-import java.util.List;
-
-import com.hnfnu.zyw.vo.RoleMenuVo;
+import com.hnfnu.zyw.dto.system.UserDto;
+import com.hnfnu.zyw.dto.system.ValidateMessege;
 
 public interface ILoginService {
-
-	public List<RoleMenuVo> getRoleMenusByUserId(int userId);
-
+	ValidateMessege validateUser(UserDto user);
 }

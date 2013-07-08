@@ -13,7 +13,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.hnfnu.zyw.dto.system.UserDto;
-import com.hnfnu.zyw.dto.system.ValidateMessege;
 import com.hnfnu.zyw.service.system.IUserService;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -96,23 +95,6 @@ public class UserAction extends ActionSupport implements ModelDriven<UserDto> {
 	@Action(value = "listUser")
 	public String list() {
 		userList = userService.list();
-		return SUCCESS;
-	}
-
-	// 登陆验证用户是否存在
-	@Action(value = "validateUser")
-	public String validateUser() {
-		System.out.println("++++++"+user.getUsername());
-		ValidateMessege vm = userService.validateUser(user);
-		if (vm.isResult()) {
-			message = vm.getMessege();
-			user = (UserDto) vm.getO();
-			success =true;
-		} else {
-			message = vm.getMessege();
-			success = false;
-		}
-		System.out.println(	message = vm.getMessege());
 		return SUCCESS;
 	}
 
