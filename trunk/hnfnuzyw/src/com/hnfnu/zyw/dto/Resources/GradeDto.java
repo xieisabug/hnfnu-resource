@@ -1,8 +1,15 @@
 package com.hnfnu.zyw.dto.Resources;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
 * 通过数据库内表的字段动态生成 GradeDto
 **/
+@Entity
+@Table(name="r_grade")
 public class GradeDto 
 {	
 	//id
@@ -20,6 +27,8 @@ public class GradeDto
 	{
 		this.id = id;
 	}
+	@Id
+	@GeneratedValue
 	public Integer getId()
 	{
 		return this.id;
