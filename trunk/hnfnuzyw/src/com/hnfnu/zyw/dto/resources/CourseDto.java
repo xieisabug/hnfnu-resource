@@ -1,8 +1,15 @@
 package com.hnfnu.zyw.dto.resources;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
 * 通过数据库内表的字段动态生成 CourseDto
 **/
+@Entity
+@Table(name="r_course")
 public class CourseDto 
 {	
 	//id
@@ -24,6 +31,8 @@ public class CourseDto
 	{
 		this.id = id;
 	}
+	@Id
+	@GeneratedValue
 	public Integer getId()
 	{
 		return this.id;
