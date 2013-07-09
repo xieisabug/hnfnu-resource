@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.hnfnu.zyw.dao.resources.ICategoryDao;
-import com.hnfnu.zyw.dto.Resources.CategoryDto;
+import com.hnfnu.zyw.dto.resources.CategoryDto;
 
 @Service("categoryService")
 public class CategoryServiceImpl implements ICategoryService {

@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.dto.Resources;
+package com.hnfnu.zyw.dto.resources;
 
 /**
 * 通过数据库内表的字段动态生成 CourseDto

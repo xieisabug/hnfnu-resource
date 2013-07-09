@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.dto.Resources;
+package com.hnfnu.zyw.dto.resources;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

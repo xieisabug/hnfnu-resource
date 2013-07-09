@@ -3,7 +3,7 @@ package com.hnfnu.zyw.service.resources;
 import java.util.List;
 import java.util.Map;
 
-import com.hnfnu.zyw.dto.Resources.GradeDto;
+import com.hnfnu.zyw.dto.resources.GradeDto;
 
 public interface IGradeService {
 

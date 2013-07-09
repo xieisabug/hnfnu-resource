@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.hnfnu.zyw.dao.resources.IGradeDao;
-import com.hnfnu.zyw.dto.Resources.GradeDto;
+import com.hnfnu.zyw.dto.resources.GradeDto;
 
 @Service("gradeService")
 public class GradeServiceImpl implements IGradeService{

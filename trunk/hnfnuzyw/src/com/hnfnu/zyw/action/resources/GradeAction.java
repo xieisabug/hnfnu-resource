@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-import com.hnfnu.zyw.dto.Resources.GradeDto;
+import com.hnfnu.zyw.dto.resources.GradeDto;
 import com.hnfnu.zyw.service.resources.IGradeService;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
