@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.hnfnu.zyw.dao.resources.ISubjectDao;
-import com.hnfnu.zyw.dto.Resources.SubjectDto;
+import com.hnfnu.zyw.dto.resources.SubjectDto;
 
 @Service("subjectService")
 public class SubjectServiceImpl implements ISubjectService {

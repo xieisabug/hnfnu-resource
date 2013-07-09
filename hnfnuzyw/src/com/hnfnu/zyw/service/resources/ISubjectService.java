@@ -3,7 +3,7 @@ package com.hnfnu.zyw.service.resources;
 import java.util.List;
 import java.util.Map;
 
-import com.hnfnu.zyw.dto.Resources.SubjectDto;
+import com.hnfnu.zyw.dto.resources.SubjectDto;
 
 public interface ISubjectService {
 
