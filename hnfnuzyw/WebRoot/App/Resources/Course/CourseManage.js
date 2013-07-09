@@ -177,7 +177,7 @@ function formInit() {
 					display : "所属年级",
 					name : "gradeId",
 					type : "select",
-					comboboxName : "gradeId",
+					comboboxName : "grade",
 					options : {
 						textField : "name",
 						valueField : "id",
@@ -190,7 +190,7 @@ function formInit() {
 					display : "所属学科",
 					name : "subjectId",
 					type : "select",
-					comboboxName : "subjectId",
+					comboboxName : "subject",
 					options : {
 						textField : "name",
 						valueField : "id",
@@ -222,7 +222,6 @@ function formInit() {
 
 // 页面加载完成后就开始调用
 $(function() {
-
 	var toolbarItems = [ {
 		text : '增加',
 		click : add_course,
