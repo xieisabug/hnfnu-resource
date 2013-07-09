@@ -18,6 +18,11 @@ public class ParameterServiceImpl implements IParameterService {
 	@Qualifier("parameterDao")
 	public IParameterDao parameterDao;//暂时不写get set 试试可以不。
 
+	/**
+	 * 增加一个参数
+	 * @param 一个参数对象
+	 * @return 成功返回true，失败返回false
+	 */
 	public boolean add(ParameterDto parameter) {
 		try {
 			parameterDao.add(parameter);
@@ -28,6 +33,11 @@ public class ParameterServiceImpl implements IParameterService {
 		return true;
 	}
 
+	/**
+	 * 修改一个参数
+	 * @param 一个参数对象
+	 * @return 成功返回true，失败返回false
+	 */
 	public boolean update(ParameterDto parameter) {
 		try {
 			parameterDao.update(parameter);
@@ -38,6 +48,11 @@ public class ParameterServiceImpl implements IParameterService {
 		return true;
 	}
 
+	/**
+	 * 读取一个参数
+	 * @param 一个参数对象
+	 * @return 读取到的参数对象
+	 */
 	public ParameterDto load(ParameterDto parameter) {
 		if(parameter == null || parameter.getId() == null){
 			return null;
@@ -52,6 +67,11 @@ public class ParameterServiceImpl implements IParameterService {
 		return p;
 	}
 
+	/**
+	 * 删除一个参数
+	 * @param 一个参数对象
+	 * @return 成功返回true，失败返回false
+	 */
 	public boolean delete(ParameterDto parameter) {
 		if(parameter == null || parameter.getId() == null){
 			return false;
@@ -65,6 +85,10 @@ public class ParameterServiceImpl implements IParameterService {
 		return true;
 	}
 
+	/**
+	 * 读取所有参数
+	 * @return 保存了集合的Map
+	 */
 	public Map<String, Object> list() {
 		Map<String, Object> m = new HashMap<String, Object>();
 		List<ParameterDto> l = null;
