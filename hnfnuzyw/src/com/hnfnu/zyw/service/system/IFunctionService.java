@@ -8,11 +8,11 @@ import com.hnfnu.zyw.dto.system.FunctionDto;
 public interface IFunctionService {
 	public boolean add(FunctionDto function);
 
-	public boolean delete(int id);
+	public boolean delete(FunctionDto function);
 
 	public boolean update(FunctionDto function);
 
-	public FunctionDto load(int id);
+	public FunctionDto load(FunctionDto function);
 
 	
 	/**

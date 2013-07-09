@@ -17,6 +17,11 @@ import com.hnfnu.zyw.service.system.IFunctionService;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
+/**
+ * 功能类
+ * @author Administrator
+ *
+ */
 @Controller("functionAction")
 @Scope("prototype")
 @ParentPackage("json-default")
@@ -25,9 +30,6 @@ import com.opensymphony.xwork2.ModelDriven;
 public class FunctionAction extends ActionSupport implements
 		ModelDriven<FunctionDto> {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -7199971221300636848L;
 	private FunctionDto function = new FunctionDto();// 获取页面提交参数
 	private boolean success;
@@ -38,7 +40,10 @@ public class FunctionAction extends ActionSupport implements
 	@Qualifier("functionService")
 	private IFunctionService functionService;
 
-	// 添加菜单
+	/**
+	 * 添加菜单
+	 * @return
+	 */
 	@Action(value = "addFunction")
 	public String add() {
 		success = functionService.add(function);
@@ -50,7 +55,10 @@ public class FunctionAction extends ActionSupport implements
 		return SUCCESS;
 	}
 
-	// 修改菜单
+	/**
+	 * 修改菜单
+	 * @return
+	 */
 	@Action(value = "updateFunction")
 	public String update() {
 		success = functionService.update(function);
@@ -64,24 +72,22 @@ public class FunctionAction extends ActionSupport implements
 
 	/**
 	 * 根据菜单ID查询一个菜单
-	 * 
 	 * @return
 	 */
 	@Action(value = "loadFunction")
 	public String load() {
-		function = functionService.load(function.getId());
+		function = functionService.load(function);
 		return SUCCESS;
 	}
 
 	/**
 	 * 根据菜单id删除一个菜单
-	 * 
 	 * @return
 	 */
 
 	@Action(value = "deleteFunction")
 	public String delete() {
-		success = functionService.delete(function.getId());
+		success = functionService.delete(function);
 		if (success) {
 			message = "删除功能成功！";
 		} else {
@@ -90,7 +96,11 @@ public class FunctionAction extends ActionSupport implements
 		return SUCCESS;
 	}
 
-	// 获取表中所有功能，用Map装，为了分页的需要加上Rows和Total
+	/**
+	 *  获取表中所有功能
+	 *  用Map装，为了分页的需要加上Rows和Total
+	 * @return
+	 */
 	@Action(value = "listFunction")
 	public String list() {
 		functionList = functionService.listFun();

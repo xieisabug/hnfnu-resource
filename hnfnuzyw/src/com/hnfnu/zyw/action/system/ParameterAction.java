@@ -35,6 +35,10 @@ public class ParameterAction extends ActionSupport implements ModelDriven<Parame
 	private String message;
 	private Map<String,Object> parameterList;
 
+	/**
+	 * 添加参数
+	 * @return
+	 */
 	@Action(value = "addParameter")
 	public String add(){
 		success = parameterService.add(parameter);
@@ -46,6 +50,10 @@ public class ParameterAction extends ActionSupport implements ModelDriven<Parame
 		return SUCCESS;
 	}
 	
+	/**
+	 * 修改参数
+	 * @return
+	 */
 	@Action(value = "updateParameter")
 	public String update(){
 		success = parameterService.update(parameter);
@@ -57,12 +65,20 @@ public class ParameterAction extends ActionSupport implements ModelDriven<Parame
 		return SUCCESS;
 	}
 	
+	/**
+	 * 读取参数
+	 * @return
+	 */
 	@Action(value = "loadParameter")
 	public String load(){
 		parameter = parameterService.load(parameter);
 		return SUCCESS;
 	}
 	
+	/**
+	 * 删除参数
+	 * @return
+	 */
 	@Action(value = "deleteParameter")
 	public String delete(){
 		success = parameterService.delete(parameter);
@@ -74,6 +90,10 @@ public class ParameterAction extends ActionSupport implements ModelDriven<Parame
 		return SUCCESS;
 	}
 	
+	/**
+	 * 获取参数列表
+	 * @return
+	 */
 	@Action(value = "listParameter")
 	public String list(){
 		parameterList = parameterService.list();
