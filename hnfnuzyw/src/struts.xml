@@ -5,9 +5,11 @@
 <struts>
 	<constant name="struts.i18n.encoding" value="UTF-8"/>
 	<constant name="struts.objectFactory" value="spring" />
-	<!-- 表示Action由Spring来进行创建，可以直接使用Spring依赖注入来注入  
-     <constant
-		name="struts.objectFactory"
-		value="org.apache.struts2.spring.StrutsSpringObjectFactory" />
--->
+	<constant name="struts.multipart.maxSize" value="1024000000"/> 
+	
+	 <package name="upload" namespace="/upload" extends="struts-default">
+       <action name="fileUpload" class="com.hnfnu.zyw.action.resources.ResourcesAction" method="upload">
+           <param name="savePath">/uploads</param> 
+       </action>
+    </package>
 </struts>
