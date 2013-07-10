@@ -198,15 +198,13 @@ function formInit() {
 						valueFieldID : "id",
 						data : data.subjectList
 					}
-				} ]
-			}, {
-				name : 'remark',
-				display : '备注',
-				type : 'text',
-				space : 30,
-				labelWidth : 100,
-				newline : true,
-				width : 200
+				}, {
+					name : 'remark',
+					display : '备注',
+					type : 'text',
+					newline : true,
+					width : 200
+				}]
 			});
 			$.metadata.setType("attr", "validate");
 			courseForm.validate( {
@@ -280,6 +278,11 @@ $(function() {
 				}, {
 					display : '所属学科',
 					name : 'subjectId',
+					align : 'left',
+					minWidth : 100
+				}, {
+					display : '备注',
+					name : 'remark',
 					align : 'left',
 					minWidth : 100
 				} ],
