@@ -13,7 +13,7 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-public class ResourcesAction extends ActionSupport implements
+public class SourceUploadAction extends ActionSupport implements
 		ServletRequestAware {
 	private static final long serialVersionUID = 1L;
 
