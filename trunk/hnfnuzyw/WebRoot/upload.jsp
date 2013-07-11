@@ -33,6 +33,7 @@
         auto:true,//是否自动上传
         height: 30,
         buttonText:'上传文件',
+        button_image_url: "App/Lib/Uploadify/blank.jsp",
         cancelImage:'App/Lib/Uploadify/uploadify-cancel.png',
         swf : 'App/Lib/Uploadify/uploadify.swf',
         // expressInstall:'App/Lib/Uploadify/expressInstall.swf',
