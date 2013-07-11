@@ -8,7 +8,7 @@
 	<constant name="struts.multipart.maxSize" value="1024000000"/> 
 	
 	 <package name="upload" namespace="/upload" extends="struts-default">
-       <action name="fileUpload" class="com.hnfnu.zyw.action.resources.ResourcesAction" method="upload">
+       <action name="fileUpload" class="com.hnfnu.zyw.action.resources.SourceUploadAction" method="upload">
            <param name="savePath">/uploads</param> 
        </action>
     </package>
