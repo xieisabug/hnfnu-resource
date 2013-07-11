@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <link href="../../Lib/ligerUI/skins/Aqua/css/ligerui-all.css" type="text/css" rel="stylesheet"/>
+    <script src="../../Lib/jquery/jquery-1.5.2.min.js" type="text/javascript"></script>
+    <script src="../../Lib/ligerUI/js/ligerui.min.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="selectCourseTree">
+</div>
+</body>
+</html>
+<script type="text/javascript">
+    var selectCourseTree = null;
+    $(function(){
+        var treeJson = [
+            {
+                "id":"1",
+                "name":"一年级",
+                "children":[
+                    {
+                        "id":"1",
+                        "name":"语文",
+                        "children":[
+                            {"id":"1","name":"第一课 小妈妈找蝌蚪"},
+                            {"id":"2","name":"第二课 静夜上厕所思"}
+                        ]
+                    },
+                    {
+                        "id":"2",
+                        "name":"数学",
+                        "children":[
+                            {"id":"1","name":"0+0"}
+                        ]
+                    },
+                    {"id":"3","name":"英语"},
+                    {"id":"4","name":"政治"},
+                    {
+                        "id":"5",
+                        "name":"生物",
+                        "children":[
+                            {"id":"2","name":"人的进化"}
+                        ]
+                    }
+                ]
+            },
+            {
+                "id":"2",
+                "name":"二年级",
+                "children":[
+                    {
+                        "id":"1",
+                        "name":"语文",
+                        "children":[
+                            {"id":"1","name":"第一课 狂人日志"},
+                            {"id":"2","name":"第二课 清明下河图"}
+                        ]
+                    },
+                    {
+                        "id":"2",
+                        "name":"数学",
+                        "children":[
+                            {"id":"1","name":"1+1"}
+                        ]
+                    },
+                    {"id":"3","name":"英语"},
+                    {"id":"4","name":"政治"},
+                    {
+                        "id":"5",
+                        "name":"生物",
+                        "children":[
+                            {"id":"2","name":"细胞的故事"}
+                        ]
+                    }
+                ]
+            }
+        ];
+        //todo 树形结构中的数据要用ajax取
+        selectCourseTree = $("#selectCourseTree").ligerTree({
+            nodeWidth:200,
+            textFieldName : 'name',
+            idFieldName : 'id',
+            parentIDFieldName : 'pid',
+            checkbox:false,
+            data : treeJson
+        });
+    });
+    function selectCourse(){
+        return selectCourseTree.getSelected();
+    }
+</script>
