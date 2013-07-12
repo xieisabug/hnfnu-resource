@@ -135,8 +135,16 @@ function edit_save() {
 function edit_cancel() {
     sourceWin.close();
 }
+//查看资源全部的信息
 function all_info(){
-
+    var sourceGridData = sourceGrid.getSelected();
+    $.ligerDialog.open({
+        title: '查看全部信息',
+        name:'winSelector',
+        width: 500,
+        height: 550,
+        url: 'SourceInfo.jsp?id='+sourceGridData.id
+    });
 }
 //打开一个选择课程的树形结构的对话框
 function openTreeDialog(){
@@ -196,7 +204,6 @@ function formInit() {
                 required : true,
                 maxlength : 30
             }
-
         }, {
             display : "所属课程",
             name : "courseId",
@@ -209,6 +216,9 @@ function formInit() {
                 valueFieldID : "courseId",
                 //todo 课程列表要后面获取
                 onBeforeOpen:openTreeDialog
+            },
+            validate : {
+                required : true
             }
         }, {
             // todo 这个最后要搞成下拉框的形式，从后台取数据
@@ -227,6 +237,9 @@ function formInit() {
                     {"id":"1","name":"文章朗读"},
                     {"id":"2","name":"动画演示"}
                 ]
+            },
+            validate : {
+                required : true
             }
         }, {
             name : 'keyWords',
@@ -253,19 +266,37 @@ function formInit() {
             display : '播放时间',
             type : 'text',
             newline : true,
-            width : 200
+            width : 200,
+            validate : {
+                maxlength : 20
+            }
+        },  {
+            name : 'url',
+            display : '链接地址',
+            type : 'text',
+            newline : true,
+            width : 200,
+            validate : {
+                maxlength : 255
+            }
         }, {
             name : 'fileSize',
             display : '文件大小',
             type : 'number',
             newline : true,
-            width : 200
+            width : 200,
+            validate : {
+                maxlength : 50
+            }
         }, {
             name : 'author',
             display : '作者',
             type : 'text',
             newline : true,
-            width : 200
+            width : 200,
+            validate : {
+                maxlength : 100
+            }
         }, {
             name : 'publisher',
             display : '出版社',
