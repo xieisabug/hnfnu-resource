@@ -1,8 +1,9 @@
-var sourceForm = null;
-var sourceGrid = null;
-var sourceTree = null;
-var sourceWin = null;
+var sourceForm = null;//表单
+var sourceGrid = null;//右侧表格
+var sourceTree = null;//左侧树
+var sourceWin = null;//显示的窗口
 
+//增加课程
 function add_source(){
     formInit();
 
@@ -54,6 +55,7 @@ function add_save() {
 function add_cancel() {
     sourceWin.close();
 }
+//删除课程
 function delete_source(){
     if (!sourceGrid.getSelected()) {
         $.ligerDialog.warn("请选择您要删除的行！");
@@ -82,6 +84,7 @@ function delete_source(){
         }
     });
 }
+//编辑课程
 function edit_source(){
     formInit();
     if (!sourceGrid.getSelected()) {
@@ -107,6 +110,7 @@ function edit_source(){
         } ]
     });
 }
+//编辑完成课程后进行保存
 function edit_save() {
 
     if (sourceForm.valid()) {
@@ -132,11 +136,16 @@ function edit_save() {
         });
     }
 }
+//取消编辑
 function edit_cancel() {
     sourceWin.close();
 }
 //查看资源全部的信息
 function all_info(){
+    if (!sourceGrid.getSelected()) {
+        $.ligerDialog.warn("请选择您要查看的数据。");
+        return;
+    }
     var sourceGridData = sourceGrid.getSelected();
     $.ligerDialog.open({
         title: '查看全部信息',
@@ -154,6 +163,7 @@ function openTreeDialog(){
         width: 500,
         height: 500,
         url: 'SelectCourse.html',
+        isHidden:false,
         buttons: [
             { text: '确定', onclick: selectOK },
             { text: '取消', onclick: selectCancel }
@@ -161,27 +171,39 @@ function openTreeDialog(){
     });
     return false;
 }
-function selectOK(item, dialog)
-{
+//选择了课程后进行数据处理的函数
+function selectOK(item, dialog){
     var fn = dialog.frame.selectCourse || dialog.frame.window.selectCourse;
     var data = fn();
-    if (!data)
-    {
-        alert('请选择行!');
+    if (!data){
+        alert('请选择行。');
         return;
     }
-    console.log(data);
-    //todo 还没有对选择的数据进行处理
-    /*
-    $("#txtContactName").val(data.CompanyName+","+data.ContactName);
-    $("#hidCustomerID").val(data.CustomerID);
-    */
+    if(isCourse(data)){
+        $("#courseId",sourceForm).val(data.data.id);
+        $("#course",sourceForm).val(data.data.name);
+    } else {
+        alert('请选择课程。');
+        return;
+    }
+
     dialog.close();
 }
-function selectCancel(item, dialog)
-{
+//取消选择
+function selectCancel(item, dialog){
     dialog.close();
 }
+//判断选择的是否是课程
+function isCourse(obj){
+    return sourceTree.getParent(sourceTree.getParent(sourceTree.getParent(obj.target)))==null &&
+           sourceTree.getParent(sourceTree.getParent(obj.target))!=null;
+}
+//判断选择的是否是类别
+function isCategory(obj){
+    return !isCourse(obj) &&
+        sourceTree.getParent(sourceTree.getParent(sourceTree.getParent(obj.target)))!=null;
+}
+//初始化表单
 function formInit() {
     var groupicon = "../../../App/Lib/ligerUI/skins/icons/communication.gif";
     sourceForm = $('<form></form>');
@@ -404,8 +426,8 @@ $(function() {
                         {"id":"1","name":"0+0"}
                     ]
                 },
-                {"id":"3","name":"英语"},
-                {"id":"4","name":"政治"},
+                {"id":"3","name":"英语","type":"subject"},
+                {"id":"4","name":"政治","type":"subject"},
                 {
                     "id":"5",
                     "name":"生物",
@@ -434,8 +456,8 @@ $(function() {
                         {"id":"1","name":"1+1"}
                     ]
                 },
-                {"id":"3","name":"英语"},
-                {"id":"4","name":"政治"},
+                {"id":"3","name":"英语","type":"subject"},
+                {"id":"4","name":"政治","type":"subject"},
                 {
                     "id":"5",
                     "name":"生物",
@@ -452,7 +474,15 @@ $(function() {
         idFieldName : 'id',
         parentIDFieldName : 'pid',
         checkbox:false,
-        data : treeJson
+        data : treeJson,
+        onSelect:function(data){
+            //todo 通过判断数据的不同，从不同的函数取数据过来，然后更新grid里的数据
+            if(isCourse(data)){
+                console.log("course");
+            } else if(isCategory(data)){
+                console.log("category");
+            }
+        }
     });
     //todo 没有取数据。取数据函数要在上面的sourceTree的点击事件中定义
     var gridJson = {
