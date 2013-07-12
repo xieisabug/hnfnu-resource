@@ -14,6 +14,8 @@ import org.springframework.stereotype.Controller;
 
 import com.hnfnu.zyw.dto.resources.SourceDto;
 import com.hnfnu.zyw.service.resources.ISourceService;
+import com.hnfnu.zyw.service.resources.ISourceVoService;
+import com.hnfnu.zyw.vo.SourceVo;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
@@ -26,13 +28,19 @@ import com.opensymphony.xwork2.ModelDriven;
 public class SourceAction extends ActionSupport implements ModelDriven<SourceDto>{
 	private static final long serialVersionUID = -7199971221300636848L;
 	private SourceDto source = new SourceDto();// 获取页面提交参数
+	private SourceVo sourceVo;// 获取页面提交参数
 	private boolean success;
 	private String message;
-	private Map<String, Object> sourceList;
+	private Map<String, Object> sourceVoList;
 
 	@Autowired
 	@Qualifier("sourceService")
 	private ISourceService sourceService;
+	
+	@Autowired
+	@Qualifier("sourceVoService")
+	private ISourceVoService sourceVoService;
+	
 
 	// 添加资源
 	@Action(value = "addSource")
@@ -63,9 +71,9 @@ public class SourceAction extends ActionSupport implements ModelDriven<SourceDto
 	 * 
 	 * @return
 	 */
-	@Action(value = "loadSource")
+	@Action(value = "loadSourceVo")
 	public String load() {
-		source = sourceService.load(source.getId());
+		sourceVo = sourceVoService.load(source.getId());
 		return SUCCESS;
 	}
 
@@ -87,9 +95,9 @@ public class SourceAction extends ActionSupport implements ModelDriven<SourceDto
 	}
 
 	// 获取表中所有资源，用Map装，为了分页的需要加上Rows和Total
-	@Action(value = "listSource")
+	@Action(value = "listSourceVo")
 	public String list() {
-		sourceList = sourceService.listSource();
+		sourceVoList = sourceVoService.listSourceVo();
 		return SUCCESS;
 	}
 
@@ -119,6 +127,15 @@ public class SourceAction extends ActionSupport implements ModelDriven<SourceDto
 	}
 
 	public Map<String, Object> getSourceList() {
-		return sourceList;
+		return sourceVoList;
 	}
+
+	public SourceVo getSourceVo() {
+		return sourceVo;
+	}
+
+	public void setSourceVo(SourceVo sourceVo) {
+		this.sourceVo = sourceVo;
+	}
+	
 }
