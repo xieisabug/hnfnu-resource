@@ -94,7 +94,7 @@
         },
         //上传到服务器，服务器返回相应信息到data里
         onUploadSuccess : function(file, data, response) {
-       /* var fileNameAndPath = data.split(",");
+        var fileNameAndPath = data.split(",");
         var phtml = "__tag_143$33_<a href='#' onlick=downLoad('"
         + fileNameAndPath[1]
         + "')>"
