@@ -29,7 +29,7 @@
         <script type="text/javascript"><!--
         $(function() {
         $("#file_upload").uploadify({
-        debug:true,
+        debug:false,
         auto:true,//是否自动上传
         height: 30,
         buttonText:'上传文件',
@@ -95,16 +95,13 @@
         //上传到服务器，服务器返回相应信息到data里
         onUploadSuccess : function(file, data, response) {
         var fileNameAndPath = data.split(",");
-        var phtml = "__tag_143$33_<a href='#' onlick=downLoad('"
-        + fileNameAndPath[1]
-        + "')>"
-        + fileNameAndPath[0]
-        + "__tag_143$112_<img alt='删除' src='js/uploadify/uploadify-cancel.png' onclick=delFile(this)>__tag_143$192_";
+        var phtml = fileNameAndPath[0]
+        + "<img alt='删除' value='删除，重新上传' src='App/Lib/Uploadify/uploadify-cancel.png' onclick=delFile(this,"+fileNameAndPath[1]+")>";
         if ($("#uploadfileQueue p").length == 0) {
         $("#uploadfileQueue").html(phtml);
         } else {
         $("#uploadfileQueue p:last").after(phtml);
-        }*/
+        }
         alert(data+"上传成功");
         },
         onSelect : function(file) {
@@ -124,8 +121,31 @@
         });
         });
         //删除文件
-        function delFile(obj) {
-        $(obj).parent().remove
+        function delFile(obj,url2) {
+        
+      //  var row_data = "{"url":""+"url+""}";
+        //console.log(row_data);
+        alert(url);
+        $.ajax({
+					url : '/hnfnuzyw/resources/deleteSource.action',
+					data : {
+						url:url2
+					},
+					type : 'post',
+					success : function(data) {
+						if (data.success) {
+						 $(obj).parent().remove();
+							$.ligerDialog.tip({
+								title : '提示信息',
+								content : data.message
+							});
+						} else {
+							$.ligerDialog.error(data.message);
+						}
+					}
+				});
+       
+        
         }
         --></script>
 
