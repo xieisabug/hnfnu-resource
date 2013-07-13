@@ -114,9 +114,8 @@ function add_save() {
         var row_data = Form.parseJSON(sourceForm);
         console.log(row_data);
         // 发往服务器，返回成功后再添加到表格中
-        /*
         $.ajax( {
-            url : '/hnfnuzyw/resources/addCourse.action',
+            url : '/hnfnuzyw/resources/addSource.action',
             data : row_data,
             type : 'post',
             success : function(data) {
@@ -126,13 +125,13 @@ function add_save() {
                     $.ligerDialog.tip( {
                         title : '提示信息',
                         content : data.message
-                    });*/
+                    });
                     sourceWin.close();
-                /*} else {
+                } else {
                     $.ligerDialog.error(data.message);
                 }
             }
-        });*/
+        });
     }
 }
 // 增加课程的取消按钮事件
@@ -140,7 +139,7 @@ function add_cancel() {
     var dlg = $.ligerDialog.waitting('正在撤销已经上传的文件...');
     $.ajax({
         url:'/hnfnuzyw/resources/deleteSource.action',
-        data:$("#url",sourceForm).val(),
+        data:{url:$("#url",sourceForm).val()},
         type:'post',
         success:function (data) {
             dlg.close();

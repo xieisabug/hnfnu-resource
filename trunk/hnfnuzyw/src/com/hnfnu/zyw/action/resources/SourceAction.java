@@ -1,5 +1,6 @@
 package com.hnfnu.zyw.action.resources;
 
+import java.util.Date;
 import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Action;
@@ -13,9 +14,11 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.hnfnu.zyw.dto.resources.SourceDto;
+import com.hnfnu.zyw.dto.system.UserDto;
 import com.hnfnu.zyw.service.resources.ISourceService;
 import com.hnfnu.zyw.service.resources.ISourceVoService;
 import com.hnfnu.zyw.vo.SourceVo;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
@@ -32,6 +35,7 @@ public class SourceAction extends ActionSupport implements ModelDriven<SourceDto
 	private boolean success;
 	private String message;
 	private Map<String, Object> sourceVoList;
+	private UserDto user;
 
 	@Autowired
 	@Qualifier("sourceService")
@@ -45,6 +49,13 @@ public class SourceAction extends ActionSupport implements ModelDriven<SourceDto
 	// 添加资源
 	@Action(value = "addSource")
 	public String add() {
+		//获取当前时间
+		source.setCreateDate(new Date());
+		//获取当前用户
+		 ActionContext context = ActionContext.getContext();  
+		 Map session = context.getSession();
+		 user = (UserDto) session.get("user");
+		 source.setCreateUserId(user.getId());
 		success = sourceService.add(source);
 		if (success) {
 			message = "添加资源成功！";
@@ -78,21 +89,38 @@ public class SourceAction extends ActionSupport implements ModelDriven<SourceDto
 	}
 
 	/**
-	 * 根据资源id删除一个资源
+	 * 根据资源id删除一个资源文件以及在数据库里面的信息,
 	 * 
 	 * @return
 	 */
 
-	@Action(value = "deleteSource")
-	public String delete() {
-		success = sourceService.delete(source.getId());
+	@Action(value = "deleteSourceMessege")
+	public String deleteMessege() {
+		success = sourceService.deleteMessege(source.getId());
 		if (success) {
-			message = "删除资源成功！";
+			message = "删除资源信息成功！";
 		} else {
-			message = "删除资源失败！";
+			message = "删除资源信息失败！";
 		}
 		return SUCCESS;
 	}
+	
+	@Action(value = "deleteSource")
+	public String delete() {
+		int i = sourceService.delete(source.getUrl());
+		if (i == 1) {
+			success = true;
+			message = "删除资源文件成功！";
+		} else if (i == -1){
+			success = false;
+			message = "删除资源文件失败，因为该文件不存在！";
+		}else if(i == -1){
+			success = false;
+			message = "删除资源文件失败,因为不是文件！";
+		}
+		return SUCCESS;
+	}
+	
 
 	// 获取表中所有资源，用Map装，为了分页的需要加上Rows和Total
 	@Action(value = "listSourceVo")

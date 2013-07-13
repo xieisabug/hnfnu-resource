@@ -25,6 +25,7 @@ function add_function() {
 function add_save() {
 	if (functionForm.valid()) {
 		var row_data = Form.parseJSON(functionForm);
+		
 		// 发往服务器，返回成功后再添加到表格中
 		$.ajax({
 			url : '/hnfnuzyw/system/addFunction.action',

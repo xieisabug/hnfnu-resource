@@ -1,5 +1,6 @@
 package com.hnfnu.zyw.service.resources;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,7 +29,7 @@ public class SourcesServiceImpl implements ISourceService {
 		return true;
 	}
 
-	public boolean delete(int id) {
+	public boolean deleteMessege(int id) {
 		try {
 			sourceDao.delete(id);
 		} catch (Exception e) {
@@ -83,4 +84,25 @@ public class SourcesServiceImpl implements ISourceService {
 		return sourceList;
 	}
 
+	//删除文件的方法，如果返回的是1说明删除成功，-1说明文件不存在。0说明删除错误，因为不是文件
+	public int delete(String url) {
+		System.out.println(url);
+		File file = new File(url);
+	
+		    // 判断目录或文件是否存在  
+		    if (!file.exists()) {  // 不存在返回 false  
+		        return -1;  
+		    } else {  
+		        // 判断是否为文件  
+		        if (file.isFile()) {  // 为文件时调用删除文件方法  
+		        	 file.delete();
+		        	 return 1;
+		        } else {  // 为目录时调用删除目录方法  
+		            return 0;  
+		        }  
+		    }  
+	}
+
+	
+	
 }

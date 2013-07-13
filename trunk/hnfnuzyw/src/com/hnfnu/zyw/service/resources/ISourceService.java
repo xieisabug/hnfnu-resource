@@ -8,7 +8,7 @@ import com.hnfnu.zyw.dto.resources.SourceDto;
 public interface ISourceService {
 	public boolean add(SourceDto source);
 
-	public boolean delete(int id);
+	public boolean deleteMessege(int id);
 
 	public boolean update(SourceDto source);
 
@@ -28,4 +28,5 @@ public interface ISourceService {
 	 */
 	public Map<String, Object> listSource();
 
+	public int delete(String url);
 }
