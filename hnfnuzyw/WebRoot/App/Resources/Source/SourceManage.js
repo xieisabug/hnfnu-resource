@@ -84,20 +84,8 @@ function add_source(){
         },
         //上传到服务器，服务器返回相应信息到data里
         onUploadSuccess : function(file, data, response) {
-            /*
             var fileNameAndPath = data.split(",");
-            var phtml = "__tag_143$33_<a href='#' onclick=downLoad('"
-                + fileNameAndPath[1]
-                + "')>"
-                + fileNameAndPath[0]
-                + "__tag_143$112_<img alt='删除' src='js/uploadify/uploadify-cancel.png' onclick=delFile(this)>__tag_143$192_";
-            if ($("#uploadfileQueue p").length == 0) {
-                $("#uploadfileQueue").html(phtml);
-            } else {
-                $("#uploadfileQueue p:last").after(phtml);
-            }
-            alert(data+"上传成功");
-            */
+            $("#url",sourceForm).val(fileNameAndPath[1]);
         },
         onSelect : function(file) {
             alert(file.name);
@@ -149,7 +137,20 @@ function add_save() {
 }
 // 增加课程的取消按钮事件
 function add_cancel() {
-    sourceWin.close();
+    var dlg = $.ligerDialog.waitting('正在撤销已经上传的文件...');
+    $.ajax({
+        url:'/hnfnuzyw/resources/deleteSource.action',
+        data:$("#url",sourceForm).val(),
+        type:'post',
+        success:function (data) {
+            dlg.close();
+            if (data.success) {
+                sourceWin.close();
+            } else {
+                $.ligerDialog.error(data.message);
+            }
+        }
+    });
 }
 //删除课程
 function delete_source(){
@@ -310,6 +311,9 @@ function formInit() {
         space : 40,
         fields : [ {
             name : "id",
+            type : "hidden"
+        }, {
+            name : "url",
             type : "hidden"
         }, {
             display : "资源名字",
