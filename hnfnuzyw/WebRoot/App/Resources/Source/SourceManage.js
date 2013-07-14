@@ -353,14 +353,11 @@ function formInit() {
                 hideOnLoseFocus:true,
                 isMultiSelect : true,
                 isShowCheckBox : true,
-                valueFieldID : "id",
+                valueFieldID : "categoryId",
                 data : [
                     {"id":"1","name":"文章朗读"},
                     {"id":"2","name":"动画演示"}
                 ]
-            },
-            validate : {
-                required : true
             }
         }, {
             name : 'keyWords',
@@ -443,6 +440,10 @@ function formInit() {
         debug : true,
         onkeyup : false,
         errorPlacement : function(error) {
+            console.log("error:");
+            console.log(error);
+            console.log("form:");
+            console.log(sourceForm);
             $.ligerDialog.error(error[0].innerHTML);
         }
     });
