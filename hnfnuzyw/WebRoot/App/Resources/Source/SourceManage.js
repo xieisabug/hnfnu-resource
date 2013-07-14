@@ -85,7 +85,9 @@ function add_source(){
         //上传到服务器，服务器返回相应信息到data里
         onUploadSuccess : function(file, data, response) {
             var fileNameAndPath = data.split(",");
-            $("#url",sourceForm).val(fileNameAndPath[1]);
+            var path = fileNameAndPath[i];
+            path = path.replaceAll(/\\/g,'\\\\');
+            $("#url",sourceForm).val(path);
         },
         onSelect : function(file) {
             alert(file.name);
@@ -121,7 +123,7 @@ function add_save() {
             success : function(data) {
                 console.log(data);
                 if (data.success) {
-                    courseGrid.addRow(data.model);
+                    //courseGrid.addRow(data.model);
                     $.ligerDialog.tip( {
                         title : '提示信息',
                         content : data.message
@@ -344,7 +346,7 @@ function formInit() {
         }, {
             // todo 这个最后要搞成下拉框的形式，从后台取数据
             display : "所属分类",
-            name : "categoryId",
+            name : "categoryIdList",
             type : "select",
             comboboxName : "category",
             options : {
@@ -353,7 +355,7 @@ function formInit() {
                 hideOnLoseFocus:true,
                 isMultiSelect : true,
                 isShowCheckBox : true,
-                valueFieldID : "categoryId",
+                valueFieldID : "categoryIdList",
                 data : [
                     {"id":"1","name":"文章朗读"},
                     {"id":"2","name":"动画演示"}
@@ -387,15 +389,6 @@ function formInit() {
             width : 200,
             validate : {
                 maxlength : 20
-            }
-        },  {
-            name : 'url',
-            display : '链接地址',
-            type : 'text',
-            newline : true,
-            width : 200,
-            validate : {
-                maxlength : 255
             }
         }, {
             name : 'fileSize',
