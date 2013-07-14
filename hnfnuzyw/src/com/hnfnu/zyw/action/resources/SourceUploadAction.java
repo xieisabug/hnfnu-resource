@@ -49,6 +49,7 @@ public class SourceUploadAction extends ActionSupport implements
 		File dir = new File(getSavePath());
 
 		String savePath = getSavePath();// 保存上传文件的地址
+		//savePath.replaceAll("\\", "\\\\");
 
 		if (!dir.exists()) {
 
@@ -160,14 +161,15 @@ public class SourceUploadAction extends ActionSupport implements
 
 	//@SuppressWarnings("deprecation")
 	public String getSavePath() {
-
 		return request.getSession().getServletContext().getRealPath(savePath);
 
 	}
 
 	public void setSavePath(String savePath) {
 
+		
 		this.savePath = savePath;
+		
 
 	}
 
