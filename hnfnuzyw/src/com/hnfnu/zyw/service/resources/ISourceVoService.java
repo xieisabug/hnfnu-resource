@@ -21,5 +21,13 @@ public interface ISourceVoService {
 	 * @return
 	 */
 	public Map<String, Object> listSourceVo();
+	
+	
+	/**
+	 *根据courseId和categoryId获得相应的资列表，用Map装，为了分页的需要加上Rows和Total
+	 * 
+	 * @return
+	 */
+	public Map<String, Object> listSourceVo(int courseId,int categoryId);
 
 }

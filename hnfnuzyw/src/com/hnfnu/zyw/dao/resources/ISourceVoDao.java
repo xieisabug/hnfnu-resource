@@ -4,5 +4,6 @@ import com.hnfnu.zyw.dao.base.IBaseDao;
 import com.hnfnu.zyw.vo.SourceVo;
 
 public interface ISourceVoDao extends IBaseDao<SourceVo> {
+	
 
 }

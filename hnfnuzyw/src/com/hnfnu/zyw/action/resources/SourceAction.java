@@ -1,5 +1,6 @@
 package com.hnfnu.zyw.action.resources;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Map;
 
@@ -28,7 +29,8 @@ import com.opensymphony.xwork2.ModelDriven;
 @Results( { @Result(name = "success", type = "json", params = { "root",
 		"action" }) })
 @Namespace("/resources")
-public class SourceAction extends ActionSupport implements ModelDriven<SourceDto>{
+public class SourceAction extends ActionSupport implements
+		ModelDriven<SourceDto> {
 	private static final long serialVersionUID = -7199971221300636848L;
 	private SourceDto source = new SourceDto();// 获取页面提交参数
 	private SourceVo sourceVo;// 获取页面提交参数
@@ -36,27 +38,36 @@ public class SourceAction extends ActionSupport implements ModelDriven<SourceDto
 	private String message;
 	private Map<String, Object> sourceVoList;
 	private UserDto user;
+	private int courseId;
+	private int categoryId;
+	private String categoryIdList;
 
 	@Autowired
 	@Qualifier("sourceService")
 	private ISourceService sourceService;
-	
+
 	@Autowired
 	@Qualifier("sourceVoService")
 	private ISourceVoService sourceVoService;
-	
 
+
+	
 	// 添加资源
 	@Action(value = "addSource")
 	public String add() {
-		//获取当前时间
-		source.setCreateDate(new Date());
-		//获取当前用户
-		 ActionContext context = ActionContext.getContext();  
-		 Map session = context.getSession();
-		 user = (UserDto) session.get("user");
-		 source.setCreateUserId(user.getId());
-		success = sourceService.add(source);
+		// 获取当前时间
+		Date date = new Date();
+		Timestamp timeStamp = new Timestamp(date.getTime());
+		source.setCreateDate(timeStamp);
+		// 获取当前用户
+		ActionContext context = ActionContext.getContext();
+		Map session = context.getSession();
+		user = (UserDto) session.get("user");
+		source.setCreateUserId(user.getId());
+		source.setApprovalStatus("0");
+		source.setUseTimes(0);
+		//System.out.println("Action类别列表categoryList" + categoryIdList);
+		success = sourceService.add(source,categoryIdList);
 		if (success) {
 			message = "添加资源成功！";
 		} else {
@@ -104,28 +115,27 @@ public class SourceAction extends ActionSupport implements ModelDriven<SourceDto
 		}
 		return SUCCESS;
 	}
-	
+
 	@Action(value = "deleteSource")
 	public String delete() {
 		int i = sourceService.delete(source.getUrl());
 		if (i == 1) {
 			success = true;
 			message = "删除资源文件成功！";
-		} else if (i == -1){
+		} else if (i == -1) {
 			success = false;
 			message = "删除资源文件失败，因为该文件不存在！";
-		}else if(i == -1){
+		} else if (i == -1) {
 			success = false;
 			message = "删除资源文件失败,因为不是文件！";
 		}
 		return SUCCESS;
 	}
-	
 
 	// 获取表中所有资源，用Map装，为了分页的需要加上Rows和Total
 	@Action(value = "listSourceVo")
 	public String list() {
-		sourceVoList = sourceVoService.listSourceVo();
+		sourceVoList = sourceVoService.listSourceVo(source.getCourseId(),categoryId);
 		return SUCCESS;
 	}
 
@@ -165,5 +175,32 @@ public class SourceAction extends ActionSupport implements ModelDriven<SourceDto
 	public void setSourceVo(SourceVo sourceVo) {
 		this.sourceVo = sourceVo;
 	}
+
+
+	public int getCourseId() {
+		return courseId;
+	}
+
+	public void setCourseId(int courseId) {
+		this.courseId = courseId;
+	}
+
+	public int getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
+	}
+
+	public String getCategoryIdList() {
+		return categoryIdList;
+	}
+
+	public void setCategoryIdList(String categoryIdList) {
+		this.categoryIdList = categoryIdList;
+	}
+
 	
+
 }

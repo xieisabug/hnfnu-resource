@@ -1,5 +1,6 @@
 package com.hnfnu.zyw.vo;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -66,7 +67,7 @@ public class SourceVo {
 
 	// 创建时间
 
-	private Date createDate;
+	private Timestamp createDate;
 
 	// 审核状态
 
@@ -97,12 +98,14 @@ public class SourceVo {
 		super();
 	}
 
+	
+
 	public SourceVo(Integer sourceId, String sourceName, Integer courseId,
 			String courseName, Integer gradeId, String gradeName,
 			Integer subjectId, String subjectName, String categoryIdList,
 			String keyWords, String mediaType, String mediaFormat,
 			String playTime, String fileSize, String author, String publisher,
-			String description, Date createDate, String approvalStatus,
+			String description, Timestamp createDate, String approvalStatus,
 			String quality, double price, Integer viewTimes, Integer useTimes,
 			String url, Integer createUserId, String createUserName) {
 		super();
@@ -133,6 +136,8 @@ public class SourceVo {
 		this.createUserId = createUserId;
 		this.createUserName = createUserName;
 	}
+
+
 
 	@Id
 	@GeneratedValue
@@ -272,13 +277,19 @@ public class SourceVo {
 		this.description = description;
 	}
 
-	public Date getCreateDate() {
+
+
+	public Timestamp getCreateDate() {
 		return createDate;
 	}
 
-	public void setCreateDate(Date createDate) {
+
+
+	public void setCreateDate(Timestamp createDate) {
 		this.createDate = createDate;
 	}
+
+
 
 	public String getApprovalStatus() {
 		return approvalStatus;
