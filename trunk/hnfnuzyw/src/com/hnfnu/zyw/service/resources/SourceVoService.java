@@ -51,4 +51,24 @@ public class SourceVoService implements ISourceVoService {
 		sourceVoList.put("Total", l.size());
 		return sourceVoList;
 	}
+
+	public Map<String, Object> listSourceVo(int courseId, int categoryId) {
+		
+		String hql = "from SourceVo where courseId="+courseId;
+		if(categoryId > 0){
+			hql += " and categoryId ="+categoryId;
+		}
+		
+		Map<String, Object> sourceVoList = new HashMap<String, Object>();
+		List<SourceVo> l = null;
+
+		try {
+			l = sourceVoDao.list(hql);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		sourceVoList.put("Rows", l);
+		sourceVoList.put("Total", l.size());
+		return sourceVoList;
+	}
 }

@@ -6,7 +6,7 @@ import java.util.Map;
 import com.hnfnu.zyw.dto.resources.SourceDto;
 
 public interface ISourceService {
-	public boolean add(SourceDto source);
+	public boolean add(SourceDto source,String categoryList);
 
 	public boolean deleteMessege(int id);
 
