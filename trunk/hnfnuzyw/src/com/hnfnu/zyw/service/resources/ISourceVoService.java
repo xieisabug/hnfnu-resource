@@ -30,4 +30,6 @@ public interface ISourceVoService {
 	 */
 	public Map<String, Object> listSourceVo(int courseId,int categoryId);
 
+	public List<Map<String, Object>> allTree();
+
 }

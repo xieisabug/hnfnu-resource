@@ -1,7 +1,6 @@
 package com.hnfnu.zyw.vo;
 
 import java.sql.Timestamp;
-import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,6 +31,8 @@ public class SourceVo {
 	// 属于的类别的id,一个资源有多个类别，以；隔开
 
 	private String categoryIdList;
+	
+	private String categoryNameList;
 
 	// 关键字列表，用"；"分隔
 
@@ -98,16 +99,15 @@ public class SourceVo {
 		super();
 	}
 
-	
-
 	public SourceVo(Integer sourceId, String sourceName, Integer courseId,
 			String courseName, Integer gradeId, String gradeName,
 			Integer subjectId, String subjectName, String categoryIdList,
-			String keyWords, String mediaType, String mediaFormat,
-			String playTime, String fileSize, String author, String publisher,
-			String description, Timestamp createDate, String approvalStatus,
-			String quality, double price, Integer viewTimes, Integer useTimes,
-			String url, Integer createUserId, String createUserName) {
+			String categoryNameList, String keyWords, String mediaType,
+			String mediaFormat, String playTime, String fileSize,
+			String author, String publisher, String description,
+			Timestamp createDate, String approvalStatus, String quality,
+			double price, Integer viewTimes, Integer useTimes, String url,
+			Integer createUserId, String createUserName) {
 		super();
 		this.sourceId = sourceId;
 		this.sourceName = sourceName;
@@ -118,6 +118,7 @@ public class SourceVo {
 		this.subjectId = subjectId;
 		this.subjectName = subjectName;
 		this.categoryIdList = categoryIdList;
+		this.categoryNameList = categoryNameList;
 		this.keyWords = keyWords;
 		this.mediaType = mediaType;
 		this.mediaFormat = mediaFormat;
@@ -137,7 +138,23 @@ public class SourceVo {
 		this.createUserName = createUserName;
 	}
 
-
+	@Override
+	public String toString() {
+		return "SourceVo [sourceId=" + sourceId + ", sourceName=" + sourceName
+				+ ", courseId=" + courseId + ", courseName=" + courseName
+				+ ", gradeId=" + gradeId + ", gradeName=" + gradeName
+				+ ", subjectId=" + subjectId + ", subjectName=" + subjectName
+				+ ", categoryIdList=" + categoryIdList + ", categoryNameList="
+				+ categoryNameList + ", keyWords=" + keyWords + ", mediaType="
+				+ mediaType + ", mediaFormat=" + mediaFormat + ", playTime="
+				+ playTime + ", fileSize=" + fileSize + ", author=" + author
+				+ ", publisher=" + publisher + ", description=" + description
+				+ ", createDate=" + createDate + ", approvalStatus="
+				+ approvalStatus + ", quality=" + quality + ", price=" + price
+				+ ", viewTimes=" + viewTimes + ", useTimes=" + useTimes
+				+ ", url=" + url + ", createUserId=" + createUserId
+				+ ", createUserName=" + createUserName + "]";
+	}
 
 	@Id
 	@GeneratedValue
@@ -355,22 +372,14 @@ public class SourceVo {
 		this.createUserName = createUserName;
 	}
 
-	@Override
-	public String toString() {
-		return "SourceVo [approvalStatus=" + approvalStatus + ", author="
-				+ author + ", categoryIdList=" + categoryIdList + ", courseId="
-				+ courseId + ", courseName=" + courseName + ", createDate="
-				+ createDate + ", createUserId=" + createUserId
-				+ ", createUserName=" + createUserName + ", description="
-				+ description + ", fileSize=" + fileSize + ", gradeId="
-				+ gradeId + ", gradeName=" + gradeName + ", keyWords="
-				+ keyWords + ", mediaFormat=" + mediaFormat + ", mediaType="
-				+ mediaType + ", playTime=" + playTime + ", price=" + price
-				+ ", publisher=" + publisher + ", quality=" + quality
-				+ ", sourceId=" + sourceId + ", sourceName=" + sourceName
-				+ ", subjectId=" + subjectId + ", subjectName=" + subjectName
-				+ ", url=" + url + ", useTimes=" + useTimes + ", viewTimes="
-				+ viewTimes + "]";
+	public String getCategoryNameList() {
+		return categoryNameList;
+	}
+
+
+
+	public void setCategoryNameList(String categoryNameList) {
+		this.categoryNameList = categoryNameList;
 	}
 
 }

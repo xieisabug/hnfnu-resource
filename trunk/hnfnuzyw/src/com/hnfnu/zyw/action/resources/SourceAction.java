@@ -2,6 +2,7 @@ package com.hnfnu.zyw.action.resources;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Action;
@@ -41,6 +42,7 @@ public class SourceAction extends ActionSupport implements
 	private int courseId;
 	private int categoryId;
 	private String categoryIdList;
+	private List<Map<String, Object>> allTree;
 
 	@Autowired
 	@Qualifier("sourceService")
@@ -61,7 +63,7 @@ public class SourceAction extends ActionSupport implements
 		source.setCreateDate(timeStamp);
 		// 获取当前用户
 		ActionContext context = ActionContext.getContext();
-		Map session = context.getSession();
+		Map<String,Object> session = context.getSession();
 		user = (UserDto) session.get("user");
 		source.setCreateUserId(user.getId());
 		source.setApprovalStatus("0");
@@ -138,6 +140,12 @@ public class SourceAction extends ActionSupport implements
 		sourceVoList = sourceVoService.listSourceVo(source.getCourseId(),categoryId);
 		return SUCCESS;
 	}
+	
+	@Action(value = "allTree")
+	public String allTree(){
+		allTree = sourceVoService.allTree();
+		return SUCCESS;
+	}
 
 	/* get set */
 	public ISourceService getSourceService() {
@@ -199,6 +207,10 @@ public class SourceAction extends ActionSupport implements
 
 	public void setCategoryIdList(String categoryIdList) {
 		this.categoryIdList = categoryIdList;
+	}
+
+	public List<Map<String, Object>> getAllTree() {
+		return allTree;
 	}
 
 	
