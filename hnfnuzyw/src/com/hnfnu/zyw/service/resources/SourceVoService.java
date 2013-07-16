@@ -103,7 +103,7 @@ System.out.println(sv.toString());
 				// 重新生成科目列表，确保科目列表变为空，并且加入基础数据。
 				if (sv.getGradeId() != gradeId) {
 					// 是第一次进来就不加了,因为没有初始化,第二次加进去，加的是之前一轮的
-					if (i != 0) {
+					if (i != 0 && grade.get("name")!=null) {
 						course.put("children", categoryList);
 						courseList.add(course);
 						subject.put("children", courseList);
