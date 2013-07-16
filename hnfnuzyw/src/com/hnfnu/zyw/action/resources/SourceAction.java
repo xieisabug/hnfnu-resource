@@ -38,6 +38,7 @@ public class SourceAction extends ActionSupport implements
 	private boolean success;
 	private String message;
 	private Map<String, Object> sourceVoList;
+	private Map<String, Object> sourceMoreVoList;
 	private UserDto user;
 	private int courseId;
 	private int categoryId;
@@ -134,10 +135,10 @@ public class SourceAction extends ActionSupport implements
 		return SUCCESS;
 	}
 
-	// 获取表中所有资源，用Map装，为了分页的需要加上Rows和Total
-	@Action(value = "listSourceVo")
+	// 根据courceId和categoryId获取表中所有资源，用Map装，为了分页的需要加上Rows和Total
+	@Action(value = "sourceMoreVoList")
 	public String list() {
-		sourceVoList = sourceVoService.listSourceVo(source.getCourseId(),categoryId);
+		sourceMoreVoList = sourceVoService.listSourceVo(source.getCourseId(),categoryId);
 		return SUCCESS;
 	}
 	
@@ -213,6 +214,12 @@ public class SourceAction extends ActionSupport implements
 		return allTree;
 	}
 
-	
+	public Map<String, Object> getSourceMoreVoList() {
+		return sourceMoreVoList;
+	}
+
+	public void setSourceMoreVoList(Map<String, Object> sourceMoreVoList) {
+		this.sourceMoreVoList = sourceMoreVoList;
+	}
 
 }

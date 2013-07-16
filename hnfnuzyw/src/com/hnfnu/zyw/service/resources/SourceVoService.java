@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.hnfnu.zyw.dao.resources.ISourceMoreVoDao;
 import com.hnfnu.zyw.dao.resources.ISourceVoDao;
+import com.hnfnu.zyw.vo.SourceMoreVo;
 import com.hnfnu.zyw.vo.SourceVo;
 
 @Service("sourceVoService")
@@ -17,6 +19,10 @@ public class SourceVoService implements ISourceVoService {
 	@Autowired
 	@Qualifier("sourceVoDao")
 	public ISourceVoDao sourceVoDao;
+
+	@Autowired
+	@Qualifier("sourceMoreVoDao")
+	public ISourceMoreVoDao sourceMoreVoDao;
 
 	public SourceVo load(int id) {
 		try {
@@ -55,22 +61,22 @@ public class SourceVoService implements ISourceVoService {
 
 	public Map<String, Object> listSourceVo(int courseId, int categoryId) {
 
-		String hql = "from SourceVo where courseId=" + courseId;
+		String hql = "from SourceMoreVo where courseId=" + courseId;
 		if (categoryId > 0) {
 			hql += " and categoryId =" + categoryId;
 		}
 
-		Map<String, Object> sourceVoList = new HashMap<String, Object>();
-		List<SourceVo> l = null;
+		Map<String, Object> sourceMoreVoList = new HashMap<String, Object>();
+		List<SourceMoreVo> l = null;
 
 		try {
-			l = sourceVoDao.list(hql);
+			l = sourceMoreVoDao.list(hql);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		sourceVoList.put("Rows", l);
-		sourceVoList.put("Total", l.size());
-		return sourceVoList;
+		sourceMoreVoList.put("Rows", l);
+		sourceMoreVoList.put("Total", l.size());
+		return sourceMoreVoList;
 	}
 
 	public List<Map<String, Object>> allTree() {
