@@ -301,6 +301,9 @@ function isCategory(obj){
     return !isCourse(obj) &&
         sourceTree.getParent(sourceTree.getParent(sourceTree.getParent(obj.target)))!=null;
 }
+function getParentId(obj){
+    return $(sourceTree.getParentTreeItem(obj.target)).attr("id");
+}
 //初始化表单
 function formInit() {
     var groupicon = "../../../App/Lib/ligerUI/skins/icons/communication.gif";
@@ -485,84 +488,6 @@ $(function() {
 	toolbarItems = Toolbar.confirmToolbar(toolbarItems, ajaxToolbar);
     $("#sourceToolBar").ligerToolBar({items:toolbarItems});
 
-    //todo treeJson后台取数据
-    /*
-    var treeJson = [
-        {
-            "id":"1",
-            "name":"一年级",
-            "children":[
-                {
-                    "id":"1",
-                    "name":"语文",
-                    "children":[
-                        {
-                            "id":"1",
-                            "name":"第一课 小妈妈找蝌蚪",
-                            "children":[
-                                {
-                                    "id":"1",
-                                    "name":"文章朗读"
-                                },
-                                {
-                                    "id":"2",
-                                    "name":"动画演示"
-                                }
-                            ]
-                        },
-                        {"id":"2","name":"第二课 静夜上厕所思"}
-                    ]
-                },
-                {
-                    "id":"2",
-                    "name":"数学",
-                    "children":[
-                        {"id":"1","name":"0+0"}
-                    ]
-                },
-                {"id":"3","name":"英语","type":"subject"},
-                {"id":"4","name":"政治","type":"subject"},
-                {
-                    "id":"5",
-                    "name":"生物",
-                    "children":[
-                        {"id":"2","name":"人的进化"}
-                    ]
-                }
-            ]
-        },
-        {
-            "id":"2",
-            "name":"二年级",
-            "children":[
-                {
-                    "id":"1",
-                    "name":"语文",
-                    "children":[
-                        {"id":"1","name":"第一课 狂人日志"},
-                        {"id":"2","name":"第二课 清明下河图"}
-                    ]
-                },
-                {
-                    "id":"2",
-                    "name":"数学",
-                    "children":[
-                        {"id":"1","name":"1+1"}
-                    ]
-                },
-                {"id":"3","name":"英语","type":"subject"},
-                {"id":"4","name":"政治","type":"subject"},
-                {
-                    "id":"5",
-                    "name":"生物",
-                    "children":[
-                        {"id":"2","name":"细胞的故事"}
-                    ]
-                }
-            ]
-        }
-    ];
-    */
     $.ajax( {
         url : '/hnfnuzyw/resources/allTree.action',
         type : 'post',
@@ -576,21 +501,31 @@ $(function() {
                 data : data.allTree,
                 onSelect:function(data){
                     //todo 获取数据后重置grid
+                    var params;
+                    if(isCourse(data)){
+                        params = {
+                            courseId:data.data.id,
+                            categoryId:0
+                        };
+                    } else if(isCategory(data)){
+                        params = {
+                            courseId:getParentId(data),
+                            categoryId:data.data.id
+                        };
+                    }
+                    $.ajax( {
+                        url:'/hnfnuzyw/resources/sourceMoreVoList.action',
+                        type : 'post',
+                        data:params,
+                        success : function(data) {
+                            sourceGrid.loadData(data.sourceMoreVoList);
+                        }
+                    });
                 }
             });
         }
     });
 
-    //todo 没有取数据。取数据函数要在上面的sourceTree的点击事件中定义
-    var gridJson = {
-        "Rows":[
-                {"id":"1","name":"课文","keyWords":"","courseId":"1","courseName":"第一课 小妈妈找蝌蚪",
-                    "categoryIdList":"1;2","categoryNameList":"文章朗读;动画演示","mediaType":"ppt",
-                    "mediaFormat":"ppt","playTime":"00:00:00","fileSize":"1,234KB","author":"吴老师",
-                    "publisher":"","description":"小蝌蚪找妈妈的另外一个版本","createDate":"2013-01-22",
-                    "approvalStatus":"通过","quality":"高","price":"0","viewTimes":"203","useTimes":"13"}
-            ]
-        };
     sourceGrid = $("#sourceGrid").ligerGrid( {
         columns : [ {
             display : '资源名',
@@ -696,9 +631,20 @@ $(function() {
             align : 'left',
             minWidth : 60
         } ],
-        data:gridJson,
         height : '98%',
-        width : '100%'
+        width : '100%',
+        /*
+        onSuccess:function(data,grid){
+            console.log(data);
+            console.log(grid);
+            grid.loadData(data.sourceMoreVoList);
+            return true;
+
+        },
+        */
+        onBeforeShowData:function(current){
+            console.log(current);
+        }
     });
 	$("#pageloading").hide();
 });

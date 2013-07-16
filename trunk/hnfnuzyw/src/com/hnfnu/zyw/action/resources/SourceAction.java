@@ -40,8 +40,7 @@ public class SourceAction extends ActionSupport implements
 	private Map<String, Object> sourceVoList;
 	private Map<String, Object> sourceMoreVoList;
 	private UserDto user;
-	private int courseId;
-	private int categoryId;
+	private Integer categoryId;
 	private String categoryIdList;
 	private List<Map<String, Object>> allTree;
 
@@ -53,8 +52,6 @@ public class SourceAction extends ActionSupport implements
 	@Qualifier("sourceVoService")
 	private ISourceVoService sourceVoService;
 
-
-	
 	// Ìí¼Ó×ÊÔ´
 	@Action(value = "addSource")
 	public String add() {
@@ -185,20 +182,11 @@ public class SourceAction extends ActionSupport implements
 		this.sourceVo = sourceVo;
 	}
 
-
-	public int getCourseId() {
-		return courseId;
-	}
-
-	public void setCourseId(int courseId) {
-		this.courseId = courseId;
-	}
-
-	public int getCategoryId() {
+	public Integer getCategoryId() {
 		return categoryId;
 	}
 
-	public void setCategoryId(int categoryId) {
+	public void setCategoryId(Integer categoryId) {
 		this.categoryId = categoryId;
 	}
 
