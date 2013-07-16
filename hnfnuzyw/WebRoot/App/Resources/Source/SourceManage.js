@@ -486,6 +486,7 @@ $(function() {
     $("#sourceToolBar").ligerToolBar({items:toolbarItems});
 
     //todo treeJson后台取数据
+    /*
     var treeJson = [
         {
             "id":"1",
@@ -561,22 +562,25 @@ $(function() {
             ]
         }
     ];
-    sourceTree = $("#sourceTree").ligerTree({
-        nodeWidth:200,
-        textFieldName : 'name',
-        idFieldName : 'id',
-        parentIDFieldName : 'pid',
-        checkbox:false,
-        data : treeJson,
-        onSelect:function(data){
-            //todo 通过判断数据的不同，从不同的函数取数据过来，然后更新grid里的数据
-            if(isCourse(data)){
-                console.log("course");
-            } else if(isCategory(data)){
-                console.log("category");
-            }
+    */
+    $.ajax( {
+        url : '/hnfnuzyw/resources/allTree.action',
+        type : 'post',
+        success : function(data) {
+            sourceTree = $("#sourceTree").ligerTree({
+                nodeWidth:200,
+                textFieldName : 'name',
+                idFieldName : 'id',
+                parentIDFieldName : 'pid',
+                checkbox:false,
+                data : data.allTree,
+                onSelect:function(data){
+                    //todo 获取数据后重置grid
+                }
+            });
         }
     });
+
     //todo 没有取数据。取数据函数要在上面的sourceTree的点击事件中定义
     var gridJson = {
         "Rows":[
