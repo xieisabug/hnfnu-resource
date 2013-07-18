@@ -105,6 +105,7 @@ public class SourcesServiceImpl implements ISourceService {
 	// 删除文件的方法，如果返回的是1说明删除成功，-1说明文件不存在。0说明删除错误，因为不是文件
 	public int delete(String url) {
 		System.out.println(url);
+		if(url == null) return -1;
 		File file = new File(url);
 
 		// 判断目录或文件是否存在

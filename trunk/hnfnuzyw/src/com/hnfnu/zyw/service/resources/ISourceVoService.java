@@ -32,4 +32,6 @@ public interface ISourceVoService {
 
 	public List<Map<String, Object>> allTree();
 
+	public List<Map<String, Object>> courseTree();
+
 }

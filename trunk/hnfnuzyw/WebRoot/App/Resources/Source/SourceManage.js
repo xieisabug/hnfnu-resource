@@ -2,16 +2,15 @@ var sourceForm = null;//表单
 var sourceGrid = null;//右侧表格
 var sourceTree = null;//左侧树
 var sourceWin = null;//显示的窗口
+var sourceSelectData = null;//表格选择的数据
 
 //增加课程
-function add_source(){
-    formInit();
-    sourceForm.prepend('<input type="file" id="file_upload" name="fileName">');
+function add_source2(){
     sourceWin = $.ligerDialog.open( {
         width : 400,
         height : 550,
         title : "上传资源",
-        target : sourceForm,
+        url:'AddForm.html',
         buttons : [ {
             text : "提交",
             width : 80,
@@ -22,106 +21,20 @@ function add_source(){
             onclick : add_cancel
         } ]
     });
-    $("#file_upload").uploadify({
-        debug:false,
-        auto:true,//是否自动上传
-        height: 30,
-        buttonText:'上传资源',
-        button_image_url: "/hnfnuzyw/App/Lib/Uploadify/blank.jsp",
-        cancelImage:'/hnfnuzyw/App/Lib/Uploadify/uploadify-cancel.png',
-        swf : '/hnfnuzyw/App/Lib/Uploadify/uploadify.swf',
-        // expressInstall:'App/Lib/Uploadify/expressInstall.swf',
-        uploader : '/hnfnuzyw/upload/fileUpload.action', //后台处理上传文件的action
-        width : 120 ,
-        multi : false,//是否允许多个文件上传
-        queueID : 'uploadfileQueue',
-        fileObjName : 'fileName', //与后台Action中file属性一样
-        //formData : { },//附带值
-        successTimeout : 99999,//上传超时时间
-        overrideEvents : [ 'onDialogClose' ],
-        // fileTypeDesc : '上传文件支持的文件格式:jpg,jpge,gif,png',
-        // fileTypeExts : '*.*',//*.jpg;*.jpge;*.gif;*.png
-        //queueSizeLimit : 3,//
-        simUploadLimit:1,//一次可以上传1个文件
-        fileSizeLimit : '2048MB',//上传文件最大值
-        //返回一个错误，选择文件的时候触发
-        onSelectError : function(file, errorCode, errorMsg) {
-            switch (errorCode) {
-                case -100:
-                    alert("上传的文件数量已经超出系统限制的"
-                        + $('#file_upload').uploadify(
-                        'settings',
-                        'queueSizeLimit') + "个文件！");
-                    break;
-                case -110:
-                    alert("文件 ["
-                        + file.name
-                        + "] 大小超出系统限制的"
-                        + $('#file_upload')
-                        .uploadify('settings',
-                        'fileSizeLimit')
-                        + "大小！");
-                    break;
-                case -120:
-                    alert("文件 [" + file.name + "] 大小异常！");
-                    break;
-                case -130:
-                    alert("文件 [" + file.name + "] 类型不正确！");
-                    break;
-            }
-        },
-        //每次更新上载的文件的进展
-        onUploadProgress : function(file, bytesUploaded,
-                                    bytesTotal, totalBytesUploaded,
-                                    totalBytesTotal) {
-            //alert(bytesUploaded);
-            //有时候上传进度什么想自己个性化控制，可以利用这个方法
-            //使用方法见官方说明
-        },
-        //检测FLASH失败调用
-        onFallback : function() {
-            alert("您未安装FLASH控件，无法上传图片！请安装FLASH控件后再试。");
-        },
-        //上传到服务器，服务器返回相应信息到data里
-        onUploadSuccess : function(file, data, response) {
-            var fileNameAndPath = data.split(",");
-            var path = fileNameAndPath[i];
-            path = path.replaceAll(/\\/g,'\\\\');
-            $("#url",sourceForm).val(path);
-        },
-        onSelect : function(file) {
-            alert(file.name);
-        },
-        removeCompleted : true,//上传的文件进度条是否消失
-        requeueErrors : false,
-        removeTimeout : 2,//进度条消失的时间，默认为3
-        progressData : "percentage",//显示上传的百分比
-        onUploadError : function(file, errorCode, errorMsg,
-                                 errorString, swfuploadifyQueue) {
-            $("#dialog-message").html(errorString);
-        },
-        onError : function(event, queueID, fileObj) {
-            alert("文件:" + fileObj.name + " 上传失败");
-        }
-    });
-    //删除文件
-    function delFile(obj) {
-        $(obj).parent().remove();
-    }
+    //sourceForm = sourceWin.frame.sourceForm;
 }
 // 增加课程的保存按钮事件
 function add_save() {
+    sourceForm = sourceWin.frame.sourceForm;
     // 把表单转化为数组
     if (sourceForm.valid()) {
         var row_data = Form.parseJSON(sourceForm);
-        console.log(row_data);
         // 发往服务器，返回成功后再添加到表格中
         $.ajax( {
             url : '/hnfnuzyw/resources/addSource.action',
             data : row_data,
             type : 'post',
             success : function(data) {
-                console.log(data);
                 if (data.success) {
                     //courseGrid.addRow(data.model);
                     $.ligerDialog.tip( {
@@ -138,6 +51,7 @@ function add_save() {
 }
 // 增加课程的取消按钮事件
 function add_cancel() {
+    sourceForm = sourceWin.frame.sourceForm;
     var dlg = $.ligerDialog.waitting('正在撤销已经上传的文件...');
     $.ajax({
         url:'/hnfnuzyw/resources/deleteSource.action',
@@ -147,6 +61,7 @@ function add_cancel() {
             dlg.close();
             if (data.success) {
                 sourceWin.close();
+                $.ligerDialog.success(data.message);
             } else {
                 $.ligerDialog.error(data.message);
             }
@@ -184,19 +99,17 @@ function delete_source(){
 }
 //编辑课程
 function edit_source(){
-    formInit();
     if (!sourceGrid.getSelected()) {
         $.ligerDialog.warn("请选择您要修改的行！");
         return;
     }
     // 这个函数的参数为：form，data，作用就是把data放到from
-    var sourceGridData = sourceGrid.getSelected();
-    Form.loadForm(sourceForm, sourceGridData);
-    courseWin = $.ligerDialog.open( {
+    sourceSelectData = sourceGrid.getSelected();
+    sourceWin = $.ligerDialog.open( {
         width : 400,
-        height : 400,
+        height : 550,
         title : "修改课程",
-        target : sourceForm,
+        url:'EditForm.html',
         buttons : [ {
             text : "提交",
             width : 80,
@@ -219,7 +132,6 @@ function edit_save() {
             data : row_data,
             type : 'post',
             success : function(data) {
-                console.log(data);
                 if (data.success) {
                     sourceGrid.update(sourceGrid.getSelected(), data.model);
                     $.ligerDialog.tip( {
@@ -263,44 +175,45 @@ function openTreeDialog(){
         url: 'SelectCourse.html',
         isHidden:false,
         buttons: [
-            { text: '确定', onclick: selectOK },
-            { text: '取消', onclick: selectCancel }
+            {
+                text: '确定',
+                onclick: function(item, dialog){//选择了课程后进行数据处理的函数
+                    var fn = dialog.frame.selectCourse || dialog.frame.window.selectCourse;
+                    var data = fn();
+                    if (!data){
+                        alert('请选择行。');
+                        return;
+                    }
+                    if(isCourse(data)){
+                        sourceWin.frame.setCourseData(data);
+                    } else {
+                        alert('请选择课程。');
+                        return;
+                    }
+                    dialog.close();
+                }
+            },
+            {
+                text: '取消',
+                onclick: function(item, dialog){//取消选择
+                    dialog.close();
+                }
+            }
         ]
     });
     return false;
 }
-//选择了课程后进行数据处理的函数
-function selectOK(item, dialog){
-    var fn = dialog.frame.selectCourse || dialog.frame.window.selectCourse;
-    var data = fn();
-    if (!data){
-        alert('请选择行。');
-        return;
-    }
-    if(isCourse(data)){
-        $("#courseId",sourceForm).val(data.data.id);
-        $("#course",sourceForm).val(data.data.name);
-    } else {
-        alert('请选择课程。');
-        return;
-    }
-
-    dialog.close();
-}
-//取消选择
-function selectCancel(item, dialog){
-    dialog.close();
-}
 //判断选择的是否是课程
 function isCourse(obj){
-    return sourceTree.getParent(sourceTree.getParent(sourceTree.getParent(obj.target)))==null &&
-           sourceTree.getParent(sourceTree.getParent(obj.target))!=null;
+    return sourceTree.getParentTreeItem(sourceTree.getParentTreeItem(sourceTree.getParentTreeItem(obj.target)))==null &&
+           sourceTree.getParentTreeItem(sourceTree.getParentTreeItem(obj.target))!=null;
 }
 //判断选择的是否是类别
 function isCategory(obj){
     return !isCourse(obj) &&
-        sourceTree.getParent(sourceTree.getParent(sourceTree.getParent(obj.target)))!=null;
+        sourceTree.getParentTreeItem(sourceTree.getParentTreeItem(sourceTree.getParentTreeItem(obj.target)))!=null;
 }
+//获取树的父一级的id
 function getParentId(obj){
     return $(sourceTree.getParentTreeItem(obj.target)).attr("id");
 }
@@ -309,138 +222,135 @@ function formInit() {
     var groupicon = "../../../App/Lib/ligerUI/skins/icons/communication.gif";
     sourceForm = $('<form></form>');
 
-    sourceForm.ligerForm( {
-        inputWidth : 200,
-        labelWidth : 120,
-        space : 40,
-        fields : [ {
-            name : "id",
-            type : "hidden"
-        }, {
-            name : "url",
-            type : "hidden"
-        }, {
-            display : "资源名字",
-            name : "name",
-            newline : true,
-            type : "text",
-            group : "必填信息",
-            groupicon : groupicon,
-            validate : {
-                required : true,
-                maxlength : 30
-            }
-        }, {
-            display : "所属课程",
-            name : "courseId",
-            type : "select",
-            comboboxName : "course",
-            options : {
-                textField : "name",
-                valueField : "id",
-                hideOnLoseFocus : true,
-                valueFieldID : "courseId",
-                //todo 课程列表要后面获取
-                onBeforeOpen:openTreeDialog
-            },
-            validate : {
-                required : true
-            }
-        }, {
-            // todo 这个最后要搞成下拉框的形式，从后台取数据
-            display : "所属分类",
-            name : "categoryIdList",
-            type : "select",
-            comboboxName : "category",
-            options : {
-                textField : "name",
-                valueField : "id",
-                hideOnLoseFocus:true,
-                isMultiSelect : true,
-                isShowCheckBox : true,
-                valueFieldID : "categoryIdList",
-                data : [
-                    {"id":"1","name":"文章朗读"},
-                    {"id":"2","name":"动画演示"}
-                ]
-            }
-        }, {
-            name : 'keyWords',
-            display : '关键字(用;分割)',
-            type : 'text',
-            group : "选填信息",
-            groupicon : groupicon,
-            newline : true,
-            width : 200
-        }, {
-            name : 'mediaType',
-            display : '媒体类型',
-            type : 'text',
-            newline : true,
-            width : 200
-        }, {
-            name : 'mediaFormat',
-            display : '媒体格式',
-            type : 'text',
-            newline : true,
-            width : 200
-        }, {
-            name : 'playTime',
-            display : '播放时间',
-            type : 'text',
-            newline : true,
-            width : 200,
-            validate : {
-                maxlength : 20
-            }
-        }, {
-            name : 'fileSize',
-            display : '文件大小',
-            type : 'number',
-            newline : true,
-            width : 200,
-            validate : {
-                maxlength : 50
-            }
-        }, {
-            name : 'author',
-            display : '作者',
-            type : 'text',
-            newline : true,
-            width : 200,
-            validate : {
-                maxlength : 100
-            }
-        }, {
-            name : 'publisher',
-            display : '出版社',
-            type : 'text',
-            newline : true,
-            width : 200
-        }, {
-            name : 'description',
-            display : '描述',
-            type : 'text',
-            newline : true,
-            width : 200
-        }, {
-            name : 'price',
-            display : '价格',
-            type : 'number',
-            newline : true,
-            width : 200
-        }]
-    });
-    $.metadata.setType("attr", "validate");
-    sourceForm.validate( {
-        debug : true,
-        onkeyup : false,
-        errorPlacement : function(error) {
-            console.log("error:");
-            console.log(error);
-            console.log("form:");
-            console.log(sourceForm);
-            $.ligerDialog.error(error[0].innerHTML);
+    $.ajax({
+        url:'/hnfnuzyw/resources/formSelect.action',
+        type:'post',
+        success:function(data){
+            sourceForm.ligerForm( {
+                inputWidth : 200,
+                labelWidth : 120,
+                space : 40,
+                fields : [ {
+                    name : "id",
+                    type : "hidden"
+                }, {
+                    name : "url",
+                    type : "hidden"
+                }, {
+                    display : "资源名字",
+                    name : "name",
+                    newline : true,
+                    type : "text",
+                    group : "必填信息",
+                    groupicon : groupicon,
+                    validate : {
+                        required : true,
+                        maxlength : 30
+                    }
+                }, {
+                    display : "所属课程",
+                    name : "courseId",
+                    type : "select",
+                    comboboxName : "course",
+                    options : {
+                        textField : "name",
+                        valueField : "id",
+                        hideOnLoseFocus : true,
+                        valueFieldID : "courseId",
+                        onBeforeOpen:openTreeDialog
+                    },
+                    validate : {
+                        required : true
+                    }
+                }, {
+                    display : "所属分类",
+                    name : "categoryIdList",
+                    type : "select",
+                    comboboxName : "category",
+                    options : {
+                        textField : "name",
+                        valueField : "id",
+                        hideOnLoseFocus:true,
+                        isMultiSelect : true,
+                        isShowCheckBox : true,
+                        valueFieldID : "categoryIdList",
+                        data : data.categoryList
+                    }
+                }, {
+                    name : 'keyWords',
+                    display : '关键字(用;分割)',
+                    type : 'text',
+                    group : "选填信息",
+                    groupicon : groupicon,
+                    newline : true,
+                    width : 200
+                }, {
+                    name : 'mediaType',
+                    display : '媒体类型',
+                    type : 'text',
+                    newline : true,
+                    width : 200
+                }, {
+                    name : 'mediaFormat',
+                    display : '媒体格式',
+                    type : 'text',
+                    newline : true,
+                    width : 200
+                }, {
+                    name : 'playTime',
+                    display : '播放时间',
+                    type : 'text',
+                    newline : true,
+                    width : 200,
+                    validate : {
+                        maxlength : 20
+                    }
+                }, {
+                    name : 'fileSize',
+                    display : '文件大小',
+                    type : 'number',
+                    newline : true,
+                    width : 200,
+                    validate : {
+                        maxlength : 50
+                    }
+                }, {
+                    name : 'author',
+                    display : '作者',
+                    type : 'text',
+                    newline : true,
+                    width : 200,
+                    validate : {
+                        maxlength : 100
+                    }
+                }, {
+                    name : 'publisher',
+                    display : '出版社',
+                    type : 'text',
+                    newline : true,
+                    width : 200
+                }, {
+                    name : 'description',
+                    display : '描述',
+                    type : 'text',
+                    newline : true,
+                    width : 200
+                }, {
+                    name : 'price',
+                    display : '价格',
+                    type : 'number',
+                    newline : true,
+                    width : 200
+                }]
+            });
+            $.metadata.setType("attr", "validate");
+            sourceForm.validate( {
+                debug : true,
+                onkeyup : false,
+                errorPlacement : function(error) {
+                    $.ligerDialog.error(error[0].innerHTML);
+                }
+            });
         }
     });
 }
@@ -449,7 +359,7 @@ $(function() {
     $("#sourceLayout").ligerLayout({leftWidth:250});
 	var toolbarItems = [ {
 		text : '上传资源',
-		click : add_source,
+		click : add_source2,
 		icon : 'add',
 		key : 'add'
 	}, {
@@ -500,7 +410,6 @@ $(function() {
                 checkbox:false,
                 data : data.allTree,
                 onSelect:function(data){
-                    //todo 获取数据后重置grid
                     var params;
                     if(isCourse(data)){
                         params = {
@@ -529,7 +438,7 @@ $(function() {
     sourceGrid = $("#sourceGrid").ligerGrid( {
         columns : [ {
             display : '资源名',
-            name : 'name',
+            name : 'sourceName',
             align : 'left',
             minWidth : 120
         }, {
@@ -551,13 +460,13 @@ $(function() {
             minWidth : 150
         }, {
             display : '所属类别ID',
-            name : 'categoryIdList',
+            name : 'categoryId',
             align : 'left',
             hide : true,
             minWidth : 100
         },  {
             display : '所属类别',
-            name : 'categoryNameList',
+            name : 'categoryName',
             align : 'left',
             minWidth : 150
         }, {
@@ -632,19 +541,7 @@ $(function() {
             minWidth : 60
         } ],
         height : '98%',
-        width : '100%',
-        /*
-        onSuccess:function(data,grid){
-            console.log(data);
-            console.log(grid);
-            grid.loadData(data.sourceMoreVoList);
-            return true;
-
-        },
-        */
-        onBeforeShowData:function(current){
-            console.log(current);
-        }
+        width : '100%'
     });
 	$("#pageloading").hide();
 });
