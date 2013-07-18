@@ -59,7 +59,7 @@ public class SourceAction extends ActionSupport implements
 	@Autowired
 	@Qualifier("categoryService")
 	private ICategoryService categoryService;
-	
+
 	// 添加资源
 	@Action(value = "addSource")
 	public String add() {
@@ -69,13 +69,13 @@ public class SourceAction extends ActionSupport implements
 		source.setCreateDate(timeStamp);
 		// 获取当前用户
 		ActionContext context = ActionContext.getContext();
-		Map<String,Object> session = context.getSession();
+		Map<String, Object> session = context.getSession();
 		user = (UserDto) session.get("user");
 		source.setCreateUserId(user.getId());
 		source.setApprovalStatus("0");
 		source.setUseTimes(0);
-		//System.out.println("Action类别列表categoryList" + categoryIdList);
-		success = sourceService.add(source,categoryIdList);
+		// System.out.println("Action类别列表categoryList" + categoryIdList);
+		success = sourceService.add(source, categoryIdList);
 		if (success) {
 			message = "添加资源成功！";
 		} else {
@@ -131,7 +131,7 @@ public class SourceAction extends ActionSupport implements
 			success = true;
 			message = "删除资源文件成功！";
 		} else if (i == -1) {
-			success = true;//虽然删除失败，返回true代表此文件已经不存在，页面上的对话框自动消失
+			success = true;// 虽然删除失败，返回true代表此文件已经不存在，页面上的对话框自动消失
 			message = "删除资源文件失败，因为该文件不存在！";
 		} else if (i == 0) {
 			success = false;
@@ -143,27 +143,28 @@ public class SourceAction extends ActionSupport implements
 	// 根据courceId和categoryId获取表中所有资源，用Map装，为了分页的需要加上Rows和Total
 	@Action(value = "sourceMoreVoList")
 	public String list() {
-		sourceMoreVoList = sourceVoService.listSourceVo(source.getCourseId(),categoryId);
+		sourceMoreVoList = sourceVoService.listSourceVo(source.getCourseId(),
+				categoryId);
 		return SUCCESS;
 	}
-	
-	//页面上的一颗显示所有数据的树
+
+	// 页面上的一颗显示所有数据的树
 	@Action(value = "allTree")
-	public String allTree(){
+	public String allTree() {
 		allTree = sourceVoService.allTree();
 		return SUCCESS;
 	}
-	
-	//页面上的一颗显示所有数据的树
+
+	// 页面上的一颗显示所有数据的树
 	@Action(value = "courseTree")
-	public String courseTree(){
+	public String courseTree() {
 		courseTree = sourceVoService.courseTree();
 		return SUCCESS;
 	}
-	
-	//获取form中的下拉列表值
+
+	// 获取form中的下拉列表值
 	@Action(value = "formSelect")
-	public String formSelect(){
+	public String formSelect() {
 		categoryList = categoryService.list();
 		return SUCCESS;
 	}

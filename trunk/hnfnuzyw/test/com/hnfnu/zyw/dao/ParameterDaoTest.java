@@ -30,9 +30,9 @@ public class ParameterDaoTest {
 	@Test
 	public void testAdd() {
 		ParameterDto p = new ParameterDto();
-		p.setName("ÍõÀÏ°å");
+		p.setName("ï¿½ï¿½ï¿½Ï°ï¿½");
 		p.setType("string");
-		p.setValue("ÍõÑÜ");
+		p.setValue("ï¿½ï¿½ï¿½ï¿½");
 		p.setRemark("");
 		try {
 			parameterDao.add(p);
@@ -42,34 +42,34 @@ public class ParameterDaoTest {
 		}
 		try {
 			List<ParameterDto> l = parameterDao.list(
-					"from ParameterDto where name=?", "ÍõÀÏ°å");
+					"from ParameterDto where name=?", "ï¿½ï¿½ï¿½Ï°ï¿½");
 			parameterDao.delete(l.get(0).getId());
 		} catch (Exception e) {
-			fail("testAdd£ºÉ¾³ý²âÊÔÊý¾ÝÊ§°Ü¡£");
+			fail("testAddï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½Ü¡ï¿½");
 			e.printStackTrace();
 		}
-		System.out.println("£¡£¡testAdd£ºÌí¼ÓÊý¾Ý²âÊÔ³É¹¦¡£");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½testAddï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý²ï¿½ï¿½Ô³É¹ï¿½ï¿½ï¿½");
 	}
 
 	@Test
 	public void testLoad() {
 		ParameterDto p = new ParameterDto();
-		p.setName("ÍõÀÏ°å");
+		p.setName("ï¿½ï¿½ï¿½Ï°ï¿½");
 		p.setType("string");
-		p.setValue("ÍõÑÜ");
+		p.setValue("ï¿½ï¿½ï¿½ï¿½");
 		p.setRemark("");
 		try {
 			parameterDao.add(p);
 		} catch (Exception e) {
 			e.printStackTrace();
-			fail("testLoad£ºÌí¼Ó²âÊÔÊý¾ÝÊ±Ê§°Ü");
+			fail("testLoadï¿½ï¿½ï¿½ï¿½Ó²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±Ê§ï¿½ï¿½");
 		}
 		List<ParameterDto> l = null;
 		try {
-			l = parameterDao.list("from ParameterDto where name=?", "ÍõÀÏ°å");
+			l = parameterDao.list("from ParameterDto where name=?", "ï¿½ï¿½ï¿½Ï°ï¿½");
 			ParameterDto lp = parameterDao.load(l.get(0).getId());
 			if (lp == null)
-				fail("testLoad£º»ñÈ¡Êý¾ÝÎª¿Õ¡£");
+				fail("testLoadï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½Îªï¿½Õ¡ï¿½");
 		} catch (Exception e) {
 			fail(e.getLocalizedMessage());
 			e.printStackTrace();
@@ -78,31 +78,31 @@ public class ParameterDaoTest {
 			parameterDao.delete(l.get(0).getId());
 		} catch (Exception e) {
 			e.printStackTrace();
-			fail("testLoad£ºÉ¾³ý²âÊÔÊý¾ÝÊ±³ö´í¡£");
+			fail("testLoadï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½?");
 		}
-		System.out.println("£¡£¡testLoad£º²âÊÔ¼ÓÔØ³É¹¦¡£");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½testLoadï¿½ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½Ø³É¹ï¿½ï¿½ï¿½");
 	}
 
 	@Test
 	public void testDelete() {
 		ParameterDto p = new ParameterDto();
-		p.setName("ÍõÀÏ°å");
+		p.setName("ï¿½ï¿½ï¿½Ï°ï¿½");
 		p.setType("string");
-		p.setValue("ÍõÑÜ");
+		p.setValue("ï¿½ï¿½ï¿½ï¿½");
 		p.setRemark("");
 		try {
 			parameterDao.add(p);
 		} catch (Exception e) {
 			e.printStackTrace();
-			fail("testDelete£ºÌí¼Ó²âÊÔÊý¾ÝÊ±Ê§°Ü");
+			fail("testDeleteï¿½ï¿½ï¿½ï¿½Ó²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±Ê§ï¿½ï¿½");
 		}
 
 		List<ParameterDto> l = null;
 		try {
-			l = parameterDao.list("from ParameterDto where name=?", "ÍõÀÏ°å");
+			l = parameterDao.list("from ParameterDto where name=?", "ï¿½ï¿½ï¿½Ï°ï¿½");
 		} catch (Exception e) {
 			e.printStackTrace();
-			fail("testDelete£º²âÊÔÊäÈë¼ÓÔØÊ§°Ü");
+			fail("testDeleteï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½");
 		}
 		try {
 			parameterDao.delete(l.get(0).getId());
@@ -110,29 +110,29 @@ public class ParameterDaoTest {
 			e.printStackTrace();
 			fail(e.getLocalizedMessage());
 		}
-		System.out.println("£¡£¡testDelete£º²âÊÔÉ¾³ý³É¹¦");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½testDeleteï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½É¹ï¿½");
 	}
 
 	@Test
 	public void testUpdate() {
 		ParameterDto p = new ParameterDto();
-		p.setName("ÍõÀÏ°å");
+		p.setName("ï¿½ï¿½ï¿½Ï°ï¿½");
 		p.setType("string");
-		p.setValue("ÍõÑÜ");
+		p.setValue("ï¿½ï¿½ï¿½ï¿½");
 		p.setRemark("");
 		try {
 			parameterDao.add(p);
 		} catch (Exception e) {
 			e.printStackTrace();
-			fail("testUpdate£ºÌí¼Ó²âÊÔÊý¾ÝÊ±Ê§°Ü");
+			fail("testUpdateï¿½ï¿½ï¿½ï¿½Ó²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±Ê§ï¿½ï¿½");
 		}
 
 		List<ParameterDto> l = null;
 		try {
-			l = parameterDao.list("from ParameterDto where name=?", "ÍõÀÏ°å");
+			l = parameterDao.list("from ParameterDto where name=?", "ï¿½ï¿½ï¿½Ï°ï¿½");
 		} catch (Exception e) {
 			e.printStackTrace();
-			fail("testUpdate£º²âÊÔÊäÈë¼ÓÔØÊ§°Ü");
+			fail("testUpdateï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½");
 		}
 		int id = l.get(0).getId();
 		ParameterDto t = new ParameterDto();
@@ -143,7 +143,7 @@ public class ParameterDaoTest {
 		t.setId(id);
 		try {
 			parameterDao.update(t);
-			System.out.println("testUpdate:¸üÐÂÍê±Ï");
+			System.out.println("testUpdate:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		} catch (Exception e1) {
 			e1.printStackTrace();
 			fail(e1.getLocalizedMessage());
@@ -152,29 +152,29 @@ public class ParameterDaoTest {
 			parameterDao.delete(l.get(0).getId());
 		} catch (Exception e) {
 			e.printStackTrace();
-			fail("testUpdate£ºÉ¾³ý²âÊÔÊý¾ÝÊ§°Ü");
+			fail("testUpdateï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½");
 		}
-		System.out.println("£¡£¡testUpdate£º²âÊÔ¸üÐÂ³É¹¦");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½testUpdateï¿½ï¿½ï¿½ï¿½ï¿½Ô¸ï¿½ï¿½Â³É¹ï¿½");
 	}
 
 	@Test
 	public void testList() {
 		ParameterDto p = new ParameterDto();
-		p.setName("ÍõÀÏ°å");
+		p.setName("ï¿½ï¿½ï¿½Ï°ï¿½");
 		p.setType("string");
-		p.setValue("ÍõÑÜ");
+		p.setValue("ï¿½ï¿½ï¿½ï¿½");
 		p.setRemark("");
 		ParameterDto q = new ParameterDto();
-		q.setName("ºØÈü¶þ");
+		q.setName("ï¿½ï¿½ï¿½ï¿½ï¿½");
 		q.setType("string");
-		q.setValue("ºØË§");
+		q.setValue("ï¿½ï¿½Ë§");
 		q.setRemark("");
 		try {
 			parameterDao.add(p);
 			parameterDao.add(q);
 		} catch (Exception e) {
 			e.printStackTrace();
-			fail("testList£ºÌí¼Ó²âÊÔÊý¾ÝÊ§°Ü");
+			fail("testListï¿½ï¿½ï¿½ï¿½Ó²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½");
 		}
 		List<ParameterDto> l = null;
 		try {
@@ -184,7 +184,7 @@ public class ParameterDaoTest {
 			fail(e.getLocalizedMessage());
 		}
 		if (l.size() != 2) {
-			fail("»ñÈ¡ÁÐ±íµÄÊýÁ¿²»ÕýÈ·£¡");
+			fail("ï¿½ï¿½È¡ï¿½Ð±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½");
 		}
 
 		try {
@@ -193,10 +193,10 @@ public class ParameterDaoTest {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			fail("testList£ºÉ¾³ý²âÊÔÊý¾ÝÊ§°Ü");
+			fail("testListï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½");
 		}
 
-		System.out.println("£¡£¡testList£º²âÊÔ»ñÈ¡ÁÐ±íÊý¾Ý³É¹¦");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½testListï¿½ï¿½ï¿½ï¿½ï¿½Ô»ï¿½È¡ï¿½Ð±ï¿½ï¿½ï¿½Ý³É¹ï¿½");
 	}
 
 	@After
@@ -204,4 +204,7 @@ public class ParameterDaoTest {
 		System.out.println("***************************************");
 	}
 
+	
+	
+	
 }

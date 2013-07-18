@@ -13,11 +13,11 @@ public class SourceVo {
 
 	// id
 
-	private Integer sourceId;
+	private Integer id;
 
 	// 资源名称
 
-	private String sourceName;
+	private String name;
 
 	// 属于的课程的id
 
@@ -99,7 +99,11 @@ public class SourceVo {
 		super();
 	}
 
-	public SourceVo(Integer sourceId, String sourceName, Integer courseId,
+	
+
+	
+
+	public SourceVo(Integer id, String name, Integer courseId,
 			String courseName, Integer gradeId, String gradeName,
 			Integer subjectId, String subjectName, String categoryIdList,
 			String categoryNameList, String keyWords, String mediaType,
@@ -109,8 +113,8 @@ public class SourceVo {
 			double price, Integer viewTimes, Integer useTimes, String url,
 			Integer createUserId, String createUserName) {
 		super();
-		this.sourceId = sourceId;
-		this.sourceName = sourceName;
+		this.id = id;
+		this.name = name;
 		this.courseId = courseId;
 		this.courseName = courseName;
 		this.gradeId = gradeId;
@@ -138,45 +142,35 @@ public class SourceVo {
 		this.createUserName = createUserName;
 	}
 
-	@Override
-	public String toString() {
-		return "SourceVo [sourceId=" + sourceId + ", sourceName=" + sourceName
-				+ ", courseId=" + courseId + ", courseName=" + courseName
-				+ ", gradeId=" + gradeId + ", gradeName=" + gradeName
-				+ ", subjectId=" + subjectId + ", subjectName=" + subjectName
-				+ ", categoryIdList=" + categoryIdList + ", categoryNameList="
-				+ categoryNameList + ", keyWords=" + keyWords + ", mediaType="
-				+ mediaType + ", mediaFormat=" + mediaFormat + ", playTime="
-				+ playTime + ", fileSize=" + fileSize + ", author=" + author
-				+ ", publisher=" + publisher + ", description=" + description
-				+ ", createDate=" + createDate + ", approvalStatus="
-				+ approvalStatus + ", quality=" + quality + ", price=" + price
-				+ ", viewTimes=" + viewTimes + ", useTimes=" + useTimes
-				+ ", url=" + url + ", createUserId=" + createUserId
-				+ ", createUserName=" + createUserName + "]";
+	public Integer getCourseId() {
+		return courseId;
 	}
 
 	@Id
 	@GeneratedValue
-	public Integer getSourceId() {
-		return sourceId;
-	}
-	
-	public void setSourceId(Integer sourceId) {
-		this.sourceId = sourceId;
+	public Integer getId() {
+		return id;
 	}
 
-	public String getSourceName() {
-		return sourceName;
+
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
-	public void setSourceName(String sourceName) {
-		this.sourceName = sourceName;
+
+
+	public String getName() {
+		return name;
 	}
 
-	public Integer getCourseId() {
-		return courseId;
+
+
+	public void setName(String name) {
+		this.name = name;
 	}
+
+
 
 	public void setCourseId(Integer courseId) {
 		this.courseId = courseId;
@@ -382,4 +376,24 @@ public class SourceVo {
 		this.categoryNameList = categoryNameList;
 	}
 
+	@Override
+	public String toString() {
+		return "SourceVo [approvalStatus=" + approvalStatus + ", author="
+				+ author + ", categoryIdList=" + categoryIdList
+				+ ", categoryNameList=" + categoryNameList + ", courseId="
+				+ courseId + ", courseName=" + courseName + ", createDate="
+				+ createDate + ", createUserId=" + createUserId
+				+ ", createUserName=" + createUserName + ", description="
+				+ description + ", fileSize=" + fileSize + ", gradeId="
+				+ gradeId + ", gradeName=" + gradeName + ", id=" + id
+				+ ", keyWords=" + keyWords + ", mediaFormat=" + mediaFormat
+				+ ", mediaType=" + mediaType + ", name=" + name + ", playTime="
+				+ playTime + ", price=" + price + ", publisher=" + publisher
+				+ ", quality=" + quality + ", subjectId=" + subjectId
+				+ ", subjectName=" + subjectName + ", url=" + url
+				+ ", useTimes=" + useTimes + ", viewTimes=" + viewTimes + "]";
+	}
+
+	
+	
 }

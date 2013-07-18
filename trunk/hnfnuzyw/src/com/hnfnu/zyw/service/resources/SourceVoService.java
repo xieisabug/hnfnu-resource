@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import com.hnfnu.zyw.dao.resources.ISourceMoreVoDao;
 import com.hnfnu.zyw.dao.resources.ISourceVoDao;
-import com.hnfnu.zyw.vo.SourceMoreVo;
 import com.hnfnu.zyw.vo.SourceVo;
 
 @Service("sourceVoService")
@@ -20,9 +19,9 @@ public class SourceVoService implements ISourceVoService {
 	@Qualifier("sourceVoDao")
 	public ISourceVoDao sourceVoDao;
 
-	@Autowired
-	@Qualifier("sourceMoreVoDao")
-	public ISourceMoreVoDao sourceMoreVoDao;
+	//@Autowired
+	//@Qualifier("sourceMoreVoDao")
+	//public ISourceMoreVoDao sourceMoreVoDao;
 
 	public SourceVo load(int id) {
 		try {
@@ -61,22 +60,23 @@ public class SourceVoService implements ISourceVoService {
 
 	public Map<String, Object> listSourceVo(int courseId, int categoryId) {
 
-		String hql = "from SourceMoreVo where courseId=" + courseId;
+		String sql = "from SourceVo where id in(select t2.id from SourceCategoryJoinDto as t1,SourceDto as t2,CategoryDto as t3 where t1.sourceId = t2.id and t1.categoryId = t3.id and t2.courseId ="
+				+ courseId;// and t3.id = 1)";
 		if (categoryId > 0) {
-			hql += " and categoryId =" + categoryId;
+			sql += " and t3.id =" + categoryId;
 		}
-
-		Map<String, Object> sourceMoreVoList = new HashMap<String, Object>();
-		List<SourceMoreVo> l = null;
+		sql += ")";
+		Map<String, Object> sourceVoList = new HashMap<String, Object>();
+		List<SourceVo> l = null;
 
 		try {
-			l = sourceMoreVoDao.list(hql);
+			l = sourceVoDao.sourceVoList(sql);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		sourceMoreVoList.put("Rows", l);
-		sourceMoreVoList.put("Total", l.size());
-		return sourceMoreVoList;
+		sourceVoList.put("Rows", l);
+		sourceVoList.put("Total", l.size());
+		return sourceVoList;
 	}
 
 	public List<Map<String, Object>> allTree() {
@@ -97,20 +97,20 @@ public class SourceVoService implements ISourceVoService {
 			String categoryContain = "";// 用于保存已经加入过的类别
 			for (int i = 0; i < l.size(); i++) {
 				SourceVo sv = l.get(i);
-//System.out.println(sv.toString());
+				// System.out.println(sv.toString());
 				// 如果当前的年级和所处理的数据的年级不相同，说明已经换了年级了，
 				// 需要新建一个map,同时重置subjectId，防止错误。
 				// 重新生成科目列表，确保科目列表变为空，并且加入基础数据。
 				if (sv.getGradeId() != gradeId) {
 					// 是第一次进来就不加了,因为没有初始化,第二次加进去，加的是之前一轮的
-					if (i != 0 && grade.get("name")!=null) {
+					if (i != 0 && grade.get("name") != null) {
 						course.put("children", categoryList);
 						courseList.add(course);
 						subject.put("children", courseList);
 						subjectList.add(subject);
 						grade.put("children", subjectList);
 						ret.add(grade);
-//System.out.println("ret:" + ret.toString());
+						// System.out.println("ret:" + ret.toString());
 					}
 					gradeId = sv.getGradeId();
 					subjectId = 0;
@@ -123,20 +123,21 @@ public class SourceVoService implements ISourceVoService {
 					// 基础信息加入
 					grade.put("id", sv.getGradeId());
 					grade.put("name", sv.getGradeName());
-					
-//System.out.println(grade.toString());
+
+					// System.out.println(grade.toString());
 				}
 				// 如果当前的年级是相同的年级，则要进一步判断科目是否是相同
 				// 如果科目不相同，则说明在相同年级下更换了科目，要将科目加入到
 				// 科目列表
 				if (sv.getSubjectId() != subjectId) {
 					// 第一次不加，原理同上面
-					if (i != 0 && subject.get("name")!=null) {
+					if (i != 0 && subject.get("name") != null) {
 						course.put("children", categoryList);
 						courseList.add(course);
 						subject.put("children", courseList);
 						subjectList.add(subject);
-//System.out.println("subjectList:" + subjectList.toString());
+						// System.out.println("subjectList:" +
+						// subjectList.toString());
 					}
 					// 进入一个新的科目要重置课程列表
 					subjectId = sv.getSubjectId();
@@ -145,18 +146,19 @@ public class SourceVoService implements ISourceVoService {
 					subject = new HashMap<String, Object>();
 					course = new HashMap<String, Object>();
 					categoryList = new ArrayList<Map<String, String>>();
-					subject.put("id", sv.getSourceId());
-					subject.put("name", sv.getSubjectName());
-					
-//System.out.println(subject.toString());
+					subject.put("id", sv.getId());
+					subject.put("name", sv.getName());
+
+					// System.out.println(subject.toString());
 				}
 				// 如果当前的课程不是相同的课程，则创建新的类别表，并存入
 				// 当前课程的基本信息
 				if (courseId != sv.getCourseId()) {
-					if (i != 0 && course.get("name")!=null) {
+					if (i != 0 && course.get("name") != null) {
 						course.put("children", categoryList);
 						courseList.add(course);
-//System.out.println("courseList:" + courseList.toString());
+						// System.out.println("courseList:" +
+						// courseList.toString());
 					}
 					courseId = sv.getCourseId();
 					categoryContain = "";
@@ -164,8 +166,8 @@ public class SourceVoService implements ISourceVoService {
 					course = new HashMap<String, Object>();
 					course.put("id", sv.getCourseId());
 					course.put("name", sv.getCourseName());
-					
-//System.out.println(course.toString());
+
+					// System.out.println(course.toString());
 				}
 				// 取出所有的类别id和name,放到category里去
 				String categoryIds[] = sv.getCategoryIdList().split(",");
@@ -184,13 +186,13 @@ public class SourceVoService implements ISourceVoService {
 				if (i == l.size() - 1) {
 					course.put("children", categoryList);
 					courseList.add(course);
-//System.out.println(courseList);
+					// System.out.println(courseList);
 					subject.put("children", courseList);
 					subjectList.add(subject);
-//System.out.println(subjectList);
+					// System.out.println(subjectList);
 					grade.put("children", subjectList);
 					ret.add(grade);
-//System.out.println(ret);
+					// System.out.println(ret);
 				}
 			}
 		} catch (Exception e) {
@@ -198,7 +200,7 @@ public class SourceVoService implements ISourceVoService {
 		}
 		return ret;
 	}
-	
+
 	public List<Map<String, Object>> courseTree() {
 		List<Map<String, Object>> ret = new ArrayList<Map<String, Object>>();// 用来返回的map
 		Map<String, Object> grade = null;// 用来存放年级的map
@@ -214,19 +216,19 @@ public class SourceVoService implements ISourceVoService {
 			int courseId = 0;// 当前课程id
 			for (int i = 0; i < l.size(); i++) {
 				SourceVo sv = l.get(i);
-//System.out.println(sv.toString());
+				// System.out.println(sv.toString());
 				// 如果当前的年级和所处理的数据的年级不相同，说明已经换了年级了，
 				// 需要新建一个map,同时重置subjectId，防止错误。
 				// 重新生成科目列表，确保科目列表变为空，并且加入基础数据。
 				if (sv.getGradeId() != gradeId) {
 					// 是第一次进来就不加了,因为没有初始化,第二次加进去，加的是之前一轮的
-					if (i != 0 && grade.get("name")!=null) {
+					if (i != 0 && grade.get("name") != null) {
 						courseList.add(course);
 						subject.put("children", courseList);
 						subjectList.add(subject);
 						grade.put("children", subjectList);
 						ret.add(grade);
-//System.out.println("ret:" + ret.toString());
+						// System.out.println("ret:" + ret.toString());
 					}
 					gradeId = sv.getGradeId();
 					subjectId = 0;
@@ -238,18 +240,19 @@ public class SourceVoService implements ISourceVoService {
 					// 基础信息加入
 					grade.put("id", sv.getGradeId());
 					grade.put("name", sv.getGradeName());
-//System.out.println(grade.toString());
+					// System.out.println(grade.toString());
 				}
 				// 如果当前的年级是相同的年级，则要进一步判断科目是否是相同
 				// 如果科目不相同，则说明在相同年级下更换了科目，要将科目加入到
 				// 科目列表
 				if (sv.getSubjectId() != subjectId) {
 					// 第一次不加，原理同上面
-					if (i != 0 && subject.get("name")!=null) {
+					if (i != 0 && subject.get("name") != null) {
 						courseList.add(course);
 						subject.put("children", courseList);
 						subjectList.add(subject);
-//System.out.println("subjectList:" + subjectList.toString());
+						// System.out.println("subjectList:" +
+						// subjectList.toString());
 					}
 					// 进入一个新的科目要重置课程列表
 					subjectId = sv.getSubjectId();
@@ -257,34 +260,35 @@ public class SourceVoService implements ISourceVoService {
 					courseList = new ArrayList<Map<String, Object>>();
 					subject = new HashMap<String, Object>();
 					course = new HashMap<String, Object>();
-					subject.put("id", sv.getSourceId());
+					subject.put("id", sv.getId());
 					subject.put("name", sv.getSubjectName());
-//System.out.println(subject.toString());
+					// System.out.println(subject.toString());
 				}
 				// 如果当前的课程不是相同的课程，则创建新的类别表，并存入
 				// 当前课程的基本信息
 				if (courseId != sv.getCourseId()) {
-					if (i != 0 && course.get("name")!=null) {
+					if (i != 0 && course.get("name") != null) {
 						courseList.add(course);
-//System.out.println("courseList:" + courseList.toString());
+						// System.out.println("courseList:" +
+						// courseList.toString());
 					}
 					courseId = sv.getCourseId();
 					course = new HashMap<String, Object>();
 					course.put("id", sv.getCourseId());
 					course.put("name", sv.getCourseName());
-					
-//System.out.println(course.toString());
+
+					// System.out.println(course.toString());
 				}
 
 				if (i == l.size() - 1) {
 					courseList.add(course);
-//System.out.println(courseList);
+					// System.out.println(courseList);
 					subject.put("children", courseList);
 					subjectList.add(subject);
-//System.out.println(subjectList);
+					// System.out.println(subjectList);
 					grade.put("children", subjectList);
 					ret.add(grade);
-//System.out.println(ret);
+					// System.out.println(ret);
 				}
 			}
 		} catch (Exception e) {
