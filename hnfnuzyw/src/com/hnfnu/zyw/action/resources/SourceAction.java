@@ -15,8 +15,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.hnfnu.zyw.dto.resources.CategoryDto;
 import com.hnfnu.zyw.dto.resources.SourceDto;
 import com.hnfnu.zyw.dto.system.UserDto;
+import com.hnfnu.zyw.service.resources.ICategoryService;
 import com.hnfnu.zyw.service.resources.ISourceService;
 import com.hnfnu.zyw.service.resources.ISourceVoService;
 import com.hnfnu.zyw.vo.SourceVo;
@@ -43,6 +45,8 @@ public class SourceAction extends ActionSupport implements
 	private Integer categoryId;
 	private String categoryIdList;
 	private List<Map<String, Object>> allTree;
+	private List<Map<String, Object>> courseTree;
+	private List<CategoryDto> categoryList;
 
 	@Autowired
 	@Qualifier("sourceService")
@@ -52,6 +56,10 @@ public class SourceAction extends ActionSupport implements
 	@Qualifier("sourceVoService")
 	private ISourceVoService sourceVoService;
 
+	@Autowired
+	@Qualifier("categoryService")
+	private ICategoryService categoryService;
+	
 	// 添加资源
 	@Action(value = "addSource")
 	public String add() {
@@ -123,9 +131,9 @@ public class SourceAction extends ActionSupport implements
 			success = true;
 			message = "删除资源文件成功！";
 		} else if (i == -1) {
-			success = false;
+			success = true;//虽然删除失败，返回true代表此文件已经不存在，页面上的对话框自动消失
 			message = "删除资源文件失败，因为该文件不存在！";
-		} else if (i == -1) {
+		} else if (i == 0) {
 			success = false;
 			message = "删除资源文件失败,因为不是文件！";
 		}
@@ -139,9 +147,24 @@ public class SourceAction extends ActionSupport implements
 		return SUCCESS;
 	}
 	
+	//页面上的一颗显示所有数据的树
 	@Action(value = "allTree")
 	public String allTree(){
 		allTree = sourceVoService.allTree();
+		return SUCCESS;
+	}
+	
+	//页面上的一颗显示所有数据的树
+	@Action(value = "courseTree")
+	public String courseTree(){
+		courseTree = sourceVoService.courseTree();
+		return SUCCESS;
+	}
+	
+	//获取form中的下拉列表值
+	@Action(value = "formSelect")
+	public String formSelect(){
+		categoryList = categoryService.list();
 		return SUCCESS;
 	}
 
@@ -208,6 +231,14 @@ public class SourceAction extends ActionSupport implements
 
 	public void setSourceMoreVoList(Map<String, Object> sourceMoreVoList) {
 		this.sourceMoreVoList = sourceMoreVoList;
+	}
+
+	public List<CategoryDto> getCategoryList() {
+		return categoryList;
+	}
+
+	public List<Map<String, Object>> getCourseTree() {
+		return courseTree;
 	}
 
 }
