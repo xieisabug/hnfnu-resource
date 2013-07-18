@@ -115,7 +115,7 @@ public class SourceMoreVo {
 		this.courseName = courseName;
 		this.gradeId = gradeId;
 		this.gradeName = gradeName;
-		this.subjectId = subjectId;
+		this.subjectId = subjectId; 
 		this.subjectName = subjectName;
 		this.categoryId = categoryId;
 		this.categoryName = categoryName;
