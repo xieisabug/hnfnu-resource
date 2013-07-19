@@ -13,6 +13,7 @@
     <script src="../../Lib/Uploadify/jquery.uploadify.min.js" type="text/javascript"></script>
     <script type="text/javascript" src="../../Lib/Uploadify/swfobject.js"></script>
     <script src="../../Util/Form.js" type="text/javascript"></script>
+    <script src="../../Util/String.js" type="text/javascript"></script>
 </head>
 <body>
 <form>
@@ -98,8 +99,6 @@ $(function () {
         }
     });
     //Form.loadForm(sourceForm, window.parent.sourceSelectData);
-    console.log(window.parent.sourceSelectData);
-    console.log(sourceForm);
 });
 function formInit() {
     var groupicon = "../../../App/Lib/ligerUI/skins/icons/communication.gif";
@@ -154,7 +153,7 @@ function formInit() {
                         display:"所属分类",
                         name:"categoryIdList",
                         type:"select",
-                        comboboxName:"categoryName",
+                        comboboxName:"categoryNameList",
                         options:{
                             textField:"name",
                             valueField:"id",
@@ -250,6 +249,8 @@ function formInit() {
                 }
             });
             Form.loadForm(sourceForm,window.parent.sourceSelectData);
+            var idList = window.parent.sourceSelectData.categoryIdList.replaceAll(/,/g,';');
+            liger.get("categoryNameList").selectValue(idList);
         }
     });
 }
