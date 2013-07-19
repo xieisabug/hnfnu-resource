@@ -438,7 +438,7 @@ $(function() {
     sourceGrid = $("#sourceGrid").ligerGrid( {
         columns : [ {
             display : '资源名',
-            name : 'sourceName',
+            name : 'name',
             align : 'left',
             minWidth : 120
         }, {
@@ -460,13 +460,13 @@ $(function() {
             minWidth : 150
         }, {
             display : '所属类别ID',
-            name : 'categoryId',
+            name : 'categoryIdList',
             align : 'left',
             hide : true,
             minWidth : 100
         },  {
             display : '所属类别',
-            name : 'categoryName',
+            name : 'categoryNameList',
             align : 'left',
             minWidth : 150
         }, {
