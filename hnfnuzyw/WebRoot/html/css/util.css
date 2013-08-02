@@ -1,4 +1,4 @@
-.panel,.panel-green,.panel-blue,.panel-red,.panel-gray{
+.panel,.panel-green,.panel-blue,.panel-red,.panel-gray,.panel-yellow,.panel-clouds,.panel-sliver{
     width: 100%;
     height: 100%;
     border: 1px solid #ccc;
@@ -29,4 +29,13 @@ panel-title-info{
 }
 .panel-green>.panel-title{
     background-color: #1ABC9C;
+}
+.panel-yellow>.panel-title{
+    background-color: #F1C40F;
+}
+.panel-clouds>.panel-title{
+    background-color: #ECF0F1;
+}
+.panel-sliver>.panel-title{
+    background-color: #BDC3C7;
 }
