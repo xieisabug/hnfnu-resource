@@ -128,39 +128,24 @@
                 <div class="pull-right"><a href="#" style="color:rgb(64,96,0)">more</a></div>
             </div>
             <div class="panel-body">
-                    <div style="height: 300px">
+				<div style="height: 300px">
+					<ul class="nav nav-tabs" id="myTab">
+						<li class="active"><a href="#one">小学一年级</a></li>
+						<li><a href="#two">小学二年级</a></li>
+						<li><a href="#three">小学三年级</a></li>
+						<li><a href="#four">小学四年级</a></li>
+						<li><a href="#five">小学五年级</a></li>
+						<li><a href="#six">小学六年级</a></li>
+					</ul>
 
-                    <ul class="nav nav-tabs" id="myTab">
-                        <li class="active"><a href="#one">小学一年级</a></li>
-                        <li><a href="#two">小学二年级</a></li>
-                        <li><a href="#three">小学三年级</a></li>
-                        <li><a href="#four">小学四年级</a></li>
-                        <li><a href="#five">小学五年级</a></li>
-                        <li><a href="#six">小学六年级</a></li>
-                    </ul>
-
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="one">111</div>
-                        <div class="tab-pane" id="two">222</div>
-                        <div class="tab-pane" id="three">333</div>
-                        <div class="tab-pane" id="four">444</div>
-                        <div class="tab-pane" id="five">555</div>
-                        <div class="tab-pane" id="six">666</div>
-                    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+					<div class="tab-content">
+						<div class="tab-pane active" id="one">111</div>
+						<div class="tab-pane" id="two">222</div>
+						<div class="tab-pane" id="three">333</div>
+						<div class="tab-pane" id="four">444</div>
+						<div class="tab-pane" id="five">555</div>
+						<div class="tab-pane" id="six">666</div>
+					</div>
                 </div>
             </div>
         </div>
@@ -227,30 +212,27 @@
 </div>
 <div style="margin-top: 30px;"></div>
 </div>
-
-</body>
-
 <script src="js/jquery-1.8.3.min.js" type="text/javascript"></script>
 <script src="js/bootstrap.min.js" type="text/javascript"></script>
 <script src="js/application.js"></script>
 
 
 <script type="text/javascript">
-    $(function () {
-        $('.carousel').carousel({
-            interval:2000
-        });
 
-        $(".collapse").collapse();
+	$('.carousel').carousel({
+		interval:2000
+	});
 
-      //  $('#myTab a').tab('show');
+	$(".collapse").collapse();
 
-        $("#myTab a").click(function (e) {
-            e.preventDefault();
-            $(this).tab('show');
-        })
+	$("#myTab a").click(function (e) {
+		e.preventDefault();
+		$(this).tab('show');
+	})
 
-    });
 </script>
+</body>
+
+
 
 </html>
