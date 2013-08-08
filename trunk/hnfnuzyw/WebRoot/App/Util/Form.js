@@ -15,8 +15,6 @@ Form.parseJSON = function(f){
     return $.parseJSON(data);
 };
 Form.loadForm = function(form,data){
-    //console.log(form);
-    //console.log(data);
     for(var name in data){
         var ele = $("[name=" + name + "]",form);
         if(ele.is(":checkbox,:radio")) {
