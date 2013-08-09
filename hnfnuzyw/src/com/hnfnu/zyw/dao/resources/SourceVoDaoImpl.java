@@ -2,7 +2,6 @@ package com.hnfnu.zyw.dao.resources;
 
 import java.util.List;
 
-import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
 import com.hnfnu.zyw.dao.base.BaseDao;

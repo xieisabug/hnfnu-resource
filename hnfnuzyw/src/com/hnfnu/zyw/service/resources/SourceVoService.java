@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.hnfnu.zyw.dao.resources.ISourceMoreVoDao;
 import com.hnfnu.zyw.dao.resources.ISourceVoDao;
 import com.hnfnu.zyw.vo.SourceVo;
 
@@ -19,9 +18,9 @@ public class SourceVoService implements ISourceVoService {
 	@Qualifier("sourceVoDao")
 	public ISourceVoDao sourceVoDao;
 
-	//@Autowired
-	//@Qualifier("sourceMoreVoDao")
-	//public ISourceMoreVoDao sourceMoreVoDao;
+	// @Autowired
+	// @Qualifier("sourceMoreVoDao")
+	// public ISourceMoreVoDao sourceMoreVoDao;
 
 	public SourceVo load(int id) {
 		try {
