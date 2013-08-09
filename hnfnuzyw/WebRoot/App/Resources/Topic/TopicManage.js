@@ -1,6 +1,9 @@
 var topicGrid = null;// 专题表格
 var topicFrom = null;// 专题表单
 var topicWin = null;// 专题窗口
+var joinWin = null;//挂接窗口
+var joinTree = null;//挂接树
+var joinGrid = null;//挂接表格
 
 // 增加专题的函数
 function add_topic() {
@@ -132,6 +135,38 @@ function delete_topic() {
         }
     });
 }
+//判断选择的是否是课程
+function isCourse(obj){
+    return joinTree.getParentTreeItem(joinTree.getParentTreeItem(joinTree.getParentTreeItem(obj.target)))==null &&
+        joinTree.getParentTreeItem(joinTree.getParentTreeItem(obj.target))!=null;
+}
+//判断选择的是否是类别
+function isCategory(obj){
+    return !isCourse(obj) &&
+        joinTree.getParentTreeItem(joinTree.getParentTreeItem(joinTree.getParentTreeItem(obj.target)))!=null;
+}
+//获取树的父一级的id
+function getParentId(obj){
+    return $(joinTree.getParentTreeItem(obj.target)).attr("id");
+}
+function topic_source_join() {
+
+    joinWin = $.ligerDialog.open({
+        width : 1000,
+        height : 550,
+        title : '挂接资源',
+        url : "JoinSource.html",
+        buttons : [ {
+            text : '提交',
+            width : 80,
+            onclick : add_save
+        }, {
+            text : '取消',
+            width : 80,
+            onclick : add_cancel
+        } ]
+    });
+}
 // 初始化表单，生成form标签
 function formInit() {
     topicFrom = $('<form></form>');
@@ -213,13 +248,12 @@ $(function() {
         click : delete_topic,
         icon : 'delete',
         key : 'delete'
-    },
-        {
+    }, {
             text:'挂接资源',
-            //click:user_role_join,
+            click:topic_source_join,
             icon:'config',
             key:'join'
-        }];
+    }];
     // todo 以后这个ajaxToolbar要通过ajax取过来
     var ajaxToolbar = [ {
         name : 'add'
