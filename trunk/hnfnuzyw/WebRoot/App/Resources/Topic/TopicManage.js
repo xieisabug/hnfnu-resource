@@ -1,15 +1,15 @@
-var categoryGrid = null;// 类别表格
-var categoryFrom = null;// 类别表单
-var categoryWin = null;// 类别窗口
+var topicGrid = null;// 专题表格
+var topicFrom = null;// 专题表单
+var topicWin = null;// 专题窗口
 
-// 增加类别的函数
-function add_catecory() {
+// 增加专题的函数
+function add_topic() {
     formInit();
-    categoryWin = $.ligerDialog.open({
+    topicWin = $.ligerDialog.open({
         width : 400,
         height : 200,
-        title : '新增类别',
-        target : categoryFrom,
+        title : '新增专题',
+        target : topicFrom,
         buttons : [ {
             text : '提交',
             width : 80,
@@ -21,23 +21,23 @@ function add_catecory() {
         } ]
     });
 }
-// 增加类别的保存按钮事件
+// 增加专题的保存按钮事件
 function add_save() {
-    if (categoryFrom.valid()) {
-        var row_data = Form.parseJSON(categoryFrom);
+    if (topicFrom.valid()) {
+        var row_data = Form.parseJSON(topicFrom);
         // 发往服务器，返回成功后再添加到表格中
         $.ajax({
-            url : '/hnfnuzyw/resources/addCategory.action',
+            url : '/hnfnuzyw/resources/addTopic.action',
             data : row_data,
             type : 'post',
             success : function(data) {
                 if (data.success) {
-                    categoryGrid.addRow(data.model);
+                    topicGrid.addRow(data.model);
                     $.ligerDialog.tip({
                         title : '提示信息',
                         content : data.message
                     });
-                    categoryWin.close();
+                    topicWin.close();
                 } else {
                     $.ligerDialog.error(data.message);
                 }
@@ -45,23 +45,23 @@ function add_save() {
         });
     }
 }
-// 增加类别的取消按钮事件
+// 增加专题的取消按钮事件
 function add_cancel() {
-    categoryWin.close();
+    topicWin.close();
 }
-// 修改类别的函数
-function edit_category() {
+// 修改专题的函数
+function edit_topic() {
         formInit();
-    if (!categoryGrid.getSelected()) {
+    if (!topicGrid.getSelected()) {
         $.ligerDialog.warn('请选择您要修改的行.');
         return;
     }
-    Form.loadForm(categoryFrom, categoryGrid.getSelected());
-    categoryWin = $.ligerDialog.open({
+    Form.loadForm(topicFrom, topicGrid.getSelected());
+    topicWin = $.ligerDialog.open({
         width : 400,
         height : 200,
-        title : '编辑类别',
-        target : categoryFrom,
+        title : '编辑专题',
+        target : topicFrom,
         buttons : [ {
             text : '提交',
             width : 80,
@@ -73,24 +73,24 @@ function edit_category() {
         } ]
     });
 }
-// 修改类别的保存按钮事件
+// 修改专题的保存按钮事件
 function edit_save() {
-    if (categoryFrom.valid()) {
-        var row_data = Form.parseJSON(categoryFrom);
+    if (topicFrom.valid()) {
+        var row_data = Form.parseJSON(topicFrom);
         // todo 需要发往服务器，返回成功后再修改到表格中
         $ .ajax({
-                url : '/hnfnuzyw/resources/updateCategory.action',
+                url : '/hnfnuzyw/resources/updateTopic.action',
                 data : row_data,
                 type : 'post',
                 success : function(data) {
                     if (data.success) {
-                        categoryGrid.update(categoryGrid.getSelected(),
+                        topicGrid.update(topicGrid.getSelected(),
                             data.model);
                         $.ligerDialog.tip({
                             title : '提示信息',
                             content : data.message
                         });
-                        categoryWin.close();
+                        topicWin.close();
                     } else {
                         $.ligerDialog.error(data.message);
                     }
@@ -98,22 +98,22 @@ function edit_save() {
             });
     }
 }
-// 修改类别的取消按钮事件
+// 修改专题的取消按钮事件
 function edit_cancel() {
-    categoryWin.close();
+    topicWin.close();
 }
 
-// 删除类别的函数
-function delete_category() {
-    if (!categoryGrid.getSelected()) {
+// 删除专题的函数
+function delete_topic() {
+    if (!topicGrid.getSelected()) {
         $.ligerDialog.warn('请选择您要删除的行.');
         return;
     }
-    var row_data = categoryGrid.getSelected();
-    $.ligerDialog.confirm('确认删除' + row_data.name + '？', '删除类别', function(r) {
+    var row_data = topicGrid.getSelected();
+    $.ligerDialog.confirm('确认删除' + row_data.name + '？', '删除专题', function(r) {
         if (r) {
             $.ajax({
-                url : '/hnfnuzyw/resources/deleteCategory.action',
+                url : '/hnfnuzyw/resources/deleteTopic.action',
                 data : row_data,
                 type : 'post',
                 success : function(data) {
@@ -122,8 +122,8 @@ function delete_category() {
                             title : '提示信息',
                             content : data.message
                         });
-                        categoryGrid.deleteSelectedRow();
-                        categoryWin.close();
+                        topicGrid.deleteSelectedRow();
+                        topicWin.close();
                     } else {
                         $.ligerDialog.error(data.message);
                     }
@@ -134,14 +134,14 @@ function delete_category() {
 }
 // 初始化表单，生成form标签
 function formInit() {
-    categoryFrom = $('<form></form>');
-    categoryFrom.ligerForm({
+    topicFrom = $('<form></form>');
+    topicFrom.ligerForm({
         inputWidth : 280,
         fields : [ {
             name : 'id',
             type : "hidden"
         }, {
-            display : '类别名称',
+            display : '专题名称',
             name : 'name',
             type : 'text',
             space : 30,
@@ -152,7 +152,32 @@ function formInit() {
                 required : true,
                 maxlength : 22
             }
-        }, {
+        },
+            {
+                display : '专题简介',
+                name : 'description',
+                type : 'text',
+                space : 30,
+                labelWidth : 100,
+                width : 220,
+                newline : true,
+                validate : {
+                    required : true
+                }
+            },
+            {
+                display : '专题作者',
+                name : 'author',
+                type : 'text',
+                space : 30,
+                labelWidth : 100,
+                width : 220,
+                newline : true,
+                validate : {
+                    required : true,
+                    maxlength : 22
+                }
+            },{
             display : '备注',
             name : 'remark',
             type : 'text',
@@ -163,7 +188,7 @@ function formInit() {
         } ]
     });
     $.metadata.setType("attr", "validate");
-    categoryFrom.validate({
+    topicFrom.validate({
         debug : true,
         onkeyup : false,
         errorPlacement : function(error) {
@@ -174,21 +199,27 @@ function formInit() {
 // 初始化表格
 $(function() {
     var toolbarItems = [ {
-        text : '新增类别',
-        click : add_catecory,
+        text : '新增专题',
+        click : add_topic,
         icon : 'add',
         key : 'add'
     }, {
-        text : '修改类别',
-        click : edit_category,
+        text : '修改专题',
+        click : edit_topic,
         icon : 'modify',
         key : 'modify'
     }, {
-        text : '删除类别',
-        click : delete_category,
+        text : '删除专题',
+        click : delete_topic,
         icon : 'delete',
         key : 'delete'
-    } ];
+    },
+        {
+            text:'挂接资源',
+            //click:user_role_join,
+            icon:'config',
+            key:'join'
+        }];
     // todo 以后这个ajaxToolbar要通过ajax取过来
     var ajaxToolbar = [ {
         name : 'add'
@@ -196,30 +227,44 @@ $(function() {
         name : 'delete'
     }, {
         name : 'modify'
-    } ];
+    }, {
+        name : 'join'
+        }];
     toolbarItems = Toolbar.confirmToolbar(toolbarItems, ajaxToolbar);
 
     $.ajax({
-        url : '/hnfnuzyw/resources/listCategory.action',
+        url : '/hnfnuzyw/resources/listTopic.action',
         type : 'post',
         success : function(data) {
-            categoryGrid = $('#categoryGrid').ligerGrid({
+            topicGrid = $('#topicGrid').ligerGrid({
                 columns : [
                     // { display:'ID', name:'id', align:'left', width:100 },
                     {
-                        display : '类别名称',
+                        display : '专题名称',
                         name : 'name',
                         width : 200
                     }, {
+                        display : '专题介绍',
+                        name : 'description',
+                        align : 'left',
+                        width : 400
+                    },
+                    {
+                        display : '专题作者',
+                        name : 'author',
+                        align : 'left',
+                        width : 200
+                    },
+                    {
                         display : '备注',
                         name : 'remark',
                         align : 'left',
-                        width : 800
+                        width : 200
                     } ],
                 width : '99%',
                 height : '98%',
                 pageSize : 30,
-                data : data.categoryList,
+                data : data.topicList,
                 toolbar : {
                     items : toolbarItems
                 }
