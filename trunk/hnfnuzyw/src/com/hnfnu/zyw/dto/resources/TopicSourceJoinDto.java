@@ -14,17 +14,17 @@ public class TopicSourceJoinDto
 {	
 	private Integer id;
 	private Integer topicId;
-	private Integer sourceID;
+	private Integer sourceId;
 
 	public TopicSourceJoinDto()
 	{
 
 	}
-	public TopicSourceJoinDto(Integer id, Integer topicId, Integer sourceID) {
+	public TopicSourceJoinDto(Integer id, Integer topicId, Integer sourceId) {
 		super();
 		this.id = id;
 		this.topicId = topicId;
-		this.sourceID = sourceID;
+		this.sourceId = sourceId;
 	}
 	public void setId(Integer id)
 	{
@@ -44,17 +44,17 @@ public class TopicSourceJoinDto
 	{
 		return this.topicId;
 	}
-	public void setSourceID(Integer sourceID)
+	public void setsourceId(Integer sourceId)
 	{
-		this.sourceID = sourceID;
+		this.sourceId = sourceId;
 	}
-	public Integer getSourceID()
+	public Integer getsourceId()
 	{
-		return this.sourceID;
+		return this.sourceId;
 	}
 	@Override
 	public String toString() {
-		return "TopicSourceJoinDto [id=" + id + ", sourceID=" + sourceID
+		return "TopicSourceJoinDto [id=" + id + ", sourceId=" + sourceId
 				+ ", topicId=" + topicId + "]";
 	}
 	
