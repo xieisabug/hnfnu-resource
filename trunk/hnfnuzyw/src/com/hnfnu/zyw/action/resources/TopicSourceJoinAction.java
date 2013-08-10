@@ -67,11 +67,11 @@ public class TopicSourceJoinAction extends ActionSupport implements
 	}
 
 	/* get set */
-	public ITopicSourceJoinService getUserRoleJoinService() {
+	public ITopicSourceJoinService getTopicSourceJoinService() {
 		return topicSourceJoinService;
 	}
 
-	public void setUserRoleJoinService(
+	public void setTopicSourceJoinService(
 			ITopicSourceJoinService topicSourceJoinService) {
 		this.topicSourceJoinService = topicSourceJoinService;
 	}

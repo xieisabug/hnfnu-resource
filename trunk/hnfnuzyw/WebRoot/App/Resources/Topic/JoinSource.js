@@ -1,6 +1,7 @@
 var joinGrid = null;//右侧表格
 var joinTree = null;//左侧树
-var joinSelectData = [9];//表格选择的数据
+var joinSelectData = null;//表格选择的数据
+var topicId = null;//当前选择的topic的id
 
 //判断选择的是否是课程
 function isCourse(obj){
@@ -19,7 +20,18 @@ function getParentId(obj){
 // 页面加载完成后就开始调用
 $(function() {
     $("#joinLayout").ligerLayout({leftWidth:250});
-
+    topicId = window.parent.topicGrid.getSelected().id;
+    $.ajax( {
+        url : '/hnfnuzyw/resources/querySourceIdsByTopicId.action',
+        type : 'post',
+        data : {
+            topicId : topicId
+        },
+        success : function(data) {
+            joinSelectData = data.sourceIds;
+            console.log(joinSelectData);
+        }
+    });
     $.ajax( {
         url : '/hnfnuzyw/resources/allTree.action',
         type : 'post',
@@ -171,7 +183,6 @@ $(function() {
             } else {
                 joinSelectData.splice(joinSelectData.indexOf(data.id,0), 1);
             }
-            console.log(joinSelectData);
         },
         isChecked:function(rowdata){
             for(var i = 0; i<joinSelectData.length; i++){

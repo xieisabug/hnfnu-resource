@@ -2,8 +2,6 @@ var topicGrid = null;// 专题表格
 var topicFrom = null;// 专题表单
 var topicWin = null;// 专题窗口
 var joinWin = null;//挂接窗口
-var joinTree = null;//挂接树
-var joinGrid = null;//挂接表格
 
 // 增加专题的函数
 function add_topic() {
@@ -135,22 +133,7 @@ function delete_topic() {
         }
     });
 }
-//判断选择的是否是课程
-function isCourse(obj){
-    return joinTree.getParentTreeItem(joinTree.getParentTreeItem(joinTree.getParentTreeItem(obj.target)))==null &&
-        joinTree.getParentTreeItem(joinTree.getParentTreeItem(obj.target))!=null;
-}
-//判断选择的是否是类别
-function isCategory(obj){
-    return !isCourse(obj) &&
-        joinTree.getParentTreeItem(joinTree.getParentTreeItem(joinTree.getParentTreeItem(obj.target)))!=null;
-}
-//获取树的父一级的id
-function getParentId(obj){
-    return $(joinTree.getParentTreeItem(obj.target)).attr("id");
-}
 function topic_source_join() {
-
     joinWin = $.ligerDialog.open({
         width : 1000,
         height : 550,
@@ -159,13 +142,32 @@ function topic_source_join() {
         buttons : [ {
             text : '提交',
             width : 80,
-            onclick : add_save
+            onclick : join_save
         }, {
             text : '取消',
             width : 80,
-            onclick : add_cancel
+            onclick : join_cancel
         } ]
     });
+}
+function join_save(){
+    var seletedSourceIds = joinWin.frame.joinSelectData;
+    var topicId = topicGrid.getSelected().id;
+    console.log(seletedSourceIds);
+    $.ajax( {
+        url : '/hnfnuzyw/resources/updateTopicSourceJoins.action',
+        type : 'post',
+        data : {
+            topicId : topicId,
+            seletedSourceIds : seletedSourceIds
+        },
+        success : function() {
+            joinWin.close();
+        }
+    });
+}
+function join_cancel(){
+    joinWin.close();
 }
 // 初始化表单，生成form标签
 function formInit() {
