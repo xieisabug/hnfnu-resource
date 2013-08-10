@@ -153,13 +153,20 @@ function topic_source_join() {
 function join_save(){
     var seletedSourceIds = joinWin.frame.joinSelectData;
     var topicId = topicGrid.getSelected().id;
-    console.log(seletedSourceIds);
+    var sendIds = '';
+    for(var i = 0; i<seletedSourceIds.length; i++){
+        if(i==0){
+            sendIds += seletedSourceIds[i];
+        } else {
+            sendIds += ',' + seletedSourceIds[i];
+        }
+    }
     $.ajax( {
         url : '/hnfnuzyw/resources/updateTopicSourceJoins.action',
         type : 'post',
         data : {
             topicId : topicId,
-            seletedSourceIds : seletedSourceIds
+            seletedSourceIds : sendIds
         },
         success : function() {
             joinWin.close();
