@@ -65,20 +65,20 @@ public class TopicSourceJoinServiceImpl implements ITopicSourceJoinService {
 		}
 	}
 
-	public boolean addTopicSourceJoins(String topicSourceIds, int topicId) {
+	public boolean addTopicSourceJoins(int[] topicSourceIds, int topicId) {
 		// if (topicSourceIds != null && !topicSourceIds.equals("")) {
 
 		// int topicId = Integer.parseInt(ids[0]);
 
 		List<TopicSourceJoinDto> topicSourceJoins = new ArrayList<TopicSourceJoinDto>();
 		// 当该用户没有角色时
-		if (topicSourceIds == null || topicSourceIds.equals("")) {
+		if (topicSourceIds == null) {
 			topicSourceJoins = null;
 		} else {
-			String[] ids = topicSourceIds.split(",");
-			for (int i = 0; i < ids.length; i++) {
+			
+			for (int i = 0; i < topicSourceIds.length; i++) {
 				TopicSourceJoinDto dto = new TopicSourceJoinDto(null, topicId,
-						Integer.parseInt(ids[i]));
+						topicSourceIds[i]);
 				topicSourceJoins.add(dto);
 			}
 		}
