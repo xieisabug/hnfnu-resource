@@ -30,8 +30,7 @@ public class TopicSourceJoinAction extends ActionSupport implements
 	private boolean success;
 	private String message;
 	private Map<String, Object> topicSourceJoinList;
-	// 用户挂接角色，用；好隔开。
-	private String seletedSourceIds;
+	private int[] seletedSourceIds;
 	private int topicId;
 	private int[] sourceIds;
 
@@ -46,6 +45,11 @@ public class TopicSourceJoinAction extends ActionSupport implements
 	 */
 	@Action(value = "updateTopicSourceJoins")
 	public String updateTopicSourceJoins() {
+		
+		for(int i = 0; i < seletedSourceIds.length;i++){
+			System.out.println(seletedSourceIds[i]);
+		}
+		
 		success = topicSourceJoinService.addTopicSourceJoins(seletedSourceIds,
 				topicId);
 		if (success) {
@@ -96,7 +100,12 @@ public class TopicSourceJoinAction extends ActionSupport implements
 		return topicSourceJoinList;
 	}
 
-	public void setSeletedRoleIds(String seletedSourceIds) {
+	
+	public int[] getSeletedSourceIds() {
+		return seletedSourceIds;
+	}
+
+	public void setSeletedSourceIds(int[] seletedSourceIds) {
 		this.seletedSourceIds = seletedSourceIds;
 	}
 
