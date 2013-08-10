@@ -1,5 +1,6 @@
 package com.hnfnu.zyw.action.resources;
 
+import java.io.Console;
 import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Action;
@@ -30,7 +31,8 @@ public class TopicSourceJoinAction extends ActionSupport implements
 	private boolean success;
 	private String message;
 	private Map<String, Object> topicSourceJoinList;
-	private int[] seletedSourceIds;
+	// 用户挂接角色，用；好隔开。
+	private String seletedSourceIds;
 	private int topicId;
 	private int[] sourceIds;
 
@@ -45,11 +47,7 @@ public class TopicSourceJoinAction extends ActionSupport implements
 	 */
 	@Action(value = "updateTopicSourceJoins")
 	public String updateTopicSourceJoins() {
-		
-		for(int i = 0; i < seletedSourceIds.length;i++){
-			System.out.println(seletedSourceIds[i]);
-		}
-		
+		System.out.println(seletedSourceIds);
 		success = topicSourceJoinService.addTopicSourceJoins(seletedSourceIds,
 				topicId);
 		if (success) {
@@ -100,12 +98,7 @@ public class TopicSourceJoinAction extends ActionSupport implements
 		return topicSourceJoinList;
 	}
 
-	
-	public int[] getSeletedSourceIds() {
-		return seletedSourceIds;
-	}
-
-	public void setSeletedSourceIds(int[] seletedSourceIds) {
+	public void setSeletedSourceIds(String seletedSourceIds) {
 		this.seletedSourceIds = seletedSourceIds;
 	}
 
