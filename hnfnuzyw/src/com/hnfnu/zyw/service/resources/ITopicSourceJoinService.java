@@ -28,6 +28,6 @@ public interface ITopicSourceJoinService {
 	 * @param topicSourceIds
 	 * @return
 	 */
-	public boolean addTopicSourceJoins(int[] topicSourceIds, int topicId);
+	public boolean addTopicSourceJoins(String topicSourceIds, int topicId);
 
 }

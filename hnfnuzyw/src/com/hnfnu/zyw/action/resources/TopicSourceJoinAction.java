@@ -1,6 +1,5 @@
 package com.hnfnu.zyw.action.resources;
 
-import java.io.Console;
 import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Action;
