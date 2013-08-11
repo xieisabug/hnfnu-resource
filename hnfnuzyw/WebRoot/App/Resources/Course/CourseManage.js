@@ -261,7 +261,7 @@ $(function() {
 	toolbarItems = Toolbar.confirmToolbar(toolbarItems, ajaxToolbar);
 
 	$.ajax( {
-		url : '/hnfnuzyw/resources/listCourse.action',
+		url : '/hnfnuzyw/resources/listCourseGradeSubject.action',
 		type : 'post',
 		success : function(data) {
 			courseGrid = $("#courseGrid").ligerGrid( {
@@ -272,12 +272,12 @@ $(function() {
 					minWidth : 80
 				}, {
 					display : '所属年级',
-					name : 'gradeId',
+					name : 'gradeName',
 					align : 'left',
 					minWidth : 100
 				}, {
 					display : '所属学科',
-					name : 'subjectId',
+					name : 'subjectName',
 					align : 'left',
 					minWidth : 100
 				}, {
@@ -286,7 +286,7 @@ $(function() {
 					align : 'left',
 					minWidth : 100
 				} ],
-				data : data.courseList,
+				data : data.courseGradeSubjectList,
 				height : '98%',
 				width : '100%',
 				toolbar : {

@@ -168,7 +168,7 @@ function all_info(){
 //打开一个选择课程的树形结构的对话框
 function openTreeDialog(){
     $.ligerDialog.open({
-        title: '选择联系人',
+        title: '选择课程',
         name:'winSelector',
         width: 500,
         height: 500,
