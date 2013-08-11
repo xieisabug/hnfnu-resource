@@ -50,20 +50,28 @@ $(function() {
                             courseId:data.data.id,
                             categoryId:0
                         };
+                        $.ajax( {
+                            url:'/hnfnuzyw/resources/sourceMoreVoList.action',
+                            type : 'post',
+                            data:params,
+                            success : function(data) {
+                                joinGrid.loadData(data.sourceMoreVoList);
+                            }
+                        });
                     } else if(isCategory(data)){
                         params = {
                             courseId:getParentId(data),
                             categoryId:data.data.id
                         };
+                        $.ajax( {
+                            url:'/hnfnuzyw/resources/sourceMoreVoList.action',
+                            type : 'post',
+                            data:params,
+                            success : function(data) {
+                                joinGrid.loadData(data.sourceMoreVoList);
+                            }
+                        });
                     }
-                    $.ajax( {
-                        url:'/hnfnuzyw/resources/sourceMoreVoList.action',
-                        type : 'post',
-                        data:params,
-                        success : function(data) {
-                            joinGrid.loadData(data.sourceMoreVoList);
-                        }
-                    });
                 }
             });
         }
