@@ -7,4 +7,11 @@ function SlideView(e){
        c(el.$1);el.className=f>t?'':'on';
        return el.$1=setInterval(function(){el.style.height=(f+=Math[f>t?'floor':'ceil']((t-f)*.3))+'px';if (f==t)c(el.$1)},10),_
    }
+   
+	if(document.getElementById("resource_content").clientHeight < document.getElementById("idSlideView3").clientHeight){
+		console.log(document.getElementById("resource_content").clientHeight);
+		console.log(document.getElementById("idSlideView3").clientHeight);
+		document.getElementById("resource_content").style.height=document.getElementById("idSlideView3").offsetHeight+"px";
+		document.getElementById("topic").style.height=(document.getElementById("idSlideView3").offsetHeight+69)+"px";
+	}
 };
