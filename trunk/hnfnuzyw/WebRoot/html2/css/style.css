@@ -102,7 +102,7 @@ body{
 
 /*专题*/
 #topic{
-	height:326px;
+	min-height:326px;
 	width:200px;
 	border:1px #ccc solid;
 	border-top:0px;
@@ -227,6 +227,8 @@ body{
 /*资源库*/
 #resource{
 	width:640px;
+	height:auto !important;
+	min-height:326px;
 	height:326px;
 	border:1px #ccc solid;
 	border-top:0px;
@@ -244,17 +246,50 @@ body{
 	background:url(../images/subject_title.jpg) 0px -1px;
 }
 #subject_menu{
+	height:auto !important;
+	min-height:256px;
 	width:150px;
-	height:256px;
 	float:left;
 }
 #resource_content{
 	width:489px;
-	height:255px;
 	float:left;
 	border-left:1px #ccc solid;
 	border-top:1px #ccc solid;
 }
+#resource_content table{
+	padding:10px 30px 0 30px;
+	width:100%;
+}
+#resource_content td{
+	padding-top:20px;
+	font-size:14px;
+	text-align:center;
+	background:#fff;
+}
+
+#resource_content td span{
+	font-size:8px;
+	text-align:center;
+	color:#09F;
+}
+#resource_content a{
+	text-decoration:none;
+	color:#000;
+}
+#resource_content a:hover{
+	color:#ccc;
+}
+#resource_more{
+	text-align:right;
+	margin-top:20px;
+}
+#resource_more a{
+	text-decoration:none;
+	font-size:12px;
+	color:red;
+}
+
 /*资源库*/
 
 /*menu*/
@@ -299,6 +334,16 @@ body{
 	color:#333;
 	display:block;
 	text-align:right;
+}
+.sv3 td a:link,
+.sv3 td a:visited,
+.sv3 td a:active{
+	color:#333;
+	text-decoration:none;
+	display:inherit;
+}
+.sv3 td a:hover{
+	color:#aaa;
 }
 /*menu*/
 
