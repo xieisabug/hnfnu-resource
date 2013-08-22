@@ -9,6 +9,8 @@
 </head>
 
 <body>
+<#import "/inc/topic.ftl" as myTopic/>
+
 <div style="width:846px; margin:0 auto;">
 	<!-- 顶部菜单 -->
 	<div id="top">
@@ -66,22 +68,13 @@
         </div>
     	<!-- 登陆 -->
         
-        <!-- 专题  -->
-        <div id="topic">
-        	<a href="#"><div id="topic_title"></div></a>
-            <div id="topic_content">
-            	<ul>
-                	<#list topicList as topic>
-            		<#if topic_index % 2 == 0>
-            		 <li class="topic_item_even"><a href="#">${topic.name}</a></li>
-            		 <#else>
-            		 <li class="topic_item_odd"><a href="#">${topic.name}</a></li>
-            		</#if>
-            	</#list>
-                </ul>
-            </div>
-        </div>
-        <!-- 专题  -->
+        <!-- 专题   -->
+       <@myTopic.topic num=10 topicList=topicList/>
+         
+         
+         
+         
+        
         
         <!-- 服务中心  -->
         <div id="service">
