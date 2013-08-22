@@ -68,10 +68,10 @@
         
         <!-- 专题  -->
         <div id="topic">
-        	<div id="topic_title"></div>
+        	<a href="#"><div id="topic_title"></div></a>
             <div id="topic_content">
             	<ul>
-            	<#list topicList as topic>
+                	<#list topicList as topic>
             		<#if topic_index % 2 == 0>
             		 <li class="topic_item_even"><a href="#">${topic.name}</a></li>
             		 <#else>
@@ -96,7 +96,7 @@
     <div class="left center">
     	<!-- 最新公告 -->
     	<div id="notice">
-        	<div id="notice_title"></div>
+        	<a href="#"><div id="notice_title"></div></a>
             <div id="notice_content">
             	<ul>
                 	<li>
@@ -135,87 +135,129 @@
             <div id="subject_title"></div>
             <div id="subject_menu">
             	<div id="idSlideView3" class="sv3">
-                    <dl class="on">
-                    	<dt>语  文 </dt>
-                    	<dd>
-                            <table width="127" cellpadding="0" cellspacing="0" height="80">
-                                <tr>
-                                    <td>一年级</td>
-                                    <td>二年级</td>
-                                </tr>
-                                <tr>
-                                    <td>三年级</td>
-                                    <td>四年级</td>
-                                </tr>
-                                <tr>
-                                    <td>五年级</td>
-                                    <td>六年级</td>
-                                </tr>
-                            </table>
-                        </dd>
-                    </dl>
-                    <dl>
-                    <dt>数  学</dt>
-                    <dd><table width="127" cellpadding="0" cellspacing="0" height="80"><tr><td>一年级</td><td>二年级</td></tr>
-                    <tr>
-                    <td>三年级</td>
-                    <td>四年级</td>
-                    </tr>
-                    <tr>
-                    <td>五年级</td>
-                    <td>六年级</td>
-                    </tr>
-                    </table>
-                    </dd>
-                    </dl>
-                    <dl>
-                    <dt> 英  语 </dt>
-                    <dd><table width="127" cellpadding="0" cellspacing="0" height="80"><tr><td>一年级</td><td>二年级</td></tr>
-                    <tr>
-                    <td>三年级</td>
-                    <td>四年级</td>
-                    </tr>
-                    <tr>
-                    <td>五年级</td>
-                    <td>六年级</td>
-                    </tr>
-                    </table></dd>
-                    </dl>
-                    <dl>
-                    <dt> 科  学 </dt>
-                    <dd><table width="127" cellpadding="0" cellspacing="0" height="80"><tr><td>一年级</td><td>二年级</td></tr>
-                    <tr>
-                    <td>三年级</td>
-                    <td>四年级</td>
-                    </tr>
-                    <tr>
-                    <td>五年级</td>
-                    <td>六年级</td>
-                    </tr>
-                    </table></dd>
-                    </dl>
-                    <dl>
-                    <dt> 思  政 </dt>
-                    <dd><table width="127" cellpadding="0" cellspacing="0" height="80"><tr><td>一年级</td><td>二年级</td></tr>
-                    <tr>
-                    <td>三年级</td>
-                    <td>四年级</td>
-                    </tr>
-                    <tr>
-                    <td>五年级</td>
-                    <td>六年级</td>
-                    </tr>
-                    </table></dd>
-                    </dl>
-                    </div>
+            	
+            		<#list subjectList as subject>
+            		 <dl class="on">
+            		
+						<dt>${subject.name}</dt>
+					
+					 <dd>
+					 <table width="127" cellpadding="0" cellspacing="0" height="80">
+					 	<#list subject.gradeList as grade>
+					 		<#if grade_index % 2 == 0>
+                               			 <tr>
+                                   		 <td><a href="javascript:void(0);" id="0101">${grade.name}</a></td>
+					 		<#else>
+					 					<td><a href="javascript:void(0);" id="0102">${grade.name}</a></td>
+					 					 </tr>
+					 				  
+					 		
+					 		</#if>
+					 	</#list>
+					 	</table>
+					 	</dd>
+					 	 </dl> 
+					</#list> 
+					
+                </div>
             </div>
-            <div id="resource_content"></div>
+            <div id="resource_content">
+            	<table>
+                	<tr>
+                    	<td>
+                        	<a href="#">小妈妈找蝌蚪</a><br />
+                            <span>浏览：1210120 类型：PPT</span>
+                        </td>
+                        <td>
+                        	<a href="#">小妈妈找蝌蚪</a><br />
+                            <span>浏览：12120 类型：PPT</span>
+                        </td>
+                        <td>
+                        	<a href="#">小妈妈找蝌蚪</a><br />
+                            <span>浏览：1112 类型：PPT</span>
+                        </td>
+                    </tr>
+                    <tr>
+                    	<td>
+                        	<a href="#">小妈妈找蝌蚪</a><br />
+                            <span>浏览：1210120 类型：PPT</span>
+                        </td>
+                        <td>
+                        	<a href="#">小妈妈找蝌蚪</a><br />
+                            <span>浏览：12120 类型：PPT</span>
+                        </td>
+                        <td>
+                        	<a href="#">小妈妈找蝌蚪</a><br />
+                            <span>浏览：1112 类型：PPT</span>
+                        </td>
+                    </tr>
+                    <tr>
+                    	<td>
+                        	<a href="#">小妈妈找蝌蚪</a><br />
+                            <span>浏览：1210120 类型：PPT</span>
+                        </td>
+                        <td>
+                        	<a href="#">小妈妈找蝌蚪</a><br />
+                            <span>浏览：12120 类型：PPT</span>
+                        </td>
+                        <td>
+                        	<a href="#">小妈妈找蝌蚪</a><br />
+                            <span>浏览：1112 类型：PPT</span>
+                        </td>
+                    </tr>
+                    <tr>
+                    	<td>
+                        	<a href="#">小妈妈找蝌蚪</a><br />
+                            <span>浏览：1210120 类型：PPT</span>
+                        </td>
+                        <td>
+                        	<a href="#">小妈妈找蝌蚪</a><br />
+                            <span>浏览：12120 类型：PPT</span>
+                        </td>
+                        <td>
+                        	<a href="#">小妈妈找蝌蚪</a><br />
+                            <span>浏览：1112 类型：PPT</span>
+                        </td>
+                    </tr>
+                    <tr>
+                    	<td>
+                        	<a href="#">小妈妈找蝌蚪</a><br />
+                            <span>浏览：1210120 类型：PPT</span>
+                        </td>
+                        <td>
+                        	<a href="#">小妈妈找蝌蚪</a><br />
+                            <span>浏览：12120 类型：PPT</span>
+                        </td>
+                        <td>
+                        	<a href="#">小妈妈找蝌蚪</a><br />
+                            <span>浏览：1112 类型：PPT</span>
+                        </td>
+                    </tr>
+                    <tr>
+                    	<td>
+                        	<a href="#">小妈妈找蝌蚪</a><br />
+                            <span>浏览：1210120 类型：PPT</span>
+                        </td>
+                        <td>
+                        	<a href="#">小妈妈找蝌蚪</a><br />
+                            <span>浏览：12120 类型：PPT</span>
+                        </td>
+                        <td>
+                        	<a href="#">小妈妈找蝌蚪</a><br />
+                            <span>浏览：1112 类型：PPT</span>
+                        </td>
+                    </tr>
+                </table>
+                <div id="resource_more">
+                	<a href="list.html">更多...</a>
+                </div>
+            </div>
         </div>
         <!-- 资源库 -->
         
         <!-- 优质课程库 -->
         <div id="course">
-        	<div id="course_title"></div>
+        	<a href="#"><div id="course_title"></div></a>
             <div id="course_content"></div>
         </div>
         <!-- 优质课程库 -->

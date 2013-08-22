@@ -23,6 +23,13 @@ public class GradeDto
 
 	}
 
+	public GradeDto(Integer id, String name, String remark) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.remark = remark;
+	}
+
 	public void setId(Integer id)
 	{
 		this.id = id;

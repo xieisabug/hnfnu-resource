@@ -27,6 +27,16 @@ public class CourseDto
 
 	}
 
+	public CourseDto(Integer id, String name, Integer gradeId,
+			Integer subjectId, String remark) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.gradeId = gradeId;
+		this.subjectId = subjectId;
+		this.remark = remark;
+	}
+
 	public void setId(Integer id)
 	{
 		this.id = id;
