@@ -475,6 +475,10 @@ body{
 #source_list_table tr{
 	font-size:14px;
 }
+#source_list_table tr:hover{
+	background:#f0f0f0;
+	cursor:pointer;
+}
 .grid_odd{
 	height:30px;
 	background:#f9f9f9;
