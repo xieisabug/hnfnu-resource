@@ -69,7 +69,7 @@
     	<!-- 登陆 -->
         
         <!-- 专题   -->
-       <@myTopic.topic num=10 topicList=topicList/>
+       <@myTopic.topic num=topicNum topicList=topicList/>
          
          
          
@@ -136,15 +136,13 @@
 					
 					 <dd>
 					 <table width="127" cellpadding="0" cellspacing="0" height="80">
-					 	<#list subject.gradeList as grade>
+					 	<#list gradeList as grade>
 					 		<#if grade_index % 2 == 0>
                                			 <tr>
                                    		 <td><a href="javascript:void(0);" id="0101">${grade.name}</a></td>
 					 		<#else>
 					 					<td><a href="javascript:void(0);" id="0102">${grade.name}</a></td>
 					 					 </tr>
-					 				  
-					 		
 					 		</#if>
 					 	</#list>
 					 	</table>
@@ -156,6 +154,7 @@
             </div>
             <div id="resource_content">
             	<table>
+            		<#list 1..sourceLine as line>
                 	<tr>
                     	<td>
                         	<a href="#">小妈妈找蝌蚪</a><br />
@@ -170,76 +169,8 @@
                             <span>浏览：1112 类型：PPT</span>
                         </td>
                     </tr>
-                    <tr>
-                    	<td>
-                        	<a href="#">小妈妈找蝌蚪</a><br />
-                            <span>浏览：1210120 类型：PPT</span>
-                        </td>
-                        <td>
-                        	<a href="#">小妈妈找蝌蚪</a><br />
-                            <span>浏览：12120 类型：PPT</span>
-                        </td>
-                        <td>
-                        	<a href="#">小妈妈找蝌蚪</a><br />
-                            <span>浏览：1112 类型：PPT</span>
-                        </td>
-                    </tr>
-                    <tr>
-                    	<td>
-                        	<a href="#">小妈妈找蝌蚪</a><br />
-                            <span>浏览：1210120 类型：PPT</span>
-                        </td>
-                        <td>
-                        	<a href="#">小妈妈找蝌蚪</a><br />
-                            <span>浏览：12120 类型：PPT</span>
-                        </td>
-                        <td>
-                        	<a href="#">小妈妈找蝌蚪</a><br />
-                            <span>浏览：1112 类型：PPT</span>
-                        </td>
-                    </tr>
-                    <tr>
-                    	<td>
-                        	<a href="#">小妈妈找蝌蚪</a><br />
-                            <span>浏览：1210120 类型：PPT</span>
-                        </td>
-                        <td>
-                        	<a href="#">小妈妈找蝌蚪</a><br />
-                            <span>浏览：12120 类型：PPT</span>
-                        </td>
-                        <td>
-                        	<a href="#">小妈妈找蝌蚪</a><br />
-                            <span>浏览：1112 类型：PPT</span>
-                        </td>
-                    </tr>
-                    <tr>
-                    	<td>
-                        	<a href="#">小妈妈找蝌蚪</a><br />
-                            <span>浏览：1210120 类型：PPT</span>
-                        </td>
-                        <td>
-                        	<a href="#">小妈妈找蝌蚪</a><br />
-                            <span>浏览：12120 类型：PPT</span>
-                        </td>
-                        <td>
-                        	<a href="#">小妈妈找蝌蚪</a><br />
-                            <span>浏览：1112 类型：PPT</span>
-                        </td>
-                    </tr>
-                    <tr>
-                    	<td>
-                        	<a href="#">小妈妈找蝌蚪</a><br />
-                            <span>浏览：1210120 类型：PPT</span>
-                        </td>
-                        <td>
-                        	<a href="#">小妈妈找蝌蚪</a><br />
-                            <span>浏览：12120 类型：PPT</span>
-                        </td>
-                        <td>
-                        	<a href="#">小妈妈找蝌蚪</a><br />
-                            <span>浏览：1112 类型：PPT</span>
-                        </td>
-                    </tr>
+                    </#list>
+                   
                 </table>
                 <div id="resource_more">
                 	<a href="list.html">更多...</a>
