@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Map;
 
+import org.apache.commons.io.output.FileWriterWithEncoding;
+
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -18,6 +20,7 @@ public class FreemarkerUtil {
 			Configuration cfg = new Configuration();
 			//设定去哪里读取相应的ftl模板文件
 			cfg.setClassForTemplateLoading(this.getClass(),"../ftl");
+			cfg.setDefaultEncoding("utf-8");
 			//在模板文件目录中找到名称为name的文件
 			Template temp = cfg.getTemplate(name);
 			return temp;
@@ -40,10 +43,31 @@ public class FreemarkerUtil {
 	}
 	
 	public void fprint(String name,Map<String,Object> root,String outFile) {
+		FileWriterWithEncoding out = null;
+		try {
+			//通过一个文件输出流，就可以写到相应的文件中
+			out =new FileWriterWithEncoding(new File("D:\\webservice\\ftl\\"+outFile), "utf-8");
+			 //= new FileWriter(new File("D:\\webservice\\ftl\\"+outFile));
+			Template temp = this.getTemplate(name);
+			temp.process(root, out);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (TemplateException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(out!=null) out.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void fprint(String name,Map<String,Object> root,String filePath,String fileName) {
 		FileWriter out = null;
 		try {
 			//通过一个文件输出流，就可以写到相应的文件中
-			out = new FileWriter(new File("D:\\webservice\\ftl\\"+outFile));
+			out = new FileWriter(new File(filePath+fileName));
 			Template temp = this.getTemplate(name);
 			temp.process(root, out);
 		} catch (IOException e) {

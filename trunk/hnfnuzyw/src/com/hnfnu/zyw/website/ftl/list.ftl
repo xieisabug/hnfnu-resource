@@ -122,7 +122,7 @@
                     </thead>
                     <tbody>
                     
-                     <#list sourceList as source>
+                     <#list sourcePager.datas as source>
                     	<tr class="grid_odd" onclick="javascript:openWindow('http://www.baidu.com')">
                         	<td>${source.id}</td>
                             <td>${source.name}</td>

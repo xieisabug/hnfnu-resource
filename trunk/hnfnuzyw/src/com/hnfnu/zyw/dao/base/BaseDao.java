@@ -78,5 +78,72 @@ public class BaseDao<T> extends HibernateDaoSupport implements IBaseDao<T>{
 		return this.list(hql,new Object[]{arg});
 	}
 
+	public Pager<T> find(String hql, Object arg,SystemContext systemContext) throws Exception {
+		return this.find(hql, new Object[]{arg},systemContext);
+	}
+
+	public Pager<T> find(String hql,SystemContext systemContext) throws Exception {
+		return this.find(hql,null,systemContext);
+	}
+
+	public Pager<T> find(String hql, Object[] args,SystemContext systemContext) throws Exception {
+		hql = initSort(hql,systemContext);
+		String cq = getCountHql(hql,true);
+		Query cquery = getSession().createQuery(cq);
+		Query query = getSession().createQuery(hql);
+		
+		//…Ë÷√≤Œ ˝
+		setParameter(query, args);
+		setParameter(cquery, args);
+		Pager<T> pages = new Pager<T>();
+		setPagers(query,pages,systemContext);
+		List<T> datas = query.list();
+		pages.setDatas(datas);
+		long total = (Long)cquery.uniqueResult();
+		pages.setTotal(total);
+		return pages;
+	}
+
+	
+	private void setPagers(Query query,Pager pages,SystemContext systemContext) {
+		Integer pageSize = systemContext.getPageSize();
+		Integer pageOffset = systemContext.getPageOffset();
+		if(pageOffset==null||pageOffset<0) pageOffset = 0;
+		if(pageSize==null||pageSize<0) pageSize = 15;
+		pages.setOffset(pageOffset);
+		pages.setSize(pageSize);
+		query.setFirstResult(pageOffset).setMaxResults(pageSize);
+	}
+	
+	private String getCountHql(String hql,boolean isHql) {
+		String e = hql.substring(hql.indexOf("from"));
+		String c = "select count(*) "+e;
+		if(isHql)
+			c.replaceAll("fetch", "");
+		return c;
+	}
+
+	
+	private String initSort(String hql,SystemContext systemContext) {
+		String order = systemContext.getOrder();
+		String sort = systemContext.getSort();
+		if(sort!=null&&!"".equals(sort.trim())) {
+			hql+=" order by "+sort;
+			if(!"desc".equals(order)) hql+=" asc";
+			else hql+=" desc";
+		}
+		return hql;
+	}
+	
+	
+	private void setParameter(Query query,Object[] args) {
+		if(args!=null&&args.length>0) {
+			int index = 0;
+			for(Object arg:args) {
+				query.setParameter(index++, arg);
+			}
+		}
+	}
+
 	
 }
