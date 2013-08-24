@@ -12,9 +12,11 @@ public interface IBaseDao<T> {
 		public List<T> list(String hql) throws Exception;
 		public List<T> list(String hql,Object arg) throws Exception;
 		
-		public Pager<T> find(String hql,Object[] args,SystemContext systemContext) throws Exception;
-		public Pager<T> find(String hql,SystemContext systemContext) throws Exception;
-		public Pager<T> find(String hql,Object arg,SystemContext systemContext) throws Exception;
+		public Pager<T> find(String hql, Object arg,int pageOffset,int pageSize) throws Exception;
+
+		public Pager<T> find(String hql,int pageOffset,int pageSize) throws Exception;
+
+		public Pager<T> find(String hql, Object[] args,int pageOffset,int pageSize) throws Exception;
 }
 
 
