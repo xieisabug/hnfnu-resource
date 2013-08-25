@@ -14,4 +14,4 @@ function SlideView(e){
 		document.getElementById("resource_content").style.height=document.getElementById("idSlideView3").offsetHeight+"px";
 		document.getElementById("topic").style.height=(document.getElementById("idSlideView3").offsetHeight+69)+"px";
 	}
-};
+}
