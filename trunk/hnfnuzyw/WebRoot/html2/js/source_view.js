@@ -23,114 +23,130 @@ $(function() {
 			});
 		}
 	});
-	grid = $("#grid").ligerGrid({
-		columns : [ {
-			display : '资源名',
-			name : 'name',
-			align : 'left',
-			minWidth : 120
-		}, {
-			display : '关键字',
-			name : 'keyWords',
-			align : 'left',
-			hide : true,
-			minWidth : 100
-		}, {
-			display : '所属课程ID',
-			name : 'courseId',
-			align : 'left',
-			hide : true,
-			minWidth : 100
-		}, {
-			display : '所属课程名',
-			name : 'courseName',
-			align : 'left',
-			minWidth : 150
-		}, {
-			display : '所属类别ID',
-			name : 'categoryIdList',
-			align : 'left',
-			hide : true,
-			minWidth : 100
-		}, {
-			display : '所属类别',
-			name : 'categoryNameList',
-			align : 'left',
-			minWidth : 150
-		}, {
-			display : '媒体类型',
-			name : 'mediaType',
-			align : 'left',
-			minWidth : 60
-		}, {
-			display : '媒体格式',
-			name : 'mediaFormat',
-			align : 'left',
-			minWidth : 60
-		}, {
-			display : '播放时间',
-			name : 'playTime',
-			align : 'left',
-			hide : true,
-			minWidth : 100
-		}, {
-			display : '文件大小',
-			name : 'fileSize',
-			align : 'left',
-			minWidth : 60
-		}, {
-			display : '作者',
-			name : 'author',
-			align : 'left',
-			minWidth : 60
-		}, {
-			display : '出版社',
-			name : 'publisher',
-			align : 'left',
-			hide : true,
-			minWidth : 100
-		}, {
-			display : '描述',
-			name : 'description',
-			align : 'left',
-			hide : true,
-			minWidth : 100
-		}, {
-			display : '创建时间',
-			name : 'createDate',
-			align : 'left',
-			hide : true,
-			minWidth : 100
-		}, {
-			display : '审核状态',
-			name : 'approvalStatus',
-			align : 'left',
-			minWidth : 60
-		}, {
-			display : '质量等级',
-			name : 'quality',
-			align : 'left',
-			minWidth : 60
-		}, {
-			display : '价格',
-			name : 'price',
-			align : 'left',
-			hide : true,
-			minWidth : 100
-		}, {
-			display : '访问次数',
-			name : 'viewTimes',
-			align : 'left',
-			minWidth : 60
-		}, {
-			display : '使用次数',
-			name : 'useTimes',
-			align : 'left',
-			minWidth : 60
-		} ],
-		height : '94%',
-		width : '100%'
-	});
+    $.ajax({
+        url : '/hnfnuzyw/resources/loadSourceVo.action',
+        type : 'post',
+        data:{
+            id:argsArr.id
+        },
+        success : function(data) {
+            //todo 把dataload到这个grid里
+            grid = $("#grid").ligerGrid({
+                columns : [ {
+                    display : '资源名',
+                    name : 'name',
+                    align : 'left',
+                    minWidth : 120
+                }, {
+                    display : '关键字',
+                    name : 'keyWords',
+                    align : 'left',
+                    hide : true,
+                    minWidth : 100
+                }, {
+                    display : '所属课程ID',
+                    name : 'courseId',
+                    align : 'left',
+                    hide : true,
+                    minWidth : 100
+                }, {
+                    display : '所属课程名',
+                    name : 'courseName',
+                    align : 'left',
+                    minWidth : 150
+                }, {
+                    display : '所属类别ID',
+                    name : 'categoryIdList',
+                    align : 'left',
+                    hide : true,
+                    minWidth : 100
+                }, {
+                    display : '所属类别',
+                    name : 'categoryNameList',
+                    align : 'left',
+                    minWidth : 150
+                }, {
+                    display : '媒体类型',
+                    name : 'mediaType',
+                    align : 'left',
+                    minWidth : 60
+                }, {
+                    display : '媒体格式',
+                    name : 'mediaFormat',
+                    align : 'left',
+                    minWidth : 60
+                }, {
+                    display : '播放时间',
+                    name : 'playTime',
+                    align : 'left',
+                    hide : true,
+                    minWidth : 100
+                }, {
+                    display : '文件大小',
+                    name : 'fileSize',
+                    align : 'left',
+                    minWidth : 60
+                }, {
+                    display : '作者',
+                    name : 'author',
+                    align : 'left',
+                    minWidth : 60
+                }, {
+                    display : '出版社',
+                    name : 'publisher',
+                    align : 'left',
+                    hide : true,
+                    minWidth : 100
+                }, {
+                    display : '描述',
+                    name : 'description',
+                    align : 'left',
+                    hide : true,
+                    minWidth : 100
+                }, {
+                    display : '创建时间',
+                    name : 'createDate',
+                    align : 'left',
+                    hide : true,
+                    minWidth : 100
+                }, {
+                    display : '审核状态',
+                    name : 'approvalStatus',
+                    align : 'left',
+                    minWidth : 60
+                }, {
+                    display : '质量等级',
+                    name : 'quality',
+                    align : 'left',
+                    minWidth : 60
+                }, {
+                    display : '价格',
+                    name : 'price',
+                    align : 'left',
+                    hide : true,
+                    minWidth : 100
+                }, {
+                    display : '访问次数',
+                    name : 'viewTimes',
+                    align : 'left',
+                    minWidth : 60
+                }, {
+                    display : '使用次数',
+                    name : 'useTimes',
+                    align : 'left',
+                    minWidth : 60
+                } ],
+                height : '94%',
+                width : '100%',
+                onDblClickRow:function(data){
+                    //todo 将data拼一个table出来，放到div里
+                }
+            });
+            //todo 用data拼一个table出来，放到这个div里
+            $("#source").html();
+        }
+    });
+
 });
 // 提取URL中的参数
 function getArgs() {

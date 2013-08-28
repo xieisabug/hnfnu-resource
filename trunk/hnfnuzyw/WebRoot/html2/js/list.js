@@ -2,8 +2,8 @@ var currentPage = 1;
 var pageCount = $("#pager a").length - 4;
 var type = "";
 var keyWords = "";
-function openWindow(url) {
-    window.open(url, '', 'height=650,width=1024,top=50,left=0,toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
+function openSourceWindow(id) {
+    window.open('source_view.html?id='+id, '', 'height=650,width=1024,top=50,left=0,toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
 }
 function pager(subjectId,gradeId,page){
     $.ajax({
