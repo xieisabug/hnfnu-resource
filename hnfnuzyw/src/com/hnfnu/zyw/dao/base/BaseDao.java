@@ -49,7 +49,6 @@ public class BaseDao<T> extends HibernateDaoSupport implements IBaseDao<T>{
 	}
 
 	public T load(int id) throws Exception{
-//		return this.getHibernateTemplate().load(T.c, id);
 		return this.getHibernateTemplate().load(getClz(), id);
 	}
 	

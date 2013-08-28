@@ -29,7 +29,7 @@ public class SourceVoService implements ISourceVoService {
 
 	public SourceVo load(int id) {
 		try {
-			return sourceVoDao.load(id);
+			return sourceVoDao.get(id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

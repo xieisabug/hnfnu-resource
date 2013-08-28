@@ -329,7 +329,7 @@ function add_user() {
     userWin = $.ligerDialog.open({
         width:400,
         height:600,
-        title:'新增功能',
+        title:'新增用户',
         target:userForm,
         buttons:[
             {
