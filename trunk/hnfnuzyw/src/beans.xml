@@ -44,7 +44,7 @@
 
 		<property name="removeAbandonedTimeout">
 
-			<value>160</value>
+			<value>10</value>
 
 		</property>
 
@@ -55,6 +55,8 @@
 			<value>true</value>
 
 		</property>
+		
+	
 
 	</bean>
 	<!-- 导入Src目录下的jdbc.properties文件 -->

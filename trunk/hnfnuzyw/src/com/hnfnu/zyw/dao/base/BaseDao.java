@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
@@ -58,14 +59,15 @@ public class BaseDao<T> extends HibernateDaoSupport implements IBaseDao<T>{
 
 	@SuppressWarnings("unchecked")
 	public List<T> list(String hql, Object[] args) throws Exception{
-		Query u = this.getSession().createQuery(hql);
+		Session session = this.getSession();
+		Query u = session.createQuery(hql);
 		if(args != null){
 		for(int i=0;i<args.length;i++) {
 			u.setParameter(i, args[i]);
 		}
 		}
 		List<T> list = u.list();
-		System.out.println(list.toString());
+		session.close();
 		return list;
 	}
 
@@ -87,8 +89,11 @@ public class BaseDao<T> extends HibernateDaoSupport implements IBaseDao<T>{
 
 	public Pager<T> find(String hql, Object[] args,int pageOffset,int pageSize) throws Exception {
 		String cq = getCountHql(hql,true);
-		Query cquery = getSession().createQuery(cq);
-		Query query = getSession().createQuery(hql);
+		Session session1 = getSession();
+		Session session2 = getSession();
+		
+		Query cquery = session1.createQuery(cq);
+		Query query = session2.createQuery(hql);
 		
 		//…Ë÷√≤Œ ˝
 		setParameter(query, args);
@@ -101,6 +106,8 @@ public class BaseDao<T> extends HibernateDaoSupport implements IBaseDao<T>{
 		pages.setDatas(datas);
 		long total = (Long)cquery.uniqueResult();
 		pages.setTotal(total);
+		session1.close();
+		session2.close();
 		return pages;
 	}
 

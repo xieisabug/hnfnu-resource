@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>无标题文档</title>
 <link href="css/style.css" type="text/css" rel="stylesheet"/>
-<script src="js/banner.js" type="text/javascript"></script>
+<script src="js/gallery.js" type="text/javascript"></script>
 <script src="js/menu.js" type="text/javascript"></script>
 </head>
 
@@ -130,8 +130,12 @@
             	<div id="idSlideView3" class="sv3">
             	
             		<#list subjectList as subject>
-            		 <dl class="on">
-            		
+            			<#if subject_index == 0>
+            		 		<dl class="on">
+            		 	<#else>
+            		 		<dl>
+            			</#if>
+            			
 						<dt>${subject.name}</dt>
 					
 					 <dd>
