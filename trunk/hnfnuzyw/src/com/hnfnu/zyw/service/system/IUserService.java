@@ -20,4 +20,5 @@ public interface IUserService {
 	 */
 	public Map<String, Object> list();
 	
+	public boolean updatePwd(int id,String newPassword);
 }

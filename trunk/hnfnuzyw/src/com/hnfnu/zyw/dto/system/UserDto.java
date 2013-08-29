@@ -71,7 +71,6 @@ public class UserDto
 	{
 		this.password = password;
 	}
-	@Column(updatable=false) 
 	public String getPassword()
 	{
 		return this.password;
@@ -164,4 +163,16 @@ public class UserDto
 	{
 		return this.remark;
 	}
+
+	@Override
+	public String toString() {
+		return "UserDto [id=" + id + ", username=" + username + ", password="
+				+ password + ", name=" + name + ", idcard=" + idcard + ", sex="
+				+ sex + ", qq=" + qq + ", telephone=" + telephone + ", birth="
+				+ birth + ", department=" + department + ", createDate="
+				+ createDate + ", latestLoginDate=" + latestLoginDate
+				+ ", setting=" + setting + ", remark=" + remark + "]";
+	}
+	
+	
 }

@@ -40,6 +40,8 @@ public class UserServiceImpl implements IUserService {
 
 	public boolean update(UserDto user) {
 		try {
+			UserDto u = userDao.get(user.getId());
+			user.setPassword(u.getPassword());
 			userDao.update(user);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -50,7 +52,7 @@ public class UserServiceImpl implements IUserService {
 
 	public UserDto load(int id) {
 		try {
-			return userDao.load(id);
+			return userDao.get(id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -73,4 +75,20 @@ public class UserServiceImpl implements IUserService {
 		return userList;
 	}
 
+	public boolean updatePwd(int id, String newPassword) {
+//		UserDto u = this.load(id);
+//		if (u != null) {
+//			u.setPassword(newPassword);
+//			return this.update(u);
+//		}
+		try {
+			userDao.updatePwd(id, newPassword);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		return true;
+		
+	}
 }

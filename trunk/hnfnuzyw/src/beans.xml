@@ -18,11 +18,11 @@
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-		<property name="url" value="jdbc:mysql://localhost:3306/hnfnuzyw"></property>
+		<property name="url" value="jdbc:mysql://125.221.193.205:3306/hnfnuzyw"></property>
 		<property name="username" value="root"></property>
 		<property name="password" value="640310"></property>
 		<property name="maxActive">
-			<value>100</value>
+			<value>0</value>
 		</property>
 
 

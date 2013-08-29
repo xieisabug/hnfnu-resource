@@ -3,8 +3,15 @@ var userForm = null;// 用户表单
 var userWin = null;// 用户窗口
 var listBox = null;// 用户角色列表
 var userRoleJoinWin = null;// 用户赋予角色窗口
-
+var pwdForm = null;// 修改密码的表单
+var pwdWin = null;// 修改密码窗口
 // 用户赋予角色listBox的初始化
+$.extend($.ligerMethos.ListBox,{
+    clearData:function(){
+        this.data = null;
+        this.refresh();
+    }
+});
 function listBoxInit() {
     listBox = $('<div style="margin:4px;float:left;">未选角色：<div id="listbox1"></div></div>'
         + '<div style="margin:4px;float:left;" class="middle">'
@@ -80,11 +87,19 @@ function user_role_join() {
         },
         type:'post',
         success:function (data) {
-            liger.get("listbox1").setData(data.roleByUser.unSelected);
-            liger.get("listbox2").setData(data.roleByUser.selected);
+            var box1 = liger.get("listbox1");
+            var box2 = liger.get("listbox2");
+            box1.setData(data.roleByUser.unSelected);
+            box2.setData(data.roleByUser.selected);
+            if(!data.roleByUser.unSelected.length){
+                box1.clearData();
+            }
+            if(!data.roleByUser.selected.length){
+                box2.clearData();
+            }
             userRoleJoinWin = $.ligerDialog.open({
                 width:600,
-                height:600,
+                height:400,
                 title:'赋予' + user.username + '角色',
                 target:listBox,
                 buttons:[
@@ -139,177 +154,246 @@ function join_cancel() {
     userRoleJoinWin.close();
 }
 
-// 初始化表单
-function formInit(func) {
-    var groupicon = "../../../App/Lib/ligerUI/skins/icons/communication.gif";
-    userForm = $('<form></form>');
-    var fields = [];
-    fields.push({
-            name:'id',
-            type:'hidden'
-        },
-        {
-            name:'username',
-            display:'用户名',
-            type:'text',
-            space:30,
-            labelWidth:100,
-            newline:true,
-            group:'必填信息',
-            groupicon:groupicon,
-            width:200,
-            validate:{
-                required:true,
-                maxlength:20
-            }
-        });
+function edit_pwd_save() {
+    if (pwdForm.valid()) {
+        if (pwdForm.valid()) {
+            var row_data = Form.parseJSON(pwdForm);
+            $.ajax({
+                url:'/hnfnuzyw/system/updatePwd.action',
+                data:row_data,
+                type:'post',
+                success:function (data) {
+                    if (data.success) {
+                        $.ligerDialog.tip({
+                            title:'提示信息',
+                            content:data.message
+                        });
+                        pwdWin.close();
+                    } else {
+                        $.ligerDialog.error(data.message);
+                    }
+                }
+            });
+        }
+    }
+}
 
-    if (func === "add") {
-        fields.push({
-                name:'password',
-                display:'密码',
-                type:'password',
+function edit_pwd_cancel() {
+    pwdForm.close();
+}
+
+// 初始化修改密码的表单
+function pwd_formInit() {
+    pwdForm = $('<form></form>');
+    pwdForm.ligerForm({
+        inputWidth:280,
+        fields:[
+            {
+                name:'id',
+                type:'hidden'
+            },
+            {
+                display:'新密码',
+                name:'newPassword',
+                type:'text',
                 space:30,
                 labelWidth:100,
+                width:220,
                 newline:true,
-                width:200,
                 validate:{
                     required:true,
                     maxlength:20
                 }
             },
             {
-                name:'confirmPassword',
-                display:'密码确认',
-                type:'password',
+                display:'新密码确认',
+                name:'newPassword2',
+                type:'text',
                 space:30,
                 labelWidth:100,
+                width:220,
                 newline:true,
-                width:200,
                 validate:{
                     required:true,
                     maxlength:20,
-                    equalTo:"#password"
+                    equalTo:"#newPassword"
                 }
-            });
+            }
+        ]
+    });
+    $.metadata.setType("attr", "validate");
+    pwdForm.validate({
+        debug:true,
+        onkeyup:false,
+        errorPlacement:function (error) {
+            $.ligerDialog.error(error[0].innerHTML);
+        }
+    });
+
+}
+
+// 初始化表单
+function formInit(func) {
+    var groupicon = "../../../App/Lib/ligerUI/skins/icons/communication.gif";
+    userForm = $('<form></form>');
+    var fields = [];
+    fields.push({
+        name:'id',
+        type:'hidden'
+    }, {
+        name:'username',
+        display:'用户名',
+        type:'text',
+        space:30,
+        labelWidth:100,
+        newline:true,
+        group:'必填信息',
+        groupicon:groupicon,
+        width:200,
+        validate:{
+            required:true,
+            maxlength:20
+        }
+    });
+
+    if (func === "add") {
+        fields.push({
+            name:'password',
+            display:'密码',
+            type:'password',
+            space:30,
+            labelWidth:100,
+            newline:true,
+            width:200,
+            validate:{
+                required:true,
+                maxlength:20
+            }
+        }, {
+            name:'confirmPassword',
+            display:'密码确认',
+            type:'password',
+            space:30,
+            labelWidth:100,
+            newline:true,
+            width:200,
+            validate:{
+                required:true,
+                maxlength:20,
+                equalTo:"#password"
+            }
+        });
     } else if (func === "edit") {
 
     }
     fields.push({
-            name:'name',
-            display:'姓名',
-            type:'text',
-            space:30,
-            labelWidth:100,
-            newline:true,
-            width:200,
-            validate:{
-                required:true,
-                maxlength:10
-            }
-        },
-        {
-            name:'idcard',
-            display:'身份证',
-            type:'text',
-            space:30,
-            labelWidth:100,
-            newline:true,
-            width:200,
-            validate:{
-                required:true,
-                maxlength:18
-            }
-        },
-        {
-            name:'department',
-            display:'部门',
-            type:'text',
-            space:30,
-            labelWidth:100,
-            newline:true,
-            width:200,
-            validate:{
-                required:true,
-                maxlength:40
-            }
-        },
-        {
-            name:'telephone',
-            display:'电话',
-            type:'text',
-            space:30,
-            labelWidth:100,
-            newline:true,
-            width:200,
-            group:'选填信息',
-            groupicon:groupicon,
-            validate:{
-                required:true,
-                maxlength:15
-            }
-        },
-        {
-            display:"性别",
-            name:"sex",
-            type:"select",
-            width:200,
-            space:30,
-            labelWidth:100,
-            comboboxName:"sex",
-            textField:"text",
-            valueField:"id",
-            newline:true,
-            options:{
-                hideOnLoseFocus:true,
-                valueFieldID:"id",
-                data:[
-                    {
-                        "id":"1",
-                        "text":"男"
-                    },
-                    {
-                        "id":"0",
-                        "text":"女"
-                    }
-                ]
+        name:'name',
+        display:'姓名',
+        type:'text',
+        space:30,
+        labelWidth:100,
+        newline:true,
+        width:200,
+        validate:{
+            required:true,
+            maxlength:10
+        }
+    }, {
+        name:'idcard',
+        display:'身份证',
+        type:'text',
+        space:30,
+        labelWidth:100,
+        newline:true,
+        width:200,
+        validate:{
+            required:true,
+            maxlength:18
+        }
+    }, {
+        name:'department',
+        display:'部门',
+        type:'text',
+        space:30,
+        labelWidth:100,
+        newline:true,
+        width:200,
+        validate:{
+            required:true,
+            maxlength:40
+        }
+    }, {
+        name:'telephone',
+        display:'电话',
+        type:'text',
+        space:30,
+        labelWidth:100,
+        newline:true,
+        width:200,
+        group:'选填信息',
+        groupicon:groupicon,
+        validate:{
+            required:true,
+            maxlength:15
+        }
+    }, {
+        display:"性别",
+        name:"sex",
+        type:"select",
+        width:200,
+        space:30,
+        labelWidth:100,
+        comboboxName:"sex",
+        textField:"text",
+        valueField:"id",
+        newline:true,
+        options:{
+            hideOnLoseFocus:true,
+            valueFieldID:"id",
+            data:[
+                {
+                    "id":"1",
+                    "text":"男"
+                },
+                {
+                    "id":"0",
+                    "text":"女"
+                }
+            ]
 
-            }
-        },
-        {
-            name:'qq',
-            display:'QQ',
-            type:'text',
-            space:30,
-            labelWidth:100,
-            newline:true,
-            width:200,
-            validate:{
-                maxlength:15
-            }
-        },
-        {
-            name:'birth',
-            display:'生日',
-            type:'date',
-            space:30,
-            labelWidth:100,
-            newline:true,
-            width:200
-        },
-        {
-            name:'remark',
-            display:'备注',
-            type:'text',
-            space:30,
-            labelWidth:100,
-            newline:true,
-            width:200
-        });
+        }
+    }, {
+        name:'qq',
+        display:'QQ',
+        type:'text',
+        space:30,
+        labelWidth:100,
+        newline:true,
+        width:200,
+        validate:{
+            maxlength:15
+        }
+    }, {
+        name:'birth',
+        display:'生日',
+        type:'date',
+        space:30,
+        labelWidth:100,
+        newline:true,
+        width:200
+    }, {
+        name:'remark',
+        display:'备注',
+        type:'text',
+        space:30,
+        labelWidth:100,
+        newline:true,
+        width:200
+    });
 
     userForm.ligerForm({
-        inputWidth : 280,
-        fields : fields
+        inputWidth:280,
+        fields:fields
     });
     $.metadata.setType("attr", "validate");
     userForm.validate({
@@ -321,6 +405,45 @@ function formInit(func) {
     });
 
 }
+// 修改密码的函数
+function edit_password() {
+    var data = userGrid.getSelected();
+    if (!data) {
+        $.ligerDialog.warn('请选择您要修改的行.');
+        return;
+    }
+
+    pwd_formInit();
+
+    pwdWin = $.ligerDialog.open({
+        width:400,
+        height:250,
+        title:'修改密码',
+        target:pwdForm,
+        buttons:[
+            {
+                text:'提交',
+                width:80,
+                onclick:edit_pwd_save
+            },
+            {
+                text:'取消',
+                width:80,
+                onclick:edit_pwd_cancel
+            }
+        ]
+    });
+    $.metadata.setType("attr", "validate");
+    pwdForm.validate({
+        debug:true,
+        onkeyup:false,
+        errorPlacement:function (error) {
+            $.ligerDialog.error(error[0].innerHTML);
+        }
+    });
+    $("#id",pwdForm).val(data.id);
+    console.log($("#id",pwdForm));
+}
 
 // 增加用户的函数
 function add_user() {
@@ -328,7 +451,7 @@ function add_user() {
 
     userWin = $.ligerDialog.open({
         width:400,
-        height:600,
+        height:470,
         title:'新增用户',
         target:userForm,
         buttons:[
@@ -496,6 +619,12 @@ $(function () {
             click:user_role_join,
             icon:'config',
             key:'join'
+        },
+        {
+            text:'修改密码',
+            click:edit_password,
+            icon:'modify',
+            key:'modify_pwd'
         }
     ];
     // todo 以后这个ajaxToolbar要通过ajax取过来
@@ -511,6 +640,9 @@ $(function () {
         },
         {
             name:'join'
+        },
+        {
+            name:'modify_pwd'
         }
     ];
     // 确认权限的是否有这个功能
