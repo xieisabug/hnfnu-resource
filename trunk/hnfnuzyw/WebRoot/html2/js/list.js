@@ -23,8 +23,11 @@ function pager(subjectId,gradeId,page){
             	var item;
             	if(i < list.length){
             		item = list[i];
-            		var url = "";
-                	$(trs[i+1]).attr("onclick", "javascript:openWindow(" + url + ")");
+            		var url = item.id;
+                    $(trs[i+1]).removeAttr('onclick');
+                    $(trs[i+1]).bind('click',function(){
+                        openSourceWindow(url);
+                    });
             	} else {
             		item = {
             			id:"",
@@ -32,7 +35,7 @@ function pager(subjectId,gradeId,page){
             			createDate:"",
             			mediaType:""
             		};
-            		$(trs[i+1]).attr("onclick", "");
+                    $(trs[i+1]).removeAttr('onclick');
             	}
             	var tds = $("td",trs[i+1]);
             	$(tds[0]).html(item.id);
