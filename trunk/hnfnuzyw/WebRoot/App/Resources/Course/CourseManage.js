@@ -31,14 +31,12 @@ function add_save() {
 	// 把表单转化为数组
 	if (courseForm.valid()) {
 		var row_data = Form.parseJSON(courseForm);
-		console.log(row_data);
 		// 发往服务器，返回成功后再添加到表格中
 		$.ajax( {
 			url : '/hnfnuzyw/resources/addCourse.action',
 			data : row_data,
 			type : 'post',
 			success : function(data) {
-				console.log(data);
 				if (data.success) {
 					courseGrid.addRow(data.model);
 					$.ligerDialog.tip( {
@@ -67,7 +65,6 @@ function delete_course() {
 	var row_data = courseGrid.getSelected();
 	$.ligerDialog.confirm('确认删除' + row_data.name + '?', '删除功能', function(r) {
 		if (r) {
-			// todo 进行ajax操作，成功后在回调函数里删除选择的行
 			$.ajax( {
 				url : '/hnfnuzyw/resources/deleteCourse.action',
 				data : row_data,
@@ -126,7 +123,6 @@ function edit_save() {
 			data : row_data,
 			type : 'post',
 			success : function(data) {
-				console.log(data);
 				if (data.success) {
 					courseGrid.update(courseGrid.getSelected(), data.model);
 					$.ligerDialog.tip( {
@@ -186,7 +182,6 @@ function formInit() {
 						data : data.gradeList
 					}
 				}, {
-					// todo 这个最后要搞成下拉框的形式，从后台取数据
 					display : "所属学科",
 					name : "subjectId",
 					type : "select",
