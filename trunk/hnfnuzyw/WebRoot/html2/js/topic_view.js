@@ -3,11 +3,12 @@ var grid = null;
 $(function() {
 	$("#layout").ligerLayout({
 		leftWidth : 240,
-		rightWidth : 400
+		rightWidth : 400,
+		bottomHeight: 100
 	});
 	var argsArr = getArgs();
 	$.ajax({
-		url : '/hnfnuzyw/resources/allTree.action',
+		url : '/hnfnuzyw/resources/topicTree.action',
 		type : 'post',
 		success : function(data) {
 			tree = $("#tree").ligerTree({
@@ -16,42 +17,26 @@ $(function() {
 				idFieldName : 'id',
 				parentIDFieldName : 'pid',
 				checkbox : false,
-				data : data.allTree,
+				data : data.topicTree,
 				onSelect : function(data) {
-                    var params;
-                    if(isCourse(data)){
-                        params = {
-                            courseId:data.data.id,
-                            categoryId:0
-                        };
-                        $.ajax( {
-                            url:'/hnfnuzyw/resources/sourceMoreVoList.action',
-                            type : 'post',
-                            data:params,
-                            success : function(data) {
-                                grid.loadData(data.sourceMoreVoList);
-                            }
-                        });
-                    } else if(isCategory(data)){
-                        params = {
-                            courseId:getParentId(data),
-                            categoryId:data.data.id
-                        };
-                        $.ajax( {
-                            url:'/hnfnuzyw/resources/sourceMoreVoList.action',
-                            type : 'post',
-                            data:params,
-                            success : function(data) {
-                                grid.loadData(data.sourceMoreVoList);
-                            }
-                        });
-                    }
+                    params = {
+                        id:data.data.id,
+                    };
+                    $.ajax( {
+                        url:'/hnfnuzyw/resources/listSourceByTopicId.action',
+                        type : 'post',
+                        data:params,
+                        success : function(data) {
+                            grid.loadData({Rows:data.topicSourceList});
+                            topicViewTable(data.topicSourceList[0]);
+                        }
+                    });
 				}
 			});
 		}
 	});
     $.ajax({
-        url : '/hnfnuzyw/resources/loadSourceVo.action',
+        url : '/hnfnuzyw/resources/listSourceByTopicId.action',
         type : 'post',
         data:{
             id:argsArr.id
@@ -61,7 +46,7 @@ $(function() {
             grid = $("#grid").ligerGrid({
                 columns : [ {
                     display : '资源名',
-                    name : 'name',
+                    name : 'sourceName',
                     align : 'left',
                     minWidth : 120
                 }, {
@@ -70,28 +55,6 @@ $(function() {
                     align : 'left',
                     hide : true,
                     minWidth : 100
-                }, {
-                    display : '所属课程ID',
-                    name : 'courseId',
-                    align : 'left',
-                    hide : true,
-                    minWidth : 100
-                }, {
-                    display : '所属课程名',
-                    name : 'courseName',
-                    align : 'left',
-                    minWidth : 150
-                }, {
-                    display : '所属类别ID',
-                    name : 'categoryIdList',
-                    align : 'left',
-                    hide : true,
-                    minWidth : 100
-                }, {
-                    display : '所属类别',
-                    name : 'categoryNameList',
-                    align : 'left',
-                    minWidth : 150
                 }, {
                     display : '媒体类型',
                     name : 'mediaType',
@@ -126,7 +89,7 @@ $(function() {
                     minWidth : 100
                 }, {
                     display : '描述',
-                    name : 'description',
+                    name : 'sourceDescription',
                     align : 'left',
                     hide : true,
                     minWidth : 100
@@ -163,27 +126,27 @@ $(function() {
                     align : 'left',
                     minWidth : 60
                 } ],
-                height : '94%',
+                height : '500',
                 width : '100%',
-                data:{Rows:[data.sourceVo]},
+                data:{Rows:data.topicSourceList},
                 onDblClickRow:function(data){
-                    console.log(data);
                     sourceViewTable(data);
                 }
             });
-            sourceViewTable(data.sourceVo);
+            if(data.topicSourceList.length)
+            	topicViewTable(data.topicSourceList[0]);
             $("#source").html();
         }
     });
 
 });
 function sourceViewTable(data){
-    var id = data.id;
+    var id = data.sourceId;
     var html = "";
     html += '<table>';
     html += '<tr>';
     html += '<td class="attrName">名称</td>';
-    html += '<td>'+data.name+'</td>';
+    html += '<td>'+data.sourceName+'</td>';
     html += '<td class="attrName">课程名称</td>';
     html += '<td>'+data.courseName+'</td>';
     html += '</tr>';
@@ -215,7 +178,7 @@ function sourceViewTable(data){
     html += '<td class="attrName">出版社</td>';
     html += '<td>'+data.publisher+'</td>';
     html += '<td class="attrName">描述</td>';
-    html += '<td>'+data.description+'</td>';
+    html += '<td>'+data.sourceDescription+'</td>';
     html += '</tr>';
     html += '<tr>';
     html += '<td class="attrName">创建时间</td>';
@@ -235,6 +198,23 @@ function sourceViewTable(data){
     html += '<a href="javascript:onlineView('+id+')">预览</a>';
     html += '</div>';
     $("#source").html(html);
+}
+function topicViewTable(data){
+	var html = "";
+    html += '<table>';
+    html += '<tr>';
+    html += '<td class="attrName">专题名称</td>';
+    html += '<td>'+data.topicName+'</td>';
+    html += '<td class="attrName">专题描述</td>';
+    html += '<td>'+data.topicDescription+'</td>';
+    html += '<td class="attrName">创建者</td>';
+    html += '<td>'+data.topicAuthor+'</td>';
+    html += '<td class="attrName">备注</td>';
+    html += '<td>'+data.remark+'</td>';
+    html += '</tr>';
+    html += '</table>';
+    console.log(data);
+    $("#topic").html(html);
 }
 function onlineView(data){
     window.open("onlineView.jsp?id="+data, '', 'height=650,width=1024,top=50,left=0,toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
