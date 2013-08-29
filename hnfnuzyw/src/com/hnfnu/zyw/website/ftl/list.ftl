@@ -96,7 +96,7 @@
             </div>
             <div id="source_list_title">
             	<div id="source_list_title_icon"></div>
-                <p>语文备课资源</p>
+                <p>${subject.name}备课资源</p>
             </div>
             <div id="source_list_search">
             	<div class="left">
@@ -121,23 +121,85 @@
                         <th width="12%">媒体格式</th>
                     </thead>
                     <tbody>
-                    
+                    <#if (sourcePager.datas?size > 0)>
                      <#list sourcePager.datas as source>
-                    	<tr class="grid_odd" onclick="javascript:openWindow('http://www.baidu.com')">
+                     	<#if source_index%2==0>
+                     		<tr class="grid_even" onclick="javascript:openWindow('http://www.baidu.com')">
                         	<td>${source.id}</td>
                             <td>${source.name}</td>
                             <td>${source.createDate}</td>
                             <td>${source.mediaType}</td>
                             <td>${source.mediaFormat}</td>
                         </tr>
+                     	<#else>
+                     	<tr class="grid_odd" onclick="javascript:openWindow('http://www.baidu.com')">
+                        	<td>${source.id}</td>
+                            <td>${source.name}</td>
+                            <td>${source.createDate}</td>
+                            <td>${source.mediaType}</td>
+                            <td>${source.mediaFormat}</td>
+                        </tr>
+                     	</#if>
+                    	
+                        <#if source_has_next>
+                        <#else>
+                        <#if source_index < 9>
+                        		<#list source_index+1..9 as y>
+                        			<#if y%2 == 0>
+                        				<tr class="grid_even" onclick="javascript:openWindow('http://www.baidu.com')">
+                        				<td></td>
+                            			<td></td>
+                            			<td></td>
+                            			<td></td>
+                            			<td></td>
+                        				</tr>
+                        			<#else>
+                        				<tr class="grid_odd" onclick="javascript:openWindow('http://www.baidu.com')">
+                        				<td></td>
+                            			<td></td>
+                            			<td></td>
+                            			<td></td>
+                            			<td></td>
+                        				</tr>
+                        			</#if>
+                        		</#list>
+                        	</#if>
+                        </#if>
                     </#list>
+                   <#else>
+                   		<#list 0..9 as y>
+                        			<#if y%2 == 0>
+                        				<tr class="grid_even" onclick="javascript:openWindow('http://www.baidu.com')">
+                        				<td></td>
+                            			<td></td>
+                            			<td></td>
+                            			<td></td>
+                            			<td></td>
+                        				</tr>
+                        			<#else>
+                        				<tr class="grid_odd" onclick="javascript:openWindow('http://www.baidu.com')">
+                        				<td></td>
+                            			<td></td>
+                            			<td></td>
+                            			<td></td>
+                            			<td></td>
+                        				</tr>
+                        			</#if>
+                        		</#list>
+                   </#if>
                     </tbody>
                 </table>
                 <div id="pager">
                 	<a href="#">第一页</a> 
                     <a href="#">上一页</a> 
                     <a href="#"><</a> 
-                   	<@myPager.pager url="#" totalPage=20 curPage=1 class="pagers" showPageNum=5/>
+                    <#assign x = sourcePager.total%sourcePager.size>
+                    <#if x==0 && sourcePager.total!=0> 
+                     <#assign tp = sourcePager.total/sourcePager.size>
+                    <#else>
+                     <#assign tp = (sourcePager.total/sourcePager.size)+1>
+                    </#if>
+                   	<@myPager.pager url="#" totalPage=tp curPage=1 class="pagers" showPageNum=5/>
                     <a href="#">></a> 
                     <a href="#">下一页</a> 
                     <a href="#">最后一页</a> 
