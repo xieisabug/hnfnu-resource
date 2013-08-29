@@ -1,7 +1,6 @@
 package com.hnfnu.zyw.website.utils;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Map;
@@ -64,10 +63,10 @@ public class FreemarkerUtil {
 	}
 	
 	public void fprint(String name,Map<String,Object> root,String filePath,String fileName) {
-		FileWriter out = null;
+		FileWriterWithEncoding out = null;
 		try {
 			//通过一个文件输出流，就可以写到相应的文件中
-			out = new FileWriter(new File(filePath+fileName));
+			out = new FileWriterWithEncoding(new File(filePath+fileName),"utf-8");
 			Template temp = this.getTemplate(name);
 			temp.process(root, out);
 		} catch (IOException e) {

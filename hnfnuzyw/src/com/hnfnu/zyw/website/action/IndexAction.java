@@ -2,6 +2,7 @@ package com.hnfnu.zyw.website.action;
 
 import java.util.Map;
 
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -38,14 +39,17 @@ public class IndexAction extends ActionSupport {
 	
 	@Action(value = "makeIndex")
 	public String makeIndex() {
+		String filePath = null;
+		
+		filePath = ServletActionContext.getServletContext().getRealPath("/");
+		System.out.println("filepPth:"+filePath);
 		// 获得数据模型
 		root = indexService.getDataModel();
-		System.out.println("root"+root.get("subjectList"));
 		
 		//打印到输出台，以便于测试
 		fu.print("index.ftl", root);
 		//输出到文件
-		fu.fprint("index.ftl", root, "index.html");
+		fu.fprint("index.ftl", root, filePath+"website\\", "index.html");
 		return SUCCESS;
 	}
 
