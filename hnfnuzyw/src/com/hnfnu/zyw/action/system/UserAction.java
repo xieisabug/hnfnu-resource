@@ -32,7 +32,7 @@ public class UserAction extends ActionSupport implements ModelDriven<UserDto> {
 	private boolean success;
 	private String message;
 	private Map<String, Object> userList;
-
+	private String newPassword;
 	@Autowired
 	@Qualifier("userService")
 	private IUserService userService;
@@ -62,7 +62,21 @@ public class UserAction extends ActionSupport implements ModelDriven<UserDto> {
 		}
 		return SUCCESS;
 	}
-
+	/**
+	 * 修改密码
+	 * @return
+	 */
+	@Action(value = "updatePwd")
+	public String updatePwd() {
+		System.out.println(user.getId()+"user.getId()");
+		success = userService.updatePwd(user.getId(), newPassword);
+		if (success) {
+			message = "修改密码成功！";
+		} else {
+			message = "修改密码失败！";
+		}
+		return SUCCESS;
+	}
 	/**
 	 * 根据菜单ID查询一个对象
 	 * 
@@ -127,8 +141,9 @@ public class UserAction extends ActionSupport implements ModelDriven<UserDto> {
 		return userList;
 	}
 
-	// public void setBir(String bir) {
-	// this.bir = bir;
-	// }
+	public void setNewPassword(String newPassword) {
+		this.newPassword = newPassword;
+	}
 
+	
 }
