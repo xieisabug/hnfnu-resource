@@ -1,5 +1,6 @@
 package com.hnfnu.zyw.service.resources;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -83,4 +84,21 @@ public class TopicServiceImpl implements ITopicService {
 		return topicList;
 	}
 
+	public List<Map<String,String>> topicTree(){
+		String hql = "from TopicDto";
+		List<TopicDto> topics = null;
+		try {
+			topics = topicDao.list(hql);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		List<Map<String,String>> ret = new ArrayList<Map<String,String>>();
+		for(int i = 0; i<topics.size(); i++){
+			Map<String,String> topic = new HashMap<String, String>();
+			topic.put("id", topics.get(i).getId().toString());
+			topic.put("name", topics.get(i).getName());
+			ret.add(topic);
+		}
+		return ret;
+	}
 }
