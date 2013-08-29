@@ -18,7 +18,34 @@ $(function() {
 				checkbox : false,
 				data : data.allTree,
 				onSelect : function(data) {
-					console.log(data);
+                    var params;
+                    if(isCourse(data)){
+                        params = {
+                            courseId:data.data.id,
+                            categoryId:0
+                        };
+                        $.ajax( {
+                            url:'/hnfnuzyw/resources/sourceMoreVoList.action',
+                            type : 'post',
+                            data:params,
+                            success : function(data) {
+                                grid.loadData(data.sourceMoreVoList);
+                            }
+                        });
+                    } else if(isCategory(data)){
+                        params = {
+                            courseId:getParentId(data),
+                            categoryId:data.data.id
+                        };
+                        $.ajax( {
+                            url:'/hnfnuzyw/resources/sourceMoreVoList.action',
+                            type : 'post',
+                            data:params,
+                            success : function(data) {
+                                grid.loadData(data.sourceMoreVoList);
+                            }
+                        });
+                    }
 				}
 			});
 		}
@@ -138,16 +165,80 @@ $(function() {
                 } ],
                 height : '94%',
                 width : '100%',
+                data:{Rows:[data.sourceVo]},
                 onDblClickRow:function(data){
-                    //todo 将data拼一个table出来，放到div里
+                    console.log(data);
+                    sourceViewTable(data);
                 }
             });
-            //todo 用data拼一个table出来，放到这个div里
+            sourceViewTable(data.sourceVo);
             $("#source").html();
         }
     });
 
 });
+function sourceViewTable(data){
+    var id = data.id;
+    var html = "";
+    html += '<table>';
+    html += '<tr>';
+    html += '<td class="attrName">名称</td>';
+    html += '<td>'+data.name+'</td>';
+    html += '<td class="attrName">课程名称</td>';
+    html += '<td>'+data.courseName+'</td>';
+    html += '</tr>';
+    html += '<tr>';
+    html += '<td class="attrName">科目</td>';
+    html += '<td>'+data.subjectName+'</td>';
+    html += '<td class="attrName">年级</td>';
+    html += '<td>'+data.gradeName+'</td>';
+    html += '</tr>';
+    html += '<tr>';
+    html += '<td class="attrName">关键字</td>';
+    html += '<td>'+data.keyWords+'</td>';
+    html += '<td class="attrName">媒体类型</td>';
+    html += '<td>'+data.mediaType+'</td>';
+    html += '</tr>';
+    html += '<tr>';
+    html += '<td class="attrName">媒体格式</td>';
+    html += '<td>'+data.mediaFormat+'</td>';
+    html += '<td class="attrName">播放时间</td>';
+    html += '<td>'+data.playTime+'</td>';
+    html += '</tr>';
+    html += '<tr>';
+    html += '<td class="attrName">文件大小</td>';
+    html += '<td>'+data.fileSize+'</td>';
+    html += '<td class="attrName">作者</td>';
+    html += '<td>'+data.author+'</td>';
+    html += '</tr>';
+    html += '<tr>';
+    html += '<td class="attrName">出版社</td>';
+    html += '<td>'+data.publisher+'</td>';
+    html += '<td class="attrName">描述</td>';
+    html += '<td>'+data.description+'</td>';
+    html += '</tr>';
+    html += '<tr>';
+    html += '<td class="attrName">创建时间</td>';
+    html += '<td>'+data.createDate+'</td>';
+    html += '<td class="attrName">创建者</td>';
+    html += '<td>'+data.createUserName+'</td>';
+    html += '</tr>';
+    html += '<tr>';
+    html += '<td class="attrName">质量</td>';
+    html += '<td>'+data.quality+'</td>';
+    html += '<td class="attrName">价格</td>';
+    html += '<td>'+data.price+'</td>';
+    html += '</tr>';
+    html += '</table>';
+    html += '<div id="button">';
+    html += '<a href="'+data.url+'">下载</a>';
+    html += '<a href="javascript:onlineView('+id+')">预览</a>';
+    html += '</div>';
+    $("#source").html(html);
+}
+function onlineView(data){
+    window.open("onlineView.jsp?id="+data, '', 'height=650,width=1024,top=50,left=0,toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
+}
 // 提取URL中的参数
 function getArgs() {
 	// 加上substring的意义是去掉查询字符串中的？号。
@@ -171,4 +262,17 @@ function getArgs() {
 		argsArr[aKey] = aValue;
 	}
 	return argsArr;
+}
+function isCourse(obj){
+    return tree.getParentTreeItem(tree.getParentTreeItem(tree.getParentTreeItem(obj.target)))==null &&
+        tree.getParentTreeItem(tree.getParentTreeItem(obj.target))!=null;
+}
+//判断选择的是否是类别
+function isCategory(obj){
+    return !isCourse(obj) &&
+        tree.getParentTreeItem(tree.getParentTreeItem(tree.getParentTreeItem(obj.target)))!=null;
+}
+//获取树的父一级的id
+function getParentId(obj){
+    return $(tree.getParentTreeItem(obj.target)).attr("id");
 }
