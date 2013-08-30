@@ -79,7 +79,7 @@
             onUploadSuccess : function(file, data) {
                 var fileNameAndPath = data.split(",");
                 var path = fileNameAndPath[1];
-                path = path.replaceAll(/\\/g,'\\\\');
+                //path = path.replaceAll(/\\/g,'\\\\');
                 $("#url",sourceForm).val(path);
             },
             onSelect : function(file) {
