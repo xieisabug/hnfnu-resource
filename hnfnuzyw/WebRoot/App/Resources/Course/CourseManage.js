@@ -236,12 +236,7 @@ $(function() {
 		key : 'modify'
 	}, {
 		line : true
-	}, {
-		text : '刷新',
-		click : update_course,
-		icon : 'refresh',
-		key : 'refresh'
-	} ];
+	}];
 
 	// todo 以后这个ajaxToolbar要通过ajax取过来
 	var ajaxToolbar = [ {
@@ -250,8 +245,6 @@ $(function() {
 		name : 'modify'
 	}, {
 		name : 'delete'
-	}, {
-		name : 'refresh'
 	} ];
 	toolbarItems = Toolbar.confirmToolbar(toolbarItems, ajaxToolbar);
 

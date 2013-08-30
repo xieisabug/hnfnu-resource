@@ -36,7 +36,7 @@
 
 		<property name="removeAbandoned">
 
-			<value>true</value>
+			<value>false</value>
 
 		</property>
 
