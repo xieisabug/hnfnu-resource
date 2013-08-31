@@ -6,8 +6,8 @@ var userRoleJoinWin = null;// 用户赋予角色窗口
 var pwdForm = null;// 修改密码的表单
 var pwdWin = null;// 修改密码窗口
 // 用户赋予角色listBox的初始化
-$.extend($.ligerMethos.ListBox,{
-    clearData:function(){
+$.extend($.ligerMethos.ListBox, {
+    clearData:function () {
         this.data = null;
         this.refresh();
     }
@@ -91,10 +91,10 @@ function user_role_join() {
             var box2 = liger.get("listbox2");
             box1.setData(data.roleByUser.unSelected);
             box2.setData(data.roleByUser.selected);
-            if(!data.roleByUser.unSelected.length){
+            if (!data.roleByUser.unSelected.length) {
                 box1.clearData();
             }
-            if(!data.roleByUser.selected.length){
+            if (!data.roleByUser.selected.length) {
                 box2.clearData();
             }
             userRoleJoinWin = $.ligerDialog.open({
@@ -106,7 +106,7 @@ function user_role_join() {
                     {
                         text:'提交',
                         width:80,
-                        onclick:join_sava
+                        onclick:join_save
                     },
                     {
                         text:'取消',
@@ -121,31 +121,36 @@ function user_role_join() {
 
 }
 // 用户赋予角色提交函数
-function join_sava() {
-    // 得到用户
-    var user = userGrid.getSelected();
-    var userRoleIds = user.id + "";
-    var selecteds = liger.get("listbox2").data;
-    for (var i = 0; i < selecteds.length; i++) {
-        userRoleIds += ";";
-        userRoleIds += selecteds[i].id;
-    }
-    $.ajax({
-        url:'/hnfnuzyw/system/addUserRoleJoins.action',
-        data:{
-            seletedRoleIds:userRoleIds
-        },
-        type:'post',
-        success:function (data) {
-            if (data.success) {
-                $.ligerDialog.tip({
-                    title:'提示信息',
-                    content:data.message
-                });
-                userRoleJoinWin.close();
-            } else {
-                $.ligerDialog.error(data.message);
+function join_save() {
+    $.ligerDialog.confirm('挂接成功后将会刷新页面，请保存好其他页面的工作？', '挂接', function (r) {
+        if (r) {
+            // 得到用户
+            var user = userGrid.getSelected();
+            var userRoleIds = user.id + "";
+            var selecteds = liger.get("listbox2").data;
+            for (var i = 0; i < selecteds.length; i++) {
+                userRoleIds += ";";
+                userRoleIds += selecteds[i].id;
             }
+            $.ajax({
+                url:'/hnfnuzyw/system/addUserRoleJoins.action',
+                data:{
+                    seletedRoleIds:userRoleIds
+                },
+                type:'post',
+                success:function (data) {
+                    if (data.success) {
+                        $.ligerDialog.tip({
+                            title:'提示信息',
+                            content:data.message
+                        });
+                        userRoleJoinWin.close();
+                        window.parent.window.location.reload();
+                    } else {
+                        $.ligerDialog.error(data.message);
+                    }
+                }
+            });
         }
     });
 }// 用户赋予角色取消函数
@@ -441,8 +446,8 @@ function edit_password() {
             $.ligerDialog.error(error[0].innerHTML);
         }
     });
-    $("#id",pwdForm).val(data.id);
-    console.log($("#id",pwdForm));
+    $("#id", pwdForm).val(data.id);
+    console.log($("#id", pwdForm));
 }
 
 // 增加用户的函数
@@ -715,11 +720,11 @@ $(function () {
                 toolbar:{
                     items:toolbarItems
                 },
-                rowAttrRender:function (rowdata, rowid) {
+                rowAttrRender:function (rowdata) {
                     if (rowdata.birth) {
                         rowdata.birth = rowdata.birth.substring(0, 10);
                     }
-                    return;
+                    return ;
                 }
             });
             $("#pageloading").hide();
