@@ -2,165 +2,160 @@ package com.hnfnu.zyw.dto.system;
 
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
-* 通过数据库内表的字段动态生成 UserDto
-**/
+ * 通过数据库内表的字段动态生成 UserDto
+ **/
 @Entity
-@Table(name="s_user")
-public class UserDto 
-{	
+@Table(name = "s_user")
+public class UserDto {
 	private Integer id;
-	//用户名
+	// 用户名
 	private String username;
-	//密码
+	// 密码
 	private String password;
-	//姓名
+	// 姓名
 	private String name;
-	//身份证
+	// 身份证
 	private String idcard;
-	//性别
+	// 性别
 	private String sex;
-	//QQ
+	// QQ
 	private String qq;
-	//电话
+	// 电话
 	private String telephone;
-	//生日
+	// 生日
 	private Date birth;
-	//部门
+	// 部门
 	private String department;
-	//创建日期
+	// 创建日期
 	private Date createDate;
-	//最后登录时间
+	// 最后登录时间
 	private Date latestLoginDate;
-	//设置（用于涉及用户个人的设置）
+	// 设置（用于涉及用户个人的设置）
 	private String setting;
-	//备注
+	// 备注
 	private String remark;
 
-	public UserDto()
-	{
+	public UserDto() {
 
 	}
 
-	public void setId(Integer id)
-	{
+	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	@Id
 	@GeneratedValue
-	public Integer getId()
-	{
+	public Integer getId() {
 		return this.id;
 	}
-	public void setUsername(String username)
-	{
+
+	public void setUsername(String username) {
 		this.username = username;
 	}
-	public String getUsername()
-	{
+
+	public String getUsername() {
 		return this.username;
 	}
-	
-	public void setPassword(String password)
-	{
+
+	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getPassword()
-	{
+
+	public String getPassword() {
 		return this.password;
 	}
-	public void setName(String name)
-	{
+
+	public void setName(String name) {
 		this.name = name;
 	}
-	public String getName()
-	{
+
+	public String getName() {
 		return this.name;
 	}
-	public void setIdcard(String idcard)
-	{
+
+	public void setIdcard(String idcard) {
 		this.idcard = idcard;
 	}
-	public String getIdcard()
-	{
+
+	public String getIdcard() {
 		return this.idcard;
 	}
-	public void setSex(String sex)
-	{
+
+	public void setSex(String sex) {
 		this.sex = sex;
 	}
-	public String getSex()
-	{
+
+	public String getSex() {
 		return this.sex;
 	}
-	public void setQq(String qq)
-	{
+
+	public void setQq(String qq) {
 		this.qq = qq;
 	}
-	public String getQq()
-	{
+
+	public String getQq() {
 		return this.qq;
 	}
-	public void setTelephone(String telephone)
-	{
+
+	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
-	public String getTelephone()
-	{
+
+	public String getTelephone() {
 		return this.telephone;
 	}
-	public void setBirth(Date birth)
-	{
+
+	public void setBirth(Date birth) {
 		this.birth = birth;
 	}
-	public Date getBirth()
-	{
+
+	public Date getBirth() {
 		return this.birth;
 	}
-	public void setDepartment(String department)
-	{
+
+	public void setDepartment(String department) {
 		this.department = department;
 	}
-	public String getDepartment()
-	{
+
+	public String getDepartment() {
 		return this.department;
 	}
-	public void setCreateDate(Date createDate)
-	{
+
+	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
-	public Date getCreateDate()
-	{
+
+	public Date getCreateDate() {
 		return this.createDate;
 	}
-	public void setLatestLoginDate(Date latestLoginDate)
-	{
+
+	public void setLatestLoginDate(Date latestLoginDate) {
 		this.latestLoginDate = latestLoginDate;
 	}
-	public Date getLatestLoginDate()
-	{
+
+	public Date getLatestLoginDate() {
 		return this.latestLoginDate;
 	}
-	public void setSetting(String setting)
-	{
+
+	public void setSetting(String setting) {
 		this.setting = setting;
 	}
-	public String getSetting()
-	{
+
+	public String getSetting() {
 		return this.setting;
 	}
-	public void setRemark(String remark)
-	{
+
+	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-	public String getRemark()
-	{
+
+	public String getRemark() {
 		return this.remark;
 	}
 
@@ -173,6 +168,5 @@ public class UserDto
 				+ createDate + ", latestLoginDate=" + latestLoginDate
 				+ ", setting=" + setting + ", remark=" + remark + "]";
 	}
-	
-	
+
 }
