@@ -11,7 +11,7 @@ import com.hnfnu.zyw.dao.base.BaseDao;
 import com.hnfnu.zyw.dto.system.RoleMenuJoinDto;
 
 @Repository("roleMenuJoinDao")
-public class RoleMenuJoinDaoImpl extends BaseDao<RoleMenuJoinDto> implements
+public class RoleMenuJoinVoDaoImpl extends BaseDao<RoleMenuJoinDto> implements
 		IRoleMenuJoinDao {
 
 	public RoleMenuJoinDto uniqueLoad(String hql){
