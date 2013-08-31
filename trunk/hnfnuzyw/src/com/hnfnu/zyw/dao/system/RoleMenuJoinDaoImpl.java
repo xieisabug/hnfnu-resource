@@ -14,9 +14,19 @@ import com.hnfnu.zyw.dto.system.RoleMenuJoinDto;
 public class RoleMenuJoinDaoImpl extends BaseDao<RoleMenuJoinDto> implements
 		IRoleMenuJoinDao {
 
-	public RoleMenuJoinDto uniqueLoad(String hql) throws Exception {
-		Query u = this.getSession().createQuery(hql);
-		RoleMenuJoinDto d = (RoleMenuJoinDto) u.uniqueResult();
+	public RoleMenuJoinDto uniqueLoad(String hql){
+		Session session = null;
+		RoleMenuJoinDto d = null;
+		try{
+		session = this.getSession(); 
+		Query u = session.createQuery(hql);
+		d = (RoleMenuJoinDto) u.uniqueResult();
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}finally{
+			session.close();
+		}
 		return d;
 	}
 
@@ -54,6 +64,7 @@ public class RoleMenuJoinDaoImpl extends BaseDao<RoleMenuJoinDto> implements
 			if (t != null) {
 				t.rollback();
 			}
+			session.close();
 			return false;
 		} finally {
 			session.close();

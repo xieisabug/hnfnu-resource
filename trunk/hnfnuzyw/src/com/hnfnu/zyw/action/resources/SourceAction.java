@@ -74,7 +74,14 @@ public class SourceAction extends ActionSupport implements
 		source.setCreateUserId(user.getId());
 		source.setApprovalStatus("0");
 		source.setUseTimes(0);
-		// System.out.println("Action类别列表categoryList" + categoryIdList);
+		String kw = source.getKeyWords();
+		if(kw != null && !"".equals(kw)){
+			kw += ";"+ source.getName();
+		}else{
+			kw += source.getName();
+		}
+		
+		source.setKeyWords(kw);
 		success = sourceService.add(source, categoryIdList);
 		if (success) {
 			message = "添加资源成功！";

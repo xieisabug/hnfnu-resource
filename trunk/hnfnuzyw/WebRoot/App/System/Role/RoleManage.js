@@ -254,14 +254,6 @@ function formInit() {
 				maxlength : 50
 			}
 		}, {
-			display : '创建用户',
-			name : 'createUser',
-			type : 'text',
-			space : 30,
-			labelWidth : 100,
-			width : 220,
-			newline : true
-		}, {
 			display : '备注',
 			name : 'remark',
 			type : 'text',
@@ -334,7 +326,7 @@ $(function() {
 					hide : true
 				}, {
 					display : '创建用户',
-					name : 'createUser',
+					name : 'createUserName',
 					width : 200
 				}, {
 					display : '备注',

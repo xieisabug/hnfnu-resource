@@ -40,8 +40,17 @@ public class IndexAction extends ActionSupport implements ModelDriven<UserDto> {
 	// 获取登录所需要的东西
 	@Action(value = "index")
 	public String index() {
-		int id = ((UserDto)ServletActionContext.getContext().getSession().get("user")).getId();
-		menuList = indexService.getRoleMenusByUserId(id);
+		Map<String, Object> s = ServletActionContext.getContext().getSession();
+		System.out.println("session"+s);
+		UserDto user = (UserDto)s.get("user");
+		if(user != null){
+			 int id = user.getId();
+			 menuList = indexService.getRoleMenusByUserId(id);
+			success = true;
+		}else{
+			success = false;
+			message = "您还没有登录";
+		}
 		return SUCCESS;
 	}
 
