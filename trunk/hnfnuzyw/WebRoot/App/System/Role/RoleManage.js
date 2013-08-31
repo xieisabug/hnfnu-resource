@@ -112,7 +112,7 @@ function delete_role() {
 		return;
 	}
 	var row_data = roleGrid.getSelected();
-	$.ligerDialog.confirm('确认删除' + row_data.name + '？', '删除功能', function(r) {
+	$.ligerDialog.confirm('确认删除' + row_data.name + '？', '删除角色', function(r) {
 		if (r) {
 			$.ajax({
 				url : '/hnfnuzyw/system/deleteRole.action',
@@ -156,7 +156,6 @@ function role_menu_join() {
 				joinTree.ligerTree({
 					idFieldName : 'id',
 					textFieldName : 'name',
-					idFieldName : 'id',
 					parentIDFieldName : 'pid',
 					data : data.joinTree
 
@@ -182,53 +181,52 @@ function role_menu_join() {
 			}
 		}
 	});
-
-	// var row = roleGrid.getSelected();
-	// todo tree需要发送上面获取row的信息到服务器，返回来一系列的数据来生成
-
 }
 function join_save() {
-	// todo ajax发送数据后返回成功消息即可
-	var role = roleGrid.getSelected();
-	var checked = treeManager.getChecked();
-	var len = checked.length;
-	var row_data = role.id + "";
+    $.ligerDialog.confirm('挂接成功后将会刷新页面，请保存好其他页面的工作？', '挂接', function(r) {
+        if (r) {
+            var role = roleGrid.getSelected();
+            var checked = treeManager.getChecked();
+            var len = checked.length;
+            var row_data = role.id + "";
 
-	var temp = -1;
-	for ( var i = 0; i < len; i++) {
-		var node = checked[i].data;
-		if (checked[i].data.pid === undefined) {
-			continue;
-		}
-		if (checked[i].data.pid == temp) {
-			row_data += ";";
-			row_data += checked[i].data.id;
-		} else {
-			temp = checked[i].data.pid;
-			row_data += ":";
-			row_data += temp;
-			row_data += ",";
-			row_data += checked[i].data.id;
-		}
-	}
-	$.ajax({
-		url : '/hnfnuzyw/system/addRoleMenuJoins.action',
-		data : {
-			joinIds : row_data
-		},
-		type : 'post',
-		success : function(data) {
-			if (data.success) {
-				$.ligerDialog.tip({
-					title : '提示信息',
-					content : data.message
-				});
-				roleWin.close();
-			} else {
-				$.ligerDialog.error(data.message);
-			}
-		}
-	});
+            var temp = -1;
+            for ( var i = 0; i < len; i++) {
+                if (checked[i].data.pid === undefined) {
+                    continue;
+                }
+                if (checked[i].data.pid == temp) {
+                    row_data += ";";
+                    row_data += checked[i].data.id;
+                } else {
+                    temp = checked[i].data.pid;
+                    row_data += ":";
+                    row_data += temp;
+                    row_data += ",";
+                    row_data += checked[i].data.id;
+                }
+            }
+            $.ajax({
+                url : '/hnfnuzyw/system/addRoleMenuJoins.action',
+                data : {
+                    joinIds : row_data
+                },
+                type : 'post',
+                success : function(data) {
+                    if (data.success) {
+                        $.ligerDialog.tip({
+                            title : '提示信息',
+                            content : data.message
+                        });
+                        roleWin.close();
+                        window.parent.window.location.reload();
+                    } else {
+                        $.ligerDialog.error(data.message);
+                    }
+                }
+            });
+        }
+    });
 }
 function join_cancel() {
 	roleWin.close();

@@ -134,6 +134,10 @@ function delete_topic() {
     });
 }
 function topic_source_join() {
+	if (!topicGrid.getSelected()) {
+        $.ligerDialog.warn('请选择您要删除的行.');
+        return;
+    }
     joinWin = $.ligerDialog.open({
         width : 1000,
         height : 550,
