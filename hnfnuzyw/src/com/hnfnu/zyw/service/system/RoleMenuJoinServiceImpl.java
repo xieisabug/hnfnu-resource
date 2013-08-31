@@ -57,7 +57,6 @@ public class RoleMenuJoinServiceImpl implements IRoleMenuJoinService {
 
 				for (int j = 0; j < functionIds.length; j++) {
 					child = new HashMap<String, Object>();
-					System.out.println("functionIds[j]"+functionIds[j]);
 					FunctionDto function = functionDao.get(Integer
 							.parseInt(functionIds[j]));
 					child.put("name", function.getRemark());

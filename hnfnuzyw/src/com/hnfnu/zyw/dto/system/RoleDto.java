@@ -17,12 +17,24 @@ public class RoleDto
 	private String name;
 	//创建用户id
 	private Integer createUserId;
+	
+	private String createUserName;
 	//备注
 	private String remark;
 
 	public RoleDto()
 	{
 
+	}
+
+	public RoleDto(Integer id, String name, Integer createUserId,
+			String createUserName, String remark) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.createUserId = createUserId;
+		this.createUserName = createUserName;
+		this.remark = remark;
 	}
 
 	public void setId(Integer id)
@@ -51,6 +63,15 @@ public class RoleDto
 	{
 		return this.createUserId;
 	}
+
+	public String getCreateUserName() {
+		return createUserName;
+	}
+
+	public void setCreateUserName(String createUserName) {
+		this.createUserName = createUserName;
+	}
+
 	public void setRemark(String remark)
 	{
 		this.remark = remark;
@@ -58,6 +79,13 @@ public class RoleDto
 	public String getRemark()
 	{
 		return this.remark;
+	}
+
+	@Override
+	public String toString() {
+		return "RoleDto [id=" + id + ", name=" + name + ", createUserId="
+				+ createUserId + ", createUserName="
+				+ createUserName + ", remark=" + remark + "]";
 	}
 
 }
