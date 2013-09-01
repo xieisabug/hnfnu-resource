@@ -1,5 +1,7 @@
 package com.hnfnu.zyw.action.system;
 
+import java.util.Map;
+
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -10,8 +12,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.hnfnu.zyw.dto.system.UserDto;
 import com.hnfnu.zyw.service.system.IUserRoleMenuVoService;
 import com.hnfnu.zyw.vo.UserRoleMenuVo;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
@@ -28,8 +32,7 @@ ModelDriven<UserRoleMenuVo>{
 	private boolean success;
 	private String message;
 	private String functionIdList;
-	private int userId;
-	private int menuId;
+	
 
 	@Autowired
 	@Qualifier("userRoleMenuVoService")
@@ -38,7 +41,11 @@ ModelDriven<UserRoleMenuVo>{
 	
 	@Action(value = "listFunctionIdList")
 	public String listFunctionIdList() {
-		functionIdList = userRoleMenuVoService.getListByUserIdMenuId(userId, menuId);
+		// 获取当前用户
+				ActionContext context = ActionContext.getContext();
+				Map<String, Object> session = context.getSession();
+				UserDto user = (UserDto) session.get("user");
+		functionIdList = userRoleMenuVoService.getListByUserIdMenuId(user.getId(), userRoleMenuVo.getMenuId());
 		return SUCCESS;
 	}
 	
@@ -67,12 +74,6 @@ ModelDriven<UserRoleMenuVo>{
 	public void setUserRoleMenuVoService(
 			IUserRoleMenuVoService userRoleMenuVoService) {
 		this.userRoleMenuVoService = userRoleMenuVoService;
-	}
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-	public void setMenuId(int menuId) {
-		this.menuId = menuId;
 	}
 	
 }
