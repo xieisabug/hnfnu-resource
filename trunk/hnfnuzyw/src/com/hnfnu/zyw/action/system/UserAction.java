@@ -68,7 +68,6 @@ public class UserAction extends ActionSupport implements ModelDriven<UserDto> {
 	 */
 	@Action(value = "updatePwd")
 	public String updatePwd() {
-		System.out.println(user.getId()+"user.getId()");
 		success = userService.updatePwd(user.getId(), newPassword);
 		if (success) {
 			message = "ÐÞ¸ÄÃÜÂë³É¹¦£¡";

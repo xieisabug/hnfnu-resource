@@ -21,6 +21,7 @@ public class UserRoleMenuVoServiceImpl implements IUserRoleMenuVoService{
 	
 	public String getListByUserIdMenuId(int userId, int menuId) {
 		String hql = "from UserRoleMenuVo where userId="+userId+" and menuId="+menuId;
+		System.out.println("hql"+hql);
 		List<UserRoleMenuVo> list = null;
 		try {
 			list = userRoleMenuVoDao.list(hql);
@@ -45,7 +46,7 @@ public class UserRoleMenuVoServiceImpl implements IUserRoleMenuVoService{
 		while(it.hasNext()){
           String s= (String) it.next();
           String v = t.get(s);
-          re += "v;";
+          re += (v+";");
       }
 		return re;
 	}

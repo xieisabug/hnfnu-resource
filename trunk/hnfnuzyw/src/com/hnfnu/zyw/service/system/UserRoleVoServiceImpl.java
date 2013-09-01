@@ -42,7 +42,6 @@ public class UserRoleVoServiceImpl implements IUserRoleVoService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("角色有："+roles.size());
 		
 		for (int i = 0; i < roles.size(); i++) {
 			
@@ -55,11 +54,7 @@ public class UserRoleVoServiceImpl implements IUserRoleVoService {
 				}
 			}
 
-			System.out.println("selected = " + selected.size());
-			System.out.println("unselected" + unSelected.size());
 			if (j >= _selected.size()) {
-				System.out.println("此时的i = "+ i);
-				System.out.println("没有被选的角色"+roles.get(i));
 				unSelected.add(roles.get(i));
 			}
 		}
