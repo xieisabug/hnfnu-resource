@@ -28,6 +28,7 @@ public class UserRoleMenuVoServiceImpl implements IUserRoleMenuVoService{
 			e.printStackTrace();
 			return null;
 		}
+		System.out.println("list.size"+list.size());
 		Map<String,String> t = new HashMap<String,String>();
 		
 		for(int i = 0;i<list.size();i++){
