@@ -15,8 +15,10 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.hnfnu.zyw.dto.system.FunctionDto;
+import com.hnfnu.zyw.dto.system.ParameterDto;
 import com.hnfnu.zyw.dto.system.UserDto;
 import com.hnfnu.zyw.service.system.IFunctionService;
+import com.hnfnu.zyw.service.system.IParameterService;
 import com.hnfnu.zyw.service.website.IIndexService;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -35,6 +37,7 @@ public class IndexAction extends ActionSupport implements ModelDriven<UserDto> {
 	private String message;
 	private List<Map<String, Object>> menuList;
 	private List<FunctionDto> functionList;
+	private List<ParameterDto> parameterList;
 
 	@Autowired
 	@Qualifier("indexService")
@@ -43,6 +46,11 @@ public class IndexAction extends ActionSupport implements ModelDriven<UserDto> {
 	@Autowired
 	@Qualifier("functionService")
 	private IFunctionService functionService;
+	
+	@Autowired
+	@Qualifier("parameterService")
+	private IParameterService parameterService;
+
 
 	// 获取登录所需要的东西,menuList,functionList
 	@Action(value = "index")
@@ -53,6 +61,7 @@ public class IndexAction extends ActionSupport implements ModelDriven<UserDto> {
 			int id = user.getId();
 			menuList = indexService.getRoleMenusByUserId(id);
 			functionList = functionService.list();
+			parameterList = parameterService.listAll();
 			success = true;
 		} else {
 			success = false;
@@ -102,5 +111,15 @@ public class IndexAction extends ActionSupport implements ModelDriven<UserDto> {
 	public void setMenuList(List<Map<String, Object>> menuList) {
 		this.menuList = menuList;
 	}
+
+	public List<ParameterDto> getParameterList() {
+		return parameterList;
+	}
+
+	public void setParameterService(IParameterService parameterService) {
+		this.parameterService = parameterService;
+	}
+	
+	
 
 }
