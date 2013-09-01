@@ -103,4 +103,15 @@ public class ParameterServiceImpl implements IParameterService {
 		return m;
 	}
 
+	public List<ParameterDto> listAll() {
+		List<ParameterDto> l = null;
+		try {
+			l = parameterDao.list("from ParameterDto");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		return l;
+	}
+
 }
