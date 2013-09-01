@@ -1,5 +1,6 @@
 //几个布局的对象
 var tab, layout, accordion;
+var hnfnu = {};
 //tabid计数器，保证tabid不会重复
 var tabidcounter = 0;
 
@@ -29,7 +30,7 @@ $(document).ready(function () {
         if (!url)return;
         if (!tabid) {
             tabidcounter++;
-            tabid = "tabid" + tabidcounter;
+            tabid = jitem.attr("menuno") + "tabid" + tabidcounter;
             jitem.attr("tabid", tabid);
         }
         f_addTab(tabid, $("span:first", jitem).html(), url);
@@ -60,15 +61,21 @@ $(document).ready(function () {
     );
 
     /* 数据库获得菜单*/
-    $.getJSON('website/index.action', function (menus) {
-    	menus = menus.menuList;
+    $.getJSON('website/index.action', function (data) {
+            var menus = data.menuList;
+            hnfnu.functionList = {};
+            var len = data.functionList.length;
+            for(var i = 0; i<len; i++){
+                var f = data.functionList[i];
+                hnfnu.functionList[f.id] = f.name;
+            }
             $(menus).each(function (i, menu) {
                 var item = $('<div title="' + menu.name + '"> <ul class="menulist"></ul></div>');
                 $(menu.children).each(function (i, submenu) {
                     var subitem = $('<li><img/><span></span><div class="menuitem-l"></div><div class="menuitem-r"></div></li>');
                     subitem.attr({
-                        url:submenu.url,
-                        menuno:submenu.id
+                        'url':submenu.url,
+                        'menuno':submenu.menuId
                     });
                     $("img", subitem).attr("src", submenu.icon || submenu.menuicon);
                     $("span", subitem).html(submenu.menuName || submenu.menuname || submenu.name || submenu.text);

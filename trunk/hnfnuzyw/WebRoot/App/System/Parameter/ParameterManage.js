@@ -203,13 +203,22 @@ $(function () {
         {text:'修改参数', click:edit_parameter, icon:'modify', key:'modify'},
         {text:'删除参数', click:delete_parameter, icon:'delete', key:'delete'}
     ];
-    //todo 以后这个ajaxToolbar要通过ajax取过来
-    var ajaxToolbar = [
-        {name:'add'},
-        {name:'modify'},
-        {name:'delete'}
-    ];
-    toolbarItems = Toolbar.confirmToolbar(toolbarItems, ajaxToolbar);
+    var menuId = window.parent.tab.getSelectedTabItemID();
+    $.ajax({
+        url : '/hnfnuzyw/system/listFunctionIdList.action',
+        type : 'post',
+        data : {
+            menuId : menuId.substr(0,menuId.indexOf("t"))
+        },
+        success : function(data) {
+            var idList = data.functionIdList.split(";");
+            var ajaxToolbar = [];
+            for(var i = 0; i<idList.length; i++){
+                ajaxToolbar.push({name:parent.hnfnu.functionList[idList[i]]});
+            }
+            toolbarItems = Toolbar.confirmToolbar(toolbarItems, ajaxToolbar);
+        }
+    });
     $.ajax({
         url:'/hnfnuzyw/system/listParameter.action',
         type:'post',
