@@ -189,15 +189,22 @@ $(function() {
         icon : 'delete',
         key : 'delete'
     } ];
-    // todo 以后这个ajaxToolbar要通过ajax取过来
-    var ajaxToolbar = [ {
-        name : 'add'
-    }, {
-        name : 'delete'
-    }, {
-        name : 'modify'
-    } ];
-    toolbarItems = Toolbar.confirmToolbar(toolbarItems, ajaxToolbar);
+    var menuId = window.parent.tab.getSelectedTabItemID();
+    $.ajax({
+        url : '/hnfnuzyw/system/listFunctionIdList.action',
+        type : 'post',
+        data : {
+            menuId : menuId.substr(0,menuId.indexOf("t"))
+        },
+        success : function(data) {
+            var idList = data.functionIdList.split(";");
+            var ajaxToolbar = [];
+            for(var i = 0; i<idList.length; i++){
+                ajaxToolbar.push({name:parent.hnfnu.functionList[idList[i]]});
+            }
+            toolbarItems = Toolbar.confirmToolbar(toolbarItems, ajaxToolbar);
+        }
+    });
 
     $.ajax({
         url : '/hnfnuzyw/resources/listGrade.action',

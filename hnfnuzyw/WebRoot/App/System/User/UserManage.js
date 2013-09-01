@@ -447,7 +447,6 @@ function edit_password() {
         }
     });
     $("#id", pwdForm).val(data.id);
-    console.log($("#id", pwdForm));
 }
 
 // 增加用户的函数
@@ -632,26 +631,22 @@ $(function () {
             key:'modify_pwd'
         }
     ];
-    // todo 以后这个ajaxToolbar要通过ajax取过来
-    var ajaxToolbar = [
-        {
-            name:'add'
+    var menuId = window.parent.tab.getSelectedTabItemID();
+    $.ajax({
+        url : '/hnfnuzyw/system/listFunctionIdList.action',
+        type : 'post',
+        data : {
+            menuId : menuId.substr(0,menuId.indexOf("t"))
         },
-        {
-            name:'delete'
-        },
-        {
-            name:'modify'
-        },
-        {
-            name:'join'
-        },
-        {
-            name:'modify_pwd'
+        success : function(data) {
+            var idList = data.functionIdList.split(";");
+            var ajaxToolbar = [];
+            for(var i = 0; i<idList.length; i++){
+                ajaxToolbar.push({name:parent.hnfnu.functionList[idList[i]]});
+            }
+            toolbarItems = Toolbar.confirmToolbar(toolbarItems, ajaxToolbar);
         }
-    ];
-    // 确认权限的是否有这个功能
-    toolbarItems = Toolbar.confirmToolbar(toolbarItems, ajaxToolbar);
+    });
     $.ajax({
         url:'/hnfnuzyw/system/listUser.action',
         type:'post',
@@ -724,7 +719,7 @@ $(function () {
                     if (rowdata.birth) {
                         rowdata.birth = rowdata.birth.substring(0, 10);
                     }
-                    return ;
+                    return;
                 }
             });
             $("#pageloading").hide();
