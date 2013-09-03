@@ -166,8 +166,8 @@ function formInit() {
     gradeFrom.validate({
         debug : true,
         onkeyup : false,
-        errorPlacement : function(error) {
-            $.ligerDialog.error(error[0].innerHTML);
+        errorPlacement : function(error,element) {
+            error.appendTo(element.parent().parent().parent().parent());
         }
     });
 }

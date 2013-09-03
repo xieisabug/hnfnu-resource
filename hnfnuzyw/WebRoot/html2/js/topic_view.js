@@ -12,7 +12,7 @@ $(function() {
 		type : 'post',
 		success : function(data) {
 			tree = $("#tree").ligerTree({
-				nodeWidth : 200,
+				nodeWidth : 190,
 				textFieldName : 'name',
 				idFieldName : 'id',
 				parentIDFieldName : 'pid',
@@ -20,7 +20,7 @@ $(function() {
 				data : data.topicTree,
 				onSelect : function(data) {
                     params = {
-                        id:data.data.id,
+                        id:data.data.id
                     };
                     $.ajax( {
                         url:'/hnfnuzyw/resources/listSourceByTopicId.action',
