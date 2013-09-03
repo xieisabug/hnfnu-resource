@@ -356,7 +356,7 @@ function formInit() {
 }
 // 页面加载完成后就开始调用
 $(function() {
-    $("#sourceLayout").ligerLayout({leftWidth:250});
+    $("#sourceLayout").ligerLayout({leftWidth:260});
 	var toolbarItems = [ {
 		text : '上传资源',
 		click : add_source2,
@@ -408,7 +408,7 @@ $(function() {
         type : 'post',
         success : function(data) {
             sourceTree = $("#sourceTree").ligerTree({
-                nodeWidth:200,
+                nodeWidth:150,
                 textFieldName : 'name',
                 idFieldName : 'id',
                 parentIDFieldName : 'pid',

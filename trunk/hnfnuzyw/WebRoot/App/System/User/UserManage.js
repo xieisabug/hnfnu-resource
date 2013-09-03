@@ -231,7 +231,7 @@ function pwd_formInit() {
         debug:true,
         onkeyup:false,
         errorPlacement:function (error) {
-            $.ligerDialog.error(error[0].innerHTML);
+            error.appendTo(element.parent().parent().parent().parent());
         }
     });
 
@@ -289,7 +289,6 @@ function formInit(func) {
             }
         });
     } else if (func === "edit") {
-
     }
     fields.push({
         name:'name',
@@ -404,8 +403,8 @@ function formInit(func) {
     userForm.validate({
         debug:true,
         onkeyup:false,
-        errorPlacement:function (error) {
-            $.ligerDialog.error(error[0].innerHTML);
+        errorPlacement:function (error,element) {
+            error.appendTo(element.parent().parent().parent().parent());
         }
     });
 

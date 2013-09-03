@@ -2,8 +2,8 @@ var tree = null;
 var grid = null;
 $(function() {
 	$("#layout").ligerLayout({
-		leftWidth : 240,
-		rightWidth : 400
+		leftWidth : 260,
+		rightWidth : 380
 	});
 	var argsArr = getArgs();
 	$.ajax({
@@ -11,7 +11,7 @@ $(function() {
 		type : 'post',
 		success : function(data) {
 			tree = $("#tree").ligerTree({
-				nodeWidth : 200,
+				nodeWidth : 150,
 				textFieldName : 'name',
 				idFieldName : 'id',
 				parentIDFieldName : 'pid',
