@@ -47,9 +47,11 @@ public class SourceUploadAction extends ActionSupport implements
 		String uploadFileName = "";
 
 		File dir = new File(getSavePath());
+		//System.out.println("132434:"+dir.exists());
 
 		String savePath = getSavePath();// 保存上传文件的地址
-		//savePath.replaceAll("\\", "\\\\");
+		//System.out.println("savePath"+savePath);
+		
 
 		if (!dir.exists()) {
 
@@ -65,6 +67,7 @@ public class SourceUploadAction extends ActionSupport implements
 					+ getFileNameFileName().get(i));
 
 			FileInputStream fis = new FileInputStream(getFileName().get(i));
+			System.out.println("getFileName().get(i)"+getFileName().get(i));
 
 			byte[] buffers = new byte[1024];
 
@@ -104,14 +107,13 @@ public class SourceUploadAction extends ActionSupport implements
 	@Override
 	public String execute() throws Exception {
 
-		// TODO Auto-generated method stub
 
 		return "success";
 
 	}
 
 	public InputStream getInputStream() {
-
+		
 		return ServletActionContext.getServletContext().getResourceAsStream(
 				"/" + fileName);
 
