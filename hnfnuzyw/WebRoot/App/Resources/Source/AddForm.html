@@ -11,6 +11,7 @@
     <script src="../../Lib/jquery-validation/messages_cn.js" type="text/javascript"></script>
     <script src="../../Lib/jquery.form.js" type="text/javascript"></script>
     <script src="../../Lib/Uploadify/jquery.uploadify.min.js" type="text/javascript"></script>
+    <script src="../../Util/String.js" type="text/javascript"></script>
     <script type="text/javascript" src="../../Lib/Uploadify/swfobject.js"></script>
 </head>
 <body>
@@ -79,7 +80,7 @@
             onUploadSuccess : function(file, data) {
                 var fileNameAndPath = data.split(",");
                 var path = fileNameAndPath[1];
-                //path = path.replaceAll(/\\/g,'\\\\');
+                path = path.replaceAll(/\\/g,'\\\\');
                 $("#url",sourceForm).val(path);
             },
             onSelect : function(file) {
