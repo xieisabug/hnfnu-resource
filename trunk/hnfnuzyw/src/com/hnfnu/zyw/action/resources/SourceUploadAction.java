@@ -62,12 +62,23 @@ public class SourceUploadAction extends ActionSupport implements
 		List<File> files = getFileName();
 
 		for (int i = 0; i < files.size(); i++) {
-
+			//判断文件名是否重复，如果重复就加上（数字）
+			String fn = getFileNameFileName().get(i);
+			File f = new File(getSavePath() + "\\"
+					+ fn);
+			int j = 0;
+			while(f.exists()){
+				j++;
+				
+				 fn = "("+j+")"+getFileNameFileName().get(i);
+				
+				f = new File(getSavePath() + "\\"
+						+ fn);
+				
+			}
 			FileOutputStream fos = new FileOutputStream(getSavePath() + "\\"
-					+ getFileNameFileName().get(i));
-
+					+ fn);
 			FileInputStream fis = new FileInputStream(getFileName().get(i));
-			System.out.println("getFileName().get(i)"+getFileName().get(i));
 
 			byte[] buffers = new byte[1024];
 
@@ -83,7 +94,7 @@ public class SourceUploadAction extends ActionSupport implements
 
 			fis.close();
 
-			uploadFileName = getFileNameFileName().get(i);
+			uploadFileName = fn;
 
 		}
 
