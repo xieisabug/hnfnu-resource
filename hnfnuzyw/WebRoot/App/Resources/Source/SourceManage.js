@@ -31,7 +31,7 @@ function add_save() {
         var row_data = Form.parseJSON(sourceForm);
         // 发往服务器，返回成功后再添加到表格中
         $.ajax( {
-            url : '/hnfnuzyw/resources/addSource.action',
+            url : '../../../resources/addSource.action',
             data : row_data,
             type : 'post',
             success : function(data) {
@@ -54,7 +54,7 @@ function add_cancel() {
     sourceForm = sourceWin.frame.sourceForm;
     var dlg = $.ligerDialog.waitting('正在撤销已经上传的文件...');
     $.ajax({
-        url:'/hnfnuzyw/resources/deleteSource.action',
+        url:'../../../resources/deleteSource.action',
         data:{url:$("#url",sourceForm).val()},
         type:'post',
         success:function (data) {
@@ -78,7 +78,7 @@ function delete_source(){
     $.ligerDialog.confirm('确认删除' + row_data.name + '?', '删除功能', function(r) {
         if (r) {
             $.ajax( {
-                url : '/hnfnuzyw/resources/deleteSource.action',
+                url : '../../../resources/deleteSource.action',
                 data : row_data,
                 type : 'post',
                 success : function(data) {
@@ -128,7 +128,7 @@ function edit_save() {
         var row_data = Form.parseJSON(sourceForm);
         // 发往服务器，返回成功后再修改到表格中
         $.ajax( {
-            url : '/hnfnuzyw/resources/updateSource.action',
+            url : '../../../resources/updateSource.action',
             data : row_data,
             type : 'post',
             success : function(data) {
@@ -223,7 +223,7 @@ function formInit() {
     sourceForm = $('<form></form>');
 
     $.ajax({
-        url:'/hnfnuzyw/resources/formSelect.action',
+        url:'../../../resources/formSelect.action',
         type:'post',
         success:function(data){
             sourceForm.ligerForm( {
@@ -387,7 +387,7 @@ $(function() {
 
     var menuId = window.parent.tab.getSelectedTabItemID();
     $.ajax({
-        url : '/hnfnuzyw/system/listFunctionIdList.action',
+        url : '../../../system/listFunctionIdList.action',
         type : 'post',
         data : {
             menuId : menuId.substr(0,menuId.indexOf("t"))
@@ -404,7 +404,7 @@ $(function() {
     $("#sourceToolBar").ligerToolBar({items:toolbarItems});
 
     $.ajax( {
-        url : '/hnfnuzyw/resources/allTree.action',
+        url : '../../../resources/allTree.action',
         type : 'post',
         success : function(data) {
             sourceTree = $("#sourceTree").ligerTree({
@@ -422,7 +422,7 @@ $(function() {
                             categoryId:0
                         };
                         $.ajax( {
-                            url:'/hnfnuzyw/resources/sourceMoreVoList.action',
+                            url:'../../../resources/sourceMoreVoList.action',
                             type : 'post',
                             data:params,
                             success : function(data) {
@@ -435,7 +435,7 @@ $(function() {
                             categoryId:data.data.id
                         };
                         $.ajax( {
-                            url:'/hnfnuzyw/resources/sourceMoreVoList.action',
+                            url:'../../../resources/sourceMoreVoList.action',
                             type : 'post',
                             data:params,
                             success : function(data) {

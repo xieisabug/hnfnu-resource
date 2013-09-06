@@ -27,7 +27,7 @@ function add_save() {
         var row_data = Form.parseJSON(subjectFrom);
         // 发往服务器，返回成功后再添加到表格中
         $.ajax({
-            url : '/hnfnuzyw/resources/addSubject.action',
+            url : '../../../resources/addSubject.action',
             data : row_data,
             type : 'post',
             success : function(data) {
@@ -79,7 +79,7 @@ function edit_save() {
         var row_data = Form.parseJSON(subjectFrom);
         // todo 需要发往服务器，返回成功后再修改到表格中
         $ .ajax({
-                url : '/hnfnuzyw/resources/updateSubject.action',
+                url : '../../../resources/updateSubject.action',
                 data : row_data,
                 type : 'post',
                 success : function(data) {
@@ -113,7 +113,7 @@ function delete_subject() {
     $.ligerDialog.confirm('确认删除' + row_data.name + '？', '删除学科', function(r) {
         if (r) {
             $.ajax({
-                url : '/hnfnuzyw/resources/deleteSubject.action',
+                url : '../../../resources/deleteSubject.action',
                 data : row_data,
                 type : 'post',
                 success : function(data) {
@@ -191,7 +191,7 @@ $(function() {
     } ];
     var menuId = window.parent.tab.getSelectedTabItemID();
     $.ajax({
-        url : '/hnfnuzyw/system/listFunctionIdList.action',
+        url : '../../../system/listFunctionIdList.action',
         type : 'post',
         data : {
             menuId : menuId.substr(0,menuId.indexOf("t"))
@@ -207,7 +207,7 @@ $(function() {
     });
 
     $.ajax({
-        url : '/hnfnuzyw/resources/listSubject.action',
+        url : '../../../resources/listSubject.action',
         type : 'post',
         success : function(data) {
             subjectGrid = $('#subjectGrid').ligerGrid({

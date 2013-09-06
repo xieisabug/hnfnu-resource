@@ -34,7 +34,7 @@ function add_save() {
 		console.log(row_data);
 		// 发往服务器，返回成功后再添加到表格中
 		$.ajax({
-			url : '/hnfnuzyw/system/addMenu.action',
+			url : '../../../system/addMenu.action',
 			data : row_data,
 			type : 'post',
 			success : function(data) {
@@ -69,7 +69,7 @@ function delete_menu() {
 		if (r) {
 			// todo 进行ajax操作，成功后在回调函数里删除选择的行
 			$.ajax({
-				url : '/hnfnuzyw/system/deleteMenu.action',
+				url : '../../../system/deleteMenu.action',
 				data : row_data,
 				type : 'post',
 				success : function(data) {
@@ -119,7 +119,7 @@ function edit_save() {
 		var row_data = Form.parseJSON(menuForm);
 		// 发往服务器，返回成功后再修改到表格中
 		$.ajax({
-			url : '/hnfnuzyw/system/updateMenu.action',
+			url : '../../../system/updateMenu.action',
 			data : row_data,
 			type : 'post',
 			success : function(data) {
@@ -144,7 +144,7 @@ function formInit() {
 	menuForm = $('<form></form>');
 
 	$.ajax({
-		url : '/hnfnuzyw/system/listFunAndMenu.action',
+		url : '../../../system/listFunAndMenu.action',
 		type : 'post',
         async:false,
 		success : function(data) {
@@ -257,7 +257,7 @@ $(function() {
 
     var menuId = window.parent.tab.getSelectedTabItemID();
     $.ajax({
-        url : '/hnfnuzyw/system/listFunctionIdList.action',
+        url : '../../../system/listFunctionIdList.action',
         type : 'post',
         data : {
             menuId : menuId.substr(0,menuId.indexOf("t"))
@@ -273,7 +273,7 @@ $(function() {
     });
 
 	$.ajax({
-		url : '/hnfnuzyw/system/listMenu.action',
+		url : '../../../system/listMenu.action',
 		type : 'post',
 		success : function(data) {
 			grid = $("#menuGrid").ligerGrid({

@@ -29,7 +29,7 @@ function add_save() {
 		if (roleForm.valid()) {
 			var row_data = Form.parseJSON(roleForm);
 			$.ajax({
-				url : '/hnfnuzyw/system/addRole.action',
+				url : '../../../system/addRole.action',
 				data : row_data,
 				type : 'post',
 				success : function(data) {
@@ -82,7 +82,7 @@ function edit_save() {
 		if (roleForm.valid()) {
 			var row_data = Form.parseJSON(roleForm);
 			$.ajax({
-				url : '/hnfnuzyw/system/updateRole.action',
+				url : '../../../system/updateRole.action',
 				data : row_data,
 				type : 'post',
 				success : function(data) {
@@ -115,7 +115,7 @@ function delete_role() {
 	$.ligerDialog.confirm('确认删除' + row_data.name + '？', '删除角色', function(r) {
 		if (r) {
 			$.ajax({
-				url : '/hnfnuzyw/system/deleteRole.action',
+				url : '../../../system/deleteRole.action',
 				data : {
 					id : row_data.id
 				},
@@ -145,7 +145,7 @@ function role_menu_join() {
 	var role = roleGrid.getSelected();
 
 	$.ajax({
-		url : '/hnfnuzyw/system/joinTree.action',
+		url : '../../../system/joinTree.action',
 		data : {
 			roleId : role.id
 		},
@@ -207,7 +207,7 @@ function join_save() {
                 }
             }
             $.ajax({
-                url : '/hnfnuzyw/system/addRoleMenuJoins.action',
+                url : '../../../system/addRoleMenuJoins.action',
                 data : {
                     joinIds : row_data
                 },
@@ -297,7 +297,7 @@ $(function() {
 	} ];
     var menuId = window.parent.tab.getSelectedTabItemID();
     $.ajax({
-        url : '/hnfnuzyw/system/listFunctionIdList.action',
+        url : '../../../system/listFunctionIdList.action',
         type : 'post',
         data : {
             menuId : menuId.substr(0,menuId.indexOf("t"))
@@ -313,7 +313,7 @@ $(function() {
     });
 
 	$.ajax({
-		url : '/hnfnuzyw/system/listRole.action',
+		url : '../../../system/listRole.action',
 		type : 'post',
 		success : function(data) {
 			roleGrid = $('#roleGrid').ligerGrid({

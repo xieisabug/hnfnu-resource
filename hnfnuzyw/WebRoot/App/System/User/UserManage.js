@@ -81,7 +81,7 @@ function user_role_join() {
     }
 
     $.ajax({
-        url:'/hnfnuzyw/system/roleByUser.action',
+        url:'../../../system/roleByUser.action',
         data:{
             userId:user.id
         },
@@ -133,7 +133,7 @@ function join_save() {
                 userRoleIds += selecteds[i].id;
             }
             $.ajax({
-                url:'/hnfnuzyw/system/addUserRoleJoins.action',
+                url:'../../../system/addUserRoleJoins.action',
                 data:{
                     seletedRoleIds:userRoleIds
                 },
@@ -164,7 +164,7 @@ function edit_pwd_save() {
         if (pwdForm.valid()) {
             var row_data = Form.parseJSON(pwdForm);
             $.ajax({
-                url:'/hnfnuzyw/system/updatePwd.action',
+                url:'../../../system/updatePwd.action',
                 data:row_data,
                 type:'post',
                 success:function (data) {
@@ -477,7 +477,7 @@ function add_save() {
         var row_data = Form.parseJSON(userForm);
         // 发往服务器，返回成功后再添加到表格中
         $.ajax({
-            url:'/hnfnuzyw/system/addUser.action',
+            url:'../../../system/addUser.action',
             data:row_data,
             type:'post',
             success:function (data) {
@@ -512,7 +512,7 @@ function delete_user() {
         if (r) {
             // 进行ajax操作，成功后在回调函数里删除选择的行
             $.ajax({
-                url:'/hnfnuzyw/system/deleteUser.action',
+                url:'../../../system/deleteUser.action',
                 data:{
                     id:row_data.id
                 },
@@ -570,7 +570,7 @@ function edit_save() {
         // 需要发往服务器，返回成功后再修改到表格中
 
         $.ajax({
-            url:'/hnfnuzyw/system/updateUser.action',
+            url:'../../../system/updateUser.action',
             data:row_data,
             type:'post',
             success:function (data) {
@@ -632,7 +632,7 @@ $(function () {
     ];
     var menuId = window.parent.tab.getSelectedTabItemID();
     $.ajax({
-        url : '/hnfnuzyw/system/listFunctionIdList.action',
+        url : '../../../system/listFunctionIdList.action',
         type : 'post',
         data : {
             menuId : menuId.substr(0,menuId.indexOf("t"))
@@ -647,7 +647,7 @@ $(function () {
         }
     });
     $.ajax({
-        url:'/hnfnuzyw/system/listUser.action',
+        url:'../../../system/listUser.action',
         type:'post',
         success:function (data) {
             userGrid = $("#userGrid").ligerGrid({

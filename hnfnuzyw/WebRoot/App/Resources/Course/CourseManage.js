@@ -33,7 +33,7 @@ function add_save() {
 		var row_data = Form.parseJSON(courseForm);
 		// 发往服务器，返回成功后再添加到表格中
 		$.ajax( {
-			url : '/hnfnuzyw/resources/addCourse.action',
+			url : '../../../resources/addCourse.action',
 			data : row_data,
 			type : 'post',
 			success : function(data) {
@@ -66,7 +66,7 @@ function delete_course() {
 	$.ligerDialog.confirm('确认删除' + row_data.name + '?', '删除功能', function(r) {
 		if (r) {
 			$.ajax( {
-				url : '/hnfnuzyw/resources/deleteCourse.action',
+				url : '../../../resources/deleteCourse.action',
 				data : row_data,
 				type : 'post',
 				success : function(data) {
@@ -119,7 +119,7 @@ function edit_save() {
 		var row_data = Form.parseJSON(courseForm);
 		// 发往服务器，返回成功后再修改到表格中
 		$.ajax( {
-			url : '/hnfnuzyw/resources/updateCourse.action',
+			url : '../../../resources/updateCourse.action',
 			data : row_data,
 			type : 'post',
 			success : function(data) {
@@ -146,7 +146,7 @@ function formInit() {
 	courseForm = $('<form></form>');
 
 	$.ajax( {
-		url : '/hnfnuzyw/resources/listGradesAndSubjects.action',
+		url : '../../../resources/listGradesAndSubjects.action',
 		type : 'post',
 		async : false,
 		success : function(data) {
@@ -240,7 +240,7 @@ $(function() {
 
     var menuId = window.parent.tab.getSelectedTabItemID();
     $.ajax({
-        url : '/hnfnuzyw/system/listFunctionIdList.action',
+        url : '../../../system/listFunctionIdList.action',
         type : 'post',
         data : {
             menuId : menuId.substr(0,menuId.indexOf("t"))
@@ -256,7 +256,7 @@ $(function() {
     });
 
 	$.ajax( {
-		url : '/hnfnuzyw/resources/listCourseGradeSubject.action',
+		url : '../../../resources/listCourseGradeSubject.action',
 		type : 'post',
 		success : function(data) {
 			courseGrid = $("#courseGrid").ligerGrid( {
