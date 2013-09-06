@@ -4,7 +4,7 @@ function generateIndex(){
     $.ligerDialog.confirm('确认生成主页么（将会覆盖您上次生成的主页）?', '生成主页', function(r) {
         if (r) {
             $.ajax({
-                url : '/hnfnuzyw/ftl/makeIndex.action',
+                url : '../../../ftl/makeIndex.action',
                 data : row_data,
                 type : 'post',
                 success : function(data) {
@@ -24,7 +24,7 @@ function generateAllList(){
         if (r) {
             $.ajax({
                 //todo url没有更改
-                url : '/hnfnuzyw/ftl/makeAllListFtl.action',
+                url : '../../../ftl/makeAllListFtl.action',
                 data : row_data,
                 type : 'post',
                 success : function(data) {
@@ -63,7 +63,7 @@ function generate(){
     var subjectId = $("div.l-text-wrapper #subjectId").val();
     $.ajax( {
         //todo url不对
-        url : '/hnfnuzyw/ftl/makeListFtl.action',
+        url : '../../../ftl/makeListFtl.action',
         data : {
             gradeId:gradeId,
             subjectId:subjectId
@@ -91,7 +91,7 @@ function initListForm(){
     listForm = $('<form></form>');
 
     $.ajax( {
-        url : '/hnfnuzyw/resources/listGradesAndSubjects.action',
+        url : '../../../resources/listGradesAndSubjects.action',
         type : 'post',
         async : false,
         success : function(data) {

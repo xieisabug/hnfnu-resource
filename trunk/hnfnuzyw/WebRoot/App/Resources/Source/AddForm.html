@@ -29,11 +29,11 @@
             auto:true,//是否自动上传
             height: 30,
             buttonText:'上传资源',
-            button_image_url: "/hnfnuzyw/App/Lib/Uploadify/blank.png",
-            cancelImage:'/hnfnuzyw/App/Lib/Uploadify/uploadify-cancel.png',
-            swf : '/hnfnuzyw/App/Lib/Uploadify/uploadify.swf',
+            button_image_url: "../../../App/Lib/Uploadify/blank.png",
+            cancelImage:'../../../App/Lib/Uploadify/uploadify-cancel.png',
+            swf : '../../../App/Lib/Uploadify/uploadify.swf',
             // expressInstall:'App/Lib/Uploadify/expressInstall.swf',
-            uploader : '/hnfnuzyw/upload/fileUpload.action', //后台处理上传文件的action
+            uploader : '../../../upload/fileUpload.action', //后台处理上传文件的action
             width : 120 ,
             multi : false,//是否允许多个文件上传
             queueID : 'uploadfileQueue',
@@ -104,7 +104,7 @@
         sourceForm = $('form');
 
         $.ajax({
-            url:'/hnfnuzyw/resources/formSelect.action',
+            url:'../../../resources/formSelect.action',
             type:'post',
             success:function(data){
                 sourceForm.ligerForm( {

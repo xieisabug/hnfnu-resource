@@ -28,7 +28,7 @@ function add_save() {
 		
 		// 发往服务器，返回成功后再添加到表格中
 		$.ajax({
-			url : '/hnfnuzyw/system/addFunction.action',
+			url : '../../../system/addFunction.action',
 			data : row_data,
 			type : 'post',
 			success : function(data) {
@@ -81,7 +81,7 @@ function edit_save() {
 		// todo 需要发往服务器，返回成功后再修改到表格中
 		$
 				.ajax({
-					url : '/hnfnuzyw/system/updateFunction.action',
+					url : '../../../system/updateFunction.action',
 					data : row_data,
 					type : 'post',
 					success : function(data) {
@@ -115,7 +115,7 @@ function delete_function() {
 	$.ligerDialog.confirm('确认删除' + row_data.name + '？', '删除功能', function(r) {
 		if (r) {
 			$.ajax({
-				url : '/hnfnuzyw/system/deleteFunction.action',
+				url : '../../../system/deleteFunction.action',
 				data : row_data,
 				type : 'post',
 				success : function(data) {
@@ -197,7 +197,7 @@ $(function() {
 	} ];
     var menuId = window.parent.tab.getSelectedTabItemID();
     $.ajax({
-        url : '/hnfnuzyw/system/listFunctionIdList.action',
+        url : '../../../system/listFunctionIdList.action',
         type : 'post',
         data : {
             menuId : menuId.substr(0,menuId.indexOf("t"))
@@ -213,7 +213,7 @@ $(function() {
     });
 
 	$.ajax({
-		url : '/hnfnuzyw/system/listFunction.action',
+		url : '../../../system/listFunction.action',
 		type : 'post',
 		success : function(data) {
 			functionGrid = $('#functionGrid').ligerGrid({

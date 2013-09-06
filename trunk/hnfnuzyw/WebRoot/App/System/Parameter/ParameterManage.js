@@ -22,7 +22,7 @@ function add_save() {
     if (parameterForm.valid()) {
         var row_data = Form.parseJSON(parameterForm);
         $.ajax({
-            url:'/hnfnuzyw/system/addParameter.action',
+            url:'../../../system/addParameter.action',
             data:row_data,
             type:'post',
             success:function (data) {
@@ -66,7 +66,7 @@ function edit_save() {
     if (parameterForm.valid()) {
         var row_data = Form.parseJSON(parameterForm);
         $.ajax({
-            url:'/hnfnuzyw/system/updateParameter.action',
+            url:'../../../system/updateParameter.action',
             data:row_data,
             type:'post',
             success:function (data) {
@@ -95,7 +95,7 @@ function delete_parameter() {
     $.ligerDialog.confirm('确认删除' + row_data.name + '？', '删除功能', function (r) {
         if (r) {
             $.ajax({
-                url:'/hnfnuzyw/system/deleteParameter.action',
+                url:'../../../system/deleteParameter.action',
                 data:row_data,
                 type:'post',
                 success:function (data) {
@@ -205,7 +205,7 @@ $(function () {
     ];
     var menuId = window.parent.tab.getSelectedTabItemID();
     $.ajax({
-        url : '/hnfnuzyw/system/listFunctionIdList.action',
+        url : '../../../system/listFunctionIdList.action',
         type : 'post',
         data : {
             menuId : menuId.substr(0,menuId.indexOf("t"))
@@ -220,7 +220,7 @@ $(function () {
         }
     });
     $.ajax({
-        url:'/hnfnuzyw/system/listParameter.action',
+        url:'../../../system/listParameter.action',
         type:'post',
         success:function (data) {
             parameterGrid = $('#parameterGrid').ligerGrid({

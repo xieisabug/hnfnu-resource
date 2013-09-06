@@ -16,7 +16,7 @@
     var selectCourseTree = null;
     $(function(){
         $.ajax({
-            url:'/hnfnuzyw/resources/courseTree.action',
+            url:'../../../resources/courseTree.action',
             type:'post',
             success:function(data){
                 selectCourseTree = $("#selectCourseTree").ligerTree({

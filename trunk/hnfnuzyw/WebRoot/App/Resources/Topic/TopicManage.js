@@ -28,7 +28,7 @@ function add_save() {
         var row_data = Form.parseJSON(topicFrom);
         // 发往服务器，返回成功后再添加到表格中
         $.ajax({
-            url : '/hnfnuzyw/resources/addTopic.action',
+            url : '../../../resources/addTopic.action',
             data : row_data,
             type : 'post',
             success : function(data) {
@@ -80,7 +80,7 @@ function edit_save() {
         var row_data = Form.parseJSON(topicFrom);
         // todo 需要发往服务器，返回成功后再修改到表格中
         $ .ajax({
-                url : '/hnfnuzyw/resources/updateTopic.action',
+                url : '../../../resources/updateTopic.action',
                 data : row_data,
                 type : 'post',
                 success : function(data) {
@@ -114,7 +114,7 @@ function delete_topic() {
     $.ligerDialog.confirm('确认删除' + row_data.name + '？', '删除专题', function(r) {
         if (r) {
             $.ajax({
-                url : '/hnfnuzyw/resources/deleteTopic.action',
+                url : '../../../resources/deleteTopic.action',
                 data : row_data,
                 type : 'post',
                 success : function(data) {
@@ -166,7 +166,7 @@ function join_save(){
         }
     }
     $.ajax( {
-        url : '/hnfnuzyw/resources/updateTopicSourceJoins.action',
+        url : '../../../resources/updateTopicSourceJoins.action',
         type : 'post',
         data : {
             topicId : topicId,
@@ -269,7 +269,7 @@ $(function() {
     }];
     var menuId = window.parent.tab.getSelectedTabItemID();
     $.ajax({
-        url : '/hnfnuzyw/system/listFunctionIdList.action',
+        url : '../../../system/listFunctionIdList.action',
         type : 'post',
         data : {
             menuId : menuId.substr(0,menuId.indexOf("t"))
@@ -285,7 +285,7 @@ $(function() {
     });
 
     $.ajax({
-        url : '/hnfnuzyw/resources/listTopic.action',
+        url : '../../../resources/listTopic.action',
         type : 'post',
         success : function(data) {
             topicGrid = $('#topicGrid').ligerGrid({

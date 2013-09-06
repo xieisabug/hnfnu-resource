@@ -22,7 +22,7 @@ $(function() {
     $("#joinLayout").ligerLayout({leftWidth:250});
     topicId = window.parent.topicGrid.getSelected().id;
     $.ajax( {
-        url : '/hnfnuzyw/resources/querySourceIdsByTopicId.action',
+        url : '../../../resources/querySourceIdsByTopicId.action',
         type : 'post',
         data : {
             topicId : topicId
@@ -33,7 +33,7 @@ $(function() {
         }
     });
     $.ajax( {
-        url : '/hnfnuzyw/resources/allTree.action',
+        url : '../../../resources/allTree.action',
         type : 'post',
         success : function(data) {
             joinTree = $("#joinTree").ligerTree({
@@ -51,7 +51,7 @@ $(function() {
                             categoryId:0
                         };
                         $.ajax( {
-                            url:'/hnfnuzyw/resources/sourceMoreVoList.action',
+                            url:'../../../resources/sourceMoreVoList.action',
                             type : 'post',
                             data:params,
                             success : function(data) {
@@ -64,7 +64,7 @@ $(function() {
                             categoryId:data.data.id
                         };
                         $.ajax( {
-                            url:'/hnfnuzyw/resources/sourceMoreVoList.action',
+                            url:'../../../resources/sourceMoreVoList.action',
                             type : 'post',
                             data:params,
                             success : function(data) {
