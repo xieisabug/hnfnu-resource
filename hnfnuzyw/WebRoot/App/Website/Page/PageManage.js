@@ -5,7 +5,6 @@ function generateIndex(){
         if (r) {
             $.ajax({
                 url : '../../../ftl/makeIndex.action',
-                data : row_data,
                 type : 'post',
                 success : function(data) {
                     if (data.success) {
@@ -25,7 +24,6 @@ function generateAllList(){
             $.ajax({
                 //todo url没有更改
                 url : '../../../ftl/makeAllListFtl.action',
-                data : row_data,
                 type : 'post',
                 success : function(data) {
                     if (data.success) {

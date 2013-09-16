@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>无标题文档</title>
+<title>资源管理系统首页</title>
 <link href="css/style.css" type="text/css" rel="stylesheet"/>
 <script src="js/gallery.js" type="text/javascript"></script>
 <script src="js/menu.js" type="text/javascript"></script>

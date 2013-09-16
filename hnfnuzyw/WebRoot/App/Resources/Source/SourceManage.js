@@ -29,6 +29,11 @@ function add_save() {
     // 把表单转化为数组
     if (sourceForm.valid()) {
         var row_data = Form.parseJSON(sourceForm);
+        if(row_data.url == "" || row_data.url == null) {
+        	$.ligerDialog.error("未上传文件");
+        	return;
+        }
+        
         // 发往服务器，返回成功后再添加到表格中
         $.ajax( {
             url : '../../../resources/addSource.action',
