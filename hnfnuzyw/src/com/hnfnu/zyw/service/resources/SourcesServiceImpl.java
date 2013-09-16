@@ -102,23 +102,31 @@ public class SourcesServiceImpl implements ISourceService {
 		return sourceList;
 	}
 
-	// 删除文件的方法，如果返回的是1说明删除成功，-1说明文件不存在。0说明删除错误，因为不是文件
-	public int delete(String url) {
-		//System.out.println(url);
-		if(url == null) return -1;
+	// 删除文件的方法，如果返回的是1说明删除成功，-1说明文件不存在。0说明文件删除错误，2说明文件删除成功，信息删除错误
+	public int delete(String url,int id) {
 		File file = new File(url);
 
 		// 判断目录或文件是否存在
 		if (!file.exists()) { // 不存在返回 false
+			try {
+				sourceDao.delete(id);
+			} catch (Exception e) {
+				e.printStackTrace();
+				return 2;
+			}
 			return -1;
 		} else {
-			// 判断是否为文件
-			if (file.isFile()) { // 为文件时调用删除文件方法
-				file.delete();
+				if(file.delete()){
+					try {
+						sourceDao.delete(id);
+					} catch (Exception e) {
+						e.printStackTrace();
+						return 2;
+					}
 				return 1;
-			} else { // 为目录时调用删除目录方法
-				return 0;
-			}
+				}else {
+					return 0;
+				}
 		}
 	}
 
