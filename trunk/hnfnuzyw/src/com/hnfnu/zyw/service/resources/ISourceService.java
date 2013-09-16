@@ -28,5 +28,5 @@ public interface ISourceService {
 	 */
 	public Map<String, Object> listSource();
 
-	public int delete(String url);
+	public int delete(String url,int id);
 }

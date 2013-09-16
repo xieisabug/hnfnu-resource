@@ -67,6 +67,7 @@ public class SourceAction extends ActionSupport implements
 		Date date = new Date();
 		Timestamp timeStamp = new Timestamp(date.getTime());
 		source.setCreateDate(timeStamp);
+		source.setViewTimes(0);
 		// 获取当前用户
 		ActionContext context = ActionContext.getContext();
 		Map<String, Object> session = context.getSession();
@@ -114,35 +115,21 @@ public class SourceAction extends ActionSupport implements
 		return SUCCESS;
 	}
 
-	/**
-	 * 根据资源id删除一个资源文件以及在数据库里面的信息,
-	 * 
-	 * @return
-	 */
 
-	@Action(value = "deleteSourceMessege")
-	public String deleteMessege() {
-		success = sourceService.deleteMessege(source.getId());
-		if (success) {
-			message = "删除资源信息成功！";
-		} else {
-			message = "删除资源信息失败！";
-		}
-		return SUCCESS;
-	}
-
+	// 删除文件的方法，如果返回的是1说明删除成功，-1说明文件不存在。0说明文件删除错误，2说明文件删除成功，信息删除错误
 	@Action(value = "deleteSource")
 	public String delete() {
-		int i = sourceService.delete(source.getUrl());
+		
+		int i = sourceService.delete(source.getUrl(),source.getId());
 		if (i == 1) {
 			success = true;
 			message = "删除资源文件成功！";
 		} else if (i == -1) {
 			success = true;// 虽然删除失败，返回true代表此文件已经不存在，页面上的对话框自动消失
-			message = "删除资源文件失败，因为该文件不存在！";
+			message = "文件不存在,资源信息已经删除";
 		} else if (i == 0) {
 			success = false;
-			message = "删除资源文件失败,因为不是文件！";
+			message = "删除资源文件失败！";
 		}
 		return SUCCESS;
 	}
