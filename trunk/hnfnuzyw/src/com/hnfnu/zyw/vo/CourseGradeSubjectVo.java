@@ -14,6 +14,7 @@ public class CourseGradeSubjectVo {
 	private String gradeName;
 	private int subjectId;
 	private String subjectName;
+	private String remark; 
 	
 
 	public CourseGradeSubjectVo() {
@@ -80,5 +81,15 @@ public class CourseGradeSubjectVo {
 	public void setSubjectName(String subjectName) {
 		this.subjectName = subjectName;
 	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	
+	
 
 }

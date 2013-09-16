@@ -28,20 +28,11 @@ public class SourceUploadAction extends ActionSupport implements
 	private String savePath;// 文件上传后保存的路径
 
 	/**
-	 * 
-	 * 
-	 * 
 	 * @return
-	 * 
-	 * @throws Exception
-	 * 
 	 * @author lijf
-	 * 
 	 * @description 上传文件
-	 * 
 	 * @update 2013-1-26 下午02:15:26
 	 */
-
 	public void upload() throws Exception {// intentionPicture
 
 		String uploadFileName = "";
