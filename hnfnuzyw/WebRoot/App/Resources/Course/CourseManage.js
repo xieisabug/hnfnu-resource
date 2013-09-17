@@ -140,6 +140,11 @@ function edit_save() {
 function edit_cancel() {
 	courseWin.close();
 }
+
+function query_course(){
+    courseGrid.showFilter();
+}
+
 // 初始化表单，生成form标签
 function formInit() {
 	var groupicon = "../../../App/Lib/ligerUI/skins/icons/communication.gif";
@@ -236,7 +241,12 @@ $(function() {
 		key : 'modify'
 	}, {
 		line : true
-	}];
+	}, {
+        text : '高级查询',
+        click : query_course,
+        icon : 'search2',
+        key : 'query'
+    }];
 
     var menuId = window.parent.tab.getSelectedTabItemID();
     $.ajax({
