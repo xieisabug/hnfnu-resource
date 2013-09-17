@@ -165,9 +165,9 @@ function all_info(){
     $.ligerDialog.open({
         title: '查看全部信息',
         name:'winSelector',
-        width: 500,
-        height: 550,
-        url: 'SourceInfo.jsp?id='+sourceGridData.id
+        width: 1024,
+        height: 650,
+        url: '../../../html2/source_view.html?id='+sourceGridData.id
     });
 }
 //打开一个选择课程的树形结构的对话框

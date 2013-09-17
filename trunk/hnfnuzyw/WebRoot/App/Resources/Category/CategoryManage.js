@@ -110,7 +110,7 @@ function delete_category() {
         return;
     }
     var row_data = categoryGrid.getSelected();
-    $.ligerDialog.confirm('确认删除' + row_data.name + '？', '删除类别', function(r) {
+    $.ligerDialog.warn('<p style="color:red;font-weight: bolder;">（警告：删除此类别后，类别下所有的资源会全部删除。）</p>确认删除' + row_data.name + '？', '删除类别', function(r) {
         if (r) {
             $.ajax({
                 url : '../../../resources/deleteCategory.action',
