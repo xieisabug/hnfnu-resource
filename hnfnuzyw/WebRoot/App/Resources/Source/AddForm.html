@@ -23,7 +23,7 @@
     var sourceForm = null;
     $(function(){
         formInit();
-        sourceForm.prepend('<input type="file" id="file_upload" name="fileName">');
+        sourceForm.prepend('<input type="file" id="file_upload" name="fileName"><div id="uploadFileName"></div>');
         $("#file_upload").uploadify({
             debug:false,
             auto:true,//是否自动上传
@@ -82,9 +82,13 @@
                 var path = fileNameAndPath[1];
                 path = path.replaceAll(/\\/g,'\\\\');
                 $("#url",sourceForm).val(path);
+                $.ligerDialog.closeWaitting();
             },
             onSelect : function(file) {
-            
+                $("#uploadFileName").html(file.name);
+                $("#mediaFormat",sourceForm).val(file.type.substr(1));
+                $("#fileSize",sourceForm).val(file.size);
+                $.ligerDialog.waitting('正在上传中,请稍候...');
             },
             removeCompleted : true,//上传的文件进度条是否消失
             requeueErrors : false,
