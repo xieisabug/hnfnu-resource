@@ -113,8 +113,9 @@ function edit_source(){
     sourceWin = $.ligerDialog.open( {
         width : 400,
         height : 550,
-        title : "修改课程",
+        title : "修改资源",
         url:'EditForm.html',
+        allowClose:false,
         buttons : [ {
             text : "提交",
             width : 80,
@@ -128,7 +129,7 @@ function edit_source(){
 }
 //编辑完成课程后进行保存
 function edit_save() {
-
+    sourceForm = sourceWin.frame.sourceForm;
     if (sourceForm.valid()) {
         var row_data = Form.parseJSON(sourceForm);
         // 发往服务器，返回成功后再修改到表格中
@@ -183,6 +184,7 @@ function openTreeDialog(){
             {
                 text: '确定',
                 onclick: function(item, dialog){//选择了课程后进行数据处理的函数
+                    console.log(dialog);
                     var fn = dialog.frame.selectCourse || dialog.frame.window.selectCourse;
                     var data = fn();
                     if (!data){
@@ -292,9 +294,24 @@ function formInit() {
                 }, {
                     name : 'mediaType',
                     display : '媒体类型',
-                    type : 'text',
-                    newline : true,
-                    width : 200
+                    type : "select",
+                    comboboxName : "mediaType",
+                    options : {
+                        textField : "name",
+                        valueField : "id",
+                        hideOnLoseFocus:true,
+                        isMultiSelect : true,
+                        isShowCheckBox : true,
+                        valueFieldID : "mediaType",
+                        data : [
+                            {name:"图片",id:"图片"},
+                            {name:"动画",id:"动画"},
+                            {name:"声音",id:"声音"},
+                            {name:"视频",id:"视频"},
+                            {name:"文档",id:"文档"},
+                            {name:"程序",id:"程序"}
+                        ]
+                    }
                 }, {
                     name : 'mediaFormat',
                     display : '媒体格式',
