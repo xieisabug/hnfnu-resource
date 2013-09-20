@@ -21,241 +21,177 @@
 </body>
 </html>
 <script type="text/javascript">
-var sourceForm = null;
-$(function () {
-    formInit();
-    sourceForm.prepend('<input type="file" id="file_upload" name="fileName">');
-    $("#file_upload").uploadify({
-        debug:false,
-        auto:true, //是否自动上传
-        height:30,
-        buttonText:'上传资源',
-        button_image_url:"../../../App/Lib/Uploadify/blank.png",
-        cancelImage:'../../../App/Lib/Uploadify/uploadify-cancel.png',
-        swf:'../../../App/Lib/Uploadify/uploadify.swf',
-        // expressInstall:'App/Lib/Uploadify/expressInstall.swf',
-        uploader:'../../../upload/fileUpload.action', //后台处理上传文件的action
-        width:120,
-        multi:false, //是否允许多个文件上传
-        queueID:'uploadfileQueue',
-        fileObjName:'fileName', //与后台Action中file属性一样
-        //formData : { },//附带值
-        successTimeout:99999, //上传超时时间
-        overrideEvents:[ 'onDialogClose' ],
-        // fileTypeDesc : '上传文件支持的文件格式:jpg,jpge,gif,png',
-        // fileTypeExts : '*.*',//*.jpg;*.jpge;*.gif;*.png
-        //queueSizeLimit : 3,//
-        simUploadLimit:1, //一次可以上传1个文件
-        fileSizeLimit:'2048MB', //上传文件最大值
-        //返回一个错误，选择文件的时候触发
-        onSelectError:function (file, errorCode) {
-            switch (errorCode) {
-                case -100:
-                    alert("上传的文件数量已经超出系统限制的"
-                            + $(this).uploadify(
-                            'settings',
-                            'queueSizeLimit') + "个文件！");
-                    break;
-                case -110:
-                    alert("文件 ["
-                            + file.name
-                            + "] 大小超出系统限制的"
-                            + $(this)
-                            .uploadify('settings',
-                            'fileSizeLimit')
-                            + "大小！");
-                    break;
-                case -120:
-                    alert("文件 [" + file.name + "] 大小异常！");
-                    break;
-                case -130:
-                    alert("文件 [" + file.name + "] 类型不正确！");
-                    break;
-            }
-        },
-        //检测FLASH失败调用
-        onFallback:function () {
-            alert("您未安装FLASH控件，无法上传图片！请安装FLASH控件后再试。");
-        },
-        //上传到服务器，服务器返回相应信息到data里
-        onUploadSuccess:function (file, data) {
-            var fileNameAndPath = data.split(",");
-            var path = fileNameAndPath[1];
-            path = path.replaceAll(/\\/g, '\\\\');
-            $("#url", sourceForm).val(path);
-        },
-        onSelect:function (file) {
-            alert(file.name);
-        },
-        removeCompleted:true, //上传的文件进度条是否消失
-        requeueErrors:false,
-        removeTimeout:2, //进度条消失的时间，默认为3
-        progressData:"percentage", //显示上传的百分比
-        onUploadError:function (file, errorCode, errorMsg, errorString) {
-            $("#dialog-message").html(errorString);
-        },
-        onError:function (event, queueID, fileObj) {
-            alert("文件:" + fileObj.name + " 上传失败");
-        }
+    var sourceForm = null;
+    $(function () {
+        formInit();
     });
-    //Form.loadForm(sourceForm, window.parent.sourceSelectData);
-});
-function formInit() {
-    var groupicon = "../../../App/Lib/ligerUI/skins/icons/communication.gif";
-    sourceForm = $('form');
+    function formInit() {
+        var groupicon = "../../../App/Lib/ligerUI/skins/icons/communication.gif";
+        sourceForm = $('form');
 
-    $.ajax({
-        url:'../../../resources/formSelect.action',
-        type:'post',
-        success:function (data) {
-            sourceForm.ligerForm({
-                inputWidth:200,
-                labelWidth:120,
-                space:40,
-                fields:[
-                    {
-                        name:"id",
-                        type:"hidden"
-                    },
-                    {
-                        name:"url",
-                        type:"hidden"
-                    },
-                    {
-                        display:"资源名字",
-                        name:"name",
-                        newline:true,
-                        type:"text",
-                        group:"必填信息",
-                        groupicon:groupicon,
-                        validate:{
-                            required:true,
-                            maxlength:30
-                        }
-                    },
-                    {
-                        display:"所属课程",
-                        name:"courseId",
-                        type:"select",
-                        comboboxName:"courseName",
-                        options:{
-                            textField:"name",
-                            valueField:"id",
-                            hideOnLoseFocus:true,
-                            valueFieldID:"courseId",
-                            onBeforeOpen:window.parent.openTreeDialog
+        $.ajax({
+            url:'../../../resources/formSelect.action',
+            type:'post',
+            success:function (data) {
+                sourceForm.ligerForm({
+                    inputWidth:200,
+                    labelWidth:120,
+                    space:40,
+                    fields:[
+                        {
+                            name:"id",
+                            type:"hidden"
                         },
-                        validate:{
-                            required:true
+                        {
+                            display:"资源名字",
+                            name:"name",
+                            newline:true,
+                            type:"text",
+                            group:"必填信息",
+                            groupicon:groupicon,
+                            validate:{
+                                required:true,
+                                maxlength:30
+                            }
+                        },
+                        {
+                            display:"所属课程",
+                            name:"courseId",
+                            type:"select",
+                            comboboxName:"courseName",
+                            options:{
+                                textField:"name",
+                                valueField:"id",
+                                hideOnLoseFocus:true,
+                                valueFieldID:"courseId",
+                                onBeforeOpen:window.parent.openTreeDialog
+                            },
+                            validate:{
+                                required:true
+                            }
+                        },
+                        {
+                            display:"所属分类",
+                            name:"categoryIdList",
+                            type:"select",
+                            comboboxName:"categoryNameList",
+                            options:{
+                                textField:"name",
+                                valueField:"id",
+                                hideOnLoseFocus:true,
+                                isMultiSelect:true,
+                                isShowCheckBox:true,
+                                valueFieldID:"categoryIdList",
+                                data:data.categoryList
+                            }
+                        },
+                        {
+                            name:'keyWords',
+                            display:'关键字(用;分割)',
+                            type:'text',
+                            group:"选填信息",
+                            groupicon:groupicon,
+                            newline:true,
+                            width:200
+                        },
+                        {
+                            name:'mediaType',
+                            display:'媒体类型',
+                            type:"select",
+                            comboboxName:"mediaTypeName",
+                            options:{
+                                textField:"name",
+                                valueField:"id",
+                                hideOnLoseFocus:true,
+                                isMultiSelect:false,
+                                isShowCheckBox:false,
+                                valueFieldID:"mediaType",
+                                data:[
+                                    {name:"图片", id:"图片"},
+                                    {name:"动画", id:"动画"},
+                                    {name:"声音", id:"声音"},
+                                    {name:"视频", id:"视频"},
+                                    {name:"文档", id:"文档"},
+                                    {name:"程序", id:"程序"}
+                                ]
+                            }
+                        },
+                        {
+                            name:'mediaFormat',
+                            display:'媒体格式',
+                            type:'text',
+                            newline:true,
+                            width:200
+                        },
+                        {
+                            name:'playTime',
+                            display:'播放时间',
+                            type:'text',
+                            newline:true,
+                            width:200,
+                            validate:{
+                                maxlength:20
+                            }
+                        },
+                        {
+                            name:'fileSize',
+                            display:'文件大小',
+                            type:'number',
+                            newline:true,
+                            width:200,
+                            validate:{
+                                maxlength:50
+                            }
+                        },
+                        {
+                            name:'author',
+                            display:'作者',
+                            type:'text',
+                            newline:true,
+                            width:200,
+                            validate:{
+                                maxlength:100
+                            }
+                        },
+                        {
+                            name:'publisher',
+                            display:'出版社',
+                            type:'text',
+                            newline:true,
+                            width:200
+                        },
+                        {
+                            name:'description',
+                            display:'描述',
+                            type:'text',
+                            newline:true,
+                            width:200
+                        },
+                        {
+                            name:'price',
+                            display:'价格',
+                            type:'number',
+                            newline:true,
+                            width:200
                         }
-                    },
-                    {
-                        display:"所属分类",
-                        name:"categoryIdList",
-                        type:"select",
-                        comboboxName:"categoryNameList",
-                        options:{
-                            textField:"name",
-                            valueField:"id",
-                            hideOnLoseFocus:true,
-                            isMultiSelect:true,
-                            isShowCheckBox:true,
-                            valueFieldID:"categoryIdList",
-                            data:data.categoryList
-                        }
-                    },
-                    {
-                        name:'keyWords',
-                        display:'关键字(用;分割)',
-                        type:'text',
-                        group:"选填信息",
-                        groupicon:groupicon,
-                        newline:true,
-                        width:200
-                    },
-                    {
-                        name:'mediaType',
-                        display:'媒体类型',
-                        type:'text',
-                        newline:true,
-                        width:200
-                    },
-                    {
-                        name:'mediaFormat',
-                        display:'媒体格式',
-                        type:'text',
-                        newline:true,
-                        width:200
-                    },
-                    {
-                        name:'playTime',
-                        display:'播放时间',
-                        type:'text',
-                        newline:true,
-                        width:200,
-                        validate:{
-                            maxlength:20
-                        }
-                    },
-                    {
-                        name:'fileSize',
-                        display:'文件大小',
-                        type:'number',
-                        newline:true,
-                        width:200,
-                        validate:{
-                            maxlength:50
-                        }
-                    },
-                    {
-                        name:'author',
-                        display:'作者',
-                        type:'text',
-                        newline:true,
-                        width:200,
-                        validate:{
-                            maxlength:100
-                        }
-                    },
-                    {
-                        name:'publisher',
-                        display:'出版社',
-                        type:'text',
-                        newline:true,
-                        width:200
-                    },
-                    {
-                        name:'description',
-                        display:'描述',
-                        type:'text',
-                        newline:true,
-                        width:200
-                    },
-                    {
-                        name:'price',
-                        display:'价格',
-                        type:'number',
-                        newline:true,
-                        width:200
+                    ]
+                });
+                $.metadata.setType("attr", "validate");
+                sourceForm.validate({
+                    debug:true,
+                    onkeyup:false,
+                    errorPlacement:function (error, element) {
+                        error.appendTo(element.parent().parent().parent().parent());
                     }
-                ]
-            });
-            $.metadata.setType("attr", "validate");
-            sourceForm.validate({
-                debug:true,
-                onkeyup:false,
-                errorPlacement:function (error,element) {
-                    error.appendTo(element.parent().parent().parent().parent());
-                }
-            });
-            Form.loadForm(sourceForm,window.parent.sourceSelectData);
-            var idList = window.parent.sourceSelectData.categoryIdList.replaceAll(/,/g,';');
-            liger.get("categoryNameList").selectValue(idList);
-        }
-    });
-}
-function setCourseData(data) {
-    $("#courseId", sourceForm).val(data.data.id);
-    $("#course", sourceForm).val(data.data.name);
-}
+                });
+                Form.loadForm(sourceForm, window.parent.sourceSelectData);
+                var idList = window.parent.sourceSelectData.categoryIdList.replaceAll(/,/g, ';');
+                liger.get("categoryNameList").selectValue(idList);
+            }
+        });
+    }
+    function setCourseData(data) {
+        $("#courseId", sourceForm).val(data.data.id);
+        $("#course", sourceForm).val(data.data.name);
+    }
 </script>

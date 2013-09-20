@@ -172,9 +172,24 @@
                     }, {
                         name : 'mediaType',
                         display : '媒体类型',
-                        type : 'text',
-                        newline : true,
-                        width : 200
+                        type : "select",
+                        comboboxName : "mediaTypeName",
+                        options : {
+                            textField : "name",
+                            valueField : "id",
+                            hideOnLoseFocus:true,
+                            isMultiSelect : false,
+                            isShowCheckBox : false,
+                            valueFieldID : "mediaType",
+                            data : [
+                                {name:"图片",id:"图片"},
+                                {name:"动画",id:"动画"},
+                                {name:"声音",id:"声音"},
+                                {name:"视频",id:"视频"},
+                                {name:"文档",id:"文档"},
+                                {name:"程序",id:"程序"}
+                            ]
+                        }
                     }, {
                         name : 'mediaFormat',
                         display : '媒体格式',
