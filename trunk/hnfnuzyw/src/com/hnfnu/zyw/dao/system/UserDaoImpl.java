@@ -17,9 +17,7 @@ public class UserDaoImpl extends BaseDao<UserDto> implements IUserDao {
 
 	public void updatePwd(int id,String newPassword) throws Exception {
 		UserDto userDto =  this.get(id);
-		
 		userDto.setPassword(newPassword);
-		System.out.println(userDto+"userDto");
 		this.update(userDto);
 	}
 

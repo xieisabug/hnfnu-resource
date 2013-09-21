@@ -5,4 +5,6 @@ import com.hnfnu.zyw.dto.resources.SourceCategoryJoinDto;
 
 public interface ISourceCategoryJoinDao extends IBaseDao<SourceCategoryJoinDto>{
 
+	public boolean deleteBySourceId(int sourceId) throws Exception;
+	
 }

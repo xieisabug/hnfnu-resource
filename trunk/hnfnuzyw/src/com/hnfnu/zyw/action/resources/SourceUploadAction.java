@@ -4,7 +4,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -54,19 +57,10 @@ public class SourceUploadAction extends ActionSupport implements
 
 		for (int i = 0; i < files.size(); i++) {
 			//判断文件名是否重复，如果重复就加上（数字）
-			String fn = getFileNameFileName().get(i);
-			File f = new File(getSavePath() + "\\"
-					+ fn);
-			int j = 0;
-			while(f.exists()){
-				j++;
-				
-				 fn = "("+j+")"+getFileNameFileName().get(i);
-				
-				f = new File(getSavePath() + "\\"
-						+ fn);
-				
-			}
+			SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");//设置日期格式
+			String fn = df.format(new Date()) + Math.round(Math.random() * 10);
+			//加上文件后缀名
+			fn = fn+getFileNameFileName().get(i);
 			FileOutputStream fos = new FileOutputStream(getSavePath() + "\\"
 					+ fn);
 			FileInputStream fis = new FileInputStream(getFileName().get(i));

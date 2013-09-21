@@ -10,6 +10,7 @@ public interface ISourceService {
 
 	public boolean deleteMessege(int id);
 
+	public boolean update(SourceDto source,String categoryIdList);
 	public boolean update(SourceDto source);
 
 	public SourceDto load(int id);
