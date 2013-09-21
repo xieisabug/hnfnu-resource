@@ -29,8 +29,7 @@ import com.opensymphony.xwork2.ModelDriven;
 @Controller("sourceAction")
 @Scope("prototype")
 @ParentPackage("json-default")
-@Results( { @Result(name = "success", type = "json", params = { "root",
-		"action" }) })
+@Results({ @Result(name = "success", type = "json", params = { "root", "action" }) })
 @Namespace("/resources")
 public class SourceAction extends ActionSupport implements
 		ModelDriven<SourceDto> {
@@ -76,12 +75,12 @@ public class SourceAction extends ActionSupport implements
 		source.setApprovalStatus("0");
 		source.setUseTimes(0);
 		String kw = source.getKeyWords();
-		if(kw != null && !"".equals(kw)){
-			kw += ";"+ source.getName();
-		}else{
+		if (kw != null && !"".equals(kw)) {
+			kw += ";" + source.getName();
+		} else {
 			kw += source.getName();
 		}
-		
+
 		source.setKeyWords(kw);
 		success = sourceService.add(source, categoryIdList);
 		if (success) {
@@ -95,7 +94,7 @@ public class SourceAction extends ActionSupport implements
 	// 修改资源
 	@Action(value = "updateSource")
 	public String update() {
-		success = sourceService.update(source,categoryIdList);
+		success = sourceService.update(source, categoryIdList);
 		if (success) {
 			message = "修改资源成功！";
 		} else {
@@ -114,17 +113,16 @@ public class SourceAction extends ActionSupport implements
 	public String load() {
 		sourceVo = sourceVoService.load(source.getId());
 		source = sourceService.load(source.getId());
-		source.setViewTimes(source.getViewTimes()+1);
+		source.setViewTimes(source.getViewTimes() + 1);
 		sourceService.update(source);
 		return SUCCESS;
 	}
 
-
 	// 删除文件的方法，如果返回的是1说明删除成功，-1说明文件不存在。0说明文件删除错误，2说明文件删除成功，信息删除错误
 	@Action(value = "deleteSource")
 	public String delete() {
-		
-		int i = sourceService.delete(source.getUrl(),source.getId());
+
+		int i = sourceService.delete(source.getUrl(), source.getId());
 		if (i == 1) {
 			success = true;
 			message = "删除资源文件成功！";
@@ -134,6 +132,18 @@ public class SourceAction extends ActionSupport implements
 		} else if (i == 0) {
 			success = false;
 			message = "删除资源文件失败！";
+		}
+		return SUCCESS;
+	}
+
+	// 撤销上传文件的方法
+	@Action(value = "deleteFile")
+	public String deleteFile() {
+		success = sourceService.deleteFile(source.getUrl());
+		if (success) {
+			message = "文件撤销成功";
+		} else {
+			message = "文件撤销失败";
 		}
 		return SUCCESS;
 	}

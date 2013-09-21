@@ -577,7 +577,8 @@ $(function() {
             minWidth : 60
         } ],
         height : '98%',
-        width : '100%'
+        width : '100%',
+        pageSize:20
     });
 	$("#pageloading").hide();
 });

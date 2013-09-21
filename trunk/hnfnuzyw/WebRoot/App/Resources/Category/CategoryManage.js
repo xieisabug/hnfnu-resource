@@ -225,7 +225,7 @@ $(function() {
                     } ],
                 width : '99%',
                 height : '98%',
-                pageSize : 30,
+                pageSize : 20,
                 data : data.categoryList,
                 toolbar : {
                     items : toolbarItems

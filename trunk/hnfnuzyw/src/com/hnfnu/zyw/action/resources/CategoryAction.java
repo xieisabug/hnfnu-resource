@@ -35,15 +35,22 @@ public class CategoryAction extends ActionSupport implements ModelDriven<Categor
 	@Qualifier("categoryService")
 	private ICategoryService categoryService;
 
-	// 添加年级
+	// 添加类别
 	@Action(value = "addCategory")
 	public String add() {
-		success = categoryService.add(category);
-		if (success) {
-			message = "添加类别成功！";
-		} else {
-			message = "添加类别失败！";
+		int order = categoryService.maxOrder()+1;
+		if(order < 1){
+			message="添加类别失败,类别获取失败";
+		}else{
+			category.setOrd(order);
+			success = categoryService.add(category);
+			if (success) {
+				message = "添加类别成功！";
+			} else {
+				message = "添加类别失败！";
+			}
 		}
+		
 		return SUCCESS;
 	}
 

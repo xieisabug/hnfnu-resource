@@ -28,8 +28,8 @@ public class SourcesServiceImpl implements ISourceService {
 	public boolean add(SourceDto source, String categoryIdList) {
 		try {
 			sourceDao.add(source);
-			//System.out.println("自动生成的资源id" + source.getId());
-			//System.out.println("类别列表categoryList" + categoryIdList);
+			// System.out.println("自动生成的资源id" + source.getId());
+			// System.out.println("类别列表categoryList" + categoryIdList);
 
 			if (categoryIdList != null && !categoryIdList.equals("")) {
 				String[] categoryIds = categoryIdList.split(";");
@@ -56,11 +56,26 @@ public class SourcesServiceImpl implements ISourceService {
 		}
 		return true;
 	}
+	
+	public boolean deleteFile(String url) {
+		File file = new File(url);
 
-	public boolean update(SourceDto source,String categoryIdList) {
+		// 判断目录或文件是否存在
+		if (!file.exists()) { // 不存在返回true，当做已经删除了
+			return true;
+		} else {
+			if (file.delete()) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+
+	public boolean update(SourceDto source, String categoryIdList) {
 		try {
-			SourceDto s =  sourceDao.get(source.getId());
-			
+			SourceDto s = sourceDao.get(source.getId());
+
 			source.setCreateDate(s.getCreateDate());
 			source.setApprovalStatus(s.getApprovalStatus());
 			source.setQuality(s.getQuality());
@@ -70,7 +85,7 @@ public class SourcesServiceImpl implements ISourceService {
 			source.setCreateUserId(s.getCreateUserId());
 			sourceDao.update(source);
 			sourceCategoryJoinDao.deleteBySourceId(source.getId());
-			
+
 			if (categoryIdList != null && !categoryIdList.equals("")) {
 				String[] categoryIds = categoryIdList.split(";");
 				for (int i = 0; i < categoryIds.length; i++) {
@@ -80,15 +95,14 @@ public class SourcesServiceImpl implements ISourceService {
 					sourceCategoryJoinDao.add(t);
 				}
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		}
 		return true;
 	}
-	
-	
+
 	public boolean update(SourceDto source) {
 		try {
 			sourceDao.update(source);
@@ -135,7 +149,7 @@ public class SourcesServiceImpl implements ISourceService {
 	}
 
 	// 删除文件的方法，如果返回的是1说明删除成功，-1说明文件不存在。0说明文件删除错误，2说明文件删除成功，信息删除错误
-	public int delete(String url,int id) {
+	public int delete(String url, int id) {
 		File file = new File(url);
 
 		// 判断目录或文件是否存在
@@ -148,17 +162,17 @@ public class SourcesServiceImpl implements ISourceService {
 			}
 			return -1;
 		} else {
-				if(file.delete()){
-					try {
-						sourceDao.delete(id);
-					} catch (Exception e) {
-						e.printStackTrace();
-						return 2;
-					}
-				return 1;
-				}else {
-					return 0;
+			if (file.delete()) {
+				try {
+					sourceDao.delete(id);
+				} catch (Exception e) {
+					e.printStackTrace();
+					return 2;
 				}
+				return 1;
+			} else {
+				return 0;
+			}
 		}
 	}
 

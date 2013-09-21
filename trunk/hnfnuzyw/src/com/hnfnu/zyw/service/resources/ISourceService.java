@@ -9,6 +9,7 @@ public interface ISourceService {
 	public boolean add(SourceDto source,String categoryList);
 
 	public boolean deleteMessege(int id);
+	public boolean deleteFile(String url);
 
 	public boolean update(SourceDto source,String categoryIdList);
 	public boolean update(SourceDto source);
