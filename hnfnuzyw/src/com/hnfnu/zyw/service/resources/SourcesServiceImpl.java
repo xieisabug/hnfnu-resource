@@ -57,6 +57,38 @@ public class SourcesServiceImpl implements ISourceService {
 		return true;
 	}
 
+	public boolean update(SourceDto source,String categoryIdList) {
+		try {
+			SourceDto s =  sourceDao.get(source.getId());
+			
+			source.setCreateDate(s.getCreateDate());
+			source.setApprovalStatus(s.getApprovalStatus());
+			source.setQuality(s.getQuality());
+			source.setViewTimes(s.getViewTimes());
+			source.setUseTimes(s.getUseTimes());
+			source.setUrl(s.getUrl());
+			source.setCreateUserId(s.getCreateUserId());
+			sourceDao.update(source);
+			sourceCategoryJoinDao.deleteBySourceId(source.getId());
+			
+			if (categoryIdList != null && !categoryIdList.equals("")) {
+				String[] categoryIds = categoryIdList.split(";");
+				for (int i = 0; i < categoryIds.length; i++) {
+					SourceCategoryJoinDto t = new SourceCategoryJoinDto();
+					t.setCategoryId(Integer.parseInt(categoryIds[i]));
+					t.setSourceId(source.getId());
+					sourceCategoryJoinDao.add(t);
+				}
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
+	
 	public boolean update(SourceDto source) {
 		try {
 			sourceDao.update(source);
@@ -69,7 +101,7 @@ public class SourcesServiceImpl implements ISourceService {
 
 	public SourceDto load(int id) {
 		try {
-			return sourceDao.load(id);
+			return sourceDao.get(id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

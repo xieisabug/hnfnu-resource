@@ -95,7 +95,7 @@ public class SourceAction extends ActionSupport implements
 	// 修改资源
 	@Action(value = "updateSource")
 	public String update() {
-		success = sourceService.update(source);
+		success = sourceService.update(source,categoryIdList);
 		if (success) {
 			message = "修改资源成功！";
 		} else {
@@ -105,13 +105,17 @@ public class SourceAction extends ActionSupport implements
 	}
 
 	/**
-	 * 根据资源ID查询一个资源
+	 * 根据资源ID查询一个资源,前台每查询一次viewTimes增加一次
+	 * 
 	 * 
 	 * @return
 	 */
 	@Action(value = "loadSourceVo")
 	public String load() {
 		sourceVo = sourceVoService.load(source.getId());
+		source = sourceService.load(source.getId());
+		source.setViewTimes(source.getViewTimes()+1);
+		sourceService.update(source);
 		return SUCCESS;
 	}
 
