@@ -340,7 +340,7 @@ $(function() {
 				} ],
 				width : '99%',
 				height : '98%',
-				pageSize : 30,
+                usePager:false,
 				data : data.roleList,
 				toolbar : {
 					items : toolbarItems

@@ -5,4 +5,6 @@ import com.hnfnu.zyw.dto.resources.CategoryDto;
 
 public interface ICategoryDao extends IBaseDao<CategoryDto> {
 
+	public int maxOrder();
+	
 }

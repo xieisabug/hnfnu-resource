@@ -294,6 +294,7 @@ $(function() {
 				data : data.courseGradeSubjectList,
 				height : '98%',
 				width : '100%',
+                pageSize:20,
 				toolbar : {
 					items : toolbarItems
 				}

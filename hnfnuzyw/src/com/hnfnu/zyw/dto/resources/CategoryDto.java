@@ -16,19 +16,21 @@ public class CategoryDto
 	private Integer id;
 	//Àà±ðÃû³Æ
 	private String name;
+	private int ord;
 	private String remark;
 
 	public CategoryDto()
 	{
 
 	}
-
-	public CategoryDto(Integer id, String name, String remark) {
+	public CategoryDto(Integer id, String name, int ord, String remark) {
 		super();
 		this.id = id;
 		this.name = name;
+		this.ord = ord;
 		this.remark = remark;
 	}
+
 
 	public void setId(Integer id)
 	{
@@ -55,6 +57,14 @@ public class CategoryDto
 	public String getRemark()
 	{
 		return this.remark;
+	}
+
+	public int getOrd() {
+		return ord;
+	}
+
+	public void setOrd(int ord) {
+		this.ord = ord;
 	}
 
 	@Override

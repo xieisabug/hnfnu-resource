@@ -81,4 +81,8 @@ public class CategoryServiceImpl implements ICategoryService {
 		categoryList.put("Total", l.size());
 		return categoryList;
 	}
+
+	public int maxOrder() {
+		return categoryDao.maxOrder();
+	}
 }

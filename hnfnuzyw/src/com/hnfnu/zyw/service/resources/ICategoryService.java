@@ -27,4 +27,6 @@ public interface ICategoryService {
 	 * @return
 	 */
 	public Map<String, Object> listCategory();
+	
+	public int maxOrder();
 }

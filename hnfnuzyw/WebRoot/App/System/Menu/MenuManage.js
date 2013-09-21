@@ -306,6 +306,7 @@ $(function() {
 				data : data.menuList,
 				height : '98%',
 				width : '100%',
+                pageSize : 20,
 				toolbar : {
 					items : toolbarItems
 				}
