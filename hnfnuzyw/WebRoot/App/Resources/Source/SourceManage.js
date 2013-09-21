@@ -11,6 +11,7 @@ function add_source2(){
         height : 550,
         title : "上传资源",
         url:'AddForm.html',
+        allowClose:false,
         buttons : [ {
             text : "提交",
             width : 80,
@@ -59,7 +60,7 @@ function add_cancel() {
     sourceForm = sourceWin.frame.sourceForm;
     var dlg = $.ligerDialog.waitting('正在撤销已经上传的文件...');
     $.ajax({
-        url:'../../../resources/deleteSource.action',
+        url:'../../../resources/deleteFile.action',
         data:{url:$("#url",sourceForm).val()},
         type:'post',
         success:function (data) {
