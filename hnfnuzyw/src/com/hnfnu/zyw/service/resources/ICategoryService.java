@@ -29,4 +29,9 @@ public interface ICategoryService {
 	public Map<String, Object> listCategory();
 	
 	public int maxOrder();
+	
+	public Map<String, Object> getCategoryDtoOrder();
+	
+	public boolean setCategoryDtoOrder(String orders);
+	
 }
