@@ -1,5 +1,6 @@
 var categoryGrid = null;// 类别表格
 var sortGrid = null;//用于排序的类别表格
+var sortWin = null;//用于显示排序的类别的窗口
 var categoryFrom = null;// 类别表单
 var categoryWin = null;// 类别窗口
 
@@ -142,8 +143,7 @@ function delete_category() {
 //排序类别
 function sort_category() {
     $.ajax({
-        //todo url是错误的，需要改成跟order有关的
-        url:'../../../resources/listCategory.action',
+        url:'../../../resources/listCategoryOrder.action',
         type:'post',
         success:function (data) {
             var s = $('#sortGrid');
@@ -162,7 +162,7 @@ function sort_category() {
                 rownumbers:true,
                 rowDraggable:true
             });
-            categoryWin = $.ligerDialog.open({
+            sortWin = $.ligerDialog.open({
                 width:300,
                 height:400,
                 title:'类别排序',
@@ -181,7 +181,7 @@ function sort_category() {
                 ]
             });
             //console.log($(".l-grid2",categoryWin.element));
-            $(".l-grid2",categoryWin.element).css({width:223});
+            $(".l-grid2",sortWin.element).css({width:223});
             $("#pageloading").hide();
         }
     });
@@ -193,11 +193,28 @@ function sort_save(){
     for(var i = 0; i < objArray.length; i++){
         ids = objArray[i].id + ';';
     }
-    //todo 还没提交
+    $.ajax({
+        url:'../../../resources/categoryOrder.action',
+        type:'post',
+        data : {
+            orders : ids
+        },
+        success:function (data) {
+            if (data.success) {
+                $.ligerDialog.tip({
+                    title:'提示信息',
+                    content:data.message
+                });
+                sortWin.hide();
+            } else {
+                $.ligerDialog.error(data.message);
+            }
+        }
+    });
 }
 
 function sort_cancel(){
-    categoryWin.close();
+    sortWin.hide();
 }
 
 // 初始化表单，生成form标签

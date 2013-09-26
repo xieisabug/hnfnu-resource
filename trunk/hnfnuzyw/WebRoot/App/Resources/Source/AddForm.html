@@ -21,6 +21,7 @@
 </html>
 <script type="text/javascript">
     var sourceForm = null;
+    var winManager = null;
     $(function(){
         formInit();
         sourceForm.prepend('<input type="file" id="file_upload" name="fileName"><div id="uploadFileName"></div>');
@@ -28,7 +29,7 @@
             debug:false,
             auto:true,//是否自动上传
             height: 30,
-            buttonText:'上传资源',
+            buttonText:'选择文件',
             button_image_url: "../../../App/Lib/Uploadify/blank.png",
             cancelImage:'../../../App/Lib/Uploadify/uploadify-cancel.png',
             swf : '../../../App/Lib/Uploadify/uploadify.swf',
@@ -80,6 +81,7 @@
             onUploadSuccess : function(file, data) {
                 //console.log(file);
                 //console.log(data);
+                winManager._setContent("正在保存上传信息。请等待。");
                 var fileNameAndPath = data.split(",");
                 var path = fileNameAndPath[1];
                 path = path.replaceAll(/\\/g,'\\\\');
@@ -90,7 +92,15 @@
                 $("#uploadFileName").html(file.name);
                 $("#mediaFormat",sourceForm).val(file.type.substr(1));
                 $("#fileSize",sourceForm).val(file.size);
-                $.ligerDialog.waitting('正在上传中,请稍候...');
+                winManager = $.ligerDialog.waitting('正在上传中,请稍候...');
+            },
+            onUploadProgress : function(file, fileBytesLoaded, fileTotalBytes){
+                //console.log(winManager);
+                console.log(file);
+                winManager._setContent("正在上传： "+file.name+"<br> 已上传 " + Math.floor(fileBytesLoaded / fileTotalBytes * 100) +
+                        "% ,  总大小为 : " + Math.floor(fileTotalBytes/1024) + "KB ");
+                //console.log(fileBytesLoaded);
+                //console.log(fileTotalBytes);
             },
             removeCompleted : true,//上传的文件进度条是否消失
             requeueErrors : false,
