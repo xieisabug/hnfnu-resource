@@ -85,4 +85,26 @@ public class CategoryServiceImpl implements ICategoryService {
 	public int maxOrder() {
 		return categoryDao.maxOrder();
 	}
+
+	public Map<String, Object> getCategoryDtoOrder() {
+		String hql = "from CategoryDto order by ord asc";
+		Map<String, Object> categoryList = new HashMap<String, Object>();
+		List<CategoryDto> l = null;
+
+		try {
+			l = categoryDao.list(hql);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		categoryList.put("Rows", l);
+		categoryList.put("Total", l.size());
+		return categoryList;
+		
+	}
+
+	public boolean setCategoryDtoOrder(String orders) {
+		String[] s = orders.split(";");
+		return categoryDao.setCategorysOrder(s);
+	}
+
 }

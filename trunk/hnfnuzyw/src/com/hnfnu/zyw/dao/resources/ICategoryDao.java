@@ -7,4 +7,6 @@ public interface ICategoryDao extends IBaseDao<CategoryDto> {
 
 	public int maxOrder();
 	
+	public boolean setCategorysOrder(String[] orders);
+	
 }
