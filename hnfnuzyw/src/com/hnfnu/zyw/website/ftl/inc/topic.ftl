@@ -6,9 +6,9 @@
                 <#list topicList as topic>
                 	<#if topic_index < num>
             			<#if topic_index % 2 == 0>
-            		 		<li class="topic_item_even"><a href="#">${topic.name}</a></li>
+            		 		<li class="topic_item_even"><a href="javascript:openTopicWindow(${topic.id})">${topic.name}</a></li>
             			 <#else>
-            		 		<li class="topic_item_odd"><a href="#">${topic.name}</a></li>
+            		 		<li class="topic_item_odd"><a href="javascript:openTopicWindow(${topic.id})">${topic.name}</a></li>
             			</#if>
             		</#if>
             	</#list>

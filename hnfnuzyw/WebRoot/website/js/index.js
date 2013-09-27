@@ -1,6 +1,6 @@
 function loadSource(subjectId,gradeId){
     $.ajax({
-        url:'../../../resources/formSelect.action',
+        url:'../../../resources/listSourceVoOrder.action',
         type:'post',
         data:{
             subjectId:subjectId,
@@ -31,4 +31,10 @@ function loadSource(subjectId,gradeId){
             $("#resource_content").html(html);
         }
     });
+}
+function openTopicWindow(id) {
+    window.open('topic_view.html?id='+id, '', 'height=650,width=1024,top=50,left=0,toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
+}
+function openSourceWindow(id) {
+    window.open('source_view.html?id='+id, '', 'height=650,width=1024,top=50,left=0,toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
 }

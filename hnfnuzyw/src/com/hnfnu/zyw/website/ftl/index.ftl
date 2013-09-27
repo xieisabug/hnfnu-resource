@@ -148,9 +148,9 @@
 					 	<#list gradeList as grade>
 					 		<#if grade_index % 2 == 0>
                                			 <tr>
-                                   		 <td><a href="javascript:void(0);" id="0101">${grade.name}</a></td>
+                                   		 <td><a href="sourceList_${subject.id}_${grade.id}.html">${grade.name}</a></td>
 					 		<#else>
-					 					<td><a href="javascript:void(0);" id="0102">${grade.name}</a></td>
+					 					<td><a href="sourceList_${subject.id}_${grade.id}.html">${grade.name}</a></td>
 					 					 </tr>
 					 		</#if>
 					 	</#list>
@@ -193,8 +193,9 @@
 	                    </#list>
                    </#if>
                 </table>
+                
                 <div id="resource_more">
-                	<a href="list.html">更多...</a>
+                	<a href="javascript:openSourceWindow(${sourceList[0].id})">更多...</a>
                 </div>
             </div>
         </div>
