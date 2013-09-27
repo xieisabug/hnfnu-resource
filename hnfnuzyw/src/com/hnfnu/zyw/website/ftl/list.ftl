@@ -1,92 +1,90 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>无标题文档</title>
-<link href="css/style.css" type="text/css" rel="stylesheet"/>
-<script src="js/gallery.js" type="text/javascript"></script>
-<script type="text/javascript">
-	function openWindow(url){
-		window.open(url,'baidu','height=500,width=400,top=200,left=200,toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
-	}
-</script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>无标题文档</title>
+    <link href="css/style.css" type="text/css" rel="stylesheet"/>
+    <link href="css/Aqua/css/ligerui-all.css" type="text/css" rel="stylesheet"/>
 </head>
 
 <body>
 <#import "/inc/topic.ftl" as myTopic/>
 <#import "/inc/pager.ftl" as myPager/>
+
 <div style="width:846px; margin:0 auto;">
-	<!-- 顶部菜单 -->
-	<div id="top">
-    	<div id="logo"></div>
-        <div id="top_menu">
-            <div style="background:url(images/black.jpg); height:4px; width:433px; float:left;"></div>
-            <a href="#" style="background:url(images/top_menu1.jpg); height:30px; width:43px; float:left;"></a>
-            <a href="#" style="background:url(images/top_menu2.jpg); height:30px; width:65px; float:left;"></a>
-            <a href="#" style="background:url(images/top_menu3.jpg); height:30px; width:48px; float:left;"></a>
-            <a href="#" style="background:url(images/top_menu4.jpg); height:30px; width:51px; float:left;"></a>
-        </div>
-        <div id="bar">
-        	<a href="#" style="background:url(images/bar1.jpg); height:41px; width:93px; float:left;"></a>
-            <a href="#" style="background:url(images/bar2.jpg); height:41px; width:182px; float:left;"></a>
-            <a href="#" style="background:url(images/bar3.jpg); height:41px; width:182px; float:left;"></a>
-            <a href="#" style="background:url(images/bar4.jpg); height:41px; width:183px; float:left;"></a>
+<!-- 顶部菜单 -->
+<div id="top">
+    <div id="logo"></div>
+    <div id="top_menu">
+        <div style="background:url(images/black.jpg); height:4px; width:433px; float:left;"></div>
+        <a href="#" style="background:url(images/top_menu1.jpg); height:30px; width:43px; float:left;"></a>
+        <a href="#" style="background:url(images/top_menu2.jpg); height:30px; width:65px; float:left;"></a>
+        <a href="#" style="background:url(images/top_menu3.jpg); height:30px; width:48px; float:left;"></a>
+        <a href="#" style="background:url(images/top_menu4.jpg); height:30px; width:51px; float:left;"></a>
+    </div>
+    <div id="bar">
+        <a href="index.html" style="background:url(images/bar1.jpg); height:41px; width:93px; float:left;"></a>
+        <a href="#" style="background:url(images/bar2.jpg); height:41px; width:182px; float:left;"></a>
+        <a href="#" style="background:url(images/bar3.jpg); height:41px; width:182px; float:left;"></a>
+        <a href="#" style="background:url(images/bar4.jpg); height:41px; width:183px; float:left;"></a>
+    </div>
+</div>
+<!-- 顶部菜单 -->
+
+<!-- banner -->
+<div id="idContainer2" class="container">
+    <table id="idSlider2" cellSpacing=0 cellPadding=0>
+        <tr>
+            <td class="td_f"><IMG src="images/slider1.jpg"></td>
+            <td class="td_f"><IMG src="images/slider2.jpg"></td>
+            <td class="td_f"><IMG src="images/slider1.jpg"></td>
+            <td class="td_f"><IMG src="images/slider2.jpg"></td>
+            <td class="td_f"><IMG src="images/slider1.jpg"></td>
+        </tr>
+    </table>
+    <ul id="idNum" class="num"></ul>
+</div>
+<!-- banner -->
+
+<div class="left">
+    <!-- 登陆 -->
+    <div id="login">
+        <div id="login_title"></div>
+        <div id="login_form">
+            <form name="login" action="" method="post">
+                <div id="login_input">
+                    <label for="username">账 号：</label>
+                    <input type="text" name="username" id="username"/><br/>
+                    <label for="password">密 码：</label>
+                    <input type="password" name="password" id="password"/>
+                </div>
+                <div id="login_button">
+                    <a href="#" id="login_submit_button"></a>
+                    <a href="#" id="regist_button"></a>
+                    <a href="#" id="forget_button"></a>
+                </div>
+            </form>
         </div>
     </div>
-    <!-- 顶部菜单 -->
-    
-    <!-- banner -->
-  	<div id="idContainer2" class="container">
-        <table id="idSlider2" cellSpacing=0 cellPadding=0>
-            <tr>
-                <td class="td_f"><IMG src="images/slider1.jpg"></td>
-                <td class="td_f"><IMG src="images/slider2.jpg"></td>
-                <td class="td_f"><IMG src="images/slider1.jpg"></td>
-                <td class="td_f"><IMG src="images/slider2.jpg"></td>
-                <td class="td_f"><IMG src="images/slider1.jpg"></td>
-            </tr>
-        </table>
-      <ul id="idNum" class="num"></ul>
-    </div>
-    <!-- banner -->
-    
-    <div class="left">
-        <!-- 登陆 -->
-        <div id="login">
-            <div id="login_title"></div>
-            <div id="login_form">
-                <form name="login" action="" method="post">
-                    <div id="login_input">
-                        <label for="username">账 号：</label>
-                        <input type="text" name="username" id="username" /><br />
-                        <label for="password">密 码：</label>
-                        <input type="password" name="password" id="password" />
-                    </div>
-                    <div id="login_button">
-                        <a href="#" id="login_submit_button"></a>
-                        <a href="#" id="regist_button"></a>
-                        <a href="#" id="forget_button"></a>
-                    </div>
-                </form>
-            </div>
-        </div>
-    	<!-- 登陆 -->
-        
-        <!-- 专题  -->
+    <!-- 登陆 -->
+
+    <!-- 专题  -->
         <@myTopic.topic num=10 topicList=topicList/>
-        <!-- 专题  -->
-        
-        <!-- 服务中心  -->
-        <div id="service">
-        	<div id="service_title"></div>
-            <div id="service_content">
-            	<a href="#" id="zaixianfuwu"></a>
-                <a href="#" id="lianxidianhua"></a>
-            </div>
+    <!-- 专题  -->
+
+    <!-- 服务中心  -->
+    <div id="service">
+        <div id="service_title"></div>
+        <div id="service_content">
+            <a href="#" id="zaixianfuwu"></a>
+            <a href="#" id="lianxidianhua"></a>
         </div>
-        <!-- 服务中心  -->
-    </div>	
-    <div class="left center">
+    </div>
+    <!-- 服务中心  -->
+</div>
+
+<div class="left center">
     	<!--资源列表-->
         <div id="source_list">
         	<div id="toast">
@@ -208,14 +206,19 @@
         </div>
         <!--资源列表-->
     </div>
-    <div id="foot_menu">
-    	<div id="foot_menu_content">| 关于我们 | 联系我们 | 版权申明 | 网站帮助 |</div>
+<div id="foot_menu">
+    <div id="foot_menu_content">| 关于我们 | 联系我们 | 版权申明 | 网站帮助 |</div>
+</div>
+<div id="foot_info">
+    <div id="foot_info_content">版权所有 湖南第一师范学院公共实验管理中心 湘ICP备05000548号<br/>
+        地址:湖南省长沙市枫林三路1015号 科技楼B403 邮编:410205 电话 (0731)82841118
     </div>
-    <div id="foot_info">
-    	<div id="foot_info_content">版权所有  湖南第一师范学院公共实验管理中心  湘ICP备05000548号<br />
-       地址:湖南省长沙市枫林三路1015号 科技楼B403  邮编:410205  电话 (0731)82841118</div>
-    </div>
-    <div id="foot_black"></div>
+</div>
+<div id="foot_black"></div>
 </div>
 </body>
+<script src="js/gallery.js" type="text/javascript"></script>
+<script src="js/jquery-1.5.2.min.js" type="text/javascript"></script>
+<script src="js/ligerui.min.js" type="text/javascript"></script>
+<script src="js/list.js" type="text/javascript"></script>
 </html>
