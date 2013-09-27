@@ -7,6 +7,9 @@ import java.util.Map;
 
 import org.apache.commons.io.output.FileWriterWithEncoding;
 
+import com.sun.org.apache.bcel.internal.generic.RETURN;
+
+import freemarker.core.ReturnInstruction.Return;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -62,7 +65,7 @@ public class FreemarkerUtil {
 		}
 	}
 	
-	public void fprint(String name,Map<String,Object> root,String filePath,String fileName) {
+	public boolean fprint(String name,Map<String,Object> root,String filePath,String fileName) {
 		FileWriterWithEncoding out = null;
 		try {
 			//通过一个文件输出流，就可以写到相应的文件中
@@ -71,8 +74,10 @@ public class FreemarkerUtil {
 			temp.process(root, out);
 		} catch (IOException e) {
 			e.printStackTrace();
+			return false;
 		} catch (TemplateException e) {
 			e.printStackTrace();
+			return false;
 		} finally {
 			try {
 				if(out!=null) out.close();
@@ -80,6 +85,7 @@ public class FreemarkerUtil {
 				e.printStackTrace();
 			}
 		}
+		return true;
 	}
 	
 }
