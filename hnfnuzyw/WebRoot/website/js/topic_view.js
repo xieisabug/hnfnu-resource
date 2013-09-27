@@ -28,7 +28,8 @@ $(function() {
                         data:params,
                         success : function(data) {
                             grid.loadData({Rows:data.topicSourceList});
-                            topicViewTable(data.topicSourceList[0]);
+                            if(data.topicSourceList.length)
+                            	topicViewTable(data.topicSourceList[0]);
                         }
                     });
 				}
