@@ -45,9 +45,10 @@ public class IndexAction extends ActionSupport {
 		System.out.println("filepPth:"+filePath);
 		// 获得数据模型
 		root = indexService.getDataModel();
+		System.out.println("root"+root);
 		
 		//打印到输出台，以便于测试
-		fu.print("index.ftl", root);
+		//fu.print("index.ftl", root);
 		//输出到文件
 		fu.fprint("index.ftl", root, filePath+"website\\", "index.html");
 		return SUCCESS;
