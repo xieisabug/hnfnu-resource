@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>无标题文档</title>
+    <title>${subject.name}${grade.name}资源库</title>
     <link href="css/style.css" type="text/css" rel="stylesheet"/>
     <link href="css/Aqua/css/ligerui-all.css" type="text/css" rel="stylesheet"/>
 </head>
@@ -89,7 +89,7 @@
         <div id="source_list">
         	<div id="toast">
             	<div>
-                	<a href="#">首页</a> >> <a href="#">${subject.name}</a> >> <a href="#">${grade.name}</a>
+                	<a href="index.html">首页</a> >> <a href="avascript:chooseSubjectGrade();">${subject.name}</a> >> <a href="javascript:chooseSubjectGrade();">${grade.name}</a>
                 </div>
             </div>
             <div id="source_list_title">
@@ -106,7 +106,7 @@
                 </div>
                 <div class="right">
                     <input type="text" id="key_word" />
-                    <a href="#">search</a>
+                    <a href="javascript:search(${subject.id},${grade.id})">search</a>
                 </div>
             </div>
             <div id="source_list_table">
@@ -122,7 +122,7 @@
                     <#if (sourcePager.datas?size > 0)>
                      <#list sourcePager.datas as source>
                      	<#if source_index%2==0>
-                     		<tr class="grid_even" onclick="javascript:openWindow('http://www.baidu.com')">
+                     		<tr class="grid_even" onclick="javascript:openSourceWindow(${source.id})">
                         	<td>${source.id}</td>
                             <td>${source.name}</td>
                             <td>${source.createDate}</td>
@@ -130,7 +130,7 @@
                             <td>${source.mediaFormat}</td>
                         </tr>
                      	<#else>
-                     	<tr class="grid_odd" onclick="javascript:openWindow('http://www.baidu.com')">
+                     	<tr class="grid_odd" onclick="javascript:openSourceWindow(${source.id})">
                         	<td>${source.id}</td>
                             <td>${source.name}</td>
                             <td>${source.createDate}</td>
@@ -144,7 +144,7 @@
                         <#if source_index < 9>
                         		<#list source_index+1..9 as y>
                         			<#if y%2 == 0>
-                        				<tr class="grid_even" onclick="javascript:openWindow('http://www.baidu.com')">
+                        				<tr class="grid_even" onclick="javascript:void(0)">
                         				<td></td>
                             			<td></td>
                             			<td></td>
@@ -152,7 +152,7 @@
                             			<td></td>
                         				</tr>
                         			<#else>
-                        				<tr class="grid_odd" onclick="javascript:openWindow('http://www.baidu.com')">
+                        				<tr class="grid_odd" onclick="javascript:void(0)">
                         				<td></td>
                             			<td></td>
                             			<td></td>
@@ -167,7 +167,7 @@
                    <#else>
                    		<#list 0..9 as y>
                         			<#if y%2 == 0>
-                        				<tr class="grid_even" onclick="javascript:openWindow('http://www.baidu.com')">
+                        				<tr class="grid_even" onclick="javascript:void(0)">
                         				<td></td>
                             			<td></td>
                             			<td></td>
@@ -175,7 +175,7 @@
                             			<td></td>
                         				</tr>
                         			<#else>
-                        				<tr class="grid_odd" onclick="javascript:openWindow('http://www.baidu.com')">
+                        				<tr class="grid_odd" onclick="javascript:void(0)">
                         				<td></td>
                             			<td></td>
                             			<td></td>
@@ -188,19 +188,17 @@
                     </tbody>
                 </table>
                 <div id="pager">
-                	<a href="#">第一页</a> 
-                    <a href="#">上一页</a> 
-                    <a href="#"><</a> 
+                	<a href="javascript:firstPage(${subject.id},${grade.id})">第一页</a> 
+                    <a href="javascript:prePage(${subject.id},${grade.id})">上一页</a> 
                     <#assign x = sourcePager.total%sourcePager.size>
                     <#if x==0 && sourcePager.total!=0> 
                      <#assign tp = sourcePager.total/sourcePager.size>
                     <#else>
                      <#assign tp = (sourcePager.total/sourcePager.size)+1>
                     </#if>
-                   	<@myPager.pager url="#" totalPage=tp curPage=1 class="pagers" showPageNum=5/>
-                    <a href="#">></a> 
-                    <a href="#">下一页</a> 
-                    <a href="#">最后一页</a> 
+                   	<@myPager.pager subjectId=subject.id gradeId=grade.id totalPage=tp curPage=1 class="pagers" showPageNum=5/>
+                    <a href="javascript:nextPage(${subject.id},${grade.id})">下一页</a> 
+                    <a href="javascript:lastPage(${subject.id},${grade.id})">最后一页</a> 
                 </div>
             </div>
         </div>
