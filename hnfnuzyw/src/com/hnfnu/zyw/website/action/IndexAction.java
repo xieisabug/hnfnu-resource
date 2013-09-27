@@ -25,7 +25,8 @@ import com.opensymphony.xwork2.ActionSupport;
 public class IndexAction extends ActionSupport {
 
 	private static final long serialVersionUID = 8211651083165988085L;
-	
+	private boolean success;
+	private String message;
 	@Autowired
 	@Qualifier("ftl_indexService")
 	private IIndexService indexService;
@@ -42,16 +43,24 @@ public class IndexAction extends ActionSupport {
 		String filePath = null;
 		
 		filePath = ServletActionContext.getServletContext().getRealPath("/");
-		System.out.println("filepPth:"+filePath);
 		// 获得数据模型
 		root = indexService.getDataModel();
-		System.out.println("root"+root);
 		
 		//打印到输出台，以便于测试
 		//fu.print("index.ftl", root);
 		//输出到文件
-		fu.fprint("index.ftl", root, filePath+"website\\", "index.html");
+		success = fu.fprint("index.ftl", root, filePath+"website\\", "index.html");
+		if(success){
+			message="主页生成成功";
+		}else{
+			message="主页生成失败";
+		}
 		return SUCCESS;
 	}
-
+	public boolean isSuccess() {
+		return success;
+	}
+	public String getMessage() {
+		return message;
+	}
 }

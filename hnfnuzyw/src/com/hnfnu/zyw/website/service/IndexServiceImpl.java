@@ -56,9 +56,7 @@ public class IndexServiceImpl implements IIndexService {
 				topicNum = subjectList.size() * 2;
 				sourceLine = sourceLine + (subjectList.size() - 5)/2;
 			}
-			System.out.println("hql4"+hql4);
 			sourceVoList = sourceVoDao.list(hql4);
-			System.out.println("sourceList"+sourceVoList.size());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
