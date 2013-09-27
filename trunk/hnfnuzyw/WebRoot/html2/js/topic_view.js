@@ -213,7 +213,7 @@ function topicViewTable(data){
     html += '<td>'+data.remark+'</td>';
     html += '</tr>';
     html += '</table>';
-    console.log(data);
+    //console.log(data);
     $("#topic").html(html);
 }
 function onlineView(data){
