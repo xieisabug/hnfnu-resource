@@ -29,6 +29,14 @@ public interface ISourceVoService {
 	 * @return
 	 */
 	public Map<String, Object> listSourceVo(int courseId,int categoryId);
+	
+	/**
+	 *根据gradeId和subjectId获得前16个相应的资列表，根据浏览次数排序
+	 * 
+	 * @return
+	 */
+	public List<SourceVo> listSourceVoOrder(int gradeId,int subjectId);
+
 
 	public List<Map<String, Object>> allTree();
 

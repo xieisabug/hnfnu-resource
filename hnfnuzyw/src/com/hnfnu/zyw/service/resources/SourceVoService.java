@@ -300,4 +300,15 @@ public class SourceVoService implements ISourceVoService {
 		}
 		return ret;
 	}
+
+	public List<SourceVo> listSourceVoOrder(int gradeId, int subjectId) {
+		String hql = "from SourceVo where gradeId="+gradeId+" and subjectId="+subjectId+" order by viewTimes desc";
+		List<SourceVo> l = null;
+		try {
+			l = sourceVoDao.list(hql);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return l;
+	}
 }
