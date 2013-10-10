@@ -113,8 +113,14 @@ public class SourceAction extends ActionSupport implements
 	public String load() {
 		sourceVo = sourceVoService.load(source.getId());
 		source = sourceService.load(source.getId());
-		source.setViewTimes(source.getViewTimes() + 1);
-		sourceService.update(source);
+		if (source != null) {
+			// System.out.println("source= " +source);
+			if (source.getViewTimes() == null) {
+				source.setViewTimes(1);
+			}
+			source.setViewTimes(source.getViewTimes() + 1);
+			sourceService.update(source);
+		}
 		return SUCCESS;
 	}
 
