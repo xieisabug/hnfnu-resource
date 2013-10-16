@@ -98,6 +98,7 @@ body {
 
 /*banner*/
 .left {
+	width:202px;
     float: left;
 }
 
@@ -211,6 +212,93 @@ body {
 }
 
 /*topic*/
+
+/*teachvideo*/
+#teachvideo {
+    min-height: 200px;
+    max-height: 300px;
+    width: 420px;
+    border: 1px #ccc solid;
+    border-top: 0;
+}
+
+#teachvideo_title {
+    width: 420px;
+    height: 36px;
+    background: url(../images/teachvideo_title.jpg);
+    border-bottom: 1px #ccc solid;
+}
+
+#teachvideo_content ul {
+    border: 1px #ccc solid;
+    padding-left: 15px;
+    margin: 5px;
+}
+
+#teachvideo_content li {
+    list-style-image: url(../images/topic_item_list.jpg);
+    padding: 5px;
+}
+
+#teachvideo_content a {
+    font-size: 10px;
+    margin-left: 5px;
+    text-decoration: none;
+}
+
+.teachvideo_item_odd {
+    background: #eee;
+}
+
+.teachvideo_item_even {
+    background: #fff;
+}
+
+/*teachvideo*/
+
+/*teacher*/
+#teacher {
+    min-height: 200px;
+    max-height: 300px;
+    width: 422px;
+    border: 1px #ccc solid;
+    border-top: 0;
+    float:right;
+}
+
+#teacher_title {
+    width: 421px;
+    height: 36px;
+    background: url(../images/teacher_title.jpg);
+    border-bottom: 1px #ccc solid;
+}
+
+#teacher_content ul {
+    border: 1px #ccc solid;
+    padding-left: 15px;
+    margin: 5px;
+}
+
+#teacher_content li {
+    list-style-image: url(../images/topic_item_list.jpg);
+    padding: 5px;
+}
+
+#teacher_content a {
+    font-size: 10px;
+    margin-left: 5px;
+    text-decoration: none;
+}
+
+.teacher_item_odd {
+    background: #eee;
+}
+
+.teacher_item_even {
+    background: #fff;
+}
+
+/*teacher*/
 
 /*service*/
 #service {
