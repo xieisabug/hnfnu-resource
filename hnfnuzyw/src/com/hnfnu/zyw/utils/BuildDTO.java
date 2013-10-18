@@ -30,7 +30,7 @@ public class BuildDTO {
 	}
 
 	/**
-	 * »ñµÃ¸ÃÓÃ»§ÏÂÃæµÄËùÓÐ±í
+	 * ï¿½ï¿½Ã¸ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
 	 */
 	public void getAllTableList(String schemaName) {
 		getDatabaseMetaData();
@@ -39,7 +39,7 @@ public class BuildDTO {
 			ResultSet rs = dbMetaData.getTables(null, schemaName, "%", types);
 			while (rs.next()) {
 				String tableName = rs.getString("TABLE_NAME");
-				//¿ªÊ¼Éú³ÉDto
+				//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½Dto
 				build(schemaName, tableName);
 			}
 		} catch (SQLException e) {
@@ -63,17 +63,15 @@ public class BuildDTO {
 			
 			
 			//String _className = tableName.substring(2);
-			//System.out.println("ÀàÃû" + className);
 			//className = _className.substring(0,1);
 			//className = className.toUpperCase();
 			//className += _className.substring(1);
 			
-		//System.out.println("ÀàÃû" + className);
-			//Éú³ÉºóµÄDtoËùÔÚµÄÎÄ¼þ
+			//ï¿½ï¿½Éºï¿½ï¿½Dtoï¿½ï¿½ï¿½Úµï¿½ï¿½Ä¼ï¿½
 			pw = new PrintWriter(new File("e:\\javaDto\\" + className + "Dto.java"));
 
 			pw.println("/**");
-			pw.println("* Í¨¹ýÊý¾Ý¿âÄÚ±íµÄ×Ö¶Î¶¯Ì¬Éú³É " + className + "Dto");
+			pw.println("* Í¨ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½Ú±ï¿½ï¿½ï¿½Ö¶Î¶ï¿½Ì¬ï¿½ï¿½ï¿½ " + className + "Dto");
 			pw.println("**/");
 			pw.println("public class " + className + "Dto \n{\t");
 
@@ -81,47 +79,46 @@ public class BuildDTO {
 
 			while (rs.next()) {
 				String pStr = ""; // setXxxx
-				String typeStr = ""; // ÀàÐÍ
-				String notes = "";// ×¢ÊÍ
+				String typeStr = ""; // ï¿½ï¿½ï¿½ï¿½
+				String notes = "";// ×¢ï¿½ï¿½
 
-				// »ñÈ¡ÁÐÃû
+				// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½
 				String columName = rs.getString("COLUMN_NAME");
-				// »ñÈ¡Ã¿Ò»ÁÐµÄÊý¾ÝÀàÐÍ
+				// ï¿½ï¿½È¡Ã¿Ò»ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				int type = rs.getInt("DATA_TYPE");
-				System.out.println("Êý¾ÝÀàÐÍ£º" + type);
 
 				String comments = rs.getString("REMARKS");
 
-				// ÅÐ¶Ï
+				// ï¿½Ð¶ï¿½
 				if (Types.INTEGER == type) {
 					typeStr = "Integer";
 				} else if (Types.VARCHAR == type ||type == -1) {
 					typeStr = "String";
-				}else if (Types.DATE == type || type == 93){//ÕâÊÇÒòÎªÎÒÃ»ÕÒµ½textµÄÀàÐÍ³£Á¿ÊÇÊ²Ã´¡£
+				}else if (Types.DATE == type || type == 93){//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½Ã»ï¿½Òµï¿½textï¿½ï¿½ï¿½ï¿½ï¿½Í³ï¿½ï¿½ï¿½ï¿½ï¿½Ê²Ã´ï¿½ï¿½
 					typeStr = "Date";
 				}
 
-				// ×é×°×¢ÊÍ
+				// ï¿½ï¿½×°×¢ï¿½ï¿½
 				//System.out.println("comments:" + comments);
 				if (comments != null && !comments.equals("")) {
 					notes += "\t//";
 					notes += comments;
-					// Êä³ö×¢ÊÍ
+					// ï¿½ï¿½ï¿½×¢ï¿½ï¿½
 					pw.println(notes);
 				}
 
-				// ×é×° private µÄÓï¾ä
+				// ï¿½ï¿½×° private ï¿½ï¿½ï¿½ï¿½ï¿½
 				pStr += "private " + typeStr + " " + columName + ";";
 
-				// Êä³ö private µÄ×Ö¶Î
+				// ï¿½ï¿½ï¿½ private ï¿½ï¿½ï¿½Ö¶ï¿½
 				pw.println("\t" + pStr + "");
 
 			}
 
-			String constructStr = ""; // ¹¹Ôì
-			// ×é×°¿Õ²Î¹¹Ôì
+			String constructStr = ""; // ï¿½ï¿½ï¿½ï¿½
+			// ï¿½ï¿½×°ï¿½Õ²Î¹ï¿½ï¿½ï¿½
 			constructStr += "public " + className + "Dto()\n\t{\n\n\t}";
-			// Êä³ö¿Õ²Î¹¹Ôì
+			// ï¿½ï¿½ï¿½ï¿½Õ²Î¹ï¿½ï¿½ï¿½
 			pw.println("\n\t" + constructStr + "\n");
 
 			rs = dbMetaData.getColumns(null, schemaName, tableName, "%");
@@ -131,20 +128,20 @@ public class BuildDTO {
 				String setStr = "";
 				String typeStr = "";
 
-				// »ñÈ¡ÁÐÃû
+				// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½
 				String columName = rs.getString("COLUMN_NAME");
-				// »ñÈ¡Ã¿Ò»ÁÐµÄÊý¾ÝÀàÐÍ
+				// ï¿½ï¿½È¡Ã¿Ò»ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				int type = rs.getInt("DATA_TYPE");
 
-				// ÅÐ¶Ï
+				// ï¿½Ð¶ï¿½
 				if (Types.INTEGER == type) {
 					typeStr = "Integer";
 				} else if (Types.VARCHAR == type ||type == -1) {
 					typeStr = "String";
-				}else if (Types.DATE == type || type == 93){//ÕâÊÇÒòÎªÎÒÃ»ÕÒµ½textµÄÀàÐÍ³£Á¿ÊÇÊ²Ã´¡£
+				}else if (Types.DATE == type || type == 93){//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½Ã»ï¿½Òµï¿½textï¿½ï¿½ï¿½ï¿½ï¿½Í³ï¿½ï¿½ï¿½ï¿½ï¿½Ê²Ã´ï¿½ï¿½
 					typeStr = "Date";
 				}
-				// ×é×° set µÄÓï¾ä
+				// ï¿½ï¿½×° set ï¿½ï¿½ï¿½ï¿½ï¿½
 				setStr += "public void set"
 						+ columName.substring(0, 1).toUpperCase() + ""
 						+ columName.substring(1) + "(" + typeStr + " "
@@ -152,23 +149,23 @@ public class BuildDTO {
 				setStr += "\t\tthis." + columName + " = " + columName
 						+ ";\n\t}";
 
-				// ×é×°getÓï¾ä
+				// ï¿½ï¿½×°getï¿½ï¿½ï¿½
 				getStr += "public " + typeStr + " get"
 						+ columName.substring(0, 1).toUpperCase() + ""
 						+ columName.substring(1) + "()\n\t{\n\t";
 				getStr += "\treturn this." + columName + ";\n\t}";
-				// Êä³ö set
+				// ï¿½ï¿½ï¿½ set
 				pw.println("\t" + setStr);
-				// Êä³ö get
+				// ï¿½ï¿½ï¿½ get
 				pw.println("\t" + getStr);
 			}
 
 			pw.println("}");
 
-			// »º³å
+			// ï¿½ï¿½ï¿½ï¿½
 			pw.flush();
 			pw.close();
-			System.out.println(className+"Dto.java´´½¨³É¹¦£¡");
+			System.out.println(className+"Dto.javaï¿½ï¿½ï¿½ï¿½ï¿½É¹ï¿½ï¿½ï¿½");
 
 		} catch (Exception e) {
 			e.printStackTrace();

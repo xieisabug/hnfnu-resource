@@ -28,9 +28,6 @@ public class SourcesServiceImpl implements ISourceService {
 	public boolean add(SourceDto source, String categoryIdList) {
 		try {
 			sourceDao.add(source);
-			// System.out.println("自动生成的资源id" + source.getId());
-			// System.out.println("类别列表categoryList" + categoryIdList);
-
 			if (categoryIdList != null && !categoryIdList.equals("")) {
 				String[] categoryIds = categoryIdList.split(";");
 				for (int i = 0; i < categoryIds.length; i++) {

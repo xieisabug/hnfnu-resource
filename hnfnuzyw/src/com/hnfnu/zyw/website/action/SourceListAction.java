@@ -68,10 +68,15 @@ public class SourceListAction extends ActionSupport {
 		// 获得数据模型
 		root = sourceListService.getDataModel(subjectId, gradeId, 1, 10);
 		// 打印到输出台，以便于测试
-		fu.print("list.ftl", root);
+		//fu.print("list.ftl", root);
 		// 输出到文件
-		fu.fprint("list.ftl", root, filePath+"website//","sourceList_" + subjectId + "_" + gradeId
+		success = fu.fprint("list.ftl", root, filePath+"website//","sourceList_" + subjectId + "_" + gradeId
 				+ ".html");
+		if(success){
+			message = "列表页面生成成功";
+		}else{
+			message = "列表页面生成失败";
+		}
 		return SUCCESS;
 	}
 
@@ -82,23 +87,32 @@ public class SourceListAction extends ActionSupport {
 		List<SubjectDto> subjects = subjectService.list();
 		List<GradeDto> grades = gradeService.list();
 		
-		
-		for (int i = 0; i < subjects.size(); i++) {
+		int i = 0;
+		for (i = 0; i < subjects.size(); i++) {
 			SubjectDto subject = subjects.get(i);
 			for (int j = 0; j < grades.size(); j++) {
 				GradeDto grade = grades.get(j);
 				// 获得数据模型
 				root = sourceListService.getDataModel(subject.getId(),
 						grade.getId(), 1, 10);
-				System.out.println("subjects.size = "+subjects.size());
-				System.out.println("grades.size = "+grades.size());
 				// 打印到输出台，以便于测试
 				//fu.print("list.ftl", root);
 				// 输出到文件
-				fu.fprint("list.ftl", root,filePath+"website//","sourceList_" + subject.getId()
+				success = fu.fprint("list.ftl", root,filePath+"website//","sourceList_" + subject.getId()
 						+ "_" + grade.getId() + ".html");
+				if(success == false)break;
 			}
 		}
+		if(i < subjects.size()){
+			success = false;
+			message = "列表页面生成失败";
+			
+		}else{
+			success = true;
+			message = "所有列表页面生成成功";
+		}
+		
+		
 		return SUCCESS;
 	}
 

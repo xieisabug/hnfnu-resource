@@ -32,7 +32,7 @@ public class TopicSourceJoinAction extends ActionSupport implements
 	private Map<String, Object> topicSourceJoinList;
 	// 用户挂接角色，用；好隔开。
 	private String seletedSourceIds;
-	private int topicId;
+	//private int topicId;
 	private int[] sourceIds;
 
 	@Autowired
@@ -46,9 +46,8 @@ public class TopicSourceJoinAction extends ActionSupport implements
 	 */
 	@Action(value = "updateTopicSourceJoins")
 	public String updateTopicSourceJoins() {
-		System.out.println(seletedSourceIds);
 		success = topicSourceJoinService.addTopicSourceJoins(seletedSourceIds,
-				topicId);
+				topicSourceJoin.getTopicId());
 		if (success) {
 			message = "专题更新资源成功！";
 		} else {
@@ -63,7 +62,7 @@ public class TopicSourceJoinAction extends ActionSupport implements
 	 */
 	@Action(value = "querySourceIdsByTopicId")
 	public String querySourceIdsByTopicId() {
-		sourceIds = topicSourceJoinService.QueryAllSourceidsByTopicId(topicId);
+		sourceIds = topicSourceJoinService.QueryAllSourceidsByTopicId(topicSourceJoin.getTopicId());
 		return SUCCESS;
 	}
 
@@ -101,13 +100,13 @@ public class TopicSourceJoinAction extends ActionSupport implements
 		this.seletedSourceIds = seletedSourceIds;
 	}
 
-	public int getTopicId() {
+	/*public int getTopicId() {
 		return topicId;
 	}
 
 	public void setTopicId(int topicId) {
 		this.topicId = topicId;
-	}
+	}*/
 
 	public int[] getSourceIds() {
 		return sourceIds;

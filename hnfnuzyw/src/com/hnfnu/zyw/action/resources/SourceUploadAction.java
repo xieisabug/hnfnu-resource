@@ -41,7 +41,6 @@ public class SourceUploadAction extends ActionSupport implements
 		String uploadFileName = "";
 
 		File dir = new File(getSavePath());
-		//System.out.println("132434:"+dir.exists());
 
 		String savePath = getSavePath();// 保存上传文件的地址
 		//System.out.println("savePath"+savePath);
