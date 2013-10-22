@@ -30,7 +30,7 @@ public class CourseServiceImpl implements ICourseService {
 
 	public boolean delete(int id) {
 		try {
-			courseDao.delete(id);
+			courseDao.deleteCourseAndSources(id);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;

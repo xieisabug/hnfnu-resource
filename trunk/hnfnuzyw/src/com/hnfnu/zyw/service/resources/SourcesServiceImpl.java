@@ -13,6 +13,7 @@ import com.hnfnu.zyw.dao.resources.ISourceCategoryJoinDao;
 import com.hnfnu.zyw.dao.resources.ISourceDao;
 import com.hnfnu.zyw.dto.resources.SourceCategoryJoinDto;
 import com.hnfnu.zyw.dto.resources.SourceDto;
+import com.hnfnu.zyw.utils.FileUtils;
 
 @Service("sourceService")
 public class SourcesServiceImpl implements ISourceService {
@@ -146,30 +147,17 @@ public class SourcesServiceImpl implements ISourceService {
 	}
 
 	// 删除文件的方法，如果返回的是1说明删除成功，-1说明文件不存在。0说明文件删除错误，2说明文件删除成功，信息删除错误
-	public int delete(String url, int id) {
-		File file = new File(url);
-
-		// 判断目录或文件是否存在
-		if (!file.exists()) { // 不存在返回 false
+	public boolean delete(String url, int id) {
+		//先删除本地文件，再删除文件信息
+		if(FileUtils.deleteOneFile(url)){
 			try {
 				sourceDao.delete(id);
 			} catch (Exception e) {
-				e.printStackTrace();
-				return 2;
+				return false;
 			}
-			return -1;
-		} else {
-			if (file.delete()) {
-				try {
-					sourceDao.delete(id);
-				} catch (Exception e) {
-					e.printStackTrace();
-					return 2;
-				}
-				return 1;
-			} else {
-				return 0;
-			}
+			return true;
+		}else{
+			return false;
 		}
 	}
 
