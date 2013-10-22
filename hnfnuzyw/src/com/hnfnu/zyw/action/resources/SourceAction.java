@@ -127,16 +127,11 @@ public class SourceAction extends ActionSupport implements
 	@Action(value = "deleteSource")
 	public String delete() {
 
-		int i = sourceService.delete(source.getUrl(), source.getId());
-		if (i == 1) {
-			success = true;
-			message = "删除资源文件成功！";
-		} else if (i == -1) {
-			success = true;// 虽然删除失败，返回true代表此文件已经不存在，页面上的对话框自动消失
-			message = "文件不存在,资源信息已经删除";
-		} else if (i == 0) {
-			success = false;
-			message = "删除资源文件失败！";
+		success = sourceService.delete(source.getUrl(), source.getId());
+		if(success){
+			message = "资源删除成功！";
+		}else{
+			message = "资源删除失败";
 		}
 		return SUCCESS;
 	}
