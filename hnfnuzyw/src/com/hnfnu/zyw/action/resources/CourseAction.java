@@ -96,7 +96,7 @@ public class CourseAction extends ActionSupport implements
 	public String delete() {
 		success = courseService.delete(course.getId());
 		if (success) {
-			message = "删除课程成功！";
+			message = "删除课程成功，资源界面请刷新或者重新打开资源界面！";
 		} else {
 			message = "删除课程失败！";
 		}

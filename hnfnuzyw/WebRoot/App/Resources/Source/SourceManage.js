@@ -170,6 +170,10 @@ function refresh_info() {
         url : '../../../resources/allTree.action',
         type : 'post',
         success : function(data) {
+            sourceGrid.loadData({
+                Rows:[],
+                Total:0
+            });
             sourceTree.clear();
             sourceTree.setData(data.allTree);
         }

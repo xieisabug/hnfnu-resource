@@ -28,13 +28,7 @@ public class CategoryServiceImpl implements ICategoryService {
 	}
 
 	public boolean delete(int id) {
-		try {
-			categoryDao.delete(id);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-		return true;
+			return categoryDao.deleteCategoryAndSource(id);
 	}
 
 	public boolean update(CategoryDto category) {
