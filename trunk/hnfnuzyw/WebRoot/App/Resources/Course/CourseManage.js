@@ -43,6 +43,7 @@ function add_save() {
 						title : '提示信息',
 						content : data.message
 					});
+                    refresh_course();
 					courseWin.close();
 				} else {
 					$.ligerDialog.error(data.message);
@@ -131,6 +132,7 @@ function edit_save() {
 						title : '提示信息',
 						content : data.message
 					});
+                    refresh_course();
 					courseWin.close();
 				} else {
 					$.ligerDialog.error(data.message);

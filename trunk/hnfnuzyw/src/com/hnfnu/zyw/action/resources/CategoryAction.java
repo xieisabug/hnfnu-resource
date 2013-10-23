@@ -88,7 +88,7 @@ public class CategoryAction extends ActionSupport implements
 	public String delete() {
 		success = categoryService.delete(category.getId());
 		if (success) {
-			message = "删除类别成功！";
+			message = "删除类别成功,请刷新资源界面或者重新打开资源界面！";
 		} else {
 			message = "删除类别失败！";
 		}
