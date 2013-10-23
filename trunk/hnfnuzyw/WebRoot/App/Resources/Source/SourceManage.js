@@ -4,7 +4,7 @@ var sourceTree = null;//左侧树
 var sourceWin = null;//显示的窗口
 var sourceSelectData = null;//表格选择的数据
 
-//增加课程
+//增加资源
 function add_source2(){
     sourceWin = $.ligerDialog.open( {
         width : 400,
@@ -24,7 +24,7 @@ function add_source2(){
     });
     //sourceForm = sourceWin.frame.sourceForm;
 }
-// 增加课程的保存按钮事件
+// 增加资源的保存按钮事件
 function add_save() {
     sourceForm = sourceWin.frame.sourceForm;
     // 把表单转化为数组
@@ -43,19 +43,21 @@ function add_save() {
             success : function(data) {
                 if (data.success) {
                     //courseGrid.addRow(data.model);
-                    $.ligerDialog.tip( {
+                        $.ligerDialog.tip( {
                         title : '提示信息',
                         content : data.message
                     });
+                    refresh_info();
                     sourceWin.close();
                 } else {
                     $.ligerDialog.error(data.message);
                 }
             }
         });
+
     }
 }
-// 增加课程的取消按钮事件
+// 增加资源的取消按钮事件
 function add_cancel() {
     sourceForm = sourceWin.frame.sourceForm;
     var dlg = $.ligerDialog.waitting('正在撤销已经上传的文件...');
@@ -74,7 +76,7 @@ function add_cancel() {
         }
     });
 }
-//删除课程
+//删除资源
 function delete_source(){
     if (!sourceGrid.getSelected()) {
         $.ligerDialog.warn("请选择您要删除的行！");
@@ -93,8 +95,11 @@ function delete_source(){
                             title : '提示信息',
                             content : data.message
                         });
+                        refresh_info();
                         sourceGrid.deleteSelectedRow();
-                        sourceWin.close();
+                        if(sourceWin){
+                            sourceWin.close();
+                         }
                     } else {
                         $.ligerDialog.error(data.message);
                     }
@@ -103,7 +108,7 @@ function delete_source(){
         }
     });
 }
-//编辑课程
+//编辑资源
 function edit_source(){
     if (!sourceGrid.getSelected()) {
         $.ligerDialog.warn("请选择您要修改的行！");
@@ -128,7 +133,7 @@ function edit_source(){
         } ]
     });
 }
-//编辑完成课程后进行保存
+//编辑完成资源后进行保存
 function edit_save() {
     sourceForm = sourceWin.frame.sourceForm;
     if (sourceForm.valid()) {
@@ -144,7 +149,8 @@ function edit_save() {
                     $.ligerDialog.tip( {
                         title : '提示信息',
                         content : data.message
-                    });
+                    })
+                    refresh_info();
                     sourceWin.close();
                 } else {
                     $.ligerDialog.error(data.message);
@@ -157,6 +163,22 @@ function edit_save() {
 function edit_cancel() {
     sourceWin.close();
 }
+
+// 刷新资源的函数
+function refresh_info() {
+    $.ajax( {
+        url : '../../../resources/allTree.action',
+        type : 'post',
+        success : function(data) {
+            sourceTree.clear();
+            sourceTree.setData(data.allTree);
+        }
+    });
+    $("#pageloading").hide();
+
+}
+
+
 //查看资源全部的信息
 function all_info(){
     if (!sourceGrid.getSelected()) {
@@ -172,10 +194,10 @@ function all_info(){
         url: '../../../html2/source_view.html?id='+sourceGridData.id
     });
 }
-//打开一个选择课程的树形结构的对话框
+//打开一个选择资源的树形结构的对话框
 function openTreeDialog(){
     $.ligerDialog.open({
-        title: '选择课程',
+        title: '选择资源',
         name:'winSelector',
         width: 500,
         height: 500,
@@ -184,7 +206,7 @@ function openTreeDialog(){
         buttons: [
             {
                 text: '确定',
-                onclick: function(item, dialog){//选择了课程后进行数据处理的函数
+                onclick: function(item, dialog){//选择了资源后进行数据处理的函数
                     console.log(dialog);
                     var fn = dialog.frame.selectCourse || dialog.frame.window.selectCourse;
                     var data = fn();
@@ -195,7 +217,7 @@ function openTreeDialog(){
                     if(isCourse(data)){
                         sourceWin.frame.setCourseData(data);
                     } else {
-                        alert('请选择课程。');
+                        alert('请选择资源。');
                         return;
                     }
                     dialog.close();
@@ -211,7 +233,7 @@ function openTreeDialog(){
     });
     return false;
 }
-//判断选择的是否是课程
+//判断选择的是否是资源
 function isCourse(obj){
     return sourceTree.getParentTreeItem(sourceTree.getParentTreeItem(sourceTree.getParentTreeItem(obj.target)))==null &&
            sourceTree.getParentTreeItem(sourceTree.getParentTreeItem(obj.target))!=null;
@@ -256,7 +278,7 @@ function formInit() {
                         maxlength : 30
                     }
                 }, {
-                    display : "所属课程",
+                    display : "所属资源",
                     name : "courseId",
                     type : "select",
                     comboboxName : "course",
@@ -406,7 +428,13 @@ $(function() {
 		click : all_info,
 		icon : 'attibutes',
 		key : 'info'
-	} ];
+	},
+        {
+            text : '刷新资源',
+            click : refresh_info,
+            icon : 'refresh',
+            key : 'info'
+        }];
 
     var menuId = window.parent.tab.getSelectedTabItemID();
     $.ajax({
@@ -484,13 +512,13 @@ $(function() {
             hide : true,
             minWidth : 100
         }, {
-            display : '所属课程ID',
+            display : '所属资源ID',
             name : 'courseId',
             align : 'left',
             hide : true,
             minWidth : 100
         }, {
-            display : '所属课程名',
+            display : '所属资源名',
             name : 'courseName',
             align : 'left',
             minWidth : 150

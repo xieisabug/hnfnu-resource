@@ -64,7 +64,7 @@ function delete_course() {
 	}
 	var row_data = courseGrid.getSelected();
 
-	$.ligerDialog.warn('<p style="color:red;font-weight: bolder;">（警告：删除此课程后，课程下所有的资源会全部删除，并且主题下的该资源也会删除。）</p>确认删除' + row_data.name + '？', '删除类别', function (r)  {
+	$.ligerDialog.warn('<p style="color:red;font-weight: bolder;">（警告：删除此课程后，课程下所有的资源会全部删除，并且主题下的该资源也会删除。）</p>确认删除' + row_data.name + '？', '删除课程', function (r)  {
 		if (r) {
 			$.ajax( {
 				url : '../../../resources/deleteCourse.action',
@@ -114,6 +114,7 @@ function edit_course() {
 		} ]
 	});
 }
+
 function edit_save() {
 
 	if (courseForm.valid()) {
@@ -141,6 +142,21 @@ function edit_save() {
 function edit_cancel() {
 	courseWin.close();
 }
+
+// 刷新课程的函数
+function refresh_course() {
+    $.ajax( {
+        url : '../../../resources/listCourseGradeSubject.action',
+        type : 'post',
+        success : function(data) {
+            courseGrid.loadData(data.courseGradeSubjectList);
+        }
+    });
+    $("#pageloading").hide();
+
+}
+
+
 
 function query_course(){
     courseGrid.showFilter();
@@ -247,7 +263,12 @@ $(function() {
         click : query_course,
         icon : 'search2',
         key : 'query'
-    }];
+    },{
+            text : '刷新',
+            click : refresh_course,
+            icon : 'refresh',
+            key : 'refresh'
+        }];
 
     var menuId = window.parent.tab.getSelectedTabItemID();
     $.ajax({
