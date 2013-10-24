@@ -35,10 +35,13 @@ function add_save() {
 				success : function(data) {
 					if (data.success) {
 						roleGrid.addRow(data.model);
-						$.ligerDialog.tip({
-							title : '提示信息',
-							content : data.message
-						});
+                        var roleDialog = $.ligerDialog.confirm('需要马上为该角色赋予权限吗？', function (answer)
+                                                {
+                                                       if(answer){
+                                                           roleGrid.select(data.model);
+                                                           role_menu_join();
+                                                       }
+                                                });
 						roleWin.close();
 					} else {
 						$.ligerDialog.error(data.message);
@@ -240,6 +243,10 @@ function formInit() {
 			name : 'id',
 			type : 'hidden'
 		}, {
+            name : 'createUserName',
+            type : 'hidden'
+        },
+            {
 			display : '角色名称',
 			name : 'name',
 			type : 'text',
@@ -324,9 +331,8 @@ $(function() {
 					name : 'name',
 					width : 200
 				},
-				// todo 注意这里是createUser，后台需要处理好user的名字后再显示到前台
 				{
-					name : 'createUserId',
+					name : 'createUserName',
 					hide : true
 				}, {
 					display : '创建用户',
