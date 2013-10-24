@@ -483,9 +483,12 @@ function add_save() {
             success:function (data) {
                 if (data.success) {
                     userGrid.addRow(data.model);
-                    $.ligerDialog.tip({
-                        title:'提示信息',
-                        content:data.message
+                    var userDialog = $.ligerDialog.confirm('用户添加成功，需要马上为该用户赋予角色吗？', function (answer)
+                    {
+                        if(answer){
+                            userGrid.select(data.model);
+                            user_role_join();
+                        }
                     });
                     userWin.close();
                 } else {
