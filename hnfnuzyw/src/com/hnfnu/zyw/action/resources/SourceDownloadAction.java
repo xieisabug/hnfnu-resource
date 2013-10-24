@@ -6,35 +6,30 @@ import java.io.InputStream;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-public class SourceDownloadAction extends ActionSupport{
+public class SourceDownloadAction extends ActionSupport {
 	private static final long serialVersionUID = 7344069651943159764L;
-	//fileName是绝对路径
+	// fileName是绝对路径
 	private String url;
-    
-    public String getFileName() {
-        return "201309211650035.doc"; 
-}
-    
-    
-    public void setUrl(String url) {
+
+	public String getFileName() {
+		return "201309211650035.doc";
+	}
+
+	public void setUrl(String url) {
 		this.url = url;
 	}
 
-
-
 	public InputStream getInputStream() {
-        try {
+		try {
 			return new FileInputStream(url);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			return null;
-		}   
-    }
-   
-    public String execute(){
-            return "success";
-    }
+		}
+	}
 
-	
+	public String execute() {
+		return "success";
+	}
 
 }

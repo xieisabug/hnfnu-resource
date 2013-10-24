@@ -90,18 +90,23 @@ public class CategoryDaoImpl extends BaseDao<CategoryDto> implements
 		try {
 			t = session.beginTransaction();
 			l = getSourceDtos(categoryId);
+			this.delete(categoryId);
 			for (int i = 0; i < l.size(); i++) {
+				System.out.println("11111111111111111");
 				SourceDto s = l.get(i);
 				//如果该资源不属于其他的类别，就删除该资源和删除该资源的本地文件
 				if(!blongOtherCategory(s.getId())){
+					System.out.println("22222222222222222222");
 					//如果本地文件删除成功就删除该资源的信息
 					if(FileUtils.deleteOneFile(s.getUrl())){
+					System.out.println("333333333333333333333");
 					this.deleteSource(s.getId());
 					}else{
 						t.rollback();
 					}
 				}
-				this.delete(categoryId);
+				System.out.println("444444444444444444444");
+				
 			}
 			
 			t.commit();
@@ -178,7 +183,7 @@ public class CategoryDaoImpl extends BaseDao<CategoryDto> implements
 
 	private boolean deleteSource(int sourceId) {
 
-		String sql1 = "delete SourceDto where id:=id";
+		String sql1 = "delete SourceDto where id=:id";
 		Session session = this.getSession();
 		Transaction t = null;
 		try {
