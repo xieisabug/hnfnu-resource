@@ -56,7 +56,7 @@ public class CourseAction extends ActionSupport implements
 	public String add() {
 		success = courseService.add(course);
 		if (success) {
-			message = "添加课程成功！";
+			message = "添加课程成功，请到资源界面为该课程添加资源！";
 		} else {
 			message = "添加课程失败！";
 		}
