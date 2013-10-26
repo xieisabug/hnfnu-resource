@@ -231,7 +231,7 @@ function sourceViewTable(data){
     html += '</tr>';
     html += '</table>';
     html += '<div id="button">';
-    html += '<a href="'+data.url+'">下载</a>';
+    html += '<a href="/hnfnuzyw/file/download?url='+data.url+'">下载</a>';
     html += '<a href="javascript:onlineView('+id+')">预览</a>';
     html += '</div>';
     $("#source").html(html);

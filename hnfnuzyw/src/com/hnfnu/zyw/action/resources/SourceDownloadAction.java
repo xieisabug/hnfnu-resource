@@ -10,9 +10,25 @@ public class SourceDownloadAction extends ActionSupport {
 	private static final long serialVersionUID = 7344069651943159764L;
 	// fileNameÊÇ¾ø¶ÔÂ·¾¶
 	private String url;
+	private String fileName;
 
 	public String getFileName() {
-		return "201309211650035.doc";
+		try {
+			String[] s = url.split("\\\\");
+			this.fileName = s[s.length-1];
+			fileName = java.net.URLEncoder.encode(fileName, "UTF-8"); 
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return this.fileName;
+	}
+	
+	public void setFileName(String fileName) {
+		String[] s = url.split("\\");
+		String f = s[s.length-1];
+		this.fileName = f;
 	}
 
 	public void setUrl(String url) {

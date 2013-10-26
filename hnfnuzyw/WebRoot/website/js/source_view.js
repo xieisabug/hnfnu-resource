@@ -2,8 +2,8 @@ var tree = null;
 var grid = null;
 $(function() {
 	$("#layout").ligerLayout({
-		leftWidth : 240,
-		rightWidth : 400
+		leftWidth : 260,
+		rightWidth : 380
 	});
 	var argsArr = getArgs();
 	$.ajax({
@@ -11,7 +11,7 @@ $(function() {
 		type : 'post',
 		success : function(data) {
 			tree = $("#tree").ligerTree({
-				nodeWidth : 200,
+				nodeWidth : 150,
 				textFieldName : 'name',
 				idFieldName : 'id',
 				parentIDFieldName : 'pid',
@@ -231,7 +231,7 @@ function sourceViewTable(data){
     html += '</tr>';
     html += '</table>';
     html += '<div id="button">';
-    html += '<a href="'+data.url+'">下载</a>';
+    html += '<a href="/hnfnuzyw/file/download?url='+data.url+'">下载</a>';
     html += '<a href="javascript:onlineView('+id+')">预览</a>';
     html += '</div>';
     $("#source").html(html);
