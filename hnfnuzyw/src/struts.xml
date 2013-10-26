@@ -11,14 +11,14 @@
        <action name="fileUpload" class="com.hnfnu.zyw.action.resources.SourceUploadAction" method="upload">
            <param name="savePath">/uploads</param> 
        </action>
-       
+        <!-- 初始文件名 
        <action name="download" class="com.hnfnu.zyw.action.resources.SourceDownloadAction" >  
-            <!-- 初始文件名 
+           
             	contentType 指定下载文件的文件类型 —— application/octet-stream 表示无限制
             	inputName 流对象名 —— 比如这里写inputStream，它就会自动去找Action中的getInputStream方法。
             	contentDisposition 使用经过转码的文件名作为下载文件名 —— 默认格式是attachment;filename="${fileName}"，将调用该Action中的getFileName方法。
             	bufferSize 下载文件的缓冲大小
-            -->  
+           
             <result name="success" type="stream">  
                                 <param name="contentType">application/octet-stream</param>
                                 <param name="inputName">inputStream</param>
@@ -26,5 +26,6 @@
                                 <param name="bufferSize">4096</param>
            </result>
         </action>  
+         -->  
     </package>
 </struts>
