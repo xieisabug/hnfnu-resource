@@ -32,7 +32,7 @@ public class LoginFilter extends HttpServlet implements Filter {
 			System.out.println("已经登录");
 			// 判断获取的路径不为空且不是访问登录页面或执行登录操作时跳转
 			if (url != null
-					&& (url.indexOf("login") < 0 && url.indexOf("website") < 0)) {
+					&& (url.indexOf("login") < 0 && url.indexOf("website") < 0) && url.indexOf("html2") < 0) {
 				response.sendRedirect("http://localhost:8080/hnfnuzyw/login.html");
 				return;
 			}
