@@ -117,7 +117,7 @@ public class SourceAction extends ActionSupport implements
 			if (source.getViewTimes() == null) {
 				source.setViewTimes(1);
 			}
-			source.setViewTimes(source.getViewTimes() + 1);
+				source.setViewTimes(source.getViewTimes() + 1);
 			sourceService.update(source);
 		}
 		return SUCCESS;
@@ -128,9 +128,9 @@ public class SourceAction extends ActionSupport implements
 	public String delete() {
 
 		success = sourceService.delete(source.getUrl(), source.getId());
-		if(success){
+		if (success) {
 			message = "资源删除成功！";
-		}else{
+		} else {
 			message = "资源删除失败";
 		}
 		return SUCCESS;
