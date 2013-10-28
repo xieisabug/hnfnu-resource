@@ -1,5 +1,5 @@
 
-<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -20,7 +20,7 @@
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 <meta http-equiv="description" content="This is my page">
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<script type="text/javascript" src="js/jwplayer.js"></script>
+<script type="text/javascript" src="<%=path %>/website/js/jwplayer.js"></script>
 </head>
 
 <body>
@@ -28,7 +28,7 @@
 
 	<script type="text/javascript">
 		jwplayer("myElement").setup({
-			flashplayer : "player.swf",
+			flashplayer : "<%=path %>/website/player.swf",
 			file : "../uploads/test.mp4"
 		});
 	</script>
