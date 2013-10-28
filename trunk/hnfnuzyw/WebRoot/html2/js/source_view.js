@@ -238,6 +238,7 @@ function sourceViewTable(data){
 }
 function onlineView(data){
     window.open("onlineView.jsp?id="+data, '', 'height=650,width=1024,top=50,left=0,toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
+
 }
 // 提取URL中的参数
 function getArgs() {
