@@ -16,6 +16,7 @@ public class MenuDto
 	private Integer id;
 	//父菜单的id，如果是-1，则表示当前为最高级菜单
 	private Integer parentId;
+	
 	//菜单的名字
 	private String name;
 	//菜单点击后调用的链接
@@ -28,6 +29,17 @@ public class MenuDto
 	public MenuDto()
 	{
 
+	}
+
+	public MenuDto(Integer id, Integer parentId, String parentName,
+			String name, String url, String functionIdList, String icon) {
+		super();
+		this.id = id;
+		this.parentId = parentId;
+		this.name = name;
+		this.url = url;
+		this.functionIdList = functionIdList;
+		this.icon = icon;
 	}
 
 	public void setId(Integer id)
@@ -88,6 +100,5 @@ public class MenuDto
 				+ name + ", url=" + url + ", functionIdList=" + functionIdList
 				+ ", icon=" + icon + "]";
 	}
-	
-	
+
 }

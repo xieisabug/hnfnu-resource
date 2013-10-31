@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.hnfnu.zyw.dao.system.IMenuDao;
+import com.hnfnu.zyw.dao.system.IMenuVoDao;
 import com.hnfnu.zyw.dto.system.MenuDto;
+import com.hnfnu.zyw.vo.MenuVo;
 
 @Service("menuService")
 public class MenuServiceImpl implements IMenuService {
@@ -15,7 +17,11 @@ public class MenuServiceImpl implements IMenuService {
 	@Autowired
 	@Qualifier("menuDao")
 	public IMenuDao menuDao;
-
+	
+	@Autowired
+	@Qualifier("menuVoDao")
+	public IMenuVoDao menuVoDao;
+	
 	public boolean add(MenuDto menu) {
 		try {
 			if(menu.getParentId() == null){
@@ -59,11 +65,11 @@ public class MenuServiceImpl implements IMenuService {
 		
 	}
 
-	public List<MenuDto> list() {
-		String hql = "from MenuDto";
-		List<MenuDto> menus = null;
+	public List<MenuVo> list() {
+		String hql = "from MenuVo";
+		List<MenuVo> menus = null;
 		try {
-			menus = menuDao.list(hql);
+			menus = menuVoDao.list(hql);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;

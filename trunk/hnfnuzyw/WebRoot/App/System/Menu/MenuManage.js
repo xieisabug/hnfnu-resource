@@ -40,7 +40,7 @@ function add_save() {
 			success : function(data) {
 				console.log(data);
 				if (data.success) {
-					grid.addRow(data.model);
+					refresh_menu();
 					$.ligerDialog.tip({
 						title : '提示信息',
 						content : data.message
@@ -57,6 +57,20 @@ function add_save() {
 function add_cancel() {
 	menuFormWin.close();
 }
+
+//刷新菜单的函数
+function refresh_menu() {
+    $.ajax( {
+        url : '../../../system/listMenu.action',
+        type : 'post',
+        success : function(data) {
+        	grid.loadData(data.menuList);
+        }
+    });
+    $("#pageloading").hide();
+
+}
+
 
 // 删除菜单的函数
 function delete_menu() {
@@ -75,7 +89,7 @@ function delete_menu() {
 				success : function(data) {
 					if (data.success) {
 						$.ligerDialog.tip({title:'提示信息', content:data.message});
-						grid.deleteSelectedRow();
+						refresh_menu();
 						menuFormWin.close();
 					}else{
 						 $.ligerDialog.error(data.message);
@@ -125,7 +139,7 @@ function edit_save() {
 			success : function(data) {
 				console.log(data);
 				if (data.success) {
-					grid.update(grid.getSelected(), data.model);
+					refresh_menu();
 					$.ligerDialog.tip({title:'提示信息', content:data.message});
 					menuFormWin.close();
 				}else{
@@ -297,16 +311,13 @@ $(function() {
 					name : 'icon',
 					align : 'left',
 					minWidth : 120
-				}, {
-					display : '上级菜单',
-					name : 'parentId',
-					align : 'left',
-					minWidth : 100
-				} ],
+				}],
 				data : data.menuList,
 				height : '98%',
 				width : '100%',
                 pageSize : 20,
+                groupColumnName:'parentName',
+                groupColumnDisplay:'一级菜单',
 				toolbar : {
 					items : toolbarItems
 				}
