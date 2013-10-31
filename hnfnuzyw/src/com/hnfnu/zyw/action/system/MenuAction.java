@@ -18,6 +18,7 @@ import com.hnfnu.zyw.dto.system.FunctionDto;
 import com.hnfnu.zyw.dto.system.MenuDto;
 import com.hnfnu.zyw.service.system.IFunctionService;
 import com.hnfnu.zyw.service.system.IMenuService;
+import com.hnfnu.zyw.vo.MenuVo;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
@@ -105,7 +106,7 @@ public class MenuAction extends ActionSupport implements ModelDriven<MenuDto> {
 	@Action(value = "listMenu")
 	public String list() {
 		menuList = new HashMap<String, Object>();
-		List<MenuDto> l = menuService.list();
+		List<MenuVo> l = menuService.list();
 		menuList.put("Rows", l);
 		menuList.put("Total", l.size());
 		return SUCCESS;
