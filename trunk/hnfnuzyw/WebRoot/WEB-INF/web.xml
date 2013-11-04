@@ -26,7 +26,7 @@
 
 	<filter>
 		<filter-name>LoginFilter</filter-name>
-		<filter-class>com.hnfnu.zyw.Filter.LoginFilter</filter-class>
+		<filter-class>com.hnfnu.zyw.filter.LoginFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>LoginFilter</filter-name>
