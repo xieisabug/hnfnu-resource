@@ -7,7 +7,7 @@ function add_student() {
     formInit("add");
     studentWin = $.ligerDialog.open({
         width:400,
-        height:200,
+        height:500,
         title:'新增学生',
         target:studentForm,
         buttons:[
@@ -63,7 +63,7 @@ function edit_student() {
     Form.loadForm(studentForm, studentGrid.getSelected());
     studentWin = $.ligerDialog.open({
         width:400,
-        height:200,
+        height:400,
         title:'编辑学生',
         target:studentForm,
         buttons:[
@@ -121,7 +121,9 @@ function delete_student() {
         if (r) {
             $.ajax({
                 url:'../../../system/deleteStudent.action',
-                data:row_data,
+                data:{
+                    id:row_data.id
+                },
                 type:'post',
                 success:function (data) {
                     if (data.success) {
@@ -151,7 +153,11 @@ function formInit(func) {
        {
             name:'balance',
             type:'hidden'
-       },{
+       },
+       {
+           name:'password',
+           type:'hidden'
+      },{
         name:'username',
         display:'用户名',
         type:'text',
@@ -254,68 +260,87 @@ function formInit(func) {
         labelWidth:100,
         comboboxName:"entranceTime",
         textField:"text",
-        valueField:"text",
+        valueField:"id",
         newline:true,
         options:{
             hideOnLoseFocus:true,
             valueFieldID:"id",
             data:[
                 {
+                	"id":"2010",
                     "text":"2010"
                 },
                 {
+                	"id":"2011",
                     "text":"2011"
                 },
                 {
+                	"id":"2012",
                     "text":"2012"
                 },
                 {
+                	"id":"2013",
                     "text":"2013"
                 },
                 {
+                	"id":"2014",
                     "text":"2014"
                 },
                 {
+                	"id":"2015",
                     "text":"2015"
                 },
                 {
+                	"id":"2016",
                     "text":"2016"
                 },
                 {
+                	"id":"2017",
                     "text":"2017"
                 },
                 {
+                	"id":"2018",
                     "text":"2018"
                 },
                 {
+                	"id":"2019",
                     "text":"2019"
                 },
                 {
+                	"id":"2020",
                     "text":"2020"
                 },
                 {
+                	"id":"2021",
                     "text":"2021"
                 },
                 {
-                    "text":"2011"
+                	"id":"2022",
+                    "text":"2022"
                 },
                 {
-                    "text":"2011"
+                	"id":"2023",
+                    "text":"2023"
                 },
                 {
-                    "text":"2011"
+                	"id":"2024",
+                    "text":"2024"
                 },
                 {
-                    "text":"2011"
+                	"id":"2025",
+                    "text":"2025"
                 },
                 {
-                    "text":"2011"
+                	"id":"2026",
+                    "text":"2026"
                 },
                 {
-                    "text":"2011"
+                	"id":"2027",
+                    "text":"2027"
                 },
                 {
-                    "text":"2011"
+                	"id":"2028",
+                    "text":"2028"
                 }
             ]
 
@@ -403,6 +428,10 @@ $(function () {
                 columns:[
                     // { display:'ID', name:'id', align:'left', width:100 },
                     {
+                        display:'账号',
+                        name:'username',
+                        width:200
+                    },{
                         display:'学生名字',
                         name:'name',
                         width:200
