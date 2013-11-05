@@ -26,18 +26,15 @@ public class LoginFilter extends HttpServlet implements Filter {
 		HttpSession session = request.getSession(true);
 		UserDto user = (UserDto) session.getAttribute("user");
 		String url = request.getRequestURI();
-		System.out.println("����filter"+url);
-		System.out.println(user);
+		//System.out.println("filter"+url);
+		//System.out.println(user);
 		if (user == null) {
-			System.out.println("�Ѿ���¼");
-			// �жϻ�ȡ��·����Ϊ���Ҳ��Ƿ��ʵ�¼ҳ���ִ�е�¼����ʱ��ת
 			if (url != null
 					&& (url.indexOf("login") < 0 && url.indexOf("website") < 0) && url.indexOf("html2") < 0) {
 				response.sendRedirect("/hnfnuzyw/login.html");
 				return;
 			}
 		}
-		// ��ͨ����֤���û����ʼ���
 		arg2.doFilter(arg0, arg1);
 		return;
 	}
