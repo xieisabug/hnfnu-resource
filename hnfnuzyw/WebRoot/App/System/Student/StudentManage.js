@@ -1,5 +1,7 @@
 var studentGrid = null;// 学生表格
 var studentForm = null;// 学生表单
+var balanceForm = null;// 批量增加资源币表单
+var balanceWin = null;//批量增加资源币的窗口
 var studentWin = null;// 学生窗口
 
 // 增加学生的函数
@@ -51,6 +53,68 @@ function add_save() {
 }
 // 增加学生的取消按钮事件
 function add_cancel() {
+    studentWin.close();
+}
+
+//批量给学生充值资源币
+function add_balance() {
+	var datas = studentGrid.getSelecteds();
+	  //console.log(datas);
+    if (datas.length == 0) {
+        $.ligerDialog.warn('请选择您要充值的学生们.');
+        return;
+    }
+    balanceFormInit();
+    balanceWin = $.ligerDialog.open({
+        width:300,
+        height:200,
+        title:'充值资源币',
+        target:balanceForm,
+        buttons:[
+            {
+                text:'提交',
+                width:80,
+                onclick:add_balance_save
+            },
+            {
+                text:'取消',
+                width:80,
+                onclick:add_balance_cancel
+            }
+        ]
+    });
+}
+//批量充值资源币的保存按钮事件
+function add_balance_save() {
+    if (balanceForm.valid()) {
+    	var students = studentGrid.getSelecteds();
+        var row_data = Form.parseJSON(balanceForm);
+
+        console.log(students);
+        console.log(row_data);
+        
+        // 发往服务器，返回成功后再添加到表格中
+      /*  $.ajax({
+            url:'../../../system/addStudent.action',
+            data:row_data,
+            type:'post',
+            success:function (data) {
+                if (data.success) {
+                    studentGrid.addRow(data.model);
+                    $.ligerDialog.tip({
+                        title:'提示信息',
+                        content:data.message
+                    });
+                    studentWin.close();
+                } else {
+                    $.ligerDialog.error(data.message);
+                }
+            }
+        });*/
+    }
+}
+// 增加学生的取消按钮事件
+function add_balance_cancel() {
     studentWin.close();
 }
 // 修改学生的函数
@@ -381,6 +445,38 @@ function formInit(func) {
         }
     });
 }
+
+
+//初始化批量充值资源币的表单，生成form标签
+function balanceFormInit() {
+    balanceForm = $('<form></form>');
+    balanceForm.ligerForm({
+		inputWidth :80 ,
+		fields : [ 
+		{
+			display : '充值资源币数量',
+			name : 'addCount',
+			type : 'text',
+			space : 50,
+			labelWidth : 100,
+			width : 100,
+			height: 50,
+			newline : true,
+			validate : {
+				required : true,
+				maxlength : 11
+			}
+		} ]
+	});
+	$.metadata.setType("attr", "validate");
+	balanceForm.validate({
+		debug : true,
+		onkeyup : false,
+		errorPlacement : function(error,element) {
+            error.appendTo(element.parent().parent().parent().parent());
+		}
+	});
+}
 // 初始化表格
 $(function () {
     var toolbarItems = [
@@ -401,6 +497,11 @@ $(function () {
             click:delete_student,
             icon:'delete',
             key:'delete'
+        }, {
+            text:'资源币充值',
+            click:add_balance,
+            icon:'modify',
+            key:'modify_balance'
         }
     ];
     var menuId = window.parent.tab.getSelectedTabItemID();
@@ -483,6 +584,7 @@ $(function () {
                 height:'98%',
                 usePager:false,
                 data:data.studentList,
+                checkbox:true,
                 toolbar:{
                     items:toolbarItems
                 }
