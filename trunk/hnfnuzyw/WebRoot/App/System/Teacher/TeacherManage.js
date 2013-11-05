@@ -197,7 +197,7 @@ function formInit(func) {
             validate:{
                 required:true,
                 maxlength:20,
-                equalTo:"#password"
+                //equalTo:"#password"
             }
         });
     } else if (func === "edit") {
