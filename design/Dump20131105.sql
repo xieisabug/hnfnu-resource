@@ -1,8 +1,8 @@
 CREATE DATABASE  IF NOT EXISTS `hnfnuzyw` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `hnfnuzyw`;
--- MySQL dump 10.13  Distrib 5.6.11, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.6.11, for Win32 (x86)
 --
--- Host: localhost    Database: hnfnuzyw
+-- Host: 125.221.193.205    Database: hnfnuzyw
 -- ------------------------------------------------------
 -- Server version	5.6.11
 
@@ -365,7 +365,7 @@ CREATE TABLE `s_menu` (
   `functionIdList` varchar(100) DEFAULT NULL COMMENT '菜单所拥有的功能的id列表，用‘，’分割',
   `icon` varchar(100) DEFAULT NULL COMMENT '菜单的图标',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -374,7 +374,7 @@ CREATE TABLE `s_menu` (
 
 LOCK TABLES `s_menu` WRITE;
 /*!40000 ALTER TABLE `s_menu` DISABLE KEYS */;
-INSERT INTO `s_menu` VALUES (40,-1,'用户管理','','',''),(41,-1,'资源库系统','','',''),(45,-1,'在线备课','','',''),(46,61,'菜单管理','App/System/Menu/MenuManage.html','1;2;3','./App/Lib/icons/32X32/product_169.gif'),(47,40,'角色管理','App/System/Role/RoleManage.html','1;2;3;6','./App/Lib/icons/32X32/product_169.gif'),(48,40,'用户管理','App/System/User/UserManage.html','1;2;3;6;7','./App/Lib/icons/32X32/product_169.gif'),(49,61,'功能管理','App/System/Function/FunctionManage.html','1;3','./App/Lib/icons/32X32/product_169.gif'),(50,61,'参数管理','App/System/Parameter/ParameterManage.html','1;2;3','./App/Lib/icons/32X32/product_169.gif'),(51,41,'学科管理','App/Resources/Subject/SubjectManage.html','1;2;3','./App/Lib/icons/32X32/product_169.gif'),(52,41,'年级管理','App/Resources/Grade/GradeManage.html','1;2;3','./App/Lib/icons/32X32/product_169.gif'),(53,41,'类别管理','App/Resources/Category/CategoryManage.html','1;2;3;8','./App/Lib/icons/32X32/product_169.gif'),(54,41,'课程管理','App/Resources/Course/CourseManage.html','1;2;3;4;5','./App/Lib/icons/32X32/product_169.gif'),(55,41,'资源管理','App/Resources/Source/SourceManage.html','1;2;3;5','./App/Lib/icons/32X32/product_169.gif'),(56,-1,'专题系统','','',''),(57,41,'专题管理','App/Resources/Topic/TopicManage.html','1;2;3;6','./App/Lib/icons/32X32/product_169.gif'),(61,-1,'网站管理','','',''),(62,61,'页面生成','App/Website/Page/PageManage.html','5','./App/Lib/icons/32X32/product_169.gif'),(63,40,'学生管理','App/System/Student/StudentManage.html','1;2;3','./App/Lib/icons/32X32/product_169.gif');
+INSERT INTO `s_menu` VALUES (40,-1,'用户管理','','',''),(41,-1,'资源库系统','','',''),(45,-1,'在线备课','','',''),(46,61,'菜单管理','App/System/Menu/MenuManage.html','1;2;3','./App/Lib/icons/32X32/product_169.gif'),(47,40,'角色管理','App/System/Role/RoleManage.html','1;2;3;6','./App/Lib/icons/32X32/product_169.gif'),(48,40,'用户管理','App/System/User/UserManage.html','1;2;3;6;7','./App/Lib/icons/32X32/product_169.gif'),(49,61,'功能管理','App/System/Function/FunctionManage.html','1;3','./App/Lib/icons/32X32/product_169.gif'),(50,61,'参数管理','App/System/Parameter/ParameterManage.html','1;2;3','./App/Lib/icons/32X32/product_169.gif'),(51,41,'学科管理','App/Resources/Subject/SubjectManage.html','1;2;3','./App/Lib/icons/32X32/product_169.gif'),(52,41,'年级管理','App/Resources/Grade/GradeManage.html','1;2;3','./App/Lib/icons/32X32/product_169.gif'),(53,41,'类别管理','App/Resources/Category/CategoryManage.html','1;2;3;8','./App/Lib/icons/32X32/product_169.gif'),(54,41,'课程管理','App/Resources/Course/CourseManage.html','1;2;3;4;5','./App/Lib/icons/32X32/product_169.gif'),(55,41,'资源管理','App/Resources/Source/SourceManage.html','1;2;3;5','./App/Lib/icons/32X32/product_169.gif'),(56,-1,'专题系统','','',''),(57,41,'专题管理','App/Resources/Topic/TopicManage.html','1;2;3;6','./App/Lib/icons/32X32/product_169.gif'),(61,-1,'网站管理','','',''),(62,61,'页面生成','App/Website/Page/PageManage.html','5','./App/Lib/icons/32X32/product_169.gif'),(63,40,'学生管理','App/System/Student/StudentManage.html','1;2;3','./App/Lib/icons/32X32/product_169.gif'),(64,40,'老师管理','App/System/Teacher/TeacherManage.html','1;2;3','./App/Lib/icons/32X32/product_169.gif');
 /*!40000 ALTER TABLE `s_menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -448,7 +448,7 @@ CREATE TABLE `s_role_menu_join` (
   KEY `fk_menu_idx` (`menuId`),
   CONSTRAINT `fk_menu` FOREIGN KEY (`menuId`) REFERENCES `s_menu` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   CONSTRAINT `fk_role` FOREIGN KEY (`roleId`) REFERENCES `s_role` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=325 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=339 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -457,7 +457,7 @@ CREATE TABLE `s_role_menu_join` (
 
 LOCK TABLES `s_role_menu_join` WRITE;
 /*!40000 ALTER TABLE `s_role_menu_join` DISABLE KEYS */;
-INSERT INTO `s_role_menu_join` VALUES (222,5,51,'1;2;3'),(223,5,52,'1;2;3'),(224,5,53,'1;2;3;8'),(225,5,54,'1;2;3;4'),(226,5,55,'1;2;3'),(227,5,57,'1;2;3;6'),(228,6,62,'5'),(229,7,46,'1;3'),(230,7,47,'1;2;3;6'),(231,7,48,'1;2;3;6;7'),(278,18,46,'1;3'),(279,18,47,'1;2;3;6'),(280,18,48,'1;2;3;6;7'),(281,18,49,'1;3'),(282,18,50,'1;2;3'),(283,18,51,'1;2;3'),(284,18,52,'1;2;3'),(285,18,53,'1;2;3;8'),(286,18,54,'1;2;3;4;5'),(287,18,55,'1;2;3;5'),(312,4,46,'1;2;3'),(313,4,47,'1;3;6'),(314,4,48,'1;2;3;6;7'),(315,4,49,'1;3'),(316,4,50,'1;2;3'),(317,4,51,'1;2;3'),(318,4,52,'1;2;3'),(319,4,53,'1;2;3;8'),(320,4,54,'1;2;3;4;5'),(321,4,55,'1;2;3;5'),(322,4,57,'1;2;3;6'),(323,4,62,'5'),(324,4,63,'1;2;3');
+INSERT INTO `s_role_menu_join` VALUES (222,5,51,'1;2;3'),(223,5,52,'1;2;3'),(224,5,53,'1;2;3;8'),(225,5,54,'1;2;3;4'),(226,5,55,'1;2;3'),(227,5,57,'1;2;3;6'),(228,6,62,'5'),(229,7,46,'1;3'),(230,7,47,'1;2;3;6'),(231,7,48,'1;2;3;6;7'),(278,18,46,'1;3'),(279,18,47,'1;2;3;6'),(280,18,48,'1;2;3;6;7'),(281,18,49,'1;3'),(282,18,50,'1;2;3'),(283,18,51,'1;2;3'),(284,18,52,'1;2;3'),(285,18,53,'1;2;3;8'),(286,18,54,'1;2;3;4;5'),(287,18,55,'1;2;3;5'),(325,4,46,'1;2;3'),(326,4,47,'1;3;6'),(327,4,48,'1;2;3;6;7'),(328,4,49,'1;3'),(329,4,50,'1;2;3'),(330,4,51,'1;2;3'),(331,4,52,'1;2;3'),(332,4,53,'1;2;3;8'),(333,4,54,'1;2;3;4;5'),(334,4,55,'1;2;3;5'),(335,4,57,'1;2;3;6'),(336,4,62,'5'),(337,4,63,'1;2;3'),(338,4,64,'1;2;3');
 /*!40000 ALTER TABLE `s_role_menu_join` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -482,7 +482,7 @@ CREATE TABLE `s_student` (
   `createDate` date DEFAULT NULL,
   `remark` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -491,7 +491,7 @@ CREATE TABLE `s_student` (
 
 LOCK TABLES `s_student` WRITE;
 /*!40000 ALTER TABLE `s_student` DISABLE KEYS */;
-INSERT INTO `s_student` VALUES (1,'ceshi','123456','kk','10402050102','数学系','信息与计算科学','undefined',NULL,'15574589632',NULL,'asds');
+INSERT INTO `s_student` VALUES (1,'ceshi','123456','kk','10402050102','数学系','信息与计算科学','undefined',NULL,'15574589632',NULL,'asds'),(2,'sdd','123456','aa','123456','dfsdfsd','asdas','2012',NULL,'2343243',NULL,'asds');
 /*!40000 ALTER TABLE `s_student` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -514,6 +514,7 @@ CREATE TABLE `s_teacher` (
   `createDate` date DEFAULT NULL COMMENT '创建日期',
   `createUserId` int(11) DEFAULT NULL COMMENT '创建人id',
   `remark` text COMMENT '备注',
+  `balance` int(11) DEFAULT '0' COMMENT '资源币',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='特殊角色老师。';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -909,4 +910,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-11-05 17:03:46
+-- Dump completed on 2013-11-05 21:10:13
