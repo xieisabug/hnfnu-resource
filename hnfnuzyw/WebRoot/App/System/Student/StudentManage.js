@@ -1,8 +1,63 @@
 var studentGrid = null;// 学生表格
 var studentForm = null;// 学生表单
 var balanceForm = null;// 批量增加资源币表单
+var fileForm = null;//批量学生注册表单
+var fileWin = null;//批量学生注册的窗口
 var balanceWin = null;//批量增加资源币的窗口
 var studentWin = null;// 学生窗口
+
+//增加学生的函数
+function add_student() {
+    formInit("add");
+    studentWin = $.ligerDialog.open({
+        width:400,
+        height:500,
+        title:'新增学生',
+        target:studentForm,
+        buttons:[
+            {
+                text:'提交',
+                width:80,
+                onclick:add_save
+            },
+            {
+                text:'取消',
+                width:80,
+                onclick:add_cancel
+            }
+        ]
+    });
+}
+// 增加学生的保存按钮事件
+function add_save() {
+    if (studentForm.valid()) {
+        var row_data = Form.parseJSON(studentForm);
+
+        // 发往服务器，返回成功后再添加到表格中
+        $.ajax({
+            url:'../../../system/addStudent.action',
+            data:row_data,
+            type:'post',
+            success:function (data) {
+                if (data.success) {
+                    studentGrid.addRow(data.model);
+                    $.ligerDialog.tip({
+                        title:'提示信息',
+                        content:data.message
+                    });
+                    studentWin.close();
+                } else {
+                    $.ligerDialog.error(data.message);
+                }
+            }
+        });
+    }
+}
+// 增加学生的取消按钮事件
+function add_cancel() {
+    studentWin.close();
+}
+
 
 // 增加学生的函数
 function add_student() {
@@ -87,36 +142,57 @@ function add_balance() {
 //批量充值资源币的保存按钮事件
 function add_balance_save() {
     if (balanceForm.valid()) {
-    	var students = studentGrid.getSelecteds();
+    	var studentDatas = studentGrid.getSelecteds();
+    	var studentIds = "";
+    	for(var i = 0; i < studentDatas.length;i++){
+    		if( i > 0){
+        		studentIds = studentIds + ";";	
+    		}
+    		studentIds = studentIds + studentDatas[i].id;
+    	}
+    	//console.log(studentIds);
         var row_data = Form.parseJSON(balanceForm);
-
-        console.log(students);
-        console.log(row_data);
-        
         // 发往服务器，返回成功后再添加到表格中
-      /*  $.ajax({
-            url:'../../../system/addStudent.action',
-            data:row_data,
+       $.ajax({
+            url:'../../../system/addStudentBalanceCount.action',
+            data:{
+    	   		studentIds:studentIds,
+    	   		balanceCount:row_data.addCount
+       		},
             type:'post',
             success:function (data) {
                 if (data.success) {
-                    studentGrid.addRow(data.model);
                     $.ligerDialog.tip({
                         title:'提示信息',
                         content:data.message
                     });
-                    studentWin.close();
+                    refresh_student();
+                    balanceWin.close();
                 } else {
                     $.ligerDialog.error(data.message);
                 }
             }
-        });*/
+        });
     }
 }
-// 增加学生的取消按钮事件
+// 批量充值资源币的取消按钮事件
 function add_balance_cancel() {
-    studentWin.close();
+    balanceWin.close();
 }
+
+// 刷新学生的函数
+function refresh_student() {
+    $.ajax( {
+        url : '../../../system/listStudent.action',
+        type : 'post',
+        success : function(data) {
+            studentGrid.loadData(data.studentList);
+        }
+    });
+    $("#pageloading").hide();
+
+}
+
 // 修改学生的函数
 function edit_student() {
     formInit("edit");
@@ -261,7 +337,7 @@ function formInit(func) {
             validate:{
                 required:true,
                 maxlength:20,
-                equalTo:"#password"
+                //equalTo:"#password"
             }
         });
     } else if (func === "edit") {
@@ -501,7 +577,12 @@ $(function () {
             text:'资源币充值',
             click:add_balance,
             icon:'modify',
-            key:'modify_balance'
+            key:'modify_many'
+        }, {
+            text:'批量注册',
+            click:add_many_student,
+            icon:'add',
+            key:'add_many'
         }
     ];
     var menuId = window.parent.tab.getSelectedTabItemID();
@@ -531,11 +612,11 @@ $(function () {
                     {
                         display:'账号',
                         name:'username',
-                        width:200
+                        width:180
                     },{
                         display:'学生名字',
                         name:'name',
-                        width:200
+                        width:100
                     },
                     {
                         display:'学号',
@@ -547,7 +628,7 @@ $(function () {
                         display:'专业',
                         name:'major',
                         align:'left',
-                        width:100
+                        width:120
                     },
                     {
                         display:'系部',
@@ -559,7 +640,7 @@ $(function () {
                         display:'入学年份',
                         name:'entranceTime',
                         align:'left',
-                        width:100
+                        width:80
                     },
                     {
                         display:'资源币余额',
@@ -571,7 +652,7 @@ $(function () {
                         display:'电话号码',
                         name:'telephone',
                         align:'left',
-                        width:120
+                        width:100
                     },
                     {
                         display:'备注',
