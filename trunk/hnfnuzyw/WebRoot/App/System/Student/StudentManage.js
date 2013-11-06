@@ -6,46 +6,47 @@ var fileWin = null;//批量学生注册的窗口
 var balanceWin = null;//批量增加资源币的窗口
 var studentWin = null;// 学生窗口
 
-//增加学生的函数
-function add_student() {
-    formInit("add");
-    studentWin = $.ligerDialog.open({
+//批量注册学生的函数
+function add_many_student() {
+    formFileInit();
+    fileWin = $.ligerDialog.open({
         width:400,
-        height:500,
-        title:'新增学生',
-        target:studentForm,
+        height:300,
+        title:'批量注册学生',
+        target:fileForm,
         buttons:[
             {
                 text:'提交',
                 width:80,
-                onclick:add_save
+                onclick:add_many_save
             },
             {
                 text:'取消',
                 width:80,
-                onclick:add_cancel
+                onclick:add_many_cancel
             }
         ]
     });
 }
-// 增加学生的保存按钮事件
-function add_save() {
-    if (studentForm.valid()) {
-        var row_data = Form.parseJSON(studentForm);
+// 批量注册学生的保存按钮事件
+function add_many_save() {
+    if (fileForm.valid()) {
+        var row_data = Form.parseJSON(fileForm);
 
         // 发往服务器，返回成功后再添加到表格中
         $.ajax({
-            url:'../../../system/addStudent.action',
-            data:row_data,
+            url:'../../../system/addManyStudent.action',
+            data:{
+        	fileUrl:row_data.url
+        	},
             type:'post',
             success:function (data) {
                 if (data.success) {
-                    studentGrid.addRow(data.model);
                     $.ligerDialog.tip({
                         title:'提示信息',
                         content:data.message
                     });
-                    studentWin.close();
+                    fileWin.close();
                 } else {
                     $.ligerDialog.error(data.message);
                 }
@@ -53,9 +54,9 @@ function add_save() {
         });
     }
 }
-// 增加学生的取消按钮事件
-function add_cancel() {
-    studentWin.close();
+// 批量注册学生的取消按钮事件
+function add_many_cancel() {
+    fileWin.close();
 }
 
 
@@ -553,6 +554,39 @@ function balanceFormInit() {
 		}
 	});
 }
+
+//初始化批量注册学生的表单，生成form标签
+function formFileInit() {
+    fileForm = $('<form></form>');
+    fileForm.ligerForm({
+		inputWidth :80 ,
+		fields : [ 
+		{
+			display : '选择文件',
+			name : 'url',
+			type : 'file',
+			space : 50,
+			labelWidth : 100,
+			width : 100,
+			height: 50,
+			newline : true,
+			validate : {
+				required : true,
+				maxlength : 200
+			}
+		} ]
+	});
+	$.metadata.setType("attr", "validate");
+	fileForm.validate({
+		debug : true,
+		onkeyup : false,
+		errorPlacement : function(error,element) {
+            error.appendTo(element.parent().parent().parent().parent());
+		}
+	});
+}
+
+
 // 初始化表格
 $(function () {
     var toolbarItems = [
