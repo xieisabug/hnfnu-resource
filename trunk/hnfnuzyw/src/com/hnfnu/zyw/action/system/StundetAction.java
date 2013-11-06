@@ -30,11 +30,31 @@ ModelDriven<StudentDto>{
 	private boolean success;
 	private String message;
 	private Map<String, Object> studentList;
+	private String studentIds; 
+	private int balanceCount;
 
 	@Autowired
 	@Qualifier("studentService")
 	private IStudentService studentService;
 
+	
+
+	/**
+	 * 批量给学生充值资源币
+	 * @return
+	 */
+	@Action(value = "addStudentBalanceCount")
+	public String addStudentBalanceCount() {
+		success = studentService.addStudnetBalance(balanceCount, studentIds);
+		if (success) {
+			message = "给学生们充值成功！";
+		} else {
+			message = "给学生们充值失败！";
+		}
+		return SUCCESS;
+	}
+
+	
 	/**
 	 * 添加学生
 	 * @return
@@ -133,5 +153,13 @@ ModelDriven<StudentDto>{
 	public Map<String, Object> getStudentList() {
 		return studentList;
 	}
+	
+	public void setBalanceCount(int balanceCount) {
+		this.balanceCount = balanceCount;
+	}
 
+
+	public void setStudentIds(String studentIds) {
+		this.studentIds = studentIds;
+	}
 }

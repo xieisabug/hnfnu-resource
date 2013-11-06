@@ -5,4 +5,5 @@ import com.hnfnu.zyw.dto.system.StudentDto;
 
 public interface IStudentDao  extends IBaseDao<StudentDto>{
 
+	public boolean addStudnetBalance(int count,String studentIds);
 }

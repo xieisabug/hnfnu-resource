@@ -27,5 +27,10 @@ public interface IStudentService {
 	 */
 	public Map<String, Object> listStu();
 	
+	/*
+	 * 批量给学生充值资源币
+	 */
+	public boolean addStudnetBalance(int count,String studentIds);
+	
 
 }

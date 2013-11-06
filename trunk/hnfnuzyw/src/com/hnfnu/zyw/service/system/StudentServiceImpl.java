@@ -111,4 +111,11 @@ public class StudentServiceImpl implements IStudentService{
 		studentList.put("Total", l.size());
 		return studentList;
 	}
+
+	/**
+	 * 给学生批量充值资源币
+	 */
+	public boolean addStudnetBalance(int count, String studentIds) {
+		return studentDao.addStudnetBalance(count, studentIds);
+	}
 }
