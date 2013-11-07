@@ -22,16 +22,16 @@ public class POITest {
 	@Test
 	public void testRead() {
 		try {
-			// WorkbookFactoryå¯ä»¥è‡ªåŠ¨æ ¹æ®æ–‡æ¡£çš„ç±»å‹æ‰“å¼€ä¸€ä¸ªexcel
+			// WorkbookFactory¿ÉÒÔ×Ô¶¯¸ù¾İÎÄµµµÄÀàĞÍ´ò¿ªÒ»¸öexcel
 			Workbook wb = WorkbookFactory.create(new File("d:/11.xls"));
-			// è·å–excelä¸­çš„æŸä¸€ä¸ªæ•°æ®è¡¨
+			// »ñÈ¡excelÖĞµÄÄ³Ò»¸öÊı¾İ±í
 			Sheet sheet = wb.getSheetAt(0);
-			// è·å–æ•°æ®è¡¨ä¸­çš„æŸä¸€è¡Œ
+			// »ñÈ¡Êı¾İ±íÖĞµÄÄ³Ò»ĞĞ
 			Row row = null;
 			Row titleRow = sheet.getRow(0);
 			for (int i = 1; i < sheet.getLastRowNum(); i++) {
 				row = sheet.getRow(i);
-				// è·å–ä¸€è¡Œå¤šå°‘åˆ—
+				// »ñÈ¡Ò»ĞĞ¶àÉÙÁĞ
 				StudentDto student = new StudentDto();
 				for (int j = row.getFirstCellNum(); j < row.getLastCellNum(); j++) {
 					String title = getCellValue(titleRow.getCell(j));
@@ -39,27 +39,27 @@ public class POITest {
 					String value = getCellValue(row.getCell(j));
 					System.out.println(value);
 					
-					if (title.equals("å§“å")) {
-						System.out.println("æˆ‘æ˜¯å§“å");
+					if (title.equals("ĞÕÃû")) {
+						System.out.println("ÎÒÊÇĞÕÃû");
 						student.setName(value);
 						System.out.println(student.getName());
-					} else if (title.equals("å­¦å·")) {
+					} else if (title.equals("Ñ§ºÅ")) {
 						student.setNumber(value);
 						student.setUsername(value);
 
-					} else if (title.equals("ä¸“ä¸š")) {
+					} else if (title.equals("×¨Òµ")) {
 						student.setMajor(value);
 
-					} else if (title.equals("ç³»éƒ¨")) {
+					} else if (title.equals("Ïµ²¿")) {
 						student.setDepartment(value);
 
-					} else if (title.equals("å…¥å­¦å¹´ä»½")) {
+					} else if (title.equals("ÈëÑ§Äê·İ")) {
 						student.setEntranceTime(value);
 
-					} else if (title.equals("ç”µè¯å·ç ") || title.equals("è”ç³»ç”µè¯")) {
+					} else if (title.equals("µç»°ºÅÂë") || title.equals("ÁªÏµµç»°")) {
 						student.setTelephone(value);
 
-					} else if (title.equals("å¤‡æ³¨")) {
+					} else if (title.equals("±¸×¢")) {
 						student.setRemark(value);
 					}
 					
@@ -87,7 +87,8 @@ public class POITest {
 			o = String.valueOf(c.getCellFormula());
 			break;
 		case Cell.CELL_TYPE_NUMERIC:
-			o = String.valueOf(c.getNumericCellValue());
+			//o = String.valueOf(c.getNumericCellValue());
+			o = c.getStringCellValue();
 			break;
 		case Cell.CELL_TYPE_STRING:
 			o = c.getStringCellValue();
@@ -105,14 +106,14 @@ public class POITest {
 			Workbook wb = WorkbookFactory
 					.create(new File("d:/test/poi/11.xls"));
 			Sheet sheet = wb.getSheetAt(0);
-			// è·å–ä¸€å…±å¤šå°‘è¡Œ
+			// »ñÈ¡Ò»¹²¶àÉÙĞĞ
 			System.out.println(sheet.getLastRowNum());
 			Row row = null;
 			for (int i = 0; i < sheet.getLastRowNum(); i++) {
 				row = sheet.getRow(i);
-				// è·å–ä¸€è¡Œå¤šå°‘åˆ—
+				// »ñÈ¡Ò»ĞĞ¶àÉÙÁĞ
 				for (int j = row.getFirstCellNum(); j < row.getLastCellNum(); j++) {
-					// getCellValueå¯ä»¥æ ¹æ®ä¸åŒçš„ç±»å‹è·å–ä¸€ä¸ªStringç±»å‹çš„å€¼
+					// getCellValue¿ÉÒÔ¸ù¾İ²»Í¬µÄÀàĞÍ»ñÈ¡Ò»¸öStringÀàĞÍµÄÖµ
 					System.out.print(getCellValue(row.getCell(j)) + "--");
 				}
 				System.out.println();
@@ -130,9 +131,9 @@ public class POITest {
 			Workbook wb = WorkbookFactory
 					.create(new File("d:/test/poi/11.xls"));
 			Sheet sheet = wb.getSheetAt(0);
-			// ä¹Ÿæ”¯æŒå¢å¼ºforå¾ªç¯çš„æ–¹å¼
+			// Ò²Ö§³ÖÔöÇ¿forÑ­»·µÄ·½Ê½
 			/**
-			 * æ³¨æ„è¯¥ç§æ–¹å¼ä½¿ç”¨ä¸å¤šï¼Œå› ä¸ºè¯»å–çš„æ•°æ®å¹¶ä¸ä¸€å®šæ˜¯ä»ç¬¬ä¸€è¡Œå¼€å§‹çš„ï¼Œ è€Œä¸”ç»“æŸçš„æ•°æ®ä¹Ÿä¸ä¸€å®šå°±æ˜¯æœ€åä¸€è¡Œ
+			 * ×¢Òâ¸ÃÖÖ·½Ê½Ê¹ÓÃ²»¶à£¬ÒòÎª¶ÁÈ¡µÄÊı¾İ²¢²»Ò»¶¨ÊÇ´ÓµÚÒ»ĞĞ¿ªÊ¼µÄ£¬ ¶øÇÒ½áÊøµÄÊı¾İÒ²²»Ò»¶¨¾ÍÊÇ×îºóÒ»ĞĞ
 			 */
 			for (Row row : sheet) {
 				for (Cell c : row) {
@@ -153,13 +154,13 @@ public class POITest {
 		FileOutputStream fos = null;
 		try {
 			fos = new FileOutputStream("d:/test/poi/w1.xls");
-			// åˆ›å»ºè¡¨æ ¼
-			Sheet sheet = wb.createSheet("æµ‹è¯•01");
-			// åˆ›å»ºè¡Œ
+			// ´´½¨±í¸ñ
+			Sheet sheet = wb.createSheet("²âÊÔ01");
+			// ´´½¨ĞĞ
 			Row row = sheet.createRow(0);
-			// è®¾ç½®è¡Œé«˜
+			// ÉèÖÃĞĞ¸ß
 			row.setHeightInPoints(30);
-			// åˆ›å»ºæ ·å¼
+			// ´´½¨ÑùÊ½
 			CellStyle cs = wb.createCellStyle();
 			cs.setAlignment(CellStyle.ALIGN_CENTER);
 			cs.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
@@ -167,16 +168,16 @@ public class POITest {
 			cs.setBorderLeft(CellStyle.BORDER_THIN);
 			cs.setBorderRight(CellStyle.BORDER_THIN);
 			cs.setBorderTop(CellStyle.BORDER_THIN);
-			// åˆ›å»ºå•å…ƒæ ¼
+			// ´´½¨µ¥Ôª¸ñ
 			Cell c = row.createCell(0);
-			// è®¾ç½®å•å…ƒæ ¼æ ·å¼
+			// ÉèÖÃµ¥Ôª¸ñÑùÊ½
 			c.setCellStyle(cs);
-			// åˆ›å»ºå•å…ƒæ ¼
-			c.setCellValue("æ ‡è¯†");
+			// ´´½¨µ¥Ôª¸ñ
+			c.setCellValue("±êÊ¶");
 			c = row.createCell(1);
 			c.setCellStyle(cs);
-			c.setCellValue("ç”¨æˆ·å");
-			// å†™åˆ°è¾“å‡ºæµ
+			c.setCellValue("ÓÃ»§Ãû");
+			// Ğ´µ½Êä³öÁ÷
 			wb.write(fos);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
