@@ -1,5 +1,7 @@
 package com.hnfnu.zyw.dao.system;
 
+import java.util.ArrayList;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
@@ -16,6 +18,8 @@ IStudentDao{
 		String[] ids = null; 
 		if(studentIds != null && !studentIds.equals("")){
 			ids = studentIds.split(";");
+		}else{
+			return false;
 		}
 		Transaction t = null;
 		try {
@@ -25,6 +29,34 @@ IStudentDao{
 				StudentDto s = this.get(id);
 				s.setBalance(s.getBalance() + count);
 				this.update(s);
+			}
+			t.commit();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			if (t != null) {
+				t.rollback();
+			}
+			return false;
+		} finally {
+			session.close();
+		}
+		return true;
+	}
+
+	/**
+	 * 批量注册学生
+	 */
+	public boolean addStudnets( ArrayList<StudentDto> students) {
+		Session session = this.getSession();
+		if(students.size() == 0){
+			return false;
+		}
+		Transaction t = null;
+		try {
+			t = session.beginTransaction();
+			for(int i = 0; i < students.size(); i++){
+				StudentDto s =  students.get(i);
+				this.add(s);
 			}
 			t.commit();
 		} catch (Exception ex) {

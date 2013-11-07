@@ -12,7 +12,7 @@ function add_many_student() {
         width:400,
         height:300,
         title:'批量注册学生',
-        //url:'AddForm.html',
+        url:'AddForm.html',
         buttons:[
             {
                 text:'提交',
@@ -29,14 +29,22 @@ function add_many_student() {
 }
 // 批量注册学生的保存按钮事件
 function add_many_save() {
+	
+	fileForm = fileWin.frame.sourceForm;
+	
     if (fileForm.valid()) {
         var row_data = Form.parseJSON(fileForm);
 
+        if(row_data.url == "" || row_data.url == null) {
+        	$.ligerDialog.error("未上传文件");
+        	return;
+        }
+        
         // 发往服务器，返回成功后再添加到表格中
         $.ajax({
             url:'../../../system/addManyStudent.action',
             data:{
-        	fileUrl:row_data.url
+        	url:row_data.url
         	},
             type:'post',
             success:function (data) {

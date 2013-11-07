@@ -32,5 +32,12 @@ public interface IStudentService {
 	 */
 	public boolean addStudnetBalance(int count,String studentIds);
 	
+	
+
+	/*
+	 * 解析excel表批量给学生注册
+	 */
+	public boolean addStudnets(String url);
+	
 
 }
