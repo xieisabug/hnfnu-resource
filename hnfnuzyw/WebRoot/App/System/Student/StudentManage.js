@@ -8,12 +8,11 @@ var studentWin = null;// 学生窗口
 
 //批量注册学生的函数
 function add_many_student() {
-    formFileInit();
     fileWin = $.ligerDialog.open({
         width:400,
         height:300,
         title:'批量注册学生',
-        target:fileForm,
+        //url:'AddForm.html',
         buttons:[
             {
                 text:'提交',
@@ -554,39 +553,6 @@ function balanceFormInit() {
 		}
 	});
 }
-
-//初始化批量注册学生的表单，生成form标签
-function formFileInit() {
-    fileForm = $('<form></form>');
-    fileForm.ligerForm({
-		inputWidth :80 ,
-		fields : [ 
-		{
-			display : '选择文件',
-			name : 'url',
-			type : 'file',
-			space : 50,
-			labelWidth : 100,
-			width : 100,
-			height: 50,
-			newline : true,
-			validate : {
-				required : true,
-				maxlength : 200
-			}
-		} ]
-	});
-	$.metadata.setType("attr", "validate");
-	fileForm.validate({
-		debug : true,
-		onkeyup : false,
-		errorPlacement : function(error,element) {
-            error.appendTo(element.parent().parent().parent().parent());
-		}
-	});
-}
-
-
 // 初始化表格
 $(function () {
     var toolbarItems = [
