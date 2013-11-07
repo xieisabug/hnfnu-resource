@@ -118,22 +118,15 @@
 
     //初始化批量注册学生的表单，生成form标签
     function formInit() {
-        fileForm = $('<form></form>');
+        fileForm = $('form');
         fileForm.ligerForm({
             inputWidth :80 ,
             fields : [
                 {
-                    display : "资源路径",
                     name : "url",
-                    newline : true,
-                    type : "text",
-                    group : "必填信息",
-                    validate : {
-                        required : true,
-                        maxlength : 30
-                    }
+                    type : "hidden"
                 }
-                ]
+            ]
         });
         $.metadata.setType("attr", "validate");
         fileForm.validate({

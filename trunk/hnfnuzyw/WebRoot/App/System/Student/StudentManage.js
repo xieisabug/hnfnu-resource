@@ -30,7 +30,7 @@ function add_many_student() {
 // 批量注册学生的保存按钮事件
 function add_many_save() {
 	
-	fileForm = fileWin.frame.sourceForm;
+	fileForm = fileWin.frame.fileForm;
 	
     if (fileForm.valid()) {
         var row_data = Form.parseJSON(fileForm);
