@@ -32,9 +32,8 @@ public class POITest {
 			for (int i = 1; i < sheet.getLastRowNum(); i++) {
 				row = sheet.getRow(i);
 				// 获取一行多少列
-				StudentDto student = null;
+				StudentDto student = new StudentDto();
 				for (int j = row.getFirstCellNum(); j < row.getLastCellNum(); j++) {
-					student = new StudentDto();
 					String title = getCellValue(titleRow.getCell(j));
 					System.out.println(title);
 					String value = getCellValue(row.getCell(j));
