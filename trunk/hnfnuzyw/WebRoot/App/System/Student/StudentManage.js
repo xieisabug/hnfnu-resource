@@ -337,7 +337,7 @@ function formInit(func) {
             width:200,
             validate:{
                 required:true,
-                maxlength:20,
+                maxlength:20
                 //equalTo:"#password"
             }
         });
