@@ -32,7 +32,7 @@ ModelDriven<StudentDto>{
 	private Map<String, Object> studentList;
 	private String studentIds; 
 	private int balanceCount;
-	private String fileUrl;
+	private String url;
 	@Autowired
 	@Qualifier("studentService")
 	private IStudentService studentService;
@@ -54,14 +54,19 @@ ModelDriven<StudentDto>{
 		return SUCCESS;
 	}
 
-	
 	/**
 	 * 批量注册学生
 	 * @return
 	 */
 	@Action(value = "addManyStudent")
 	public String addManyStudent() {
-		System.out.println("fileUrl"+fileUrl);
+		System.out.println("fileUrl"+url);
+		success = studentService.addStudnets(url);
+		if (success) {
+			message = "给学生们注册成功！";
+		} else {
+			message = "给学生们注册失败！";
+		}
 		return SUCCESS;
 	}
 	
@@ -174,10 +179,12 @@ ModelDriven<StudentDto>{
 		this.studentIds = studentIds;
 	}
 
-
-	public void setFileUrl(String fileUrl) {
-		this.fileUrl = fileUrl;
+	public void setUrl(String url) {
+		this.url = url;
 	}
+
+
+	
 	
 	
 }

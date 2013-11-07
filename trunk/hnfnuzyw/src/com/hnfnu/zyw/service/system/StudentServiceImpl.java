@@ -1,9 +1,16 @@
 package com.hnfnu.zyw.service.system;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -117,5 +124,85 @@ public class StudentServiceImpl implements IStudentService{
 	 */
 	public boolean addStudnetBalance(int count, String studentIds) {
 		return studentDao.addStudnetBalance(count, studentIds);
+	}
+
+	public boolean addStudnets(String url) {
+		ArrayList<StudentDto> students = new ArrayList<StudentDto>();
+		
+		try {
+			// WorkbookFactory可以自动根据文档的类型打开一个excel
+			Workbook wb = WorkbookFactory.create(new File("d:/11.xls"));
+			// 获取excel中的某一个数据表
+			Sheet sheet = wb.getSheetAt(0);
+			// 获取数据表中的某一行
+			Row row = null;
+			Row titleRow = sheet.getRow(0);
+			for (int i = 1; i < sheet.getLastRowNum(); i++) {
+				row = sheet.getRow(i);
+				// 获取一行多少列
+				StudentDto student = new StudentDto();
+				for (int j = row.getFirstCellNum(); j < row.getLastCellNum(); j++) {
+					String title = getCellValue(titleRow.getCell(j));
+					System.out.println(title);
+					String value = getCellValue(row.getCell(j));
+					System.out.println(value);
+					
+					if (title.equals("姓名")) {
+						student.setName(value);
+					} else if (title.equals("学号")) {
+						student.setNumber(value);
+						student.setUsername(value);
+
+					} else if (title.equals("专业")) {
+						student.setMajor(value);
+
+					} else if (title.equals("系部")) {
+						student.setDepartment(value);
+
+					} else if (title.equals("入学年份")) {
+						student.setEntranceTime(value);
+
+					} else if (title.equals("电话号码") || title.equals("联系电话")) {
+						student.setTelephone(value);
+
+					} else if (title.equals("备注")) {
+						student.setRemark(value);
+					}
+				}
+				student.setPassword("123456");
+				student.setBalance(100);
+				students.add(student);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return studentDao.addStudnets(students);
+	}
+	
+	
+	private String getCellValue(Cell c) {
+		String o = null;
+		switch (c.getCellType()) {
+		case Cell.CELL_TYPE_BLANK:
+			o = "";
+			break;
+		case Cell.CELL_TYPE_BOOLEAN:
+			o = String.valueOf(c.getBooleanCellValue());
+			break;
+		case Cell.CELL_TYPE_FORMULA:
+			o = String.valueOf(c.getCellFormula());
+			break;
+		case Cell.CELL_TYPE_NUMERIC:
+			o = String.valueOf(c.getNumericCellValue());
+			break;
+		case Cell.CELL_TYPE_STRING:
+			o = c.getStringCellValue();
+			break;
+		default:
+			o = null;
+			break;
+		}
+		return o;
 	}
 }
