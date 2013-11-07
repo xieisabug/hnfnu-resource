@@ -131,7 +131,7 @@ public class StudentServiceImpl implements IStudentService{
 		
 		try {
 			// WorkbookFactory可以自动根据文档的类型打开一个excel
-			Workbook wb = WorkbookFactory.create(new File("d:/11.xls"));
+			Workbook wb = WorkbookFactory.create(new File(url));
 			// 获取excel中的某一个数据表
 			Sheet sheet = wb.getSheetAt(0);
 			// 获取数据表中的某一行
@@ -143,9 +143,7 @@ public class StudentServiceImpl implements IStudentService{
 				StudentDto student = new StudentDto();
 				for (int j = row.getFirstCellNum(); j < row.getLastCellNum(); j++) {
 					String title = getCellValue(titleRow.getCell(j));
-					System.out.println(title);
 					String value = getCellValue(row.getCell(j));
-					System.out.println(value);
 					
 					if (title.equals("姓名")) {
 						student.setName(value);
@@ -194,7 +192,9 @@ public class StudentServiceImpl implements IStudentService{
 			o = String.valueOf(c.getCellFormula());
 			break;
 		case Cell.CELL_TYPE_NUMERIC:
-			o = String.valueOf(c.getNumericCellValue());
+			c.setCellType(Cell.CELL_TYPE_STRING);
+			//o = String.valueOf(c.getNumericCellValue());
+			o = c.getStringCellValue();
 			break;
 		case Cell.CELL_TYPE_STRING:
 			o = c.getStringCellValue();

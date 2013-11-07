@@ -53,6 +53,7 @@ function add_many_save() {
                         title:'提示信息',
                         content:data.message
                     });
+                    refresh_student();
                     fileWin.close();
                 } else {
                     $.ligerDialog.error(data.message);
@@ -208,25 +209,37 @@ function edit_student() {
         $.ligerDialog.warn('请选择您要修改的行.');
         return;
     }
-    Form.loadForm(studentForm, studentGrid.getSelected());
-    studentWin = $.ligerDialog.open({
-        width:400,
-        height:400,
-        title:'编辑学生',
-        target:studentForm,
-        buttons:[
-            {
-                text:'提交',
-                width:80,
-                onclick:edit_save
-            },
-            {
-                text:'取消',
-                width:80,
-                onclick:edit_cancel
-            }
-        ]
+    
+    $.ligerDialog.confirm('该功能不支持批量修改，如果您选择了多个文件，只会修改第一个文件', function (r) {
+        if (r) {
+        	Form.loadForm(studentForm, studentGrid.getSelected());
+            studentWin = $.ligerDialog.open({
+                width:400,
+                height:400,
+                title:'编辑学生',
+                target:studentForm,
+                buttons:[
+                    {
+                        text:'提交',
+                        width:80,
+                        onclick:edit_save
+                    },
+                    {
+                        text:'取消',
+                        width:80,
+                        onclick:edit_cancel
+                    }
+                ]
+            });
+        }
     });
+    
+    
+    
+    
+    
+    
+    
 }
 // 修改学生的保存按钮事件
 function edit_save() {
@@ -265,7 +278,7 @@ function delete_student() {
         return;
     }
     var row_data = studentGrid.getSelected();
-    $.ligerDialog.confirm('确认删除' + row_data.name + '？', '删除学生', function (r) {
+    $.ligerDialog.confirm('该功能不支持批量删除，如果您选择了多个文件，只会删除第一个。确认删除' + row_data.name + '？', '删除学生', function (r) {
         if (r) {
             $.ajax({
                 url:'../../../system/deleteStudent.action',
@@ -279,7 +292,9 @@ function delete_student() {
                             title:'提示信息',
                             content:data.message
                         });
-                        studentGrid.deleteSelectedRow();
+                        //studentGrid.deleteSelectedRow();
+                        refresh_student();
+                        
                         parameterWin.close();
                     } else {
                         $.ligerDialog.error(data.message);
@@ -587,7 +602,7 @@ $(function () {
             icon:'modify',
             key:'modify_many'
         }, {
-            text:'批量注册',
+            text:'通过Excel批量注册',
             click:add_many_student,
             icon:'add',
             key:'add_many'
