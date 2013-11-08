@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import com.hnfnu.zyw.dao.system.IStudentDao;
 import com.hnfnu.zyw.dto.system.StudentDto;
+import com.hnfnu.zyw.utils.FileUtils;
 
 
 @Service("studentService")
@@ -128,10 +129,11 @@ public class StudentServiceImpl implements IStudentService{
 
 	public boolean addStudnets(String url) {
 		ArrayList<StudentDto> students = new ArrayList<StudentDto>();
-		
+		File file = null;
 		try {
 			// WorkbookFactory可以自动根据文档的类型打开一个excel
-			Workbook wb = WorkbookFactory.create(new File(url));
+			 file= new File(url);
+			Workbook wb = WorkbookFactory.create(file);
 			// 获取excel中的某一个数据表
 			Sheet sheet = wb.getSheetAt(0);
 			// 获取数据表中的某一行
@@ -174,7 +176,14 @@ public class StudentServiceImpl implements IStudentService{
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
+		}finally{
+			file.delete();
 		}
+		
+		//System.out.println(url);
+		//FileUtils.deleteOneFile(url);
+		
+		
 		return studentDao.addStudnets(students);
 	}
 	
