@@ -23,9 +23,9 @@ public class NewsServiceImpl implements INewsService {
 	 * @param 一个新闻对象
 	 * @return 成功返回true，失败返回false
 	 */
-	public boolean add(NewsDto function) {
+	public boolean add(NewsDto news) {
 		try {
-			newsDao.add(function);
+			newsDao.add(news);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -38,9 +38,9 @@ public class NewsServiceImpl implements INewsService {
 	 * @param 要删除的新闻的id
 	 * @return 成功返回true，失败返回false
 	 */
-	public boolean delete(NewsDto function) {
+	public boolean delete(NewsDto news) {
 		try {
-			newsDao.delete(function.getId());
+			newsDao.delete(news.getId());
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -53,9 +53,9 @@ public class NewsServiceImpl implements INewsService {
 	 * @param 已经更新的新闻的对象
 	 * @return 成功返回true，失败返回false
 	 */
-	public boolean update(NewsDto function) {
+	public boolean update(NewsDto news) {
 		try {
-			newsDao.update(function);
+			newsDao.update(news);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -68,9 +68,9 @@ public class NewsServiceImpl implements INewsService {
 	 * @param 读取的新闻的id
 	 * @return 返回读取的新闻对象
 	 */
-	public NewsDto load(NewsDto function) {
+	public NewsDto load(NewsDto news) {
 		try {
-			return newsDao.load(function.getId());
+			return newsDao.load(news.getId());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -83,22 +83,22 @@ public class NewsServiceImpl implements INewsService {
 	 */
 	public List<NewsDto> list() {
 		String hql = "from NewsDto";
-		List<NewsDto> functions = null;
+		List<NewsDto> newss = null;
 		try {
-			functions = newsDao.list(hql);
+			newss = newsDao.list(hql);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return functions;
+		return newss;
 	}
 
 	/**
 	 * 列出所有的新闻
 	 * @return 保存了所有新闻的Map
 	 */
-	public Map<String, Object> listFun() {
+	public Map<String, Object> listNews() {
 		String hql = "from NewsDto";
-		Map<String, Object> functionList = new HashMap<String, Object>();
+		Map<String, Object> newsList = new HashMap<String, Object>();
 		List<NewsDto> l = null;
 		
 		try {
@@ -106,8 +106,8 @@ public class NewsServiceImpl implements INewsService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		functionList.put("Rows", l);
-		functionList.put("Total", l.size());
-		return functionList;
+		newsList.put("Rows", l);
+		newsList.put("Total", l.size());
+		return newsList;
 	}
 }
