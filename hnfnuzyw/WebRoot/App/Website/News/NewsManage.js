@@ -19,12 +19,8 @@ function f_addTab(tabid, text, url) {
 
 // 增加新闻的函数,实际上就是增加一个tab
 function add_news(tabid, text, url) {
-    if (!tab) return;
-    if (!tabid) {
-        tabidcounter++;
-        tabid = "tabid" + tabidcounter;
-    }
-    tab.addTabItem({ tabid:tabid, text:text, url:url });
+    var tabid = "add_news", text = "新增新闻", url = "App/Website/News/NewsEditor.html";
+    window.parent.window.f_addTab(tabid, text, url);
 }
 // 增加新闻的保存按钮事件
 function add_save() {
