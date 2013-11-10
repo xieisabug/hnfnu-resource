@@ -20,15 +20,16 @@ public class NewsDto
 	//日期
 	private Date date;
 	//创建者用户id
-	private String createUserId;
+	private int createUserId;
 	//优先级，默认为0
 	private Integer priority;
 
 	public NewsDto()
 	{
 	}
+	
 	public NewsDto(Integer id, String title, String content, Date date,
-			String createUserId, Integer priority) {
+			int createUserId, Integer priority) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -37,6 +38,7 @@ public class NewsDto
 		this.createUserId = createUserId;
 		this.priority = priority;
 	}
+
 	public void setId(Integer id)
 	{
 		this.id = id;
@@ -71,14 +73,15 @@ public class NewsDto
 	{
 		return this.date;
 	}
-	public void setCreateUserId(String createUserId)
-	{
+	
+	public int getCreateUserId() {
+		return createUserId;
+	}
+
+	public void setCreateUserId(int createUserId) {
 		this.createUserId = createUserId;
 	}
-	public String getCreateUserId()
-	{
-		return this.createUserId;
-	}
+
 	public void setPriority(Integer priority)
 	{
 		this.priority = priority;

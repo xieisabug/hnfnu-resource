@@ -1,14 +1,27 @@
+var newsId = null;
+
 $(function() {
 	var ue = UE.getEditor('editor');
-/*
-	function getContent() {
-		var arr = [];
-		arr.push("使用editor.getContent()方法可以获得编辑器的内容");
-		arr.push("内容为：");
-		arr.push(UE.getEditor('editor').getContent());
-		alert(arr.join("\n"));
-	}
-*/
+    newsId = Url.getArgs().id;
+    $.ajax({
+        url : '../../../website/loadNews.action',
+        data : {
+           "id":newsId
+        },
+        type : 'post',
+        success : function(data) {
+            if (data.success) {
+                
+            } else {
+                $.ligerDialog.error(data.message);
+                window.parent.window.tab.removeTabItem("update_news");
+            }
+        }
+    });
+
+
+
+
 });
 
 // 增加新闻的保存按钮事件
@@ -23,8 +36,8 @@ function add_save() {
 		alert("新闻内容不能为空");
 		return;
 	}
-	
-	
+
+
 	var row_data = {
 			"title":title,
 			"content":content
