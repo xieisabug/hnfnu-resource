@@ -70,7 +70,7 @@ public class NewsServiceImpl implements INewsService {
 	 */
 	public NewsDto load(NewsDto news) {
 		try {
-			return newsDao.load(news.getId());
+			return newsDao.get(news.getId());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

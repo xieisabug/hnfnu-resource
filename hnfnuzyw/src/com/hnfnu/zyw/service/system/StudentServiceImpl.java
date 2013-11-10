@@ -2,6 +2,7 @@ package com.hnfnu.zyw.service.system;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +18,6 @@ import org.springframework.stereotype.Service;
 
 import com.hnfnu.zyw.dao.system.IStudentDao;
 import com.hnfnu.zyw.dto.system.StudentDto;
-import com.hnfnu.zyw.utils.FileUtils;
 
 
 @Service("studentService")
@@ -171,6 +171,8 @@ public class StudentServiceImpl implements IStudentService{
 				}
 				student.setPassword("123456");
 				student.setBalance(100);
+				Date dt = new Date();
+				student.setCreateDate(dt);
 				students.add(student);
 			}
 		} catch (Exception e) {

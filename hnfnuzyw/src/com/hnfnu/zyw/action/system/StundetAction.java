@@ -1,5 +1,6 @@
 package com.hnfnu.zyw.action.system;
 
+import java.util.Date;
 import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Action;
@@ -79,6 +80,8 @@ ModelDriven<StudentDto>{
 	public String add() {
 		//新建用户默认资源币为100
 		student.setBalance(100);
+		Date dt = new Date();
+		student.setCreateDate(dt);
 		success = studentService.add(student);
 		if (success) {
 			message = "添加学生成功！";
