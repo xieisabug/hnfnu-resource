@@ -13,7 +13,7 @@ public interface IStudentDao  extends IBaseDao<StudentDto>{
 	 * @param studentIds
 	 * @return
 	 */
-	public boolean addStudnetBalance(int count,String studentIds);
+	public int addStudnetBalance(int count,String studentIds);
 	
 	/**
 	 * 批量注册学生
@@ -22,4 +22,7 @@ public interface IStudentDao  extends IBaseDao<StudentDto>{
 	 * @return
 	 */
 	public boolean addStudnets(ArrayList<StudentDto> students);
+	
+	public StudentDto getStudent(String hql);
+	
 }

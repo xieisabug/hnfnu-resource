@@ -42,6 +42,8 @@ public class UserAction extends ActionSupport implements ModelDriven<UserDto> {
 	// 添加
 	@Action(value = "addUser")
 	public String add() {
+		//老师默认资源币为0
+		user.setBalance(0);
 		success = userService.add(user);
 		if (success) {
 			message = "添加功能成功！";

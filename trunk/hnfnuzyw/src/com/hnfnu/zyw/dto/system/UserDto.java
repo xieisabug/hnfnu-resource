@@ -32,6 +32,8 @@ public class UserDto {
 	private Date birth;
 	// 部门
 	private String department;
+	//资源币余额
+	private int balance;
 	// 创建日期
 	private Date createDate;
 	// 最后登录时间
@@ -43,6 +45,28 @@ public class UserDto {
 
 	public UserDto() {
 
+	}
+
+	public UserDto(Integer id, String username, String password, String name,
+			String idcard, String sex, String qq, String telephone, Date birth,
+			String department, int balance, Date createDate,
+			Date latestLoginDate, String setting, String remark) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.name = name;
+		this.idcard = idcard;
+		this.sex = sex;
+		this.qq = qq;
+		this.telephone = telephone;
+		this.birth = birth;
+		this.department = department;
+		this.balance = balance;
+		this.createDate = createDate;
+		this.latestLoginDate = latestLoginDate;
+		this.setting = setting;
+		this.remark = remark;
 	}
 
 	public void setId(Integer id) {
@@ -157,6 +181,13 @@ public class UserDto {
 
 	public String getRemark() {
 		return this.remark;
+	}
+	public int getBalance() {
+		return balance;
+	}
+
+	public void setBalance(int balance) {
+		this.balance = balance;
 	}
 
 	@Override

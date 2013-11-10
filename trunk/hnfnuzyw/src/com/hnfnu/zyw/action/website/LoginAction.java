@@ -1,5 +1,7 @@
 package com.hnfnu.zyw.action.website;
 
+import java.util.Map;
+
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
@@ -11,24 +13,25 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.hnfnu.zyw.dto.system.StudentDto;
 import com.hnfnu.zyw.dto.system.UserDto;
 import com.hnfnu.zyw.dto.system.ValidateMessege;
 import com.hnfnu.zyw.service.website.ILoginService;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.ModelDriven;
 
 @Controller("loginAction")
 @Scope("prototype")
 @ParentPackage("json-default")
 @Results({ @Result(name = "success", type = "json", params = { "root", "action" }) })
 @Namespace("/website")
-public class LoginAction extends ActionSupport implements ModelDriven<UserDto> {
-
-	/**
-	 * 
-	 */
+public class LoginAction extends ActionSupport {
 	private static final long serialVersionUID = -7199971221300636848L;
-	private UserDto user = new UserDto();// 获取页面提交参数
+	private final int USER = 1;
+	private final int STUDENT = 0;
+	private int loginType;
+	private String username;
+	private String password;
 	private boolean success;
 	private String message;
 
@@ -36,10 +39,12 @@ public class LoginAction extends ActionSupport implements ModelDriven<UserDto> {
 	@Qualifier("loginService")
 	private ILoginService loginService;
 
-
-	// 登陆验证用户是否存在
-	@Action(value = "validateUser")
-	public String validateUser() {
+	// 验证用户是否存在
+	@Action(value = "loginUser")
+	public String loginUser() {
+		UserDto user = new UserDto();
+		user.setUsername(username);
+		user.setPassword(password);
 		ValidateMessege vm = loginService.validateUser(user);
 		if (vm.isResult()) {
 			message = vm.getMessege();
@@ -49,6 +54,62 @@ public class LoginAction extends ActionSupport implements ModelDriven<UserDto> {
 		} else {
 			message = vm.getMessege();
 			success = false;
+		}
+		return SUCCESS;
+	}
+
+	@Action(value = "loginStudent")
+	public String loginStudent() {
+		StudentDto student = new StudentDto();
+		student.setUsername(username);
+		student.setPassword(password);
+		ValidateMessege vm = loginService.validateStudent(student);
+		if (vm.isResult()) {
+			message = vm.getMessege();
+			student = (StudentDto) vm.getO();
+			ServletActionContext.getContext().getSession()
+					.put("student", student);
+			success = true;
+		} else {
+			message = vm.getMessege();
+			success = false;
+		}
+		return SUCCESS;
+	}
+
+	// 根据登陆的身份登陆
+	@Action(value = "login")
+	public String login() {
+		if (loginType == STUDENT) {
+			return loginStudent();
+		}
+
+		if (loginType == USER) {
+			return loginUser();
+		}
+		return SUCCESS;
+	}
+
+	// 判断前台是否登陆，不管是学生还是老师
+	@Action(value = "validateLogin")
+	public String validateLogin() {
+		// 获取当前用户
+		ActionContext context = ActionContext.getContext();
+		Map<String, Object> session = context.getSession();
+		UserDto user = (UserDto) session.get("user");
+		StudentDto student = (StudentDto) session.get("student");
+		success = false;
+		if(user != null){
+			success = true;
+		}
+		if(student != null){
+			success = true;
+		}
+		
+		if(success){
+			message = "用户已经登陆";
+		}else{
+			message = "未登陆";
 		}
 		return SUCCESS;
 	}
@@ -63,12 +124,20 @@ public class LoginAction extends ActionSupport implements ModelDriven<UserDto> {
 		this.loginService = loginService;
 	}
 
-	public UserDto getModel() {
-		return user;
+	public String getUsername() {
+		return username;
 	}
 
-	public UserDto getUser() {
-		return user;
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public boolean isSuccess() {
@@ -79,4 +148,11 @@ public class LoginAction extends ActionSupport implements ModelDriven<UserDto> {
 		return message;
 	}
 
+	public int getLoginType() {
+		return loginType;
+	}
+
+	public void setLoginType(int loginType) {
+		this.loginType = loginType;
+	}
 }

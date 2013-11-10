@@ -563,7 +563,7 @@ function balanceFormInit() {
 			newline : true,
 			validate : {
 				required : true,
-				maxlength : 11
+				maxlength : 9
 			}
 		} ]
 	});
