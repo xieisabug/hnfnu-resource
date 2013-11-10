@@ -231,7 +231,7 @@ function sourceViewTable(data){
     html += '</tr>';
     html += '</table>';
     html += '<div id="button">';
-    html += '<a href="/hnfnuzyw/file/download?url='+data.url+'&id='+data.id+'">下载</a>';
+    html += '<a href="javascript:download('+id+')">下载</a>';
     html += '<a href="javascript:onlineView('+id+')">预览</a>';
     html += '</div>';
     $("#source").html(html);
@@ -276,4 +276,22 @@ function isCategory(obj){
 //获取树的父一级的id
 function getParentId(obj){
     return $(tree.getParentTreeItem(obj.target)).attr("id");
+}
+
+function download(id){
+    $.ajax({
+        url : '../../../website/validateLogin.action',
+        type : 'post',
+        success : function(data) {
+            if (data.success) {
+                $.ajax({
+                    url : '../../../file/download',
+                    data : {"id":id},
+                    type : 'post'
+                });
+            } else {
+                $.ligerDialog.error(data.message);
+            }
+        }
+    });
 }

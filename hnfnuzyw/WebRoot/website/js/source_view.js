@@ -179,6 +179,7 @@ $(function() {
 });
 function sourceViewTable(data){
     var id = data.id;
+    var url =data.url.replaceAll(/\\/g,'\\\\');
     var html = "";
     html += '<table>';
     html += '<tr>';
@@ -231,13 +232,14 @@ function sourceViewTable(data){
     html += '</tr>';
     html += '</table>';
     html += '<div id="button">';
-    html += '<a href="/hnfnuzyw/file/download?url='+data.url+'&id='+data.id+'">下载</a>';
+    html += '<a href=javascript:download('+id+',"'+url+'")>下载</a>';
     html += '<a href="javascript:onlineView('+id+')">预览</a>';
     html += '</div>';
     $("#source").html(html);
 }
 function onlineView(data){
     window.open("onlineView.jsp?id="+data, '', 'height=650,width=1024,top=50,left=0,toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
+
 }
 // 提取URL中的参数
 function getArgs() {
@@ -275,4 +277,18 @@ function isCategory(obj){
 //获取树的父一级的id
 function getParentId(obj){
     return $(tree.getParentTreeItem(obj.target)).attr("id");
+}
+
+function download(id,url){
+    $.ajax({
+        url : '/hnfnuzyw/website/validateLogin.action',
+        type : 'post',
+        success : function(data) {
+            if (data.success) {
+                window.location.href="/hnfnuzyw/file/download.action?url="+url+"&id="+id;
+            } else {
+                $.ligerDialog.error(data.message);
+            }
+        }
+    });
 }

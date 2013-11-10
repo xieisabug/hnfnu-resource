@@ -109,7 +109,7 @@ public class LoginAction extends ActionSupport {
 		if(success){
 			message = "用户已经登陆";
 		}else{
-			message = "未登陆";
+			message = "下载资源前请您先登陆";
 		}
 		return SUCCESS;
 	}
