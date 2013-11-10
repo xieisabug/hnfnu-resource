@@ -42,7 +42,8 @@ body {
 
 .container {
     width: 842px;
-    height: 215px
+    height: 215px;
+    overflow: hidden;
 }
 
 .container A IMG {

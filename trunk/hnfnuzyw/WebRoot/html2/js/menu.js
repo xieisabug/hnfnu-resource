@@ -15,3 +15,6 @@ function SlideView(e){
 		document.getElementById("topic").style.height=(document.getElementById("idSlideView3").offsetHeight+69)+"px";
 	}
 }
+$(function(){
+    new SlideView("idSlideView3");
+});
