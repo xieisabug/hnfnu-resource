@@ -245,7 +245,8 @@ function formInit(func) {
     fields.push({
         name:'id',
         type:'hidden'
-    }, {
+    },
+        {
         name:'username',
         display:'用户名',
         type:'text',
@@ -289,6 +290,19 @@ function formInit(func) {
             }
         });
     } else if (func === "edit") {
+        fields.push({
+            name:'balance',
+            display:'资源币余额',
+            type:'text',
+            space:30,
+            labelWidth:100,
+            newline:true,
+            width:200,
+            validate:{
+                required:true,
+                maxlength:11
+            }
+        });
     }
     fields.push({
         name:'name',
@@ -676,6 +690,12 @@ $(function () {
                     {
                         display:'性别',
                         name:'sex',
+                        align:'left',
+                        width:50
+                    },
+                    {
+                        display:'资源币余额',
+                        name:'balance',
                         align:'left',
                         width:50
                     },

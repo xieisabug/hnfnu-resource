@@ -123,7 +123,7 @@ public class StudentServiceImpl implements IStudentService{
 	/**
 	 * 给学生批量充值资源币
 	 */
-	public boolean addStudnetBalance(int count, String studentIds) {
+	public int addStudnetBalance(int count, String studentIds) {
 		return studentDao.addStudnetBalance(count, studentIds);
 	}
 
@@ -215,5 +215,9 @@ public class StudentServiceImpl implements IStudentService{
 			break;
 		}
 		return o;
+	}
+
+	public StudentDto getStudent(String sql) {
+		return studentDao.getStudent(sql);
 	}
 }

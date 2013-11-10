@@ -11,7 +11,7 @@ $(function() {
         type : 'post',
         success : function(data) {
             if (data.success) {
-                
+
             } else {
                 $.ligerDialog.error(data.message);
                 window.parent.window.tab.removeTabItem("update_news");

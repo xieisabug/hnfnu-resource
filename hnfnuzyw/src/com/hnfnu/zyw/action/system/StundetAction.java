@@ -46,11 +46,22 @@ ModelDriven<StudentDto>{
 	 */
 	@Action(value = "addStudentBalanceCount")
 	public String addStudentBalanceCount() {
-		success = studentService.addStudnetBalance(balanceCount, studentIds);
-		if (success) {
+		int i = studentService.addStudnetBalance(balanceCount, studentIds);
+		if (i == 1) {
+			success = true;
 			message = "给学生们充值成功！";
 		} else {
-			message = "给学生们充值失败！";
+			success=false;
+			if(i==0){
+				message = "给学生们充值失败！";	
+			}
+			if(i == -1){
+				message = "给学生们充值失败,因为在您选择的学生当中有学生的资源币少于您要减去的资源币！";
+			}
+			if( i == -2){
+				message = "给学生们充值失败,因为每位学生的总余额数不能超过1000000000！";
+			}
+			
 		}
 		return SUCCESS;
 	}
@@ -61,7 +72,6 @@ ModelDriven<StudentDto>{
 	 */
 	@Action(value = "addManyStudent")
 	public String addManyStudent() {
-		System.out.println("fileUrl"+url);
 		success = studentService.addStudnets(url);
 		if (success) {
 			message = "给学生们注册成功！";

@@ -30,7 +30,7 @@ public interface IStudentService {
 	/*
 	 * 批量给学生充值资源币
 	 */
-	public boolean addStudnetBalance(int count,String studentIds);
+	public int addStudnetBalance(int count,String studentIds);
 	
 	
 
@@ -38,6 +38,8 @@ public interface IStudentService {
 	 * 解析excel表批量给学生注册
 	 */
 	public boolean addStudnets(String url);
+	
+	public StudentDto getStudent(String sql);
 	
 
 }

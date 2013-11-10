@@ -2,6 +2,7 @@ package com.hnfnu.zyw.dao.system;
 
 import java.util.ArrayList;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
@@ -13,13 +14,13 @@ import com.hnfnu.zyw.dto.system.StudentDto;
 public class StudnetDaoImpl extends BaseDao<StudentDto> implements
 IStudentDao{
 	
-	public boolean addStudnetBalance(int count,String studentIds) {
+	public int addStudnetBalance(int count,String studentIds) {
 		Session session = this.getSession();
 		String[] ids = null; 
 		if(studentIds != null && !studentIds.equals("")){
 			ids = studentIds.split(";");
 		}else{
-			return false;
+			return 0;
 		}
 		Transaction t = null;
 		try {
@@ -28,6 +29,16 @@ IStudentDao{
 				int id = Integer.parseInt(ids[i]);
 				StudentDto s = this.get(id);
 				s.setBalance(s.getBalance() + count);
+				
+				//余额不能为负数
+				if(s.getBalance()<0){
+						t.rollback();
+						return -1;
+				}
+				//余额不能超过整数范围
+				if(s.getBalance() > 1000000000){
+					return -2;
+				}
 				this.update(s);
 			}
 			t.commit();
@@ -36,11 +47,11 @@ IStudentDao{
 			if (t != null) {
 				t.rollback();
 			}
-			return false;
+			return 0;
 		} finally {
 			session.close();
 		}
-		return true;
+		return 1;
 	}
 
 	/**
@@ -69,5 +80,11 @@ IStudentDao{
 			session.close();
 		}
 		return true;
+	}
+	
+	public StudentDto getStudent(String hql) {
+		Query u = this.getSession().createQuery(hql);
+		StudentDto d = (StudentDto) u.uniqueResult();
+		return d;
 	}
 }
