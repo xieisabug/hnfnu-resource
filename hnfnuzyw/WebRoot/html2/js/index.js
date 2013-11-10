@@ -38,3 +38,34 @@ function openTopicWindow(id) {
 function openSourceWindow(id) {
     window.open('source_view.html?id='+id, '', 'height=650,width=1024,top=50,left=0,toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
 }
+
+function login() {
+    var username = $('#username').val();
+    var password = $('#password').val();
+    if( !username || username == "") {
+        alert("未输入用户名");
+        return ;
+    }
+    if( !password || password == "") {
+        alert("未输入密码");
+        return ;
+    }
+    // loginType 0为学生，1为老师
+    var loginType = $('#login_type').val();
+    $.ajax({
+        url:'/hnfnuzyw/website/login.action',
+        type:'post',
+        data:{
+            username:username,
+            password:password,
+            loginType:loginType
+        },
+        success:function(data){
+            if(data.success) {
+                window.location.reload();
+            } else {
+                alert(data.message);
+            }
+        }
+    });
+}
