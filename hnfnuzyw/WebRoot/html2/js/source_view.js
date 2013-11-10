@@ -179,6 +179,7 @@ $(function() {
 });
 function sourceViewTable(data){
     var id = data.id;
+    var url =data.url.replaceAll(/\\/g,'\\\\');
     var html = "";
     html += '<table>';
     html += '<tr>';
@@ -231,7 +232,7 @@ function sourceViewTable(data){
     html += '</tr>';
     html += '</table>';
     html += '<div id="button">';
-    html += '<a href="javascript:download('+id+')">下载</a>';
+    html += '<a href=javascript:download('+id+',"'+url+'")>下载</a>';
     html += '<a href="javascript:onlineView('+id+')">预览</a>';
     html += '</div>';
     $("#source").html(html);
@@ -278,17 +279,13 @@ function getParentId(obj){
     return $(tree.getParentTreeItem(obj.target)).attr("id");
 }
 
-function download(id){
+function download(id,url){
     $.ajax({
-        url : '../../../website/validateLogin.action',
+        url : '/hnfnuzyw/website/validateLogin.action',
         type : 'post',
         success : function(data) {
             if (data.success) {
-                $.ajax({
-                    url : '../../../file/download',
-                    data : {"id":id},
-                    type : 'post'
-                });
+                window.location.href="/hnfnuzyw/file/download.action?url="+url+"&id="+id;
             } else {
                 $.ligerDialog.error(data.message);
             }
