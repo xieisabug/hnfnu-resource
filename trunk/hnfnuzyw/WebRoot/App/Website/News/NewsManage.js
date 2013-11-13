@@ -22,40 +22,16 @@ function add_news(tabid, text, url) {
 
 // 修改新闻的函数
 function edit_news() {
-    var row_data = newsGrid.getSelected;
+    if (!newsGrid.getSelected()) {
+        $.ligerDialog.warn('请选择您要修改的行.');
+        return;
+    }
+    var row_data = newsGrid.getSelected();
     var tabid = "update_news", text = "修改新闻", url = "App/Website/News/NewsUpdateEditor.html?id="+row_data.id;
     window.parent.window.f_addTab(tabid, text, url);
 }
-// 修改新闻的保存按钮事件
-function edit_save() {
-    if (newsFrom.valid()) {
-        var row_data = Form.parseJSON(newsFrom);
-        // todo 需要发往服务器，返回成功后再修改到表格中
-        $
-            .ajax({
-                url:'../../../system/updateFunction.action',
-                data:row_data,
-                type:'post',
-                success:function (data) {
-                    if (data.success) {
-                        newsGrid.update(newsGrid.getSelected(),
-                            data.model);
-                        $.ligerDialog.tip({
-                            title:'提示信息',
-                            content:data.message
-                        });
-                        newsWin.close();
-                    } else {
-                        $.ligerDialog.error(data.message);
-                    }
-                }
-            });
-    }
-}
-// 修改新闻的取消按钮事件
-function edit_cancel() {
-    newsWin.close();
-}
+
+
 
 // 删除新闻的函数
 function delete_news() {
@@ -64,11 +40,13 @@ function delete_news() {
         return;
     }
     var row_data = newsGrid.getSelected();
-    $.ligerDialog.confirm('确认删除' + row_data.name + '？', '删除新闻', function (r) {
+    $.ligerDialog.confirm('确认删除' + row_data.title + '？', '删除新闻', function (r) {
         if (r) {
             $.ajax({
-                url:'../../../system/deleteFunction.action',
-                data:row_data,
+                url:'../../../website/deleteNews.action',
+                data:{
+                    "id":row_data.id
+                },
                 type:'post',
                 success:function (data) {
                     if (data.success) {
@@ -77,7 +55,7 @@ function delete_news() {
                             content:data.message
                         });
                         newsGrid.deleteSelectedRow();
-                        parameterWin.close();
+                        //parameterWin.close();
                     } else {
                         $.ligerDialog.error(data.message);
                     }
@@ -85,6 +63,20 @@ function delete_news() {
             });
         }
     });
+}
+
+
+// 刷新新闻的函数
+function refresh_news() {
+    $.ajax( {
+        url : '../../../website/listNews.action',
+        type : 'post',
+        success : function(data) {
+            newsGrid.loadData(data.newsList);
+        }
+    });
+    $("#pageloading").hide();
+
 }
 // 初始化表格
 $(function () {
@@ -106,6 +98,12 @@ $(function () {
             click:delete_news,
             icon:'delete',
             key:'delete'
+        },
+        {
+            text:'刷新新闻',
+            click:refresh_news,
+            icon:'refresh',
+            key:'refresh'
         }
     ];
     var menuId = window.parent.tab.getSelectedTabItemID();

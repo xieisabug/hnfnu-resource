@@ -52,7 +52,9 @@ $(document).ready(function () {
     });
     var bodyHeight = $(".l-layout-center:first").height();
 
-    tab = $("#mainframe").ligerTab({contextmenu:true});
+    tab = $("#mainframe").ligerTab({
+        contextmenu:true
+    });
     var main_menu = $("#main_menu");
 
     $.get('welcome.html', function (data) {

@@ -52,7 +52,7 @@ ModelDriven<NewsDto>{
 			news.setCreateUserId(user.getId());
 			success = newsService.add(news);
 			if (success) {
-				message = "添加新闻成功！";
+				message = "添加新闻成功，刷新之后可查看！";
 			} else {
 				message = "添加新闻失败！";
 			}
@@ -67,7 +67,7 @@ ModelDriven<NewsDto>{
 		public String update() {
 			success = newsService.update(news);
 			if (success) {
-				message = "修改新闻成功！";
+				message = "修改新闻成功，刷新之后可查看！";
 			} else {
 				message = "修改新闻失败！";
 			}
@@ -81,6 +81,13 @@ ModelDriven<NewsDto>{
 		@Action(value = "loadNews")
 		public String load() {
 			news = newsService.load(news);
+			if (news != null) {
+				success = true;
+				message = "加载新闻成功！";
+			} else {
+				success = false;
+				message = "加载新闻失败！";
+			}
 			return SUCCESS;
 		}
 
