@@ -5,6 +5,8 @@
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
+	//TODO 登陆用户需要判断两个，一个是student，一个是user，还需要确定
+	//TODO 需要把UserDto换成VO
 	UserDto user = (UserDto) session.getAttribute("user");
 %>
 
@@ -48,7 +50,7 @@
 <div id="idContainer2" class="container">
     <table id="idSlider2" cellSpacing=0 cellPadding=0>
         <tr>
-            <td class="td_f"><IMG src="images/slider1.jpg"></td>
+            <td class="td_f"><a target="_blank" href="http://www.baidu.com"><IMG src="images/slider1.jpg"></a></td>
             <td class="td_f"><IMG src="images/slider2.jpg"></td>
             <td class="td_f"><IMG src="images/slider1.jpg"></td>
             <td class="td_f"><IMG src="images/slider2.jpg"></td>
@@ -153,36 +155,8 @@
     <!-- 服务中心  -->
 </div>
 <div class="left center">
-    <!-- 最新公告 -->
-    <div id="notice">
-        <a href="#">
-            <div id="notice_title"></div>
-        </a>
-
-        <div id="notice_content">
-            <ul>
-                <li>
-                    <a href="#">
-                        <div class="notice_item_title">关于学校创新项目立项的通知</div>
-                        <div class="notice_item_date">2013-01-22</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <div class="notice_item_title">关于2014级学生开课通知</div>
-                        <div class="notice_item_date">2013-07-08</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <div class="notice_item_title">资源管理系统开通了！</div>
-                        <div class="notice_item_date">2013-01-22</div>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <!-- 最新公告 -->
+	<!-- ！！！！！！！！！！！记得更改引用文件的位置 ！！！！！！！！！ -->
+    <jsp:include page="../website/news.html" />
 
     <!-- 资源库统计 -->
     <div id="source_count">
