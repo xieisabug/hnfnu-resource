@@ -741,6 +741,11 @@ $(function () {
                     if (rowdata.birth) {
                         rowdata.birth = rowdata.birth.substring(0, 10);
                     }
+                    if (rowdata.sex == 0) {
+                        rowdata.sex = "女";
+                    } else {
+                        rowdata.sex = "男";
+                    }
                     return;
                 }
             });
