@@ -41,6 +41,15 @@ function add_save() {
 					title : '提示信息',
 					content : data.message
 				});
+                var frameLen = top.frames.length;
+                for(var i = 0; i < frameLen; i++){
+                    if(top.frames[i].newsGrid){
+                        top.frames[i].newsGrid.loadData(data.newsList);
+                    }
+                }
+
+
+
 				window.parent.window.tab.removeTabItem("add_news");
 			} else {
 				$.ligerDialog.error(data.message);
