@@ -51,6 +51,7 @@ ModelDriven<NewsDto>{
 			news.setDate(dt);
 			news.setCreateUserId(user.getId());
 			success = newsService.add(news);
+			newsList = newsService.listNews();
 			if (success) {
 				message = "添加新闻成功，刷新之后可查看！";
 			} else {
