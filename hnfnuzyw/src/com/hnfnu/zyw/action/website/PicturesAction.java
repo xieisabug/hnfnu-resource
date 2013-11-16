@@ -69,6 +69,8 @@ ModelDriven<PicturesDto>{
 	 */
 	@Action(value = "updatePictures")
 	public String update() {
+		PicturesDto p = picturesService.load(pictures);
+		pictures.setSrc(p.getSrc());
 		success = picturesService.update(pictures);
 		if (success) {
 			message = "修改图片成功，刷新之后可查看！";

@@ -540,7 +540,7 @@ function delete_user() {
                             title:'提示信息',
                             content:data.message
                         });
-                        userGrid.deleteSelectedRow();
+                       refresh_user();
                         userWin.close();
                     } else {
                         $.ligerDialog.error(data.message);
@@ -612,6 +612,21 @@ function edit_save() {
 function edit_cancel() {
     userWin.close();
 }
+
+
+// 刷新图片的函数
+function refresh_user() {
+    $.ajax( {
+        url : '../../../system/listUser.action',
+        type : 'post',
+        success : function(data) {
+            userGrid.loadData(data.userList);
+        }
+    });
+    $("#pageloading").hide();
+
+}
+
 
 // 初始化表格
 $(function () {

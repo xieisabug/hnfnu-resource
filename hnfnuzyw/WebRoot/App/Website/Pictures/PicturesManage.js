@@ -43,12 +43,7 @@ function add_save() {
         // 发往服务器，返回成功后再添加到表格中
         $.ajax({
             url:'../../../website/addPictures.action',
-            data:{
-                src:row_data.src,
-                link:row_data.link,
-                show:row_data.show,
-                remark:row_data.remark
-            },
+            data:row_data,
             type:'post',
             success:function (data) {
                 if (data.success) {
@@ -100,6 +95,10 @@ function edit_pictures() {
 function edit_save() {
     if (picturesForm.valid()) {
         var row_data = Form.parseJSON(picturesForm);
+        /*var row_data  = {
+          "id" =  picturesForm
+        };*/
+
         // todo 需要发往服务器，返回成功后再修改到表格中
         $ .ajax({
                 url:'../../../website/updatePictures.action',
@@ -107,8 +106,7 @@ function edit_save() {
                 type:'post',
                 success:function (data) {
                     if (data.success) {
-                        picturesGrid.update(picturesGrid.getSelected(),
-                            data.model);
+                        refresh_pictures();
                         $.ligerDialog.tip({
                             title:'提示信息',
                             content:data.message
@@ -137,7 +135,9 @@ function delete_pictures() {
         if (r) {
             $.ajax({
                 url:'../../../website/deletePictures.action',
-                data:row_data,
+                data:{
+                    "id":row_data.id
+                },
                 type:'post',
                 success:function (data) {
                     if (data.success) {
@@ -145,8 +145,9 @@ function delete_pictures() {
                             title:'提示信息',
                             content:data.message
                         });
-                        picturesGrid.deleteSelectedRow();
-                        parameterWin.close();
+
+                       refresh_pictures();
+                        //parameterWin.close();
 
                     } else {
                         $.ligerDialog.error(data.message);
@@ -166,20 +167,17 @@ function formInit() {
             {
                 name:'id',
                 type:"hidden"
-            },{
-                name:'createUserId',
-                type:"hidden"
-            },
-            {
-                name:'createUserName',
-                type:"hidden"
             },
             {
                 name:'createDate',
                 type:"hidden"
             },
             {
-                name:'src',
+                name:'createUserId',
+                type:"hidden"
+            },
+            {
+                name:'createUserName',
                 type:"hidden"
             },
             {
@@ -205,8 +203,6 @@ function formInit() {
                 comboboxName:"show",
                 textField:"text",
                 valueField:"id",
-                initValue:"1",
-                initText:"是",
                 newline:true,
                 options:{
                     hideOnLoseFocus:true,
@@ -246,7 +242,7 @@ function formInit() {
 }
 
 
-// 刷新学生的函数
+// 刷新图片的函数
 function refresh_pictures() {
     $.ajax( {
         url : '../../../website/mapPictures.action',
@@ -299,7 +295,7 @@ $(function () {
     });
 
     $.ajax({
-        url:'../../../website/listPictures.action',
+        url:'../../../website/mapPictures.action',
         type:'post',
         success:function (data) {
             picturesGrid = $('#picturesGrid').ligerGrid({
@@ -334,7 +330,7 @@ $(function () {
                 width:'99%',
                 height:'98%',
                 usePager:false,
-                data:data.functionList,
+                data:data.picturesMap,
                 toolbar:{
                     items:toolbarItems
                 },
@@ -342,12 +338,11 @@ $(function () {
                     if (rowdata.createDate) {
                         rowdata.createDate = rowdata.createDate.substring(0, 10);
                     }
-                    if (rowdata.show == 0) {
-                        rowdata.sex = "否";
+                    if (rowdata.display == "0") {
+                        rowdata.display = "否";
                     } else {
-                        rowdata.sex = "是";
+                        rowdata.display = "是";
                     }
-                    return;
                 }
             });
             $("#pageloading").hide();
