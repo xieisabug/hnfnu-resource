@@ -64,11 +64,6 @@ public class SourceDto {
 	// 审核状态
 
 	private String approvalStatus;
-
-	// 质量等级
-
-	private String quality;
-
 	// 价格
 
 	private double price;
@@ -109,7 +104,6 @@ public class SourceDto {
 		this.description = description;
 		this.createDate = createDate;
 		this.approvalStatus = approvalStatus;
-		this.quality = quality;
 		this.price = price;
 		this.viewTimes = viewTimes;
 		this.useTimes = useTimes;
@@ -223,14 +217,6 @@ public class SourceDto {
 		return this.approvalStatus;
 	}
 
-	public void setQuality(String quality) {
-		this.quality = quality;
-	}
-
-	public String getQuality() {
-		return this.quality;
-	}
-
 	public void setPrice(double price) {
 		this.price = price;
 	}
@@ -280,7 +266,7 @@ public class SourceDto {
 				+ ", id=" + id + ", keyWords=" + keyWords + ", mediaFormat="
 				+ mediaFormat + ", mediaType=" + mediaType + ", name=" + name
 				+ ", playTime=" + playTime + ", price=" + price
-				+ ", publisher=" + publisher + ", quality=" + quality
+				+ ", publisher=" + publisher 
 				+ ", url=" + url + ", useTimes=" + useTimes + ", viewTimes="
 				+ viewTimes + "]";
 	}

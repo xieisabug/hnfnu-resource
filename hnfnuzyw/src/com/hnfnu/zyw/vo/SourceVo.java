@@ -74,9 +74,7 @@ public class SourceVo {
 
 	private String approvalStatus;
 
-	// 质量等级
-
-	private String quality;
+	
 
 	// 价格
 
@@ -133,7 +131,6 @@ public class SourceVo {
 		this.description = description;
 		this.createDate = createDate;
 		this.approvalStatus = approvalStatus;
-		this.quality = quality;
 		this.price = price;
 		this.viewTimes = viewTimes;
 		this.useTimes = useTimes;
@@ -310,13 +307,6 @@ public class SourceVo {
 		this.approvalStatus = approvalStatus;
 	}
 
-	public String getQuality() {
-		return quality;
-	}
-
-	public void setQuality(String quality) {
-		this.quality = quality;
-	}
 
 	public double getPrice() {
 		return price;
@@ -389,7 +379,7 @@ public class SourceVo {
 				+ ", keyWords=" + keyWords + ", mediaFormat=" + mediaFormat
 				+ ", mediaType=" + mediaType + ", name=" + name + ", playTime="
 				+ playTime + ", price=" + price + ", publisher=" + publisher
-				+ ", quality=" + quality + ", subjectId=" + subjectId
+				+ ", subjectId=" + subjectId
 				+ ", subjectName=" + subjectName + ", url=" + url
 				+ ", useTimes=" + useTimes + ", viewTimes=" + viewTimes + "]";
 	}

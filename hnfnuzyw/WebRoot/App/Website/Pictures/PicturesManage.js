@@ -5,7 +5,7 @@ var picturesWin = null;// 图片窗口
 // 增加图片的函数
 function add_pictures() {
     picturesWin = $.ligerDialog.open({
-        width:400,
+        width:450,
         height:300,
         title:'添加图片',
         url:'AddForm.html',
@@ -66,12 +66,19 @@ function add_cancel() {
 }
 // 修改图片的函数
 function edit_pictures() {
-    formInit();
     if (!picturesGrid.getSelected()) {
         $.ligerDialog.warn('请选择您要修改的行.');
         return;
     }
-    Form.loadForm(picturesForm, picturesGrid.getSelected());
+    formInit();
+    var row_data = picturesGrid.getSelected();
+    if (row_data.display == "是") {
+        row_data.display = 1;
+    } else {
+        row_data.display = 0;
+    }
+    Form.loadForm(picturesForm, row_data);
+
     picturesWin = $.ligerDialog.open({
         width:400,
         height:200,
@@ -96,27 +103,27 @@ function edit_save() {
     if (picturesForm.valid()) {
         var row_data = Form.parseJSON(picturesForm);
         /*var row_data  = {
-          "id" =  picturesForm
-        };*/
+         "id" =  picturesForm
+         };*/
 
         // todo 需要发往服务器，返回成功后再修改到表格中
-        $ .ajax({
-                url:'../../../website/updatePictures.action',
-                data:row_data,
-                type:'post',
-                success:function (data) {
-                    if (data.success) {
-                        refresh_pictures();
-                        $.ligerDialog.tip({
-                            title:'提示信息',
-                            content:data.message
-                        });
-                        picturesWin.close();
-                    } else {
-                        $.ligerDialog.error(data.message);
-                    }
+        $.ajax({
+            url:'../../../website/updatePictures.action',
+            data:row_data,
+            type:'post',
+            success:function (data) {
+                if (data.success) {
+                    refresh_pictures();
+                    $.ligerDialog.tip({
+                        title:'提示信息',
+                        content:data.message
+                    });
+                    picturesWin.close();
+                } else {
+                    $.ligerDialog.error(data.message);
                 }
-            });
+            }
+        });
     }
 }
 // 修改图片的取消按钮事件
@@ -146,7 +153,7 @@ function delete_pictures() {
                             content:data.message
                         });
 
-                       refresh_pictures();
+                        refresh_pictures();
                         //parameterWin.close();
 
                     } else {
@@ -205,6 +212,7 @@ function formInit() {
                 valueField:"id",
                 newline:true,
                 options:{
+                    selectBoxHeight:40,
                     hideOnLoseFocus:true,
                     valueFieldID:"id",
                     data:[
@@ -244,10 +252,10 @@ function formInit() {
 
 // 刷新图片的函数
 function refresh_pictures() {
-    $.ajax( {
-        url : '../../../website/mapPictures.action',
-        type : 'post',
-        success : function(data) {
+    $.ajax({
+        url:'../../../website/mapPictures.action',
+        type:'post',
+        success:function (data) {
             picturesGrid.loadData(data.picturesMap);
         }
     });
@@ -315,7 +323,8 @@ $(function () {
                         display:'图片创建时间',
                         name:'createDate',
                         width:200
-                    }, {
+                    },
+                    {
                         display:'图片创建人',
                         name:'createUserName',
                         width:200

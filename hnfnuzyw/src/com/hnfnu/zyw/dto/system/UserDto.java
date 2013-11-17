@@ -28,6 +28,8 @@ public class UserDto {
 	private String qq;
 	// 电话
 	private String telephone;
+	//邮箱
+	private String email;
 	// 生日
 	private Date birth;
 	// 部门
@@ -46,11 +48,11 @@ public class UserDto {
 	public UserDto() {
 
 	}
-
+	
 	public UserDto(Integer id, String username, String password, String name,
-			String idcard, String sex, String qq, String telephone, Date birth,
-			String department, int balance, Date createDate,
-			Date latestLoginDate, String setting, String remark) {
+			String idcard, String sex, String qq, String telephone,
+			String email, Date birth, String department, int balance,
+			Date createDate, Date latestLoginDate, String setting, String remark) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -60,6 +62,7 @@ public class UserDto {
 		this.sex = sex;
 		this.qq = qq;
 		this.telephone = telephone;
+		this.email = email;
 		this.birth = birth;
 		this.department = department;
 		this.balance = balance;
@@ -188,6 +191,13 @@ public class UserDto {
 
 	public void setBalance(int balance) {
 		this.balance = balance;
+	}
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	@Override
