@@ -253,7 +253,6 @@ function formInit(func) {
         space:30,
         labelWidth:100,
         newline:true,
-        group:'必填信息',
         groupicon:groupicon,
         width:200,
         validate:{
@@ -348,13 +347,26 @@ function formInit(func) {
         labelWidth:100,
         newline:true,
         width:200,
-        group:'选填信息',
         groupicon:groupicon,
         validate:{
             required:true,
             maxlength:15
         }
-    }, {
+    },
+        {
+            name:'email',
+            display:'邮箱',
+            type:'text',
+            space:30,
+            labelWidth:100,
+            newline:true,
+            width:200,
+            groupicon:groupicon,
+            validate:{
+                required:true,
+                maxlength:45
+            }
+        },{
         display:"性别",
         name:"sex",
         type:"select",
@@ -366,6 +378,7 @@ function formInit(func) {
         valueField:"id",
         newline:true,
         options:{
+            selectBoxHeight:40,
             hideOnLoseFocus:true,
             valueFieldID:"id",
             data:[
@@ -558,7 +571,13 @@ function edit_user() {
         $.ligerDialog.warn('请选择您要修改的行.');
         return;
     }
-    Form.loadForm(userForm, userGrid.getSelected());
+    var row_data = userGrid.getSelected();
+    if (row_data.sex == "女") {
+        row_data.sex = 0;
+    } else {
+        row_data.sex = 1;
+    }
+    Form.loadForm(userForm, row_data);
     userWin = $.ligerDialog.open({
         width:400,
         height:500,
@@ -723,6 +742,12 @@ $(function () {
                     {
                         display:'电话号码',
                         name:'telephone',
+                        align:'left',
+                        width:120
+                    },
+                    {
+                        display:'邮箱',
+                        name:'email',
                         align:'left',
                         width:120
                     },

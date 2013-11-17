@@ -76,7 +76,6 @@ public class SourcesServiceImpl implements ISourceService {
 
 			source.setCreateDate(s.getCreateDate());
 			source.setApprovalStatus(s.getApprovalStatus());
-			source.setQuality(s.getQuality());
 			source.setViewTimes(s.getViewTimes());
 			source.setUseTimes(s.getUseTimes());
 			source.setUrl(s.getUrl());

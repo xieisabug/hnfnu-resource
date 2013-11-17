@@ -587,11 +587,6 @@ $(function() {
             align : 'left',
             minWidth : 60
         }, {
-            display : '质量等级',
-            name : 'quality',
-            align : 'left',
-            minWidth : 60
-        }, {
             display : '价格',
             name : 'price',
             align : 'left',
