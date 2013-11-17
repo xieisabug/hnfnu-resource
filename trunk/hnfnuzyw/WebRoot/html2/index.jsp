@@ -46,19 +46,8 @@
 </div>
 <!-- 顶部菜单 -->
 
-<!-- banner -->
-<div id="idContainer2" class="container">
-    <table id="idSlider2" cellSpacing=0 cellPadding=0>
-        <tr>
-            <td class="td_f"><a target="_blank" href="http://www.baidu.com"><IMG src="images/slider1.jpg"></a></td>
-            <td class="td_f"><IMG src="images/slider2.jpg"></td>
-            <td class="td_f"><IMG src="images/slider1.jpg"></td>
-            <td class="td_f"><IMG src="images/slider2.jpg"></td>
-            <td class="td_f"><IMG src="images/slider1.jpg"></td>
-        </tr>
-    </table>
-    <ul id="idNum" class="num"></ul>
-</div>
+<!-- !!!!!!!!!!!!!!!!!!!!更改文件引用位置banner -->
+    <jsp:include page="../website/pictures.html" />
 <!-- banner -->
 
 <div class="left">

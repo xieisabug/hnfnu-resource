@@ -153,33 +153,40 @@ $(window)
 						}
 					};
 
-					var st = new Slidetrans("idContainer2", "idSlider2", 5, {
-						Vertical : false
-					});
+                    var st;
+                    $.ajax({
+                        url : '../website/count.action',
+                        type : 'post',
+                        success : function(data) {
+                            console.log(data);
+                            st = new Slidetrans("idContainer2", "idSlider2", data.count, {
+                                Vertical : false
+                            });
+                            var nums = [];
+                            for ( var i = 0, n = st._count - 1; i <= n;) {
+                                (nums[i] = Q("idNum").appendChild(
+                                    document.createElement("li"))).innerHTML = ++i;
+                            }
 
-					var nums = [];
-					for ( var i = 0, n = st._count - 1; i <= n;) {
-						(nums[i] = Q("idNum").appendChild(
-								document.createElement("li"))).innerHTML = ++i;
-					}
+                            forEach(nums, function(o, i) {
+                                o.onmouseover = function() {
+                                    o.className = "on";
+                                    st.Auto = false;
+                                    st.Run(i);
+                                };
+                                o.onmouseout = function() {
+                                    o.className = "";
+                                    st.Auto = true;
+                                    st.Run();
+                                }
+                            });
 
-					forEach(nums, function(o, i) {
-						o.onmouseover = function() {
-							o.className = "on";
-							st.Auto = false;
-							st.Run(i);
-						};
-						o.onmouseout = function() {
-							o.className = "";
-							st.Auto = true;
-							st.Run();
-						}
-					});
-
-					st.onStart = function() {
-						forEach(nums, function(o, i) {
-							o.className = st.Index == i ? "on" : "";
-						})
-					};
-					st.Run();
+                            st.onStart = function() {
+                                forEach(nums, function(o, i) {
+                                    o.className = st.Index == i ? "on" : "";
+                                })
+                            };
+                            st.Run();
+                        }
+                    });
 				});
