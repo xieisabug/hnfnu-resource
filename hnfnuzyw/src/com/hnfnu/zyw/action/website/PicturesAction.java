@@ -34,6 +34,7 @@ ModelDriven<PicturesDto>{
 	private String message;
 	private Map<String, Object> picturesMap;
 	private List<PicturesDto> picturesList;
+	private int count;
 
 	@Autowired
 	@Qualifier("picturesService")
@@ -113,6 +114,24 @@ ModelDriven<PicturesDto>{
 		return SUCCESS;
 	}
 
+	
+	/**
+	 * 获取可以显示的图片的数量
+	 * @return
+	 */
+
+	@Action(value = "count")
+	public String count() {
+		count = picturesService.getCount();
+		if(count < 0){
+			success = false;
+			message = "获取图片数量成功！";
+		}else {
+			message = "获取图片数量失败！";
+		}
+		return SUCCESS;
+	}
+
 	/**
 	 *  获取表中所有图片
 	 *  用Map装，为了分页的需要加上Rows和Total
@@ -168,4 +187,9 @@ ModelDriven<PicturesDto>{
 	public List<PicturesDto> getPicturesList() {
 		return picturesList;
 	}
+
+	public int getCount() {
+		return count;
+	}
+	
 }

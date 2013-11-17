@@ -83,7 +83,7 @@ public class PicturesServiceImpl implements IPicturesService{
 	 * @return 获取到的图片集合
 	 */
 	public List<PicturesDto> list() {
-		String hql = "from PicturesDto";
+		String hql = "from PicturesDto where display=1";
 		List<PicturesDto> pictures = null;
 		try {
 			pictures = picturesDao.list(hql);
@@ -110,5 +110,9 @@ public class PicturesServiceImpl implements IPicturesService{
 		picturesList.put("Rows", l);
 		picturesList.put("Total", l.size());
 		return picturesList;
+	}
+
+	public int getCount() {
+		return picturesDao.getCount();
 	}
 }
