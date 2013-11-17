@@ -5,4 +5,7 @@ import com.hnfnu.zyw.dto.website.PicturesDto;
 
 public interface IPicturesDao extends IBaseDao<PicturesDto>{
 
+	public int getCount();
+	
+	
 }

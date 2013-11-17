@@ -26,6 +26,11 @@ public interface IPicturesService {
 	 * @return
 	 */
 	public Map<String, Object> listPictures();
+	/**
+	 * 获取所有的可以显示的图片的数量
+	 * @return
+	 */
+	public int getCount();
 	
 	
 	
