@@ -12,15 +12,33 @@
     <link href="Css/common.css" rel="stylesheet" type="text/css"/>
 
     <title>湖南第一师范学院资源网</title>
-    <!--
-    <link rel="stylesheet" type="text/css" href="styles.css">
-    -->
 </head>
+<script type="text/javascript">
+    function exit(){
+        $.ajax({
+            url : 'website/exit.action',
+            type : 'post',
+            success : function(data) {
+                if (data.success) {
+                   /* $.ligerDialog.tip({
+                        title : '提示信息',
+                        content : data.message
+                    });*/
+                    top.location.replace("/hnfnuzyw/login.html");
+                } else {
+                    $.ligerDialog.error(data.message);
+                }
+            }
+        });
+    }
 
+</script>
 <body>
 <div class="l-loading" style="display: block" id="pageloading"></div>
-<div id="top_page">这个不是框架的一部分，用来放logo</div>
-<div id="main_body">
+<div id="top_page">
+    <button style="width:100px;background-color: #01AAEE" id="exit" name="exit" onclick="javascript:exit()">退出系统</button>
+</div>
+<div id="main_body" >
 
     <div position="left" title="主要菜单" id="main_menu"></div>
     <div position="center" id="mainframe">
