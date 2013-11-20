@@ -694,6 +694,7 @@ $(function () {
                 }
             });
             $("#pageloading").hide();
+            console.log(studentGrid.getColumns());
         }
     });
 });
