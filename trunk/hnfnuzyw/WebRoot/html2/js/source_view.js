@@ -17,6 +17,9 @@ $(function() {
 				parentIDFieldName : 'pid',
 				checkbox : false,
 				data : data.allTree,
+                onAfterAppend : function() {
+                    this.collapseAll();
+                },
 				onSelect : function(data) {
                     var params;
                     if(isCourse(data)){
