@@ -113,6 +113,22 @@ public class LoginAction extends ActionSupport {
 		}
 		return SUCCESS;
 	}
+	
+
+	@Action(value = "exit")
+	public String exit() {
+		Map<String, Object>   session = ServletActionContext.getContext().getSession();
+		session.clear();
+		if(session.containsKey("user") ||session.containsKey("student")){
+			success = false;
+			message="推出系统失败，session清除不成功";
+		} else{
+			success = true;
+			message="推出系统成功";
+		}
+		return SUCCESS;
+	}
+	
 
 	/* get set */
 
