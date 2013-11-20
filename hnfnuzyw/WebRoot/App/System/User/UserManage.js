@@ -1,4 +1,5 @@
 var userGrid = null;// 用户表格
+var multipleGrid = null;// 多选
 var userForm = null;// 用户表单
 var userWin = null;// 用户窗口
 var listBox = null;// 用户角色列表
@@ -646,6 +647,195 @@ function refresh_user() {
 
 }
 
+//批量给用户充值资源币
+function add_balance() {
+
+    userGrid.checkBoxIsTrue();
+    //multiple_select_grid();
+   /* var datas = studentGrid.getSelecteds();
+    //console.log(datas);
+    if (datas.length == 0) {
+        $.ligerDialog.warn('请选择您要充值的学生们.');
+        return;
+    }
+    balanceFormInit();
+    balanceWin = $.ligerDialog.open({
+        width:300,
+        height:200,
+        title:'充值资源币',
+        target:balanceForm,
+        buttons:[
+            {
+                text:'提交',
+                width:80,
+                onclick:add_balance_save
+            },
+            {
+                text:'取消',
+                width:80,
+                onclick:add_balance_cancel
+            }
+        ]
+    });*/
+}
+
+
+/*
+function multiple_select_grid(){
+    var toolbarItems = [
+        {
+            text:'新增用户',
+            click:add_user,
+            icon:'add',
+            key:'add'
+        },
+        {
+            text:'删除用户',
+            click:delete_user,
+            icon:'delete',
+            key:'delete'
+        },
+        {
+            text:'修改用户',
+            click:edit_user,
+            icon:'modify',
+            key:'modify'
+        },
+        {
+            text:'角色赋予',
+            click:user_role_join,
+            icon:'config',
+            key:'join'
+        },
+        {
+            text:'修改密码',
+            click:edit_password,
+            icon:'modify',
+            key:'modify_pwd'
+        },{
+            text:'资源币充值',
+            click:add_balance,
+            icon:'modify',
+            key:'modify_many'
+        }
+    ];
+    var menuId = window.parent.tab.getSelectedTabItemID();
+    $.ajax({
+        url : '../../../system/listFunctionIdList.action',
+        type : 'post',
+        data : {
+            menuId : menuId.substr(0,menuId.indexOf("t"))
+        },
+        success : function(data) {
+            var idList = data.functionIdList.split(";");
+            var ajaxToolbar = [];
+            for(var i = 0; i<idList.length; i++){
+                ajaxToolbar.push({name:parent.hnfnu.functionList[idList[i]]});
+            }
+            toolbarItems = Toolbar.confirmToolbar(toolbarItems, ajaxToolbar);
+        }
+    });
+    $.ajax({
+        url:'../../../system/listUser.action',
+        type:'post',
+        success:function (data) {
+           userGrid = $("#userGrid").ligerGrid({
+                columns:[
+                    {
+                        display:'用户名',
+                        name:'username',
+                        align:'left',
+                        width:100
+                    },
+                    {
+                        display:'姓名',
+                        name:'name',
+                        align:'left',
+                        width:80
+                    },
+                    {
+                        display:'身份证号码',
+                        name:'idcard',
+                        align:'left',
+                        width:100
+                    },
+                    {
+                        display:'性别',
+                        name:'sex',
+                        align:'left',
+                        width:50
+                    },
+                    {
+                        display:'资源币余额',
+                        name:'balance',
+                        align:'left',
+                        width:50
+                    },
+                    {
+                        display:'QQ',
+                        name:'qq',
+                        align:'left',
+                        width:100
+                    },
+                    {
+                        display:'电话号码',
+                        name:'telephone',
+                        align:'left',
+                        width:120
+                    },
+                    {
+                        display:'邮箱',
+                        name:'email',
+                        align:'left',
+                        width:120
+                    },
+                    {
+                        display:'生日',
+                        name:'birth',
+                        align:'left',
+                        width:100
+                    },
+                    {
+                        display:'部门',
+                        name:'department',
+                        align:'left',
+                        width:80
+                    },
+                    {
+                        display:'备注',
+                        name:'remark',
+                        align:'left',
+                        width:50
+                    }
+                ],
+                width:'99%',
+                height:'98%',
+                pageSize:20,
+                checkbox:true,
+                data:data.userList,
+                toolbar:{
+                    items:toolbarItems
+                },
+                rowAttrRender:function (rowdata) {
+                    if (rowdata.birth) {
+                        rowdata.birth = rowdata.birth.substring(0, 10);
+                    }
+                    if (rowdata.sex == 0) {
+                        rowdata.sex = "女";
+                    } else {
+                        rowdata.sex = "男";
+                    }
+                    return;
+                }
+            });
+            $("#pageloading").hide();
+        }
+    });
+}
+*/
+
+
+
 
 // 初始化表格
 $(function () {
@@ -679,6 +869,11 @@ $(function () {
             click:edit_password,
             icon:'modify',
             key:'modify_pwd'
+        },{
+            text:'资源币充值',
+            click:add_balance,
+            icon:'modify',
+            key:'modify_many'
         }
     ];
     var menuId = window.parent.tab.getSelectedTabItemID();

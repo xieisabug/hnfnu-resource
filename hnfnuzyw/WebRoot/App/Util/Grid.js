@@ -72,6 +72,43 @@ $.ligerui.controls.Grid.prototype.showFilter = function ()
     }
 
 };
+//启用复选框
+$.ligerui.controls.Grid.prototype.checkBoxIsTrue = function (){
+    var g = this,p = this.options;
+    var isCheck = this.enabledCheckbox();
+    if(!isCheck){
+        this.options.checkbox = true;
+        this.checkbox = true;
+//        /this.options.ischeckbox = true;
+//        console.log(this.enabledCheckbox());
+        p.columns.push({
+            __domid: "userGrid|hcell|c101",
+            __id: "c101",
+            __leaf: true,
+            __leafindex: 0,
+            __level: 1,
+            __pid: -1,
+            __previd: -1,
+            _hide: false,
+            _width: 29,
+            columnindex: 0,
+            columnname: undefined,
+            frozen: true,
+            isSort: true,
+            ischeckbox: true,
+            islast: false,
+            issystem: true,
+            type: "string",
+            width: 29
+        });
+        g._setColumns(p.columns);
+        g.reRender();
+        console.log(p.columns);
+        //this._bulid();
+        //this.reRender();
+    }
+}
+
 
 
 var filterTranslator = {
