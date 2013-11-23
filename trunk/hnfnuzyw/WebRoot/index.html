@@ -20,10 +20,6 @@
             type : 'post',
             success : function(data) {
                 if (data.success) {
-                   /* $.ligerDialog.tip({
-                        title : '提示信息',
-                        content : data.message
-                    });*/
                     top.location.replace("/hnfnuzyw/login.html");
                 } else {
                     $.ligerDialog.error(data.message);
@@ -36,7 +32,7 @@
 <body>
 <div class="l-loading" style="display: block" id="pageloading"></div>
 <div id="top_page">
-    <button style="width:100px;background-color: #01AAEE" id="exit" name="exit" onclick="javascript:exit()">退出系统</button>
+    <button id="exit" name="exit" onclick="javascript:exit()">退出系统</button>
 </div>
 <div id="main_body" >
 
