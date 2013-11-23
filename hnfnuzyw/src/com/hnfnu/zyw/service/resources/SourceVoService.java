@@ -62,6 +62,9 @@ public class SourceVoService implements ISourceVoService {
 		return sourceVoList;
 	}
 
+	/**
+	 * 根据课程和类别获得资源
+	 */
 	public Map<String, Object> listSourceVo(int courseId, int categoryId) {
 
 		String sql = "from SourceVo where id in(select t2.id from SourceCategoryJoinDto as t1,SourceDto as t2,CategoryDto as t3 where t1.sourceId = t2.id and t1.categoryId = t3.id and t2.courseId ="
@@ -70,6 +73,25 @@ public class SourceVoService implements ISourceVoService {
 			sql += " and t3.id =" + categoryId;
 		}
 		sql += ")";
+		return getSources(sql);
+	}
+	
+	/**
+	 * 根据课程和类别获得资源制定用户的资源
+	 */
+	public Map<String, Object> listSourceVoByUserId(int courseId, int categoryId,int userId) {
+
+		String sql = "from SourceVo where createUserId="+userId+" and id in(select t2.id from SourceCategoryJoinDto as t1,SourceDto as t2,CategoryDto as t3 where t1.sourceId = t2.id and t1.categoryId = t3.id and t2.courseId ="
+				+ courseId;// and t3.id = 1)";
+		if (categoryId > 0) {
+			sql += " and t3.id =" + categoryId;
+		}
+		sql += ")";
+		return getSources(sql);
+	}
+
+
+	private Map<String, Object> getSources(String sql) {
 		Map<String, Object> sourceVoList = new HashMap<String, Object>();
 		List<SourceVo> l = null;
 
@@ -83,7 +105,26 @@ public class SourceVoService implements ISourceVoService {
 		return sourceVoList;
 	}
 
+	
+
+	/**
+	 * 获得所有的资源
+	 */
 	public List<Map<String, Object>> allTree() {
+		String sql = "FROM SourceVo ORDER BY gradeId,subjectId,courseId ASC";
+		return getTree(sql);
+	}
+	
+	/**
+	 * 获得特定用户的资源树
+	 */
+	public List<Map<String, Object>> treeByUserId(int userId) {
+		String sql = "FROM SourceVo WHERE createUserId=" + userId + "ORDER BY gradeId,subjectId,courseId ASC";
+		return getTree(sql);
+	}
+	
+	
+	private List<Map<String, Object>> getTree(String sql) {
 		List<Map<String, Object>> ret = new ArrayList<Map<String, Object>>();// 用来返回的map
 		Map<String, Object> grade = null;// 用来存放年级的map
 		List<Map<String, Object>> subjectList = null;
@@ -92,7 +133,7 @@ public class SourceVoService implements ISourceVoService {
 		Map<String, Object> course = null;
 		List<Map<String, String>> categoryList = new ArrayList<Map<String, String>>();
 		Map<String, String> category = null;
-		String voHQL = "FROM SourceVo ORDER BY gradeId,subjectId,courseId ASC";
+		String voHQL = sql;
 		try {
 			List<SourceVo> l = sourceVoDao.list(voHQL);
 			int gradeId = 0;// 当前的年级id
@@ -194,6 +235,8 @@ public class SourceVoService implements ISourceVoService {
 		}
 		return ret;
 	}
+	
+	
 
 	public List<Map<String, Object>> courseTree() {
 		List<Map<String, Object>> ret = new ArrayList<Map<String, Object>>();// 用来返回的map
