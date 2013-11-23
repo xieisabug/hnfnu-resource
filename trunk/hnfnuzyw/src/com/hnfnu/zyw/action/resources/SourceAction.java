@@ -117,7 +117,7 @@ public class SourceAction extends ActionSupport implements
 			if (source.getViewTimes() == null) {
 				source.setViewTimes(1);
 			}
-				source.setViewTimes(source.getViewTimes() + 1);
+			source.setViewTimes(source.getViewTimes() + 1);
 			sourceService.update(source);
 		}
 		return SUCCESS;
@@ -156,6 +156,17 @@ public class SourceAction extends ActionSupport implements
 		return SUCCESS;
 	}
 
+	// 根据courceId和categoryId获取表中该用户的资源，用Map装，为了分页的需要加上Rows和Total
+	@Action(value = "sourceMoreVoList")
+	public String listByUserId() {
+		ActionContext context = ActionContext.getContext();
+		Map<String, Object> session = context.getSession();
+		user = (UserDto) session.get("user");
+		sourceMoreVoList = sourceVoService.listSourceVoByUserId(
+				source.getCourseId(), categoryId, user.getId());
+		return SUCCESS;
+	}
+
 	// 页面上的一颗显示所有数据的树
 	@Action(value = "allTree")
 	public String allTree() {
@@ -163,7 +174,17 @@ public class SourceAction extends ActionSupport implements
 		return SUCCESS;
 	}
 
-	// 页面上的一颗显示所有数据的树
+	// 页面上的一颗显示该用户的数据的树
+	@Action(value = "treeByUserId")
+	public String treeByUserId() {
+		// 获取当前用户
+		ActionContext context = ActionContext.getContext();
+		Map<String, Object> session = context.getSession();
+		user = (UserDto) session.get("user");
+		allTree = sourceVoService.treeByUserId(user.getId());
+		return SUCCESS;
+	}
+
 	@Action(value = "courseTree")
 	public String courseTree() {
 		courseTree = sourceVoService.courseTree();
