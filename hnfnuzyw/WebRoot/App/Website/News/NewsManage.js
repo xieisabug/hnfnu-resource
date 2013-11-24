@@ -1,24 +1,11 @@
 var newsGrid = null;// 新闻表格
 var newsFrom = null;// 新闻表单
 var newsWin = null;// 新闻窗口
-
-/*
- * 增加tab项的函数 function f_addTab(tabid, text, url) { if (!tab) return; if (!tabid) {
- * tabidcounter++; tabid = "tabid" + tabidcounter; } tab.addTabItem({
- * tabid:tabid, text:text, url:url }); }
- */
-
-
-
-
-
-
 // 增加新闻的函数,实际上就是增加一个tab
 function add_news(tabid, text, url) {
     var tabid = "add_news", text = "新增新闻", url = "App/Website/News/NewsEditor.html";
     window.parent.window.f_addTab(tabid, text, url);
 }
-
 
 // 修改新闻的函数
 function edit_news() {
@@ -30,8 +17,6 @@ function edit_news() {
     var tabid = "update_news", text = "修改新闻", url = "App/Website/News/NewsUpdateEditor.html?id="+row_data.id;
     window.parent.window.f_addTab(tabid, text, url);
 }
-
-
 
 // 删除新闻的函数
 function delete_news() {
@@ -45,7 +30,8 @@ function delete_news() {
             $.ajax({
                 url:'../../../website/deleteNews.action',
                 data:{
-                    "id":row_data.id
+                    "id":row_data.id,
+                    "content":row_data.content
                 },
                 type:'post',
                 success:function (data) {

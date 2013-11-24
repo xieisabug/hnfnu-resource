@@ -16,7 +16,7 @@ public class MyStrutsFilter extends StrutsPrepareAndExecuteFilter {
 		HttpServletRequest request = (HttpServletRequest) req;
 		// 不过滤的url
 		String url = request.getRequestURI();
-		System.out.println(url);
+		//System.out.println(url);
 		// if ("/hnfnuzyw/ueditor/jsp/imageUp.jsp".equals(url)) {
 		if (url.contains("ueditor")) {
 			//System.out.println("使用自定义的过滤器");

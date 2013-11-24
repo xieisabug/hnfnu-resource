@@ -10,10 +10,13 @@ import org.springframework.stereotype.Service;
 
 import com.hnfnu.zyw.dao.website.INewsDao;
 import com.hnfnu.zyw.dto.website.NewsDto;
+import com.hnfnu.zyw.utils.FileUtils;
+import com.hnfnu.zyw.utils.RegexUtil;
 
 @Service("newsService")
 public class NewsServiceImpl implements INewsService {
 
+	private static final String UEDITOR_FILE = "F:/workspaces/hnfnu-resource/trunk/hnfnuzyw/WebRoot/ueditor/jsp/upload/";
 	@Autowired
 	@Qualifier("newsDao")
 	public INewsDao newsDao;
@@ -40,6 +43,12 @@ public class NewsServiceImpl implements INewsService {
 	 */
 	public boolean delete(NewsDto news) {
 		try {
+			List<String> a = RegexUtil.findUploadFilesATagHref(news.getContent());
+			for(int i = 0;i < a.size();i++){
+				String herf = a.get(i);
+				herf = herf.replace("\\", "\\\\");
+				FileUtils.deleteOneFile(UEDITOR_FILE+herf);
+			}
 			newsDao.delete(news.getId());
 		} catch (Exception e) {
 			e.printStackTrace();
