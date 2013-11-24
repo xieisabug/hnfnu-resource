@@ -244,23 +244,23 @@ function formInit(func) {
     userForm = $('<form></form>');
     var fields = [];
     fields.push({
-        name:'id',
-        type:'hidden'
-    },
+            name:'id',
+            type:'hidden'
+        },
         {
-        name:'username',
-        display:'用户名',
-        type:'text',
-        space:30,
-        labelWidth:100,
-        newline:true,
-        groupicon:groupicon,
-        width:200,
-        validate:{
-            required:true,
-            maxlength:20
-        }
-    });
+            name:'username',
+            display:'用户名',
+            type:'text',
+            space:30,
+            labelWidth:100,
+            newline:true,
+            groupicon:groupicon,
+            width:200,
+            validate:{
+                required:true,
+                maxlength:20
+            }
+        });
 
     if (func === "add") {
         fields.push({
@@ -305,55 +305,55 @@ function formInit(func) {
         });
     }
     fields.push({
-        name:'name',
-        display:'姓名',
-        type:'text',
-        space:30,
-        labelWidth:100,
-        newline:true,
-        width:200,
-        validate:{
-            required:true,
-            maxlength:10
-        }
-    }, {
-        name:'idcard',
-        display:'身份证',
-        type:'text',
-        space:30,
-        labelWidth:100,
-        newline:true,
-        width:200,
-        validate:{
-            required:true,
-            maxlength:18
-        }
-    }, {
-        name:'department',
-        display:'部门',
-        type:'text',
-        space:30,
-        labelWidth:100,
-        newline:true,
-        width:200,
-        validate:{
-            required:true,
-            maxlength:40
-        }
-    }, {
-        name:'telephone',
-        display:'电话',
-        type:'text',
-        space:30,
-        labelWidth:100,
-        newline:true,
-        width:200,
-        groupicon:groupicon,
-        validate:{
-            required:true,
-            maxlength:15
-        }
-    },
+            name:'name',
+            display:'姓名',
+            type:'text',
+            space:30,
+            labelWidth:100,
+            newline:true,
+            width:200,
+            validate:{
+                required:true,
+                maxlength:10
+            }
+        }, {
+            name:'idcard',
+            display:'身份证',
+            type:'text',
+            space:30,
+            labelWidth:100,
+            newline:true,
+            width:200,
+            validate:{
+                required:true,
+                maxlength:18
+            }
+        }, {
+            name:'department',
+            display:'部门',
+            type:'text',
+            space:30,
+            labelWidth:100,
+            newline:true,
+            width:200,
+            validate:{
+                required:true,
+                maxlength:40
+            }
+        }, {
+            name:'telephone',
+            display:'电话',
+            type:'text',
+            space:30,
+            labelWidth:100,
+            newline:true,
+            width:200,
+            groupicon:groupicon,
+            validate:{
+                required:true,
+                maxlength:15
+            }
+        },
         {
             name:'email',
             display:'邮箱',
@@ -367,61 +367,61 @@ function formInit(func) {
                 required:true,
                 maxlength:45
             }
-        },{
-        display:"性别",
-        name:"sex",
-        type:"select",
-        width:200,
-        space:30,
-        labelWidth:100,
-        comboboxName:"sex",
-        textField:"text",
-        valueField:"id",
-        newline:true,
-        options:{
-            selectBoxHeight:40,
-            hideOnLoseFocus:true,
-            valueFieldID:"id",
-            data:[
-                {
-                    "id":"1",
-                    "text":"男"
-                },
-                {
-                    "id":"0",
-                    "text":"女"
-                }
-            ]
+        }, {
+            display:"性别",
+            name:"sex",
+            type:"select",
+            width:200,
+            space:30,
+            labelWidth:100,
+            comboboxName:"sex",
+            textField:"text",
+            valueField:"id",
+            newline:true,
+            options:{
+                selectBoxHeight:40,
+                hideOnLoseFocus:true,
+                valueFieldID:"id",
+                data:[
+                    {
+                        "id":"1",
+                        "text":"男"
+                    },
+                    {
+                        "id":"0",
+                        "text":"女"
+                    }
+                ]
 
-        }
-    }, {
-        name:'qq',
-        display:'QQ',
-        type:'text',
-        space:30,
-        labelWidth:100,
-        newline:true,
-        width:200,
-        validate:{
-            maxlength:15
-        }
-    }, {
-        name:'birth',
-        display:'生日',
-        type:'date',
-        space:30,
-        labelWidth:100,
-        newline:true,
-        width:200
-    }, {
-        name:'remark',
-        display:'备注',
-        type:'text',
-        space:30,
-        labelWidth:100,
-        newline:true,
-        width:200
-    });
+            }
+        }, {
+            name:'qq',
+            display:'QQ',
+            type:'text',
+            space:30,
+            labelWidth:100,
+            newline:true,
+            width:200,
+            validate:{
+                maxlength:15
+            }
+        }, {
+            name:'birth',
+            display:'生日',
+            type:'date',
+            space:30,
+            labelWidth:100,
+            newline:true,
+            width:200
+        }, {
+            name:'remark',
+            display:'备注',
+            type:'text',
+            space:30,
+            labelWidth:100,
+            newline:true,
+            width:200
+        });
 
     userForm.ligerForm({
         inputWidth:280,
@@ -431,7 +431,7 @@ function formInit(func) {
     userForm.validate({
         debug:true,
         onkeyup:false,
-        errorPlacement:function (error,element) {
+        errorPlacement:function (error, element) {
             error.appendTo(element.parent().parent().parent().parent());
         }
     });
@@ -503,27 +503,47 @@ function add_user() {
 function add_save() {
     if (userForm.valid()) {
         var row_data = Form.parseJSON(userForm);
-        // 发往服务器，返回成功后再添加到表格中
+        var flat = false;
         $.ajax({
-            url:'../../../system/addUser.action',
-            data:row_data,
+            url:'../../../system/validateUsername.action',
+            data:{
+                "username":row_data.username
+            },
             type:'post',
+            async:false,
             success:function (data) {
                 if (data.success) {
-                    userGrid.addRow(data.model);
-                    var userDialog = $.ligerDialog.confirm('用户添加成功，需要马上为该用户赋予角色吗？', function (answer)
-                    {
-                        if(answer){
-                            userGrid.select(data.model);
-                            user_role_join();
-                        }
+                    flat = true;
+                    $.ligerDialog.tip({
+                        title:'提示信息',
+                        content:data.message
                     });
-                    userWin.close();
-                } else {
-                    $.ligerDialog.error(data.message);
                 }
             }
         });
+        //如果用户名不存在
+        if (!flat) {
+            $.ajax({
+                url:'../../../system/addUser.action',
+                data:row_data,
+                type:'post',
+                success:function (data) {
+                    if (data.success) {
+                        //userGrid.addRow(data.model);
+                        refresh_user();
+                        var userDialog = $.ligerDialog.confirm('用户添加成功，需要马上为该用户赋予角色吗？', function (answer) {
+                            if (answer) {
+                                userGrid.select(data.model);
+                                user_role_join();
+                            }
+                        });
+                        userWin.close();
+                    } else {
+                        $.ligerDialog.error(data.message);
+                    }
+                }
+            });
+        }
     }
 }
 
@@ -554,7 +574,7 @@ function delete_user() {
                             title:'提示信息',
                             content:data.message
                         });
-                       refresh_user();
+                        refresh_user();
                         userWin.close();
                     } else {
                         $.ligerDialog.error(data.message);
@@ -636,10 +656,10 @@ function edit_cancel() {
 
 // 刷新图片的函数
 function refresh_user() {
-    $.ajax( {
-        url : '../../../system/listUser.action',
-        type : 'post',
-        success : function(data) {
+    $.ajax({
+        url:'../../../system/listUser.action',
+        type:'post',
+        success:function (data) {
             userGrid.loadData(data.userList);
         }
     });
@@ -652,187 +672,187 @@ function add_balance() {
 
     userGrid.checkBoxIsTrue();
     //multiple_select_grid();
-   /* var datas = studentGrid.getSelecteds();
-    //console.log(datas);
-    if (datas.length == 0) {
-        $.ligerDialog.warn('请选择您要充值的学生们.');
-        return;
-    }
-    balanceFormInit();
-    balanceWin = $.ligerDialog.open({
-        width:300,
-        height:200,
-        title:'充值资源币',
-        target:balanceForm,
-        buttons:[
-            {
-                text:'提交',
-                width:80,
-                onclick:add_balance_save
-            },
-            {
-                text:'取消',
-                width:80,
-                onclick:add_balance_cancel
-            }
-        ]
-    });*/
+    /* var datas = studentGrid.getSelecteds();
+     //console.log(datas);
+     if (datas.length == 0) {
+     $.ligerDialog.warn('请选择您要充值的学生们.');
+     return;
+     }
+     balanceFormInit();
+     balanceWin = $.ligerDialog.open({
+     width:300,
+     height:200,
+     title:'充值资源币',
+     target:balanceForm,
+     buttons:[
+     {
+     text:'提交',
+     width:80,
+     onclick:add_balance_save
+     },
+     {
+     text:'取消',
+     width:80,
+     onclick:add_balance_cancel
+     }
+     ]
+     });*/
 }
 
 
 /*
-function multiple_select_grid(){
-    var toolbarItems = [
-        {
-            text:'新增用户',
-            click:add_user,
-            icon:'add',
-            key:'add'
-        },
-        {
-            text:'删除用户',
-            click:delete_user,
-            icon:'delete',
-            key:'delete'
-        },
-        {
-            text:'修改用户',
-            click:edit_user,
-            icon:'modify',
-            key:'modify'
-        },
-        {
-            text:'角色赋予',
-            click:user_role_join,
-            icon:'config',
-            key:'join'
-        },
-        {
-            text:'修改密码',
-            click:edit_password,
-            icon:'modify',
-            key:'modify_pwd'
-        },{
-            text:'资源币充值',
-            click:add_balance,
-            icon:'modify',
-            key:'modify_many'
-        }
-    ];
-    var menuId = window.parent.tab.getSelectedTabItemID();
-    $.ajax({
-        url : '../../../system/listFunctionIdList.action',
-        type : 'post',
-        data : {
-            menuId : menuId.substr(0,menuId.indexOf("t"))
-        },
-        success : function(data) {
-            var idList = data.functionIdList.split(";");
-            var ajaxToolbar = [];
-            for(var i = 0; i<idList.length; i++){
-                ajaxToolbar.push({name:parent.hnfnu.functionList[idList[i]]});
-            }
-            toolbarItems = Toolbar.confirmToolbar(toolbarItems, ajaxToolbar);
-        }
-    });
-    $.ajax({
-        url:'../../../system/listUser.action',
-        type:'post',
-        success:function (data) {
-           userGrid = $("#userGrid").ligerGrid({
-                columns:[
-                    {
-                        display:'用户名',
-                        name:'username',
-                        align:'left',
-                        width:100
-                    },
-                    {
-                        display:'姓名',
-                        name:'name',
-                        align:'left',
-                        width:80
-                    },
-                    {
-                        display:'身份证号码',
-                        name:'idcard',
-                        align:'left',
-                        width:100
-                    },
-                    {
-                        display:'性别',
-                        name:'sex',
-                        align:'left',
-                        width:50
-                    },
-                    {
-                        display:'资源币余额',
-                        name:'balance',
-                        align:'left',
-                        width:50
-                    },
-                    {
-                        display:'QQ',
-                        name:'qq',
-                        align:'left',
-                        width:100
-                    },
-                    {
-                        display:'电话号码',
-                        name:'telephone',
-                        align:'left',
-                        width:120
-                    },
-                    {
-                        display:'邮箱',
-                        name:'email',
-                        align:'left',
-                        width:120
-                    },
-                    {
-                        display:'生日',
-                        name:'birth',
-                        align:'left',
-                        width:100
-                    },
-                    {
-                        display:'部门',
-                        name:'department',
-                        align:'left',
-                        width:80
-                    },
-                    {
-                        display:'备注',
-                        name:'remark',
-                        align:'left',
-                        width:50
-                    }
-                ],
-                width:'99%',
-                height:'98%',
-                pageSize:20,
-                checkbox:true,
-                data:data.userList,
-                toolbar:{
-                    items:toolbarItems
-                },
-                rowAttrRender:function (rowdata) {
-                    if (rowdata.birth) {
-                        rowdata.birth = rowdata.birth.substring(0, 10);
-                    }
-                    if (rowdata.sex == 0) {
-                        rowdata.sex = "女";
-                    } else {
-                        rowdata.sex = "男";
-                    }
-                    return;
-                }
-            });
-            $("#pageloading").hide();
-        }
-    });
-}
-*/
+ function multiple_select_grid(){
+ var toolbarItems = [
+ {
+ text:'新增用户',
+ click:add_user,
+ icon:'add',
+ key:'add'
+ },
+ {
+ text:'删除用户',
+ click:delete_user,
+ icon:'delete',
+ key:'delete'
+ },
+ {
+ text:'修改用户',
+ click:edit_user,
+ icon:'modify',
+ key:'modify'
+ },
+ {
+ text:'角色赋予',
+ click:user_role_join,
+ icon:'config',
+ key:'join'
+ },
+ {
+ text:'修改密码',
+ click:edit_password,
+ icon:'modify',
+ key:'modify_pwd'
+ },{
+ text:'资源币充值',
+ click:add_balance,
+ icon:'modify',
+ key:'modify_many'
+ }
+ ];
+ var menuId = window.parent.tab.getSelectedTabItemID();
+ $.ajax({
+ url : '../../../system/listFunctionIdList.action',
+ type : 'post',
+ data : {
+ menuId : menuId.substr(0,menuId.indexOf("t"))
+ },
+ success : function(data) {
+ var idList = data.functionIdList.split(";");
+ var ajaxToolbar = [];
+ for(var i = 0; i<idList.length; i++){
+ ajaxToolbar.push({name:parent.hnfnu.functionList[idList[i]]});
+ }
+ toolbarItems = Toolbar.confirmToolbar(toolbarItems, ajaxToolbar);
+ }
+ });
+ $.ajax({
+ url:'../../../system/listUser.action',
+ type:'post',
+ success:function (data) {
+ userGrid = $("#userGrid").ligerGrid({
+ columns:[
+ {
+ display:'用户名',
+ name:'username',
+ align:'left',
+ width:100
+ },
+ {
+ display:'姓名',
+ name:'name',
+ align:'left',
+ width:80
+ },
+ {
+ display:'身份证号码',
+ name:'idcard',
+ align:'left',
+ width:100
+ },
+ {
+ display:'性别',
+ name:'sex',
+ align:'left',
+ width:50
+ },
+ {
+ display:'资源币余额',
+ name:'balance',
+ align:'left',
+ width:50
+ },
+ {
+ display:'QQ',
+ name:'qq',
+ align:'left',
+ width:100
+ },
+ {
+ display:'电话号码',
+ name:'telephone',
+ align:'left',
+ width:120
+ },
+ {
+ display:'邮箱',
+ name:'email',
+ align:'left',
+ width:120
+ },
+ {
+ display:'生日',
+ name:'birth',
+ align:'left',
+ width:100
+ },
+ {
+ display:'部门',
+ name:'department',
+ align:'left',
+ width:80
+ },
+ {
+ display:'备注',
+ name:'remark',
+ align:'left',
+ width:50
+ }
+ ],
+ width:'99%',
+ height:'98%',
+ pageSize:20,
+ checkbox:true,
+ data:data.userList,
+ toolbar:{
+ items:toolbarItems
+ },
+ rowAttrRender:function (rowdata) {
+ if (rowdata.birth) {
+ rowdata.birth = rowdata.birth.substring(0, 10);
+ }
+ if (rowdata.sex == 0) {
+ rowdata.sex = "女";
+ } else {
+ rowdata.sex = "男";
+ }
+ return;
+ }
+ });
+ $("#pageloading").hide();
+ }
+ });
+ }
+ */
 
 
 
@@ -869,7 +889,8 @@ $(function () {
             click:edit_password,
             icon:'modify',
             key:'modify_pwd'
-        },{
+        },
+        {
             text:'资源币充值',
             click:add_balance,
             icon:'modify',
@@ -878,15 +899,15 @@ $(function () {
     ];
     var menuId = window.parent.tab.getSelectedTabItemID();
     $.ajax({
-        url : '../../../system/listFunctionIdList.action',
-        type : 'post',
-        data : {
-            menuId : menuId.substr(0,menuId.indexOf("t"))
+        url:'../../../system/listFunctionIdList.action',
+        type:'post',
+        data:{
+            menuId:menuId.substr(0, menuId.indexOf("t"))
         },
-        success : function(data) {
+        success:function (data) {
             var idList = data.functionIdList.split(";");
             var ajaxToolbar = [];
-            for(var i = 0; i<idList.length; i++){
+            for (var i = 0; i < idList.length; i++) {
                 ajaxToolbar.push({name:parent.hnfnu.functionList[idList[i]]});
             }
             toolbarItems = Toolbar.confirmToolbar(toolbarItems, ajaxToolbar);

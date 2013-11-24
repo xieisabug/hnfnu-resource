@@ -29,23 +29,23 @@ function add_many_student() {
 }
 // 批量注册学生的保存按钮事件
 function add_many_save() {
-	
-	fileForm = fileWin.frame.fileForm;
-	
+
+    fileForm = fileWin.frame.fileForm;
+
     if (fileForm.valid()) {
         var row_data = Form.parseJSON(fileForm);
 
-        if(row_data.url == "" || row_data.url == null) {
-        	$.ligerDialog.error("未上传文件");
-        	return;
+        if (row_data.url == "" || row_data.url == null) {
+            $.ligerDialog.error("未上传文件");
+            return;
         }
-        
+
         // 发往服务器，返回成功后再添加到表格中
         $.ajax({
             url:'../../../system/addManyStudent.action',
             data:{
-        	url:row_data.url
-        	},
+                url:row_data.url
+            },
             type:'post',
             success:function (data) {
                 if (data.success) {
@@ -94,25 +94,44 @@ function add_student() {
 function add_save() {
     if (studentForm.valid()) {
         var row_data = Form.parseJSON(studentForm);
-
-        // 发往服务器，返回成功后再添加到表格中
+        var flat = false;
         $.ajax({
-            url:'../../../system/addStudent.action',
-            data:row_data,
+            url:'../../../system/validateStudentUsername.action',
+            data:{
+                "username":row_data.username
+            },
             type:'post',
+            async:false,
             success:function (data) {
                 if (data.success) {
-                    studentGrid.addRow(data.model);
+                    flat = true;
                     $.ligerDialog.tip({
                         title:'提示信息',
                         content:data.message
                     });
-                    studentWin.close();
-                } else {
-                    $.ligerDialog.error(data.message);
                 }
             }
         });
+
+        if (!flat) {
+            $.ajax({
+                url:'../../../system/addStudent.action',
+                data:row_data,
+                type:'post',
+                success:function (data) {
+                    if (data.success) {
+                        studentGrid.addRow(data.model);
+                        $.ligerDialog.tip({
+                            title:'提示信息',
+                            content:data.message
+                        });
+                        studentWin.close();
+                    } else {
+                        $.ligerDialog.error(data.message);
+                    }
+                }
+            });
+        }
     }
 }
 // 增加学生的取消按钮事件
@@ -122,8 +141,8 @@ function add_cancel() {
 
 //批量给学生充值资源币
 function add_balance() {
-	var datas = studentGrid.getSelecteds();
-	  //console.log(datas);
+    var datas = studentGrid.getSelecteds();
+    //console.log(datas);
     if (datas.length == 0) {
         $.ligerDialog.warn('请选择您要充值的学生们.');
         return;
@@ -151,23 +170,23 @@ function add_balance() {
 //批量充值资源币的保存按钮事件
 function add_balance_save() {
     if (balanceForm.valid()) {
-    	var studentDatas = studentGrid.getSelecteds();
-    	var studentIds = "";
-    	for(var i = 0; i < studentDatas.length;i++){
-    		if( i > 0){
-        		studentIds = studentIds + ";";	
-    		}
-    		studentIds = studentIds + studentDatas[i].id;
-    	}
-    	//console.log(studentIds);
+        var studentDatas = studentGrid.getSelecteds();
+        var studentIds = "";
+        for (var i = 0; i < studentDatas.length; i++) {
+            if (i > 0) {
+                studentIds = studentIds + ";";
+            }
+            studentIds = studentIds + studentDatas[i].id;
+        }
+        //console.log(studentIds);
         var row_data = Form.parseJSON(balanceForm);
         // 发往服务器，返回成功后再添加到表格中
-       $.ajax({
+        $.ajax({
             url:'../../../system/addStudentBalanceCount.action',
             data:{
-    	   		studentIds:studentIds,
-    	   		balanceCount:row_data.addCount
-       		},
+                studentIds:studentIds,
+                balanceCount:row_data.addCount
+            },
             type:'post',
             success:function (data) {
                 if (data.success) {
@@ -191,10 +210,10 @@ function add_balance_cancel() {
 
 // 刷新学生的函数
 function refresh_student() {
-    $.ajax( {
-        url : '../../../system/listStudent.action',
-        type : 'post',
-        success : function(data) {
+    $.ajax({
+        url:'../../../system/listStudent.action',
+        type:'post',
+        success:function (data) {
             studentGrid.loadData(data.studentList);
         }
     });
@@ -209,10 +228,10 @@ function edit_student() {
         $.ligerDialog.warn('请选择您要修改的行.');
         return;
     }
-    
+
     $.ligerDialog.confirm('该功能不支持批量修改，如果您选择了多个文件，只会修改第一个文件', function (r) {
         if (r) {
-        	Form.loadForm(studentForm, studentGrid.getSelected());
+            Form.loadForm(studentForm, studentGrid.getSelected());
             studentWin = $.ligerDialog.open({
                 width:400,
                 height:400,
@@ -233,13 +252,8 @@ function edit_student() {
             });
         }
     });
-    
-    
-    
-    
-    
-    
-    
+
+
 }
 // 修改学生的保存按钮事件
 function edit_save() {
@@ -294,7 +308,7 @@ function delete_student() {
                         });
                         //studentGrid.deleteSelectedRow();
                         refresh_student();
-                        
+
                         parameterWin.close();
                     } else {
                         $.ligerDialog.error(data.message);
@@ -310,31 +324,31 @@ function formInit(func) {
     studentForm = $('<form></form>');
     var fields = [];
     fields.push({
-        name:'id',
-        type:'hidden'
-    },
-       {
+            name:'id',
+            type:'hidden'
+        },
+        {
             name:'balance',
             type:'hidden'
-       },
-       {
-           name:'password',
-           type:'hidden'
-      },{
-        name:'username',
-        display:'用户名',
-        type:'text',
-        space:30,
-        labelWidth:100,
-        newline:true,
-        group:'必填信息',
-        groupicon:groupicon,
-        width:200,
-        validate:{
-            required:true,
-            maxlength:20
-        }
-    });
+        },
+        {
+            name:'password',
+            type:'hidden'
+        }, {
+            name:'username',
+            display:'用户名',
+            type:'text',
+            space:30,
+            labelWidth:100,
+            newline:true,
+            group:'必填信息',
+            groupicon:groupicon,
+            width:200,
+            validate:{
+                required:true,
+                maxlength:20
+            }
+        });
 
     if (func === "add") {
         fields.push({
@@ -366,30 +380,30 @@ function formInit(func) {
     } else if (func === "edit") {
     }
     fields.push({
-        name:'name',
-        display:'姓名',
-        type:'text',
-        space:30,
-        labelWidth:100,
-        newline:true,
-        width:200,
-        validate:{
-            required:true,
-            maxlength:10
-        }
-    }, {
-        name:'number',
-        display:'学号',
-        type:'text',
-        space:30,
-        labelWidth:100,
-        newline:true,
-        width:200,
-        validate:{
-            required:true,
-            maxlength:20
-        }
-    }, {
+            name:'name',
+            display:'姓名',
+            type:'text',
+            space:30,
+            labelWidth:100,
+            newline:true,
+            width:200,
+            validate:{
+                required:true,
+                maxlength:10
+            }
+        }, {
+            name:'number',
+            display:'学号',
+            type:'text',
+            space:30,
+            labelWidth:100,
+            newline:true,
+            width:200,
+            validate:{
+                required:true,
+                maxlength:20
+            }
+        }, {
             name:'major',
             display:'专业',
             type:'text',
@@ -403,112 +417,112 @@ function formInit(func) {
             }
         },
         {
-        name:'department',
-        display:'系部',
-        type:'text',
-        space:30,
-        labelWidth:100,
-        newline:true,
-        width:200,
-        validate:{
-            required:true,
-            maxlength:50
-        }
-    }, {
-        display:"入学年份",
-        name:"entranceTime",
-        type:"select",
-        width:200,
-        space:30,
-        labelWidth:100,
-        comboboxName:"entranceTime",
-        textField:"text",
-        valueField:"id",
-        newline:true,
-        options:{
-            hideOnLoseFocus:true,
-            valueFieldID:"id",
-            data:[
-                {
-                	"id":"2010",
-                    "text":"2010"
-                },
-                {
-                	"id":"2011",
-                    "text":"2011"
-                },
-                {
-                	"id":"2012",
-                    "text":"2012"
-                },
-                {
-                	"id":"2013",
-                    "text":"2013"
-                },
-                {
-                	"id":"2014",
-                    "text":"2014"
-                },
-                {
-                	"id":"2015",
-                    "text":"2015"
-                },
-                {
-                	"id":"2016",
-                    "text":"2016"
-                },
-                {
-                	"id":"2017",
-                    "text":"2017"
-                },
-                {
-                	"id":"2018",
-                    "text":"2018"
-                },
-                {
-                	"id":"2019",
-                    "text":"2019"
-                },
-                {
-                	"id":"2020",
-                    "text":"2020"
-                },
-                {
-                	"id":"2021",
-                    "text":"2021"
-                },
-                {
-                	"id":"2022",
-                    "text":"2022"
-                },
-                {
-                	"id":"2023",
-                    "text":"2023"
-                },
-                {
-                	"id":"2024",
-                    "text":"2024"
-                },
-                {
-                	"id":"2025",
-                    "text":"2025"
-                },
-                {
-                	"id":"2026",
-                    "text":"2026"
-                },
-                {
-                	"id":"2027",
-                    "text":"2027"
-                },
-                {
-                	"id":"2028",
-                    "text":"2028"
-                }
-            ]
+            name:'department',
+            display:'系部',
+            type:'text',
+            space:30,
+            labelWidth:100,
+            newline:true,
+            width:200,
+            validate:{
+                required:true,
+                maxlength:50
+            }
+        }, {
+            display:"入学年份",
+            name:"entranceTime",
+            type:"select",
+            width:200,
+            space:30,
+            labelWidth:100,
+            comboboxName:"entranceTime",
+            textField:"text",
+            valueField:"id",
+            newline:true,
+            options:{
+                hideOnLoseFocus:true,
+                valueFieldID:"id",
+                data:[
+                    {
+                        "id":"2010",
+                        "text":"2010"
+                    },
+                    {
+                        "id":"2011",
+                        "text":"2011"
+                    },
+                    {
+                        "id":"2012",
+                        "text":"2012"
+                    },
+                    {
+                        "id":"2013",
+                        "text":"2013"
+                    },
+                    {
+                        "id":"2014",
+                        "text":"2014"
+                    },
+                    {
+                        "id":"2015",
+                        "text":"2015"
+                    },
+                    {
+                        "id":"2016",
+                        "text":"2016"
+                    },
+                    {
+                        "id":"2017",
+                        "text":"2017"
+                    },
+                    {
+                        "id":"2018",
+                        "text":"2018"
+                    },
+                    {
+                        "id":"2019",
+                        "text":"2019"
+                    },
+                    {
+                        "id":"2020",
+                        "text":"2020"
+                    },
+                    {
+                        "id":"2021",
+                        "text":"2021"
+                    },
+                    {
+                        "id":"2022",
+                        "text":"2022"
+                    },
+                    {
+                        "id":"2023",
+                        "text":"2023"
+                    },
+                    {
+                        "id":"2024",
+                        "text":"2024"
+                    },
+                    {
+                        "id":"2025",
+                        "text":"2025"
+                    },
+                    {
+                        "id":"2026",
+                        "text":"2026"
+                    },
+                    {
+                        "id":"2027",
+                        "text":"2027"
+                    },
+                    {
+                        "id":"2028",
+                        "text":"2028"
+                    }
+                ]
 
-        }
-    }, {
+            }
+        }, {
             name:'telephone',
             display:'手机号码',
             type:'text',
@@ -522,14 +536,14 @@ function formInit(func) {
             }
         },
         {
-        name:'remark',
-        display:'备注',
-        type:'text',
-        space:30,
-        labelWidth:100,
-        newline:true,
-        width:200
-    });
+            name:'remark',
+            display:'备注',
+            type:'text',
+            space:30,
+            labelWidth:100,
+            newline:true,
+            width:200
+        });
 
     studentForm.ligerForm({
         inputWidth:280,
@@ -539,7 +553,7 @@ function formInit(func) {
     studentForm.validate({
         debug:true,
         onkeyup:false,
-        errorPlacement:function (error,element) {
+        errorPlacement:function (error, element) {
             error.appendTo(element.parent().parent().parent().parent());
         }
     });
@@ -550,31 +564,32 @@ function formInit(func) {
 function balanceFormInit() {
     balanceForm = $('<form></form>');
     balanceForm.ligerForm({
-		inputWidth :80 ,
-		fields : [ 
-		{
-			display : '充值资源币数量',
-			name : 'addCount',
-			type : 'text',
-			space : 50,
-			labelWidth : 100,
-			width : 100,
-			height: 50,
-			newline : true,
-			validate : {
-				required : true,
-				maxlength : 9
-			}
-		} ]
-	});
-	$.metadata.setType("attr", "validate");
-	balanceForm.validate({
-		debug : true,
-		onkeyup : false,
-		errorPlacement : function(error,element) {
+        inputWidth:80,
+        fields:[
+            {
+                display:'充值资源币数量',
+                name:'addCount',
+                type:'text',
+                space:50,
+                labelWidth:100,
+                width:100,
+                height:50,
+                newline:true,
+                validate:{
+                    required:true,
+                    maxlength:9
+                }
+            }
+        ]
+    });
+    $.metadata.setType("attr", "validate");
+    balanceForm.validate({
+        debug:true,
+        onkeyup:false,
+        errorPlacement:function (error, element) {
             error.appendTo(element.parent().parent().parent().parent());
-		}
-	});
+        }
+    });
 }
 // 初始化表格
 $(function () {
@@ -596,12 +611,14 @@ $(function () {
             click:delete_student,
             icon:'delete',
             key:'delete'
-        }, {
+        },
+        {
             text:'资源币充值',
             click:add_balance,
             icon:'modify',
             key:'modify_many'
-        }, {
+        },
+        {
             text:'通过Excel批量注册',
             click:add_many_student,
             icon:'add',
@@ -636,7 +653,8 @@ $(function () {
                         display:'账号',
                         name:'username',
                         width:180
-                    },{
+                    },
+                    {
                         display:'学生名字',
                         name:'name',
                         width:100

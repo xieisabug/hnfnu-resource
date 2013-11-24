@@ -106,6 +106,22 @@ public class UserAction extends ActionSupport implements ModelDriven<UserDto> {
 		return SUCCESS;
 	}
 
+	/**
+	 * 验证用户名是否已经存在
+	 * @return
+	 */
+	@Action(value = "validateUsername")
+	public String validateUsername() {
+		success = userService.validateUserName(user.getUsername());
+		if (success) {
+			message = "用户名已被使用！";
+		} else {
+			message = "用户名可用！";
+		}
+		return SUCCESS;
+	}
+	
+	
 	// 获取表中所有功能，用Map装，为了分页的需要加上Rows和Total
 	@Action(value = "listUser")
 	public String list() {

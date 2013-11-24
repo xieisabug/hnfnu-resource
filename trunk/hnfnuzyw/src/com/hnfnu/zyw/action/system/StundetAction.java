@@ -153,6 +153,16 @@ ModelDriven<StudentDto>{
 		return SUCCESS;
 	}
 
+	@Action(value = "validateStudentUsername")
+	public String validateStudent() {
+		success = studentService.validateStudent(student.getUsername());
+		if (success) {
+			message = "该学生用户名已被使用";
+		} else {
+			message = "还学生用户名可以使用";
+		}
+		return SUCCESS;
+	}
 	
 	/* get set */
 	public IStudentService getStudentService() {
