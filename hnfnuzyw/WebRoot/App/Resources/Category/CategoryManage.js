@@ -189,9 +189,9 @@ function sort_category() {
 
 function sort_save(){
     var objArray = sortGrid.getData();
-    var ids;
+    var ids = "";
     for(var i = 0; i < objArray.length; i++){
-        ids = objArray[i].id + ';';
+        ids += objArray[i].id + ';';
     }
     $.ajax({
         url:'../../../resources/categoryOrder.action',
