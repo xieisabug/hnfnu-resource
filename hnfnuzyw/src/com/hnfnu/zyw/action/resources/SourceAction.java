@@ -157,7 +157,7 @@ public class SourceAction extends ActionSupport implements
 	}
 
 	// 根据courceId和categoryId获取表中该用户的资源，用Map装，为了分页的需要加上Rows和Total
-	@Action(value = "sourceMoreVoList")
+	@Action(value = "sourceMoreVoListByUserId")
 	public String listByUserId() {
 		ActionContext context = ActionContext.getContext();
 		Map<String, Object> session = context.getSession();
