@@ -3,7 +3,7 @@ var sourceGrid = null;// 右侧表格
 var sourceTree = null;// 左侧树
 var sourceWin = null;// 显示的窗口
 var sourceSelectData = null;// 表格选择的数据
-
+var treeUrl = "",selectUrl = "";
 // 增加资源
 function add_source2() {
 	sourceWin = $.ligerDialog.open({
@@ -169,7 +169,7 @@ function edit_cancel() {
 // 刷新资源的函数
 function refresh_info() {
 	$.ajax({
-		url : '../../../resources/allTree.action',
+		url : treeUrl,
 		type : 'post',
 		success : function(data) {
 			sourceGrid.loadData({
@@ -212,7 +212,7 @@ function openTreeDialog() {
 				{
 					text : '确定',
 					onclick : function(item, dialog) {// 选择了资源后进行数据处理的函数
-						console.log(dialog);
+						//console.log(dialog);
 						var fn = dialog.frame.selectCourse
 								|| dialog.frame.window.selectCourse;
 						var data = fn();
@@ -453,10 +453,11 @@ $(function() {
 		text : '刷新资源',
 		click : refresh_info,
 		icon : 'refresh',
-		key : 'info'
+		key : 'refresh'
 	} ];
 
 	var menuId = window.parent.tab.getSelectedTabItemID();
+
 	$.ajax({
 		url : '../../../system/listFunctionIdList.action',
 		type : 'post',
@@ -471,60 +472,77 @@ $(function() {
 					name : parent.hnfnu.functionList[idList[i]]
 				});
 			}
+            //console.log(parent.hnfnu);
+            var super_query = false;
+            ajaxToolbar.forEach(function(data){
+                //console.log(data);
+                if(data.name == "super_query"){
+                    super_query = true;
+                }
+            })
+            if(super_query){
+                treeUrl = "../../../resources/allTree.action";
+                selectUrl = "../../../resources/sourceMoreVoList.action";
+            } else {
+                treeUrl = "../../../resources/treeByUserId.action";
+                selectUrl = "../../../resources/sourceMoreVoListByUserId.action";
+            }
 			toolbarItems = Toolbar.confirmToolbar(toolbarItems, ajaxToolbar);
+            //console.log("treeUrl : " + treeUrl + ", selectUrl : " + selectUrl);
+            $.ajax({
+                url : treeUrl,
+                type : 'post',
+                success : function(data) {
+                    sourceTree = $("#sourceTree").ligerTree({
+                        nodeWidth : 150,
+                        textFieldName : 'name',
+                        idFieldName : 'id',
+                        parentIDFieldName : 'pid',
+                        checkbox : false,
+                        data : data.allTree,
+                        onAfterAppend : function() {
+                            this.collapseAll();
+                        },
+                        onSelect : function(data) {
+                            var params;
+                            if (isCourse(data)) {
+                                params = {
+                                    courseId : data.data.id,
+                                    categoryId : 0
+                                };
+                                $.ajax({
+                                    url : selectUrl,
+                                    type : 'post',
+                                    data : params,
+                                    success : function(data) {
+                                        sourceGrid.loadData(data.sourceMoreVoList);
+                                    }
+                                });
+                            } else if (isCategory(data)) {
+                                params = {
+                                    courseId : getParentId(data),
+                                    categoryId : data.data.id
+                                };
+                                $.ajax({
+                                    url : selectUrl,
+                                    type : 'post',
+                                    data : params,
+                                    success : function(data) {
+                                        sourceGrid.loadData(data.sourceMoreVoList);
+                                    }
+                                });
+                            }
+                        }
+                    });
+                }
+            });
 		}
 	});
+    //console.log("treeUrl : " + treeUrl);
+    //console.log("selectUrl : " + selectUrl);
+
 	$("#sourceToolBar").ligerToolBar({
 		items : toolbarItems
-	});
-
-	$.ajax({
-		url : '../../../resources/allTree.action',
-		type : 'post',
-		success : function(data) {
-			sourceTree = $("#sourceTree").ligerTree({
-				nodeWidth : 150,
-				textFieldName : 'name',
-				idFieldName : 'id',
-				parentIDFieldName : 'pid',
-				checkbox : false,
-				data : data.allTree,
-				onAfterAppend : function() {
-					this.collapseAll();
-				},
-
-				onSelect : function(data) {
-					var params;
-					if (isCourse(data)) {
-						params = {
-							courseId : data.data.id,
-							categoryId : 0
-						};
-						$.ajax({
-							url : '../../../resources/sourceMoreVoList.action',
-							type : 'post',
-							data : params,
-							success : function(data) {
-								sourceGrid.loadData(data.sourceMoreVoList);
-							}
-						});
-					} else if (isCategory(data)) {
-						params = {
-							courseId : getParentId(data),
-							categoryId : data.data.id
-						};
-						$.ajax({
-							url : '../../../resources/sourceMoreVoList.action',
-							type : 'post',
-							data : params,
-							success : function(data) {
-								sourceGrid.loadData(data.sourceMoreVoList);
-							}
-						});
-					}
-				}
-			});
-		}
 	});
 
 	sourceGrid = $("#sourceGrid").ligerGrid({
