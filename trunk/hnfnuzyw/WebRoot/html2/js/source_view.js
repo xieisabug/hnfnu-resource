@@ -229,12 +229,14 @@ function sourceViewTable(data){
     html += '</table>';
     html += '<div id="button">';
     html += '<a href=javascript:download('+id+',"'+url+'")>下载</a>';
-    html += '<a href="javascript:onlineView('+id+')">预览</a>';
+    if(data.mediaFormat == "mp4") {
+    	html += '<a href=javascript:onlineView("'+url.substr(url.indexOf("uploads"))+'")>预览</a>';
+    }
     html += '</div>';
     $("#source").html(html);
 }
 function onlineView(data){
-    window.open("onlineView.jsp?id="+data, '', 'height=650,width=1024,top=50,left=0,toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
+    window.open("online_view_test.html?id="+data, '', 'height=650,width=1024,top=50,left=0,toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
 
 }
 // 提取URL中的参数
