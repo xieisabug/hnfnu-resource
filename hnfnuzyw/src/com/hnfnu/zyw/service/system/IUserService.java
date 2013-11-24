@@ -21,4 +21,10 @@ public interface IUserService {
 	public Map<String, Object> list();
 	
 	public boolean updatePwd(int id,String newPassword);
+	/**
+	 * 验证用户名是否已经存在
+	 * @param username
+	 * @return
+	 */
+	public boolean validateUserName(String username);
 }

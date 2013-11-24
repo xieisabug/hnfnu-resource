@@ -59,9 +59,9 @@ IStudentDao{
 	 */
 	public boolean addStudnets( ArrayList<StudentDto> students) {
 		Session session = this.getSession();
-		if(students.size() == 0){
+		/*if(students.size() == 0){
 			return false;
-		}
+		}*/
 		Transaction t = null;
 		try {
 			t = session.beginTransaction();

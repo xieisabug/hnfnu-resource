@@ -19,9 +19,8 @@ import org.springframework.stereotype.Service;
 import com.hnfnu.zyw.dao.system.IStudentDao;
 import com.hnfnu.zyw.dto.system.StudentDto;
 
-
 @Service("studentService")
-public class StudentServiceImpl implements IStudentService{
+public class StudentServiceImpl implements IStudentService {
 
 	@Autowired
 	@Qualifier("studentDao")
@@ -29,6 +28,7 @@ public class StudentServiceImpl implements IStudentService{
 
 	/**
 	 * 增加一个学生
+	 * 
 	 * @param 一个学生对象
 	 * @return 成功返回true，失败返回false
 	 */
@@ -44,6 +44,7 @@ public class StudentServiceImpl implements IStudentService{
 
 	/**
 	 * 删除一个学生
+	 * 
 	 * @param 要删除的学生的id
 	 * @return 成功返回true，失败返回false
 	 */
@@ -59,6 +60,7 @@ public class StudentServiceImpl implements IStudentService{
 
 	/**
 	 * 更新一个学生
+	 * 
 	 * @param 已经更新的学生的对象
 	 * @return 成功返回true，失败返回false
 	 */
@@ -74,6 +76,7 @@ public class StudentServiceImpl implements IStudentService{
 
 	/**
 	 * 读取一个学生
+	 * 
 	 * @param 读取的学生的id
 	 * @return 返回读取的学生对象
 	 */
@@ -88,6 +91,7 @@ public class StudentServiceImpl implements IStudentService{
 
 	/**
 	 * 获取所有学生
+	 * 
 	 * @return 获取到的学生集合
 	 */
 	public List<StudentDto> list() {
@@ -103,13 +107,14 @@ public class StudentServiceImpl implements IStudentService{
 
 	/**
 	 * 列出所有的学生
+	 * 
 	 * @return 保存了所有学生的Map
 	 */
 	public Map<String, Object> listStu() {
 		String hql = "from StudentDto";
 		Map<String, Object> studentList = new HashMap<String, Object>();
 		List<StudentDto> l = null;
-		
+
 		try {
 			l = studentDao.list(hql);
 		} catch (Exception e) {
@@ -132,21 +137,22 @@ public class StudentServiceImpl implements IStudentService{
 		File file = null;
 		try {
 			// WorkbookFactory可以自动根据文档的类型打开一个excel
-			 file= new File(url);
+			file = new File(url);
 			Workbook wb = WorkbookFactory.create(file);
 			// 获取excel中的某一个数据表
 			Sheet sheet = wb.getSheetAt(0);
 			// 获取数据表中的某一行
 			Row row = null;
 			Row titleRow = sheet.getRow(0);
-			for (int i = 1; i < sheet.getLastRowNum(); i++) {
+			System.out.println("sheet.getLastRowNum():"+sheet.getLastRowNum());
+			for (int i = 1; i <= sheet.getLastRowNum(); i++) {
 				row = sheet.getRow(i);
 				// 获取一行多少列
 				StudentDto student = new StudentDto();
 				for (int j = row.getFirstCellNum(); j < row.getLastCellNum(); j++) {
 					String title = getCellValue(titleRow.getCell(j));
 					String value = getCellValue(row.getCell(j));
-					
+
 					if (title.equals("姓名")) {
 						student.setName(value);
 					} else if (title.equals("学号")) {
@@ -173,23 +179,23 @@ public class StudentServiceImpl implements IStudentService{
 				student.setBalance(100);
 				Date dt = new Date();
 				student.setCreateDate(dt);
-				students.add(student);
+				if(this.validateStudent(student.getUsername()) == false){
+					students.add(student);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
-		}finally{
+		} finally {
 			file.delete();
 		}
-		
-		//System.out.println(url);
-		//FileUtils.deleteOneFile(url);
-		
-		
+
+		// System.out.println(url);
+		// FileUtils.deleteOneFile(url);
+
 		return studentDao.addStudnets(students);
 	}
-	
-	
+
 	private String getCellValue(Cell c) {
 		String o = null;
 		switch (c.getCellType()) {
@@ -204,7 +210,7 @@ public class StudentServiceImpl implements IStudentService{
 			break;
 		case Cell.CELL_TYPE_NUMERIC:
 			c.setCellType(Cell.CELL_TYPE_STRING);
-			//o = String.valueOf(c.getNumericCellValue());
+			// o = String.valueOf(c.getNumericCellValue());
 			o = c.getStringCellValue();
 			break;
 		case Cell.CELL_TYPE_STRING:
@@ -217,7 +223,18 @@ public class StudentServiceImpl implements IStudentService{
 		return o;
 	}
 
-	public StudentDto getStudent(String sql) {
-		return studentDao.getStudent(sql);
+	public boolean validateStudent(String username) {
+		String hql = "from StudentDto where username='" + username + "'";
+		StudentDto s = studentDao.getStudent(hql);
+		if (s == null) {
+			return false;
+		}else{
+			return true;
+		}
 	}
+
+	/*
+	 * public StudentDto getStudent(String sql) { return
+	 * studentDao.getStudent(sql); }
+	 */
 }

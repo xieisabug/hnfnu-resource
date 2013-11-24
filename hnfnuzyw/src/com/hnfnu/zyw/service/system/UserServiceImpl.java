@@ -76,19 +76,41 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	public boolean updatePwd(int id, String newPassword) {
-//		UserDto u = this.load(id);
-//		if (u != null) {
-//			u.setPassword(newPassword);
-//			return this.update(u);
-//		}
+		// UserDto u = this.load(id);
+		// if (u != null) {
+		// u.setPassword(newPassword);
+		// return this.update(u);
+		// }
 		try {
 			userDao.updatePwd(id, newPassword);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		}
-		
+
 		return true;
-		
+
+	}
+	/**
+	 * 验证用户名是否已经存在
+	 * @param username
+	 * @return
+	 */
+	public boolean validateUserName(String username) {
+		String hql = "from UserDto where username='" + username + "'";
+		UserDto u = null;
+		try {
+				System.out.println("***************************"+username);
+				u = userDao.getUser(hql);
+				System.out.println(u);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		if (u == null) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 }

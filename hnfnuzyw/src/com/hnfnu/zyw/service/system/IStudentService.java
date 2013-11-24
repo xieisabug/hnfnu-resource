@@ -39,7 +39,12 @@ public interface IStudentService {
 	 */
 	public boolean addStudnets(String url);
 	
-	public StudentDto getStudent(String sql);
-	
+	//public StudentDto getStudent(String sql);
+	/**
+	 * 验证学生用户是否存在
+	 * @param username
+	 * @return
+	 */
+	public boolean validateStudent(String username);
 
 }

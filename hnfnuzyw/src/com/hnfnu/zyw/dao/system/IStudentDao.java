@@ -22,6 +22,11 @@ public interface IStudentDao  extends IBaseDao<StudentDto>{
 	 * @return
 	 */
 	public boolean addStudnets(ArrayList<StudentDto> students);
+	/**
+	 * 通过任何一个字段获取一个学生信息
+	 * @param hql
+	 * @return
+	 */
 	
 	public StudentDto getStudent(String hql);
 	
