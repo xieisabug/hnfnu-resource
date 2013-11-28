@@ -1,10 +1,12 @@
-
+<%@ page import="com.hnfnu.zyw.dto.resources.SourceDto" %>
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
+	SourceDto s = (SourceDto)request.getAttribute("source");
+	System.out.println(s);
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -20,17 +22,51 @@
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 <meta http-equiv="description" content="This is my page">
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<script type="text/javascript" src="js/jwplayer.js"></script>
+
+
 </head>
 
 <body>
 	<div id="myElement">Loading the player...</div>
-
-	<script type="text/javascript">
-		jwplayer("myElement").setup({
-			flashplayer : "player.swf",
-			file : "../uploads/test.mp4"
-		});
-	</script>
 </body>
+<% 
+	if(s != null) {
+		if(s.getMediaFormat().equals("mp4") || s.getMediaFormat().equals("flv")) {
+%>
+<script type="text/javascript" src="js/jwplayer.js"></script>
+<script type="text/javascript">
+	jwplayer("myElement").setup({
+		flashplayer : "player.swf",
+		file: '../<%=s.getUrl().substring(s.getUrl().indexOf("uploads")) %>'
+	});
+</script>
+<% 
+		} else if(s.getMediaFormat().equals("wmv")) {
+%>
+<script type="text/javascript" src="js/silverlight.js"></script>
+<script type="text/javascript" src="js/wmvplayer.js"></script>
+<script type="text/javascript">
+	var elm = document.getElementById("myElement");
+	var src = 'js/wmvplayer.xaml';
+	var cfg = {
+	    file: '../<%=s.getUrl().substring(s.getUrl().indexOf("uploads")) %>',
+	    //image: 'preview.jpg',   //封面
+	    //logo: 'ruanko_logo.png',
+	    //link: 'http://www.ruanko.com/main', //logo的链接
+	    //linktarget: '_blank',   //新页面打开链接
+	    width: '500',
+	    height: '340',
+	    autostart: 'true',
+	    //start:'10',   //从第10秒开始播放
+	    backcolor: '000000',   //背景颜色
+	    frontcolor: 'FFFFFF'   //字体颜色
+	};
+	var ply = new jeroenwijering.Player(elm,src,cfg);
+</script>
+<%
+		}
+	} else {
+%>
+<h1>错误！</h1>
+<% 	} %>
 </html>
