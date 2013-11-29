@@ -1,5 +1,7 @@
 package com.hnfnu.zyw.service.website;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -41,6 +43,15 @@ public class LoginServiceImpl implements ILoginService {
 			return messege;
 		} else {
 			if (u.getPassword().equals(user.getPassword())) {
+				u.setLatestLoginDate(new Date());
+				try {
+					userDao.update(u);
+				} catch (Exception e) {
+					e.printStackTrace();
+					messege.setResult(false);
+					messege.setMessege("µÇÂ½Ê§°Ü");
+					return messege;
+				}
 				messege.setO(u);
 				messege.setResult(true);
 				messege.setMessege("µÇÂ½³É¹¦");
