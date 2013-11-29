@@ -129,6 +129,13 @@ public class LoginAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
+	@Action(value = "welcomeChart")
+	public String welcomeChart(){
+		int id = ((UserDto)ServletActionContext.getContext().getSession().get("user")).getId();
+		
+		return SUCCESS;
+	}
+	
 
 	/* get set */
 
