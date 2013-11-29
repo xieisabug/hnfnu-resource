@@ -1,5 +1,6 @@
 package com.hnfnu.zyw.service.system;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,11 @@ public class UserServiceImpl implements IUserService {
 
 	public boolean add(UserDto user) {
 		try {
+			// è€å¸ˆé»˜è®¤èµ„æºå¸ä¸º0
+			user.setBalance(0);
+			Date today = new Date();
+			user.setCreateDate(today);
+			user.setLatestLoginDate(today);
 			userDao.add(user);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -91,8 +97,10 @@ public class UserServiceImpl implements IUserService {
 		return true;
 
 	}
+
 	/**
-	 * ÑéÖ¤ÓÃ»§ÃûÊÇ·ñÒÑ¾­´æÔÚ
+	 * ï¿½ï¿½Ö¤ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * 
 	 * @param username
 	 * @return
 	 */
@@ -100,9 +108,9 @@ public class UserServiceImpl implements IUserService {
 		String hql = "from UserDto where username='" + username + "'";
 		UserDto u = null;
 		try {
-				System.out.println("***************************"+username);
-				u = userDao.getUser(hql);
-				System.out.println(u);
+			//System.out.println("***************************" + username);
+			u = userDao.getUser(hql);
+			//System.out.println(u);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;

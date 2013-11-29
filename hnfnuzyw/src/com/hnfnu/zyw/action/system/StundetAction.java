@@ -88,10 +88,6 @@ ModelDriven<StudentDto>{
 	 */
 	@Action(value = "addStudent")
 	public String add() {
-		//新建用户默认资源币为100
-		student.setBalance(100);
-		Date dt = new Date();
-		student.setCreateDate(dt);
 		success = studentService.add(student);
 		if (success) {
 			message = "添加学生成功！";

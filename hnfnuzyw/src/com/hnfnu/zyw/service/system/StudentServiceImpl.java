@@ -34,6 +34,10 @@ public class StudentServiceImpl implements IStudentService {
 	 */
 	public boolean add(StudentDto student) {
 		try {
+			//新建用户默认资源币为100
+			student.setBalance(100);
+			Date dt = new Date();
+			student.setCreateDate(dt);
 			studentDao.add(student);
 		} catch (Exception e) {
 			e.printStackTrace();
