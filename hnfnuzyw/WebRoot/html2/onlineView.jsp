@@ -6,7 +6,6 @@
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 	SourceDto s = (SourceDto)request.getAttribute("source");
-	System.out.println(s);
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -33,23 +32,23 @@
 	if(s != null) {
 		if(s.getMediaFormat().equals("mp4") || s.getMediaFormat().equals("flv")) {
 %>
-<script type="text/javascript" src="js/jwplayer.js"></script>
+<script type="text/javascript" src="html2/js/jwplayer.js"></script>
 <script type="text/javascript">
 	jwplayer("myElement").setup({
-		flashplayer : "player.swf",
-		file: '../<%=s.getUrl().substring(s.getUrl().indexOf("uploads")) %>'
+		flashplayer : "html2/player.swf",
+		file: '../uploads/<%=s.getUrl().substring(s.getUrl().indexOf("uploads")+8) %>'
 	});
 </script>
 <% 
 		} else if(s.getMediaFormat().equals("wmv")) {
 %>
-<script type="text/javascript" src="js/silverlight.js"></script>
-<script type="text/javascript" src="js/wmvplayer.js"></script>
+<script type="text/javascript" src="html2/js/silverlight.js"></script>
+<script type="text/javascript" src="html2/js/wmvplayer.js"></script>
 <script type="text/javascript">
 	var elm = document.getElementById("myElement");
-	var src = 'js/wmvplayer.xaml';
+	var src = 'html2/js/wmvplayer.xaml';
 	var cfg = {
-	    file: '../<%=s.getUrl().substring(s.getUrl().indexOf("uploads")) %>',
+	    file: '../uploads/<%=s.getUrl().substring(s.getUrl().indexOf("uploads")+8) %>',
 	    //image: 'preview.jpg',   //封面
 	    //logo: 'ruanko_logo.png',
 	    //link: 'http://www.ruanko.com/main', //logo的链接
