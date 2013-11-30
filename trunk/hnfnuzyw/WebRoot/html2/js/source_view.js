@@ -236,7 +236,7 @@ function sourceViewTable(data){
     $("#source").html(html);
 }
 function onlineView(data){
-    window.open("../online/viewSource.action?id="+data, '', 'height=650,width=1024,top=50,left=0,toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
+    window.open("../online/viewSource.action?id="+data, '', 'height=650,width=700,top=50,left=0,toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
 
 }
 // 提取URL中的参数

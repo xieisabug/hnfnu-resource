@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 
 import com.hnfnu.zyw.dto.resources.SourceDto;
 import com.hnfnu.zyw.service.resources.ISourceService;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 @Controller("onlineViewAction")
@@ -36,11 +37,10 @@ public class OnlineViewAction extends ActionSupport{
 	private ISourceService sourceService;
 	
 	@Action(value = "viewSource", results={
-			@Result(name="success", location="../html2/onlineView.jsp", 
-					type="redirect")
+			@Result(name="success", location="../../../html2/onlineView.jsp")
 			})
 	public String viewSource() {
-		System.out.println(id);
+		//System.out.println(id);
 		s = sourceService.load(id);
 		if(s!=null) {
 			success = true;
@@ -49,11 +49,12 @@ public class OnlineViewAction extends ActionSupport{
 			success = false;
 			message = "∂¡»° ß∞‹";
 		}
-		System.out.println(message);
-		System.out.println(s);
+		//System.out.println(message);
+		//System.out.println(s);
 		HttpServletRequest request = ServletActionContext.getRequest();
 		
 		request.setAttribute("source", s);
+		//ActionContext.getContext().put("aaaa", s);
 		return SUCCESS;
 	}
 	
