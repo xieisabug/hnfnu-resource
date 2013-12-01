@@ -1,5 +1,6 @@
 package com.hnfnu.zyw.action.website;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.ServletActionContext;
@@ -34,6 +35,7 @@ public class LoginAction extends ActionSupport {
 	private String password;
 	private boolean success;
 	private String message;
+	private List<Map<String, Object>> data;
 
 	@Autowired
 	@Qualifier("loginService")
@@ -99,43 +101,51 @@ public class LoginAction extends ActionSupport {
 		UserDto user = (UserDto) session.get("user");
 		StudentDto student = (StudentDto) session.get("student");
 		success = false;
-		if(user != null){
+		if (user != null) {
 			success = true;
 		}
-		if(student != null){
+		if (student != null) {
 			success = true;
 		}
-		
-		if(success){
+
+		if (success) {
 			message = "用户已经登陆";
-		}else{
+		} else {
 			message = "下载资源前请您先登陆";
 		}
 		return SUCCESS;
 	}
-	
 
 	@Action(value = "exit")
 	public String exit() {
-		Map<String, Object>   session = ServletActionContext.getContext().getSession();
+		Map<String, Object> session = ServletActionContext.getContext()
+				.getSession();
 		session.clear();
-		if(session.containsKey("user") ||session.containsKey("student")){
+		if (session.containsKey("user") || session.containsKey("student")) {
 			success = false;
-			message="推出系统失败，session清除不成功";
-		} else{
+			message = "退出系统失败，session清除不成功";
+		} else {
 			success = true;
-			message="推出系统成功";
+			message = "退出系统成功";
 		}
 		return SUCCESS;
 	}
-	
+
+	// 获取主页的图表
 	@Action(value = "welcomeChart")
-	public String welcomeChart(){
-		int id = ((UserDto)ServletActionContext.getContext().getSession().get("user")).getId();
-		
+	public String welcomeChart() {
+		int id = ((UserDto) ServletActionContext.getContext().getSession()
+				.get("user")).getId();
+		data = loginService.welcomeChart(id);
+		if (data != null) {
+			success = true;
+			message = "获取图表成功";
+		} else {
+			success = false;
+			message = "获取图表失败";
+		}
 		return SUCCESS;
 	}
-	
 
 	/* get set */
 
@@ -178,4 +188,9 @@ public class LoginAction extends ActionSupport {
 	public void setLoginType(int loginType) {
 		this.loginType = loginType;
 	}
+
+	public List<Map<String, Object>> getData() {
+		return data;
+	}
+
 }

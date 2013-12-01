@@ -28,6 +28,17 @@ body {
 	
 }
 
+#welcome {
+    height: 92%;
+    overflow-y:scroll;
+}
+
+#chart div {
+    float: left;
+    /*margin-left: 40px;*/
+    /*margin-top: 20px;*/
+}
+
 #main_menu {
     width: 100%;
 }
