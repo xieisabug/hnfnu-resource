@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.poi.poifs.storage.ListManagedBlock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -24,6 +23,8 @@ import com.hnfnu.zyw.dto.system.StudentDto;
 import com.hnfnu.zyw.dto.system.UserDto;
 import com.hnfnu.zyw.dto.system.ValidateMessege;
 import com.hnfnu.zyw.dto.website.chart.CategoryCount;
+import com.hnfnu.zyw.dto.website.chart.GradeCount;
+import com.hnfnu.zyw.dto.website.chart.SubjectCount;
 import com.hnfnu.zyw.dto.website.chart.TopUserSource;
 import com.hnfnu.zyw.dto.website.chart.UserCount;
 import com.hnfnu.zyw.utils.WebUtils;
@@ -58,7 +59,13 @@ public class LoginServiceImpl implements ILoginService {
 	@Autowired
 	@Qualifier("categoryCountDao")
 	public IChartDao categoryCountDao;
-
+	@Autowired
+	@Qualifier("gradeCountDao")
+	public IChartDao gradeCountDao;
+	@Autowired
+	@Qualifier("subjectCountDao")
+	public IChartDao subjectCountDao;
+	
 	public ValidateMessege validateUser(UserDto user) {
 		String hql = "from UserDto where username='" + user.getUsername() + "'";
 		UserDto u = null;
@@ -156,11 +163,13 @@ public class LoginServiceImpl implements ILoginService {
 					// 类别资源分布数量饼图
 					retList.add(categoryCountChart());
 				} else if (userRoleMenuVo.getMenuId() == menuNameId.get("年级管理")) {
-					// TODO 年级资源分布数量饼图
+					// 年级资源分布数量饼图
+					retList.add(gradeCountChart());
 				} else if (userRoleMenuVo.getMenuId() == menuNameId.get("学科管理")) {
-					// TODO 学科资源分布数量饼图
+					// 学科资源分布数量饼图
+					retList.add(subjectCountChart());
 				} else if (userRoleMenuVo.getMenuId() == menuNameId.get("专题管理")) {
-					// TODO 专题访问前5的2D柱形图
+					// TODO 专题访问前8的2D柱形图
 				}
 			}
 
@@ -304,6 +313,15 @@ public class LoginServiceImpl implements ILoginService {
 				}
 			}
 		}
+		if(sources.size()==0) {
+			Map<String, Object> m = new HashMap<String, Object>();
+			m.put("name", "未上传任何资源");
+			m.put("value", 0);
+			m.put("color", "#ffffff");
+			data.add(m);
+			max = 0;
+			min = 0;
+		}
 		int space = (max - min) / 10 == 0 ? 1 : (max - min) / 10;// 计算y轴显示数字的间隔
 		ret.put("start_scale", min - 2 * space > 0 ? min - 2 * space : 0);// 计算最低的数字
 		ret.put("end_scale", max + 2 * space);// 计算最高的数字
@@ -337,6 +355,66 @@ public class LoginServiceImpl implements ILoginService {
 			Map<String, Object> m = new HashMap<String, Object>();
 			m.put("name", cc.getName());
 			m.put("value", (double)cc.getNum()/sum);
+			m.put("color", WebUtils.getRandomHexColor());
+			data.add(m);
+		}
+		ret.put("data", data);
+		return ret;
+	}
+	
+	/** 图表算法 **/
+	// welcomeChart方法生成图表算法之一，用于生成年级资源总数统计饼图
+	private Map<String, Object> gradeCountChart(){
+		Map<String, Object> ret = new HashMap<String, Object>();
+		ret.put("type", "Pie2D");
+		ret.put("title", "年级资源统计");
+		
+		List<GradeCount> gradeCounts = null;
+		try {
+			gradeCounts = gradeCountDao.list("from GradeCount");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		long sum = 0;//统计总数据个数，用于计算百分比
+		for(GradeCount gc : gradeCounts) {
+			sum += gc.getNum();
+		}
+		List<Map<String, Object>> data = new ArrayList<Map<String,Object>>();
+		for(GradeCount gc : gradeCounts) {
+			Map<String, Object> m = new HashMap<String, Object>();
+			m.put("name", gc.getName());
+			m.put("value", (double)gc.getNum()/sum);
+			m.put("color", WebUtils.getRandomHexColor());
+			data.add(m);
+		}
+		ret.put("data", data);
+		return ret;
+	}
+	
+	/** 图表算法 **/
+	// welcomeChart方法生成图表算法之一，用于生成年级资源总数统计饼图
+	private Map<String, Object> subjectCountChart(){
+		Map<String, Object> ret = new HashMap<String, Object>();
+		ret.put("type", "Pie2D");
+		ret.put("title", "学科资源统计");
+		
+		List<SubjectCount> subjectCounts = null;
+		try {
+			subjectCounts = subjectCountDao.list("from SubjectCount");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		long sum = 0;//统计总数据个数，用于计算百分比
+		for(SubjectCount sc : subjectCounts) {
+			sum += sc.getNum();
+		}
+		List<Map<String, Object>> data = new ArrayList<Map<String,Object>>();
+		for(SubjectCount sc : subjectCounts) {
+			Map<String, Object> m = new HashMap<String, Object>();
+			m.put("name", sc.getName());
+			m.put("value", (double)sc.getNum()/sum);
 			m.put("color", WebUtils.getRandomHexColor());
 			data.add(m);
 		}
