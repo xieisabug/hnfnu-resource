@@ -29,7 +29,7 @@ import com.opensymphony.xwork2.ModelDriven;
 @Namespace("/system")
 public class MenuAction extends AopNoSuchMethodErrorSolveBaseAction implements ModelDriven<MenuDto> {
 
-	private MenuDto menu = new MenuDto();// »ñÈ¡Ò³ÃæÌá½»²ÎÊý
+	private MenuDto menu = new MenuDto();// 获取页面提交参数
 	private boolean success;
 	private Map<String, Object> menuList;
 	
@@ -44,32 +44,32 @@ public class MenuAction extends AopNoSuchMethodErrorSolveBaseAction implements M
 	@Qualifier("functionService")
 	private IFunctionService functionService;
 
-	// Ìí¼Ó²Ëµ¥
+	// 添加菜单
 	@Action(value = "addMenu")
 	public String add() {
 		success = menuService.add(menu);
 		if(success){
-			message = "²Ëµ¥Ìí¼Ó³É¹¦";
+			message = "菜单添加成功";
 		}else{
-			message = "²Ëµ¥Ìí¼ÓÊ§°Ü";
+			message = "菜单添加失败";
 		}
 		return SUCCESS;
 	}
 
-	// ÐÞ¸Ä²Ëµ¥
+	// 修改菜单
 	@Action(value = "updateMenu")
 	public String update() {
 		success = menuService.update(menu);
 		if(success){
-			message = "²Ëµ¥ÐÞ¸Ä³É¹¦";
+			message = "菜单修改成功";
 		}else{
-			message = "²Ëµ¥ÐÞ¸ÄÊ§°Ü";
+			message = "菜单修改失败";
 		}
 		return SUCCESS;
 	}
 
 	/**
-	 * ¸ù¾Ý²Ëµ¥ID²éÑ¯Ò»¸ö²Ëµ¥
+	 * 根据菜单ID查询一个菜单
 	 * 
 	 * @return
 	 */
@@ -77,15 +77,15 @@ public class MenuAction extends AopNoSuchMethodErrorSolveBaseAction implements M
 	public String load() {
 		menu = menuService.load(menu.getId());
 		if(menu != null){
-			message = "²Ëµ¥²éÑ¯³É¹¦";
+			message = "菜单查询成功";
 		}else{
-			message = "²Ëµ¥²éÑ¯Ê§°Ü";
+			message = "菜单查询失败";
 		}
 		return SUCCESS;
 	}
 
 	/**
-	 * ¸ù¾Ý²Ëµ¥idÉ¾³ýÒ»¸ö²Ëµ¥
+	 * 根据菜单id删除一个菜单
 	 * 
 	 * @return
 	 */
@@ -94,9 +94,9 @@ public class MenuAction extends AopNoSuchMethodErrorSolveBaseAction implements M
 	public String delete() {
 		success = menuService.delete(menu.getId());
 		if(success){
-			message = "²Ëµ¥É¾³ý³É¹¦";
+			message = "菜单删除成功";
 		}else{
-			message = "²Ëµ¥É¾³ýÊ§°Ü";
+			message = "菜单删除失败";
 		}
 		return SUCCESS;
 	}
@@ -111,7 +111,7 @@ public class MenuAction extends AopNoSuchMethodErrorSolveBaseAction implements M
 		return SUCCESS;
 	}
 	
-	// »ñÈ¡±íÖÐËùÓÐ¹¦ÄÜºÍËùÓÐÒ»¼¶²Ëµ¥£¬ÊÇÓÃList×°µÄ
+	// 获取表中所有功能和所有一级菜单，是用List装的
 		@Action(value = "listFunAndMenu")
 		public String listFunAndMenu() {
 			functionList = functionService.list();

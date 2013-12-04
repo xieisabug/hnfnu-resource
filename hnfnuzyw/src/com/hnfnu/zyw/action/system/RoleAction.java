@@ -31,14 +31,14 @@ public class RoleAction extends AopNoSuchMethodErrorSolveBaseAction implements M
 	@Qualifier("roleService")
 	private IRoleService roleService;
 	
-	private RoleDto role = new RoleDto();//»ñÈ¡Ò³ÃæÌá½»²ÎÊý
+	private RoleDto role = new RoleDto();//获取页面提交参数
 	private boolean success;
 	private String message;
 	private Map<String,Object> roleList;
 
 	@Action(value = "addRole")
 	public String add(){
-		// »ñÈ¡µ±Ç°ÓÃ»§
+		// 获取当前用户
 		ActionContext context = ActionContext.getContext();
 		Map<String, Object> session = context.getSession();
 		UserDto user = (UserDto) session.get("user");
@@ -46,9 +46,9 @@ public class RoleAction extends AopNoSuchMethodErrorSolveBaseAction implements M
 		role.setCreateUserName(user.getName());
 		success = roleService.add(role);
 		if(success) {
-			message = "Ìí¼Ó½ÇÉ«³É¹¦£¡";
+			message = "添加角色成功！";
 		} else {
-			message = "Ìí¼Ó½ÇÉ«Ê§°Ü£¡";
+			message = "添加角色失败！";
 		}
 		return SUCCESS;
 	}
@@ -57,9 +57,9 @@ public class RoleAction extends AopNoSuchMethodErrorSolveBaseAction implements M
 	public String update(){
 		success = roleService.update(role);
 		if(success) {
-			message = "ÐÞ¸Ä½ÇÉ«³É¹¦£¡";
+			message = "修改角色成功！";
 		} else {
-			message = "ÐÞ¸Ä½ÇÉ«Ê§°Ü£¡";
+			message = "修改角色失败！";
 		}
 		return SUCCESS;
 	}
@@ -74,9 +74,9 @@ public class RoleAction extends AopNoSuchMethodErrorSolveBaseAction implements M
 	public String delete(){
 		success = roleService.delete(role);
 		if(success) {
-			message = "É¾³ý½ÇÉ«³É¹¦£¡";
+			message = "删除角色成功！";
 		} else {
-			message = "É¾³ý½ÇÉ«Ê§°Ü£¡";
+			message = "删除角色失败！";
 		}
 		return SUCCESS;
 	}

@@ -21,19 +21,19 @@ public class SourceUploadAction extends ActionSupport implements
 
 	private HttpServletRequest request;
 
-	private List<File> fileName;// ÕâÀïµÄ"fileName"Ò»¶¨ÒªÓë±íµ¥ÖÐµÄÎÄ¼þÓòÃûÏàÍ¬
+	private List<File> fileName;// 这里的"fileName"一定要与表单中的文件域名相同
 
-	private List<String> fileNameContentType;// ¸ñÊ½Í¬ÉÏ"fileName"+ContentType
+	private List<String> fileNameContentType;// 格式同上"fileName"+ContentType
 
-	private List<String> fileNameFileName;// ¸ñÊ½Í¬ÉÏ"fileName"+FileName
+	private List<String> fileNameFileName;// 格式同上"fileName"+FileName
 
-	private String savePath;// ÎÄ¼þÉÏ´«ºó±£´æµÄÂ·¾¶
+	private String savePath;// 文件上传后保存的路径
 
 	/**
 	 * @return
 	 * @author lijf
-	 * @description ÉÏ´«ÎÄ¼þ
-	 * @update 2013-1-26 ÏÂÎç02:15:26
+	 * @description 上传文件
+	 * @update 2013-1-26 下午02:15:26
 	 */
 	public void upload() throws Exception {// intentionPicture
 
@@ -41,7 +41,7 @@ public class SourceUploadAction extends ActionSupport implements
 
 		File dir = new File(getSavePath());
 
-		String savePath = getSavePath();// ±£´æÉÏ´«ÎÄ¼þµÄµØÖ·
+		String savePath = getSavePath();// 保存上传文件的地址
 		//System.out.println("savePath"+savePath);
 		
 
@@ -54,10 +54,10 @@ public class SourceUploadAction extends ActionSupport implements
 		List<File> files = getFileName();
 
 		for (int i = 0; i < files.size(); i++) {
-			//ÅÐ¶ÏÎÄ¼þÃûÊÇ·ñÖØ¸´£¬Èç¹ûÖØ¸´¾Í¼ÓÉÏ£¨Êý×Ö£©
-			SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");//ÉèÖÃÈÕÆÚ¸ñÊ½
+			//判断文件名是否重复，如果重复就加上（数字）
+			SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");//设置日期格式
 			String fn = df.format(new Date()) + Math.round(Math.random() * 10);
-			//¼ÓÉÏÎÄ¼þºó×ºÃû
+			//加上文件后缀名
 			fn = fn+getFileNameFileName().get(i);
 			FileOutputStream fos = new FileOutputStream(getSavePath() + "\\"
 					+ fn);
@@ -81,7 +81,7 @@ public class SourceUploadAction extends ActionSupport implements
 
 		}
 
-		// ÉèÖÃÏìÓ¦ÄÚÈÝµÄ×Ö·û´®±àÂë
+		// 设置响应内容的字符串编码
 
 		ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
 
@@ -93,7 +93,7 @@ public class SourceUploadAction extends ActionSupport implements
 	}
 
 	/*
-	 * (non-Javadoc)ÏÂÔØÎÄ¼þ
+	 * (non-Javadoc)下载文件
 	 * 
 	 * @see com.opensymphony.xwork2.ActionSupport#execute()
 	 */

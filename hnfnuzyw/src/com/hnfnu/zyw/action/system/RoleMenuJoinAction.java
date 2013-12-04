@@ -31,7 +31,7 @@ public class RoleMenuJoinAction extends AopNoSuchMethodErrorSolveBaseAction impl
 	@Qualifier("roleMenuJoinService")
 	private IRoleMenuJoinService roleMenuJoinService;
 
-	private RoleMenuJoinDto roleMenuJoin = new RoleMenuJoinDto();// »ñÈ¡Ò³ÃæÌá½»²ÎÊý
+	private RoleMenuJoinDto roleMenuJoin = new RoleMenuJoinDto();// 获取页面提交参数
 	private boolean success;
 	private String message;
 	List<Object> joinTree;
@@ -52,9 +52,9 @@ public class RoleMenuJoinAction extends AopNoSuchMethodErrorSolveBaseAction impl
 	public String addRoleMenuJoins() {
 		success= roleMenuJoinService.addRoleMenuJoins(joinIds);
 		if(success){
-			message = "½ÇÉ«¹Ò½Ó²Ëµ¥³É¹¦";
+			message = "角色挂接菜单成功";
 		}else{
-			message = "½ÇÉ«¹Ò½Ó²Ëµ¥Ê§°Ü";
+			message = "角色挂接菜单失败";
 		}
 		return SUCCESS;
 	}

@@ -24,11 +24,11 @@ import com.opensymphony.xwork2.ModelDriven;
 @Namespace("/system")
 public class UserRoleJoinAction extends AopNoSuchMethodErrorSolveBaseAction implements
 		ModelDriven<UserRoleJoinDto> {
-	private UserRoleJoinDto userRoleJoin = new UserRoleJoinDto();// »ñÈ¡Ò³ÃæÌá½»²ÎÊý
+	private UserRoleJoinDto userRoleJoin = new UserRoleJoinDto();// 获取页面提交参数
 	private boolean success;
 	private String message;
 	private Map<String, Object> userRoleJoinList;
-	//ÓÃ»§¹Ò½Ó½ÇÉ«£¬ÓÃ£»ºÃ¸ô¿ª¡£
+	//用户挂接角色，用；好隔开。
 	private String seletedRoleIds;
 
 	@Autowired
@@ -37,32 +37,32 @@ public class UserRoleJoinAction extends AopNoSuchMethodErrorSolveBaseAction impl
 
 	// private String bir;
 
-	// Ìí¼Ó
+	// 添加
 	@Action(value = "addUserRoleJoin")
 	public String add() {
 		success = userRoleJoinService.add(userRoleJoin);
 		if (success) {
-			message = "ÓÃ»§¹Ò½Ó½ÇÉ«³É¹¦£¡";
+			message = "用户挂接角色成功！";
 		} else {
-			message = "ÓÃ»§¹Ò½Ó½ÇÉ«Ê§°Ü£¡";
+			message = "用户挂接角色失败！";
 		}
 		return SUCCESS;
 	}
 
-	// ÐÞ¸Ä
+	// 修改
 	@Action(value = "updateUserRoleJoin")
 	public String update() {
 		success = userRoleJoinService.update(userRoleJoin);
 		if (success) {
-			message = "ÓÃ»§ÐÞ¸Ä½ÇÉ«³É¹¦£¡";
+			message = "用户修改角色成功！";
 		} else {
-			message = "ÓÃ»§ÐÞ¸Ä½ÇÉ«Ê§°Ü£¡";
+			message = "用户修改角色失败！";
 		}
 		return SUCCESS;
 	}
 
 	/**
-	 * ¸ù¾Ý²Ëµ¥ID²éÑ¯Ò»¸ö¶ÔÏó
+	 * 根据菜单ID查询一个对象
 	 * 
 	 * @return
 	 */
@@ -73,7 +73,7 @@ public class UserRoleJoinAction extends AopNoSuchMethodErrorSolveBaseAction impl
 	}
 
 	/**
-	 * ¸ù¾Ý²Ëµ¥idÉ¾³ýÒ»¸ö²Ëµ¥
+	 * 根据菜单id删除一个菜单
 	 * 
 	 * @return
 	 */
@@ -82,9 +82,9 @@ public class UserRoleJoinAction extends AopNoSuchMethodErrorSolveBaseAction impl
 	public String delete() {
 		success = userRoleJoinService.delete(userRoleJoin.getId());
 		if (success) {
-			message = "ÓÃ»§ÒÆ³ý½ÇÉ«³É¹¦£¡";
+			message = "用户移除角色成功！";
 		} else {
-			message = "ÓÃ»§ÒÆ³ý½ÇÉ«Ê§°Ü£¡";
+			message = "用户移除角色失败！";
 		}
 		return SUCCESS;
 	}
@@ -93,9 +93,9 @@ public class UserRoleJoinAction extends AopNoSuchMethodErrorSolveBaseAction impl
 	public String addUserRoleJoins(){
 		success = userRoleJoinService.addUserRoleJoins(seletedRoleIds);
 		if (success) {
-			message = "ÓÃ»§Ìí¼Ó½ÇÉ«³É¹¦£¡";
+			message = "用户添加角色成功！";
 		} else {
-			message = "ÓÃ»§Ìí¼Ó½ÇÉ«Ê§°Ü£¡";
+			message = "用户添加角色失败！";
 		}
 		return SUCCESS;
 	}

@@ -29,43 +29,43 @@ public class ParameterAction extends AopNoSuchMethodErrorSolveBaseAction impleme
 	@Qualifier("parameterService")
 	private IParameterService parameterService;
 	
-	private ParameterDto parameter = new ParameterDto();//»ñÈ¡Ò³ÃæÌá½»²ÎÊý
+	private ParameterDto parameter = new ParameterDto();//获取页面提交参数
 	private boolean success;
 	private String message;
 	private Map<String,Object> parameterList;
 
 	/**
-	 * Ìí¼Ó²ÎÊý
+	 * 添加参数
 	 * @return
 	 */
 	@Action(value = "addParameter")
 	public String add(){
 		success = parameterService.add(parameter);
 		if(success) {
-			message = "Ìí¼Ó²ÎÊý³É¹¦£¡";
+			message = "添加参数成功！";
 		} else {
-			message = "Ìí¼Ó²ÎÊýÊ§°Ü£¡";
+			message = "添加参数失败！";
 		}
 		return SUCCESS;
 	}
 	
 	/**
-	 * ÐÞ¸Ä²ÎÊý
+	 * 修改参数
 	 * @return
 	 */
 	@Action(value = "updateParameter")
 	public String update(){
 		success = parameterService.update(parameter);
 		if(success) {
-			message = "ÐÞ¸Ä²ÎÊý³É¹¦£¡";
+			message = "修改参数成功！";
 		} else {
-			message = "ÐÞ¸Ä²ÎÊýÊ§°Ü£¡";
+			message = "修改参数失败！";
 		}
 		return SUCCESS;
 	}
 	
 	/**
-	 * ¶ÁÈ¡²ÎÊý
+	 * 读取参数
 	 * @return
 	 */
 	@Action(value = "loadParameter")
@@ -75,22 +75,22 @@ public class ParameterAction extends AopNoSuchMethodErrorSolveBaseAction impleme
 	}
 	
 	/**
-	 * É¾³ý²ÎÊý
+	 * 删除参数
 	 * @return
 	 */
 	@Action(value = "deleteParameter")
 	public String delete(){
 		success = parameterService.delete(parameter);
 		if(success) {
-			message = "É¾³ý²ÎÊý³É¹¦£¡";
+			message = "删除参数成功！";
 		} else {
-			message = "É¾³ý²ÎÊýÊ§°Ü£¡";
+			message = "删除参数失败！";
 		}
 		return SUCCESS;
 	}
 	
 	/**
-	 * »ñÈ¡²ÎÊýÁÐ±í
+	 * 获取参数列表
 	 * @return
 	 */
 	@Action(value = "listParameter")

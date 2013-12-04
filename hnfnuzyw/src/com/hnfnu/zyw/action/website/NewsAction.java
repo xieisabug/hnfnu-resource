@@ -27,7 +27,7 @@ import com.opensymphony.xwork2.ModelDriven;
 @Namespace("/website")
 public class NewsAction extends AopNoSuchMethodErrorSolveBaseAction implements
 ModelDriven<NewsDto>{
-		private NewsDto news = new NewsDto();// »ñÈ¡Ò³ÃæÌá½»²ÎÊý
+		private NewsDto news = new NewsDto();// 获取页面提交参数
 		private boolean success;
 		private String message;
 		private Map<String, Object> newsList;
@@ -37,13 +37,13 @@ ModelDriven<NewsDto>{
 		private INewsService newsService;
 
 		/**
-		 * Ìí¼ÓÐÂÎÅ
+		 * 添加新闻
 		 * @return
 		 */
 		@Action(value = "addNews")
 		public String add() {
 			Date dt = new Date();
-			// »ñÈ¡µ±Ç°ÓÃ»§
+			// 获取当前用户
 			ActionContext context = ActionContext.getContext();
 			Map<String, Object> session = context.getSession();
 			UserDto user = (UserDto) session.get("user");
@@ -52,15 +52,15 @@ ModelDriven<NewsDto>{
 			success = newsService.add(news);
 			newsList = newsService.listNews();
 			if (success) {
-				message = "Ìí¼ÓÐÂÎÅ³É¹¦£¬Ë¢ÐÂÖ®ºó¿É²é¿´£¡";
+				message = "添加新闻成功，刷新之后可查看！";
 			} else {
-				message = "Ìí¼ÓÐÂÎÅÊ§°Ü£¡";
+				message = "添加新闻失败！";
 			}
 			return SUCCESS;
 		}
 
 		/**
-		 * ÐÞ¸ÄÐÂÎÅ
+		 * 修改新闻
 		 * @return
 		 */
 		@Action(value = "updateNews")
@@ -69,15 +69,15 @@ ModelDriven<NewsDto>{
 			success = newsService.update(news);
 			newsList = newsService.listNews();
 			if (success) {
-				message = "ÐÞ¸ÄÐÂÎÅ³É¹¦£¬Ë¢ÐÂÖ®ºó¿É²é¿´£¡";
+				message = "修改新闻成功，刷新之后可查看！";
 			} else {
-				message = "ÐÞ¸ÄÐÂÎÅÊ§°Ü£¡";
+				message = "修改新闻失败！";
 			}
 			return SUCCESS;
 		}
 
 		/**
-		 * ¸ù¾ÝÐÂÎÅID²éÑ¯Ò»¸öÐÂÎÅ
+		 * 根据新闻ID查询一个新闻
 		 * @return
 		 */
 		@Action(value = "loadNews")
@@ -85,16 +85,16 @@ ModelDriven<NewsDto>{
 			news = newsService.load(news);
 			if (news != null) {
 				success = true;
-				message = "¼ÓÔØÐÂÎÅ³É¹¦£¡";
+				message = "加载新闻成功！";
 			} else {
 				success = false;
-				message = "¼ÓÔØÐÂÎÅÊ§°Ü£¡";
+				message = "加载新闻失败！";
 			}
 			return SUCCESS;
 		}
 
 		/**
-		 * ¸ù¾ÝÐÂÎÅidÉ¾³ýÒ»¸öÐÂÎÅ
+		 * 根据新闻id删除一个新闻
 		 * @return
 		 */
 
@@ -102,16 +102,16 @@ ModelDriven<NewsDto>{
 		public String delete() {
 			success = newsService.delete(news);
 			if (success) {
-				message = "É¾³ýÐÂÎÅ³É¹¦£¡";
+				message = "删除新闻成功！";
 			} else {
-				message = "É¾³ýÐÂÎÅÊ§°Ü£¡";
+				message = "删除新闻失败！";
 			}
 			return SUCCESS;
 		}
 
 		/**
-		 *  »ñÈ¡±íÖÐËùÓÐÐÂÎÅ
-		 *  ÓÃMap×°£¬ÎªÁË·ÖÒ³µÄÐèÒª¼ÓÉÏRowsºÍTotal
+		 *  获取表中所有新闻
+		 *  用Map装，为了分页的需要加上Rows和Total
 		 * @return
 		 */
 		@Action(value = "listNews")

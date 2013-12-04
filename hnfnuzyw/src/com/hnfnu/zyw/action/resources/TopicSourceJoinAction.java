@@ -25,11 +25,11 @@ import com.opensymphony.xwork2.ModelDriven;
 @Namespace("/resources")
 public class TopicSourceJoinAction extends AopNoSuchMethodErrorSolveBaseAction implements
 		ModelDriven<TopicSourceJoinDto> {
-	private TopicSourceJoinDto topicSourceJoin = new TopicSourceJoinDto();// »ñÈ¡Ò³ÃæÌá½»²ÎÊý
+	private TopicSourceJoinDto topicSourceJoin = new TopicSourceJoinDto();// 获取页面提交参数
 	private boolean success;
 	private String message;
 	private Map<String, Object> topicSourceJoinList;
-	// ÓÃ»§¹Ò½Ó½ÇÉ«£¬ÓÃ£»ºÃ¸ô¿ª¡£
+	// 用户挂接角色，用；好隔开。
 	private String seletedSourceIds;
 	//private int topicId;
 	private int[] sourceIds;
@@ -39,7 +39,7 @@ public class TopicSourceJoinAction extends AopNoSuchMethodErrorSolveBaseAction i
 	private ITopicSourceJoinService topicSourceJoinService;
 
 	/**
-	 * ÅúÁ¿¸üÐÂÒ»¸ö×¨Ìâ¹Ò½ÓµÄ½ÇÉ«
+	 * 批量更新一个专题挂接的角色
 	 * 
 	 * @return
 	 */
@@ -48,15 +48,15 @@ public class TopicSourceJoinAction extends AopNoSuchMethodErrorSolveBaseAction i
 		success = topicSourceJoinService.addTopicSourceJoins(seletedSourceIds,
 				topicSourceJoin.getTopicId());
 		if (success) {
-			message = "×¨Ìâ¸üÐÂ×ÊÔ´³É¹¦£¡";
+			message = "专题更新资源成功！";
 		} else {
-			message = "×¨Ìâ¸üÐÂ×ÊÔ´Ê§°Ü£¡";
+			message = "专题更新资源失败！";
 		}
 		return SUCCESS;
 	}
 
 	/**
-	 * Í¨¹ýtopicIdµÃµ½¸ÄÖ÷ÌâÒÑ¾­¹Ò½ÓµÄ×ÊÔ´ids¡£
+	 * 通过topicId得到改主题已经挂接的资源ids。
 	 * @return
 	 */
 	@Action(value = "querySourceIdsByTopicId")

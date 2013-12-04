@@ -24,7 +24,7 @@ import com.opensymphony.xwork2.ModelDriven;
 @Namespace("/system")
 public class UserAction extends AopNoSuchMethodErrorSolveBaseAction implements ModelDriven<UserDto> {
 
-	private UserDto user = new UserDto();// »ñÈ¡Ò³ÃæÌá½»²ÎÊý
+	private UserDto user = new UserDto();// 获取页面提交参数
 	private boolean success;
 	private String message;
 	private Map<String, Object> userList;
@@ -35,45 +35,45 @@ public class UserAction extends AopNoSuchMethodErrorSolveBaseAction implements M
 
 	// private String bir;
 
-	// Ìí¼Ó
+	// 添加
 	@Action(value = "addUser")
 	public String add() {
 		success = userService.add(user);
 		if (success) {
-			message = "Ìí¼Ó¹¦ÄÜ³É¹¦£¡";
+			message = "添加功能成功！";
 		} else {
-			message = "Ìí¼Ó¹¦ÄÜÊ§°Ü£¡";
+			message = "添加功能失败！";
 		}
 		return SUCCESS;
 	}
 
-	// ÐÞ¸Ä
+	// 修改
 	@Action(value = "updateUser")
 	public String update() {
 		success = userService.update(user);
 		if (success) {
-			message = "ÐÞ¸Ä³É¹¦£¡";
+			message = "修改成功！";
 		} else {
-			message = "ÐÞ¸ÄÊ§°Ü£¡";
+			message = "修改失败！";
 		}
 		return SUCCESS;
 	}
 	/**
-	 * ÐÞ¸ÄÃÜÂë
+	 * 修改密码
 	 * @return
 	 */
 	@Action(value = "updatePwd")
 	public String updatePwd() {
 		success = userService.updatePwd(user.getId(), newPassword);
 		if (success) {
-			message = "ÐÞ¸ÄÃÜÂë³É¹¦£¡";
+			message = "修改密码成功！";
 		} else {
-			message = "ÐÞ¸ÄÃÜÂëÊ§°Ü£¡";
+			message = "修改密码失败！";
 		}
 		return SUCCESS;
 	}
 	/**
-	 * ¸ù¾Ý²Ëµ¥ID²éÑ¯Ò»¸ö¶ÔÏó
+	 * 根据菜单ID查询一个对象
 	 * 
 	 * @return
 	 */
@@ -84,7 +84,7 @@ public class UserAction extends AopNoSuchMethodErrorSolveBaseAction implements M
 	}
 
 	/**
-	 * ¸ù¾Ý²Ëµ¥idÉ¾³ýÒ»¸ö²Ëµ¥
+	 * 根据菜单id删除一个菜单
 	 * 
 	 * @return
 	 */
@@ -93,30 +93,30 @@ public class UserAction extends AopNoSuchMethodErrorSolveBaseAction implements M
 	public String delete() {
 		success = userService.delete(user.getId());
 		if (success) {
-			message = "É¾³ý³É¹¦£¡";
+			message = "删除成功！";
 		} else {
-			message = "É¾³ýÊ§°Ü£¡";
+			message = "删除失败！";
 		}
 		return SUCCESS;
 	}
 
 	/**
-	 * ÑéÖ¤ÓÃ»§ÃûÊÇ·ñÒÑ¾­´æÔÚ
+	 * 验证用户名是否已经存在
 	 * @return
 	 */
 	@Action(value = "validateUsername")
 	public String validateUsername() {
 		success = userService.validateUserName(user.getUsername());
 		if (success) {
-			message = "ÓÃ»§ÃûÒÑ±»Ê¹ÓÃ£¡";
+			message = "用户名已被使用！";
 		} else {
-			message = "ÓÃ»§Ãû¿ÉÓÃ£¡";
+			message = "用户名可用！";
 		}
 		return SUCCESS;
 	}
 	
 	
-	// »ñÈ¡±íÖÐËùÓÐ¹¦ÄÜ£¬ÓÃMap×°£¬ÎªÁË·ÖÒ³µÄÐèÒª¼ÓÉÏRowsºÍTotal
+	// 获取表中所有功能，用Map装，为了分页的需要加上Rows和Total
 	@Action(value = "listUser")
 	public String list() {
 		userList = userService.list();

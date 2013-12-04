@@ -33,8 +33,8 @@ import com.opensymphony.xwork2.ModelDriven;
 @Namespace("/resources")
 public class SourceAction extends AopNoSuchMethodErrorSolveBaseAction implements
 		ModelDriven<SourceDto> {
-	private SourceDto source = new SourceDto();// »ñÈ¡Ò³ÃæÌá½»²ÎÊý
-	private SourceVo sourceVo;// »ñÈ¡Ò³ÃæÌá½»²ÎÊý
+	private SourceDto source = new SourceDto();// 获取页面提交参数
+	private SourceVo sourceVo;// 获取页面提交参数
 	private boolean success;
 	private String message;
 	private Map<String, Object> sourceVoList;
@@ -58,15 +58,15 @@ public class SourceAction extends AopNoSuchMethodErrorSolveBaseAction implements
 	@Qualifier("categoryService")
 	private ICategoryService categoryService;
 
-	// Ìí¼Ó×ÊÔ´
+	// 添加资源
 	@Action(value = "addSource")
 	public String add() {
-		// »ñÈ¡µ±Ç°Ê±¼ä
+		// 获取当前时间
 		Date date = new Date();
 		Timestamp timeStamp = new Timestamp(date.getTime());
 		source.setCreateDate(timeStamp);
 		source.setViewTimes(0);
-		// »ñÈ¡µ±Ç°ÓÃ»§
+		// 获取当前用户
 		ActionContext context = ActionContext.getContext();
 		Map<String, Object> session = context.getSession();
 		user = (UserDto) session.get("user");
@@ -83,27 +83,27 @@ public class SourceAction extends AopNoSuchMethodErrorSolveBaseAction implements
 		source.setKeyWords(kw);
 		success = sourceService.add(source, categoryIdList);
 		if (success) {
-			message = "Ìí¼Ó×ÊÔ´³É¹¦£¡";
+			message = "添加资源成功！";
 		} else {
-			message = "Ìí¼Ó×ÊÔ´Ê§°Ü£¡";
+			message = "添加资源失败！";
 		}
 		return SUCCESS;
 	}
 
-	// ÐÞ¸Ä×ÊÔ´
+	// 修改资源
 	@Action(value = "updateSource")
 	public String update() {
 		success = sourceService.update(source, categoryIdList);
 		if (success) {
-			message = "ÐÞ¸Ä×ÊÔ´³É¹¦£¡";
+			message = "修改资源成功！";
 		} else {
-			message = "ÐÞ¸Ä×ÊÔ´Ê§°Ü£¡";
+			message = "修改资源失败！";
 		}
 		return SUCCESS;
 	}
 
 	/**
-	 * ¸ù¾Ý×ÊÔ´ID²éÑ¯Ò»¸ö×ÊÔ´,Ç°Ì¨Ã¿²éÑ¯Ò»´ÎviewTimesÔö¼ÓÒ»´Î
+	 * 根据资源ID查询一个资源,前台每查询一次viewTimes增加一次
 	 * 
 	 * 
 	 * @return
@@ -122,32 +122,32 @@ public class SourceAction extends AopNoSuchMethodErrorSolveBaseAction implements
 		return SUCCESS;
 	}
 
-	// É¾³ýÎÄ¼þµÄ·½·¨£¬Èç¹û·µ»ØµÄÊÇ1ËµÃ÷É¾³ý³É¹¦£¬-1ËµÃ÷ÎÄ¼þ²»´æÔÚ¡£0ËµÃ÷ÎÄ¼þÉ¾³ý´íÎó£¬2ËµÃ÷ÎÄ¼þÉ¾³ý³É¹¦£¬ÐÅÏ¢É¾³ý´íÎó
+	// 删除文件的方法，如果返回的是1说明删除成功，-1说明文件不存在。0说明文件删除错误，2说明文件删除成功，信息删除错误
 	@Action(value = "deleteSource")
 	public String delete() {
 
 		success = sourceService.delete(source.getUrl(), source.getId());
 		if (success) {
-			message = "×ÊÔ´É¾³ý³É¹¦£¡";
+			message = "资源删除成功！";
 		} else {
-			message = "×ÊÔ´É¾³ýÊ§°Ü";
+			message = "资源删除失败";
 		}
 		return SUCCESS;
 	}
 
-	// ³·ÏúÉÏ´«ÎÄ¼þµÄ·½·¨
+	// 撤销上传文件的方法
 	@Action(value = "deleteFile")
 	public String deleteFile() {
 		success = sourceService.deleteFile(source.getUrl());
 		if (success) {
-			message = "ÎÄ¼þ³·Ïú³É¹¦";
+			message = "文件撤销成功";
 		} else {
-			message = "ÎÄ¼þ³·ÏúÊ§°Ü";
+			message = "文件撤销失败";
 		}
 		return SUCCESS;
 	}
 
-	// ¸ù¾ÝcourceIdºÍcategoryId»ñÈ¡±íÖÐËùÓÐ×ÊÔ´£¬ÓÃMap×°£¬ÎªÁË·ÖÒ³µÄÐèÒª¼ÓÉÏRowsºÍTotal
+	// 根据courceId和categoryId获取表中所有资源，用Map装，为了分页的需要加上Rows和Total
 	@Action(value = "sourceMoreVoList")
 	public String list() {
 		sourceMoreVoList = sourceVoService.listSourceVo(source.getCourseId(),
@@ -155,7 +155,7 @@ public class SourceAction extends AopNoSuchMethodErrorSolveBaseAction implements
 		return SUCCESS;
 	}
 
-	// ¸ù¾ÝcourceIdºÍcategoryId»ñÈ¡±íÖÐ¸ÃÓÃ»§µÄ×ÊÔ´£¬ÓÃMap×°£¬ÎªÁË·ÖÒ³µÄÐèÒª¼ÓÉÏRowsºÍTotal
+	// 根据courceId和categoryId获取表中该用户的资源，用Map装，为了分页的需要加上Rows和Total
 	@Action(value = "sourceMoreVoListByUserId")
 	public String listByUserId() {
 		ActionContext context = ActionContext.getContext();
@@ -166,17 +166,17 @@ public class SourceAction extends AopNoSuchMethodErrorSolveBaseAction implements
 		return SUCCESS;
 	}
 
-	// Ò³ÃæÉÏµÄÒ»¿ÅÏÔÊ¾ËùÓÐÊý¾ÝµÄÊ÷
+	// 页面上的一颗显示所有数据的树
 	@Action(value = "allTree")
 	public String allTree() {
 		allTree = sourceVoService.allTree();
 		return SUCCESS;
 	}
 
-	// Ò³ÃæÉÏµÄÒ»¿ÅÏÔÊ¾¸ÃÓÃ»§µÄÊý¾ÝµÄÊ÷
+	// 页面上的一颗显示该用户的数据的树
 	@Action(value = "treeByUserId")
 	public String treeByUserId() {
-		// »ñÈ¡µ±Ç°ÓÃ»§
+		// 获取当前用户
 		ActionContext context = ActionContext.getContext();
 		Map<String, Object> session = context.getSession();
 		user = (UserDto) session.get("user");
@@ -190,7 +190,7 @@ public class SourceAction extends AopNoSuchMethodErrorSolveBaseAction implements
 		return SUCCESS;
 	}
 
-	// »ñÈ¡formÖÐµÄÏÂÀ­ÁÐ±íÖµ
+	// 获取form中的下拉列表值
 	@Action(value = "formSelect")
 	public String formSelect() {
 		categoryList = categoryService.list();

@@ -25,7 +25,7 @@ import com.opensymphony.xwork2.ModelDriven;
 @Namespace("/system")
 public class StundetAction extends AopNoSuchMethodErrorSolveBaseAction implements
 ModelDriven<StudentDto>{
-	private StudentDto student = new StudentDto();// »ñÈ¡Ò³ÃæÌá½»²ÎÊý
+	private StudentDto student = new StudentDto();// 获取页面提交参数
 	private boolean success;
 	private String message;
 	private Map<String, Object> studentList;
@@ -39,7 +39,7 @@ ModelDriven<StudentDto>{
 	
 
 	/**
-	 * ÅúÁ¿¸øÑ§Éú³äÖµ×ÊÔ´±Ò
+	 * 批量给学生充值资源币
 	 * @return
 	 */
 	@Action(value = "addStudentBalanceCount")
@@ -47,17 +47,17 @@ ModelDriven<StudentDto>{
 		int i = studentService.addStudnetBalance(balanceCount, studentIds);
 		if (i == 1) {
 			success = true;
-			message = "¸øÑ§ÉúÃÇ³äÖµ³É¹¦£¡";
+			message = "给学生们充值成功！";
 		} else {
 			success=false;
 			if(i==0){
-				message = "¸øÑ§ÉúÃÇ³äÖµÊ§°Ü£¡";	
+				message = "给学生们充值失败！";	
 			}
 			if(i == -1){
-				message = "¸øÑ§ÉúÃÇ³äÖµÊ§°Ü,ÒòÎªÔÚÄúÑ¡ÔñµÄÑ§Éúµ±ÖÐÓÐÑ§ÉúµÄ×ÊÔ´±ÒÉÙÓÚÄúÒª¼õÈ¥µÄ×ÊÔ´±Ò£¡";
+				message = "给学生们充值失败,因为在您选择的学生当中有学生的资源币少于您要减去的资源币！";
 			}
 			if( i == -2){
-				message = "¸øÑ§ÉúÃÇ³äÖµÊ§°Ü,ÒòÎªÃ¿Î»Ñ§ÉúµÄ×ÜÓà¶îÊý²»ÄÜ³¬¹ý1000000000£¡";
+				message = "给学生们充值失败,因为每位学生的总余额数不能超过1000000000！";
 			}
 			
 		}
@@ -65,53 +65,53 @@ ModelDriven<StudentDto>{
 	}
 
 	/**
-	 * ÅúÁ¿×¢²áÑ§Éú
+	 * 批量注册学生
 	 * @return
 	 */
 	@Action(value = "addManyStudent")
 	public String addManyStudent() {
 		success = studentService.addStudnets(url);
 		if (success) {
-			message = "¸øÑ§ÉúÃÇ×¢²á³É¹¦£¡";
+			message = "给学生们注册成功！";
 		} else {
-			message = "¸øÑ§ÉúÃÇ×¢²áÊ§°Ü£¡";
+			message = "给学生们注册失败！";
 		}
 		return SUCCESS;
 	}
 	
 	
 	/**
-	 * Ìí¼ÓÑ§Éú
+	 * 添加学生
 	 * @return
 	 */
 	@Action(value = "addStudent")
 	public String add() {
 		success = studentService.add(student);
 		if (success) {
-			message = "Ìí¼ÓÑ§Éú³É¹¦£¡";
+			message = "添加学生成功！";
 		} else {
-			message = "Ìí¼ÓÑ§ÉúÊ§°Ü£¡";
+			message = "添加学生失败！";
 		}
 		return SUCCESS;
 	}
 
 	/**
-	 * ÐÞ¸ÄÑ§Éú
+	 * 修改学生
 	 * @return
 	 */
 	@Action(value = "updateStudent")
 	public String update() {
 		success = studentService.update(student);
 		if (success) {
-			message = "ÐÞ¸ÄÑ§Éú³É¹¦£¡";
+			message = "修改学生成功！";
 		} else {
-			message = "ÐÞ¸ÄÑ§ÉúÊ§°Ü£¡";
+			message = "修改学生失败！";
 		}
 		return SUCCESS;
 	}
 
 	/**
-	 * ¸ù¾ÝÑ§ÉúID²éÑ¯Ò»¸öÑ§Éú
+	 * 根据学生ID查询一个学生
 	 * @return
 	 */
 	@Action(value = "loadStudent")
@@ -121,7 +121,7 @@ ModelDriven<StudentDto>{
 	}
 
 	/**
-	 * ¸ù¾ÝÑ§ÉúidÉ¾³ýÒ»¸öÑ§Éú
+	 * 根据学生id删除一个学生
 	 * @return
 	 */
 
@@ -129,16 +129,16 @@ ModelDriven<StudentDto>{
 	public String delete() {
 		success = studentService.delete(student);
 		if (success) {
-			message = "É¾³ýÑ§Éú³É¹¦£¡";
+			message = "删除学生成功！";
 		} else {
-			message = "É¾³ýÑ§ÉúÊ§°Ü£¡";
+			message = "删除学生失败！";
 		}
 		return SUCCESS;
 	}
 
 	/**
-	 *  »ñÈ¡±íÖÐËùÓÐÑ§Éú
-	 *  ÓÃMap×°£¬ÎªÁË·ÖÒ³µÄÐèÒª¼ÓÉÏRowsºÍTotal
+	 *  获取表中所有学生
+	 *  用Map装，为了分页的需要加上Rows和Total
 	 * @return
 	 */
 	@Action(value = "listStudent")
@@ -151,9 +151,9 @@ ModelDriven<StudentDto>{
 	public String validateStudent() {
 		success = studentService.validateStudent(student.getUsername());
 		if (success) {
-			message = "¸ÃÑ§ÉúÓÃ»§ÃûÒÑ±»Ê¹ÓÃ";
+			message = "该学生用户名已被使用";
 		} else {
-			message = "»¹Ñ§ÉúÓÃ»§Ãû¿ÉÒÔÊ¹ÓÃ";
+			message = "还学生用户名可以使用";
 		}
 		return SUCCESS;
 	}
