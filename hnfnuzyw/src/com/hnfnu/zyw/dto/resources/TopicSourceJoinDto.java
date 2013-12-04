@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
-* Í¨¹ýÊý¾Ý¿âÄÚ±íµÄ×Ö¶Î¶¯Ì¬Éú³É TopicSourceJoinDto
+* 通过数据库内表的字段动态生成 TopicSourceJoinDto
 **/
 @Entity
 @Table(name="r_topic_source_join")

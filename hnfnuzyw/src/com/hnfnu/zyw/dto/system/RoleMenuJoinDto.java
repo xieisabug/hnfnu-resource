@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
-* Í¨¹ýÊý¾Ý¿âÄÚ±íµÄ×Ö¶Î¶¯Ì¬Éú³É RoleMenuJoinDto
+* 通过数据库内表的字段动态生成 RoleMenuJoinDto
 **/
 @Entity
 @Table(name="s_role_menu_join")

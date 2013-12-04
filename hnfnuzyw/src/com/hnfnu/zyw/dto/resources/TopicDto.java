@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
-* Í¨¹ýÊý¾Ý¿âÄÚ±íµÄ×Ö¶Î¶¯Ì¬Éú³É TopicDto
+* 通过数据库内表的字段动态生成 TopicDto
 **/
 @Entity
 @Table(name="r_topic")
@@ -14,13 +14,13 @@ public class TopicDto
 {	
 	//id
 	private Integer id;
-	//×¨ÌâÃû³Æ
+	//专题名称
 	private String name;
-	//×¨Ìâ¼ò½é
+	//专题简介
 	private String description;
-	//×¨Ìâ×÷Õß
+	//专题作者
 	private String author;
-	//±¸×¢
+	//备注
 	private String remark;
 
 	public TopicDto()

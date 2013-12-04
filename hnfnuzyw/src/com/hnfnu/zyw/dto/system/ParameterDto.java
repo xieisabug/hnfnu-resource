@@ -6,20 +6,20 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
-* Í¨¹ýÊý¾Ý¿âÄÚ±íµÄ×Ö¶Î¶¯Ì¬Éú³É ParameterDto
+* 通过数据库内表的字段动态生成 ParameterDto
 **/
 @Entity
 @Table(name="s_parameter")
 public class ParameterDto 
 {	
 	private Integer id;
-	//²ÎÊýµÄÃû³Æ
+	//参数的名称
 	private String name;
-	//²ÎÊýµÄÖµ
+	//参数的值
 	private String value;
-	//²ÎÊýµÄÀàÐÍ
+	//参数的类型
 	private String type;
-	//²ÎÊý±¸×¢
+	//参数备注
 	private String remark;
 
 	public ParameterDto()

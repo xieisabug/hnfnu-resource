@@ -14,17 +14,17 @@ public class StudentDto
 	private Integer id;
 	private String username;
 	private String password;
-	//Ãû×Ö
+	//名字
 	private String name;
-	//Äê¼Í
+	//年纪
 	private String number;
-	//Ïµ²¿
+	//系部
 	private String department;
-	//×¨Òµ
+	//专业
 	private String major;
-	//ÈëÑ§Äê·Ý
+	//入学年份
 	private String entranceTime;
-	//³äÖµÓà¶î£¬Ä¬ÈÏÎª0
+	//充值余额，默认为0
 	private Integer balance;
 	private String telephone;
 	private Date createDate;

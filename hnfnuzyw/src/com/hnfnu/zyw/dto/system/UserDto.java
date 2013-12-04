@@ -8,41 +8,41 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * Í¨¹ýÊý¾Ý¿âÄÚ±íµÄ×Ö¶Î¶¯Ì¬Éú³É UserDto
+ * 通过数据库内表的字段动态生成 UserDto
  **/
 @Entity
 @Table(name = "s_user")
 public class UserDto {
 	private Integer id;
-	// ÓÃ»§Ãû
+	// 用户名
 	private String username;
-	// ÃÜÂë
+	// 密码
 	private String password;
-	// ÐÕÃû
+	// 姓名
 	private String name;
-	// Éí·ÝÖ¤
+	// 身份证
 	private String idcard;
-	// ÐÔ±ð
+	// 性别
 	private String sex;
 	// QQ
 	private String qq;
-	// µç»°
+	// 电话
 	private String telephone;
-	//ÓÊÏä
+	//邮箱
 	private String email;
-	// ÉúÈÕ
+	// 生日
 	private Date birth;
-	// ²¿ÃÅ
+	// 部门
 	private String department;
-	//×ÊÔ´±ÒÓà¶î
+	//资源币余额
 	private int balance;
-	// ´´½¨ÈÕÆÚ
+	// 创建日期
 	private Date createDate;
-	// ×îºóµÇÂ¼Ê±¼ä
+	// 最后登录时间
 	private Date latestLoginDate;
-	// ÉèÖÃ£¨ÓÃÓÚÉæ¼°ÓÃ»§¸öÈËµÄÉèÖÃ£©
+	// 设置（用于涉及用户个人的设置）
 	private String setting;
-	// ±¸×¢
+	// 备注
 	private String remark;
 
 	public UserDto() {

@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
-* Í¨¹ýÊý¾Ý¿âÄÚ±íµÄ×Ö¶Î¶¯Ì¬Éú³É GradeDto
+* 通过数据库内表的字段动态生成 GradeDto
 **/
 @Entity
 @Table(name="r_grade")
@@ -14,7 +14,7 @@ public class GradeDto
 {	
 	//id
 	private Integer id;
-	//Äê¼¶Ãû³Æ
+	//年级名称
 	private String name;
 	private String remark;
 

@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
-* Í¨¹ýÊý¾Ý¿âÄÚ±íµÄ×Ö¶Î¶¯Ì¬Éú³É MenuDto
+* 通过数据库内表的字段动态生成 MenuDto
 **/
 
 @Entity
@@ -14,16 +14,16 @@ import javax.persistence.Table;
 public class MenuDto 
 {	
 	private Integer id;
-	//¸¸²Ëµ¥µÄid£¬Èç¹ûÊÇ-1£¬Ôò±íÊ¾µ±Ç°Îª×î¸ß¼¶²Ëµ¥
+	//父菜单的id，如果是-1，则表示当前为最高级菜单
 	private Integer parentId;
 	
-	//²Ëµ¥µÄÃû×Ö
+	//菜单的名字
 	private String name;
-	//²Ëµ¥µã»÷ºóµ÷ÓÃµÄÁ´½Ó
+	//菜单点击后调用的链接
 	private String url;
-	//²Ëµ¥ËùÓµÓÐµÄ¹¦ÄÜµÄidÁÐ±í£¬ÓÃ¡®£¬¡¯·Ö¸î
+	//菜单所拥有的功能的id列表，用‘，’分割
 	private String functionIdList;
-	//²Ëµ¥µÄÍ¼±ê
+	//菜单的图标
 	private String icon;
 
 	public MenuDto()

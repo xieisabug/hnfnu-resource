@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
-* Í¨¹ýÊý¾Ý¿âÄÚ±íµÄ×Ö¶Î¶¯Ì¬Éú³É CourseDto
+* 通过数据库内表的字段动态生成 CourseDto
 **/
 @Entity
 @Table(name="r_course")
@@ -14,11 +14,11 @@ public class CourseDto
 {	
 	//id
 	private Integer id;
-	//¿Î³ÌÃû³Æ
+	//课程名称
 	private String name;
-	//¿Î³ÌËùÔÚÄê¼¶µÄid
+	//课程所在年级的id
 	private Integer gradeId;
-	//¿Î³ÌËùÔÚ¿ÆÄ¿µÄid
+	//课程所在科目的id
 	private Integer subjectId;
 	private String remark;
 

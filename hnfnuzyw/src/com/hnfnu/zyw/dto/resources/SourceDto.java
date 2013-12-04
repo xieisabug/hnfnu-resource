@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * Í¨¹ýÊý¾Ý¿âÄÚ±íµÄ×Ö¶Î¶¯Ì¬Éú³É SourceDto
+ * 通过数据库内表的字段动态生成 SourceDto
  **/
 @Entity
 @Table(name = "r_source")
@@ -17,62 +17,62 @@ public class SourceDto {
 
 	private Integer id;
 
-	// ×ÊÔ´Ãû³Æ
+	// 资源名称
 
 	private String name;
 
-	// ÊôÓÚµÄ¿Î³ÌµÄid
+	// 属于的课程的id
 
 	private Integer courseId;
 
-	// ¹Ø¼ü×ÖÁÐ±í£¬ÓÃ"£»"·Ö¸ô
+	// 关键字列表，用"；"分隔
 
 	private String keyWords;
 
-	// Ã½ÌåÀàÐÍ£¬Èç£ºÎÄ±¾£¬ppt£¬ÊÓÆµµÈ
+	// 媒体类型，如：文本，ppt，视频等
 
 	private String mediaType;
 
-	// Ã½Ìå¸ñÊ½£¬Èç£ºjpg£¬mp4µÈ
+	// 媒体格式，如：jpg，mp4等
 
 	private String mediaFormat;
 
-	// ²¥·ÅÊ±¼ä£¬Ö»ÓÐÊÓÆµÓµÓÐÕâ¸öÊôÐÔ
+	// 播放时间，只有视频拥有这个属性
 
 	private String playTime;
 
-	// ÎÄ¼þ´óÐ¡
+	// 文件大小
 
 	private String fileSize;
 
-	// ×÷Õß
+	// 作者
 
 	private String author;
 
-	// ³ö°æÉç
+	// 出版社
 
 	private String publisher;
 
-	// ÃèÊö
+	// 描述
 
 	private String description;
 
-	// ´´½¨Ê±¼ä
+	// 创建时间
 
 	private Timestamp createDate;
 
-	// ÉóºË×´Ì¬
+	// 审核状态
 
 	private String approvalStatus;
-	// ¼Û¸ñ
+	// 价格
 
 	private double price;
 
-	// ·ÃÎÊ´ÎÊý
+	// 访问次数
 
 	private Integer viewTimes;
 
-	// ÏÂÔØ»òÕßÊ¹ÓÃ´ÎÊý
+	// 下载或者使用次数
 
 	private Integer useTimes;
 
