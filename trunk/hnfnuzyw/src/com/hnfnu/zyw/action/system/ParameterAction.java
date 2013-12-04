@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.action.system;
+锘縫ackage com.hnfnu.zyw.action.system;
 
 import java.util.Map;
 
@@ -29,43 +29,43 @@ public class ParameterAction extends AopNoSuchMethodErrorSolveBaseAction impleme
 	@Qualifier("parameterService")
 	private IParameterService parameterService;
 	
-	private ParameterDto parameter = new ParameterDto();//获取页面提交参数
+	private ParameterDto parameter = new ParameterDto();//禄帽脠隆脪鲁脙忙脤谩陆禄虏脦脢媒
 	private boolean success;
 	private String message;
 	private Map<String,Object> parameterList;
 
 	/**
-	 * 添加参数
+	 * 脤铆录脫虏脦脢媒
 	 * @return
 	 */
 	@Action(value = "addParameter")
 	public String add(){
 		success = parameterService.add(parameter);
 		if(success) {
-			message = "添加参数成功！";
+			message = "脤铆录脫虏脦脢媒鲁脡鹿娄拢隆";
 		} else {
-			message = "添加参数失败！";
+			message = "脤铆录脫虏脦脢媒脢搂掳脺拢隆";
 		}
 		return SUCCESS;
 	}
 	
 	/**
-	 * 修改参数
+	 * 脨脼赂脛虏脦脢媒
 	 * @return
 	 */
 	@Action(value = "updateParameter")
 	public String update(){
 		success = parameterService.update(parameter);
 		if(success) {
-			message = "修改参数成功！";
+			message = "脨脼赂脛虏脦脢媒鲁脡鹿娄拢隆";
 		} else {
-			message = "修改参数失败！";
+			message = "脨脼赂脛虏脦脢媒脢搂掳脺拢隆";
 		}
 		return SUCCESS;
 	}
 	
 	/**
-	 * 读取参数
+	 * 露脕脠隆虏脦脢媒
 	 * @return
 	 */
 	@Action(value = "loadParameter")
@@ -75,22 +75,22 @@ public class ParameterAction extends AopNoSuchMethodErrorSolveBaseAction impleme
 	}
 	
 	/**
-	 * 删除参数
+	 * 脡戮鲁媒虏脦脢媒
 	 * @return
 	 */
 	@Action(value = "deleteParameter")
 	public String delete(){
 		success = parameterService.delete(parameter);
 		if(success) {
-			message = "删除参数成功！";
+			message = "脡戮鲁媒虏脦脢媒鲁脡鹿娄拢隆";
 		} else {
-			message = "删除参数失败！";
+			message = "脡戮鲁媒虏脦脢媒脢搂掳脺拢隆";
 		}
 		return SUCCESS;
 	}
 	
 	/**
-	 * 获取参数列表
+	 * 禄帽脠隆虏脦脢媒脕脨卤铆
 	 * @return
 	 */
 	@Action(value = "listParameter")

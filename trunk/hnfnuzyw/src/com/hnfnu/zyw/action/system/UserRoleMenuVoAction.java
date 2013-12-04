@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.action.system;
+锘縫ackage com.hnfnu.zyw.action.system;
 
 import java.util.Map;
 
@@ -27,7 +27,7 @@ import com.opensymphony.xwork2.ModelDriven;
 public class UserRoleMenuVoAction extends AopNoSuchMethodErrorSolveBaseAction implements
 ModelDriven<UserRoleMenuVo>{
 	
-	private UserRoleMenuVo userRoleMenuVo = new UserRoleMenuVo();// 获取页面提交参数
+	private UserRoleMenuVo userRoleMenuVo = new UserRoleMenuVo();// 禄帽脠隆脪鲁脙忙脤谩陆禄虏脦脢媒
 	private boolean success;
 	private String message;
 	private String functionIdList;
@@ -40,7 +40,7 @@ ModelDriven<UserRoleMenuVo>{
 	
 	@Action(value = "listFunctionIdList")
 	public String listFunctionIdList() {
-		// 获取当前用户
+		// 禄帽脠隆碌卤脟掳脫脙禄搂
 				ActionContext context = ActionContext.getContext();
 				Map<String, Object> session = context.getSession();
 				UserDto user = (UserDto) session.get("user");

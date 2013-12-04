@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.dto.system;
+锘縫ackage com.hnfnu.zyw.dto.system;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
-* 通过数据库内表的字段动态生成 MenuDto
+* 脥篓鹿媒脢媒戮脻驴芒脛脷卤铆碌脛脳脰露脦露炉脤卢脡煤鲁脡 MenuDto
 **/
 
 @Entity
@@ -14,16 +14,16 @@ import javax.persistence.Table;
 public class MenuDto 
 {	
 	private Integer id;
-	//父菜单的id，如果是-1，则表示当前为最高级菜单
+	//赂赂虏脣碌楼碌脛id拢卢脠莽鹿没脢脟-1拢卢脭貌卤铆脢戮碌卤脟掳脦陋脳卯赂脽录露虏脣碌楼
 	private Integer parentId;
 	
-	//菜单的名字
+	//虏脣碌楼碌脛脙没脳脰
 	private String name;
-	//菜单点击后调用的链接
+	//虏脣碌楼碌茫禄梅潞贸碌梅脫脙碌脛脕麓陆脫
 	private String url;
-	//菜单所拥有的功能的id列表，用‘，’分割
+	//虏脣碌楼脣霉脫碌脫脨碌脛鹿娄脛脺碌脛id脕脨卤铆拢卢脫脙隆庐拢卢隆炉路脰赂卯
 	private String functionIdList;
-	//菜单的图标
+	//虏脣碌楼碌脛脥录卤锚
 	private String icon;
 
 	public MenuDto()

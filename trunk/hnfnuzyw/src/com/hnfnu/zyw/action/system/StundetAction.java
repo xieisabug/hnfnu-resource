@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.action.system;
+锘縫ackage com.hnfnu.zyw.action.system;
 
 import java.util.Map;
 
@@ -25,7 +25,7 @@ import com.opensymphony.xwork2.ModelDriven;
 @Namespace("/system")
 public class StundetAction extends AopNoSuchMethodErrorSolveBaseAction implements
 ModelDriven<StudentDto>{
-	private StudentDto student = new StudentDto();// 获取页面提交参数
+	private StudentDto student = new StudentDto();// 禄帽脠隆脪鲁脙忙脤谩陆禄虏脦脢媒
 	private boolean success;
 	private String message;
 	private Map<String, Object> studentList;
@@ -39,7 +39,7 @@ ModelDriven<StudentDto>{
 	
 
 	/**
-	 * 批量给学生充值资源币
+	 * 脜煤脕驴赂酶脩搂脡煤鲁盲脰碌脳脢脭麓卤脪
 	 * @return
 	 */
 	@Action(value = "addStudentBalanceCount")
@@ -47,17 +47,17 @@ ModelDriven<StudentDto>{
 		int i = studentService.addStudnetBalance(balanceCount, studentIds);
 		if (i == 1) {
 			success = true;
-			message = "给学生们充值成功！";
+			message = "赂酶脩搂脡煤脙脟鲁盲脰碌鲁脡鹿娄拢隆";
 		} else {
 			success=false;
 			if(i==0){
-				message = "给学生们充值失败！";	
+				message = "赂酶脩搂脡煤脙脟鲁盲脰碌脢搂掳脺拢隆";	
 			}
 			if(i == -1){
-				message = "给学生们充值失败,因为在您选择的学生当中有学生的资源币少于您要减去的资源币！";
+				message = "赂酶脩搂脡煤脙脟鲁盲脰碌脢搂掳脺,脪貌脦陋脭脷脛煤脩隆脭帽碌脛脩搂脡煤碌卤脰脨脫脨脩搂脡煤碌脛脳脢脭麓卤脪脡脵脫脷脛煤脪陋录玫脠楼碌脛脳脢脭麓卤脪拢隆";
 			}
 			if( i == -2){
-				message = "给学生们充值失败,因为每位学生的总余额数不能超过1000000000！";
+				message = "赂酶脩搂脡煤脙脟鲁盲脰碌脢搂掳脺,脪貌脦陋脙驴脦禄脩搂脡煤碌脛脳脺脫脿露卯脢媒虏禄脛脺鲁卢鹿媒1000000000拢隆";
 			}
 			
 		}
@@ -65,53 +65,53 @@ ModelDriven<StudentDto>{
 	}
 
 	/**
-	 * 批量注册学生
+	 * 脜煤脕驴脳垄虏谩脩搂脡煤
 	 * @return
 	 */
 	@Action(value = "addManyStudent")
 	public String addManyStudent() {
 		success = studentService.addStudnets(url);
 		if (success) {
-			message = "给学生们注册成功！";
+			message = "赂酶脩搂脡煤脙脟脳垄虏谩鲁脡鹿娄拢隆";
 		} else {
-			message = "给学生们注册失败！";
+			message = "赂酶脩搂脡煤脙脟脳垄虏谩脢搂掳脺拢隆";
 		}
 		return SUCCESS;
 	}
 	
 	
 	/**
-	 * 添加学生
+	 * 脤铆录脫脩搂脡煤
 	 * @return
 	 */
 	@Action(value = "addStudent")
 	public String add() {
 		success = studentService.add(student);
 		if (success) {
-			message = "添加学生成功！";
+			message = "脤铆录脫脩搂脡煤鲁脡鹿娄拢隆";
 		} else {
-			message = "添加学生失败！";
+			message = "脤铆录脫脩搂脡煤脢搂掳脺拢隆";
 		}
 		return SUCCESS;
 	}
 
 	/**
-	 * 修改学生
+	 * 脨脼赂脛脩搂脡煤
 	 * @return
 	 */
 	@Action(value = "updateStudent")
 	public String update() {
 		success = studentService.update(student);
 		if (success) {
-			message = "修改学生成功！";
+			message = "脨脼赂脛脩搂脡煤鲁脡鹿娄拢隆";
 		} else {
-			message = "修改学生失败！";
+			message = "脨脼赂脛脩搂脡煤脢搂掳脺拢隆";
 		}
 		return SUCCESS;
 	}
 
 	/**
-	 * 根据学生ID查询一个学生
+	 * 赂霉戮脻脩搂脡煤ID虏茅脩炉脪禄赂枚脩搂脡煤
 	 * @return
 	 */
 	@Action(value = "loadStudent")
@@ -121,7 +121,7 @@ ModelDriven<StudentDto>{
 	}
 
 	/**
-	 * 根据学生id删除一个学生
+	 * 赂霉戮脻脩搂脡煤id脡戮鲁媒脪禄赂枚脩搂脡煤
 	 * @return
 	 */
 
@@ -129,16 +129,16 @@ ModelDriven<StudentDto>{
 	public String delete() {
 		success = studentService.delete(student);
 		if (success) {
-			message = "删除学生成功！";
+			message = "脡戮鲁媒脩搂脡煤鲁脡鹿娄拢隆";
 		} else {
-			message = "删除学生失败！";
+			message = "脡戮鲁媒脩搂脡煤脢搂掳脺拢隆";
 		}
 		return SUCCESS;
 	}
 
 	/**
-	 *  获取表中所有学生
-	 *  用Map装，为了分页的需要加上Rows和Total
+	 *  禄帽脠隆卤铆脰脨脣霉脫脨脩搂脡煤
+	 *  脫脙Map脳掳拢卢脦陋脕脣路脰脪鲁碌脛脨猫脪陋录脫脡脧Rows潞脥Total
 	 * @return
 	 */
 	@Action(value = "listStudent")
@@ -151,9 +151,9 @@ ModelDriven<StudentDto>{
 	public String validateStudent() {
 		success = studentService.validateStudent(student.getUsername());
 		if (success) {
-			message = "该学生用户名已被使用";
+			message = "赂脙脩搂脡煤脫脙禄搂脙没脪脩卤禄脢鹿脫脙";
 		} else {
-			message = "还学生用户名可以使用";
+			message = "禄鹿脩搂脡煤脫脙禄搂脙没驴脡脪脭脢鹿脫脙";
 		}
 		return SUCCESS;
 	}

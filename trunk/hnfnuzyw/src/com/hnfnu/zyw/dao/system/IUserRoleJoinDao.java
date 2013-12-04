@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.dao.system;
+锘縫ackage com.hnfnu.zyw.dao.system;
 
 import java.util.List;
 
@@ -7,10 +7,10 @@ import com.hnfnu.zyw.dto.system.UserRoleJoinDto;
 
 public interface IUserRoleJoinDao extends IBaseDao<UserRoleJoinDto> {
 
-	//通过userId批量删除该用户已经挂接的所有角色
+	//脥篓鹿媒userId脜煤脕驴脡戮鲁媒赂脙脫脙禄搂脪脩戮颅鹿脪陆脫碌脛脣霉脫脨陆脟脡芦
 
 	public boolean deleteByUserId(int userId) throws Exception;
 	
-	//批量添加用户角色挂接记录,在添加之前先删除该用户的角色
+	//脜煤脕驴脤铆录脫脫脙禄搂陆脟脡芦鹿脪陆脫录脟脗录,脭脷脤铆录脫脰庐脟掳脧脠脡戮鲁媒赂脙脫脙禄搂碌脛陆脟脡芦
 	public boolean addUserRoleJoins(int userId,List<UserRoleJoinDto> userRoleJoins) throws Exception;
 }

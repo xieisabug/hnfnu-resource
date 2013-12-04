@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.dao.base;
+﻿package com.hnfnu.zyw.dao.base;
 
 import java.util.List;
 public interface IBaseDao<T> {

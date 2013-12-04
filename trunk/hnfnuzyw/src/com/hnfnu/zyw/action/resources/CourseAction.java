@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.action.resources;
+锘縫ackage com.hnfnu.zyw.action.resources;
 
 import java.util.List;
 import java.util.Map;
@@ -31,7 +31,7 @@ import com.opensymphony.xwork2.ModelDriven;
 public class CourseAction extends AopNoSuchMethodErrorSolveBaseAction implements
 		ModelDriven<CourseDto> {
 
-	private CourseDto course = new CourseDto();// 获取页面提交参数
+	private CourseDto course = new CourseDto();// 禄帽脠隆脪鲁脙忙脤谩陆禄虏脦脢媒
 	private List<GradeDto> gradeList;
 	private List<SubjectDto> subjectList;
 	private boolean success;
@@ -50,32 +50,32 @@ public class CourseAction extends AopNoSuchMethodErrorSolveBaseAction implements
 	@Qualifier("subjectService")
 	private ISubjectService subjectService;
 
-	// 添加课程
+	// 脤铆录脫驴脦鲁脤
 	@Action(value = "addCourse")
 	public String add() {
 		success = courseService.add(course);
 		if (success) {
-			message = "添加课程成功，请到资源界面为该课程添加资源！";
+			message = "脤铆录脫驴脦鲁脤鲁脡鹿娄拢卢脟毛碌陆脳脢脭麓陆莽脙忙脦陋赂脙驴脦鲁脤脤铆录脫脳脢脭麓拢隆";
 		} else {
-			message = "添加课程失败！";
+			message = "脤铆录脫驴脦鲁脤脢搂掳脺拢隆";
 		}
 		return SUCCESS;
 	}
 
-	// 修改课程
+	// 脨脼赂脛驴脦鲁脤
 	@Action(value = "updateCourse")
 	public String update() {
 		success = courseService.update(course);
 		if (success) {
-			message = "修改课程成功！";
+			message = "脨脼赂脛驴脦鲁脤鲁脡鹿娄拢隆";
 		} else {
-			message = "修改课程失败！";
+			message = "脨脼赂脛驴脦鲁脤脢搂掳脺拢隆";
 		}
 		return SUCCESS;
 	}
 
 	/**
-	 * 根据课程ID查询一个课程
+	 * 赂霉戮脻驴脦鲁脤ID虏茅脩炉脪禄赂枚驴脦鲁脤
 	 * 
 	 * @return
 	 */
@@ -86,7 +86,7 @@ public class CourseAction extends AopNoSuchMethodErrorSolveBaseAction implements
 	}
 
 	/**
-	 * 根据课程id删除一个课程
+	 * 赂霉戮脻驴脦鲁脤id脡戮鲁媒脪禄赂枚驴脦鲁脤
 	 * 
 	 * @return
 	 */
@@ -95,14 +95,14 @@ public class CourseAction extends AopNoSuchMethodErrorSolveBaseAction implements
 	public String delete() {
 		success = courseService.delete(course.getId());
 		if (success) {
-			message = "删除课程成功，资源界面请刷新或者重新打开资源界面！";
+			message = "脡戮鲁媒驴脦鲁脤鲁脡鹿娄拢卢脳脢脭麓陆莽脙忙脟毛脣垄脨脗禄貌脮脽脰脴脨脗麓貌驴陋脳脢脭麓陆莽脙忙拢隆";
 		} else {
-			message = "删除课程失败！";
+			message = "脡戮鲁媒驴脦鲁脤脢搂掳脺拢隆";
 		}
 		return SUCCESS;
 	}
 
-	// 获取表中所有课程，用Map装，为了分页的需要加上Rows和Total
+	// 禄帽脠隆卤铆脰脨脣霉脫脨驴脦鲁脤拢卢脫脙Map脳掳拢卢脦陋脕脣路脰脪鲁碌脛脨猫脪陋录脫脡脧Rows潞脥Total
 	@Action(value = "listCourse")
 	public String list() {
 		courseList = courseService.listCourse();

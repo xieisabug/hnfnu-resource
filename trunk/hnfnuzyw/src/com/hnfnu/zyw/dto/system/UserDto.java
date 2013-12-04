@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.dto.system;
+锘縫ackage com.hnfnu.zyw.dto.system;
 
 import java.util.Date;
 
@@ -8,41 +8,41 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * 通过数据库内表的字段动态生成 UserDto
+ * 脥篓鹿媒脢媒戮脻驴芒脛脷卤铆碌脛脳脰露脦露炉脤卢脡煤鲁脡 UserDto
  **/
 @Entity
 @Table(name = "s_user")
 public class UserDto {
 	private Integer id;
-	// 用户名
+	// 脫脙禄搂脙没
 	private String username;
-	// 密码
+	// 脙脺脗毛
 	private String password;
-	// 姓名
+	// 脨脮脙没
 	private String name;
-	// 身份证
+	// 脡铆路脻脰陇
 	private String idcard;
-	// 性别
+	// 脨脭卤冒
 	private String sex;
 	// QQ
 	private String qq;
-	// 电话
+	// 碌莽禄掳
 	private String telephone;
-	//邮箱
+	//脫脢脧盲
 	private String email;
-	// 生日
+	// 脡煤脠脮
 	private Date birth;
-	// 部门
+	// 虏驴脙脜
 	private String department;
-	//资源币余额
+	//脳脢脭麓卤脪脫脿露卯
 	private int balance;
-	// 创建日期
+	// 麓麓陆篓脠脮脝脷
 	private Date createDate;
-	// 最后登录时间
+	// 脳卯潞贸碌脟脗录脢卤录盲
 	private Date latestLoginDate;
-	// 设置（用于涉及用户个人的设置）
+	// 脡猫脰脙拢篓脫脙脫脷脡忙录掳脫脙禄搂赂枚脠脣碌脛脡猫脰脙拢漏
 	private String setting;
-	// 备注
+	// 卤赂脳垄
 	private String remark;
 
 	public UserDto() {

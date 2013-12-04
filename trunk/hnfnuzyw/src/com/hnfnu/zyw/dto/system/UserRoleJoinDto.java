@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.dto.system;
+锘縫ackage com.hnfnu.zyw.dto.system;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
-* 通过数据库内表的字段动态生成 UserRoleJoinDto
+* 脥篓鹿媒脢媒戮脻驴芒脛脷卤铆碌脛脳脰露脦露炉脤卢脡煤鲁脡 UserRoleJoinDto
 **/
 @Entity
 @Table(name="s_user_role_join")

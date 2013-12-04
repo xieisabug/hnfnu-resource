@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.action.resources;
+锘縫ackage com.hnfnu.zyw.action.resources;
 
 import java.util.Map;
 
@@ -25,7 +25,7 @@ import com.opensymphony.xwork2.ModelDriven;
 @Namespace("/resources")
 public class GradeAction extends AopNoSuchMethodErrorSolveBaseAction implements ModelDriven<GradeDto> {
 
-	private GradeDto grade = new GradeDto();// 获取页面提交参数
+	private GradeDto grade = new GradeDto();// 禄帽脠隆脪鲁脙忙脤谩陆禄虏脦脢媒
 	private boolean success;
 	private String message;
 	private Map<String, Object> gradeList;
@@ -34,32 +34,32 @@ public class GradeAction extends AopNoSuchMethodErrorSolveBaseAction implements 
 	@Qualifier("gradeService")
 	private IGradeService gradeService;
 
-	// 添加年级
+	// 脤铆录脫脛锚录露
 	@Action(value = "addGrade")
 	public String add() {
 		success = gradeService.add(grade);
 		if (success) {
-			message = "添加年级成功！";
+			message = "脤铆录脫脛锚录露鲁脡鹿娄拢隆";
 		} else {
-			message = "添加年级失败！";
+			message = "脤铆录脫脛锚录露脢搂掳脺拢隆";
 		}
 		return SUCCESS;
 	}
 
-	// 修改年级
+	// 脨脼赂脛脛锚录露
 	@Action(value = "updateGrade")
 	public String update() {
 		success = gradeService.update(grade);
 		if (success) {
-			message = "修改年级成功！";
+			message = "脨脼赂脛脛锚录露鲁脡鹿娄拢隆";
 		} else {
-			message = "修改年级失败！";
+			message = "脨脼赂脛脛锚录露脢搂掳脺拢隆";
 		}
 		return SUCCESS;
 	}
 
 	/**
-	 * 根据年级ID查询一个年级
+	 * 赂霉戮脻脛锚录露ID虏茅脩炉脪禄赂枚脛锚录露
 	 * 
 	 * @return
 	 */
@@ -70,7 +70,7 @@ public class GradeAction extends AopNoSuchMethodErrorSolveBaseAction implements 
 	}
 
 	/**
-	 * 根据年级id删除一个年级
+	 * 赂霉戮脻脛锚录露id脡戮鲁媒脪禄赂枚脛锚录露
 	 * 
 	 * @return
 	 */
@@ -79,14 +79,14 @@ public class GradeAction extends AopNoSuchMethodErrorSolveBaseAction implements 
 	public String delete() {
 		success = gradeService.delete(grade.getId());
 		if (success) {
-			message = "删除年级成功！";
+			message = "脡戮鲁媒脛锚录露鲁脡鹿娄拢隆";
 		} else {
-			message = "删除年级失败！";
+			message = "脡戮鲁媒脛锚录露脢搂掳脺拢隆";
 		}
 		return SUCCESS;
 	}
 
-	// 获取表中所有年级，用Map装，为了分页的需要加上Rows和Total
+	// 禄帽脠隆卤铆脰脨脣霉脫脨脛锚录露拢卢脫脙Map脳掳拢卢脦陋脕脣路脰脪鲁碌脛脨猫脪陋录脫脡脧Rows潞脥Total
 	@Action(value = "listGrade")
 	public String list() {
 		gradeList = gradeService.listGrade();

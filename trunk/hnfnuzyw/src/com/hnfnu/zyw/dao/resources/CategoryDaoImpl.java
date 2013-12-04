@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.dao.resources;
+锘縫ackage com.hnfnu.zyw.dao.resources;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -47,7 +47,7 @@ public class CategoryDaoImpl extends BaseDao<CategoryDto> implements
 			}
 		}
 
-		// 数据库没有数据就返回1
+		// 脢媒戮脻驴芒脙禄脫脨脢媒戮脻戮脥路碌禄脴1
 		return 1;
 	}
 
@@ -93,9 +93,9 @@ public class CategoryDaoImpl extends BaseDao<CategoryDto> implements
 			this.delete(categoryId);
 			for (int i = 0; i < l.size(); i++) {
 				SourceDto s = l.get(i);
-				//如果该资源不属于其他的类别，就删除该资源和删除该资源的本地文件
+				//脠莽鹿没赂脙脳脢脭麓虏禄脢么脫脷脝盲脣没碌脛脌脿卤冒拢卢戮脥脡戮鲁媒赂脙脳脢脭麓潞脥脡戮鲁媒赂脙脳脢脭麓碌脛卤戮碌脴脦脛录镁
 				if(!blongOtherCategory(s.getId())){
-					//如果本地文件删除成功就删除该资源的信息
+					//脠莽鹿没卤戮碌脴脦脛录镁脡戮鲁媒鲁脡鹿娄戮脥脡戮鲁媒赂脙脳脢脭麓碌脛脨脜脧垄
 					if(FileUtils.deleteOneFile(s.getUrl())){
 					this.deleteSource(s.getId());
 					}else{
@@ -118,7 +118,7 @@ public class CategoryDaoImpl extends BaseDao<CategoryDto> implements
 	}
 
 	/**
-	 * 根据类别id查出该类别下的所有资源
+	 * 赂霉戮脻脌脿卤冒id虏茅鲁枚赂脙脌脿卤冒脧脗碌脛脣霉脫脨脳脢脭麓
 	 * 
 	 * @param categoryId
 	 * @return
@@ -155,7 +155,7 @@ public class CategoryDaoImpl extends BaseDao<CategoryDto> implements
 	}
 
 	/**
-	 * 根据资源id判断该资源是否还属于其他资源
+	 * 赂霉戮脻脳脢脭麓id脜脨露脧赂脙脳脢脭麓脢脟路帽禄鹿脢么脫脷脝盲脣没脳脢脭麓
 	 * 
 	 * @param sourceId
 	 * @return

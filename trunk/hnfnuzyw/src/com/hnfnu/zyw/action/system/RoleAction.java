@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.action.system;
+﻿package com.hnfnu.zyw.action.system;
 
 import java.util.Map;
 
@@ -31,14 +31,14 @@ public class RoleAction extends AopNoSuchMethodErrorSolveBaseAction implements M
 	@Qualifier("roleService")
 	private IRoleService roleService;
 	
-	private RoleDto role = new RoleDto();//��ȡҳ���ύ����
+	private RoleDto role = new RoleDto();//»ñÈ¡Ò³ÃæÌá½»²ÎÊý
 	private boolean success;
 	private String message;
 	private Map<String,Object> roleList;
 
 	@Action(value = "addRole")
 	public String add(){
-		// ��ȡ��ǰ�û�
+		// »ñÈ¡µ±Ç°ÓÃ»§
 		ActionContext context = ActionContext.getContext();
 		Map<String, Object> session = context.getSession();
 		UserDto user = (UserDto) session.get("user");
@@ -46,9 +46,9 @@ public class RoleAction extends AopNoSuchMethodErrorSolveBaseAction implements M
 		role.setCreateUserName(user.getName());
 		success = roleService.add(role);
 		if(success) {
-			message = "���ӽ�ɫ�ɹ���";
+			message = "Ìí¼Ó½ÇÉ«³É¹¦£¡";
 		} else {
-			message = "���ӽ�ɫʧ�ܣ�";
+			message = "Ìí¼Ó½ÇÉ«Ê§°Ü£¡";
 		}
 		return SUCCESS;
 	}
@@ -57,9 +57,9 @@ public class RoleAction extends AopNoSuchMethodErrorSolveBaseAction implements M
 	public String update(){
 		success = roleService.update(role);
 		if(success) {
-			message = "�޸Ľ�ɫ�ɹ���";
+			message = "ÐÞ¸Ä½ÇÉ«³É¹¦£¡";
 		} else {
-			message = "�޸Ľ�ɫʧ�ܣ�";
+			message = "ÐÞ¸Ä½ÇÉ«Ê§°Ü£¡";
 		}
 		return SUCCESS;
 	}
@@ -74,9 +74,9 @@ public class RoleAction extends AopNoSuchMethodErrorSolveBaseAction implements M
 	public String delete(){
 		success = roleService.delete(role);
 		if(success) {
-			message = "ɾ����ɫ�ɹ���";
+			message = "É¾³ý½ÇÉ«³É¹¦£¡";
 		} else {
-			message = "ɾ����ɫʧ�ܣ�";
+			message = "É¾³ý½ÇÉ«Ê§°Ü£¡";
 		}
 		return SUCCESS;
 	}

@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.action.resources;
+锘縫ackage com.hnfnu.zyw.action.resources;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -21,19 +21,19 @@ public class SourceUploadAction extends ActionSupport implements
 
 	private HttpServletRequest request;
 
-	private List<File> fileName;// 这里的"fileName"一定要与表单中的文件域名相同
+	private List<File> fileName;// 脮芒脌茂碌脛"fileName"脪禄露篓脪陋脫毛卤铆碌楼脰脨碌脛脦脛录镁脫貌脙没脧脿脥卢
 
-	private List<String> fileNameContentType;// 格式同上"fileName"+ContentType
+	private List<String> fileNameContentType;// 赂帽脢陆脥卢脡脧"fileName"+ContentType
 
-	private List<String> fileNameFileName;// 格式同上"fileName"+FileName
+	private List<String> fileNameFileName;// 赂帽脢陆脥卢脡脧"fileName"+FileName
 
-	private String savePath;// 文件上传后保存的路径
+	private String savePath;// 脦脛录镁脡脧麓芦潞贸卤拢麓忙碌脛脗路戮露
 
 	/**
 	 * @return
 	 * @author lijf
-	 * @description 上传文件
-	 * @update 2013-1-26 下午02:15:26
+	 * @description 脡脧麓芦脦脛录镁
+	 * @update 2013-1-26 脧脗脦莽02:15:26
 	 */
 	public void upload() throws Exception {// intentionPicture
 
@@ -41,7 +41,7 @@ public class SourceUploadAction extends ActionSupport implements
 
 		File dir = new File(getSavePath());
 
-		String savePath = getSavePath();// 保存上传文件的地址
+		String savePath = getSavePath();// 卤拢麓忙脡脧麓芦脦脛录镁碌脛碌脴脰路
 		//System.out.println("savePath"+savePath);
 		
 
@@ -54,10 +54,10 @@ public class SourceUploadAction extends ActionSupport implements
 		List<File> files = getFileName();
 
 		for (int i = 0; i < files.size(); i++) {
-			//判断文件名是否重复，如果重复就加上（数字）
-			SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");//设置日期格式
+			//脜脨露脧脦脛录镁脙没脢脟路帽脰脴赂麓拢卢脠莽鹿没脰脴赂麓戮脥录脫脡脧拢篓脢媒脳脰拢漏
+			SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");//脡猫脰脙脠脮脝脷赂帽脢陆
 			String fn = df.format(new Date()) + Math.round(Math.random() * 10);
-			//加上文件后缀名
+			//录脫脡脧脦脛录镁潞贸脳潞脙没
 			fn = fn+getFileNameFileName().get(i);
 			FileOutputStream fos = new FileOutputStream(getSavePath() + "\\"
 					+ fn);
@@ -81,7 +81,7 @@ public class SourceUploadAction extends ActionSupport implements
 
 		}
 
-		// 设置响应内容的字符串编码
+		// 脡猫脰脙脧矛脫娄脛脷脠脻碌脛脳脰路没麓庐卤脿脗毛
 
 		ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
 
@@ -93,7 +93,7 @@ public class SourceUploadAction extends ActionSupport implements
 	}
 
 	/*
-	 * (non-Javadoc)下载文件
+	 * (non-Javadoc)脧脗脭脴脦脛录镁
 	 * 
 	 * @see com.opensymphony.xwork2.ActionSupport#execute()
 	 */

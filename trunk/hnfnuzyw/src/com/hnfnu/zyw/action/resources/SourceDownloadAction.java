@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.action.resources;
+﻿package com.hnfnu.zyw.action.resources;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -24,7 +24,7 @@ import com.hnfnu.zyw.service.resources.ISourceService;
 @Results({ @Result(name = "success", type = "stream", params = { "contentType", "application/octet-stream","inputName","inputStream","contentDisposition","filename='${fileName}'","bufferSize","4096" }) })
 @Namespace("/file")
 public class SourceDownloadAction extends AopNoSuchMethodErrorSolveBaseAction {
-	// fileName�Ǿ���·��
+	// fileNameÊÇ¾ø¶ÔÂ·¾¶
 	private String url;
 	private int id;
 	private String fileName;

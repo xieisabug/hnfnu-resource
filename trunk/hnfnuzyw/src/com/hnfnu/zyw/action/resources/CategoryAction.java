@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.action.resources;
+锘縫ackage com.hnfnu.zyw.action.resources;
 
 import java.util.Map;
 
@@ -25,7 +25,7 @@ import com.opensymphony.xwork2.ModelDriven;
 public class CategoryAction extends AopNoSuchMethodErrorSolveBaseAction implements
 		ModelDriven<CategoryDto> {
 
-	private CategoryDto category = new CategoryDto();// 获取页面提交参数
+	private CategoryDto category = new CategoryDto();// 禄帽脠隆脪鲁脙忙脤谩陆禄虏脦脢媒
 	private boolean success;
 	private String message;
 	private String orders;
@@ -35,39 +35,39 @@ public class CategoryAction extends AopNoSuchMethodErrorSolveBaseAction implemen
 	@Qualifier("categoryService")
 	private ICategoryService categoryService;
 
-	// 添加类别
+	// 脤铆录脫脌脿卤冒
 	@Action(value = "addCategory")
 	public String add() {
 		int order = categoryService.maxOrder() + 1;
 		if (order < 1) {
-			message = "添加类别失败,类别获取失败";
+			message = "脤铆录脫脌脿卤冒脢搂掳脺,脌脿卤冒禄帽脠隆脢搂掳脺";
 		} else {
 			category.setOrd(order);
 			success = categoryService.add(category);
 			if (success) {
-				message = "添加类别成功！";
+				message = "脤铆录脫脌脿卤冒鲁脡鹿娄拢隆";
 			} else {
-				message = "添加类别失败！";
+				message = "脤铆录脫脌脿卤冒脢搂掳脺拢隆";
 			}
 		}
 
 		return SUCCESS;
 	}
 
-	// 修改类别
+	// 脨脼赂脛脌脿卤冒
 	@Action(value = "updateCategory")
 	public String update() {
 		success = categoryService.update(category);
 		if (success) {
-			message = "修改类别成功！";
+			message = "脨脼赂脛脌脿卤冒鲁脡鹿娄拢隆";
 		} else {
-			message = "修改类别失败！";
+			message = "脨脼赂脛脌脿卤冒脢搂掳脺拢隆";
 		}
 		return SUCCESS;
 	}
 
 	/**
-	 * 根据类别ID查询一个类别
+	 * 赂霉戮脻脌脿卤冒ID虏茅脩炉脪禄赂枚脌脿卤冒
 	 * 
 	 * @return
 	 */
@@ -78,7 +78,7 @@ public class CategoryAction extends AopNoSuchMethodErrorSolveBaseAction implemen
 	}
 
 	/**
-	 * 根据类别id删除一个类别
+	 * 赂霉戮脻脌脿卤冒id脡戮鲁媒脪禄赂枚脌脿卤冒
 	 * 
 	 * @return
 	 */
@@ -87,35 +87,35 @@ public class CategoryAction extends AopNoSuchMethodErrorSolveBaseAction implemen
 	public String delete() {
 		success = categoryService.delete(category.getId());
 		if (success) {
-			message = "删除类别成功,请刷新资源界面或者重新打开资源界面！";
+			message = "脡戮鲁媒脌脿卤冒鲁脡鹿娄,脟毛脣垄脨脗脳脢脭麓陆莽脙忙禄貌脮脽脰脴脨脗麓貌驴陋脳脢脭麓陆莽脙忙拢隆";
 		} else {
-			message = "删除类别失败！";
+			message = "脡戮鲁媒脌脿卤冒脢搂掳脺拢隆";
 		}
 		return SUCCESS;
 	}
 
-	// 获取表中所有类别，用Map装，为了分页的需要加上Rows和Total
+	// 禄帽脠隆卤铆脰脨脣霉脫脨脌脿卤冒拢卢脫脙Map脳掳拢卢脦陋脕脣路脰脪鲁碌脛脨猫脪陋录脫脡脧Rows潞脥Total
 	@Action(value = "listCategory")
 	public String list() {
 		categoryList = categoryService.listCategory();
 		return SUCCESS;
 	}
 
-	// 获取表中所有类别，根据ord排序 ，用Map装，为了分页的需要加上Rows和Total
+	// 禄帽脠隆卤铆脰脨脣霉脫脨脌脿卤冒拢卢赂霉戮脻ord脜脜脨貌 拢卢脫脙Map脳掳拢卢脦陋脕脣路脰脪鲁碌脛脨猫脪陋录脫脡脧Rows潞脥Total
 	@Action(value = "listCategoryOrder")
 	public String listCategoryOrder() {
 		categoryList = categoryService.getCategoryDtoOrder();
 		return SUCCESS;
 	}
 
-	// 修改类别的排序
+	// 脨脼赂脛脌脿卤冒碌脛脜脜脨貌
 	@Action(value = "categoryOrder")
 	public String categoryOrder() {
 		success = categoryService.setCategoryDtoOrder(orders);
 		if (success) {
-			message = "类别排序成功！";
+			message = "脌脿卤冒脜脜脨貌鲁脡鹿娄拢隆";
 		} else {
-			message = "类别排序失败！";
+			message = "脌脿卤冒脜脜脨貌脢搂掳脺拢隆";
 		}
 		return SUCCESS;
 	}

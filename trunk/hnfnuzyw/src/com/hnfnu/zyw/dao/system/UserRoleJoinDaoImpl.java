@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.dao.system;
+ï»¿package com.hnfnu.zyw.dao.system;
 
 import java.util.List;
 
@@ -41,9 +41,9 @@ public class UserRoleJoinDaoImpl extends BaseDao<UserRoleJoinDto> implements
 	public boolean addUserRoleJoins(int userId,List<UserRoleJoinDto> userRoleJoins) {
 		
 		String hql = "delete UserRoleJoinDto where userId=:userId";
-		// ´ò¿ªSession
+		// Â´Ã²Â¿ÂªSession
 		Session session = this.getSession();
-		// ¿ªÊ¼ÊÂÎñ
+		// Â¿ÂªÃŠÂ¼ÃŠÃ‚ÃŽÃ±
 		Transaction t = null;
 		try {
 			t = session.beginTransaction();
@@ -51,13 +51,13 @@ public class UserRoleJoinDaoImpl extends BaseDao<UserRoleJoinDto> implements
 			q.setParameter("userId", userId);
 			q.executeUpdate();
 			if(userRoleJoins != null){
-			// Ñ­»·£¬²åÈë¼ÇÂ¼
+			// Ã‘Â­Â»Â·Â£Â¬Â²Ã¥ÃˆÃ«Â¼Ã‡Ã‚Â¼
 			for (int i = 0; i < userRoleJoins.size(); i++) {
 				UserRoleJoinDto userRoleJoin = userRoleJoins.get(i);
 
-				// ÔÚSession¼¶±ð»º´æuserRoleJoinÊµÀý
+				// Ã”ÃšSessionÂ¼Â¶Â±Ã°Â»ÂºÂ´Ã¦userRoleJoinÃŠÂµÃ€Ã½
 				session.save(userRoleJoin);
-				// Ã¿µ±ÀÛ¼ÓÆ÷ÊÇ20µÄ±¶ÊýÊ±£¬½«SessionÖÐµÄÊý¾ÝË¢ÈëÊý¾Ý¿â£¬²¢Çå¿ÕSession»º´æ
+				// ÃƒÂ¿ÂµÂ±Ã€Ã›Â¼Ã“Ã†Ã·ÃŠÃ‡20ÂµÃ„Â±Â¶ÃŠÃ½ÃŠÂ±Â£Â¬Â½Â«SessionÃ–ÃÂµÃ„ÃŠÃ½Â¾ÃÃ‹Â¢ÃˆÃ«ÃŠÃ½Â¾ÃÂ¿Ã¢Â£Â¬Â²Â¢Ã‡Ã¥Â¿Ã•SessionÂ»ÂºÂ´Ã¦
 				if (i % 20 == 0) {
 					session.flush();
 					session.clear();

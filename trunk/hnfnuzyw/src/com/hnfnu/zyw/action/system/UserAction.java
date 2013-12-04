@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.action.system;
+锘縫ackage com.hnfnu.zyw.action.system;
 
 import java.util.Map;
 
@@ -24,7 +24,7 @@ import com.opensymphony.xwork2.ModelDriven;
 @Namespace("/system")
 public class UserAction extends AopNoSuchMethodErrorSolveBaseAction implements ModelDriven<UserDto> {
 
-	private UserDto user = new UserDto();// 获取页面提交参数
+	private UserDto user = new UserDto();// 禄帽脠隆脪鲁脙忙脤谩陆禄虏脦脢媒
 	private boolean success;
 	private String message;
 	private Map<String, Object> userList;
@@ -35,45 +35,45 @@ public class UserAction extends AopNoSuchMethodErrorSolveBaseAction implements M
 
 	// private String bir;
 
-	// 添加
+	// 脤铆录脫
 	@Action(value = "addUser")
 	public String add() {
 		success = userService.add(user);
 		if (success) {
-			message = "添加功能成功！";
+			message = "脤铆录脫鹿娄脛脺鲁脡鹿娄拢隆";
 		} else {
-			message = "添加功能失败！";
+			message = "脤铆录脫鹿娄脛脺脢搂掳脺拢隆";
 		}
 		return SUCCESS;
 	}
 
-	// 修改
+	// 脨脼赂脛
 	@Action(value = "updateUser")
 	public String update() {
 		success = userService.update(user);
 		if (success) {
-			message = "修改成功！";
+			message = "脨脼赂脛鲁脡鹿娄拢隆";
 		} else {
-			message = "修改失败！";
+			message = "脨脼赂脛脢搂掳脺拢隆";
 		}
 		return SUCCESS;
 	}
 	/**
-	 * 修改密码
+	 * 脨脼赂脛脙脺脗毛
 	 * @return
 	 */
 	@Action(value = "updatePwd")
 	public String updatePwd() {
 		success = userService.updatePwd(user.getId(), newPassword);
 		if (success) {
-			message = "修改密码成功！";
+			message = "脨脼赂脛脙脺脗毛鲁脡鹿娄拢隆";
 		} else {
-			message = "修改密码失败！";
+			message = "脨脼赂脛脙脺脗毛脢搂掳脺拢隆";
 		}
 		return SUCCESS;
 	}
 	/**
-	 * 根据菜单ID查询一个对象
+	 * 赂霉戮脻虏脣碌楼ID虏茅脩炉脪禄赂枚露脭脧贸
 	 * 
 	 * @return
 	 */
@@ -84,7 +84,7 @@ public class UserAction extends AopNoSuchMethodErrorSolveBaseAction implements M
 	}
 
 	/**
-	 * 根据菜单id删除一个菜单
+	 * 赂霉戮脻虏脣碌楼id脡戮鲁媒脪禄赂枚虏脣碌楼
 	 * 
 	 * @return
 	 */
@@ -93,30 +93,30 @@ public class UserAction extends AopNoSuchMethodErrorSolveBaseAction implements M
 	public String delete() {
 		success = userService.delete(user.getId());
 		if (success) {
-			message = "删除成功！";
+			message = "脡戮鲁媒鲁脡鹿娄拢隆";
 		} else {
-			message = "删除失败！";
+			message = "脡戮鲁媒脢搂掳脺拢隆";
 		}
 		return SUCCESS;
 	}
 
 	/**
-	 * 验证用户名是否已经存在
+	 * 脩茅脰陇脫脙禄搂脙没脢脟路帽脪脩戮颅麓忙脭脷
 	 * @return
 	 */
 	@Action(value = "validateUsername")
 	public String validateUsername() {
 		success = userService.validateUserName(user.getUsername());
 		if (success) {
-			message = "用户名已被使用！";
+			message = "脫脙禄搂脙没脪脩卤禄脢鹿脫脙拢隆";
 		} else {
-			message = "用户名可用！";
+			message = "脫脙禄搂脙没驴脡脫脙拢隆";
 		}
 		return SUCCESS;
 	}
 	
 	
-	// 获取表中所有功能，用Map装，为了分页的需要加上Rows和Total
+	// 禄帽脠隆卤铆脰脨脣霉脫脨鹿娄脛脺拢卢脫脙Map脳掳拢卢脦陋脕脣路脰脪鲁碌脛脨猫脪陋录脫脡脧Rows潞脥Total
 	@Action(value = "listUser")
 	public String list() {
 		userList = userService.list();

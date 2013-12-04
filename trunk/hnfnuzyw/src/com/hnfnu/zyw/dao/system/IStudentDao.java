@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.dao.system;
+锘縫ackage com.hnfnu.zyw.dao.system;
 
 import java.util.ArrayList;
 
@@ -8,7 +8,7 @@ import com.hnfnu.zyw.dto.system.StudentDto;
 public interface IStudentDao  extends IBaseDao<StudentDto>{
 
 	/**
-	 * 批量给学生充值资源币
+	 * 脜煤脕驴赂酶脩搂脡煤鲁盲脰碌脳脢脭麓卤脪
 	 * @param count
 	 * @param studentIds
 	 * @return
@@ -16,14 +16,14 @@ public interface IStudentDao  extends IBaseDao<StudentDto>{
 	public int addStudnetBalance(int count,String studentIds);
 	
 	/**
-	 * 批量注册学生
+	 * 脜煤脕驴脳垄虏谩脩搂脡煤
 	 * @param count
 	 * @param studentIds
 	 * @return
 	 */
 	public boolean addStudnets(ArrayList<StudentDto> students);
 	/**
-	 * 通过任何一个字段获取一个学生信息
+	 * 脥篓鹿媒脠脦潞脦脪禄赂枚脳脰露脦禄帽脠隆脪禄赂枚脩搂脡煤脨脜脧垄
 	 * @param hql
 	 * @return
 	 */

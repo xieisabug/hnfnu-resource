@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.dao.system;
+ï»¿package com.hnfnu.zyw.dao.system;
 
 import java.util.List;
 
@@ -33,9 +33,9 @@ public class RoleMenuJoinVoDaoImpl extends BaseDao<RoleMenuJoinDto> implements
 	public boolean addRoleMenuJoins(int roleId,
 			List<RoleMenuJoinDto> roleMenuJoins) {
 		String hql = "delete RoleMenuJoinDto where roleId=:roleId";
-		// ´ò¿ªSession
+		// Â´Ã²Â¿ÂªSession
 		Session session = this.getSession();
-		// ¿ªÊ¼ÊÂÎñ
+		// Â¿ÂªÃŠÂ¼ÃŠÃ‚ÃŽÃ±
 		Transaction t = null;
 		try {
 			t = session.beginTransaction();
@@ -43,13 +43,13 @@ public class RoleMenuJoinVoDaoImpl extends BaseDao<RoleMenuJoinDto> implements
 			q.setParameter("roleId", roleId);
 			q.executeUpdate();
 			if (roleMenuJoins != null) {
-				// Ñ­»·£¬²åÈë¼ÇÂ¼
+				// Ã‘Â­Â»Â·Â£Â¬Â²Ã¥ÃˆÃ«Â¼Ã‡Ã‚Â¼
 				for (int i = 0; i < roleMenuJoins.size(); i++) {
 					RoleMenuJoinDto roleMenuJoin = roleMenuJoins.get(i);
 
-					// ÔÚSession¼¶±ð»º´æuserRoleJoinÊµÀý
+					// Ã”ÃšSessionÂ¼Â¶Â±Ã°Â»ÂºÂ´Ã¦userRoleJoinÃŠÂµÃ€Ã½
 					session.save(roleMenuJoin);
-					// Ã¿µ±ÀÛ¼ÓÆ÷ÊÇ20µÄ±¶ÊýÊ±£¬½«SessionÖÐµÄÊý¾ÝË¢ÈëÊý¾Ý¿â£¬²¢Çå¿ÕSession»º´æ
+					// ÃƒÂ¿ÂµÂ±Ã€Ã›Â¼Ã“Ã†Ã·ÃŠÃ‡20ÂµÃ„Â±Â¶ÃŠÃ½ÃŠÂ±Â£Â¬Â½Â«SessionÃ–ÃÂµÃ„ÃŠÃ½Â¾ÃÃ‹Â¢ÃˆÃ«ÃŠÃ½Â¾ÃÂ¿Ã¢Â£Â¬Â²Â¢Ã‡Ã¥Â¿Ã•SessionÂ»ÂºÂ´Ã¦
 					if (i % 20 == 0) {
 						session.flush();
 						session.clear();

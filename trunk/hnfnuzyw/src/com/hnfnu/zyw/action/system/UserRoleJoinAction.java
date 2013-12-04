@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.action.system;
+锘縫ackage com.hnfnu.zyw.action.system;
 
 import java.util.Map;
 
@@ -24,11 +24,11 @@ import com.opensymphony.xwork2.ModelDriven;
 @Namespace("/system")
 public class UserRoleJoinAction extends AopNoSuchMethodErrorSolveBaseAction implements
 		ModelDriven<UserRoleJoinDto> {
-	private UserRoleJoinDto userRoleJoin = new UserRoleJoinDto();// 获取页面提交参数
+	private UserRoleJoinDto userRoleJoin = new UserRoleJoinDto();// 禄帽脠隆脪鲁脙忙脤谩陆禄虏脦脢媒
 	private boolean success;
 	private String message;
 	private Map<String, Object> userRoleJoinList;
-	//用户挂接角色，用；好隔开。
+	//脫脙禄搂鹿脪陆脫陆脟脡芦拢卢脫脙拢禄潞脙赂么驴陋隆拢
 	private String seletedRoleIds;
 
 	@Autowired
@@ -37,32 +37,32 @@ public class UserRoleJoinAction extends AopNoSuchMethodErrorSolveBaseAction impl
 
 	// private String bir;
 
-	// 添加
+	// 脤铆录脫
 	@Action(value = "addUserRoleJoin")
 	public String add() {
 		success = userRoleJoinService.add(userRoleJoin);
 		if (success) {
-			message = "用户挂接角色成功！";
+			message = "脫脙禄搂鹿脪陆脫陆脟脡芦鲁脡鹿娄拢隆";
 		} else {
-			message = "用户挂接角色失败！";
+			message = "脫脙禄搂鹿脪陆脫陆脟脡芦脢搂掳脺拢隆";
 		}
 		return SUCCESS;
 	}
 
-	// 修改
+	// 脨脼赂脛
 	@Action(value = "updateUserRoleJoin")
 	public String update() {
 		success = userRoleJoinService.update(userRoleJoin);
 		if (success) {
-			message = "用户修改角色成功！";
+			message = "脫脙禄搂脨脼赂脛陆脟脡芦鲁脡鹿娄拢隆";
 		} else {
-			message = "用户修改角色失败！";
+			message = "脫脙禄搂脨脼赂脛陆脟脡芦脢搂掳脺拢隆";
 		}
 		return SUCCESS;
 	}
 
 	/**
-	 * 根据菜单ID查询一个对象
+	 * 赂霉戮脻虏脣碌楼ID虏茅脩炉脪禄赂枚露脭脧贸
 	 * 
 	 * @return
 	 */
@@ -73,7 +73,7 @@ public class UserRoleJoinAction extends AopNoSuchMethodErrorSolveBaseAction impl
 	}
 
 	/**
-	 * 根据菜单id删除一个菜单
+	 * 赂霉戮脻虏脣碌楼id脡戮鲁媒脪禄赂枚虏脣碌楼
 	 * 
 	 * @return
 	 */
@@ -82,9 +82,9 @@ public class UserRoleJoinAction extends AopNoSuchMethodErrorSolveBaseAction impl
 	public String delete() {
 		success = userRoleJoinService.delete(userRoleJoin.getId());
 		if (success) {
-			message = "用户移除角色成功！";
+			message = "脫脙禄搂脪脝鲁媒陆脟脡芦鲁脡鹿娄拢隆";
 		} else {
-			message = "用户移除角色失败！";
+			message = "脫脙禄搂脪脝鲁媒陆脟脡芦脢搂掳脺拢隆";
 		}
 		return SUCCESS;
 	}
@@ -93,9 +93,9 @@ public class UserRoleJoinAction extends AopNoSuchMethodErrorSolveBaseAction impl
 	public String addUserRoleJoins(){
 		success = userRoleJoinService.addUserRoleJoins(seletedRoleIds);
 		if (success) {
-			message = "用户添加角色成功！";
+			message = "脫脙禄搂脤铆录脫陆脟脡芦鲁脡鹿娄拢隆";
 		} else {
-			message = "用户添加角色失败！";
+			message = "脫脙禄搂脤铆录脫陆脟脡芦脢搂掳脺拢隆";
 		}
 		return SUCCESS;
 	}

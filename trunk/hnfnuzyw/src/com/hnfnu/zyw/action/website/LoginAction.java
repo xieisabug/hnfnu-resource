@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.action.website;
+锘縫ackage com.hnfnu.zyw.action.website;
 
 import java.util.List;
 import java.util.Map;
@@ -41,7 +41,7 @@ public class LoginAction extends AopNoSuchMethodErrorSolveBaseAction{
 	@Qualifier("loginService")
 	private ILoginService loginService;
 
-	// 验证用户是否存在
+	// 脩茅脰陇脫脙禄搂脢脟路帽麓忙脭脷
 	@Action(value = "loginUser")
 	public String loginUser() {
 		UserDto user = new UserDto();
@@ -79,7 +79,7 @@ public class LoginAction extends AopNoSuchMethodErrorSolveBaseAction{
 		return SUCCESS;
 	}
 
-	// 根据登陆的身份登陆
+	// 赂霉戮脻碌脟脗陆碌脛脡铆路脻碌脟脗陆
 	@Action(value = "login")
 	public String login() {
 		if (loginType == STUDENT) {
@@ -92,10 +92,10 @@ public class LoginAction extends AopNoSuchMethodErrorSolveBaseAction{
 		return SUCCESS;
 	}
 
-	// 判断前台是否登陆，不管是学生还是老师
+	// 脜脨露脧脟掳脤篓脢脟路帽碌脟脗陆拢卢虏禄鹿脺脢脟脩搂脡煤禄鹿脢脟脌脧脢娄
 	@Action(value = "validateLogin")
 	public String validateLogin() {
-		// 获取当前用户
+		// 禄帽脠隆碌卤脟掳脫脙禄搂
 		ActionContext context = ActionContext.getContext();
 		Map<String, Object> session = context.getSession();
 		UserDto user = (UserDto) session.get("user");
@@ -109,9 +109,9 @@ public class LoginAction extends AopNoSuchMethodErrorSolveBaseAction{
 		}
 
 		if (success) {
-			message = "用户已经登陆";
+			message = "脫脙禄搂脪脩戮颅碌脟脗陆";
 		} else {
-			message = "下载资源前请您先登陆";
+			message = "脧脗脭脴脳脢脭麓脟掳脟毛脛煤脧脠碌脟脗陆";
 		}
 		return SUCCESS;
 	}
@@ -123,15 +123,15 @@ public class LoginAction extends AopNoSuchMethodErrorSolveBaseAction{
 		session.clear();
 		if (session.containsKey("user") || session.containsKey("student")) {
 			success = false;
-			message = "退出系统失败，session清除不成功";
+			message = "脥脣鲁枚脧碌脥鲁脢搂掳脺拢卢session脟氓鲁媒虏禄鲁脡鹿娄";
 		} else {
 			success = true;
-			message = "退出系统成功";
+			message = "脥脣鲁枚脧碌脥鲁鲁脡鹿娄";
 		}
 		return SUCCESS;
 	}
 
-	// 获取主页的图表
+	// 禄帽脠隆脰梅脪鲁碌脛脥录卤铆
 	@Action(value = "welcomeChart")
 	public String welcomeChart() {
 		int id = ((UserDto) ServletActionContext.getContext().getSession()
@@ -139,10 +139,10 @@ public class LoginAction extends AopNoSuchMethodErrorSolveBaseAction{
 		data = loginService.welcomeChart(id);
 		if (data != null) {
 			success = true;
-			message = "获取图表成功";
+			message = "禄帽脠隆脥录卤铆鲁脡鹿娄";
 		} else {
 			success = false;
-			message = "获取图表失败";
+			message = "禄帽脠隆脥录卤铆脢搂掳脺";
 		}
 		return SUCCESS;
 	}

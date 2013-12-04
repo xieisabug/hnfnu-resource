@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.dto.system;
+锘縫ackage com.hnfnu.zyw.dto.system;
 
 import java.util.Date;
 
@@ -12,24 +12,24 @@ import javax.persistence.Table;
 public class TeacherDto 
 {	
 	private Integer id;
-	//用户登录名字
+	//脫脙禄搂碌脟脗录脙没脳脰
 	private String username;
-	//登录密码
+	//碌脟脗录脙脺脗毛
 	private String password;
-	//姓名
+	//脨脮脙没
 	private String name;
-	//身份证
+	//脡铆路脻脰陇
 	private String idcard;
 	private String qq;
-	//手机号码
+	//脢脰禄煤潞脜脗毛
 	private String telephone;
-	//系部或部门
+	//脧碌虏驴禄貌虏驴脙脜
 	private String department;
-	//创建日期
+	//麓麓陆篓脠脮脝脷
 	private Date createDate;
-	//创建人id
+	//麓麓陆篓脠脣id
 	private Integer createUserId;
-	//备注
+	//卤赂脳垄
 	private String remark;
 
 	public TeacherDto()

@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.dto.resources;
+锘縫ackage com.hnfnu.zyw.dto.resources;
 
 import java.sql.Timestamp;
 
@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * 通过数据库内表的字段动态生成 SourceDto
+ * 脥篓鹿媒脢媒戮脻驴芒脛脷卤铆碌脛脳脰露脦露炉脤卢脡煤鲁脡 SourceDto
  **/
 @Entity
 @Table(name = "r_source")
@@ -17,62 +17,62 @@ public class SourceDto {
 
 	private Integer id;
 
-	// 资源名称
+	// 脳脢脭麓脙没鲁脝
 
 	private String name;
 
-	// 属于的课程的id
+	// 脢么脫脷碌脛驴脦鲁脤碌脛id
 
 	private Integer courseId;
 
-	// 关键字列表，用"；"分隔
+	// 鹿脴录眉脳脰脕脨卤铆拢卢脫脙"拢禄"路脰赂么
 
 	private String keyWords;
 
-	// 媒体类型，如：文本，ppt，视频等
+	// 脙陆脤氓脌脿脨脥拢卢脠莽拢潞脦脛卤戮拢卢ppt拢卢脢脫脝碌碌脠
 
 	private String mediaType;
 
-	// 媒体格式，如：jpg，mp4等
+	// 脙陆脤氓赂帽脢陆拢卢脠莽拢潞jpg拢卢mp4碌脠
 
 	private String mediaFormat;
 
-	// 播放时间，只有视频拥有这个属性
+	// 虏楼路脜脢卤录盲拢卢脰禄脫脨脢脫脝碌脫碌脫脨脮芒赂枚脢么脨脭
 
 	private String playTime;
 
-	// 文件大小
+	// 脦脛录镁麓贸脨隆
 
 	private String fileSize;
 
-	// 作者
+	// 脳梅脮脽
 
 	private String author;
 
-	// 出版社
+	// 鲁枚掳忙脡莽
 
 	private String publisher;
 
-	// 描述
+	// 脙猫脢枚
 
 	private String description;
 
-	// 创建时间
+	// 麓麓陆篓脢卤录盲
 
 	private Timestamp createDate;
 
-	// 审核状态
+	// 脡贸潞脣脳麓脤卢
 
 	private String approvalStatus;
-	// 价格
+	// 录脹赂帽
 
 	private double price;
 
-	// 访问次数
+	// 路脙脦脢麓脦脢媒
 
 	private Integer viewTimes;
 
-	// 下载或者使用次数
+	// 脧脗脭脴禄貌脮脽脢鹿脫脙麓脦脢媒
 
 	private Integer useTimes;
 

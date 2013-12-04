@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.dto.system;
+锘縫ackage com.hnfnu.zyw.dto.system;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
-* 通过数据库内表的字段动态生成 FunctionDto
+* 脥篓鹿媒脢媒戮脻驴芒脛脷卤铆碌脛脳脰露脦露炉脤卢脡煤鲁脡 FunctionDto
 **/
 
 @Entity
@@ -15,10 +15,10 @@ public class FunctionDto
 {	
 	private Integer id;
 	
-	//功能的缩写字母，要大写
+	//鹿娄脛脺碌脛脣玫脨麓脳脰脛赂拢卢脪陋麓贸脨麓
 	private String name;
 	
-	//功能的中文名称
+	//鹿娄脛脺碌脛脰脨脦脛脙没鲁脝
 	private String remark;
 	
 

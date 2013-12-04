@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.dto.system;
+锘縫ackage com.hnfnu.zyw.dto.system;
 
 import java.util.Date;
 
@@ -14,17 +14,17 @@ public class StudentDto
 	private Integer id;
 	private String username;
 	private String password;
-	//名字
+	//脙没脳脰
 	private String name;
-	//年纪
+	//脛锚录脥
 	private String number;
-	//系部
+	//脧碌虏驴
 	private String department;
-	//专业
+	//脳篓脪碌
 	private String major;
-	//入学年份
+	//脠毛脩搂脛锚路脻
 	private String entranceTime;
-	//充值余额，默认为0
+	//鲁盲脰碌脫脿露卯拢卢脛卢脠脧脦陋0
 	private Integer balance;
 	private String telephone;
 	private Date createDate;

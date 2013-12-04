@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.dto.resources;
+锘縫ackage com.hnfnu.zyw.dto.resources;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
-* 通过数据库内表的字段动态生成 CategoryDto
+* 脥篓鹿媒脢媒戮脻驴芒脛脷卤铆碌脛脳脰露脦露炉脤卢脡煤鲁脡 CategoryDto
 **/
 @Entity
 @Table(name="r_category")
@@ -14,7 +14,7 @@ public class CategoryDto
 {	
 	//id
 	private Integer id;
-	//类别名称
+	//脌脿卤冒脙没鲁脝
 	private String name;
 	private int ord;
 	private String remark;
