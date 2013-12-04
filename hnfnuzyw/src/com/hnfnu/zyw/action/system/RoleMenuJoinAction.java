@@ -12,9 +12,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.hnfnu.zyw.action.base.AopNoSuchMethodErrorSolveBaseAction;
 import com.hnfnu.zyw.dto.system.RoleMenuJoinDto;
 import com.hnfnu.zyw.service.system.IRoleMenuJoinService;
-import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 @Controller("roleMemuJoinAction")
@@ -23,10 +23,9 @@ import com.opensymphony.xwork2.ModelDriven;
 @Results( { @Result(name = "success", type = "json", params = { "root",
 		"action" }) })
 @Namespace("/system")
-public class RoleMenuJoinAction extends ActionSupport implements
+public class RoleMenuJoinAction extends AopNoSuchMethodErrorSolveBaseAction implements
 		ModelDriven<RoleMenuJoinDto> {
 
-	private static final long serialVersionUID = 5941060251589671029L;
 
 	@Autowired
 	@Qualifier("roleMenuJoinService")
@@ -82,10 +81,6 @@ public class RoleMenuJoinAction extends ActionSupport implements
 
 	public List<Object> getJoinTree() {
 		return joinTree;
-	}
-
-	public void setRoleMenuJoinService(IRoleMenuJoinService roleMenuJoinService) {
-		this.roleMenuJoinService = roleMenuJoinService;
 	}
 
 	public RoleMenuJoinDto getModel() {

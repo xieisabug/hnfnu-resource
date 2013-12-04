@@ -13,11 +13,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.hnfnu.zyw.action.base.AopNoSuchMethodErrorSolveBaseAction;
 import com.hnfnu.zyw.dto.resources.TopicDto;
 import com.hnfnu.zyw.service.resources.ITopicService;
 import com.hnfnu.zyw.service.resources.ITopicSourceVoService;
 import com.hnfnu.zyw.vo.TopicSourceVo;
-import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 
@@ -27,10 +27,9 @@ import com.opensymphony.xwork2.ModelDriven;
 @Results( { @Result(name = "success", type = "json", params = { "root",
 		"action" }) })
 @Namespace("/resources")
-public class TopicAction extends ActionSupport implements
+public class TopicAction extends AopNoSuchMethodErrorSolveBaseAction implements
 ModelDriven<TopicDto>{
 	
-	private static final long serialVersionUID = -7199971221300636848L;
 	private TopicDto topic = new TopicDto();// 获取页面提交参数
 	private boolean success;
 	private String message;

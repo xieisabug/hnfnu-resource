@@ -12,11 +12,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.hnfnu.zyw.action.base.AopNoSuchMethodErrorSolveBaseAction;
 import com.hnfnu.zyw.dto.system.UserDto;
 import com.hnfnu.zyw.service.system.IUserRoleMenuVoService;
 import com.hnfnu.zyw.vo.UserRoleMenuVo;
 import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 @Controller("userRoleMenuAction")
@@ -24,10 +24,9 @@ import com.opensymphony.xwork2.ModelDriven;
 @ParentPackage("json-default")
 @Results({ @Result(name = "success", type = "json", params = { "root", "action" }) })
 @Namespace("/system")
-public class UserRoleMenuVoAction extends ActionSupport implements
+public class UserRoleMenuVoAction extends AopNoSuchMethodErrorSolveBaseAction implements
 ModelDriven<UserRoleMenuVo>{
 	
-	private static final long serialVersionUID = -7199971221300636848L;
 	private UserRoleMenuVo userRoleMenuVo = new UserRoleMenuVo();// 获取页面提交参数
 	private boolean success;
 	private String message;
@@ -71,9 +70,5 @@ ModelDriven<UserRoleMenuVo>{
 		this.userRoleMenuVo = userRoleMenuVo;
 	}
 
-	public void setUserRoleMenuVoService(
-			IUserRoleMenuVoService userRoleMenuVoService) {
-		this.userRoleMenuVoService = userRoleMenuVoService;
-	}
 	
 }

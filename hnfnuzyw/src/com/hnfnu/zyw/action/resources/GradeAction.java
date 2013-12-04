@@ -12,9 +12,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.hnfnu.zyw.action.base.AopNoSuchMethodErrorSolveBaseAction;
 import com.hnfnu.zyw.dto.resources.GradeDto;
 import com.hnfnu.zyw.service.resources.IGradeService;
-import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 @Controller("gradeAction")
@@ -23,9 +23,8 @@ import com.opensymphony.xwork2.ModelDriven;
 @Results( { @Result(name = "success", type = "json", params = { "root",
 		"action" }) })
 @Namespace("/resources")
-public class GradeAction extends ActionSupport implements ModelDriven<GradeDto> {
+public class GradeAction extends AopNoSuchMethodErrorSolveBaseAction implements ModelDriven<GradeDto> {
 
-	private static final long serialVersionUID = -7199971221300636848L;
 	private GradeDto grade = new GradeDto();// 获取页面提交参数
 	private boolean success;
 	private String message;
@@ -95,14 +94,6 @@ public class GradeAction extends ActionSupport implements ModelDriven<GradeDto> 
 	}
 
 	/* get set */
-	public IGradeService getGradeService() {
-		return gradeService;
-	}
-
-	public void setGradeService(IGradeService gradeService) {
-		this.gradeService = gradeService;
-	}
-
 	public GradeDto getModel() {
 		return grade;
 	}

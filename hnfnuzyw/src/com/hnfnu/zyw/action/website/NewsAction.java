@@ -13,11 +13,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.hnfnu.zyw.action.base.AopNoSuchMethodErrorSolveBaseAction;
 import com.hnfnu.zyw.dto.system.UserDto;
 import com.hnfnu.zyw.dto.website.NewsDto;
 import com.hnfnu.zyw.service.website.INewsService;
 import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 @Controller("NewsAction")
@@ -25,9 +25,8 @@ import com.opensymphony.xwork2.ModelDriven;
 @ParentPackage("json-default")
 @Results({ @Result(name = "success", type = "json", params = { "root", "action" }) })
 @Namespace("/website")
-public class NewsAction extends ActionSupport implements
+public class NewsAction extends AopNoSuchMethodErrorSolveBaseAction implements
 ModelDriven<NewsDto>{
-		private static final long serialVersionUID = -7199971221300636848L;
 		private NewsDto news = new NewsDto();// 获取页面提交参数
 		private boolean success;
 		private String message;
@@ -123,13 +122,6 @@ ModelDriven<NewsDto>{
 
 		
 		/* get set */
-		public INewsService getNewsService() {
-			return newsService;
-		}
-
-		public void setNewsService(INewsService newsService) {
-			this.newsService = newsService;
-		}
 
 		public NewsDto getModel() {
 			return news;

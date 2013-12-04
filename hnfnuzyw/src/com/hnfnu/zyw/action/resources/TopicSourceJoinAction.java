@@ -12,9 +12,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.hnfnu.zyw.action.base.AopNoSuchMethodErrorSolveBaseAction;
 import com.hnfnu.zyw.dto.resources.TopicSourceJoinDto;
 import com.hnfnu.zyw.service.resources.ITopicSourceJoinService;
-import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 @Controller("topicSourceJoinAction")
@@ -23,9 +23,8 @@ import com.opensymphony.xwork2.ModelDriven;
 @Results( { @Result(name = "success", type = "json", params = { "root",
 		"action" }) })
 @Namespace("/resources")
-public class TopicSourceJoinAction extends ActionSupport implements
+public class TopicSourceJoinAction extends AopNoSuchMethodErrorSolveBaseAction implements
 		ModelDriven<TopicSourceJoinDto> {
-	private static final long serialVersionUID = -5962640394246361991L;
 	private TopicSourceJoinDto topicSourceJoin = new TopicSourceJoinDto();// 获取页面提交参数
 	private boolean success;
 	private String message;
@@ -91,13 +90,6 @@ public class TopicSourceJoinAction extends ActionSupport implements
 		this.seletedSourceIds = seletedSourceIds;
 	}
 
-	/*public int getTopicId() {
-		return topicId;
-	}
-
-	public void setTopicId(int topicId) {
-		this.topicId = topicId;
-	}*/
 
 	public int[] getSourceIds() {
 		return sourceIds;

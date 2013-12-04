@@ -1,6 +1,5 @@
 package com.hnfnu.zyw.action.system;
 
-import java.util.Date;
 import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Action;
@@ -13,9 +12,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.hnfnu.zyw.action.base.AopNoSuchMethodErrorSolveBaseAction;
 import com.hnfnu.zyw.dto.system.StudentDto;
 import com.hnfnu.zyw.service.system.IStudentService;
-import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 
@@ -24,9 +23,8 @@ import com.opensymphony.xwork2.ModelDriven;
 @ParentPackage("json-default")
 @Results({ @Result(name = "success", type = "json", params = { "root", "action" }) })
 @Namespace("/system")
-public class StundetAction extends ActionSupport implements
+public class StundetAction extends AopNoSuchMethodErrorSolveBaseAction implements
 ModelDriven<StudentDto>{
-	private static final long serialVersionUID = -7199971221300636848L;
 	private StudentDto student = new StudentDto();// 获取页面提交参数
 	private boolean success;
 	private String message;
@@ -161,13 +159,6 @@ ModelDriven<StudentDto>{
 	}
 	
 	/* get set */
-	public IStudentService getStudentService() {
-		return studentService;
-	}
-
-	public void setStudentService(IStudentService studentService) {
-		this.studentService = studentService;
-	}
 
 	public StudentDto getModel() {
 		return student;

@@ -12,9 +12,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.hnfnu.zyw.action.base.AopNoSuchMethodErrorSolveBaseAction;
 import com.hnfnu.zyw.service.system.IUserRoleVoService;
 import com.hnfnu.zyw.vo.UserRoleVo;
-import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 @Controller("userRoleVoAction")
@@ -22,16 +22,12 @@ import com.opensymphony.xwork2.ModelDriven;
 @ParentPackage("json-default")
 @Results({ @Result(name = "success", type = "json", params = { "root", "action" }) })
 @Namespace("/system")
-public class UserRoleVoAction extends ActionSupport implements
+public class UserRoleVoAction extends AopNoSuchMethodErrorSolveBaseAction implements
 		ModelDriven<UserRoleVo> {
-	private static final long serialVersionUID = -2269476204981797813L;
 	private UserRoleVo userRoleVo = new UserRoleVo();// 获取页面提交参数
 	private boolean success;
 	private String message;
 	private Map<String, Object> roleByUser;
-	
-	
-	
 	/**
 	 * 通过用户id，得到该用户已经添加的角色和未添加的角色
 	 */
@@ -44,12 +40,6 @@ public class UserRoleVoAction extends ActionSupport implements
 		roleByUser = userRoleVoService.roleByUser(userRoleVo.getUserId());
 		return SUCCESS;
 	}
-	
-	
-	
-	
-	
-	
 	public UserRoleVo getUserRoleVo() {
 		return userRoleVo;
 	}
@@ -74,14 +64,6 @@ public class UserRoleVoAction extends ActionSupport implements
 		this.message = message;
 	}
 
-	public IUserRoleVoService getUserRoleVoService() {
-		return userRoleVoService;
-	}
-
-	public void setUserRoleVoService(IUserRoleVoService userRoleVoService) {
-		this.userRoleVoService = userRoleVoService;
-	}
-
 	public Map<String, Object> getRoleByUser() {
 		return roleByUser;
 	}
@@ -89,8 +71,4 @@ public class UserRoleVoAction extends ActionSupport implements
 	public UserRoleVo getModel() {
 		return userRoleVo;
 	}
-
-	
-	
-	
 }

@@ -12,9 +12,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.hnfnu.zyw.action.base.AopNoSuchMethodErrorSolveBaseAction;
 import com.hnfnu.zyw.dto.system.UserDto;
 import com.hnfnu.zyw.service.system.IUserService;
-import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 @Controller("userAction")
@@ -22,12 +22,8 @@ import com.opensymphony.xwork2.ModelDriven;
 @ParentPackage("json-default")
 @Results({ @Result(name = "success", type = "json", params = { "root", "action" }) })
 @Namespace("/system")
-public class UserAction extends ActionSupport implements ModelDriven<UserDto> {
+public class UserAction extends AopNoSuchMethodErrorSolveBaseAction implements ModelDriven<UserDto> {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -7199971221300636848L;
 	private UserDto user = new UserDto();// 获取页面提交参数
 	private boolean success;
 	private String message;
@@ -128,13 +124,6 @@ public class UserAction extends ActionSupport implements ModelDriven<UserDto> {
 	}
 
 	/* get set */
-	public IUserService getUserService() {
-		return userService;
-	}
-
-	public void setUserService(IUserService userService) {
-		this.userService = userService;
-	}
 
 	public UserDto getModel() {
 		return user;

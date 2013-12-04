@@ -13,13 +13,13 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.hnfnu.zyw.action.base.AopNoSuchMethodErrorSolveBaseAction;
 import com.hnfnu.zyw.dto.resources.CourseDto;
 import com.hnfnu.zyw.dto.resources.GradeDto;
 import com.hnfnu.zyw.dto.resources.SubjectDto;
 import com.hnfnu.zyw.service.resources.ICourseService;
 import com.hnfnu.zyw.service.resources.IGradeService;
 import com.hnfnu.zyw.service.resources.ISubjectService;
-import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 @Controller("courseAction")
@@ -28,10 +28,9 @@ import com.opensymphony.xwork2.ModelDriven;
 @Results( { @Result(name = "success", type = "json", params = { "root",
 		"action" }) })
 @Namespace("/resources")
-public class CourseAction extends ActionSupport implements
+public class CourseAction extends AopNoSuchMethodErrorSolveBaseAction implements
 		ModelDriven<CourseDto> {
 
-	private static final long serialVersionUID = -7199971221300636848L;
 	private CourseDto course = new CourseDto();// 获取页面提交参数
 	private List<GradeDto> gradeList;
 	private List<SubjectDto> subjectList;
@@ -120,9 +119,6 @@ public class CourseAction extends ActionSupport implements
 	/* get set */
 	
 	
-	public ICourseService getCourseService() {
-		return courseService;
-	}
 
 	public List<GradeDto> getGradeList() {
 		return gradeList;
@@ -138,27 +134,6 @@ public class CourseAction extends ActionSupport implements
 
 	public void setSubjectList(List<SubjectDto> subjectList) {
 		this.subjectList = subjectList;
-	}
-
-	public void setCourseService(ICourseService courseService) {
-		this.courseService = courseService;
-	}
-	
-
-	public IGradeService getGradeService() {
-		return gradeService;
-	}
-
-	public void setGradeService(IGradeService gradeService) {
-		this.gradeService = gradeService;
-	}
-
-	public ISubjectService getSubjectService() {
-		return subjectService;
-	}
-
-	public void setSubjectService(ISubjectService subjectService) {
-		this.subjectService = subjectService;
 	}
 
 	public CourseDto getModel() {

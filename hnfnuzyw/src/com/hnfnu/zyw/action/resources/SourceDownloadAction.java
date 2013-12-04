@@ -14,17 +14,16 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.hnfnu.zyw.action.base.AopNoSuchMethodErrorSolveBaseAction;
 import com.hnfnu.zyw.dto.resources.SourceDto;
 import com.hnfnu.zyw.service.resources.ISourceService;
-import com.opensymphony.xwork2.ActionSupport;
 
 @Controller("sourceDownloadAction")
 @Scope("prototype")
 @ParentPackage("json-default")
 @Results({ @Result(name = "success", type = "stream", params = { "contentType", "application/octet-stream","inputName","inputStream","contentDisposition","filename='${fileName}'","bufferSize","4096" }) })
 @Namespace("/file")
-public class SourceDownloadAction extends ActionSupport {
-	private static final long serialVersionUID = 7344069651943159764L;
+public class SourceDownloadAction extends AopNoSuchMethodErrorSolveBaseAction {
 	// fileNameÊÇ¾ø¶ÔÂ·¾¶
 	private String url;
 	private int id;
