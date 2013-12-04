@@ -42,9 +42,9 @@ ITopicSourceJoinDao{
 	public boolean addTopicSourceJoins(int topicId,List<TopicSourceJoinDto> topicSourceJoins) {
 		
 		String hql = "delete TopicSourceJoinDto where topicId=:topicId";
-		// ´ò¿ªSession
+		// 打开Session
 		Session session = this.getSession();
-		// ¿ªÊ¼ÊÂÎñ
+		// 开始事务
 		Transaction t = null;
 		try {
 			t = session.beginTransaction();
@@ -52,13 +52,13 @@ ITopicSourceJoinDao{
 			q.setParameter("topicId", topicId);
 			q.executeUpdate();
 			if(topicSourceJoins != null){
-			// Ñ­»·£¬²åÈë¼ÇÂ¼
+			// 循环，插入记录
 			for (int i = 0; i < topicSourceJoins.size(); i++) {
 				TopicSourceJoinDto topicSourceJoin = topicSourceJoins.get(i);
 
-				// ÔÚSession¼¶±ð»º´æuserRoleJoinÊµÀý
+				// 在Session级别缓存userRoleJoin实例
 				session.save(topicSourceJoin);
-				// Ã¿µ±ÀÛ¼ÓÆ÷ÊÇ20µÄ±¶ÊýÊ±£¬½«SessionÖÐµÄÊý¾ÝË¢ÈëÊý¾Ý¿â£¬²¢Çå¿ÕSession»º´æ
+				// 每当累加器是20的倍数时，将Session中的数据刷入数据库，并清空Session缓存
 				if (i % 20 == 0) {
 					session.flush();
 					session.clear();

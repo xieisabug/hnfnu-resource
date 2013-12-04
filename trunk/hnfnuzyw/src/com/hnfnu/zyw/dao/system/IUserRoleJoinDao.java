@@ -7,10 +7,10 @@ import com.hnfnu.zyw.dto.system.UserRoleJoinDto;
 
 public interface IUserRoleJoinDao extends IBaseDao<UserRoleJoinDto> {
 
-	//Í¨¹ýuserIdÅúÁ¿É¾³ý¸ÃÓÃ»§ÒÑ¾­¹Ò½ÓµÄËùÓÐ½ÇÉ«
+	//通过userId批量删除该用户已经挂接的所有角色
 
 	public boolean deleteByUserId(int userId) throws Exception;
 	
-	//ÅúÁ¿Ìí¼ÓÓÃ»§½ÇÉ«¹Ò½Ó¼ÇÂ¼,ÔÚÌí¼ÓÖ®Ç°ÏÈÉ¾³ý¸ÃÓÃ»§µÄ½ÇÉ«
+	//批量添加用户角色挂接记录,在添加之前先删除该用户的角色
 	public boolean addUserRoleJoins(int userId,List<UserRoleJoinDto> userRoleJoins) throws Exception;
 }

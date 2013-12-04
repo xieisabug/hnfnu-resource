@@ -30,12 +30,12 @@ IStudentDao{
 				StudentDto s = this.get(id);
 				s.setBalance(s.getBalance() + count);
 				
-				//Óà¶î²»ÄÜÎª¸ºÊý
+				//余额不能为负数
 				if(s.getBalance()<0){
 						t.rollback();
 						return -1;
 				}
-				//Óà¶î²»ÄÜ³¬¹ýÕûÊý·¶Î§
+				//余额不能超过整数范围
 				if(s.getBalance() > 1000000000){
 					return -2;
 				}
@@ -55,7 +55,7 @@ IStudentDao{
 	}
 
 	/**
-	 * ÅúÁ¿×¢²áÑ§Éú
+	 * 批量注册学生
 	 */
 	public boolean addStudnets( ArrayList<StudentDto> students) {
 		Session session = this.getSession();

@@ -6,13 +6,13 @@ import com.hnfnu.zyw.dto.resources.CategoryDto;
 public interface ICategoryDao extends IBaseDao<CategoryDto> {
 	
 	/**
-	 * ·µ»Øµ±Ç°ÅÅÐòµÄ×î´óÊý
+	 * 返回当前排序的最大数
 	 * @return
 	 */
 	public int maxOrder();
 	
 	/**
-	 * ÖØÐÂ¸øÀà±ðÅÅÐò
+	 * 重新给类别排序
 	 * @param orders
 	 * @return
 	 */

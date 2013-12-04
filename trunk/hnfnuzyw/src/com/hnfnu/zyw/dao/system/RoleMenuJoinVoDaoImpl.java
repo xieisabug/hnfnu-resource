@@ -33,9 +33,9 @@ public class RoleMenuJoinVoDaoImpl extends BaseDao<RoleMenuJoinDto> implements
 	public boolean addRoleMenuJoins(int roleId,
 			List<RoleMenuJoinDto> roleMenuJoins) {
 		String hql = "delete RoleMenuJoinDto where roleId=:roleId";
-		// ´ò¿ªSession
+		// 打开Session
 		Session session = this.getSession();
-		// ¿ªÊ¼ÊÂÎñ
+		// 开始事务
 		Transaction t = null;
 		try {
 			t = session.beginTransaction();
@@ -43,13 +43,13 @@ public class RoleMenuJoinVoDaoImpl extends BaseDao<RoleMenuJoinDto> implements
 			q.setParameter("roleId", roleId);
 			q.executeUpdate();
 			if (roleMenuJoins != null) {
-				// Ñ­»·£¬²åÈë¼ÇÂ¼
+				// 循环，插入记录
 				for (int i = 0; i < roleMenuJoins.size(); i++) {
 					RoleMenuJoinDto roleMenuJoin = roleMenuJoins.get(i);
 
-					// ÔÚSession¼¶±ð»º´æuserRoleJoinÊµÀý
+					// 在Session级别缓存userRoleJoin实例
 					session.save(roleMenuJoin);
-					// Ã¿µ±ÀÛ¼ÓÆ÷ÊÇ20µÄ±¶ÊýÊ±£¬½«SessionÖÐµÄÊý¾ÝË¢ÈëÊý¾Ý¿â£¬²¢Çå¿ÕSession»º´æ
+					// 每当累加器是20的倍数时，将Session中的数据刷入数据库，并清空Session缓存
 					if (i % 20 == 0) {
 						session.flush();
 						session.clear();

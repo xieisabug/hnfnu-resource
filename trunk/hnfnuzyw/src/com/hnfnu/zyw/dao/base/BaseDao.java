@@ -14,8 +14,8 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 public class BaseDao<T> extends HibernateDaoSupport implements IBaseDao<T>{
 	/**
-	 * ´Ë´¦²»ÄÜÊ¹ÓÃsetSessionFactory×¢Èë£¬ÒòÎªsetSessionFactoryÔÚHibernateDaoSupport
-	 * ÖÐÒÑ¾­¶¨ÒåÁË¶øÇÒ»¹ÊÇfinalµÄ£¬ËùÒÔ²»ÄÜ±»¸²¸Ç
+	 * 此处不能使用setSessionFactory注入，因为setSessionFactory在HibernateDaoSupport
+	 * 中已经定义了而且还是final的，所以不能被覆盖
 	 * @param sessionFactory
 	 */
 	@Resource(name="sessionFactory")
@@ -23,14 +23,14 @@ public class BaseDao<T> extends HibernateDaoSupport implements IBaseDao<T>{
 		super.setSessionFactory(sessionFactory);
 	}
 	/**
-	 * ´´½¨Ò»¸öClassµÄ¶ÔÏóÀ´»ñÈ¡·ºÐÍµÄclass
+	 * 创建一个Class的对象来获取泛型的class
 	 */
 	private Class<T> clz;
 	
 	@SuppressWarnings("unchecked")
 	public Class<T> getClz() {
 		if(clz==null) {
-			//»ñÈ¡·ºÐÍµÄClass¶ÔÏó
+			//获取泛型的Class对象
 			clz = ((Class<T>)
 					(((ParameterizedType)(this.getClass().getGenericSuperclass())).getActualTypeArguments()[0]));
 		}
@@ -95,7 +95,7 @@ public class BaseDao<T> extends HibernateDaoSupport implements IBaseDao<T>{
 		Query cquery = session1.createQuery(cq);
 		Query query = session2.createQuery(hql);
 		
-		//ÉèÖÃ²ÎÊý
+		//设置参数
 		setParameter(query, args);
 		setParameter(cquery, args);
 		Pager<T> pages = new Pager<T>();

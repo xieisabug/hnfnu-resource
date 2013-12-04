@@ -41,9 +41,9 @@ public class UserRoleJoinDaoImpl extends BaseDao<UserRoleJoinDto> implements
 	public boolean addUserRoleJoins(int userId,List<UserRoleJoinDto> userRoleJoins) {
 		
 		String hql = "delete UserRoleJoinDto where userId=:userId";
-		// ´ò¿ªSession
+		// 打开Session
 		Session session = this.getSession();
-		// ¿ªÊ¼ÊÂÎñ
+		// 开始事务
 		Transaction t = null;
 		try {
 			t = session.beginTransaction();
@@ -51,13 +51,13 @@ public class UserRoleJoinDaoImpl extends BaseDao<UserRoleJoinDto> implements
 			q.setParameter("userId", userId);
 			q.executeUpdate();
 			if(userRoleJoins != null){
-			// Ñ­»·£¬²åÈë¼ÇÂ¼
+			// 循环，插入记录
 			for (int i = 0; i < userRoleJoins.size(); i++) {
 				UserRoleJoinDto userRoleJoin = userRoleJoins.get(i);
 
-				// ÔÚSession¼¶±ð»º´æuserRoleJoinÊµÀý
+				// 在Session级别缓存userRoleJoin实例
 				session.save(userRoleJoin);
-				// Ã¿µ±ÀÛ¼ÓÆ÷ÊÇ20µÄ±¶ÊýÊ±£¬½«SessionÖÐµÄÊý¾ÝË¢ÈëÊý¾Ý¿â£¬²¢Çå¿ÕSession»º´æ
+				// 每当累加器是20的倍数时，将Session中的数据刷入数据库，并清空Session缓存
 				if (i % 20 == 0) {
 					session.flush();
 					session.clear();
