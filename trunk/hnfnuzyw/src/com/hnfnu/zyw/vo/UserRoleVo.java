@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.vo;
+ï»¿package com.hnfnu.zyw.vo;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -16,26 +16,26 @@ import com.hnfnu.zyw.dto.system.pk.UserRolePK;
 public class UserRoleVo implements Serializable{
 	private static final long serialVersionUID = 5319144941589358337L;
 	private Integer userId;
-	// ÓÃ»§Ãû
+	// ç”¨æˆ·å
 	private String username;
-	// ÃÜÂë
+	// å¯†ç 
 	private String password;
-	// ĞÕÃû
+	// å§“å
 	private String realname;
-	// Éí·İÖ¤
+	// èº«ä»½è¯
 	private String idcard;
-	// ĞÔ±ğ
+	// æ€§åˆ«
 	private String sex;
 	// QQ
 	private String qq;
-	// µç»°
+	// ç”µè¯
 	private String telephone;
-	// ÉúÈÕ
+	// ç”Ÿæ—¥
 	private Date birth;
-	// ²¿ÃÅ
+	// éƒ¨é—¨
 	private String department;
 	private Integer roleId;
-	// ½ÇÉ«Ãû
+	// è§’è‰²å
 	private String rolename;
 
 	public UserRoleVo() {

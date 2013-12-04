@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.service.system;
+ï»¿package com.hnfnu.zyw.service.system;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,9 +19,9 @@ public class FunctionServiceImpl implements IFunctionService {
 	public IFunctionDao functionDao;
 
 	/**
-	 * Ôö¼ÓÒ»¸ö¹¦ÄÜ
-	 * @param Ò»¸ö¹¦ÄÜ¶ÔÏó
-	 * @return ³É¹¦·µ»Øtrue£¬Ê§°Ü·µ»Øfalse
+	 * å¢åŠ ä¸€ä¸ªåŠŸèƒ½
+	 * @param ä¸€ä¸ªåŠŸèƒ½å¯¹è±¡
+	 * @return æˆåŠŸè¿”å›trueï¼Œå¤±è´¥è¿”å›false
 	 */
 	public boolean add(FunctionDto function) {
 		try {
@@ -34,9 +34,9 @@ public class FunctionServiceImpl implements IFunctionService {
 	}
 
 	/**
-	 * É¾³ıÒ»¸ö¹¦ÄÜ
-	 * @param ÒªÉ¾³ıµÄ¹¦ÄÜµÄid
-	 * @return ³É¹¦·µ»Øtrue£¬Ê§°Ü·µ»Øfalse
+	 * åˆ é™¤ä¸€ä¸ªåŠŸèƒ½
+	 * @param è¦åˆ é™¤çš„åŠŸèƒ½çš„id
+	 * @return æˆåŠŸè¿”å›trueï¼Œå¤±è´¥è¿”å›false
 	 */
 	public boolean delete(FunctionDto function) {
 		try {
@@ -49,9 +49,9 @@ public class FunctionServiceImpl implements IFunctionService {
 	}
 
 	/**
-	 * ¸üĞÂÒ»¸ö¹¦ÄÜ
-	 * @param ÒÑ¾­¸üĞÂµÄ¹¦ÄÜµÄ¶ÔÏó
-	 * @return ³É¹¦·µ»Øtrue£¬Ê§°Ü·µ»Øfalse
+	 * æ›´æ–°ä¸€ä¸ªåŠŸèƒ½
+	 * @param å·²ç»æ›´æ–°çš„åŠŸèƒ½çš„å¯¹è±¡
+	 * @return æˆåŠŸè¿”å›trueï¼Œå¤±è´¥è¿”å›false
 	 */
 	public boolean update(FunctionDto function) {
 		try {
@@ -64,9 +64,9 @@ public class FunctionServiceImpl implements IFunctionService {
 	}
 
 	/**
-	 * ¶ÁÈ¡Ò»¸ö¹¦ÄÜ
-	 * @param ¶ÁÈ¡µÄ¹¦ÄÜµÄid
-	 * @return ·µ»Ø¶ÁÈ¡µÄ¹¦ÄÜ¶ÔÏó
+	 * è¯»å–ä¸€ä¸ªåŠŸèƒ½
+	 * @param è¯»å–çš„åŠŸèƒ½çš„id
+	 * @return è¿”å›è¯»å–çš„åŠŸèƒ½å¯¹è±¡
 	 */
 	public FunctionDto load(FunctionDto function) {
 		try {
@@ -78,8 +78,8 @@ public class FunctionServiceImpl implements IFunctionService {
 	}
 
 	/**
-	 * »ñÈ¡ËùÓĞ¹¦ÄÜ
-	 * @return »ñÈ¡µ½µÄ¹¦ÄÜ¼¯ºÏ
+	 * è·å–æ‰€æœ‰åŠŸèƒ½
+	 * @return è·å–åˆ°çš„åŠŸèƒ½é›†åˆ
 	 */
 	public List<FunctionDto> list() {
 		String hql = "from FunctionDto";
@@ -93,8 +93,8 @@ public class FunctionServiceImpl implements IFunctionService {
 	}
 
 	/**
-	 * ÁĞ³öËùÓĞµÄ¹¦ÄÜ
-	 * @return ±£´æÁËËùÓĞ¹¦ÄÜµÄMap
+	 * åˆ—å‡ºæ‰€æœ‰çš„åŠŸèƒ½
+	 * @return ä¿å­˜äº†æ‰€æœ‰åŠŸèƒ½çš„Map
 	 */
 	public Map<String, Object> listFun() {
 		String hql = "from FunctionDto";

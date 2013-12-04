@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.service.website;
+ï»¿package com.hnfnu.zyw.service.website;
 
 import java.util.HashMap;
 import java.util.List;
@@ -22,9 +22,9 @@ public class NewsServiceImpl implements INewsService {
 	public INewsDao newsDao;
 
 	/**
-	 * Ôö¼ÓÒ»¸öĞÂÎÅ
-	 * @param Ò»¸öĞÂÎÅ¶ÔÏó
-	 * @return ³É¹¦·µ»Øtrue£¬Ê§°Ü·µ»Øfalse
+	 * å¢åŠ ä¸€ä¸ªæ–°é—»
+	 * @param ä¸€ä¸ªæ–°é—»å¯¹è±¡
+	 * @return æˆåŠŸè¿”å›trueï¼Œå¤±è´¥è¿”å›false
 	 */
 	public boolean add(NewsDto news) {
 		try {
@@ -37,9 +37,9 @@ public class NewsServiceImpl implements INewsService {
 	}
 
 	/**
-	 * É¾³ıÒ»¸öĞÂÎÅ
-	 * @param ÒªÉ¾³ıµÄĞÂÎÅµÄid
-	 * @return ³É¹¦·µ»Øtrue£¬Ê§°Ü·µ»Øfalse
+	 * åˆ é™¤ä¸€ä¸ªæ–°é—»
+	 * @param è¦åˆ é™¤çš„æ–°é—»çš„id
+	 * @return æˆåŠŸè¿”å›trueï¼Œå¤±è´¥è¿”å›false
 	 */
 	public boolean delete(NewsDto news) {
 		try {
@@ -58,9 +58,9 @@ public class NewsServiceImpl implements INewsService {
 	}
 
 	/**
-	 * ¸üĞÂÒ»¸öĞÂÎÅ
-	 * @param ÒÑ¾­¸üĞÂµÄĞÂÎÅµÄ¶ÔÏó
-	 * @return ³É¹¦·µ»Øtrue£¬Ê§°Ü·µ»Øfalse
+	 * æ›´æ–°ä¸€ä¸ªæ–°é—»
+	 * @param å·²ç»æ›´æ–°çš„æ–°é—»çš„å¯¹è±¡
+	 * @return æˆåŠŸè¿”å›trueï¼Œå¤±è´¥è¿”å›false
 	 */
 	public boolean update(NewsDto news) {
 		try {
@@ -73,9 +73,9 @@ public class NewsServiceImpl implements INewsService {
 	}
 
 	/**
-	 * ¶ÁÈ¡Ò»¸öĞÂÎÅ
-	 * @param ¶ÁÈ¡µÄĞÂÎÅµÄid
-	 * @return ·µ»Ø¶ÁÈ¡µÄĞÂÎÅ¶ÔÏó
+	 * è¯»å–ä¸€ä¸ªæ–°é—»
+	 * @param è¯»å–çš„æ–°é—»çš„id
+	 * @return è¿”å›è¯»å–çš„æ–°é—»å¯¹è±¡
 	 */
 	public NewsDto load(NewsDto news) {
 		try {
@@ -87,8 +87,8 @@ public class NewsServiceImpl implements INewsService {
 	}
 
 	/**
-	 * »ñÈ¡ËùÓĞĞÂÎÅ
-	 * @return »ñÈ¡µ½µÄĞÂÎÅ¼¯ºÏ
+	 * è·å–æ‰€æœ‰æ–°é—»
+	 * @return è·å–åˆ°çš„æ–°é—»é›†åˆ
 	 */
 	public List<NewsDto> list() {
 		String hql = "from NewsDto";
@@ -102,8 +102,8 @@ public class NewsServiceImpl implements INewsService {
 	}
 
 	/**
-	 * ÁĞ³öËùÓĞµÄĞÂÎÅ
-	 * @return ±£´æÁËËùÓĞĞÂÎÅµÄMap
+	 * åˆ—å‡ºæ‰€æœ‰çš„æ–°é—»
+	 * @return ä¿å­˜äº†æ‰€æœ‰æ–°é—»çš„Map
 	 */
 	public Map<String, Object> listNews() {
 		String hql = "from NewsDto";

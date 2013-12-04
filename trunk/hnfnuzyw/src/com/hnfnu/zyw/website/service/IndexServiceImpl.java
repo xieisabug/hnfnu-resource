@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.website.service;
+ï»¿package com.hnfnu.zyw.website.service;
 
 import java.util.HashMap;
 import java.util.List;
@@ -45,8 +45,8 @@ public class IndexServiceImpl implements IIndexService {
 		List<TopicDto> topicList = null;
 		List<GradeDto> gradeList = null;
 		List<SourceVo> sourceVoList = null;
-		int topicNum = 10;//Ä¬ÈÏµÄ×¨ÌâÏÔÊ¾10¸ö
-		int sourceLine = 4;//Ä¬ÈÏÏÔÊ¾ËÄĞĞ×ÊÔ´
+		int topicNum = 10;//é»˜è®¤çš„ä¸“é¢˜æ˜¾ç¤º10ä¸ª
+		int sourceLine = 4;//é»˜è®¤æ˜¾ç¤ºå››è¡Œèµ„æº
 		try {
 			topicList = topicDao.list(hql1);
 			subjectList = subjectDao.list(hql2);

@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.service.resources;
+ï»¿package com.hnfnu.zyw.service.resources;
 
 import com.hnfnu.zyw.dto.resources.TopicSourceJoinDto;
 
@@ -15,7 +15,7 @@ public interface ITopicSourceJoinService {
 	public int[] QueryAllSourceidsByTopicId(int topicId);
 
 	/**
-	 * Í¨¹ıtopicIdÅúÁ¿É¾³ı¸Ã×¨ÌâÒÑ¾­¹Ò½ÓµÄËùÓĞ×ÊÔ´
+	 * é€šè¿‡topicIdæ‰¹é‡åˆ é™¤è¯¥ä¸“é¢˜å·²ç»æŒ‚æ¥çš„æ‰€æœ‰èµ„æº
 	 * 
 	 * @param topicId
 	 * @return
@@ -23,7 +23,7 @@ public interface ITopicSourceJoinService {
 	public boolean deleteByTopicId(int topicId);
 
 	/**
-	 * ÅúÁ¿Ìí¼Ó×¨Ìâ×ÊÔ´¹Ò½Ó¼ÇÂ¼£¬¹Ò½ÓÖ®Ç°É¾³ı¸Ä×ÊÔ´µÄËùÓĞ½ÇÉ«
+	 * æ‰¹é‡æ·»åŠ ä¸“é¢˜èµ„æºæŒ‚æ¥è®°å½•ï¼ŒæŒ‚æ¥ä¹‹å‰åˆ é™¤æ”¹èµ„æºçš„æ‰€æœ‰è§’è‰²
 	 * 
 	 * @param topicSourceIds
 	 * @return

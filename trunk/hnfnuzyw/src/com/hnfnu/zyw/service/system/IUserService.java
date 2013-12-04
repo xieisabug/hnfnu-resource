@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.service.system;
+ï»¿package com.hnfnu.zyw.service.system;
 
 import java.util.Map;
 
@@ -14,7 +14,7 @@ public interface IUserService {
 	public UserDto load(int id);
 
 	/**
-	 * ²éÑ¯Êı¾İ¿âËùÓĞ¼ÇÂ¼,ÓÃMap×°£¬·½±ãÓÃÓÚ·ÖÒ³ÏÔÊ¾
+	 * æŸ¥è¯¢æ•°æ®åº“æ‰€æœ‰è®°å½•,ç”¨Mapè£…ï¼Œæ–¹ä¾¿ç”¨äºåˆ†é¡µæ˜¾ç¤º
 	 * 
 	 * @return
 	 */
@@ -22,7 +22,7 @@ public interface IUserService {
 	
 	public boolean updatePwd(int id,String newPassword);
 	/**
-	 * ÑéÖ¤ÓÃ»§ÃûÊÇ·ñÒÑ¾­´æÔÚ
+	 * éªŒè¯ç”¨æˆ·åæ˜¯å¦å·²ç»å­˜åœ¨
 	 * @param username
 	 * @return
 	 */

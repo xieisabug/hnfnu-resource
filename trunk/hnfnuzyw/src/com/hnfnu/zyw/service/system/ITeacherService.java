@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.service.system;
+ï»¿package com.hnfnu.zyw.service.system;
 
 import java.util.List;
 import java.util.Map;
@@ -16,12 +16,12 @@ public interface ITeacherService {
 
 	
 	/**
-	 * »ñÈ¡±íÖÐËùÓÐÀÏÊ¦£¬ÊÇÓÃList×°µÄ
+	 * èŽ·å–è¡¨ä¸­æ‰€æœ‰è€å¸ˆï¼Œæ˜¯ç”¨Listè£…çš„
 	 * @return
 	 */
 	public List<TeacherDto> list();
 	/**
-	 *»ñÈ¡±íÖÐËùÓÐÀÏÊ¦£¬ÓÃMap×°£¬ÎªÁË·ÖÒ³µÄÐèÒª¼ÓÉÏRowsºÍTotal
+	 *èŽ·å–è¡¨ä¸­æ‰€æœ‰è€å¸ˆï¼Œç”¨Mapè£…ï¼Œä¸ºäº†åˆ†é¡µçš„éœ€è¦åŠ ä¸ŠRowså’ŒTotal
 	 * @return
 	 */
 	public Map<String, Object> listTeach();

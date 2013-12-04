@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.service.website;
+ï»¿package com.hnfnu.zyw.service.website;
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,9 +20,9 @@ public class PicturesServiceImpl implements IPicturesService{
 	
 	
 	/**
-	 * Ôö¼ÓÒ»¸öÍ¼Æ¬
-	 * @param Ò»¸öÍ¼Æ¬¶ÔÏó
-	 * @return ³É¹¦·µ»Øtrue£¬Ê§°Ü·µ»Øfalse
+	 * å¢åŠ ä¸€ä¸ªå›¾ç‰‡
+	 * @param ä¸€ä¸ªå›¾ç‰‡å¯¹è±¡
+	 * @return æˆåŠŸè¿”å›trueï¼Œå¤±è´¥è¿”å›false
 	 */
 	public boolean add(PicturesDto pictures) {
 		try {
@@ -35,9 +35,9 @@ public class PicturesServiceImpl implements IPicturesService{
 	}
 
 	/**
-	 * É¾³ıÒ»¸öÍ¼Æ¬
-	 * @param ÒªÉ¾³ıµÄÍ¼Æ¬µÄid
-	 * @return ³É¹¦·µ»Øtrue£¬Ê§°Ü·µ»Øfalse
+	 * åˆ é™¤ä¸€ä¸ªå›¾ç‰‡
+	 * @param è¦åˆ é™¤çš„å›¾ç‰‡çš„id
+	 * @return æˆåŠŸè¿”å›trueï¼Œå¤±è´¥è¿”å›false
 	 */
 	public boolean delete(PicturesDto pictures) {
 		try {
@@ -50,9 +50,9 @@ public class PicturesServiceImpl implements IPicturesService{
 	}
 
 	/**
-	 * ¸üĞÂÒ»¸öÍ¼Æ¬
-	 * @param ÒÑ¾­¸üĞÂµÄÍ¼Æ¬µÄ¶ÔÏó
-	 * @return ³É¹¦·µ»Øtrue£¬Ê§°Ü·µ»Øfalse
+	 * æ›´æ–°ä¸€ä¸ªå›¾ç‰‡
+	 * @param å·²ç»æ›´æ–°çš„å›¾ç‰‡çš„å¯¹è±¡
+	 * @return æˆåŠŸè¿”å›trueï¼Œå¤±è´¥è¿”å›false
 	 */
 	public boolean update(PicturesDto pictures) {
 		try {
@@ -65,9 +65,9 @@ public class PicturesServiceImpl implements IPicturesService{
 	}
 
 	/**
-	 * ¶ÁÈ¡Ò»¸öÍ¼Æ¬
-	 * @param ¶ÁÈ¡µÄÍ¼Æ¬µÄid
-	 * @return ·µ»Ø¶ÁÈ¡µÄÍ¼Æ¬¶ÔÏó
+	 * è¯»å–ä¸€ä¸ªå›¾ç‰‡
+	 * @param è¯»å–çš„å›¾ç‰‡çš„id
+	 * @return è¿”å›è¯»å–çš„å›¾ç‰‡å¯¹è±¡
 	 */
 	public PicturesDto load(PicturesDto pictures) {
 		try {
@@ -79,8 +79,8 @@ public class PicturesServiceImpl implements IPicturesService{
 	}
 
 	/**
-	 * »ñÈ¡ËùÓĞÍ¼Æ¬
-	 * @return »ñÈ¡µ½µÄÍ¼Æ¬¼¯ºÏ
+	 * è·å–æ‰€æœ‰å›¾ç‰‡
+	 * @return è·å–åˆ°çš„å›¾ç‰‡é›†åˆ
 	 */
 	public List<PicturesDto> list() {
 		String hql = "from PicturesDto where display=1";
@@ -94,8 +94,8 @@ public class PicturesServiceImpl implements IPicturesService{
 	}
 
 	/**
-	 * ÁĞ³öËùÓĞµÄÍ¼Æ¬
-	 * @return ±£´æÁËËùÓĞÍ¼Æ¬µÄMap
+	 * åˆ—å‡ºæ‰€æœ‰çš„å›¾ç‰‡
+	 * @return ä¿å­˜äº†æ‰€æœ‰å›¾ç‰‡çš„Map
 	 */
 	public Map<String, Object> listPictures() {
 		String hql = "from PicturesDto";

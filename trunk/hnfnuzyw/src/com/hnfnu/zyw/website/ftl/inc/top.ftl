@@ -1,4 +1,4 @@
-<div id="top">
+﻿<div id="top">
     	<div id="logo"></div>
         <div id="top_menu">
             <div style="background:url(images/black.jpg); height:4px; width:433px; float:left;"></div>

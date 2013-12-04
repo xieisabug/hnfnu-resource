@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.service.resources;
+ï»¿package com.hnfnu.zyw.service.resources;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -63,7 +63,7 @@ public class SourceVoService implements ISourceVoService {
 	}
 
 	/**
-	 * ¸ù¾İ¿Î³ÌºÍÀà±ğ»ñµÃ×ÊÔ´
+	 * æ ¹æ®è¯¾ç¨‹å’Œç±»åˆ«è·å¾—èµ„æº
 	 */
 	public Map<String, Object> listSourceVo(int courseId, int categoryId) {
 
@@ -77,7 +77,7 @@ public class SourceVoService implements ISourceVoService {
 	}
 	
 	/**
-	 * ¸ù¾İ¿Î³ÌºÍÀà±ğ»ñµÃ×ÊÔ´ÖÆ¶¨ÓÃ»§µÄ×ÊÔ´
+	 * æ ¹æ®è¯¾ç¨‹å’Œç±»åˆ«è·å¾—èµ„æºåˆ¶å®šç”¨æˆ·çš„èµ„æº
 	 */
 	public Map<String, Object> listSourceVoByUserId(int courseId, int categoryId,int userId) {
 
@@ -108,7 +108,7 @@ public class SourceVoService implements ISourceVoService {
 	
 
 	/**
-	 * »ñµÃËùÓĞµÄ×ÊÔ´
+	 * è·å¾—æ‰€æœ‰çš„èµ„æº
 	 */
 	public List<Map<String, Object>> allTree() {
 		String sql = "FROM SourceVo ORDER BY gradeId,subjectId,courseId ASC";
@@ -116,7 +116,7 @@ public class SourceVoService implements ISourceVoService {
 	}
 	
 	/**
-	 * »ñµÃÌØ¶¨ÓÃ»§µÄ×ÊÔ´Ê÷
+	 * è·å¾—ç‰¹å®šç”¨æˆ·çš„èµ„æºæ ‘
 	 */
 	public List<Map<String, Object>> treeByUserId(int userId) {
 		String sql = "FROM SourceVo WHERE createUserId=" + userId + "ORDER BY gradeId,subjectId,courseId ASC";
@@ -125,10 +125,10 @@ public class SourceVoService implements ISourceVoService {
 	
 	
 	private List<Map<String, Object>> getTree(String sql) {
-		List<Map<String, Object>> ret = new ArrayList<Map<String, Object>>();// ÓÃÀ´·µ»ØµÄmap
-		Map<String, Object> grade = null;// ÓÃÀ´´æ·ÅÄê¼¶µÄmap
+		List<Map<String, Object>> ret = new ArrayList<Map<String, Object>>();// ç”¨æ¥è¿”å›çš„map
+		Map<String, Object> grade = null;// ç”¨æ¥å­˜æ”¾å¹´çº§çš„map
 		List<Map<String, Object>> subjectList = null;
-		Map<String, Object> subject = null;// ÓÃÀ´´æ·Å¿ÆÄ¿µÄmap
+		Map<String, Object> subject = null;// ç”¨æ¥å­˜æ”¾ç§‘ç›®çš„map
 		List<Map<String, Object>> courseList = new ArrayList<Map<String, Object>>();
 		Map<String, Object> course = null;
 		List<Map<String, String>> categoryList = new ArrayList<Map<String, String>>();
@@ -136,17 +136,17 @@ public class SourceVoService implements ISourceVoService {
 		String voHQL = sql;
 		try {
 			List<SourceVo> l = sourceVoDao.list(voHQL);
-			int gradeId = 0;// µ±Ç°µÄÄê¼¶id
-			int subjectId = 0;// µ±Ç°µÄ¿ÆÄ¿id
-			int courseId = 0;// µ±Ç°¿Î³Ìid
-			String categoryContain = "";// ÓÃÓÚ±£´æÒÑ¾­¼ÓÈë¹ıµÄÀà±ğ
+			int gradeId = 0;// å½“å‰çš„å¹´çº§id
+			int subjectId = 0;// å½“å‰çš„ç§‘ç›®id
+			int courseId = 0;// å½“å‰è¯¾ç¨‹id
+			String categoryContain = "";// ç”¨äºä¿å­˜å·²ç»åŠ å…¥è¿‡çš„ç±»åˆ«
 			for (int i = 0; i < l.size(); i++) {
 				SourceVo sv = l.get(i);
-				// Èç¹ûµ±Ç°µÄÄê¼¶ºÍËù´¦ÀíµÄÊı¾İµÄÄê¼¶²»ÏàÍ¬£¬ËµÃ÷ÒÑ¾­»»ÁËÄê¼¶ÁË£¬
-				// ĞèÒªĞÂ½¨Ò»¸ömap,Í¬Ê±ÖØÖÃsubjectId£¬·ÀÖ¹´íÎó¡£
-				// ÖØĞÂÉú³É¿ÆÄ¿ÁĞ±í£¬È·±£¿ÆÄ¿ÁĞ±í±äÎª¿Õ£¬²¢ÇÒ¼ÓÈë»ù´¡Êı¾İ¡£
+				// å¦‚æœå½“å‰çš„å¹´çº§å’Œæ‰€å¤„ç†çš„æ•°æ®çš„å¹´çº§ä¸ç›¸åŒï¼Œè¯´æ˜å·²ç»æ¢äº†å¹´çº§äº†ï¼Œ
+				// éœ€è¦æ–°å»ºä¸€ä¸ªmap,åŒæ—¶é‡ç½®subjectIdï¼Œé˜²æ­¢é”™è¯¯ã€‚
+				// é‡æ–°ç”Ÿæˆç§‘ç›®åˆ—è¡¨ï¼Œç¡®ä¿ç§‘ç›®åˆ—è¡¨å˜ä¸ºç©ºï¼Œå¹¶ä¸”åŠ å…¥åŸºç¡€æ•°æ®ã€‚
 				if (sv.getGradeId() != gradeId) {
-					// ÊÇµÚÒ»´Î½øÀ´¾Í²»¼ÓÁË,ÒòÎªÃ»ÓĞ³õÊ¼»¯,µÚ¶ş´Î¼Ó½øÈ¥£¬¼ÓµÄÊÇÖ®Ç°Ò»ÂÖµÄ
+					// æ˜¯ç¬¬ä¸€æ¬¡è¿›æ¥å°±ä¸åŠ äº†,å› ä¸ºæ²¡æœ‰åˆå§‹åŒ–,ç¬¬äºŒæ¬¡åŠ è¿›å»ï¼ŒåŠ çš„æ˜¯ä¹‹å‰ä¸€è½®çš„
 					if (i != 0 && grade.get("name") != null) {
 						course.put("children", categoryList);
 						courseList.add(course);
@@ -157,22 +157,22 @@ public class SourceVoService implements ISourceVoService {
 					}
 					gradeId = sv.getGradeId();
 					subjectId = 0;
-					grade = new HashMap<String, Object>();// ÖØÖÃÄê¼¶µÄĞÅÏ¢
-					subjectList = new ArrayList<Map<String, Object>>();// ÖØÖÃ¿ÆÄ¿µÄĞÅÏ¢
+					grade = new HashMap<String, Object>();// é‡ç½®å¹´çº§çš„ä¿¡æ¯
+					subjectList = new ArrayList<Map<String, Object>>();// é‡ç½®ç§‘ç›®çš„ä¿¡æ¯
 					subject = new HashMap<String, Object>();
 					courseList = new ArrayList<Map<String, Object>>();
 					course = new HashMap<String, Object>();
 					categoryList = new ArrayList<Map<String, String>>();
-					// »ù´¡ĞÅÏ¢¼ÓÈë
+					// åŸºç¡€ä¿¡æ¯åŠ å…¥
 					grade.put("id", sv.getGradeId());
 					grade.put("name", sv.getGradeName());
 
 				}
-				// Èç¹ûµ±Ç°µÄÄê¼¶ÊÇÏàÍ¬µÄÄê¼¶£¬ÔòÒª½øÒ»²½ÅĞ¶Ï¿ÆÄ¿ÊÇ·ñÊÇÏàÍ¬
-				// Èç¹û¿ÆÄ¿²»ÏàÍ¬£¬ÔòËµÃ÷ÔÚÏàÍ¬Äê¼¶ÏÂ¸ü»»ÁË¿ÆÄ¿£¬Òª½«¿ÆÄ¿¼ÓÈëµ½
-				// ¿ÆÄ¿ÁĞ±í
+				// å¦‚æœå½“å‰çš„å¹´çº§æ˜¯ç›¸åŒçš„å¹´çº§ï¼Œåˆ™è¦è¿›ä¸€æ­¥åˆ¤æ–­ç§‘ç›®æ˜¯å¦æ˜¯ç›¸åŒ
+				// å¦‚æœç§‘ç›®ä¸ç›¸åŒï¼Œåˆ™è¯´æ˜åœ¨ç›¸åŒå¹´çº§ä¸‹æ›´æ¢äº†ç§‘ç›®ï¼Œè¦å°†ç§‘ç›®åŠ å…¥åˆ°
+				// ç§‘ç›®åˆ—è¡¨
 				if (sv.getSubjectId() != subjectId) {
-					// µÚÒ»´Î²»¼Ó£¬Ô­ÀíÍ¬ÉÏÃæ
+					// ç¬¬ä¸€æ¬¡ä¸åŠ ï¼ŒåŸç†åŒä¸Šé¢
 					if (i != 0 && subject.get("name") != null) {
 						course.put("children", categoryList);
 						courseList.add(course);
@@ -180,7 +180,7 @@ public class SourceVoService implements ISourceVoService {
 						subjectList.add(subject);
 						// subjectList.toString());
 					}
-					// ½øÈëÒ»¸öĞÂµÄ¿ÆÄ¿ÒªÖØÖÃ¿Î³ÌÁĞ±í
+					// è¿›å…¥ä¸€ä¸ªæ–°çš„ç§‘ç›®è¦é‡ç½®è¯¾ç¨‹åˆ—è¡¨
 					subjectId = sv.getSubjectId();
 					courseId = 0;
 					courseList = new ArrayList<Map<String, Object>>();
@@ -191,8 +191,8 @@ public class SourceVoService implements ISourceVoService {
 					subject.put("name", sv.getSubjectName());
 
 				}
-				// Èç¹ûµ±Ç°µÄ¿Î³Ì²»ÊÇÏàÍ¬µÄ¿Î³Ì£¬Ôò´´½¨ĞÂµÄÀà±ğ±í£¬²¢´æÈë
-				// µ±Ç°¿Î³ÌµÄ»ù±¾ĞÅÏ¢
+				// å¦‚æœå½“å‰çš„è¯¾ç¨‹ä¸æ˜¯ç›¸åŒçš„è¯¾ç¨‹ï¼Œåˆ™åˆ›å»ºæ–°çš„ç±»åˆ«è¡¨ï¼Œå¹¶å­˜å…¥
+				// å½“å‰è¯¾ç¨‹çš„åŸºæœ¬ä¿¡æ¯
 				if (courseId != sv.getCourseId()) {
 					if (i != 0 && course.get("name") != null) {
 						course.put("children", categoryList);
@@ -207,11 +207,11 @@ public class SourceVoService implements ISourceVoService {
 					course.put("name", sv.getCourseName());
 
 				}
-				// È¡³öËùÓĞµÄÀà±ğidºÍname,·Åµ½categoryÀïÈ¥
+				// å–å‡ºæ‰€æœ‰çš„ç±»åˆ«idå’Œname,æ”¾åˆ°categoryé‡Œå»
 				String categoryIds[] = sv.getCategoryIdList().split(",");
 				String categoryNames[] = sv.getCategoryNameList().split(",");
 				for (int j = 0; j < categoryIds.length; j++) {
-					// ¼ÓÈë¹ıµÄÀà±ğµÄid»á¼Óµ½categoryContain£¬ÒÔ%id%µÄĞÎÊ½
+					// åŠ å…¥è¿‡çš„ç±»åˆ«çš„idä¼šåŠ åˆ°categoryContainï¼Œä»¥%id%çš„å½¢å¼
 					if (!categoryContain.contains("%" + categoryIds[j] + "%")) {
 						category = new HashMap<String, String>();
 						category.put("id", categoryIds[j]);
@@ -239,25 +239,25 @@ public class SourceVoService implements ISourceVoService {
 	
 
 	public List<Map<String, Object>> courseTree() {
-		List<Map<String, Object>> ret = new ArrayList<Map<String, Object>>();// ÓÃÀ´·µ»ØµÄmap
-		Map<String, Object> grade = null;// ÓÃÀ´´æ·ÅÄê¼¶µÄmap
+		List<Map<String, Object>> ret = new ArrayList<Map<String, Object>>();// ç”¨æ¥è¿”å›çš„map
+		Map<String, Object> grade = null;// ç”¨æ¥å­˜æ”¾å¹´çº§çš„map
 		List<Map<String, Object>> subjectList = null;
-		Map<String, Object> subject = null;// ÓÃÀ´´æ·Å¿ÆÄ¿µÄmap
+		Map<String, Object> subject = null;// ç”¨æ¥å­˜æ”¾ç§‘ç›®çš„map
 		List<Map<String, Object>> courseList = new ArrayList<Map<String, Object>>();
 		Map<String, Object> course = null;
 		String voHQL = "FROM CourseGradeSubjectVo";
 		try {
 			List<CourseGradeSubjectVo> l = courseGradeSubjectDao.list(voHQL);
-			int gradeId = 0;// µ±Ç°µÄÄê¼¶id
-			int subjectId = 0;// µ±Ç°µÄ¿ÆÄ¿id
-			int courseId = 0;// µ±Ç°¿Î³Ìid
+			int gradeId = 0;// å½“å‰çš„å¹´çº§id
+			int subjectId = 0;// å½“å‰çš„ç§‘ç›®id
+			int courseId = 0;// å½“å‰è¯¾ç¨‹id
 			for (int i = 0; i < l.size(); i++) {
 				CourseGradeSubjectVo cgs = l.get(i);
-				// Èç¹ûµ±Ç°µÄÄê¼¶ºÍËù´¦ÀíµÄÊı¾İµÄÄê¼¶²»ÏàÍ¬£¬ËµÃ÷ÒÑ¾­»»ÁËÄê¼¶ÁË£¬
-				// ĞèÒªĞÂ½¨Ò»¸ömap,Í¬Ê±ÖØÖÃsubjectId£¬·ÀÖ¹´íÎó¡£
-				// ÖØĞÂÉú³É¿ÆÄ¿ÁĞ±í£¬È·±£¿ÆÄ¿ÁĞ±í±äÎª¿Õ£¬²¢ÇÒ¼ÓÈë»ù´¡Êı¾İ¡£
+				// å¦‚æœå½“å‰çš„å¹´çº§å’Œæ‰€å¤„ç†çš„æ•°æ®çš„å¹´çº§ä¸ç›¸åŒï¼Œè¯´æ˜å·²ç»æ¢äº†å¹´çº§äº†ï¼Œ
+				// éœ€è¦æ–°å»ºä¸€ä¸ªmap,åŒæ—¶é‡ç½®subjectIdï¼Œé˜²æ­¢é”™è¯¯ã€‚
+				// é‡æ–°ç”Ÿæˆç§‘ç›®åˆ—è¡¨ï¼Œç¡®ä¿ç§‘ç›®åˆ—è¡¨å˜ä¸ºç©ºï¼Œå¹¶ä¸”åŠ å…¥åŸºç¡€æ•°æ®ã€‚
 				if (cgs.getGradeId() != gradeId) {
-					// ÊÇµÚÒ»´Î½øÀ´¾Í²»¼ÓÁË,ÒòÎªÃ»ÓĞ³õÊ¼»¯,µÚ¶ş´Î¼Ó½øÈ¥£¬¼ÓµÄÊÇÖ®Ç°Ò»ÂÖµÄ
+					// æ˜¯ç¬¬ä¸€æ¬¡è¿›æ¥å°±ä¸åŠ äº†,å› ä¸ºæ²¡æœ‰åˆå§‹åŒ–,ç¬¬äºŒæ¬¡åŠ è¿›å»ï¼ŒåŠ çš„æ˜¯ä¹‹å‰ä¸€è½®çš„
 					if (i != 0 && grade.get("name") != null) {
 						courseList.add(course);
 						subject.put("children", courseList);
@@ -267,27 +267,27 @@ public class SourceVoService implements ISourceVoService {
 					}
 					gradeId = cgs.getGradeId();
 					subjectId = 0;
-					grade = new HashMap<String, Object>();// ÖØÖÃÄê¼¶µÄĞÅÏ¢
-					subjectList = new ArrayList<Map<String, Object>>();// ÖØÖÃ¿ÆÄ¿µÄĞÅÏ¢
+					grade = new HashMap<String, Object>();// é‡ç½®å¹´çº§çš„ä¿¡æ¯
+					subjectList = new ArrayList<Map<String, Object>>();// é‡ç½®ç§‘ç›®çš„ä¿¡æ¯
 					subject = new HashMap<String, Object>();
 					courseList = new ArrayList<Map<String, Object>>();
 					course = new HashMap<String, Object>();
-					// »ù´¡ĞÅÏ¢¼ÓÈë
+					// åŸºç¡€ä¿¡æ¯åŠ å…¥
 					grade.put("id", cgs.getGradeId());
 					grade.put("name", cgs.getGradeName());
 				}
-				// Èç¹ûµ±Ç°µÄÄê¼¶ÊÇÏàÍ¬µÄÄê¼¶£¬ÔòÒª½øÒ»²½ÅĞ¶Ï¿ÆÄ¿ÊÇ·ñÊÇÏàÍ¬
-				// Èç¹û¿ÆÄ¿²»ÏàÍ¬£¬ÔòËµÃ÷ÔÚÏàÍ¬Äê¼¶ÏÂ¸ü»»ÁË¿ÆÄ¿£¬Òª½«¿ÆÄ¿¼ÓÈëµ½
-				// ¿ÆÄ¿ÁĞ±í
+				// å¦‚æœå½“å‰çš„å¹´çº§æ˜¯ç›¸åŒçš„å¹´çº§ï¼Œåˆ™è¦è¿›ä¸€æ­¥åˆ¤æ–­ç§‘ç›®æ˜¯å¦æ˜¯ç›¸åŒ
+				// å¦‚æœç§‘ç›®ä¸ç›¸åŒï¼Œåˆ™è¯´æ˜åœ¨ç›¸åŒå¹´çº§ä¸‹æ›´æ¢äº†ç§‘ç›®ï¼Œè¦å°†ç§‘ç›®åŠ å…¥åˆ°
+				// ç§‘ç›®åˆ—è¡¨
 				if (cgs.getSubjectId() != subjectId) {
-					// µÚÒ»´Î²»¼Ó£¬Ô­ÀíÍ¬ÉÏÃæ
+					// ç¬¬ä¸€æ¬¡ä¸åŠ ï¼ŒåŸç†åŒä¸Šé¢
 					if (i != 0 && subject.get("name") != null) {
 						courseList.add(course);
 						subject.put("children", courseList);
 						subjectList.add(subject);
 						// subjectList.toString());
 					}
-					// ½øÈëÒ»¸öĞÂµÄ¿ÆÄ¿ÒªÖØÖÃ¿Î³ÌÁĞ±í
+					// è¿›å…¥ä¸€ä¸ªæ–°çš„ç§‘ç›®è¦é‡ç½®è¯¾ç¨‹åˆ—è¡¨
 					subjectId = cgs.getSubjectId();
 					courseId = 0;
 					courseList = new ArrayList<Map<String, Object>>();
@@ -296,8 +296,8 @@ public class SourceVoService implements ISourceVoService {
 					subject.put("id", cgs.getSubjectId());
 					subject.put("name", cgs.getSubjectName());
 				}
-				// Èç¹ûµ±Ç°µÄ¿Î³Ì²»ÊÇÏàÍ¬µÄ¿Î³Ì£¬Ôò´´½¨ĞÂµÄÀà±ğ±í£¬²¢´æÈë
-				// µ±Ç°¿Î³ÌµÄ»ù±¾ĞÅÏ¢
+				// å¦‚æœå½“å‰çš„è¯¾ç¨‹ä¸æ˜¯ç›¸åŒçš„è¯¾ç¨‹ï¼Œåˆ™åˆ›å»ºæ–°çš„ç±»åˆ«è¡¨ï¼Œå¹¶å­˜å…¥
+				// å½“å‰è¯¾ç¨‹çš„åŸºæœ¬ä¿¡æ¯
 				if (courseId != cgs.getId()) {
 					if (i != 0 && course.get("name") != null) {
 						courseList.add(course);

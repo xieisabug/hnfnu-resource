@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.service.resources;
+ï»¿package com.hnfnu.zyw.service.resources;
 
 import java.util.List;
 import java.util.Map;
@@ -9,14 +9,14 @@ public interface ISourceVoService {
 	public SourceVo load(int id);
 
 	/**
-	 * »ñÈ¡±íÖĞËùÓĞ¹¦ÄÜ£¬ÊÇÓÃList×°µÄ
+	 * è·å–è¡¨ä¸­æ‰€æœ‰åŠŸèƒ½ï¼Œæ˜¯ç”¨Listè£…çš„
 	 * 
 	 * @return
 	 */
 	public List<SourceVo> list();
 
 	/**
-	 *»ñÈ¡±íÖĞËùÓĞ¹¦ÄÜ£¬ÓÃMap×°£¬ÎªÁË·ÖÒ³µÄĞèÒª¼ÓÉÏRowsºÍTotal
+	 *è·å–è¡¨ä¸­æ‰€æœ‰åŠŸèƒ½ï¼Œç”¨Mapè£…ï¼Œä¸ºäº†åˆ†é¡µçš„éœ€è¦åŠ ä¸ŠRowså’ŒTotal
 	 * 
 	 * @return
 	 */
@@ -24,24 +24,24 @@ public interface ISourceVoService {
 	
 	
 	/**
-	 * »ñµÃÌØ¶¨ÓÃ»§µÄ×ÊÔ´Ê÷
+	 * è·å¾—ç‰¹å®šç”¨æˆ·çš„èµ„æºæ ‘
 	 */
 	public List<Map<String, Object>> treeByUserId(int userId);
 	
 	/**
-	 * ¸ù¾İ¿Î³ÌºÍÀà±ğ»ñµÃ×ÊÔ´ÖÆ¶¨ÓÃ»§µÄ×ÊÔ´
+	 * æ ¹æ®è¯¾ç¨‹å’Œç±»åˆ«è·å¾—èµ„æºåˆ¶å®šç”¨æˆ·çš„èµ„æº
 	 */
 	public Map<String, Object> listSourceVoByUserId(int courseId, int categoryId,int userId);
 	
 	/**
-	 *¸ù¾İcourseIdºÍcategoryId»ñµÃÏàÓ¦µÄ×ÊÁĞ±í£¬ÓÃMap×°£¬ÎªÁË·ÖÒ³µÄĞèÒª¼ÓÉÏRowsºÍTotal
+	 *æ ¹æ®courseIdå’ŒcategoryIdè·å¾—ç›¸åº”çš„èµ„åˆ—è¡¨ï¼Œç”¨Mapè£…ï¼Œä¸ºäº†åˆ†é¡µçš„éœ€è¦åŠ ä¸ŠRowså’ŒTotal
 	 * 
 	 * @return
 	 */
 	public Map<String, Object> listSourceVo(int courseId,int categoryId);
 	
 	/**
-	 *¸ù¾İgradeIdºÍsubjectId»ñµÃÇ°16¸öÏàÓ¦µÄ×ÊÁĞ±í£¬¸ù¾İä¯ÀÀ´ÎÊıÅÅĞò
+	 *æ ¹æ®gradeIdå’ŒsubjectIdè·å¾—å‰16ä¸ªç›¸åº”çš„èµ„åˆ—è¡¨ï¼Œæ ¹æ®æµè§ˆæ¬¡æ•°æ’åº
 	 * 
 	 * @return
 	 */

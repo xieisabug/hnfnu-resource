@@ -1,11 +1,11 @@
-package com.hnfnu.zyw.service.resources;
+锘縫ackage com.hnfnu.zyw.service.resources;
 
 import java.util.Map;
 
 public interface ICourseGradeSubjectService {
 
 	/**
-	 * 得到表中所有的记录
+	 * 寰楀埌琛ㄤ腑鎵�鏈夌殑璁板綍
 	 * @return
 	 */
 	public Map<String, Object> listAllCourseGradeSubject();

@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.service.website;
+ï»¿package com.hnfnu.zyw.service.website;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -75,12 +75,12 @@ public class LoginServiceImpl implements ILoginService {
 		} catch (Exception e) {
 			e.printStackTrace();
 			messege.setResult(false);
-			messege.setMessege("µÇÂ½Ê§°Ü");
+			messege.setMessege("ç™»é™†å¤±è´¥");
 			return messege;
 		}
 		if (u == null) {
 			messege.setResult(false);
-			messege.setMessege("ÓÃ»§Ãû²»´æÔÚ");
+			messege.setMessege("ç”¨æˆ·åä¸å­˜åœ¨");
 			return messege;
 		} else {
 			if (u.getPassword().equals(user.getPassword())) {
@@ -90,16 +90,16 @@ public class LoginServiceImpl implements ILoginService {
 				} catch (Exception e) {
 					e.printStackTrace();
 					messege.setResult(false);
-					messege.setMessege("µÇÂ½Ê§°Ü");
+					messege.setMessege("ç™»é™†å¤±è´¥");
 					return messege;
 				}
 				messege.setO(u);
 				messege.setResult(true);
-				messege.setMessege("µÇÂ½³É¹¦");
+				messege.setMessege("ç™»é™†æˆåŠŸ");
 				return messege;
 			} else {
 				messege.setResult(false);
-				messege.setMessege("ÃÜÂë²»ÕıÈ·");
+				messege.setMessege("å¯†ç ä¸æ­£ç¡®");
 				return messege;
 			}
 		}
@@ -115,22 +115,22 @@ public class LoginServiceImpl implements ILoginService {
 		} catch (Exception e) {
 			e.printStackTrace();
 			messege.setResult(false);
-			messege.setMessege("µÇÂ½Ê§°Ü");
+			messege.setMessege("ç™»é™†å¤±è´¥");
 			return messege;
 		}
 		if (u == null) {
 			messege.setResult(false);
-			messege.setMessege("ÓÃ»§Ãû²»´æÔÚ");
+			messege.setMessege("ç”¨æˆ·åä¸å­˜åœ¨");
 			return messege;
 		} else {
 			if (u.getPassword().equals(student.getPassword())) {
 				messege.setO(u);
 				messege.setResult(true);
-				messege.setMessege("µÇÂ½³É¹¦");
+				messege.setMessege("ç™»é™†æˆåŠŸ");
 				return messege;
 			} else {
 				messege.setResult(false);
-				messege.setMessege("ÃÜÂë²»ÕıÈ·");
+				messege.setMessege("å¯†ç ä¸æ­£ç¡®");
 				return messege;
 			}
 		}
@@ -150,26 +150,26 @@ public class LoginServiceImpl implements ILoginService {
 					.list("from MenuDto where parentId <> -1");
 			Map<String, Integer> menuNameId = mapMenuNameId(menus);
 
-			// TODO ÏÈ²âÊÔºÃÍ¼±íµÄÉú³É£¬ÔÙÀ´Íê³ÉÊı¾İ»ñÈ¡ÓëÊı¾İ´ò°üµÄËã·¨
+			// TODO å…ˆæµ‹è¯•å¥½å›¾è¡¨çš„ç”Ÿæˆï¼Œå†æ¥å®Œæˆæ•°æ®è·å–ä¸æ•°æ®æ‰“åŒ…çš„ç®—æ³•
 			for (UserRoleMenuVo userRoleMenuVo : userRoleMenuVos) {
-				if (userRoleMenuVo.getMenuId() == menuNameId.get("ÓÃ»§¹ÜÀí")) {
-					// »ñÈ¡ÓÃ»§ÊıÁ¿£¬Éú³ÉÕÛÏßÍ¼£»»ñÈ¡ÉÏ´«×ÊÔ´Á¿£¬Éú³ÉÌõĞÎÍ¼
+				if (userRoleMenuVo.getMenuId() == menuNameId.get("ç”¨æˆ·ç®¡ç†")) {
+					// è·å–ç”¨æˆ·æ•°é‡ï¼Œç”ŸæˆæŠ˜çº¿å›¾ï¼›è·å–ä¸Šä¼ èµ„æºé‡ï¼Œç”Ÿæˆæ¡å½¢å›¾
 					retList.add(userCountChart());
 					retList.add(topUserSourceChart());
-				} else if (userRoleMenuVo.getMenuId() == menuNameId.get("×ÊÔ´¹ÜÀí")) {
-					// »ñÈ¡¸öÈË×ÊÔ´ÏÂÔØÁ¿×î¸ßµÄ8¸ö
+				} else if (userRoleMenuVo.getMenuId() == menuNameId.get("èµ„æºç®¡ç†")) {
+					// è·å–ä¸ªäººèµ„æºä¸‹è½½é‡æœ€é«˜çš„8ä¸ª
 					retList.add(topDownloadSourceChart(id));
-				} else if (userRoleMenuVo.getMenuId() == menuNameId.get("Àà±ğ¹ÜÀí")) {
-					// Àà±ğ×ÊÔ´·Ö²¼ÊıÁ¿±ıÍ¼
+				} else if (userRoleMenuVo.getMenuId() == menuNameId.get("ç±»åˆ«ç®¡ç†")) {
+					// ç±»åˆ«èµ„æºåˆ†å¸ƒæ•°é‡é¥¼å›¾
 					retList.add(categoryCountChart());
-				} else if (userRoleMenuVo.getMenuId() == menuNameId.get("Äê¼¶¹ÜÀí")) {
-					// Äê¼¶×ÊÔ´·Ö²¼ÊıÁ¿±ıÍ¼
+				} else if (userRoleMenuVo.getMenuId() == menuNameId.get("å¹´çº§ç®¡ç†")) {
+					// å¹´çº§èµ„æºåˆ†å¸ƒæ•°é‡é¥¼å›¾
 					retList.add(gradeCountChart());
-				} else if (userRoleMenuVo.getMenuId() == menuNameId.get("Ñ§¿Æ¹ÜÀí")) {
-					// Ñ§¿Æ×ÊÔ´·Ö²¼ÊıÁ¿±ıÍ¼
+				} else if (userRoleMenuVo.getMenuId() == menuNameId.get("å­¦ç§‘ç®¡ç†")) {
+					// å­¦ç§‘èµ„æºåˆ†å¸ƒæ•°é‡é¥¼å›¾
 					retList.add(subjectCountChart());
-				} else if (userRoleMenuVo.getMenuId() == menuNameId.get("×¨Ìâ¹ÜÀí")) {
-					// TODO ×¨Ìâ·ÃÎÊÇ°8µÄ2DÖùĞÎÍ¼
+				} else if (userRoleMenuVo.getMenuId() == menuNameId.get("ä¸“é¢˜ç®¡ç†")) {
+					// TODO ä¸“é¢˜è®¿é—®å‰8çš„2DæŸ±å½¢å›¾
 				}
 			}
 
@@ -180,7 +180,7 @@ public class LoginServiceImpl implements ILoginService {
 		return retList;
 	}
 
-	// welcomeChart·½·¨ÄÚ²¿Ê¹ÓÃ£¬½«ËùÓĞµÄ²Ëµ¥Ó³Éä³ÉÎª name:id ĞÎÊ½µÄmap
+	// welcomeChartæ–¹æ³•å†…éƒ¨ä½¿ç”¨ï¼Œå°†æ‰€æœ‰çš„èœå•æ˜ å°„æˆä¸º name:id å½¢å¼çš„map
 	private Map<String, Integer> mapMenuNameId(List<MenuDto> menus) {
 		Map<String, Integer> m = new HashMap<String, Integer>();
 		for (MenuDto menuDto : menus) {
@@ -189,16 +189,16 @@ public class LoginServiceImpl implements ILoginService {
 		return m;
 	}
 
-	/** Í¼±íËã·¨ **/
-	// welcomeChart·½·¨Éú³ÉÍ¼±íËã·¨Ö®Ò»£¬ÓÃÓÚÉú³ÉÓÃ»§ÊıÁ¿ÕÛÏßÍ¼
+	/** å›¾è¡¨ç®—æ³• **/
+	// welcomeChartæ–¹æ³•ç”Ÿæˆå›¾è¡¨ç®—æ³•ä¹‹ä¸€ï¼Œç”¨äºç”Ÿæˆç”¨æˆ·æ•°é‡æŠ˜çº¿å›¾
 	private Map<String, Object> userCountChart() {
 		Map<String, Object> ret = new HashMap<String, Object>();
-		ret.put("type", "LineBasic2D");// ÉèÖÃÀàĞÍÎªÕÛÏß
-		ret.put("title", "½üÆÚÓÃ»§ÊıÁ¿Ôö³¤Í¼");// ÉèÖÃÍ¼±í±êÌâ
+		ret.put("type", "LineBasic2D");// è®¾ç½®ç±»å‹ä¸ºæŠ˜çº¿
+		ret.put("title", "è¿‘æœŸç”¨æˆ·æ•°é‡å¢é•¿å›¾");// è®¾ç½®å›¾è¡¨æ ‡é¢˜
 
 		List<UserCount> userCounts = null;
 		try {
-			// »ñÈ¡×î½ü5¸öÔÂµÄÓÃ»§×¢²áÊıÁ¿£¨ÓĞ¿ÉÄÜ²»×ã5¸öÔÂ£©
+			// è·å–æœ€è¿‘5ä¸ªæœˆçš„ç”¨æˆ·æ³¨å†Œæ•°é‡ï¼ˆæœ‰å¯èƒ½ä¸è¶³5ä¸ªæœˆï¼‰
 			userCounts = userCountDao.list("from UserCount");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -206,7 +206,7 @@ public class LoginServiceImpl implements ILoginService {
 		}
 		List<Integer> labels = new ArrayList<Integer>();
 		List<Integer> values = new ArrayList<Integer>();
-		int max = 0, min = 9999;// ÓÃÓÚÉèÖÃ×ø±êÖáµÄ×î´ó×îĞ¡Öµ
+		int max = 0, min = 9999;// ç”¨äºè®¾ç½®åæ ‡è½´çš„æœ€å¤§æœ€å°å€¼
 		for (UserCount uc : userCounts) {
 			labels.add(uc.getMonth());
 			values.add(uc.getNum());
@@ -217,17 +217,17 @@ public class LoginServiceImpl implements ILoginService {
 				min = uc.getNum();
 			}
 		}
-		int space = (max - min) / 10 == 0 ? 1 : (max - min) / 10;// ¼ÆËãyÖáÏÔÊ¾Êı×ÖµÄ¼ä¸ô
-		ret.put("start_scale", min - 2 * space > 0 ? min - 2 * space : 0);// ¼ÆËã×îµÍµÄÊı×Ö
-		ret.put("end_scale", max + 2 * space);// ¼ÆËã×î¸ßµÄÊı×Ö
+		int space = (max - min) / 10 == 0 ? 1 : (max - min) / 10;// è®¡ç®—yè½´æ˜¾ç¤ºæ•°å­—çš„é—´éš”
+		ret.put("start_scale", min - 2 * space > 0 ? min - 2 * space : 0);// è®¡ç®—æœ€ä½çš„æ•°å­—
+		ret.put("end_scale", max + 2 * space);// è®¡ç®—æœ€é«˜çš„æ•°å­—
 		ret.put("scale_space", space);
 
-		ret.put("labels", labels);// ÉèÖÃÕÛÏßÍ¼xÖá
+		ret.put("labels", labels);// è®¾ç½®æŠ˜çº¿å›¾xè½´
 
-		// ÉèÖÃÊı¾İÏÔÊ¾µÄ¸ñÊ½ºÍÊı¾İÔ´
+		// è®¾ç½®æ•°æ®æ˜¾ç¤ºçš„æ ¼å¼å’Œæ•°æ®æº
 		List<Map<String, Object>> data = new ArrayList<Map<String, Object>>();
 		Map<String, Object> m = new HashMap<String, Object>();
-		m.put("name", "ĞÂÓÃ»§×¢²áÁ¿");
+		m.put("name", "æ–°ç”¨æˆ·æ³¨å†Œé‡");
 		m.put("value", values);
 		m.put("color", "#1f7a92");
 		m.put("line_width", 3);
@@ -237,16 +237,16 @@ public class LoginServiceImpl implements ILoginService {
 		return ret;
 	}
 
-	/** Í¼±íËã·¨ **/
-	// welcomeChart·½·¨Éú³ÉÍ¼±íËã·¨Ö®Ò»£¬ÓÃÓÚÉú³ÉÓÃ»§ÉÏ´«×ÊÔ´Êı
+	/** å›¾è¡¨ç®—æ³• **/
+	// welcomeChartæ–¹æ³•ç”Ÿæˆå›¾è¡¨ç®—æ³•ä¹‹ä¸€ï¼Œç”¨äºç”Ÿæˆç”¨æˆ·ä¸Šä¼ èµ„æºæ•°
 	private Map<String, Object> topUserSourceChart() {
 		Map<String, Object> ret = new HashMap<String, Object>();
-		ret.put("type", "Column2D");// ÉèÖÃÀàĞÍÎªÕÛÏß
-		ret.put("title", "Top8ÓÃ»§ÉÏ´«×ÊÔ´");// ÉèÖÃÍ¼±í±êÌâ
+		ret.put("type", "Column2D");// è®¾ç½®ç±»å‹ä¸ºæŠ˜çº¿
+		ret.put("title", "Top8ç”¨æˆ·ä¸Šä¼ èµ„æº");// è®¾ç½®å›¾è¡¨æ ‡é¢˜
 
 		List<TopUserSource> topUserSources = null;
 		try {
-			// »ñÈ¡×î½ü5¸öÔÂµÄÓÃ»§×¢²áÊıÁ¿£¨ÓĞ¿ÉÄÜ²»×ã5¸öÔÂ£©
+			// è·å–æœ€è¿‘5ä¸ªæœˆçš„ç”¨æˆ·æ³¨å†Œæ•°é‡ï¼ˆæœ‰å¯èƒ½ä¸è¶³5ä¸ªæœˆï¼‰
 			topUserSources = topUserSourceDao.list("from TopUserSource");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -267,9 +267,9 @@ public class LoginServiceImpl implements ILoginService {
 				min = tus.getNum();
 			}
 		}
-		int space = (max - min) / 10 == 0 ? 1 : (max - min) / 10;// ¼ÆËãyÖáÏÔÊ¾Êı×ÖµÄ¼ä¸ô
-		ret.put("start_scale", min - 2 * space > 0 ? min - 2 * space : 0);// ¼ÆËã×îµÍµÄÊı×Ö
-		ret.put("end_scale", max + 2 * space);// ¼ÆËã×î¸ßµÄÊı×Ö
+		int space = (max - min) / 10 == 0 ? 1 : (max - min) / 10;// è®¡ç®—yè½´æ˜¾ç¤ºæ•°å­—çš„é—´éš”
+		ret.put("start_scale", min - 2 * space > 0 ? min - 2 * space : 0);// è®¡ç®—æœ€ä½çš„æ•°å­—
+		ret.put("end_scale", max + 2 * space);// è®¡ç®—æœ€é«˜çš„æ•°å­—
 		ret.put("scale_space", space);
 
 		ret.put("textUnit", "");
@@ -277,12 +277,12 @@ public class LoginServiceImpl implements ILoginService {
 		return ret;
 	}
 
-	/** Í¼±íËã·¨ **/
-	// welcomeChart·½·¨Éú³ÉÍ¼±íËã·¨Ö®Ò»£¬ÓÃÓÚÉú³ÉÏÂÔØ×î¸ßµÄ8¸ö¸öÈË×ÊÔ´
+	/** å›¾è¡¨ç®—æ³• **/
+	// welcomeChartæ–¹æ³•ç”Ÿæˆå›¾è¡¨ç®—æ³•ä¹‹ä¸€ï¼Œç”¨äºç”Ÿæˆä¸‹è½½æœ€é«˜çš„8ä¸ªä¸ªäººèµ„æº
 	private Map<String, Object> topDownloadSourceChart(int id) {
 		Map<String, Object> ret = new HashMap<String, Object>();
 		ret.put("type", "Column2D");
-		ret.put("title", "ÏÂÔØÁ¿Ç°8×ÊÔ´");
+		ret.put("title", "ä¸‹è½½é‡å‰8èµ„æº");
 		List<SourceDto> sources = null;
 		try {
 			sources = sourceDao.list("from SourceDto where createUserId = "
@@ -315,29 +315,29 @@ public class LoginServiceImpl implements ILoginService {
 		}
 		if(sources.size()==0) {
 			Map<String, Object> m = new HashMap<String, Object>();
-			m.put("name", "Î´ÉÏ´«ÈÎºÎ×ÊÔ´");
+			m.put("name", "æœªä¸Šä¼ ä»»ä½•èµ„æº");
 			m.put("value", 0);
 			m.put("color", "#ffffff");
 			data.add(m);
 			max = 0;
 			min = 0;
 		}
-		int space = (max - min) / 10 == 0 ? 1 : (max - min) / 10;// ¼ÆËãyÖáÏÔÊ¾Êı×ÖµÄ¼ä¸ô
-		ret.put("start_scale", min - 2 * space > 0 ? min - 2 * space : 0);// ¼ÆËã×îµÍµÄÊı×Ö
-		ret.put("end_scale", max + 2 * space);// ¼ÆËã×î¸ßµÄÊı×Ö
+		int space = (max - min) / 10 == 0 ? 1 : (max - min) / 10;// è®¡ç®—yè½´æ˜¾ç¤ºæ•°å­—çš„é—´éš”
+		ret.put("start_scale", min - 2 * space > 0 ? min - 2 * space : 0);// è®¡ç®—æœ€ä½çš„æ•°å­—
+		ret.put("end_scale", max + 2 * space);// è®¡ç®—æœ€é«˜çš„æ•°å­—
 		ret.put("scale_space", space);
-		ret.put("textUnit", " ´Î");
+		ret.put("textUnit", " æ¬¡");
 		ret.put("data", data);
 		ret.put("tip", tip);
 		return ret;
 	}
 
-	/** Í¼±íËã·¨ **/
-	// welcomeChart·½·¨Éú³ÉÍ¼±íËã·¨Ö®Ò»£¬ÓÃÓÚÉú³ÉÀà±ğ×ÊÔ´×ÜÊıÍ³¼Æ±ıÍ¼
+	/** å›¾è¡¨ç®—æ³• **/
+	// welcomeChartæ–¹æ³•ç”Ÿæˆå›¾è¡¨ç®—æ³•ä¹‹ä¸€ï¼Œç”¨äºç”Ÿæˆç±»åˆ«èµ„æºæ€»æ•°ç»Ÿè®¡é¥¼å›¾
 	private Map<String, Object> categoryCountChart(){
 		Map<String, Object> ret = new HashMap<String, Object>();
 		ret.put("type", "Pie2D");
-		ret.put("title", "Àà±ğ×ÊÔ´Í³¼Æ");
+		ret.put("title", "ç±»åˆ«èµ„æºç»Ÿè®¡");
 		
 		List<CategoryCount> categoryCounts = null;
 		try {
@@ -346,7 +346,7 @@ public class LoginServiceImpl implements ILoginService {
 			e.printStackTrace();
 			return null;
 		}
-		long sum = 0;//Í³¼Æ×ÜÊı¾İ¸öÊı£¬ÓÃÓÚ¼ÆËã°Ù·Ö±È
+		long sum = 0;//ç»Ÿè®¡æ€»æ•°æ®ä¸ªæ•°ï¼Œç”¨äºè®¡ç®—ç™¾åˆ†æ¯”
 		for(CategoryCount cc : categoryCounts) {
 			sum += cc.getNum();
 		}
@@ -362,12 +362,12 @@ public class LoginServiceImpl implements ILoginService {
 		return ret;
 	}
 	
-	/** Í¼±íËã·¨ **/
-	// welcomeChart·½·¨Éú³ÉÍ¼±íËã·¨Ö®Ò»£¬ÓÃÓÚÉú³ÉÄê¼¶×ÊÔ´×ÜÊıÍ³¼Æ±ıÍ¼
+	/** å›¾è¡¨ç®—æ³• **/
+	// welcomeChartæ–¹æ³•ç”Ÿæˆå›¾è¡¨ç®—æ³•ä¹‹ä¸€ï¼Œç”¨äºç”Ÿæˆå¹´çº§èµ„æºæ€»æ•°ç»Ÿè®¡é¥¼å›¾
 	private Map<String, Object> gradeCountChart(){
 		Map<String, Object> ret = new HashMap<String, Object>();
 		ret.put("type", "Pie2D");
-		ret.put("title", "Äê¼¶×ÊÔ´Í³¼Æ");
+		ret.put("title", "å¹´çº§èµ„æºç»Ÿè®¡");
 		
 		List<GradeCount> gradeCounts = null;
 		try {
@@ -376,7 +376,7 @@ public class LoginServiceImpl implements ILoginService {
 			e.printStackTrace();
 			return null;
 		}
-		long sum = 0;//Í³¼Æ×ÜÊı¾İ¸öÊı£¬ÓÃÓÚ¼ÆËã°Ù·Ö±È
+		long sum = 0;//ç»Ÿè®¡æ€»æ•°æ®ä¸ªæ•°ï¼Œç”¨äºè®¡ç®—ç™¾åˆ†æ¯”
 		for(GradeCount gc : gradeCounts) {
 			sum += gc.getNum();
 		}
@@ -392,12 +392,12 @@ public class LoginServiceImpl implements ILoginService {
 		return ret;
 	}
 	
-	/** Í¼±íËã·¨ **/
-	// welcomeChart·½·¨Éú³ÉÍ¼±íËã·¨Ö®Ò»£¬ÓÃÓÚÉú³ÉÄê¼¶×ÊÔ´×ÜÊıÍ³¼Æ±ıÍ¼
+	/** å›¾è¡¨ç®—æ³• **/
+	// welcomeChartæ–¹æ³•ç”Ÿæˆå›¾è¡¨ç®—æ³•ä¹‹ä¸€ï¼Œç”¨äºç”Ÿæˆå¹´çº§èµ„æºæ€»æ•°ç»Ÿè®¡é¥¼å›¾
 	private Map<String, Object> subjectCountChart(){
 		Map<String, Object> ret = new HashMap<String, Object>();
 		ret.put("type", "Pie2D");
-		ret.put("title", "Ñ§¿Æ×ÊÔ´Í³¼Æ");
+		ret.put("title", "å­¦ç§‘èµ„æºç»Ÿè®¡");
 		
 		List<SubjectCount> subjectCounts = null;
 		try {
@@ -406,7 +406,7 @@ public class LoginServiceImpl implements ILoginService {
 			e.printStackTrace();
 			return null;
 		}
-		long sum = 0;//Í³¼Æ×ÜÊı¾İ¸öÊı£¬ÓÃÓÚ¼ÆËã°Ù·Ö±È
+		long sum = 0;//ç»Ÿè®¡æ€»æ•°æ®ä¸ªæ•°ï¼Œç”¨äºè®¡ç®—ç™¾åˆ†æ¯”
 		for(SubjectCount sc : subjectCounts) {
 			sum += sc.getNum();
 		}

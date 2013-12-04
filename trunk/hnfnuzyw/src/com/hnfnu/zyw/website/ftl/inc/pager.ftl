@@ -1,4 +1,4 @@
-<#macro pager subjectId gradeId totalPage curPage=1 class="" showPageNum=5>
+﻿<#macro pager subjectId gradeId totalPage curPage=1 class="" showPageNum=5>
 	<@showPage start=1 end=totalPage subjectId=subjectId gradeId=gradeId class=class curPage=curPage/>
 </#macro>
 

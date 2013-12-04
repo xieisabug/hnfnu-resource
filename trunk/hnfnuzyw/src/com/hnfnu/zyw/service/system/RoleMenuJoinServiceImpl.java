@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.service.system;
+ï»¿package com.hnfnu.zyw.service.system;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,13 +18,13 @@ import com.hnfnu.zyw.dto.system.RoleMenuJoinDto;
 
 @Service("roleMenuJoinService")
 public class RoleMenuJoinServiceImpl implements IRoleMenuJoinService {
-	// ²Ëµ¥Dao£¬µÃµ½ËùÓĞµÄ²Ëµ¥ĞÅÏ¢
+	// èœå•Daoï¼Œå¾—åˆ°æ‰€æœ‰çš„èœå•ä¿¡æ¯
 
 	@Autowired
 	@Qualifier("menuDao")
 	IMenuDao menuDao;
 
-	// ½ÇÉ«²Ëµ¥¹Ò½ÓDao,µÃµ½½ÇÉ«ÒÑ¾­¹Ò½ÓµÄ²Ëµ¥ĞÅÏ¢
+	// è§’è‰²èœå•æŒ‚æ¥Dao,å¾—åˆ°è§’è‰²å·²ç»æŒ‚æ¥çš„èœå•ä¿¡æ¯
 	@Autowired
 	@Qualifier("roleMenuJoinDao")
 	IRoleMenuJoinDao roleMenuJoinDao;
@@ -44,7 +44,7 @@ public class RoleMenuJoinServiceImpl implements IRoleMenuJoinService {
 
 		try {
 			menus = menuDao.list(hql);
-			// ¶ÔÊı¾İ½øĞĞÆ´×°
+			// å¯¹æ•°æ®è¿›è¡Œæ‹¼è£…
 			for (int i = 0; i < menus.size(); i++) {
 				parent = new HashMap<String, Object>();
 				parent.put("id", menus.get(i).getId());
@@ -63,7 +63,7 @@ public class RoleMenuJoinServiceImpl implements IRoleMenuJoinService {
 					child.put("id", function.getId());
 					child.put("pid", menus.get(i).getId());
 
-					// Èç¹ûÒÑ¾­Ñ¡¹ıÁË¸Ã²Ëµ¥µÄ¸Ã¹¦ÄÜ
+					// å¦‚æœå·²ç»é€‰è¿‡äº†è¯¥èœå•çš„è¯¥åŠŸèƒ½
 					if (isChecked(roleId, menus.get(i).getId(), function
 							.getId())) {
 						child.put("ischecked", true);

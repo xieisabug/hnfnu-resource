@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.service.system;
+ï»¿package com.hnfnu.zyw.service.system;
 
 import com.hnfnu.zyw.dto.system.UserRoleJoinDto;
 
@@ -12,11 +12,11 @@ public interface IUserRoleJoinService {
 
 	public UserRoleJoinDto load(int id);
 
-	// Í¨¹ıuserIdÅúÁ¿É¾³ı¸ÃÓÃ»§ÒÑ¾­¹Ò½ÓµÄËùÓĞ½ÇÉ«
+	// é€šè¿‡userIdæ‰¹é‡åˆ é™¤è¯¥ç”¨æˆ·å·²ç»æŒ‚æ¥çš„æ‰€æœ‰è§’è‰²
 
 	public boolean deleteByUserId(int userId);
 
-	// ÅúÁ¿Ìí¼ÓÓÃ»§½ÇÉ«¹Ò½Ó¼ÇÂ¼
+	// æ‰¹é‡æ·»åŠ ç”¨æˆ·è§’è‰²æŒ‚æ¥è®°å½•
 	public boolean addUserRoleJoins(String userRoleIds);
 
 }

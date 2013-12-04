@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.service.system;
+ï»¿package com.hnfnu.zyw.service.system;
 
 
 import java.util.List;
@@ -12,10 +12,10 @@ public interface IMenuService {
 	public boolean update(MenuDto menu);
 	public MenuDto  load(int id);
 	/**
-	 * ²éÑ¯Êı¾İ¿âËùÓĞ¼ÇÂ¼
+	 * æŸ¥è¯¢æ•°æ®åº“æ‰€æœ‰è®°å½•
 	 * @return
 	 */
 	public List<MenuVo> list();
-	//¸ù¾İparentIdµÃµ½¸Ã²Ëµ¥µÄËùÓĞ×Ó²Ëµ¥£¬Èç¹ûparentIdÊÇ-1£¬ÔòËµÃ÷²éÕÒµÄÊÂËùÓĞµÄÒ»¼¶²Ëµ¥
+	//æ ¹æ®parentIdå¾—åˆ°è¯¥èœå•çš„æ‰€æœ‰å­èœå•ï¼Œå¦‚æœparentIdæ˜¯-1ï¼Œåˆ™è¯´æ˜æŸ¥æ‰¾çš„äº‹æ‰€æœ‰çš„ä¸€çº§èœå•
 		public List<MenuDto> getMenusByParentId(int parentId);
 }

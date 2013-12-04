@@ -1,11 +1,11 @@
-package com.hnfnu.zyw.service.system;
+ï»¿package com.hnfnu.zyw.service.system;
 
 import java.util.Map;
 
 public interface IUserRoleVoService {
 
 	/**
-	 * Í¨¹ıÓÃ»§idµÃµ½¸ÃÓÃ»§ÒÑ¾­ÓµÓĞµÄ½ÇÉ«,ºÍ»¹Î´ÓµÓĞµÄ½ÇÉ«£¬·µ»ØMapÖµ¡£
+	 * é€šè¿‡ç”¨æˆ·idå¾—åˆ°è¯¥ç”¨æˆ·å·²ç»æ‹¥æœ‰çš„è§’è‰²,å’Œè¿˜æœªæ‹¥æœ‰çš„è§’è‰²ï¼Œè¿”å›Mapå€¼ã€‚
 	 * 
 	 * @param id
 	 * @return

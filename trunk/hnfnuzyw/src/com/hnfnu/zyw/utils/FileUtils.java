@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.utils;
+ï»¿package com.hnfnu.zyw.utils;
 
 import java.io.File;
 
@@ -7,11 +7,11 @@ public class FileUtils {
 	public static boolean deleteOneFile(String url){
 		File file = new File(url);
 
-		// ÅĞ¶ÏÄ¿Â¼»òÎÄ¼şÊÇ·ñ´æÔÚ
-		if (!file.exists()) { // ²»´æÔÚ·µ»Ø true,µ±×öÒÑ¾­É¾³ı
+		// åˆ¤æ–­ç›®å½•æˆ–æ–‡ä»¶æ˜¯å¦å­˜åœ¨
+		if (!file.exists()) { // ä¸å­˜åœ¨è¿”å› true,å½“åšå·²ç»åˆ é™¤
 			return true;
 		} else {
-			//´æÔÚ¾ÍÉ¾³ı¸ÃÎÄ¼ş
+			//å­˜åœ¨å°±åˆ é™¤è¯¥æ–‡ä»¶
 			if (file.delete()) {
 				return true;
 			} else {

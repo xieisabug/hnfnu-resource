@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.service.website;
+ï»¿package com.hnfnu.zyw.service.website;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,23 +29,23 @@ public class IndexServiceImpl implements IIndexService {
 			e.printStackTrace();
 			return null;
 		}
-		// ÓÃÓÚ·µ»ØµÄ£¬±£´æÁËËùÓĞ²Ëµ¥½á¹ûµÄlist¼¯ºÏ
+		// ç”¨äºè¿”å›çš„ï¼Œä¿å­˜äº†æ‰€æœ‰èœå•ç»“æœçš„listé›†åˆ
 		List<Map<String, Object>> ret = new ArrayList<Map<String, Object>>();
-		// ÓÃÓÚ¼ÇÂ¼µ±Ç°ÊÇÔÚ¶ÁÈ¡ÄÄÒ»¸ö´ó²Ëµ¥
+		// ç”¨äºè®°å½•å½“å‰æ˜¯åœ¨è¯»å–å“ªä¸€ä¸ªå¤§èœå•
 		String parentName = "";
-		// ÓÃÓÚ´æ·Å×Ó²Ëµ¥µÄ¼¯ºÏ
+		// ç”¨äºå­˜æ”¾å­èœå•çš„é›†åˆ
 		List<RoleMenuVo> children = new ArrayList<RoleMenuVo>();
-		// ÓÃÓÚ±£´æÒ»¸ö´ó²Ëµ¥ºÍÀïÃæ°üº¬µÄĞ¡²Ëµ¥
+		// ç”¨äºä¿å­˜ä¸€ä¸ªå¤§èœå•å’Œé‡Œé¢åŒ…å«çš„å°èœå•
 		Map<String, Object> oneMenu = null;
-		// µ±Ç°¶ÁÈ¡µÄVo
+		// å½“å‰è¯»å–çš„Vo
 		RoleMenuVo rmv = null;
 		for (int i = 0; i < list.size(); i++) {
 			rmv = list.get(i);
-			// Èç¹ûµ±Ç°¶ÁÈ¡µÄvoµÄparentNameºÍÖ®Ç°´¦ÀíµÄparentName²»ÏàµÈ£¬ËµÃ÷´¦Àíµ½ÁË
-			// ÏÂÒ»¸ö´ó²Ëµ¥£¬Õâ¸öÊ±ºò¾ÍĞèÒª½«Ö®Ç°¶ÁÈ¡µÄ²Ëµ¥±£´æµ½ret¼¯ºÏ
+			// å¦‚æœå½“å‰è¯»å–çš„voçš„parentNameå’Œä¹‹å‰å¤„ç†çš„parentNameä¸ç›¸ç­‰ï¼Œè¯´æ˜å¤„ç†åˆ°äº†
+			// ä¸‹ä¸€ä¸ªå¤§èœå•ï¼Œè¿™ä¸ªæ—¶å€™å°±éœ€è¦å°†ä¹‹å‰è¯»å–çš„èœå•ä¿å­˜åˆ°reté›†åˆ
 			if (!rmv.getParentName().equals(parentName)) {
 				if (oneMenu != null) {
-					// Èç¹û¸ü»»ÁËparentName£¬ÓÖ²»ÊÇ¸Õ¸Õ½øÈëÑ­»·£¬Ôò°ÑÖ®Ç°¶ÁÈ¡µÄ²Ëµ¥¼ÓÈëµ½ret
+					// å¦‚æœæ›´æ¢äº†parentNameï¼Œåˆä¸æ˜¯åˆšåˆšè¿›å…¥å¾ªç¯ï¼Œåˆ™æŠŠä¹‹å‰è¯»å–çš„èœå•åŠ å…¥åˆ°ret
 					oneMenu.put("children", children);
 					ret.add(oneMenu);
 				}
@@ -57,14 +57,14 @@ public class IndexServiceImpl implements IIndexService {
 			} else {
 				children.add(rmv);
 			}
-			//Èç¹ûµ½ÁË×îºó£¬¼ÇµÃÒª½«×îºóµÄÕâ¸ömap·Åµ½retÖĞ
+			//å¦‚æœåˆ°äº†æœ€åï¼Œè®°å¾—è¦å°†æœ€åçš„è¿™ä¸ªmapæ”¾åˆ°retä¸­
 			if (i == (list.size() - 1)) {
 				oneMenu.put("children", children);
 				ret.add(oneMenu);
 			}
 		}
 
-		// {"id":"4","name":"×¨Ìâ¹ÜÀí","url":"./welcome.html","icon":"./App/Lib/icons/32X32/product_169.gif"
+		// {"id":"4","name":"ä¸“é¢˜ç®¡ç†","url":"./welcome.html","icon":"./App/Lib/icons/32X32/product_169.gif"
 		// },
 		return ret;
 	}

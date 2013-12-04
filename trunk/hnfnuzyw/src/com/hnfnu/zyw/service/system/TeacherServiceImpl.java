@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.service.system;
+ï»¿package com.hnfnu.zyw.service.system;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,9 +19,9 @@ public class TeacherServiceImpl implements ITeacherService{
 	public ITeacherDao teacherDao;
 
 	/**
-	 * Ôö¼ÓÒ»¸öÀÏÊ¦
-	 * @param Ò»¸öÀÏÊ¦¶ÔÏó
-	 * @return ³É¹¦·µ»Øtrue£¬Ê§°Ü·µ»Øfalse
+	 * å¢åŠ ä¸€ä¸ªè€å¸ˆ
+	 * @param ä¸€ä¸ªè€å¸ˆå¯¹è±¡
+	 * @return æˆåŠŸè¿”å›trueï¼Œå¤±è´¥è¿”å›false
 	 */
 	public boolean add(TeacherDto teacher) {
 		try {
@@ -34,9 +34,9 @@ public class TeacherServiceImpl implements ITeacherService{
 	}
 
 	/**
-	 * É¾³ıÒ»¸öÀÏÊ¦
-	 * @param ÒªÉ¾³ıµÄÀÏÊ¦µÄid
-	 * @return ³É¹¦·µ»Øtrue£¬Ê§°Ü·µ»Øfalse
+	 * åˆ é™¤ä¸€ä¸ªè€å¸ˆ
+	 * @param è¦åˆ é™¤çš„è€å¸ˆçš„id
+	 * @return æˆåŠŸè¿”å›trueï¼Œå¤±è´¥è¿”å›false
 	 */
 	public boolean delete(TeacherDto teacher) {
 		try {
@@ -49,9 +49,9 @@ public class TeacherServiceImpl implements ITeacherService{
 	}
 
 	/**
-	 * ¸üĞÂÒ»¸öÀÏÊ¦
-	 * @param ÒÑ¾­¸üĞÂµÄÀÏÊ¦µÄ¶ÔÏó
-	 * @return ³É¹¦·µ»Øtrue£¬Ê§°Ü·µ»Øfalse
+	 * æ›´æ–°ä¸€ä¸ªè€å¸ˆ
+	 * @param å·²ç»æ›´æ–°çš„è€å¸ˆçš„å¯¹è±¡
+	 * @return æˆåŠŸè¿”å›trueï¼Œå¤±è´¥è¿”å›false
 	 */
 	public boolean update(TeacherDto teacher) {
 		try {
@@ -64,9 +64,9 @@ public class TeacherServiceImpl implements ITeacherService{
 	}
 
 	/**
-	 * ¶ÁÈ¡Ò»¸öÀÏÊ¦
-	 * @param ¶ÁÈ¡µÄÀÏÊ¦µÄid
-	 * @return ·µ»Ø¶ÁÈ¡µÄÀÏÊ¦¶ÔÏó
+	 * è¯»å–ä¸€ä¸ªè€å¸ˆ
+	 * @param è¯»å–çš„è€å¸ˆçš„id
+	 * @return è¿”å›è¯»å–çš„è€å¸ˆå¯¹è±¡
 	 */
 	public TeacherDto load(TeacherDto teacher) {
 		try {
@@ -78,8 +78,8 @@ public class TeacherServiceImpl implements ITeacherService{
 	}
 
 	/**
-	 * »ñÈ¡ËùÓĞÀÏÊ¦
-	 * @return »ñÈ¡µ½µÄÀÏÊ¦¼¯ºÏ
+	 * è·å–æ‰€æœ‰è€å¸ˆ
+	 * @return è·å–åˆ°çš„è€å¸ˆé›†åˆ
 	 */
 	public List<TeacherDto> list() {
 		String hql = "from TeacherDto";
@@ -93,8 +93,8 @@ public class TeacherServiceImpl implements ITeacherService{
 	}
 
 	/**
-	 * ÁĞ³öËùÓĞµÄÀÏÊ¦
-	 * @return ±£´æÁËËùÓĞÀÏÊ¦µÄMap
+	 * åˆ—å‡ºæ‰€æœ‰çš„è€å¸ˆ
+	 * @return ä¿å­˜äº†æ‰€æœ‰è€å¸ˆçš„Map
 	 */
 	public Map<String, Object> listTeach() {
 		String hql = "from TeacherDto";

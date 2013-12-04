@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.service.system;
+ï»¿package com.hnfnu.zyw.service.system;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,12 +16,12 @@ public class ParameterServiceImpl implements IParameterService {
 	
 	@Autowired
 	@Qualifier("parameterDao")
-	public IParameterDao parameterDao;//ÔİÊ±²»Ğ´get set ÊÔÊÔ¿ÉÒÔ²»¡£
+	public IParameterDao parameterDao;//æš‚æ—¶ä¸å†™get set è¯•è¯•å¯ä»¥ä¸ã€‚
 
 	/**
-	 * Ôö¼ÓÒ»¸ö²ÎÊı
-	 * @param Ò»¸ö²ÎÊı¶ÔÏó
-	 * @return ³É¹¦·µ»Øtrue£¬Ê§°Ü·µ»Øfalse
+	 * å¢åŠ ä¸€ä¸ªå‚æ•°
+	 * @param ä¸€ä¸ªå‚æ•°å¯¹è±¡
+	 * @return æˆåŠŸè¿”å›trueï¼Œå¤±è´¥è¿”å›false
 	 */
 	public boolean add(ParameterDto parameter) {
 		try {
@@ -34,9 +34,9 @@ public class ParameterServiceImpl implements IParameterService {
 	}
 
 	/**
-	 * ĞŞ¸ÄÒ»¸ö²ÎÊı
-	 * @param Ò»¸ö²ÎÊı¶ÔÏó
-	 * @return ³É¹¦·µ»Øtrue£¬Ê§°Ü·µ»Øfalse
+	 * ä¿®æ”¹ä¸€ä¸ªå‚æ•°
+	 * @param ä¸€ä¸ªå‚æ•°å¯¹è±¡
+	 * @return æˆåŠŸè¿”å›trueï¼Œå¤±è´¥è¿”å›false
 	 */
 	public boolean update(ParameterDto parameter) {
 		try {
@@ -49,9 +49,9 @@ public class ParameterServiceImpl implements IParameterService {
 	}
 
 	/**
-	 * ¶ÁÈ¡Ò»¸ö²ÎÊı
-	 * @param Ò»¸ö²ÎÊı¶ÔÏó
-	 * @return ¶ÁÈ¡µ½µÄ²ÎÊı¶ÔÏó
+	 * è¯»å–ä¸€ä¸ªå‚æ•°
+	 * @param ä¸€ä¸ªå‚æ•°å¯¹è±¡
+	 * @return è¯»å–åˆ°çš„å‚æ•°å¯¹è±¡
 	 */
 	public ParameterDto load(ParameterDto parameter) {
 		if(parameter == null || parameter.getId() == null){
@@ -68,9 +68,9 @@ public class ParameterServiceImpl implements IParameterService {
 	}
 
 	/**
-	 * É¾³ıÒ»¸ö²ÎÊı
-	 * @param Ò»¸ö²ÎÊı¶ÔÏó
-	 * @return ³É¹¦·µ»Øtrue£¬Ê§°Ü·µ»Øfalse
+	 * åˆ é™¤ä¸€ä¸ªå‚æ•°
+	 * @param ä¸€ä¸ªå‚æ•°å¯¹è±¡
+	 * @return æˆåŠŸè¿”å›trueï¼Œå¤±è´¥è¿”å›false
 	 */
 	public boolean delete(ParameterDto parameter) {
 		if(parameter == null || parameter.getId() == null){
@@ -86,8 +86,8 @@ public class ParameterServiceImpl implements IParameterService {
 	}
 
 	/**
-	 * ¶ÁÈ¡ËùÓĞ²ÎÊı
-	 * @return ±£´æÁË¼¯ºÏµÄMap
+	 * è¯»å–æ‰€æœ‰å‚æ•°
+	 * @return ä¿å­˜äº†é›†åˆçš„Map
 	 */
 	public Map<String, Object> list() {
 		Map<String, Object> m = new HashMap<String, Object>();

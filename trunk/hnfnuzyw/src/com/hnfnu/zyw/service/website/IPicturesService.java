@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.service.website;
+﻿package com.hnfnu.zyw.service.website;
 
 import java.util.List;
 import java.util.Map;
@@ -17,17 +17,17 @@ public interface IPicturesService {
 
 	
 	/**
-	 * ��ȡ�������й��ܣ�����Listװ��
+	 * 获取表中所有功能，是用List装的
 	 * @return
 	 */
 	public List<PicturesDto> list();
 	/**
-	 *��ȡ�������й��ܣ���Mapװ��Ϊ�˷�ҳ����Ҫ����Rows��Total
+	 *获取表中所有功能，用Map装，为了分页的需要加上Rows和Total
 	 * @return
 	 */
 	public Map<String, Object> listPictures();
 	/**
-	 * ��ȡ���еĿ�����ʾ��ͼƬ������
+	 * 获取所有的可以显示的图片的数量
 	 * @return
 	 */
 	public int getCount();

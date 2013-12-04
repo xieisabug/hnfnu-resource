@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.vo;
+ï»¿package com.hnfnu.zyw.vo;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,16 +11,16 @@ public class MenuVo {
 	
 	
 	private Integer id;
-	//¸¸²Ëµ¥µÄid£¬Èç¹ûÊÇ-1£¬Ôò±íÊ¾µ±Ç°Îª×î¸ß¼¶²Ëµ¥
+	//çˆ¶èœå•çš„idï¼Œå¦‚æœæ˜¯-1ï¼Œåˆ™è¡¨ç¤ºå½“å‰ä¸ºæœ€é«˜çº§èœå•
 	private Integer parentId;
 	private String parentName;
-	//²Ëµ¥µÄÃû×Ö
+	//èœå•çš„åå­—
 	private String name;
-	//²Ëµ¥µã»÷ºóµ÷ÓÃµÄÁ´½Ó
+	//èœå•ç‚¹å‡»åè°ƒç”¨çš„é“¾æ¥
 	private String url;
-	//²Ëµ¥ËùÓµÓĞµÄ¹¦ÄÜµÄidÁĞ±í£¬ÓÃ¡®£¬¡¯·Ö¸î
+	//èœå•æ‰€æ‹¥æœ‰çš„åŠŸèƒ½çš„idåˆ—è¡¨ï¼Œç”¨â€˜ï¼Œâ€™åˆ†å‰²
 	private String functionIdList;
-	//²Ëµ¥µÄÍ¼±ê
+	//èœå•çš„å›¾æ ‡
 	private String icon;
 	public MenuVo() {
 		super();

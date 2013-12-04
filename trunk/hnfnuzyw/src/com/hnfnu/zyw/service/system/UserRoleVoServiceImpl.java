@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.service.system;
+锘縫ackage com.hnfnu.zyw.service.system;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,12 +17,12 @@ import com.hnfnu.zyw.vo.UserRoleVo;
 @Service("userRoleVoService")
 public class UserRoleVoServiceImpl implements IUserRoleVoService {
 
-	// 操作视图的dao
+	// 鎿嶄綔瑙嗗浘鐨刣ao
 	@Autowired
 	@Qualifier("userRoleVoDao")
 	public IUserRoleVoDao userRoleVoDao;
 
-	// 操作 角色表的dao
+	// 鎿嶄綔 瑙掕壊琛ㄧ殑dao
 	@Autowired
 	@Qualifier("roleDao")
 	public IRoleDao roleDao;
