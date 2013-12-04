@@ -3,21 +3,21 @@
 import java.util.Date;
 
 /**
-* Í¨¹ýÊý¾Ý¿âÄÚ±íµÄ×Ö¶Î¶¯Ì¬Éú³É SourceCommentDto
+* 通过数据库内表的字段动态生成 SourceCommentDto
 **/
 public class SourceCommentDto 
 {	
 	//id
 	private Integer id;
-	//ËùÆÀ¼ÛµÄ×ÊÔ´µÄId
+	//所评价的资源的Id
 	private Integer sourceId;
-	//ÆÀ¼ÛµÄ¸¸ÆÀ¼Ûid£¬0Ôò±íÊ¾´ËÌõÎª×î¶¥ÆÀÂÛ
+	//评价的父评价id，0则表示此条为最顶评论
 	private Integer parentId;
-	//ÆÀÂÛµÄÄÚÈÝ
+	//评论的内容
 	private String content;
-	//ÆÀÂÛµÄ×÷Õßid£¬ÓÃÓÚÁ´½ÓÆÀÂÛÈËÔ±µÄÐÅÏ¢
+	//评论的作者id，用于链接评论人员的信息
 	private Integer authorId;
-	//´´½¨ÈÕÆÚ
+	//创建日期
 	private Date createDate;
 
 	public SourceCommentDto()

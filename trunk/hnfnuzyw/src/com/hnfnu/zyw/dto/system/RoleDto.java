@@ -6,20 +6,20 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
-* Í¨¹ýÊý¾Ý¿âÄÚ±íµÄ×Ö¶Î¶¯Ì¬Éú³É RoleDto
+* 通过数据库内表的字段动态生成 RoleDto
 **/
 @Entity
 @Table(name="s_role")
 public class RoleDto 
 {	
 	private Integer id;
-	//½ÇÉ«Ãû
+	//角色名
 	private String name;
-	//´´½¨ÓÃ»§id
+	//创建用户id
 	private Integer createUserId;
 	
 	private String createUserName;
-	//±¸×¢
+	//备注
 	private String remark;
 
 	public RoleDto()

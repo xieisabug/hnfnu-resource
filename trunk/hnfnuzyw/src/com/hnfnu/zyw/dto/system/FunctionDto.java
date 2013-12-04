@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
-* Í¨¹ýÊý¾Ý¿âÄÚ±íµÄ×Ö¶Î¶¯Ì¬Éú³É FunctionDto
+* 通过数据库内表的字段动态生成 FunctionDto
 **/
 
 @Entity
@@ -15,10 +15,10 @@ public class FunctionDto
 {	
 	private Integer id;
 	
-	//¹¦ÄÜµÄËõÐ´×ÖÄ¸£¬Òª´óÐ´
+	//功能的缩写字母，要大写
 	private String name;
 	
-	//¹¦ÄÜµÄÖÐÎÄÃû³Æ
+	//功能的中文名称
 	private String remark;
 	
 

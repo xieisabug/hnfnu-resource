@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
-* Í¨¹ýÊý¾Ý¿âÄÚ±íµÄ×Ö¶Î¶¯Ì¬Éú³É CategoryDto
+* 通过数据库内表的字段动态生成 CategoryDto
 **/
 @Entity
 @Table(name="r_category")
@@ -14,7 +14,7 @@ public class CategoryDto
 {	
 	//id
 	private Integer id;
-	//Àà±ðÃû³Æ
+	//类别名称
 	private String name;
 	private int ord;
 	private String remark;

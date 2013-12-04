@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
-* Í¨¹ýÊý¾Ý¿âÄÚ±íµÄ×Ö¶Î¶¯Ì¬Éú³É SubjectDto
+* 通过数据库内表的字段动态生成 SubjectDto
 **/
 @Entity
 @Table(name="r_subject")
@@ -14,7 +14,7 @@ public class SubjectDto
 {	
 	//id
 	private Integer id;
-	//¿ÆÄ¿Ãû³Æ
+	//科目名称
 	private String name;
 	private String remark;
 

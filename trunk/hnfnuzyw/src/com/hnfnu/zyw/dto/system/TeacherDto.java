@@ -12,24 +12,24 @@ import javax.persistence.Table;
 public class TeacherDto 
 {	
 	private Integer id;
-	//ÓÃ»§µÇÂ¼Ãû×Ö
+	//用户登录名字
 	private String username;
-	//µÇÂ¼ÃÜÂë
+	//登录密码
 	private String password;
-	//ÐÕÃû
+	//姓名
 	private String name;
-	//Éí·ÝÖ¤
+	//身份证
 	private String idcard;
 	private String qq;
-	//ÊÖ»úºÅÂë
+	//手机号码
 	private String telephone;
-	//Ïµ²¿»ò²¿ÃÅ
+	//系部或部门
 	private String department;
-	//´´½¨ÈÕÆÚ
+	//创建日期
 	private Date createDate;
-	//´´½¨ÈËid
+	//创建人id
 	private Integer createUserId;
-	//±¸×¢
+	//备注
 	private String remark;
 
 	public TeacherDto()
