@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.action.website;
+锘縫ackage com.hnfnu.zyw.action.website;
 
 import java.util.Date;
 import java.util.Map;
@@ -27,7 +27,7 @@ import com.opensymphony.xwork2.ModelDriven;
 @Namespace("/website")
 public class NewsAction extends AopNoSuchMethodErrorSolveBaseAction implements
 ModelDriven<NewsDto>{
-		private NewsDto news = new NewsDto();// 获取页面提交参数
+		private NewsDto news = new NewsDto();// 禄帽脠隆脪鲁脙忙脤谩陆禄虏脦脢媒
 		private boolean success;
 		private String message;
 		private Map<String, Object> newsList;
@@ -37,13 +37,13 @@ ModelDriven<NewsDto>{
 		private INewsService newsService;
 
 		/**
-		 * 添加新闻
+		 * 脤铆录脫脨脗脦脜
 		 * @return
 		 */
 		@Action(value = "addNews")
 		public String add() {
 			Date dt = new Date();
-			// 获取当前用户
+			// 禄帽脠隆碌卤脟掳脫脙禄搂
 			ActionContext context = ActionContext.getContext();
 			Map<String, Object> session = context.getSession();
 			UserDto user = (UserDto) session.get("user");
@@ -52,15 +52,15 @@ ModelDriven<NewsDto>{
 			success = newsService.add(news);
 			newsList = newsService.listNews();
 			if (success) {
-				message = "添加新闻成功，刷新之后可查看！";
+				message = "脤铆录脫脨脗脦脜鲁脡鹿娄拢卢脣垄脨脗脰庐潞贸驴脡虏茅驴麓拢隆";
 			} else {
-				message = "添加新闻失败！";
+				message = "脤铆录脫脨脗脦脜脢搂掳脺拢隆";
 			}
 			return SUCCESS;
 		}
 
 		/**
-		 * 修改新闻
+		 * 脨脼赂脛脨脗脦脜
 		 * @return
 		 */
 		@Action(value = "updateNews")
@@ -69,15 +69,15 @@ ModelDriven<NewsDto>{
 			success = newsService.update(news);
 			newsList = newsService.listNews();
 			if (success) {
-				message = "修改新闻成功，刷新之后可查看！";
+				message = "脨脼赂脛脨脗脦脜鲁脡鹿娄拢卢脣垄脨脗脰庐潞贸驴脡虏茅驴麓拢隆";
 			} else {
-				message = "修改新闻失败！";
+				message = "脨脼赂脛脨脗脦脜脢搂掳脺拢隆";
 			}
 			return SUCCESS;
 		}
 
 		/**
-		 * 根据新闻ID查询一个新闻
+		 * 赂霉戮脻脨脗脦脜ID虏茅脩炉脪禄赂枚脨脗脦脜
 		 * @return
 		 */
 		@Action(value = "loadNews")
@@ -85,16 +85,16 @@ ModelDriven<NewsDto>{
 			news = newsService.load(news);
 			if (news != null) {
 				success = true;
-				message = "加载新闻成功！";
+				message = "录脫脭脴脨脗脦脜鲁脡鹿娄拢隆";
 			} else {
 				success = false;
-				message = "加载新闻失败！";
+				message = "录脫脭脴脨脗脦脜脢搂掳脺拢隆";
 			}
 			return SUCCESS;
 		}
 
 		/**
-		 * 根据新闻id删除一个新闻
+		 * 赂霉戮脻脨脗脦脜id脡戮鲁媒脪禄赂枚脨脗脦脜
 		 * @return
 		 */
 
@@ -102,16 +102,16 @@ ModelDriven<NewsDto>{
 		public String delete() {
 			success = newsService.delete(news);
 			if (success) {
-				message = "删除新闻成功！";
+				message = "脡戮鲁媒脨脗脦脜鲁脡鹿娄拢隆";
 			} else {
-				message = "删除新闻失败！";
+				message = "脡戮鲁媒脨脗脦脜脢搂掳脺拢隆";
 			}
 			return SUCCESS;
 		}
 
 		/**
-		 *  获取表中所有新闻
-		 *  用Map装，为了分页的需要加上Rows和Total
+		 *  禄帽脠隆卤铆脰脨脣霉脫脨脨脗脦脜
+		 *  脫脙Map脳掳拢卢脦陋脕脣路脰脪鲁碌脛脨猫脪陋录脫脡脧Rows潞脥Total
 		 * @return
 		 */
 		@Action(value = "listNews")

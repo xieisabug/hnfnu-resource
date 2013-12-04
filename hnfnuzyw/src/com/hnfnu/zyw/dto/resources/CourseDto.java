@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.dto.resources;
+锘縫ackage com.hnfnu.zyw.dto.resources;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
-* 通过数据库内表的字段动态生成 CourseDto
+* 脥篓鹿媒脢媒戮脻驴芒脛脷卤铆碌脛脳脰露脦露炉脤卢脡煤鲁脡 CourseDto
 **/
 @Entity
 @Table(name="r_course")
@@ -14,11 +14,11 @@ public class CourseDto
 {	
 	//id
 	private Integer id;
-	//课程名称
+	//驴脦鲁脤脙没鲁脝
 	private String name;
-	//课程所在年级的id
+	//驴脦鲁脤脣霉脭脷脛锚录露碌脛id
 	private Integer gradeId;
-	//课程所在科目的id
+	//驴脦鲁脤脣霉脭脷驴脝脛驴碌脛id
 	private Integer subjectId;
 	private String remark;
 

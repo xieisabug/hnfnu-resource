@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.dao.resources;
+锘縫ackage com.hnfnu.zyw.dao.resources;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -30,7 +30,7 @@ public class CourseDaoImpl extends BaseDao<CourseDto> implements ICourseDao {
 			Query q = session.createQuery(hql1);
 			q.setParameter("id", courseId);
 			q.executeUpdate();
-			//如果本地文件删除成功，则把资源信息删除
+			//脠莽鹿没卤戮碌脴脦脛录镁脡戮鲁媒鲁脡鹿娄拢卢脭貌掳脩脳脢脭麓脨脜脧垄脡戮鲁媒
 			if(deleteFileByCourseId(courseId)){
 			Query q2 = session.createQuery(hql2);
 			q2.setParameter("courseId", courseId);
@@ -55,7 +55,7 @@ public class CourseDaoImpl extends BaseDao<CourseDto> implements ICourseDao {
 	}
 	
 	
-	//根据课程id，删除该课程下所有的本地文件
+	//赂霉戮脻驴脦鲁脤id拢卢脡戮鲁媒赂脙驴脦鲁脤脧脗脣霉脫脨碌脛卤戮碌脴脦脛录镁
 	private boolean deleteFileByCourseId(int courseId){
 		DataSource ds= SessionFactoryUtils.getDataSource(getSessionFactory());
 		Statement state = null;
@@ -65,7 +65,7 @@ public class CourseDaoImpl extends BaseDao<CourseDto> implements ICourseDao {
 		try {
 			 state = ds.getConnection().createStatement();
 			 rs=state.executeQuery(sql);  
-	         //ResultSetMetaData rsmd = rs.getMetaData(); //取得数据表中的字段数目，类型等返回结果  
+	         //ResultSetMetaData rsmd = rs.getMetaData(); //脠隆碌脙脢媒戮脻卤铆脰脨碌脛脳脰露脦脢媒脛驴拢卢脌脿脨脥碌脠路碌禄脴陆谩鹿没  
 			while(rs.next()){
 				String url = rs.getString("url");
 				if(!FileUtils.deleteOneFile(url)){

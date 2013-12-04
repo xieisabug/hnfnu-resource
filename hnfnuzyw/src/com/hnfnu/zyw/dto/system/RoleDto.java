@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.dto.system;
+锘縫ackage com.hnfnu.zyw.dto.system;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -6,20 +6,20 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
-* 通过数据库内表的字段动态生成 RoleDto
+* 脥篓鹿媒脢媒戮脻驴芒脛脷卤铆碌脛脳脰露脦露炉脤卢脡煤鲁脡 RoleDto
 **/
 @Entity
 @Table(name="s_role")
 public class RoleDto 
 {	
 	private Integer id;
-	//角色名
+	//陆脟脡芦脙没
 	private String name;
-	//创建用户id
+	//麓麓陆篓脫脙禄搂id
 	private Integer createUserId;
 	
 	private String createUserName;
-	//备注
+	//卤赂脳垄
 	private String remark;
 
 	public RoleDto()

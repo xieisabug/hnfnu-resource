@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.action.website;
+锘縫ackage com.hnfnu.zyw.action.website;
 
 import java.util.List;
 import java.util.Map;
@@ -29,7 +29,7 @@ import com.opensymphony.xwork2.ModelDriven;
 @Namespace("/website")
 public class IndexAction implements ModelDriven<UserDto> {
 
-	private UserDto user = new UserDto();// 获取页面提交参数
+	private UserDto user = new UserDto();// 禄帽脠隆脪鲁脙忙脤谩陆禄虏脦脢媒
 	private boolean success;
 	private String message;
 	private List<Map<String, Object>> menuList;
@@ -49,7 +49,7 @@ public class IndexAction implements ModelDriven<UserDto> {
 	private IParameterService parameterService;
 
 
-	// 获取登录所需要的东西,menuList,functionList
+	// 禄帽脠隆碌脟脗录脣霉脨猫脪陋碌脛露芦脦梅,menuList,functionList
 	@Action(value = "index")
 	public String index() {
 		Map<String, Object> s = ServletActionContext.getContext().getSession();
@@ -62,7 +62,7 @@ public class IndexAction implements ModelDriven<UserDto> {
 			success = true;
 		} else {
 			success = false;
-			message = "您还没有登录";
+			message = "脛煤禄鹿脙禄脫脨碌脟脗录";
 		}
 		return "success";
 	}

@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.action.resources;
+锘縫ackage com.hnfnu.zyw.action.resources;
 
 import java.util.List;
 import java.util.Map;
@@ -30,7 +30,7 @@ import com.opensymphony.xwork2.ModelDriven;
 public class TopicAction extends AopNoSuchMethodErrorSolveBaseAction implements
 ModelDriven<TopicDto>{
 	
-	private TopicDto topic = new TopicDto();// 获取页面提交参数
+	private TopicDto topic = new TopicDto();// 禄帽脠隆脪鲁脙忙脤谩陆禄虏脦脢媒
 	private boolean success;
 	private String message;
 	private Map<String, Object> topicList;
@@ -45,32 +45,32 @@ ModelDriven<TopicDto>{
 	@Qualifier("topicSourceVoService")
 	private ITopicSourceVoService topicSourceVoService;
 
-	// 添加专题
+	// 脤铆录脫脳篓脤芒
 	@Action(value = "addTopic")
 	public String add() {
 		success = topicService.add(topic);
 		if (success) {
-			message = "添加专题成功！";
+			message = "脤铆录脫脳篓脤芒鲁脡鹿娄拢隆";
 		} else {
-			message = "添加专题失败！";
+			message = "脤铆录脫脳篓脤芒脢搂掳脺拢隆";
 		}
 		return SUCCESS;
 	}
 
-	// 修改专题
+	// 脨脼赂脛脳篓脤芒
 	@Action(value = "updateTopic")
 	public String update() {
 		success = topicService.update(topic);
 		if (success) {
-			message = "修改专题成功！";
+			message = "脨脼赂脛脳篓脤芒鲁脡鹿娄拢隆";
 		} else {
-			message = "修改专题失败！";
+			message = "脨脼赂脛脳篓脤芒脢搂掳脺拢隆";
 		}
 		return SUCCESS;
 	}
 
 	/**
-	 * 根据专题ID查询一个专题
+	 * 赂霉戮脻脳篓脤芒ID虏茅脩炉脪禄赂枚脳篓脤芒
 	 * 
 	 * @return
 	 */
@@ -81,7 +81,7 @@ ModelDriven<TopicDto>{
 	}
 
 	/**
-	 * 根据专题id删除一个专题
+	 * 赂霉戮脻脳篓脤芒id脡戮鲁媒脪禄赂枚脳篓脤芒
 	 * 
 	 * @return
 	 */
@@ -90,28 +90,28 @@ ModelDriven<TopicDto>{
 	public String delete() {
 		success = topicService.delete(topic.getId());
 		if (success) {
-			message = "删除专题成功！";
+			message = "脡戮鲁媒脳篓脤芒鲁脡鹿娄拢隆";
 		} else {
-			message = "删除专题失败！";
+			message = "脡戮鲁媒脳篓脤芒脢搂掳脺拢隆";
 		}
 		return SUCCESS;
 	}
 
-	// 获取表中所有专题，用Map装，为了分页的需要加上Rows和Total
+	// 禄帽脠隆卤铆脰脨脣霉脫脨脳篓脤芒拢卢脫脙Map脳掳拢卢脦陋脕脣路脰脪鲁碌脛脨猫脪陋录脫脡脧Rows潞脥Total
 	@Action(value = "listTopic")
 	public String list() {
 		topicList = topicService.listTopic();
 		return SUCCESS;
 	}
 	
-	// 获取表中所有专题，用Map装，为了分页的需要加上Rows和Total
+	// 禄帽脠隆卤铆脰脨脣霉脫脨脳篓脤芒拢卢脫脙Map脳掳拢卢脦陋脕脣路脰脪鲁碌脛脨猫脪陋录脫脡脧Rows潞脥Total
 	@Action(value = "listSourceByTopicId")
 	public String listSourceByTopicId() {
 		topicSourceList = topicSourceVoService.listByTopicId(topic.getId());
 		return SUCCESS;
 	}
 
-	// 获取表中所有专题，用Map装，为了分页的需要加上Rows和Total
+	// 禄帽脠隆卤铆脰脨脣霉脫脨脳篓脤芒拢卢脫脙Map脳掳拢卢脦陋脕脣路脰脪鲁碌脛脨猫脪陋录脫脡脧Rows潞脥Total
 	@Action(value = "topicTree")
 	public String topicTree() {
 		topicTree = topicService.topicTree();

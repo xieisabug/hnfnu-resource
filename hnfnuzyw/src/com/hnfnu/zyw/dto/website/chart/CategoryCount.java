@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.dto.website.chart;
+﻿package com.hnfnu.zyw.dto.website.chart;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.dao.system;
+锘縫ackage com.hnfnu.zyw.dao.system;
 
 import java.util.ArrayList;
 
@@ -30,12 +30,12 @@ IStudentDao{
 				StudentDto s = this.get(id);
 				s.setBalance(s.getBalance() + count);
 				
-				//余额不能为负数
+				//脫脿露卯虏禄脛脺脦陋赂潞脢媒
 				if(s.getBalance()<0){
 						t.rollback();
 						return -1;
 				}
-				//余额不能超过整数范围
+				//脫脿露卯虏禄脛脺鲁卢鹿媒脮没脢媒路露脦搂
 				if(s.getBalance() > 1000000000){
 					return -2;
 				}
@@ -55,7 +55,7 @@ IStudentDao{
 	}
 
 	/**
-	 * 批量注册学生
+	 * 脜煤脕驴脳垄虏谩脩搂脡煤
 	 */
 	public boolean addStudnets( ArrayList<StudentDto> students) {
 		Session session = this.getSession();

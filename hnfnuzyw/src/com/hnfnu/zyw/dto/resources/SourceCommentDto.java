@@ -1,23 +1,23 @@
-package com.hnfnu.zyw.dto.resources;
+锘縫ackage com.hnfnu.zyw.dto.resources;
 
 import java.util.Date;
 
 /**
-* 通过数据库内表的字段动态生成 SourceCommentDto
+* 脥篓鹿媒脢媒戮脻驴芒脛脷卤铆碌脛脳脰露脦露炉脤卢脡煤鲁脡 SourceCommentDto
 **/
 public class SourceCommentDto 
 {	
 	//id
 	private Integer id;
-	//所评价的资源的Id
+	//脣霉脝脌录脹碌脛脳脢脭麓碌脛Id
 	private Integer sourceId;
-	//评价的父评价id，0则表示此条为最顶评论
+	//脝脌录脹碌脛赂赂脝脌录脹id拢卢0脭貌卤铆脢戮麓脣脤玫脦陋脳卯露楼脝脌脗脹
 	private Integer parentId;
-	//评论的内容
+	//脝脌脗脹碌脛脛脷脠脻
 	private String content;
-	//评论的作者id，用于链接评论人员的信息
+	//脝脌脗脹碌脛脳梅脮脽id拢卢脫脙脫脷脕麓陆脫脝脌脗脹脠脣脭卤碌脛脨脜脧垄
 	private Integer authorId;
-	//创建日期
+	//麓麓陆篓脠脮脝脷
 	private Date createDate;
 
 	public SourceCommentDto()

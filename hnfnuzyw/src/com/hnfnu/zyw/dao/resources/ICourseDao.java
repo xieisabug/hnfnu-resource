@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.dao.resources;
+锘縫ackage com.hnfnu.zyw.dao.resources;
 
 import com.hnfnu.zyw.dao.base.IBaseDao;
 import com.hnfnu.zyw.dto.resources.CourseDto;
@@ -6,7 +6,7 @@ import com.hnfnu.zyw.dto.resources.CourseDto;
 public interface ICourseDao extends IBaseDao<CourseDto> {
 
 	/**
-	 * 根据课程id删除该课程的信息，同时（事务处理）删除该课程下的所有资源
+	 * 赂霉戮脻驴脦鲁脤id脡戮鲁媒赂脙驴脦鲁脤碌脛脨脜脧垄拢卢脥卢脢卤拢篓脢脗脦帽麓娄脌铆拢漏脡戮鲁媒赂脙驴脦鲁脤脧脗碌脛脣霉脫脨脳脢脭麓
 	 * @return
 	 */
 	public boolean deleteCourseAndSources(int courseId);

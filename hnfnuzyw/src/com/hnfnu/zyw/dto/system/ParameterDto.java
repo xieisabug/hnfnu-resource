@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.dto.system;
+锘縫ackage com.hnfnu.zyw.dto.system;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -6,20 +6,20 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
-* 通过数据库内表的字段动态生成 ParameterDto
+* 脥篓鹿媒脢媒戮脻驴芒脛脷卤铆碌脛脳脰露脦露炉脤卢脡煤鲁脡 ParameterDto
 **/
 @Entity
 @Table(name="s_parameter")
 public class ParameterDto 
 {	
 	private Integer id;
-	//参数的名称
+	//虏脦脢媒碌脛脙没鲁脝
 	private String name;
-	//参数的值
+	//虏脦脢媒碌脛脰碌
 	private String value;
-	//参数的类型
+	//虏脦脢媒碌脛脌脿脨脥
 	private String type;
-	//参数备注
+	//虏脦脢媒卤赂脳垄
 	private String remark;
 
 	public ParameterDto()

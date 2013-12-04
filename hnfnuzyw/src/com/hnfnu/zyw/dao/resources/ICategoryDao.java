@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.dao.resources;
+锘縫ackage com.hnfnu.zyw.dao.resources;
 
 import com.hnfnu.zyw.dao.base.IBaseDao;
 import com.hnfnu.zyw.dto.resources.CategoryDto;
@@ -6,13 +6,13 @@ import com.hnfnu.zyw.dto.resources.CategoryDto;
 public interface ICategoryDao extends IBaseDao<CategoryDto> {
 	
 	/**
-	 * 返回当前排序的最大数
+	 * 路碌禄脴碌卤脟掳脜脜脨貌碌脛脳卯麓贸脢媒
 	 * @return
 	 */
 	public int maxOrder();
 	
 	/**
-	 * 重新给类别排序
+	 * 脰脴脨脗赂酶脌脿卤冒脜脜脨貌
 	 * @param orders
 	 * @return
 	 */

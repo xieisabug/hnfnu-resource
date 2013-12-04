@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.action.resources;
+锘縫ackage com.hnfnu.zyw.action.resources;
 
 import java.util.Map;
 
@@ -26,7 +26,7 @@ import com.opensymphony.xwork2.ModelDriven;
 public class SubjectAction extends AopNoSuchMethodErrorSolveBaseAction implements
 		ModelDriven<SubjectDto> {
 
-	private SubjectDto subject = new SubjectDto();// 获取页面提交参数
+	private SubjectDto subject = new SubjectDto();// 禄帽脠隆脪鲁脙忙脤谩陆禄虏脦脢媒
 	private boolean success;
 	private String message;
 	private Map<String, Object> subjectList;
@@ -35,32 +35,32 @@ public class SubjectAction extends AopNoSuchMethodErrorSolveBaseAction implement
 	@Qualifier("subjectService")
 	private ISubjectService subjectService;
 
-	// 添加学科
+	// 脤铆录脫脩搂驴脝
 	@Action(value = "addSubject")
 	public String add() {
 		success = subjectService.add(subject);
 		if (success) {
-			message = "添加功能成功！";
+			message = "脤铆录脫鹿娄脛脺鲁脡鹿娄拢隆";
 		} else {
-			message = "添加功能失败！";
+			message = "脤铆录脫鹿娄脛脺脢搂掳脺拢隆";
 		}
 		return SUCCESS;
 	}
 
-	// 修改学科
+	// 脨脼赂脛脩搂驴脝
 	@Action(value = "updateSubject")
 	public String update() {
 		success = subjectService.update(subject);
 		if (success) {
-			message = "修改功能成功！";
+			message = "脨脼赂脛鹿娄脛脺鲁脡鹿娄拢隆";
 		} else {
-			message = "修改功能失败！";
+			message = "脨脼赂脛鹿娄脛脺脢搂掳脺拢隆";
 		}
 		return SUCCESS;
 	}
 
 	/**
-	 * 根据学科ID查询一个学科
+	 * 赂霉戮脻脩搂驴脝ID虏茅脩炉脪禄赂枚脩搂驴脝
 	 * 
 	 * @return
 	 */
@@ -71,7 +71,7 @@ public class SubjectAction extends AopNoSuchMethodErrorSolveBaseAction implement
 	}
 
 	/**
-	 * 根据学科id删除一个学科
+	 * 赂霉戮脻脩搂驴脝id脡戮鲁媒脪禄赂枚脩搂驴脝
 	 * 
 	 * @return
 	 */
@@ -80,14 +80,14 @@ public class SubjectAction extends AopNoSuchMethodErrorSolveBaseAction implement
 	public String delete() {
 		success = subjectService.delete(subject.getId());
 		if (success) {
-			message = "删除功能成功！";
+			message = "脡戮鲁媒鹿娄脛脺鲁脡鹿娄拢隆";
 		} else {
-			message = "删除功能失败！";
+			message = "脡戮鲁媒鹿娄脛脺脢搂掳脺拢隆";
 		}
 		return SUCCESS;
 	}
 
-	// 获取表中所有功能，用Map装，为了分页的需要加上Rows和Total
+	// 禄帽脠隆卤铆脰脨脣霉脫脨鹿娄脛脺拢卢脫脙Map脳掳拢卢脦陋脕脣路脰脪鲁碌脛脨猫脪陋录脫脡脧Rows潞脥Total
 	@Action(value = "listSubject")
 	public String list() {
 		subjectList = subjectService.listSub();

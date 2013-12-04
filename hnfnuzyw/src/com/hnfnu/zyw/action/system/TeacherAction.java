@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.action.system;
+锘縫ackage com.hnfnu.zyw.action.system;
 
 import java.util.Map;
 
@@ -24,7 +24,7 @@ import com.opensymphony.xwork2.ModelDriven;
 @Namespace("/system")
 public class TeacherAction  extends AopNoSuchMethodErrorSolveBaseAction implements
 ModelDriven<TeacherDto>{
-	private TeacherDto teacher = new TeacherDto();// 获取页面提交参数
+	private TeacherDto teacher = new TeacherDto();// 禄帽脠隆脪鲁脙忙脤谩陆禄虏脦脢媒
 	private boolean success;
 	private String message;
 	private Map<String, Object> teacherList;
@@ -34,37 +34,37 @@ ModelDriven<TeacherDto>{
 	private ITeacherService teacherService;
 
 	/**
-	 * 添加教师
+	 * 脤铆录脫陆脤脢娄
 	 * @return
 	 */
 	@Action(value = "addTeacher")
 	public String add() {
 		success = teacherService.add(teacher);
 		if (success) {
-			message = "添加教师成功！";
+			message = "脤铆录脫陆脤脢娄鲁脡鹿娄拢隆";
 		} else {
-			message = "添加教师失败！";
+			message = "脤铆录脫陆脤脢娄脢搂掳脺拢隆";
 		}
 		return SUCCESS;
 	}
 
 	/**
-	 * 修改教师
+	 * 脨脼赂脛陆脤脢娄
 	 * @return
 	 */
 	@Action(value = "updateTeacher")
 	public String update() {
 		success = teacherService.update(teacher);
 		if (success) {
-			message = "修改教师成功！";
+			message = "脨脼赂脛陆脤脢娄鲁脡鹿娄拢隆";
 		} else {
-			message = "修改教师失败！";
+			message = "脨脼赂脛陆脤脢娄脢搂掳脺拢隆";
 		}
 		return SUCCESS;
 	}
 
 	/**
-	 * 根据教师ID查询一个教师
+	 * 赂霉戮脻陆脤脢娄ID虏茅脩炉脪禄赂枚陆脤脢娄
 	 * @return
 	 */
 	@Action(value = "loadTeacher")
@@ -74,7 +74,7 @@ ModelDriven<TeacherDto>{
 	}
 
 	/**
-	 * 根据教师id删除一个教师
+	 * 赂霉戮脻陆脤脢娄id脡戮鲁媒脪禄赂枚陆脤脢娄
 	 * @return
 	 */
 
@@ -82,16 +82,16 @@ ModelDriven<TeacherDto>{
 	public String delete() {
 		success = teacherService.delete(teacher);
 		if (success) {
-			message = "删除教师成功！";
+			message = "脡戮鲁媒陆脤脢娄鲁脡鹿娄拢隆";
 		} else {
-			message = "删除教师失败！";
+			message = "脡戮鲁媒陆脤脢娄脢搂掳脺拢隆";
 		}
 		return SUCCESS;
 	}
 
 	/**
-	 *  获取表中所有教师
-	 *  用Map装，为了分页的需要加上Rows和Total
+	 *  禄帽脠隆卤铆脰脨脣霉脫脨陆脤脢娄
+	 *  脫脙Map脳掳拢卢脦陋脕脣路脰脪鲁碌脛脨猫脪陋录脫脡脧Rows潞脥Total
 	 * @return
 	 */
 	@Action(value = "listTeacher")

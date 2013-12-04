@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.action.system;
+﻿package com.hnfnu.zyw.action.system;
 
 import java.util.List;
 
@@ -31,7 +31,7 @@ public class RoleMenuJoinAction extends AopNoSuchMethodErrorSolveBaseAction impl
 	@Qualifier("roleMenuJoinService")
 	private IRoleMenuJoinService roleMenuJoinService;
 
-	private RoleMenuJoinDto roleMenuJoin = new RoleMenuJoinDto();// ��ȡҳ���ύ����
+	private RoleMenuJoinDto roleMenuJoin = new RoleMenuJoinDto();// »ñÈ¡Ò³ÃæÌá½»²ÎÊý
 	private boolean success;
 	private String message;
 	List<Object> joinTree;
@@ -52,9 +52,9 @@ public class RoleMenuJoinAction extends AopNoSuchMethodErrorSolveBaseAction impl
 	public String addRoleMenuJoins() {
 		success= roleMenuJoinService.addRoleMenuJoins(joinIds);
 		if(success){
-			message = "��ɫ�ҽӲ˵��ɹ�";
+			message = "½ÇÉ«¹Ò½Ó²Ëµ¥³É¹¦";
 		}else{
-			message = "��ɫ�ҽӲ˵�ʧ��";
+			message = "½ÇÉ«¹Ò½Ó²Ëµ¥Ê§°Ü";
 		}
 		return SUCCESS;
 	}

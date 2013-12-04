@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.action.system;
+锘縫ackage com.hnfnu.zyw.action.system;
 
 import java.util.HashMap;
 import java.util.List;
@@ -29,7 +29,7 @@ import com.opensymphony.xwork2.ModelDriven;
 @Namespace("/system")
 public class MenuAction extends AopNoSuchMethodErrorSolveBaseAction implements ModelDriven<MenuDto> {
 
-	private MenuDto menu = new MenuDto();// 获取页面提交参数
+	private MenuDto menu = new MenuDto();// 禄帽脠隆脪鲁脙忙脤谩陆禄虏脦脢媒
 	private boolean success;
 	private Map<String, Object> menuList;
 	
@@ -44,32 +44,32 @@ public class MenuAction extends AopNoSuchMethodErrorSolveBaseAction implements M
 	@Qualifier("functionService")
 	private IFunctionService functionService;
 
-	// 添加菜单
+	// 脤铆录脫虏脣碌楼
 	@Action(value = "addMenu")
 	public String add() {
 		success = menuService.add(menu);
 		if(success){
-			message = "菜单添加成功";
+			message = "虏脣碌楼脤铆录脫鲁脡鹿娄";
 		}else{
-			message = "菜单添加失败";
+			message = "虏脣碌楼脤铆录脫脢搂掳脺";
 		}
 		return SUCCESS;
 	}
 
-	// 修改菜单
+	// 脨脼赂脛虏脣碌楼
 	@Action(value = "updateMenu")
 	public String update() {
 		success = menuService.update(menu);
 		if(success){
-			message = "菜单修改成功";
+			message = "虏脣碌楼脨脼赂脛鲁脡鹿娄";
 		}else{
-			message = "菜单修改失败";
+			message = "虏脣碌楼脨脼赂脛脢搂掳脺";
 		}
 		return SUCCESS;
 	}
 
 	/**
-	 * 根据菜单ID查询一个菜单
+	 * 赂霉戮脻虏脣碌楼ID虏茅脩炉脪禄赂枚虏脣碌楼
 	 * 
 	 * @return
 	 */
@@ -77,15 +77,15 @@ public class MenuAction extends AopNoSuchMethodErrorSolveBaseAction implements M
 	public String load() {
 		menu = menuService.load(menu.getId());
 		if(menu != null){
-			message = "菜单查询成功";
+			message = "虏脣碌楼虏茅脩炉鲁脡鹿娄";
 		}else{
-			message = "菜单查询失败";
+			message = "虏脣碌楼虏茅脩炉脢搂掳脺";
 		}
 		return SUCCESS;
 	}
 
 	/**
-	 * 根据菜单id删除一个菜单
+	 * 赂霉戮脻虏脣碌楼id脡戮鲁媒脪禄赂枚虏脣碌楼
 	 * 
 	 * @return
 	 */
@@ -94,9 +94,9 @@ public class MenuAction extends AopNoSuchMethodErrorSolveBaseAction implements M
 	public String delete() {
 		success = menuService.delete(menu.getId());
 		if(success){
-			message = "菜单删除成功";
+			message = "虏脣碌楼脡戮鲁媒鲁脡鹿娄";
 		}else{
-			message = "菜单删除失败";
+			message = "虏脣碌楼脡戮鲁媒脢搂掳脺";
 		}
 		return SUCCESS;
 	}
@@ -111,7 +111,7 @@ public class MenuAction extends AopNoSuchMethodErrorSolveBaseAction implements M
 		return SUCCESS;
 	}
 	
-	// 获取表中所有功能和所有一级菜单，是用List装的
+	// 禄帽脠隆卤铆脰脨脣霉脫脨鹿娄脛脺潞脥脣霉脫脨脪禄录露虏脣碌楼拢卢脢脟脫脙List脳掳碌脛
 		@Action(value = "listFunAndMenu")
 		public String listFunAndMenu() {
 			functionList = functionService.list();

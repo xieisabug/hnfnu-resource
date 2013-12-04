@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.action.system;
+锘縫ackage com.hnfnu.zyw.action.system;
 
 import java.util.Map;
 
@@ -24,12 +24,12 @@ import com.opensymphony.xwork2.ModelDriven;
 @Namespace("/system")
 public class UserRoleVoAction extends AopNoSuchMethodErrorSolveBaseAction implements
 		ModelDriven<UserRoleVo> {
-	private UserRoleVo userRoleVo = new UserRoleVo();// 获取页面提交参数
+	private UserRoleVo userRoleVo = new UserRoleVo();// 禄帽脠隆脪鲁脙忙脤谩陆禄虏脦脢媒
 	private boolean success;
 	private String message;
 	private Map<String, Object> roleByUser;
 	/**
-	 * 通过用户id，得到该用户已经添加的角色和未添加的角色
+	 * 脥篓鹿媒脫脙禄搂id拢卢碌脙碌陆赂脙脫脙禄搂脪脩戮颅脤铆录脫碌脛陆脟脡芦潞脥脦麓脤铆录脫碌脛陆脟脡芦
 	 */
 	@Autowired
 	@Qualifier("userRoleVoService")

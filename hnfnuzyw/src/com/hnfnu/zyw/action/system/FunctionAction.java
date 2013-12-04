@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.action.system;
+锘縫ackage com.hnfnu.zyw.action.system;
 
 import java.util.Map;
 
@@ -18,7 +18,7 @@ import com.hnfnu.zyw.service.system.IFunctionService;
 import com.opensymphony.xwork2.ModelDriven;
 
 /**
- * 功能类
+ * 鹿娄脛脺脌脿
  * @author Administrator
  *
  */
@@ -30,7 +30,7 @@ import com.opensymphony.xwork2.ModelDriven;
 public class FunctionAction extends AopNoSuchMethodErrorSolveBaseAction implements
 		ModelDriven<FunctionDto> {
 
-	private FunctionDto function = new FunctionDto();// 获取页面提交参数
+	private FunctionDto function = new FunctionDto();// 禄帽脠隆脪鲁脙忙脤谩陆禄虏脦脢媒
 	private boolean success;
 	private String message;
 	private Map<String, Object> functionList;
@@ -40,37 +40,37 @@ public class FunctionAction extends AopNoSuchMethodErrorSolveBaseAction implemen
 	private IFunctionService functionService;
 
 	/**
-	 * 添加菜单
+	 * 脤铆录脫虏脣碌楼
 	 * @return
 	 */
 	@Action(value = "addFunction")
 	public String add() {
 		success = functionService.add(function);
 		if (success) {
-			message = "添加功能成功！";
+			message = "脤铆录脫鹿娄脛脺鲁脡鹿娄拢隆";
 		} else {
-			message = "添加功能失败！";
+			message = "脤铆录脫鹿娄脛脺脢搂掳脺拢隆";
 		}
 		return SUCCESS;
 	}
 
 	/**
-	 * 修改菜单
+	 * 脨脼赂脛虏脣碌楼
 	 * @return
 	 */
 	@Action(value = "updateFunction")
 	public String update() {
 		success = functionService.update(function);
 		if (success) {
-			message = "修改功能成功！";
+			message = "脨脼赂脛鹿娄脛脺鲁脡鹿娄拢隆";
 		} else {
-			message = "修改功能失败！";
+			message = "脨脼赂脛鹿娄脛脺脢搂掳脺拢隆";
 		}
 		return SUCCESS;
 	}
 
 	/**
-	 * 根据菜单ID查询一个菜单
+	 * 赂霉戮脻虏脣碌楼ID虏茅脩炉脪禄赂枚虏脣碌楼
 	 * @return
 	 */
 	@Action(value = "loadFunction")
@@ -80,7 +80,7 @@ public class FunctionAction extends AopNoSuchMethodErrorSolveBaseAction implemen
 	}
 
 	/**
-	 * 根据菜单id删除一个菜单
+	 * 赂霉戮脻虏脣碌楼id脡戮鲁媒脪禄赂枚虏脣碌楼
 	 * @return
 	 */
 
@@ -88,16 +88,16 @@ public class FunctionAction extends AopNoSuchMethodErrorSolveBaseAction implemen
 	public String delete() {
 		success = functionService.delete(function);
 		if (success) {
-			message = "删除功能成功！";
+			message = "脡戮鲁媒鹿娄脛脺鲁脡鹿娄拢隆";
 		} else {
-			message = "删除功能失败！";
+			message = "脡戮鲁媒鹿娄脛脺脢搂掳脺拢隆";
 		}
 		return SUCCESS;
 	}
 
 	/**
-	 *  获取表中所有功能
-	 *  用Map装，为了分页的需要加上Rows和Total
+	 *  禄帽脠隆卤铆脰脨脣霉脫脨鹿娄脛脺
+	 *  脫脙Map脳掳拢卢脦陋脕脣路脰脪鲁碌脛脨猫脪陋录脫脡脧Rows潞脥Total
 	 * @return
 	 */
 	@Action(value = "listFunction")

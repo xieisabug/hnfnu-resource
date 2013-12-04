@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.dto.system;
+﻿package com.hnfnu.zyw.dto.system;
 
 public class ValidateMessege {
 	public boolean result;

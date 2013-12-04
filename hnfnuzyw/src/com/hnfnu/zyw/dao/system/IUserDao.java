@@ -1,14 +1,14 @@
-package com.hnfnu.zyw.dao.system;
+锘縫ackage com.hnfnu.zyw.dao.system;
 
 import com.hnfnu.zyw.dao.base.IBaseDao;
 import com.hnfnu.zyw.dto.system.UserDto;
 
 public interface IUserDao extends IBaseDao<UserDto>{
 
-	//根据任意字段得到一个用户信息
+	//赂霉戮脻脠脦脪芒脳脰露脦碌脙碌陆脪禄赂枚脫脙禄搂脨脜脧垄
 	public UserDto getUser(String hql) throws Exception;
 	
-	//修改密码
+	//脨脼赂脛脙脺脗毛
 	public void updatePwd(int id,String newPassword ) throws Exception;
 	
 }

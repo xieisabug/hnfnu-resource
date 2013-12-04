@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.action.resources;
+锘縫ackage com.hnfnu.zyw.action.resources;
 
 import java.util.Map;
 
@@ -25,11 +25,11 @@ import com.opensymphony.xwork2.ModelDriven;
 @Namespace("/resources")
 public class TopicSourceJoinAction extends AopNoSuchMethodErrorSolveBaseAction implements
 		ModelDriven<TopicSourceJoinDto> {
-	private TopicSourceJoinDto topicSourceJoin = new TopicSourceJoinDto();// 获取页面提交参数
+	private TopicSourceJoinDto topicSourceJoin = new TopicSourceJoinDto();// 禄帽脠隆脪鲁脙忙脤谩陆禄虏脦脢媒
 	private boolean success;
 	private String message;
 	private Map<String, Object> topicSourceJoinList;
-	// 用户挂接角色，用；好隔开。
+	// 脫脙禄搂鹿脪陆脫陆脟脡芦拢卢脫脙拢禄潞脙赂么驴陋隆拢
 	private String seletedSourceIds;
 	//private int topicId;
 	private int[] sourceIds;
@@ -39,7 +39,7 @@ public class TopicSourceJoinAction extends AopNoSuchMethodErrorSolveBaseAction i
 	private ITopicSourceJoinService topicSourceJoinService;
 
 	/**
-	 * 批量更新一个专题挂接的角色
+	 * 脜煤脕驴赂眉脨脗脪禄赂枚脳篓脤芒鹿脪陆脫碌脛陆脟脡芦
 	 * 
 	 * @return
 	 */
@@ -48,15 +48,15 @@ public class TopicSourceJoinAction extends AopNoSuchMethodErrorSolveBaseAction i
 		success = topicSourceJoinService.addTopicSourceJoins(seletedSourceIds,
 				topicSourceJoin.getTopicId());
 		if (success) {
-			message = "专题更新资源成功！";
+			message = "脳篓脤芒赂眉脨脗脳脢脭麓鲁脡鹿娄拢隆";
 		} else {
-			message = "专题更新资源失败！";
+			message = "脳篓脤芒赂眉脨脗脳脢脭麓脢搂掳脺拢隆";
 		}
 		return SUCCESS;
 	}
 
 	/**
-	 * 通过topicId得到改主题已经挂接的资源ids。
+	 * 脥篓鹿媒topicId碌脙碌陆赂脛脰梅脤芒脪脩戮颅鹿脪陆脫碌脛脳脢脭麓ids隆拢
 	 * @return
 	 */
 	@Action(value = "querySourceIdsByTopicId")
