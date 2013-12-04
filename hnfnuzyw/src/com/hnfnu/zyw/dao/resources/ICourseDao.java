@@ -6,7 +6,7 @@ import com.hnfnu.zyw.dto.resources.CourseDto;
 public interface ICourseDao extends IBaseDao<CourseDto> {
 
 	/**
-	 * ¸ù¾Ý¿Î³ÌidÉ¾³ý¸Ã¿Î³ÌµÄÐÅÏ¢£¬Í¬Ê±£¨ÊÂÎñ´¦Àí£©É¾³ý¸Ã¿Î³ÌÏÂµÄËùÓÐ×ÊÔ´
+	 * 根据课程id删除该课程的信息，同时（事务处理）删除该课程下的所有资源
 	 * @return
 	 */
 	public boolean deleteCourseAndSources(int courseId);

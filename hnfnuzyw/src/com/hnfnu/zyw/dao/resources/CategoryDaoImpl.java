@@ -47,7 +47,7 @@ public class CategoryDaoImpl extends BaseDao<CategoryDto> implements
 			}
 		}
 
-		// Êý¾Ý¿âÃ»ÓÐÊý¾Ý¾Í·µ»Ø1
+		// 数据库没有数据就返回1
 		return 1;
 	}
 
@@ -93,9 +93,9 @@ public class CategoryDaoImpl extends BaseDao<CategoryDto> implements
 			this.delete(categoryId);
 			for (int i = 0; i < l.size(); i++) {
 				SourceDto s = l.get(i);
-				//Èç¹û¸Ã×ÊÔ´²»ÊôÓÚÆäËûµÄÀà±ð£¬¾ÍÉ¾³ý¸Ã×ÊÔ´ºÍÉ¾³ý¸Ã×ÊÔ´µÄ±¾µØÎÄ¼þ
+				//如果该资源不属于其他的类别，就删除该资源和删除该资源的本地文件
 				if(!blongOtherCategory(s.getId())){
-					//Èç¹û±¾µØÎÄ¼þÉ¾³ý³É¹¦¾ÍÉ¾³ý¸Ã×ÊÔ´µÄÐÅÏ¢
+					//如果本地文件删除成功就删除该资源的信息
 					if(FileUtils.deleteOneFile(s.getUrl())){
 					this.deleteSource(s.getId());
 					}else{
@@ -118,7 +118,7 @@ public class CategoryDaoImpl extends BaseDao<CategoryDto> implements
 	}
 
 	/**
-	 * ¸ù¾ÝÀà±ðid²é³ö¸ÃÀà±ðÏÂµÄËùÓÐ×ÊÔ´
+	 * 根据类别id查出该类别下的所有资源
 	 * 
 	 * @param categoryId
 	 * @return
@@ -155,7 +155,7 @@ public class CategoryDaoImpl extends BaseDao<CategoryDto> implements
 	}
 
 	/**
-	 * ¸ù¾Ý×ÊÔ´idÅÐ¶Ï¸Ã×ÊÔ´ÊÇ·ñ»¹ÊôÓÚÆäËû×ÊÔ´
+	 * 根据资源id判断该资源是否还属于其他资源
 	 * 
 	 * @param sourceId
 	 * @return

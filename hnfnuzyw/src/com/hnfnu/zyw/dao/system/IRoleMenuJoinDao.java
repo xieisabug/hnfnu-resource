@@ -7,12 +7,12 @@ import com.hnfnu.zyw.dto.system.RoleMenuJoinDto;
 
 public interface IRoleMenuJoinDao extends IBaseDao<RoleMenuJoinDto> {
 
-	// Í¨¹ý½ÇÉ«idºÍ²Ëµ¥idµÃµ½Ò»¸öRoleMenuJoinÊµÌå
+	// 通过角色id和菜单id得到一个RoleMenuJoin实体
 
 	public RoleMenuJoinDto uniqueLoad(String hql) throws Exception;
 	
 	
-	//ÅúÁ¿Ìí¼Ó½ÇÉ«µÄ¹Ò½ÓµÄ²Ëµ¥£¬Ìí¼ÓÖ®Ç°Í¨¹ý½ÇÉ«idÉ¾³ý¸Ã½ÇÉ«µÄËùÓÐ¹Ò½Ó¼ÇÂ¼
+	//批量添加角色的挂接的菜单，添加之前通过角色id删除该角色的所有挂接记录
 	public boolean addRoleMenuJoins(int roleId,
 			List<RoleMenuJoinDto> roleMenuJoins) throws Exception;
 

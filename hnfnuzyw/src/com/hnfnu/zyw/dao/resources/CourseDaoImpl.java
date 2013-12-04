@@ -30,7 +30,7 @@ public class CourseDaoImpl extends BaseDao<CourseDto> implements ICourseDao {
 			Query q = session.createQuery(hql1);
 			q.setParameter("id", courseId);
 			q.executeUpdate();
-			//Èç¹û±¾µØÎÄ¼þÉ¾³ý³É¹¦£¬Ôò°Ñ×ÊÔ´ÐÅÏ¢É¾³ý
+			//如果本地文件删除成功，则把资源信息删除
 			if(deleteFileByCourseId(courseId)){
 			Query q2 = session.createQuery(hql2);
 			q2.setParameter("courseId", courseId);
@@ -55,7 +55,7 @@ public class CourseDaoImpl extends BaseDao<CourseDto> implements ICourseDao {
 	}
 	
 	
-	//¸ù¾Ý¿Î³Ìid£¬É¾³ý¸Ã¿Î³ÌÏÂËùÓÐµÄ±¾µØÎÄ¼þ
+	//根据课程id，删除该课程下所有的本地文件
 	private boolean deleteFileByCourseId(int courseId){
 		DataSource ds= SessionFactoryUtils.getDataSource(getSessionFactory());
 		Statement state = null;
@@ -65,7 +65,7 @@ public class CourseDaoImpl extends BaseDao<CourseDto> implements ICourseDao {
 		try {
 			 state = ds.getConnection().createStatement();
 			 rs=state.executeQuery(sql);  
-	         //ResultSetMetaData rsmd = rs.getMetaData(); //È¡µÃÊý¾Ý±íÖÐµÄ×Ö¶ÎÊýÄ¿£¬ÀàÐÍµÈ·µ»Ø½á¹û  
+	         //ResultSetMetaData rsmd = rs.getMetaData(); //取得数据表中的字段数目，类型等返回结果  
 			while(rs.next()){
 				String url = rs.getString("url");
 				if(!FileUtils.deleteOneFile(url)){

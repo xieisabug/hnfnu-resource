@@ -8,7 +8,7 @@ import com.hnfnu.zyw.dto.system.StudentDto;
 public interface IStudentDao  extends IBaseDao<StudentDto>{
 
 	/**
-	 * ÅúÁ¿¸øÑ§Éú³äÖµ×ÊÔ´±Ò
+	 * 批量给学生充值资源币
 	 * @param count
 	 * @param studentIds
 	 * @return
@@ -16,14 +16,14 @@ public interface IStudentDao  extends IBaseDao<StudentDto>{
 	public int addStudnetBalance(int count,String studentIds);
 	
 	/**
-	 * ÅúÁ¿×¢²áÑ§Éú
+	 * 批量注册学生
 	 * @param count
 	 * @param studentIds
 	 * @return
 	 */
 	public boolean addStudnets(ArrayList<StudentDto> students);
 	/**
-	 * Í¨¹ýÈÎºÎÒ»¸ö×Ö¶Î»ñÈ¡Ò»¸öÑ§ÉúÐÅÏ¢
+	 * 通过任何一个字段获取一个学生信息
 	 * @param hql
 	 * @return
 	 */
