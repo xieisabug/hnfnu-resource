@@ -67,15 +67,6 @@ public class TopicSourceJoinAction extends ActionSupport implements
 	}
 
 	/* get set */
-	public ITopicSourceJoinService getTopicSourceJoinService() {
-		return topicSourceJoinService;
-	}
-
-	public void setTopicSourceJoinService(
-			ITopicSourceJoinService topicSourceJoinService) {
-		this.topicSourceJoinService = topicSourceJoinService;
-	}
-
 	public TopicSourceJoinDto getModel() {
 		return topicSourceJoin;
 	}

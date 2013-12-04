@@ -96,24 +96,5 @@
 	</bean>
 
 
-	<!-- 配置Spring的事务处理 -->
-	<!-- 创建事务管理器 -->
-	<bean id="txManager"
-		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
-	<!-- 配置AOP，Spring是通过AOP来进行事务管理的 -->
-	<aop:config>
-		<!-- 设置pointCut表示哪些方法要加入事务处理 -->
-		<aop:pointcut id="allMethods" expression="execution(* com.hnfnu.zyw.dao.*.*(..))" />
-		<!-- 通过advisor来确定具体要加入事务控制的方法 -->
-		<aop:advisor advice-ref="txAdvice" pointcut-ref="allMethods" />
-	</aop:config>
-	<!-- 配置哪些方法要加入事务控制 -->
-	<tx:advice id="txAdvice" transaction-manager="txManager">
-		<tx:attributes>
-			<!-- 让所有的方法都加入事务管理 -->
-			<tx:method name="*" propagation="REQUIRED" />
-		</tx:attributes>
-	</tx:advice>
+	<aop:aspectj-autoproxy/>
 </beans>

@@ -14,20 +14,20 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.hnfnu.zyw.action.base.AopNoSuchMethodErrorSolveBaseAction;
 import com.hnfnu.zyw.dto.system.StudentDto;
 import com.hnfnu.zyw.dto.system.UserDto;
 import com.hnfnu.zyw.dto.system.ValidateMessege;
 import com.hnfnu.zyw.service.website.ILoginService;
 import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.ActionSupport;
 
 @Controller("loginAction")
 @Scope("prototype")
 @ParentPackage("json-default")
 @Results({ @Result(name = "success", type = "json", params = { "root", "action" }) })
 @Namespace("/website")
-public class LoginAction extends ActionSupport {
-	private static final long serialVersionUID = -7199971221300636848L;
+public class LoginAction extends AopNoSuchMethodErrorSolveBaseAction{
+	
 	private final int USER = 1;
 	private final int STUDENT = 0;
 	private int loginType;
@@ -148,15 +148,6 @@ public class LoginAction extends ActionSupport {
 	}
 
 	/* get set */
-
-	public ILoginService getLoginService() {
-		return loginService;
-	}
-
-	public void setLoginService(ILoginService loginService) {
-		this.loginService = loginService;
-	}
-
 	public String getUsername() {
 		return username;
 	}

@@ -14,13 +14,13 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.hnfnu.zyw.action.base.AopNoSuchMethodErrorSolveBaseAction;
 import com.hnfnu.zyw.dto.system.FunctionDto;
 import com.hnfnu.zyw.dto.system.ParameterDto;
 import com.hnfnu.zyw.dto.system.UserDto;
 import com.hnfnu.zyw.service.system.IFunctionService;
 import com.hnfnu.zyw.service.system.IParameterService;
 import com.hnfnu.zyw.service.website.IIndexService;
-import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 @Controller("IndexAction")
@@ -28,9 +28,7 @@ import com.opensymphony.xwork2.ModelDriven;
 @ParentPackage("json-default")
 @Results({ @Result(name = "success", type = "json", params = { "root", "action" }) })
 @Namespace("/website")
-public class IndexAction extends ActionSupport implements ModelDriven<UserDto> {
-
-	private static final long serialVersionUID = -7199971221300636848L;
+public class IndexAction implements ModelDriven<UserDto> {
 
 	private UserDto user = new UserDto();// 获取页面提交参数
 	private boolean success;
@@ -67,18 +65,10 @@ public class IndexAction extends ActionSupport implements ModelDriven<UserDto> {
 			success = false;
 			message = "您还没有登录";
 		}
-		return SUCCESS;
+		return "success";
 	}
 
 	/* get set */
-	public IIndexService getIndexService() {
-		return indexService;
-	}
-
-	public void setIndexService(IIndexService indexService) {
-		this.indexService = indexService;
-	}
-
 	
 	public void setFunctionService(IFunctionService functionService) {
 		this.functionService = functionService;
