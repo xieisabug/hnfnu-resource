@@ -40,6 +40,7 @@ public class LoginFilter extends HttpServlet implements Filter {
 	}
 
 	public void init(FilterConfig arg0) throws ServletException {
+		//System.out.println("LoginFilter init");
 	}
 
 }

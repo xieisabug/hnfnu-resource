@@ -58,6 +58,9 @@ $(function () {
             var widthChart = wrapDiv.width()/2-50;
             var heightChart = widthChart/4*3;
             var datas = data.data;
+            if(datas.length == 1) {
+                widthChart = wrapDiv.width()-50;
+            }
             //2D饼图，2D条形图，2D折线图
             for (var i = 0; i < datas.length; i++) {
                 //取出要绘制的数据

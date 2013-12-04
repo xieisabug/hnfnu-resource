@@ -120,14 +120,6 @@ ModelDriven<TopicDto>{
 	}
 
 	/* get set */
-	public ITopicService getTopicService() {
-		return topicService;
-	}
-
-	public void setTopicService(ITopicService topicService) {
-		this.topicService = topicService;
-	}
-
 	public TopicDto getModel() {
 		return topic;
 	}

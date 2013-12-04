@@ -12,11 +12,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.hnfnu.zyw.action.base.AopNoSuchMethodErrorSolveBaseAction;
 import com.hnfnu.zyw.dto.system.RoleDto;
 import com.hnfnu.zyw.dto.system.UserDto;
 import com.hnfnu.zyw.service.system.IRoleService;
 import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 @Controller("roleAction")
@@ -24,7 +24,7 @@ import com.opensymphony.xwork2.ModelDriven;
 @ParentPackage("json-default")
 @Results({ @Result(name = "success",type = "json",params = {"root","action"}) })
 @Namespace("/system")
-public class RoleAction extends ActionSupport implements ModelDriven<RoleDto> {
+public class RoleAction extends AopNoSuchMethodErrorSolveBaseAction implements ModelDriven<RoleDto> {
 
 	private static final long serialVersionUID = 361910504650120895L;
 
@@ -98,14 +98,6 @@ public class RoleAction extends ActionSupport implements ModelDriven<RoleDto> {
 
 	public RoleDto getModel() {
 		return role;
-	}
-
-	public IRoleService getRoleService() {
-		return roleService;
-	}
-
-	public void setRoleService(IRoleService roleService) {
-		this.roleService = roleService;
 	}
 
 	public RoleDto getRole() {
