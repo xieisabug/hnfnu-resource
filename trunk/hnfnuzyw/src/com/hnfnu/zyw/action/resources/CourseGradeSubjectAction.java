@@ -25,7 +25,7 @@ import com.opensymphony.xwork2.ModelDriven;
 @Namespace("/resources")
 public class CourseGradeSubjectAction extends AopNoSuchMethodErrorSolveBaseAction implements
 		ModelDriven<CourseGradeSubjectVo> {
-	private CourseGradeSubjectVo courseGradeSubject = new CourseGradeSubjectVo();// »ñÈ¡Ò³ÃæÌá½»²ÎÊý
+	private CourseGradeSubjectVo courseGradeSubject = new CourseGradeSubjectVo();// 获取页面提交参数
 	private boolean success;
 	private String message;
 	private Map<String, Object> courseGradeSubjectList;
@@ -34,7 +34,7 @@ public class CourseGradeSubjectAction extends AopNoSuchMethodErrorSolveBaseActio
 	@Qualifier("courseGradeSubjectService")
 	private ICourseGradeSubjectService courseGradeSubjectService;
 
-	// »ñÈ¡±íÖÐËùÓÐ¿Î³Ì£¬ÓÃMap×°£¬ÎªÁË·ÖÒ³µÄÐèÒª¼ÓÉÏRowsºÍTotal
+	// 获取表中所有课程，用Map装，为了分页的需要加上Rows和Total
 	@Action(value = "listCourseGradeSubject")
 	public String list() {
 		courseGradeSubjectList = courseGradeSubjectService

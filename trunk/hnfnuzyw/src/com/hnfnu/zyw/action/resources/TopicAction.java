@@ -30,7 +30,7 @@ import com.opensymphony.xwork2.ModelDriven;
 public class TopicAction extends AopNoSuchMethodErrorSolveBaseAction implements
 ModelDriven<TopicDto>{
 	
-	private TopicDto topic = new TopicDto();// »ñÈ¡Ò³ÃæÌá½»²ÎÊý
+	private TopicDto topic = new TopicDto();// 获取页面提交参数
 	private boolean success;
 	private String message;
 	private Map<String, Object> topicList;
@@ -45,32 +45,32 @@ ModelDriven<TopicDto>{
 	@Qualifier("topicSourceVoService")
 	private ITopicSourceVoService topicSourceVoService;
 
-	// Ìí¼Ó×¨Ìâ
+	// 添加专题
 	@Action(value = "addTopic")
 	public String add() {
 		success = topicService.add(topic);
 		if (success) {
-			message = "Ìí¼Ó×¨Ìâ³É¹¦£¡";
+			message = "添加专题成功！";
 		} else {
-			message = "Ìí¼Ó×¨ÌâÊ§°Ü£¡";
+			message = "添加专题失败！";
 		}
 		return SUCCESS;
 	}
 
-	// ÐÞ¸Ä×¨Ìâ
+	// 修改专题
 	@Action(value = "updateTopic")
 	public String update() {
 		success = topicService.update(topic);
 		if (success) {
-			message = "ÐÞ¸Ä×¨Ìâ³É¹¦£¡";
+			message = "修改专题成功！";
 		} else {
-			message = "ÐÞ¸Ä×¨ÌâÊ§°Ü£¡";
+			message = "修改专题失败！";
 		}
 		return SUCCESS;
 	}
 
 	/**
-	 * ¸ù¾Ý×¨ÌâID²éÑ¯Ò»¸ö×¨Ìâ
+	 * 根据专题ID查询一个专题
 	 * 
 	 * @return
 	 */
@@ -81,7 +81,7 @@ ModelDriven<TopicDto>{
 	}
 
 	/**
-	 * ¸ù¾Ý×¨ÌâidÉ¾³ýÒ»¸ö×¨Ìâ
+	 * 根据专题id删除一个专题
 	 * 
 	 * @return
 	 */
@@ -90,28 +90,28 @@ ModelDriven<TopicDto>{
 	public String delete() {
 		success = topicService.delete(topic.getId());
 		if (success) {
-			message = "É¾³ý×¨Ìâ³É¹¦£¡";
+			message = "删除专题成功！";
 		} else {
-			message = "É¾³ý×¨ÌâÊ§°Ü£¡";
+			message = "删除专题失败！";
 		}
 		return SUCCESS;
 	}
 
-	// »ñÈ¡±íÖÐËùÓÐ×¨Ìâ£¬ÓÃMap×°£¬ÎªÁË·ÖÒ³µÄÐèÒª¼ÓÉÏRowsºÍTotal
+	// 获取表中所有专题，用Map装，为了分页的需要加上Rows和Total
 	@Action(value = "listTopic")
 	public String list() {
 		topicList = topicService.listTopic();
 		return SUCCESS;
 	}
 	
-	// »ñÈ¡±íÖÐËùÓÐ×¨Ìâ£¬ÓÃMap×°£¬ÎªÁË·ÖÒ³µÄÐèÒª¼ÓÉÏRowsºÍTotal
+	// 获取表中所有专题，用Map装，为了分页的需要加上Rows和Total
 	@Action(value = "listSourceByTopicId")
 	public String listSourceByTopicId() {
 		topicSourceList = topicSourceVoService.listByTopicId(topic.getId());
 		return SUCCESS;
 	}
 
-	// »ñÈ¡±íÖÐËùÓÐ×¨Ìâ£¬ÓÃMap×°£¬ÎªÁË·ÖÒ³µÄÐèÒª¼ÓÉÏRowsºÍTotal
+	// 获取表中所有专题，用Map装，为了分页的需要加上Rows和Total
 	@Action(value = "topicTree")
 	public String topicTree() {
 		topicTree = topicService.topicTree();

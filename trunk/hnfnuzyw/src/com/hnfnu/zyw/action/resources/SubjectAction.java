@@ -26,7 +26,7 @@ import com.opensymphony.xwork2.ModelDriven;
 public class SubjectAction extends AopNoSuchMethodErrorSolveBaseAction implements
 		ModelDriven<SubjectDto> {
 
-	private SubjectDto subject = new SubjectDto();// »ñÈ¡Ò³ÃæÌá½»²ÎÊý
+	private SubjectDto subject = new SubjectDto();// 获取页面提交参数
 	private boolean success;
 	private String message;
 	private Map<String, Object> subjectList;
@@ -35,32 +35,32 @@ public class SubjectAction extends AopNoSuchMethodErrorSolveBaseAction implement
 	@Qualifier("subjectService")
 	private ISubjectService subjectService;
 
-	// Ìí¼ÓÑ§¿Æ
+	// 添加学科
 	@Action(value = "addSubject")
 	public String add() {
 		success = subjectService.add(subject);
 		if (success) {
-			message = "Ìí¼Ó¹¦ÄÜ³É¹¦£¡";
+			message = "添加功能成功！";
 		} else {
-			message = "Ìí¼Ó¹¦ÄÜÊ§°Ü£¡";
+			message = "添加功能失败！";
 		}
 		return SUCCESS;
 	}
 
-	// ÐÞ¸ÄÑ§¿Æ
+	// 修改学科
 	@Action(value = "updateSubject")
 	public String update() {
 		success = subjectService.update(subject);
 		if (success) {
-			message = "ÐÞ¸Ä¹¦ÄÜ³É¹¦£¡";
+			message = "修改功能成功！";
 		} else {
-			message = "ÐÞ¸Ä¹¦ÄÜÊ§°Ü£¡";
+			message = "修改功能失败！";
 		}
 		return SUCCESS;
 	}
 
 	/**
-	 * ¸ù¾ÝÑ§¿ÆID²éÑ¯Ò»¸öÑ§¿Æ
+	 * 根据学科ID查询一个学科
 	 * 
 	 * @return
 	 */
@@ -71,7 +71,7 @@ public class SubjectAction extends AopNoSuchMethodErrorSolveBaseAction implement
 	}
 
 	/**
-	 * ¸ù¾ÝÑ§¿ÆidÉ¾³ýÒ»¸öÑ§¿Æ
+	 * 根据学科id删除一个学科
 	 * 
 	 * @return
 	 */
@@ -80,14 +80,14 @@ public class SubjectAction extends AopNoSuchMethodErrorSolveBaseAction implement
 	public String delete() {
 		success = subjectService.delete(subject.getId());
 		if (success) {
-			message = "É¾³ý¹¦ÄÜ³É¹¦£¡";
+			message = "删除功能成功！";
 		} else {
-			message = "É¾³ý¹¦ÄÜÊ§°Ü£¡";
+			message = "删除功能失败！";
 		}
 		return SUCCESS;
 	}
 
-	// »ñÈ¡±íÖÐËùÓÐ¹¦ÄÜ£¬ÓÃMap×°£¬ÎªÁË·ÖÒ³µÄÐèÒª¼ÓÉÏRowsºÍTotal
+	// 获取表中所有功能，用Map装，为了分页的需要加上Rows和Total
 	@Action(value = "listSubject")
 	public String list() {
 		subjectList = subjectService.listSub();

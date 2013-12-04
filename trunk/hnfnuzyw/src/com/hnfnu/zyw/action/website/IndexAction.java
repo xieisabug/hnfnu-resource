@@ -29,7 +29,7 @@ import com.opensymphony.xwork2.ModelDriven;
 @Namespace("/website")
 public class IndexAction implements ModelDriven<UserDto> {
 
-	private UserDto user = new UserDto();// »ñÈ¡Ò³ÃæÌá½»²ÎÊý
+	private UserDto user = new UserDto();// 获取页面提交参数
 	private boolean success;
 	private String message;
 	private List<Map<String, Object>> menuList;
@@ -49,7 +49,7 @@ public class IndexAction implements ModelDriven<UserDto> {
 	private IParameterService parameterService;
 
 
-	// »ñÈ¡µÇÂ¼ËùÐèÒªµÄ¶«Î÷,menuList,functionList
+	// 获取登录所需要的东西,menuList,functionList
 	@Action(value = "index")
 	public String index() {
 		Map<String, Object> s = ServletActionContext.getContext().getSession();
@@ -62,7 +62,7 @@ public class IndexAction implements ModelDriven<UserDto> {
 			success = true;
 		} else {
 			success = false;
-			message = "Äú»¹Ã»ÓÐµÇÂ¼";
+			message = "您还没有登录";
 		}
 		return "success";
 	}

@@ -24,7 +24,7 @@ import com.hnfnu.zyw.service.resources.ISourceService;
 @Results({ @Result(name = "success", type = "stream", params = { "contentType", "application/octet-stream","inputName","inputStream","contentDisposition","filename='${fileName}'","bufferSize","4096" }) })
 @Namespace("/file")
 public class SourceDownloadAction extends AopNoSuchMethodErrorSolveBaseAction {
-	// fileNameÊÇ¾ø¶ÔÂ·¾¶
+	// fileName是绝对路径
 	private String url;
 	private int id;
 	private String fileName;

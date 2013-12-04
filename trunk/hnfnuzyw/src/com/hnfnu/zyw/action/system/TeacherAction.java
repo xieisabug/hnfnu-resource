@@ -24,7 +24,7 @@ import com.opensymphony.xwork2.ModelDriven;
 @Namespace("/system")
 public class TeacherAction  extends AopNoSuchMethodErrorSolveBaseAction implements
 ModelDriven<TeacherDto>{
-	private TeacherDto teacher = new TeacherDto();// »ñÈ¡Ò³ÃæÌá½»²ÎÊý
+	private TeacherDto teacher = new TeacherDto();// 获取页面提交参数
 	private boolean success;
 	private String message;
 	private Map<String, Object> teacherList;
@@ -34,37 +34,37 @@ ModelDriven<TeacherDto>{
 	private ITeacherService teacherService;
 
 	/**
-	 * Ìí¼Ó½ÌÊ¦
+	 * 添加教师
 	 * @return
 	 */
 	@Action(value = "addTeacher")
 	public String add() {
 		success = teacherService.add(teacher);
 		if (success) {
-			message = "Ìí¼Ó½ÌÊ¦³É¹¦£¡";
+			message = "添加教师成功！";
 		} else {
-			message = "Ìí¼Ó½ÌÊ¦Ê§°Ü£¡";
+			message = "添加教师失败！";
 		}
 		return SUCCESS;
 	}
 
 	/**
-	 * ÐÞ¸Ä½ÌÊ¦
+	 * 修改教师
 	 * @return
 	 */
 	@Action(value = "updateTeacher")
 	public String update() {
 		success = teacherService.update(teacher);
 		if (success) {
-			message = "ÐÞ¸Ä½ÌÊ¦³É¹¦£¡";
+			message = "修改教师成功！";
 		} else {
-			message = "ÐÞ¸Ä½ÌÊ¦Ê§°Ü£¡";
+			message = "修改教师失败！";
 		}
 		return SUCCESS;
 	}
 
 	/**
-	 * ¸ù¾Ý½ÌÊ¦ID²éÑ¯Ò»¸ö½ÌÊ¦
+	 * 根据教师ID查询一个教师
 	 * @return
 	 */
 	@Action(value = "loadTeacher")
@@ -74,7 +74,7 @@ ModelDriven<TeacherDto>{
 	}
 
 	/**
-	 * ¸ù¾Ý½ÌÊ¦idÉ¾³ýÒ»¸ö½ÌÊ¦
+	 * 根据教师id删除一个教师
 	 * @return
 	 */
 
@@ -82,16 +82,16 @@ ModelDriven<TeacherDto>{
 	public String delete() {
 		success = teacherService.delete(teacher);
 		if (success) {
-			message = "É¾³ý½ÌÊ¦³É¹¦£¡";
+			message = "删除教师成功！";
 		} else {
-			message = "É¾³ý½ÌÊ¦Ê§°Ü£¡";
+			message = "删除教师失败！";
 		}
 		return SUCCESS;
 	}
 
 	/**
-	 *  »ñÈ¡±íÖÐËùÓÐ½ÌÊ¦
-	 *  ÓÃMap×°£¬ÎªÁË·ÖÒ³µÄÐèÒª¼ÓÉÏRowsºÍTotal
+	 *  获取表中所有教师
+	 *  用Map装，为了分页的需要加上Rows和Total
 	 * @return
 	 */
 	@Action(value = "listTeacher")

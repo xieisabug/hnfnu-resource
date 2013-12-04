@@ -24,12 +24,12 @@ import com.opensymphony.xwork2.ModelDriven;
 @Namespace("/system")
 public class UserRoleVoAction extends AopNoSuchMethodErrorSolveBaseAction implements
 		ModelDriven<UserRoleVo> {
-	private UserRoleVo userRoleVo = new UserRoleVo();// »ñÈ¡Ò³ÃæÌá½»²ÎÊý
+	private UserRoleVo userRoleVo = new UserRoleVo();// 获取页面提交参数
 	private boolean success;
 	private String message;
 	private Map<String, Object> roleByUser;
 	/**
-	 * Í¨¹ýÓÃ»§id£¬µÃµ½¸ÃÓÃ»§ÒÑ¾­Ìí¼ÓµÄ½ÇÉ«ºÍÎ´Ìí¼ÓµÄ½ÇÉ«
+	 * 通过用户id，得到该用户已经添加的角色和未添加的角色
 	 */
 	@Autowired
 	@Qualifier("userRoleVoService")

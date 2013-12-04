@@ -18,7 +18,7 @@ import com.hnfnu.zyw.service.system.IFunctionService;
 import com.opensymphony.xwork2.ModelDriven;
 
 /**
- * ¹¦ÄÜÀà
+ * 功能类
  * @author Administrator
  *
  */
@@ -30,7 +30,7 @@ import com.opensymphony.xwork2.ModelDriven;
 public class FunctionAction extends AopNoSuchMethodErrorSolveBaseAction implements
 		ModelDriven<FunctionDto> {
 
-	private FunctionDto function = new FunctionDto();// »ñÈ¡Ò³ÃæÌá½»²ÎÊý
+	private FunctionDto function = new FunctionDto();// 获取页面提交参数
 	private boolean success;
 	private String message;
 	private Map<String, Object> functionList;
@@ -40,37 +40,37 @@ public class FunctionAction extends AopNoSuchMethodErrorSolveBaseAction implemen
 	private IFunctionService functionService;
 
 	/**
-	 * Ìí¼Ó²Ëµ¥
+	 * 添加菜单
 	 * @return
 	 */
 	@Action(value = "addFunction")
 	public String add() {
 		success = functionService.add(function);
 		if (success) {
-			message = "Ìí¼Ó¹¦ÄÜ³É¹¦£¡";
+			message = "添加功能成功！";
 		} else {
-			message = "Ìí¼Ó¹¦ÄÜÊ§°Ü£¡";
+			message = "添加功能失败！";
 		}
 		return SUCCESS;
 	}
 
 	/**
-	 * ÐÞ¸Ä²Ëµ¥
+	 * 修改菜单
 	 * @return
 	 */
 	@Action(value = "updateFunction")
 	public String update() {
 		success = functionService.update(function);
 		if (success) {
-			message = "ÐÞ¸Ä¹¦ÄÜ³É¹¦£¡";
+			message = "修改功能成功！";
 		} else {
-			message = "ÐÞ¸Ä¹¦ÄÜÊ§°Ü£¡";
+			message = "修改功能失败！";
 		}
 		return SUCCESS;
 	}
 
 	/**
-	 * ¸ù¾Ý²Ëµ¥ID²éÑ¯Ò»¸ö²Ëµ¥
+	 * 根据菜单ID查询一个菜单
 	 * @return
 	 */
 	@Action(value = "loadFunction")
@@ -80,7 +80,7 @@ public class FunctionAction extends AopNoSuchMethodErrorSolveBaseAction implemen
 	}
 
 	/**
-	 * ¸ù¾Ý²Ëµ¥idÉ¾³ýÒ»¸ö²Ëµ¥
+	 * 根据菜单id删除一个菜单
 	 * @return
 	 */
 
@@ -88,16 +88,16 @@ public class FunctionAction extends AopNoSuchMethodErrorSolveBaseAction implemen
 	public String delete() {
 		success = functionService.delete(function);
 		if (success) {
-			message = "É¾³ý¹¦ÄÜ³É¹¦£¡";
+			message = "删除功能成功！";
 		} else {
-			message = "É¾³ý¹¦ÄÜÊ§°Ü£¡";
+			message = "删除功能失败！";
 		}
 		return SUCCESS;
 	}
 
 	/**
-	 *  »ñÈ¡±íÖÐËùÓÐ¹¦ÄÜ
-	 *  ÓÃMap×°£¬ÎªÁË·ÖÒ³µÄÐèÒª¼ÓÉÏRowsºÍTotal
+	 *  获取表中所有功能
+	 *  用Map装，为了分页的需要加上Rows和Total
 	 * @return
 	 */
 	@Action(value = "listFunction")

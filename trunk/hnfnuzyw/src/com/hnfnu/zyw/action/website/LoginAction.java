@@ -41,7 +41,7 @@ public class LoginAction extends AopNoSuchMethodErrorSolveBaseAction{
 	@Qualifier("loginService")
 	private ILoginService loginService;
 
-	// ÑéÖ¤ÓÃ»§ÊÇ·ñ´æÔÚ
+	// 验证用户是否存在
 	@Action(value = "loginUser")
 	public String loginUser() {
 		UserDto user = new UserDto();
@@ -79,7 +79,7 @@ public class LoginAction extends AopNoSuchMethodErrorSolveBaseAction{
 		return SUCCESS;
 	}
 
-	// ¸ù¾ÝµÇÂ½µÄÉí·ÝµÇÂ½
+	// 根据登陆的身份登陆
 	@Action(value = "login")
 	public String login() {
 		if (loginType == STUDENT) {
@@ -92,10 +92,10 @@ public class LoginAction extends AopNoSuchMethodErrorSolveBaseAction{
 		return SUCCESS;
 	}
 
-	// ÅÐ¶ÏÇ°Ì¨ÊÇ·ñµÇÂ½£¬²»¹ÜÊÇÑ§Éú»¹ÊÇÀÏÊ¦
+	// 判断前台是否登陆，不管是学生还是老师
 	@Action(value = "validateLogin")
 	public String validateLogin() {
-		// »ñÈ¡µ±Ç°ÓÃ»§
+		// 获取当前用户
 		ActionContext context = ActionContext.getContext();
 		Map<String, Object> session = context.getSession();
 		UserDto user = (UserDto) session.get("user");
@@ -109,9 +109,9 @@ public class LoginAction extends AopNoSuchMethodErrorSolveBaseAction{
 		}
 
 		if (success) {
-			message = "ÓÃ»§ÒÑ¾­µÇÂ½";
+			message = "用户已经登陆";
 		} else {
-			message = "ÏÂÔØ×ÊÔ´Ç°ÇëÄúÏÈµÇÂ½";
+			message = "下载资源前请您先登陆";
 		}
 		return SUCCESS;
 	}
@@ -123,15 +123,15 @@ public class LoginAction extends AopNoSuchMethodErrorSolveBaseAction{
 		session.clear();
 		if (session.containsKey("user") || session.containsKey("student")) {
 			success = false;
-			message = "ÍË³öÏµÍ³Ê§°Ü£¬sessionÇå³ý²»³É¹¦";
+			message = "退出系统失败，session清除不成功";
 		} else {
 			success = true;
-			message = "ÍË³öÏµÍ³³É¹¦";
+			message = "退出系统成功";
 		}
 		return SUCCESS;
 	}
 
-	// »ñÈ¡Ö÷Ò³µÄÍ¼±í
+	// 获取主页的图表
 	@Action(value = "welcomeChart")
 	public String welcomeChart() {
 		int id = ((UserDto) ServletActionContext.getContext().getSession()
@@ -139,10 +139,10 @@ public class LoginAction extends AopNoSuchMethodErrorSolveBaseAction{
 		data = loginService.welcomeChart(id);
 		if (data != null) {
 			success = true;
-			message = "»ñÈ¡Í¼±í³É¹¦";
+			message = "获取图表成功";
 		} else {
 			success = false;
-			message = "»ñÈ¡Í¼±íÊ§°Ü";
+			message = "获取图表失败";
 		}
 		return SUCCESS;
 	}

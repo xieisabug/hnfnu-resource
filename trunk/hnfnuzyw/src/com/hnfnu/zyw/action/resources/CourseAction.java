@@ -31,7 +31,7 @@ import com.opensymphony.xwork2.ModelDriven;
 public class CourseAction extends AopNoSuchMethodErrorSolveBaseAction implements
 		ModelDriven<CourseDto> {
 
-	private CourseDto course = new CourseDto();// »ñÈ¡Ò³ÃæÌá½»²ÎÊý
+	private CourseDto course = new CourseDto();// 获取页面提交参数
 	private List<GradeDto> gradeList;
 	private List<SubjectDto> subjectList;
 	private boolean success;
@@ -50,32 +50,32 @@ public class CourseAction extends AopNoSuchMethodErrorSolveBaseAction implements
 	@Qualifier("subjectService")
 	private ISubjectService subjectService;
 
-	// Ìí¼Ó¿Î³Ì
+	// 添加课程
 	@Action(value = "addCourse")
 	public String add() {
 		success = courseService.add(course);
 		if (success) {
-			message = "Ìí¼Ó¿Î³Ì³É¹¦£¬Çëµ½×ÊÔ´½çÃæÎª¸Ã¿Î³ÌÌí¼Ó×ÊÔ´£¡";
+			message = "添加课程成功，请到资源界面为该课程添加资源！";
 		} else {
-			message = "Ìí¼Ó¿Î³ÌÊ§°Ü£¡";
+			message = "添加课程失败！";
 		}
 		return SUCCESS;
 	}
 
-	// ÐÞ¸Ä¿Î³Ì
+	// 修改课程
 	@Action(value = "updateCourse")
 	public String update() {
 		success = courseService.update(course);
 		if (success) {
-			message = "ÐÞ¸Ä¿Î³Ì³É¹¦£¡";
+			message = "修改课程成功！";
 		} else {
-			message = "ÐÞ¸Ä¿Î³ÌÊ§°Ü£¡";
+			message = "修改课程失败！";
 		}
 		return SUCCESS;
 	}
 
 	/**
-	 * ¸ù¾Ý¿Î³ÌID²éÑ¯Ò»¸ö¿Î³Ì
+	 * 根据课程ID查询一个课程
 	 * 
 	 * @return
 	 */
@@ -86,7 +86,7 @@ public class CourseAction extends AopNoSuchMethodErrorSolveBaseAction implements
 	}
 
 	/**
-	 * ¸ù¾Ý¿Î³ÌidÉ¾³ýÒ»¸ö¿Î³Ì
+	 * 根据课程id删除一个课程
 	 * 
 	 * @return
 	 */
@@ -95,14 +95,14 @@ public class CourseAction extends AopNoSuchMethodErrorSolveBaseAction implements
 	public String delete() {
 		success = courseService.delete(course.getId());
 		if (success) {
-			message = "É¾³ý¿Î³Ì³É¹¦£¬×ÊÔ´½çÃæÇëË¢ÐÂ»òÕßÖØÐÂ´ò¿ª×ÊÔ´½çÃæ£¡";
+			message = "删除课程成功，资源界面请刷新或者重新打开资源界面！";
 		} else {
-			message = "É¾³ý¿Î³ÌÊ§°Ü£¡";
+			message = "删除课程失败！";
 		}
 		return SUCCESS;
 	}
 
-	// »ñÈ¡±íÖÐËùÓÐ¿Î³Ì£¬ÓÃMap×°£¬ÎªÁË·ÖÒ³µÄÐèÒª¼ÓÉÏRowsºÍTotal
+	// 获取表中所有课程，用Map装，为了分页的需要加上Rows和Total
 	@Action(value = "listCourse")
 	public String list() {
 		courseList = courseService.listCourse();

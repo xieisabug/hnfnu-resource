@@ -25,7 +25,7 @@ import com.opensymphony.xwork2.ModelDriven;
 @Namespace("/resources")
 public class GradeAction extends AopNoSuchMethodErrorSolveBaseAction implements ModelDriven<GradeDto> {
 
-	private GradeDto grade = new GradeDto();// »ñÈ¡Ò³ÃæÌá½»²ÎÊý
+	private GradeDto grade = new GradeDto();// 获取页面提交参数
 	private boolean success;
 	private String message;
 	private Map<String, Object> gradeList;
@@ -34,32 +34,32 @@ public class GradeAction extends AopNoSuchMethodErrorSolveBaseAction implements 
 	@Qualifier("gradeService")
 	private IGradeService gradeService;
 
-	// Ìí¼ÓÄê¼¶
+	// 添加年级
 	@Action(value = "addGrade")
 	public String add() {
 		success = gradeService.add(grade);
 		if (success) {
-			message = "Ìí¼ÓÄê¼¶³É¹¦£¡";
+			message = "添加年级成功！";
 		} else {
-			message = "Ìí¼ÓÄê¼¶Ê§°Ü£¡";
+			message = "添加年级失败！";
 		}
 		return SUCCESS;
 	}
 
-	// ÐÞ¸ÄÄê¼¶
+	// 修改年级
 	@Action(value = "updateGrade")
 	public String update() {
 		success = gradeService.update(grade);
 		if (success) {
-			message = "ÐÞ¸ÄÄê¼¶³É¹¦£¡";
+			message = "修改年级成功！";
 		} else {
-			message = "ÐÞ¸ÄÄê¼¶Ê§°Ü£¡";
+			message = "修改年级失败！";
 		}
 		return SUCCESS;
 	}
 
 	/**
-	 * ¸ù¾ÝÄê¼¶ID²éÑ¯Ò»¸öÄê¼¶
+	 * 根据年级ID查询一个年级
 	 * 
 	 * @return
 	 */
@@ -70,7 +70,7 @@ public class GradeAction extends AopNoSuchMethodErrorSolveBaseAction implements 
 	}
 
 	/**
-	 * ¸ù¾ÝÄê¼¶idÉ¾³ýÒ»¸öÄê¼¶
+	 * 根据年级id删除一个年级
 	 * 
 	 * @return
 	 */
@@ -79,14 +79,14 @@ public class GradeAction extends AopNoSuchMethodErrorSolveBaseAction implements 
 	public String delete() {
 		success = gradeService.delete(grade.getId());
 		if (success) {
-			message = "É¾³ýÄê¼¶³É¹¦£¡";
+			message = "删除年级成功！";
 		} else {
-			message = "É¾³ýÄê¼¶Ê§°Ü£¡";
+			message = "删除年级失败！";
 		}
 		return SUCCESS;
 	}
 
-	// »ñÈ¡±íÖÐËùÓÐÄê¼¶£¬ÓÃMap×°£¬ÎªÁË·ÖÒ³µÄÐèÒª¼ÓÉÏRowsºÍTotal
+	// 获取表中所有年级，用Map装，为了分页的需要加上Rows和Total
 	@Action(value = "listGrade")
 	public String list() {
 		gradeList = gradeService.listGrade();

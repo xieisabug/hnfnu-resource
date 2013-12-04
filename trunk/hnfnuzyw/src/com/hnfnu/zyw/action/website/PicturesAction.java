@@ -28,7 +28,7 @@ import com.opensymphony.xwork2.ModelDriven;
 @Namespace("/website")
 public class PicturesAction extends AopNoSuchMethodErrorSolveBaseAction implements
 ModelDriven<PicturesDto>{
-	private PicturesDto pictures = new PicturesDto();// »ñÈ¡Ò³ÃæÌá½»²ÎÊý
+	private PicturesDto pictures = new PicturesDto();// 获取页面提交参数
 	private boolean success;
 	private String message;
 	private Map<String, Object> picturesMap;
@@ -40,13 +40,13 @@ ModelDriven<PicturesDto>{
 	private IPicturesService picturesService;
 
 	/**
-	 * Ìí¼ÓÍ¼Æ¬
+	 * 添加图片
 	 * @return
 	 */
 	@Action(value = "addPictures")
 	public String add() {
 		Date dt = new Date();
-		// »ñÈ¡µ±Ç°ÓÃ»§
+		// 获取当前用户
 		ActionContext context = ActionContext.getContext();
 		Map<String, Object> session = context.getSession();
 		UserDto user = (UserDto) session.get("user");
@@ -56,15 +56,15 @@ ModelDriven<PicturesDto>{
 		System.out.println(pictures);
 		success = picturesService.add(pictures);
 		if (success) {
-			message = "Ìí¼ÓÍ¼Æ¬³É¹¦£¡";
+			message = "添加图片成功！";
 		} else {
-			message = "Ìí¼ÓÍ¼Æ¬Ê§°Ü£¡";
+			message = "添加图片失败！";
 		}
 		return SUCCESS;
 	}
 
 	/**
-	 * ÐÞ¸ÄÍ¼Æ¬
+	 * 修改图片
 	 * @return
 	 */
 	@Action(value = "updatePictures")
@@ -73,15 +73,15 @@ ModelDriven<PicturesDto>{
 		pictures.setSrc(p.getSrc());
 		success = picturesService.update(pictures);
 		if (success) {
-			message = "ÐÞ¸ÄÍ¼Æ¬³É¹¦£¬Ë¢ÐÂÖ®ºó¿É²é¿´£¡";
+			message = "修改图片成功，刷新之后可查看！";
 		} else {
-			message = "ÐÞ¸ÄÍ¼Æ¬Ê§°Ü£¡";
+			message = "修改图片失败！";
 		}
 		return SUCCESS;
 	}
 
 	/**
-	 * ¸ù¾ÝÍ¼Æ¬ID²éÑ¯Ò»¸öÍ¼Æ¬
+	 * 根据图片ID查询一个图片
 	 * @return
 	 */
 	@Action(value = "loadPictures")
@@ -89,16 +89,16 @@ ModelDriven<PicturesDto>{
 		pictures = picturesService.load(pictures);
 		if (pictures != null) {
 			success = true;
-			message = "¼ÓÔØÍ¼Æ¬³É¹¦£¡";
+			message = "加载图片成功！";
 		} else {
 			success = false;
-			message = "¼ÓÔØÍ¼Æ¬Ê§°Ü£¡";
+			message = "加载图片失败！";
 		}
 		return SUCCESS;
 	}
 
 	/**
-	 * ¸ù¾ÝÍ¼Æ¬idÉ¾³ýÒ»¸öÍ¼Æ¬
+	 * 根据图片id删除一个图片
 	 * @return
 	 */
 
@@ -106,16 +106,16 @@ ModelDriven<PicturesDto>{
 	public String delete() {
 		success = picturesService.delete(pictures);
 		if (success) {
-			message = "É¾³ýÍ¼Æ¬³É¹¦£¡";
+			message = "删除图片成功！";
 		} else {
-			message = "É¾³ýÍ¼Æ¬Ê§°Ü£¡";
+			message = "删除图片失败！";
 		}
 		return SUCCESS;
 	}
 
 	
 	/**
-	 * »ñÈ¡¿ÉÒÔÏÔÊ¾µÄÍ¼Æ¬µÄÊýÁ¿
+	 * 获取可以显示的图片的数量
 	 * @return
 	 */
 
@@ -124,16 +124,16 @@ ModelDriven<PicturesDto>{
 		count = picturesService.getCount();
 		if(count < 0){
 			success = false;
-			message = "»ñÈ¡Í¼Æ¬ÊýÁ¿³É¹¦£¡";
+			message = "获取图片数量成功！";
 		}else {
-			message = "»ñÈ¡Í¼Æ¬ÊýÁ¿Ê§°Ü£¡";
+			message = "获取图片数量失败！";
 		}
 		return SUCCESS;
 	}
 
 	/**
-	 *  »ñÈ¡±íÖÐËùÓÐÍ¼Æ¬
-	 *  ÓÃMap×°£¬ÎªÁË·ÖÒ³µÄÐèÒª¼ÓÉÏRowsºÍTotal
+	 *  获取表中所有图片
+	 *  用Map装，为了分页的需要加上Rows和Total
 	 * @return
 	 */
 	@Action(value = "mapPictures")
@@ -144,8 +144,8 @@ ModelDriven<PicturesDto>{
 
 	
 	/**
-	 *  »ñÈ¡±íÖÐËùÓÐÍ¼Æ¬
-	 *  ÓÃList×°
+	 *  获取表中所有图片
+	 *  用List装
 	 * @return
 	 */
 	@Action(value = "listPictures")
