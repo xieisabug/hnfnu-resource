@@ -25,7 +25,7 @@ import com.opensymphony.xwork2.ModelDriven;
 public class CategoryAction extends AopNoSuchMethodErrorSolveBaseAction implements
 		ModelDriven<CategoryDto> {
 
-	private CategoryDto category = new CategoryDto();// »ñÈ¡Ò³ÃæÌá½»²ÎÊý
+	private CategoryDto category = new CategoryDto();// 获取页面提交参数
 	private boolean success;
 	private String message;
 	private String orders;
@@ -35,39 +35,39 @@ public class CategoryAction extends AopNoSuchMethodErrorSolveBaseAction implemen
 	@Qualifier("categoryService")
 	private ICategoryService categoryService;
 
-	// Ìí¼ÓÀà±ð
+	// 添加类别
 	@Action(value = "addCategory")
 	public String add() {
 		int order = categoryService.maxOrder() + 1;
 		if (order < 1) {
-			message = "Ìí¼ÓÀà±ðÊ§°Ü,Àà±ð»ñÈ¡Ê§°Ü";
+			message = "添加类别失败,类别获取失败";
 		} else {
 			category.setOrd(order);
 			success = categoryService.add(category);
 			if (success) {
-				message = "Ìí¼ÓÀà±ð³É¹¦£¡";
+				message = "添加类别成功！";
 			} else {
-				message = "Ìí¼ÓÀà±ðÊ§°Ü£¡";
+				message = "添加类别失败！";
 			}
 		}
 
 		return SUCCESS;
 	}
 
-	// ÐÞ¸ÄÀà±ð
+	// 修改类别
 	@Action(value = "updateCategory")
 	public String update() {
 		success = categoryService.update(category);
 		if (success) {
-			message = "ÐÞ¸ÄÀà±ð³É¹¦£¡";
+			message = "修改类别成功！";
 		} else {
-			message = "ÐÞ¸ÄÀà±ðÊ§°Ü£¡";
+			message = "修改类别失败！";
 		}
 		return SUCCESS;
 	}
 
 	/**
-	 * ¸ù¾ÝÀà±ðID²éÑ¯Ò»¸öÀà±ð
+	 * 根据类别ID查询一个类别
 	 * 
 	 * @return
 	 */
@@ -78,7 +78,7 @@ public class CategoryAction extends AopNoSuchMethodErrorSolveBaseAction implemen
 	}
 
 	/**
-	 * ¸ù¾ÝÀà±ðidÉ¾³ýÒ»¸öÀà±ð
+	 * 根据类别id删除一个类别
 	 * 
 	 * @return
 	 */
@@ -87,35 +87,35 @@ public class CategoryAction extends AopNoSuchMethodErrorSolveBaseAction implemen
 	public String delete() {
 		success = categoryService.delete(category.getId());
 		if (success) {
-			message = "É¾³ýÀà±ð³É¹¦,ÇëË¢ÐÂ×ÊÔ´½çÃæ»òÕßÖØÐÂ´ò¿ª×ÊÔ´½çÃæ£¡";
+			message = "删除类别成功,请刷新资源界面或者重新打开资源界面！";
 		} else {
-			message = "É¾³ýÀà±ðÊ§°Ü£¡";
+			message = "删除类别失败！";
 		}
 		return SUCCESS;
 	}
 
-	// »ñÈ¡±íÖÐËùÓÐÀà±ð£¬ÓÃMap×°£¬ÎªÁË·ÖÒ³µÄÐèÒª¼ÓÉÏRowsºÍTotal
+	// 获取表中所有类别，用Map装，为了分页的需要加上Rows和Total
 	@Action(value = "listCategory")
 	public String list() {
 		categoryList = categoryService.listCategory();
 		return SUCCESS;
 	}
 
-	// »ñÈ¡±íÖÐËùÓÐÀà±ð£¬¸ù¾ÝordÅÅÐò £¬ÓÃMap×°£¬ÎªÁË·ÖÒ³µÄÐèÒª¼ÓÉÏRowsºÍTotal
+	// 获取表中所有类别，根据ord排序 ，用Map装，为了分页的需要加上Rows和Total
 	@Action(value = "listCategoryOrder")
 	public String listCategoryOrder() {
 		categoryList = categoryService.getCategoryDtoOrder();
 		return SUCCESS;
 	}
 
-	// ÐÞ¸ÄÀà±ðµÄÅÅÐò
+	// 修改类别的排序
 	@Action(value = "categoryOrder")
 	public String categoryOrder() {
 		success = categoryService.setCategoryDtoOrder(orders);
 		if (success) {
-			message = "Àà±ðÅÅÐò³É¹¦£¡";
+			message = "类别排序成功！";
 		} else {
-			message = "Àà±ðÅÅÐòÊ§°Ü£¡";
+			message = "类别排序失败！";
 		}
 		return SUCCESS;
 	}
