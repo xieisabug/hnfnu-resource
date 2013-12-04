@@ -15,31 +15,31 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import sun.misc.BASE64Decoder;
 import javax.servlet.http.HttpServletRequest;
 /**
- * UEditor文件上传辅助�?
+ * UEditoræ–‡ä»¶ä¸Šä¼ è¾…åŠ©ç±?
  *
  */
 public class Uploader {
-	// 输出文件地址
+	// è¾“å‡ºæ–‡ä»¶åœ°å€
 	private String url = "";
-	// 上传文件�?
+	// ä¸Šä¼ æ–‡ä»¶å?
 	private String fileName = "";
-	// 状�?
+	// çŠ¶æ?
 	private String state = "";
-	// 文件类型
+	// æ–‡ä»¶ç±»åž‹
 	private String type = "";
-	// 原始文件�?
+	// åŽŸå§‹æ–‡ä»¶å?
 	private String originalName = "";
-	// 文件大小
+	// æ–‡ä»¶å¤§å°
 	private String size = "";
 
 	private HttpServletRequest request = null;
 	private String title = "";
 
-	// 保存路径
+	// ä¿å­˜è·¯å¾„
 	private String savePath = "upload";
-	// 文件允许格式
+	// æ–‡ä»¶å…è®¸æ ¼å¼
 	private String[] allowFiles = { ".rar", ".doc", ".docx", ".zip", ".pdf",".txt", ".swf", ".wmv", ".gif", ".png", ".jpg", ".jpeg", ".bmp" };
-	// 文件大小限制，单位KB
+	// æ–‡ä»¶å¤§å°é™åˆ¶ï¼Œå•ä½KB
 	private int maxSize = 10000;
 	
 	private HashMap<String, String> errorInfo = new HashMap<String, String>();
@@ -47,15 +47,15 @@ public class Uploader {
 	public Uploader(HttpServletRequest request) {
 		this.request = request;
 		HashMap<String, String> tmp = this.errorInfo;
-		tmp.put("SUCCESS", "SUCCESS"); //默认成功
-		tmp.put("NOFILE", "未包含文件上传域");
-		tmp.put("TYPE", "不允许的文件格式");
-		tmp.put("SIZE", "文件大小超出限制");
-		tmp.put("ENTYPE", "请求类型ENTYPE错误");
-		tmp.put("REQUEST", "上传请求异常");
-		tmp.put("IO", "IO异常");
-		tmp.put("DIR", "目录创建失败");
-		tmp.put("UNKNOWN", "未知错误");
+		tmp.put("SUCCESS", "SUCCESS"); //é»˜è®¤æˆåŠŸ
+		tmp.put("NOFILE", "æœªåŒ…å«æ–‡ä»¶ä¸Šä¼ åŸŸ");
+		tmp.put("TYPE", "ä¸å…è®¸çš„æ–‡ä»¶æ ¼å¼");
+		tmp.put("SIZE", "æ–‡ä»¶å¤§å°è¶…å‡ºé™åˆ¶");
+		tmp.put("ENTYPE", "è¯·æ±‚ç±»åž‹ENTYPEé”™è¯¯");
+		tmp.put("REQUEST", "ä¸Šä¼ è¯·æ±‚å¼‚å¸¸");
+		tmp.put("IO", "IOå¼‚å¸¸");
+		tmp.put("DIR", "ç›®å½•åˆ›å»ºå¤±è´¥");
+		tmp.put("UNKNOWN", "æœªçŸ¥é”™è¯¯");
 	
 	}
 
@@ -89,11 +89,11 @@ public class Uploader {
 					BufferedOutputStream output = new BufferedOutputStream(out);
 					Streams.copy(in, output, true);
 					this.state=this.errorInfo.get("SUCCESS");
-					//UE中只会处理单张上传，完成后即�?��
+					//UEä¸­åªä¼šå¤„ç†å•å¼ ä¸Šä¼ ï¼Œå®ŒæˆåŽå³é€?‡º
 					break;
 				} else {
 					String fname = fis.getFieldName();
-					//只处理title，其余表单请自行处理
+					//åªå¤„ç†titleï¼Œå…¶ä½™è¡¨å•è¯·è‡ªè¡Œå¤„ç†
 					if(!fname.equals("pictitle")){
 						continue;
 					}
@@ -120,7 +120,7 @@ public class Uploader {
 	}
 	
 	/**
-	 * 接受并保存以base64格式上传的文�?
+	 * æŽ¥å—å¹¶ä¿å­˜ä»¥base64æ ¼å¼ä¸Šä¼ çš„æ–‡ä»?
 	 * @param fieldName
 	 */
 	public void uploadBase64(String fieldName){
@@ -148,7 +148,7 @@ public class Uploader {
 	}
 
 	/**
-	 * 文件类型判断
+	 * æ–‡ä»¶ç±»åž‹åˆ¤æ–­
 	 * 
 	 * @param fileName
 	 * @return
@@ -165,7 +165,7 @@ public class Uploader {
 	}
 
 	/**
-	 * 获取文件扩展�?
+	 * èŽ·å–æ–‡ä»¶æ‰©å±•å?
 	 * 
 	 * @return string
 	 */
@@ -174,7 +174,7 @@ public class Uploader {
 	}
 
 	/**
-	 * 依据原始文件名生成新文件�?
+	 * ä¾æ®åŽŸå§‹æ–‡ä»¶åç”Ÿæˆæ–°æ–‡ä»¶å?
 	 * @return
 	 */
 	private String getName(String fileName) {
@@ -184,7 +184,7 @@ public class Uploader {
 	}
 
 	/**
-	 * 根据字符串创建本地目�?并按照日期建立子目录返回
+	 * æ ¹æ®å­—ç¬¦ä¸²åˆ›å»ºæœ¬åœ°ç›®å½?å¹¶æŒ‰ç…§æ—¥æœŸå»ºç«‹å­ç›®å½•è¿”å›ž
 	 * @param path 
 	 * @return 
 	 */
@@ -204,7 +204,7 @@ public class Uploader {
 	}
 
 	/**
-	 * 根据传入的虚拟路径获取物理路�?
+	 * æ ¹æ®ä¼ å…¥çš„è™šæ‹Ÿè·¯å¾„èŽ·å–ç‰©ç†è·¯å¾?
 	 * 
 	 * @param path
 	 * @return
