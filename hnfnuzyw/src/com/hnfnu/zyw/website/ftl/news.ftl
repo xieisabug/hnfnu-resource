@@ -1,4 +1,4 @@
-<!-- 最新公告 -->
+﻿<!-- 最新公告 -->
 <div id="notice">
     <a href="#">
         <div id="notice_title"></div>

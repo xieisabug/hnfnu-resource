@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.service.resources;
+ï»¿package com.hnfnu.zyw.service.resources;
 
 import java.util.List;
 import java.util.Map;
@@ -16,17 +16,17 @@ public interface ITopicService {
 	public TopicDto load(int id);
 
 	/**
-	 * »ñÈ¡±íÖĞËùÓĞ×¨Ìâ£¬ÊÇÓÃList×°µÄ
+	 * è·å–è¡¨ä¸­æ‰€æœ‰ä¸“é¢˜ï¼Œæ˜¯ç”¨Listè£…çš„
 	 * @return
 	 */
 	public List<TopicDto> list();
 	/**
-	 *»ñÈ¡±íÖĞËùÓĞ×¨Ìâ£¬ÓÃMap×°£¬ÎªÁË·ÖÒ³µÄĞèÒª¼ÓÉÏRowsºÍTotal
+	 *è·å–è¡¨ä¸­æ‰€æœ‰ä¸“é¢˜ï¼Œç”¨Mapè£…ï¼Œä¸ºäº†åˆ†é¡µçš„éœ€è¦åŠ ä¸ŠRowså’ŒTotal
 	 * @return
 	 */
 	public Map<String, Object> listTopic();
 	/**
-	 * Éú³É×¨ÌâÊ÷
+	 * ç”Ÿæˆä¸“é¢˜æ ‘
 	 * @return
 	 */
 	public List<Map<String,String>> topicTree();

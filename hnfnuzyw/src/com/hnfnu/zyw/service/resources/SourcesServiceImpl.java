@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.service.resources;
+ï»¿package com.hnfnu.zyw.service.resources;
 
 import java.io.File;
 import java.util.HashMap;
@@ -58,8 +58,8 @@ public class SourcesServiceImpl implements ISourceService {
 	public boolean deleteFile(String url) {
 		File file = new File(url);
 
-		// ÅĞ¶ÏÄ¿Â¼»òÎÄ¼şÊÇ·ñ´æÔÚ
-		if (!file.exists()) { // ²»´æÔÚ·µ»Øtrue£¬µ±×öÒÑ¾­É¾³ıÁË
+		// åˆ¤æ–­ç›®å½•æˆ–æ–‡ä»¶æ˜¯å¦å­˜åœ¨
+		if (!file.exists()) { // ä¸å­˜åœ¨è¿”å›trueï¼Œå½“åšå·²ç»åˆ é™¤äº†
 			return true;
 		} else {
 			if (file.delete()) {
@@ -145,9 +145,9 @@ public class SourcesServiceImpl implements ISourceService {
 		return sourceList;
 	}
 
-	// É¾³ıÎÄ¼şµÄ·½·¨£¬Èç¹û·µ»ØµÄÊÇ1ËµÃ÷É¾³ı³É¹¦£¬-1ËµÃ÷ÎÄ¼ş²»´æÔÚ¡£0ËµÃ÷ÎÄ¼şÉ¾³ı´íÎó£¬2ËµÃ÷ÎÄ¼şÉ¾³ı³É¹¦£¬ĞÅÏ¢É¾³ı´íÎó
+	// åˆ é™¤æ–‡ä»¶çš„æ–¹æ³•ï¼Œå¦‚æœè¿”å›çš„æ˜¯1è¯´æ˜åˆ é™¤æˆåŠŸï¼Œ-1è¯´æ˜æ–‡ä»¶ä¸å­˜åœ¨ã€‚0è¯´æ˜æ–‡ä»¶åˆ é™¤é”™è¯¯ï¼Œ2è¯´æ˜æ–‡ä»¶åˆ é™¤æˆåŠŸï¼Œä¿¡æ¯åˆ é™¤é”™è¯¯
 	public boolean delete(String url, int id) {
-		//ÏÈÉ¾³ı±¾µØÎÄ¼ş£¬ÔÙÉ¾³ıÎÄ¼şĞÅÏ¢
+		//å…ˆåˆ é™¤æœ¬åœ°æ–‡ä»¶ï¼Œå†åˆ é™¤æ–‡ä»¶ä¿¡æ¯
 		if(FileUtils.deleteOneFile(url)){
 			try {
 				sourceDao.delete(id);

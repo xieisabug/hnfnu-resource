@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.utils;
+ï»¿package com.hnfnu.zyw.utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,7 +11,7 @@ public class DBUtil {
 	public static Connection getConnection() throws ClassNotFoundException,
 			Exception {
 		Class.forName("com.mysql.jdbc.Driver");
-		String url = "jdbc:mysql://125.221.193.205:3306/hnfnuzyw"; // Õâ¸öÃ»ÓĞÑéÖ¤£¬´íÎóÁËÒª¸üÕı¡£
+		String url = "jdbc:mysql://125.221.193.205:3306/hnfnuzyw"; // è¿™ä¸ªæ²¡æœ‰éªŒè¯ï¼Œé”™è¯¯äº†è¦æ›´æ­£ã€‚
 		String user = "root";
 		String password = "640310";
 

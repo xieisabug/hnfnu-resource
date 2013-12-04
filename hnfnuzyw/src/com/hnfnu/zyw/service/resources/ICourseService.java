@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.service.resources;
+锘縫ackage com.hnfnu.zyw.service.resources;
 
 import java.util.List;
 import java.util.Map;
@@ -16,14 +16,14 @@ public interface ICourseService {
 	public CourseDto load(int id);
 
 	/**
-	 * 获取表中所有功能，是用List装的
+	 * 鑾峰彇琛ㄤ腑鎵�鏈夊姛鑳斤紝鏄敤List瑁呯殑
 	 * 
 	 * @return
 	 */
 	public List<CourseDto> list();
 
 	/**
-	 *获取表中所有功能，用Map装，为了分页的需要加上Rows和Total
+	 *鑾峰彇琛ㄤ腑鎵�鏈夊姛鑳斤紝鐢∕ap瑁咃紝涓轰簡鍒嗛〉鐨勯渶瑕佸姞涓奟ows鍜孴otal
 	 * 
 	 * @return
 	 */

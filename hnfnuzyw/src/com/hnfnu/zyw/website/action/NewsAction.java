@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.website.action;
+ï»¿package com.hnfnu.zyw.website.action;
 
 import java.util.Map;
 
@@ -40,17 +40,17 @@ public class NewsAction extends ActionSupport {
 		String filePath = null;
 		
 		filePath = ServletActionContext.getServletContext().getRealPath("/");
-		// »ñµÃÊı¾İÄ£ĞÍ
+		// è·å¾—æ•°æ®æ¨¡å‹
 		root = newsService.getIndexNews();
 		
-		//´òÓ¡µ½Êä³öÌ¨£¬ÒÔ±ãÓÚ²âÊÔ
+		//æ‰“å°åˆ°è¾“å‡ºå°ï¼Œä»¥ä¾¿äºæµ‹è¯•
 		//fu.print("index.ftl", root);
-		//Êä³öµ½ÎÄ¼ş
+		//è¾“å‡ºåˆ°æ–‡ä»¶
 		success = fu.fprint("news.ftl", root, filePath+"website\\", "news.html");
 		if(success){
-			message="ĞÂÎÅÄ£¿éÉú³É³É¹¦";
+			message="æ–°é—»æ¨¡å—ç”ŸæˆæˆåŠŸ";
 		}else{
-			message="ĞÂÎÅÄ£¿éÉú³ÉÊ§°Ü";
+			message="æ–°é—»æ¨¡å—ç”Ÿæˆå¤±è´¥";
 		}
 		return SUCCESS;
 	}

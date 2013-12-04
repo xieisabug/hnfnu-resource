@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.website.action;
+ï»¿package com.hnfnu.zyw.website.action;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -44,10 +44,10 @@ public class OnlineViewAction extends ActionSupport{
 		s = sourceService.load(id);
 		if(s!=null) {
 			success = true;
-			message = "¶ÁÈ¡³É¹¦";
+			message = "è¯»å–æˆåŠŸ";
 		} else {
 			success = false;
-			message = "¶ÁÈ¡Ê§°Ü";
+			message = "è¯»å–å¤±è´¥";
 		}
 		//System.out.println(message);
 		//System.out.println(s);

@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.website.action;
+ï»¿package com.hnfnu.zyw.website.action;
 
 import java.util.List;
 import java.util.Map;
@@ -35,13 +35,13 @@ public class SourceListAction extends ActionSupport {
 	private String message;
 	private int subjectId;
 	private int gradeId;
-	// µ±Ç°ÊÇµÚ¼¸Ò³
+	// å½“å‰æ˜¯ç¬¬å‡ é¡µ
 	private int page;
-	// ×ÊÔ´ÀàĞÍ
+	// èµ„æºç±»å‹
 	private String type;
-	// ¹Ø¼ü×Ö
+	// å…³é”®å­—
 	private String keyWords;
-	// ·µ»Ø¸ø½çÃæµÄÒ»Ò³µÄÊı¾İ
+	// è¿”å›ç»™ç•Œé¢çš„ä¸€é¡µçš„æ•°æ®
 	private Pager<SourceVo> sourcePager;
 
 	@Autowired
@@ -65,17 +65,17 @@ public class SourceListAction extends ActionSupport {
 
 		filePath = ServletActionContext.getServletContext().getRealPath("/");
 
-		// »ñµÃÊı¾İÄ£ĞÍ
+		// è·å¾—æ•°æ®æ¨¡å‹
 		root = sourceListService.getDataModel(subjectId, gradeId, 1, 10);
-		// ´òÓ¡µ½Êä³öÌ¨£¬ÒÔ±ãÓÚ²âÊÔ
+		// æ‰“å°åˆ°è¾“å‡ºå°ï¼Œä»¥ä¾¿äºæµ‹è¯•
 		//fu.print("list.ftl", root);
-		// Êä³öµ½ÎÄ¼ş
+		// è¾“å‡ºåˆ°æ–‡ä»¶
 		success = fu.fprint("list.ftl", root, filePath+"website//","sourceList_" + subjectId + "_" + gradeId
 				+ ".html");
 		if(success){
-			message = "ÁĞ±íÒ³ÃæÉú³É³É¹¦";
+			message = "åˆ—è¡¨é¡µé¢ç”ŸæˆæˆåŠŸ";
 		}else{
-			message = "ÁĞ±íÒ³ÃæÉú³ÉÊ§°Ü";
+			message = "åˆ—è¡¨é¡µé¢ç”Ÿæˆå¤±è´¥";
 		}
 		return SUCCESS;
 	}
@@ -92,12 +92,12 @@ public class SourceListAction extends ActionSupport {
 			SubjectDto subject = subjects.get(i);
 			for (int j = 0; j < grades.size(); j++) {
 				GradeDto grade = grades.get(j);
-				// »ñµÃÊı¾İÄ£ĞÍ
+				// è·å¾—æ•°æ®æ¨¡å‹
 				root = sourceListService.getDataModel(subject.getId(),
 						grade.getId(), 1, 10);
-				// ´òÓ¡µ½Êä³öÌ¨£¬ÒÔ±ãÓÚ²âÊÔ
+				// æ‰“å°åˆ°è¾“å‡ºå°ï¼Œä»¥ä¾¿äºæµ‹è¯•
 				//fu.print("list.ftl", root);
-				// Êä³öµ½ÎÄ¼ş
+				// è¾“å‡ºåˆ°æ–‡ä»¶
 				success = fu.fprint("list.ftl", root,filePath+"website//","sourceList_" + subject.getId()
 						+ "_" + grade.getId() + ".html");
 				if(success == false)break;
@@ -105,11 +105,11 @@ public class SourceListAction extends ActionSupport {
 		}
 		if(i < subjects.size()){
 			success = false;
-			message = "ÁĞ±íÒ³ÃæÉú³ÉÊ§°Ü";
+			message = "åˆ—è¡¨é¡µé¢ç”Ÿæˆå¤±è´¥";
 			
 		}else{
 			success = true;
-			message = "ËùÓĞÁĞ±íÒ³ÃæÉú³É³É¹¦";
+			message = "æ‰€æœ‰åˆ—è¡¨é¡µé¢ç”ŸæˆæˆåŠŸ";
 		}
 		
 		

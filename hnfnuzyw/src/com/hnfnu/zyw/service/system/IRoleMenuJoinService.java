@@ -1,13 +1,13 @@
-package com.hnfnu.zyw.service.system;
+ï»¿package com.hnfnu.zyw.service.system;
 
 import java.util.List;
 
 public interface IRoleMenuJoinService {
 
-	//¸ù¾İ½ÇÉ«id,µÃµ½¸Ã½ÇÉ«ÒÑ¹Ò½ÓµÄ²Ëµ¥ºÍÎ´¹Ò½ÓµÄ²Ëµ¥¡£
+	//æ ¹æ®è§’è‰²id,å¾—åˆ°è¯¥è§’è‰²å·²æŒ‚æ¥çš„èœå•å’ŒæœªæŒ‚æ¥çš„èœå•ã€‚
 	public List<Object> roleMenuInit(int roleId);
 	
-	//¸ù¾İÇ°Ì¨´«À´µÄid×Ö·û´®£¬ÅúÁ¿´æ´¢
+	//æ ¹æ®å‰å°ä¼ æ¥çš„idå­—ç¬¦ä¸²ï¼Œæ‰¹é‡å­˜å‚¨
 	public boolean addRoleMenuJoins(String joinIds);
 	
 }

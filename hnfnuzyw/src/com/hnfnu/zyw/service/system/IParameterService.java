@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.service.system;
+ï»¿package com.hnfnu.zyw.service.system;
 
 import java.util.List;
 import java.util.Map;
@@ -7,13 +7,13 @@ import com.hnfnu.zyw.dto.system.ParameterDto;
 
 public interface IParameterService {
 	
-	boolean add(ParameterDto parameter);//Ôö¼ÓÒ»¸ö²ÎÊı
+	boolean add(ParameterDto parameter);//å¢åŠ ä¸€ä¸ªå‚æ•°
 
-	boolean update(ParameterDto parameter);//ĞŞ¸ÄÒ»¸ö²ÎÊı
+	boolean update(ParameterDto parameter);//ä¿®æ”¹ä¸€ä¸ªå‚æ•°
 
-	ParameterDto load(ParameterDto parameter);//»ñÈ¡Ò»¸ö²ÎÊı
+	ParameterDto load(ParameterDto parameter);//è·å–ä¸€ä¸ªå‚æ•°
 
-	boolean delete(ParameterDto parameter);//É¾³ıÒ»¸ö²ÎÊı
+	boolean delete(ParameterDto parameter);//åˆ é™¤ä¸€ä¸ªå‚æ•°
 	
 	List<ParameterDto> listAll();  
 

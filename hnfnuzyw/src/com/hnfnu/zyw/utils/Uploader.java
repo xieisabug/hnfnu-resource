@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.utils;
+﻿package com.hnfnu.zyw.utils;
 
 import java.io.*;
 import java.text.SimpleDateFormat;

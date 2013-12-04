@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.service.resources;
+锘縫ackage com.hnfnu.zyw.service.resources;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ public interface ISourceCategoryJoinService {
 	public SourceCategoryJoinDto load(int id);
 
 	/**
-	 * 获取表中所有功能，是用List装的
+	 * 鑾峰彇琛ㄤ腑鎵�鏈夊姛鑳斤紝鏄敤List瑁呯殑
 	 * 
 	 * @return
 	 */

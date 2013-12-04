@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.service.system;
+ï»¿package com.hnfnu.zyw.service.system;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -27,14 +27,14 @@ public class StudentServiceImpl implements IStudentService {
 	public IStudentDao studentDao;
 
 	/**
-	 * Ôö¼ÓÒ»¸öÑ§Éú
+	 * å¢åŠ ä¸€ä¸ªå­¦ç”Ÿ
 	 * 
-	 * @param Ò»¸öÑ§Éú¶ÔÏó
-	 * @return ³É¹¦·µ»Øtrue£¬Ê§°Ü·µ»Øfalse
+	 * @param ä¸€ä¸ªå­¦ç”Ÿå¯¹è±¡
+	 * @return æˆåŠŸè¿”å›trueï¼Œå¤±è´¥è¿”å›false
 	 */
 	public boolean add(StudentDto student) {
 		try {
-			//ĞÂ½¨ÓÃ»§Ä¬ÈÏ×ÊÔ´±ÒÎª100
+			//æ–°å»ºç”¨æˆ·é»˜è®¤èµ„æºå¸ä¸º100
 			student.setBalance(100);
 			Date dt = new Date();
 			student.setCreateDate(dt);
@@ -47,10 +47,10 @@ public class StudentServiceImpl implements IStudentService {
 	}
 
 	/**
-	 * É¾³ıÒ»¸öÑ§Éú
+	 * åˆ é™¤ä¸€ä¸ªå­¦ç”Ÿ
 	 * 
-	 * @param ÒªÉ¾³ıµÄÑ§ÉúµÄid
-	 * @return ³É¹¦·µ»Øtrue£¬Ê§°Ü·µ»Øfalse
+	 * @param è¦åˆ é™¤çš„å­¦ç”Ÿçš„id
+	 * @return æˆåŠŸè¿”å›trueï¼Œå¤±è´¥è¿”å›false
 	 */
 	public boolean delete(StudentDto student) {
 		try {
@@ -63,10 +63,10 @@ public class StudentServiceImpl implements IStudentService {
 	}
 
 	/**
-	 * ¸üĞÂÒ»¸öÑ§Éú
+	 * æ›´æ–°ä¸€ä¸ªå­¦ç”Ÿ
 	 * 
-	 * @param ÒÑ¾­¸üĞÂµÄÑ§ÉúµÄ¶ÔÏó
-	 * @return ³É¹¦·µ»Øtrue£¬Ê§°Ü·µ»Øfalse
+	 * @param å·²ç»æ›´æ–°çš„å­¦ç”Ÿçš„å¯¹è±¡
+	 * @return æˆåŠŸè¿”å›trueï¼Œå¤±è´¥è¿”å›false
 	 */
 	public boolean update(StudentDto student) {
 		try {
@@ -79,10 +79,10 @@ public class StudentServiceImpl implements IStudentService {
 	}
 
 	/**
-	 * ¶ÁÈ¡Ò»¸öÑ§Éú
+	 * è¯»å–ä¸€ä¸ªå­¦ç”Ÿ
 	 * 
-	 * @param ¶ÁÈ¡µÄÑ§ÉúµÄid
-	 * @return ·µ»Ø¶ÁÈ¡µÄÑ§Éú¶ÔÏó
+	 * @param è¯»å–çš„å­¦ç”Ÿçš„id
+	 * @return è¿”å›è¯»å–çš„å­¦ç”Ÿå¯¹è±¡
 	 */
 	public StudentDto load(StudentDto student) {
 		try {
@@ -94,9 +94,9 @@ public class StudentServiceImpl implements IStudentService {
 	}
 
 	/**
-	 * »ñÈ¡ËùÓĞÑ§Éú
+	 * è·å–æ‰€æœ‰å­¦ç”Ÿ
 	 * 
-	 * @return »ñÈ¡µ½µÄÑ§Éú¼¯ºÏ
+	 * @return è·å–åˆ°çš„å­¦ç”Ÿé›†åˆ
 	 */
 	public List<StudentDto> list() {
 		String hql = "from StudentDto";
@@ -110,9 +110,9 @@ public class StudentServiceImpl implements IStudentService {
 	}
 
 	/**
-	 * ÁĞ³öËùÓĞµÄÑ§Éú
+	 * åˆ—å‡ºæ‰€æœ‰çš„å­¦ç”Ÿ
 	 * 
-	 * @return ±£´æÁËËùÓĞÑ§ÉúµÄMap
+	 * @return ä¿å­˜äº†æ‰€æœ‰å­¦ç”Ÿçš„Map
 	 */
 	public Map<String, Object> listStu() {
 		String hql = "from StudentDto";
@@ -130,7 +130,7 @@ public class StudentServiceImpl implements IStudentService {
 	}
 
 	/**
-	 * ¸øÑ§ÉúÅúÁ¿³äÖµ×ÊÔ´±Ò
+	 * ç»™å­¦ç”Ÿæ‰¹é‡å……å€¼èµ„æºå¸
 	 */
 	public int addStudnetBalance(int count, String studentIds) {
 		return studentDao.addStudnetBalance(count, studentIds);
@@ -140,42 +140,42 @@ public class StudentServiceImpl implements IStudentService {
 		ArrayList<StudentDto> students = new ArrayList<StudentDto>();
 		File file = null;
 		try {
-			// WorkbookFactory¿ÉÒÔ×Ô¶¯¸ù¾İÎÄµµµÄÀàĞÍ´ò¿ªÒ»¸öexcel
+			// WorkbookFactoryå¯ä»¥è‡ªåŠ¨æ ¹æ®æ–‡æ¡£çš„ç±»å‹æ‰“å¼€ä¸€ä¸ªexcel
 			file = new File(url);
 			Workbook wb = WorkbookFactory.create(file);
-			// »ñÈ¡excelÖĞµÄÄ³Ò»¸öÊı¾İ±í
+			// è·å–excelä¸­çš„æŸä¸€ä¸ªæ•°æ®è¡¨
 			Sheet sheet = wb.getSheetAt(0);
-			// »ñÈ¡Êı¾İ±íÖĞµÄÄ³Ò»ĞĞ
+			// è·å–æ•°æ®è¡¨ä¸­çš„æŸä¸€è¡Œ
 			Row row = null;
 			Row titleRow = sheet.getRow(0);
 			System.out.println("sheet.getLastRowNum():"+sheet.getLastRowNum());
 			for (int i = 1; i <= sheet.getLastRowNum(); i++) {
 				row = sheet.getRow(i);
-				// »ñÈ¡Ò»ĞĞ¶àÉÙÁĞ
+				// è·å–ä¸€è¡Œå¤šå°‘åˆ—
 				StudentDto student = new StudentDto();
 				for (int j = row.getFirstCellNum(); j < row.getLastCellNum(); j++) {
 					String title = getCellValue(titleRow.getCell(j));
 					String value = getCellValue(row.getCell(j));
 
-					if (title.equals("ĞÕÃû")) {
+					if (title.equals("å§“å")) {
 						student.setName(value);
-					} else if (title.equals("Ñ§ºÅ")) {
+					} else if (title.equals("å­¦å·")) {
 						student.setNumber(value);
 						student.setUsername(value);
 
-					} else if (title.equals("×¨Òµ")) {
+					} else if (title.equals("ä¸“ä¸š")) {
 						student.setMajor(value);
 
-					} else if (title.equals("Ïµ²¿")) {
+					} else if (title.equals("ç³»éƒ¨")) {
 						student.setDepartment(value);
 
-					} else if (title.equals("ÈëÑ§Äê·İ")) {
+					} else if (title.equals("å…¥å­¦å¹´ä»½")) {
 						student.setEntranceTime(value);
 
-					} else if (title.equals("µç»°ºÅÂë") || title.equals("ÁªÏµµç»°")) {
+					} else if (title.equals("ç”µè¯å·ç ") || title.equals("è”ç³»ç”µè¯")) {
 						student.setTelephone(value);
 
-					} else if (title.equals("±¸×¢")) {
+					} else if (title.equals("å¤‡æ³¨")) {
 						student.setRemark(value);
 					}
 				}

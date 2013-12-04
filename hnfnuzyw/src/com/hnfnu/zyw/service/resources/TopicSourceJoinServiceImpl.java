@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.service.resources;
+ï»¿package com.hnfnu.zyw.service.resources;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,7 @@ import com.hnfnu.zyw.dto.resources.TopicSourceJoinDto;
 
 @Service("topicSourceJoinService")
 public class TopicSourceJoinServiceImpl implements ITopicSourceJoinService {
-	// ²Ù×÷user_role_join±íµÄdao
+	// æ“ä½œuser_role_joinè¡¨çš„dao
 	@Autowired
 	@Qualifier("topicSourceJoinDao")
 	public ITopicSourceJoinDao topicSourceJoinDao;
@@ -71,7 +71,7 @@ public class TopicSourceJoinServiceImpl implements ITopicSourceJoinService {
 		// int topicId = Integer.parseInt(ids[0]);
 
 		List<TopicSourceJoinDto> topicSourceJoins = new ArrayList<TopicSourceJoinDto>();
-		// µ±¸ÃÓÃ»§Ã»ÓĞ½ÇÉ«Ê±
+		// å½“è¯¥ç”¨æˆ·æ²¡æœ‰è§’è‰²æ—¶
 		if (topicSourceIds == null || topicSourceIds.equals("")) {
 			topicSourceJoins = null;
 		} else {

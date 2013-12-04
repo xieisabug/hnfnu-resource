@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.vo;
+ï»¿package com.hnfnu.zyw.vo;
 
 import java.sql.Timestamp;
 
@@ -15,11 +15,11 @@ public class SourceVo {
 
 	private Integer id;
 
-	// ×ÊÔ´Ãû³Æ
+	// èµ„æºåç§°
 
 	private String name;
 
-	// ÊôÓÚµÄ¿Î³ÌµÄid
+	// å±äºçš„è¯¾ç¨‹çš„id
 
 	private Integer courseId;
 	private String courseName;
@@ -28,63 +28,63 @@ public class SourceVo {
 	private Integer subjectId;
 	private String subjectName;
 
-	// ÊôÓÚµÄÀà±ğµÄid,Ò»¸ö×ÊÔ´ÓĞ¶à¸öÀà±ğ£¬ÒÔ£»¸ô¿ª
+	// å±äºçš„ç±»åˆ«çš„id,ä¸€ä¸ªèµ„æºæœ‰å¤šä¸ªç±»åˆ«ï¼Œä»¥ï¼›éš”å¼€
 
 	private String categoryIdList;
 	
 	private String categoryNameList;
 
-	// ¹Ø¼ü×ÖÁĞ±í£¬ÓÃ"£»"·Ö¸ô
+	// å…³é”®å­—åˆ—è¡¨ï¼Œç”¨"ï¼›"åˆ†éš”
 
 	private String keyWords;
 
-	// Ã½ÌåÀàĞÍ£¬Èç£ºÎÄ±¾£¬ppt£¬ÊÓÆµµÈ
+	// åª’ä½“ç±»å‹ï¼Œå¦‚ï¼šæ–‡æœ¬ï¼Œpptï¼Œè§†é¢‘ç­‰
 
 	private String mediaType;
 
-	// Ã½Ìå¸ñÊ½£¬Èç£ºjpg£¬mp4µÈ
+	// åª’ä½“æ ¼å¼ï¼Œå¦‚ï¼šjpgï¼Œmp4ç­‰
 
 	private String mediaFormat;
 
-	// ²¥·ÅÊ±¼ä£¬Ö»ÓĞÊÓÆµÓµÓĞÕâ¸öÊôĞÔ
+	// æ’­æ”¾æ—¶é—´ï¼Œåªæœ‰è§†é¢‘æ‹¥æœ‰è¿™ä¸ªå±æ€§
 
 	private String playTime;
 
-	// ÎÄ¼ş´óĞ¡
+	// æ–‡ä»¶å¤§å°
 
 	private String fileSize;
 
-	// ×÷Õß
+	// ä½œè€…
 
 	private String author;
 
-	// ³ö°æÉç
+	// å‡ºç‰ˆç¤¾
 
 	private String publisher;
 
-	// ÃèÊö
+	// æè¿°
 
 	private String description;
 
-	// ´´½¨Ê±¼ä
+	// åˆ›å»ºæ—¶é—´
 
 	private Timestamp createDate;
 
-	// ÉóºË×´Ì¬
+	// å®¡æ ¸çŠ¶æ€
 
 	private String approvalStatus;
 
 	
 
-	// ¼Û¸ñ
+	// ä»·æ ¼
 
 	private double price;
 
-	// ·ÃÎÊ´ÎÊı
+	// è®¿é—®æ¬¡æ•°
 
 	private Integer viewTimes;
 
-	// ÏÂÔØ»òÕßÊ¹ÓÃ´ÎÊı
+	// ä¸‹è½½æˆ–è€…ä½¿ç”¨æ¬¡æ•°
 
 	private Integer useTimes;
 

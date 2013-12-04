@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.service.system;
+ï»¿package com.hnfnu.zyw.service.system;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ import com.hnfnu.zyw.dto.system.UserRoleJoinDto;
 @Service("userRoleJoinService")
 public class UserRoleJoinServiceImpl implements IUserRoleJoinService {
 
-	// ²Ù×÷user_role_join±íµÄdao
+	// æ“ä½œuser_role_joinè¡¨çš„dao
 	@Autowired
 	@Qualifier("userRoleJoinDao")
 	public IUserRoleJoinDao userRoleJoinDao;
@@ -71,7 +71,7 @@ public class UserRoleJoinServiceImpl implements IUserRoleJoinService {
 		int userId = Integer.parseInt(ids[0]);
 		
 		List<UserRoleJoinDto> userRoleJoins = new ArrayList<UserRoleJoinDto>();
-		//µ±¸ÃÓÃ»§Ã»ÓĞ½ÇÉ«Ê±
+		//å½“è¯¥ç”¨æˆ·æ²¡æœ‰è§’è‰²æ—¶
 		if(ids.length < 2){
 			userRoleJoins = null;
 		}

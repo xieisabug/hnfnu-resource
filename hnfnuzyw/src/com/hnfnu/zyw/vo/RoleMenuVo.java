@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.vo;
+ï»¿package com.hnfnu.zyw.vo;
 
 import java.io.Serializable;
 
@@ -14,23 +14,23 @@ import com.hnfnu.zyw.dto.system.pk.RoleMenuPK;
 @IdClass(RoleMenuPK.class)
 public class RoleMenuVo implements Serializable{
 	private static final long serialVersionUID = -7845996932250565865L;
-	// ½ÇÉ«Ãû
+	// è§’è‰²å
 	private String roleName;
-	// ´´½¨ÓÃ»§id
+	// åˆ›å»ºç”¨æˆ·id
 	//private RoleMenuPK id;
 	private Integer roleId;
 	private Integer menuId;
-	// ¸¸²Ëµ¥µÄid£¬Èç¹ûÊÇ-1£¬Ôò±íÊ¾µ±Ç°Îª×î¸ß¼¶²Ëµ¥
+	// çˆ¶èœå•çš„idï¼Œå¦‚æœæ˜¯-1ï¼Œåˆ™è¡¨ç¤ºå½“å‰ä¸ºæœ€é«˜çº§èœå•
 	private Integer parentId;
-	// ¸¸²Ëµ¥µÄÃû×Ö
+	// çˆ¶èœå•çš„åå­—
 	private String  parentName;
-	// ²Ëµ¥µÄÃû×Ö
+	// èœå•çš„åå­—
 	private String menuName;
-	// ²Ëµ¥µã»÷ºóµ÷ÓÃµÄÁ´½Ó
+	// èœå•ç‚¹å‡»åè°ƒç”¨çš„é“¾æ¥
 	private String url;
-	// ²Ëµ¥ËùÓµÓĞµÄ¹¦ÄÜµÄidÁĞ±í£¬ÓÃ¡®£¬¡¯·Ö¸î
+	// èœå•æ‰€æ‹¥æœ‰çš„åŠŸèƒ½çš„idåˆ—è¡¨ï¼Œç”¨â€˜ï¼Œâ€™åˆ†å‰²
 	private String functionIdList;
-	// ²Ëµ¥µÄÍ¼±ê
+	// èœå•çš„å›¾æ ‡
 	private String icon;
 
 	public RoleMenuVo() {

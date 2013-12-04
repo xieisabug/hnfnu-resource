@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.vo;
+﻿package com.hnfnu.zyw.vo;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

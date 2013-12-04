@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.service.system;
+锘縫ackage com.hnfnu.zyw.service.system;
 
 import java.util.List;
 import java.util.Map;
@@ -17,31 +17,31 @@ public interface IStudentService {
 
 	
 	/**
-	 * 获取表中所有学生，是用List装的
+	 * 鑾峰彇琛ㄤ腑鎵�鏈夊鐢燂紝鏄敤List瑁呯殑
 	 * @return
 	 */
 	public List<StudentDto> list();
 	/**
-	 *获取表中所有学生，用Map装，为了分页的需要加上Rows和Total
+	 *鑾峰彇琛ㄤ腑鎵�鏈夊鐢燂紝鐢∕ap瑁咃紝涓轰簡鍒嗛〉鐨勯渶瑕佸姞涓奟ows鍜孴otal
 	 * @return
 	 */
 	public Map<String, Object> listStu();
 	
 	/*
-	 * 批量给学生充值资源币
+	 * 鎵归噺缁欏鐢熷厖鍊艰祫婧愬竵
 	 */
 	public int addStudnetBalance(int count,String studentIds);
 	
 	
 
 	/*
-	 * 解析excel表批量给学生注册
+	 * 瑙ｆ瀽excel琛ㄦ壒閲忕粰瀛︾敓娉ㄥ唽
 	 */
 	public boolean addStudnets(String url);
 	
 	//public StudentDto getStudent(String sql);
 	/**
-	 * 验证学生用户是否存在
+	 * 楠岃瘉瀛︾敓鐢ㄦ埛鏄惁瀛樺湪
 	 * @param username
 	 * @return
 	 */
