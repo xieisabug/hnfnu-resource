@@ -26,7 +26,6 @@ import com.opensymphony.xwork2.ModelDriven;
 @Namespace("/system")
 public class RoleAction extends AopNoSuchMethodErrorSolveBaseAction implements ModelDriven<RoleDto> {
 
-	private static final long serialVersionUID = 361910504650120895L;
 
 	@Autowired
 	@Qualifier("roleService")

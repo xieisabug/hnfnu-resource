@@ -14,11 +14,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.hnfnu.zyw.action.base.AopNoSuchMethodErrorSolveBaseAction;
 import com.hnfnu.zyw.dto.system.UserDto;
 import com.hnfnu.zyw.dto.website.PicturesDto;
 import com.hnfnu.zyw.service.website.IPicturesService;
 import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 @Controller("PicturesAction")
@@ -26,9 +26,8 @@ import com.opensymphony.xwork2.ModelDriven;
 @ParentPackage("json-default")
 @Results({ @Result(name = "success", type = "json", params = { "root", "action" }) })
 @Namespace("/website")
-public class PicturesAction extends ActionSupport implements
+public class PicturesAction extends AopNoSuchMethodErrorSolveBaseAction implements
 ModelDriven<PicturesDto>{
-	private static final long serialVersionUID = -7199971221300636848L;
 	private PicturesDto pictures = new PicturesDto();// 获取页面提交参数
 	private boolean success;
 	private String message;
@@ -156,13 +155,6 @@ ModelDriven<PicturesDto>{
 	}
 	
 	/* get set */
-	public IPicturesService getPicturesService() {
-		return picturesService;
-	}
-
-	public void setPicturesService(IPicturesService picturesService) {
-		this.picturesService = picturesService;
-	}
 
 	public PicturesDto getModel() {
 		return pictures;

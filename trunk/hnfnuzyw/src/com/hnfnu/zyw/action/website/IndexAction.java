@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-import com.hnfnu.zyw.action.base.AopNoSuchMethodErrorSolveBaseAction;
 import com.hnfnu.zyw.dto.system.FunctionDto;
 import com.hnfnu.zyw.dto.system.ParameterDto;
 import com.hnfnu.zyw.dto.system.UserDto;
@@ -69,11 +68,6 @@ public class IndexAction implements ModelDriven<UserDto> {
 	}
 
 	/* get set */
-	
-	public void setFunctionService(IFunctionService functionService) {
-		this.functionService = functionService;
-	}
-
 	public UserDto getModel() {
 		return user;
 	}
@@ -105,11 +99,5 @@ public class IndexAction implements ModelDriven<UserDto> {
 	public List<ParameterDto> getParameterList() {
 		return parameterList;
 	}
-
-	public void setParameterService(IParameterService parameterService) {
-		this.parameterService = parameterService;
-	}
-	
-	
 
 }

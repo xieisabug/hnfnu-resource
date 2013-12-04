@@ -12,9 +12,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.hnfnu.zyw.action.base.AopNoSuchMethodErrorSolveBaseAction;
 import com.hnfnu.zyw.dto.system.ParameterDto;
 import com.hnfnu.zyw.service.system.IParameterService;
-import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 @Controller("parameterAction")
@@ -22,9 +22,8 @@ import com.opensymphony.xwork2.ModelDriven;
 @ParentPackage("json-default")
 @Results({ @Result(name = "success",type = "json",params = {"root","action"}) })
 @Namespace("/system")
-public class ParameterAction extends ActionSupport implements ModelDriven<ParameterDto> {
+public class ParameterAction extends AopNoSuchMethodErrorSolveBaseAction implements ModelDriven<ParameterDto> {
 
-	private static final long serialVersionUID = 361910504650120895L;
 
 	@Autowired
 	@Qualifier("parameterService")
@@ -101,13 +100,6 @@ public class ParameterAction extends ActionSupport implements ModelDriven<Parame
 	}
 
 	/*get set*/
-	public IParameterService getParameterService() {
-		return parameterService;
-	}
-
-	public void setParameterService(IParameterService parameterService) {
-		this.parameterService = parameterService;
-	}
 
 	public ParameterDto getModel() {
 		return parameter;

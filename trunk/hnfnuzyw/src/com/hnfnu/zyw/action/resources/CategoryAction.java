@@ -12,9 +12,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.hnfnu.zyw.action.base.AopNoSuchMethodErrorSolveBaseAction;
 import com.hnfnu.zyw.dto.resources.CategoryDto;
 import com.hnfnu.zyw.service.resources.ICategoryService;
-import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 @Controller("categoryAction")
@@ -22,10 +22,9 @@ import com.opensymphony.xwork2.ModelDriven;
 @ParentPackage("json-default")
 @Results({ @Result(name = "success", type = "json", params = { "root", "action" }) })
 @Namespace("/resources")
-public class CategoryAction extends ActionSupport implements
+public class CategoryAction extends AopNoSuchMethodErrorSolveBaseAction implements
 		ModelDriven<CategoryDto> {
 
-	private static final long serialVersionUID = -7199971221300636848L;
 	private CategoryDto category = new CategoryDto();// 获取页面提交参数
 	private boolean success;
 	private String message;
@@ -122,13 +121,6 @@ public class CategoryAction extends ActionSupport implements
 	}
 
 	/* get set */
-	public ICategoryService getCategoryService() {
-		return categoryService;
-	}
-
-	public void setCategoryService(ICategoryService categoryService) {
-		this.categoryService = categoryService;
-	}
 
 	public CategoryDto getModel() {
 		return category;

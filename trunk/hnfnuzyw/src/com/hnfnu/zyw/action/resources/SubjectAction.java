@@ -12,9 +12,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.hnfnu.zyw.action.base.AopNoSuchMethodErrorSolveBaseAction;
 import com.hnfnu.zyw.dto.resources.SubjectDto;
 import com.hnfnu.zyw.service.resources.ISubjectService;
-import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 @Controller("subjectAction")
@@ -23,10 +23,9 @@ import com.opensymphony.xwork2.ModelDriven;
 @Results( { @Result(name = "success", type = "json", params = { "root",
 		"action" }) })
 @Namespace("/resources")
-public class SubjectAction extends ActionSupport implements
+public class SubjectAction extends AopNoSuchMethodErrorSolveBaseAction implements
 		ModelDriven<SubjectDto> {
 
-	private static final long serialVersionUID = -7199971221300636848L;
 	private SubjectDto subject = new SubjectDto();// 获取页面提交参数
 	private boolean success;
 	private String message;
@@ -96,13 +95,6 @@ public class SubjectAction extends ActionSupport implements
 	}
 
 	/* get set */
-	public ISubjectService getSubjectService() {
-		return subjectService;
-	}
-
-	public void setSubjectService(ISubjectService subjectService) {
-		this.subjectService = subjectService;
-	}
 
 	public SubjectDto getModel() {
 		return subject;

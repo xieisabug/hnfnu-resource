@@ -12,9 +12,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.hnfnu.zyw.action.base.AopNoSuchMethodErrorSolveBaseAction;
 import com.hnfnu.zyw.dto.system.TeacherDto;
 import com.hnfnu.zyw.service.system.ITeacherService;
-import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 @Controller("teacherAction")
@@ -22,9 +22,8 @@ import com.opensymphony.xwork2.ModelDriven;
 @ParentPackage("json-default")
 @Results({ @Result(name = "success", type = "json", params = { "root", "action" }) })
 @Namespace("/system")
-public class TeacherAction  extends ActionSupport implements
+public class TeacherAction  extends AopNoSuchMethodErrorSolveBaseAction implements
 ModelDriven<TeacherDto>{
-	private static final long serialVersionUID = -7199971221300636848L;
 	private TeacherDto teacher = new TeacherDto();// 获取页面提交参数
 	private boolean success;
 	private String message;
@@ -103,13 +102,6 @@ ModelDriven<TeacherDto>{
 
 	
 	/* get set */
-	public ITeacherService getTeacherService() {
-		return teacherService;
-	}
-
-	public void setTeacherService(ITeacherService teacherService) {
-		this.teacherService = teacherService;
-	}
 
 	public TeacherDto getModel() {
 		return teacher;

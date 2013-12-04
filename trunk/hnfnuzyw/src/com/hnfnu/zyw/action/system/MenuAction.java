@@ -14,12 +14,12 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.hnfnu.zyw.action.base.AopNoSuchMethodErrorSolveBaseAction;
 import com.hnfnu.zyw.dto.system.FunctionDto;
 import com.hnfnu.zyw.dto.system.MenuDto;
 import com.hnfnu.zyw.service.system.IFunctionService;
 import com.hnfnu.zyw.service.system.IMenuService;
 import com.hnfnu.zyw.vo.MenuVo;
-import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 @Controller("menuAction")
@@ -27,9 +27,8 @@ import com.opensymphony.xwork2.ModelDriven;
 @ParentPackage("json-default")
 @Results({ @Result(name = "success", type = "json", params = { "root", "action" }) })
 @Namespace("/system")
-public class MenuAction extends ActionSupport implements ModelDriven<MenuDto> {
+public class MenuAction extends AopNoSuchMethodErrorSolveBaseAction implements ModelDriven<MenuDto> {
 
-	private static final long serialVersionUID = -6647461641925967113L;
 	private MenuDto menu = new MenuDto();// 获取页面提交参数
 	private boolean success;
 	private Map<String, Object> menuList;
@@ -127,10 +126,6 @@ public class MenuAction extends ActionSupport implements ModelDriven<MenuDto> {
 
 	public boolean isSuccess() {
 		return success;
-	}
-
-	public void setMenuService(IMenuService menuService) {
-		this.menuService = menuService;
 	}
 
 	public void setMenu(MenuDto menu) {

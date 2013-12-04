@@ -12,9 +12,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.hnfnu.zyw.action.base.AopNoSuchMethodErrorSolveBaseAction;
 import com.hnfnu.zyw.service.resources.ICourseGradeSubjectService;
 import com.hnfnu.zyw.vo.CourseGradeSubjectVo;
-import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 @Controller("courseGradeSubjectAction")
@@ -23,9 +23,8 @@ import com.opensymphony.xwork2.ModelDriven;
 @Results( { @Result(name = "success", type = "json", params = { "root",
 		"action" }) })
 @Namespace("/resources")
-public class CourseGradeSubjectAction extends ActionSupport implements
+public class CourseGradeSubjectAction extends AopNoSuchMethodErrorSolveBaseAction implements
 		ModelDriven<CourseGradeSubjectVo> {
-	private static final long serialVersionUID = -7199971221300636848L;
 	private CourseGradeSubjectVo courseGradeSubject = new CourseGradeSubjectVo();// 获取页面提交参数
 	private boolean success;
 	private String message;
@@ -63,8 +62,4 @@ public class CourseGradeSubjectAction extends ActionSupport implements
 		this.courseGradeSubject = courseGradeSubject;
 	}
 
-	public void setCourseGradeSubjectService(
-			ICourseGradeSubjectService courseGradeSubjectService) {
-		this.courseGradeSubjectService = courseGradeSubjectService;
-	}
 }

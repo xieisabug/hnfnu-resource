@@ -12,9 +12,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.hnfnu.zyw.action.base.AopNoSuchMethodErrorSolveBaseAction;
 import com.hnfnu.zyw.dto.system.UserRoleJoinDto;
 import com.hnfnu.zyw.service.system.IUserRoleJoinService;
-import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 @Controller("userRoleJoinAction")
@@ -22,9 +22,8 @@ import com.opensymphony.xwork2.ModelDriven;
 @ParentPackage("json-default")
 @Results({ @Result(name = "success", type = "json", params = { "root", "action" }) })
 @Namespace("/system")
-public class UserRoleJoinAction extends ActionSupport implements
+public class UserRoleJoinAction extends AopNoSuchMethodErrorSolveBaseAction implements
 		ModelDriven<UserRoleJoinDto> {
-	private static final long serialVersionUID = -5962640394246361991L;
 	private UserRoleJoinDto userRoleJoin = new UserRoleJoinDto();// 获取页面提交参数
 	private boolean success;
 	private String message;
@@ -105,13 +104,6 @@ public class UserRoleJoinAction extends ActionSupport implements
 	
 
 	/* get set */
-	public IUserRoleJoinService getUserRoleJoinService() {
-		return userRoleJoinService;
-	}
-
-	public void setUserRoleJoinService(IUserRoleJoinService userRoleJoinService) {
-		this.userRoleJoinService = userRoleJoinService;
-	}
 
 	public UserRoleJoinDto getModel() {
 		return userRoleJoin;
