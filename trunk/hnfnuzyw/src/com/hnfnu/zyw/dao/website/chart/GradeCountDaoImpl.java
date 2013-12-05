@@ -4,7 +4,7 @@ import org.springframework.stereotype.Repository;
 
 import com.hnfnu.zyw.dao.base.BaseDao;
 import com.hnfnu.zyw.dao.website.IChartDao;
-import com.hnfnu.zyw.dto.website.chart.GradeCount;
+import com.hnfnu.zyw.vo.chart.GradeCount;
 
 @Repository("gradeCountDao")
 public class GradeCountDaoImpl extends BaseDao<GradeCount> implements

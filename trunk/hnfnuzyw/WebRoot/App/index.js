@@ -2,7 +2,7 @@
 var tab, layout, accordion;
 var hnfnu = {};
 //tabid计数器，保证tabid不会重复
-var tabidcounter = 0;
+//var tabidcounter = 0;
 
 function f_heightChanged(options) {
     if (tab)
@@ -14,8 +14,8 @@ function f_heightChanged(options) {
 function f_addTab(tabid, text, url) {
     if (!tab) return;
     if (!tabid) {
-        tabidcounter++;
-        tabid = "tabid" + tabidcounter;
+        //tabidcounter++;
+        tabid = "tabid"; //+ tabidcounter;
     }
     tab.addTabItem({ tabid:tabid, text:text, url:url });
 }
@@ -29,8 +29,8 @@ $(document).ready(function () {
         var url = jitem.attr("url");
         if (!url)return;
         if (!tabid) {
-            tabidcounter++;
-            tabid = jitem.attr("menuno") + "tabid" + tabidcounter;
+            //tabidcounter++;
+            tabid = jitem.attr("menuno") + "tabid";// + tabidcounter;
             jitem.attr("tabid", tabid);
         }
         f_addTab(tabid, $("span:first", jitem).html(), url);

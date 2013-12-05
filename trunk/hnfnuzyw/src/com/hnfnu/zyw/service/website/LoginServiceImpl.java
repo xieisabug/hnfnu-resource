@@ -17,18 +17,21 @@ import com.hnfnu.zyw.dao.system.IUserDao;
 import com.hnfnu.zyw.dao.system.IUserRoleMenuVoDao;
 import com.hnfnu.zyw.dao.website.IChartDao;
 import com.hnfnu.zyw.dao.website.ILoginDao;
+import com.hnfnu.zyw.dao.website.IUserHabitDao;
 import com.hnfnu.zyw.dto.resources.SourceDto;
 import com.hnfnu.zyw.dto.system.MenuDto;
 import com.hnfnu.zyw.dto.system.StudentDto;
 import com.hnfnu.zyw.dto.system.UserDto;
 import com.hnfnu.zyw.dto.system.ValidateMessege;
-import com.hnfnu.zyw.dto.website.chart.CategoryCount;
-import com.hnfnu.zyw.dto.website.chart.GradeCount;
-import com.hnfnu.zyw.dto.website.chart.SubjectCount;
-import com.hnfnu.zyw.dto.website.chart.TopUserSource;
-import com.hnfnu.zyw.dto.website.chart.UserCount;
 import com.hnfnu.zyw.utils.WebUtils;
+import com.hnfnu.zyw.vo.UserHabitVo;
 import com.hnfnu.zyw.vo.UserRoleMenuVo;
+import com.hnfnu.zyw.vo.chart.CategoryCount;
+import com.hnfnu.zyw.vo.chart.GradeCount;
+import com.hnfnu.zyw.vo.chart.SubjectCount;
+import com.hnfnu.zyw.vo.chart.TopUserSource;
+import com.hnfnu.zyw.vo.chart.UserCount;
+import com.opensymphony.xwork2.ActionContext;
 
 @Service("loginService")
 public class LoginServiceImpl implements ILoginService {
@@ -65,6 +68,9 @@ public class LoginServiceImpl implements ILoginService {
 	@Autowired
 	@Qualifier("subjectCountDao")
 	public IChartDao subjectCountDao;
+	@Autowired
+	@Qualifier("userHabitDao")
+	public IUserHabitDao userHabitDao;
 	
 	public ValidateMessege validateUser(UserDto user) {
 		String hql = "from UserDto where username='" + user.getUsername() + "'";
@@ -84,6 +90,7 @@ public class LoginServiceImpl implements ILoginService {
 			return messege;
 		} else {
 			if (u.getPassword().equals(user.getPassword())) {
+				messege.setO(u);
 				u.setLatestLoginDate(new Date());
 				try {
 					userDao.update(u);
@@ -93,7 +100,6 @@ public class LoginServiceImpl implements ILoginService {
 					messege.setMessege("登陆失败");
 					return messege;
 				}
-				messege.setO(u);
 				messege.setResult(true);
 				messege.setMessege("登陆成功");
 				return messege;
@@ -204,11 +210,11 @@ public class LoginServiceImpl implements ILoginService {
 			e.printStackTrace();
 			return null;
 		}
-		List<Integer> labels = new ArrayList<Integer>();
+		List<String> labels = new ArrayList<String>();
 		List<Integer> values = new ArrayList<Integer>();
 		int max = 0, min = 9999;// 用于设置坐标轴的最大最小值
 		for (UserCount uc : userCounts) {
-			labels.add(uc.getMonth());
+			labels.add(uc.getMonth()+"月");
 			values.add(uc.getNum());
 			if (max < uc.getNum()) {
 				max = uc.getNum();
@@ -420,5 +426,25 @@ public class LoginServiceImpl implements ILoginService {
 		}
 		ret.put("data", data);
 		return ret;
+	}
+
+	public Map<String, Object> welcomeInfo() {
+		Map<String,Object> info = new HashMap<String, Object>();
+		
+		Map<String, Object> session = ActionContext.getContext().getSession();
+		UserDto user = (UserDto) session.get("user");
+		
+		info.put("username", user.getName());
+		info.put("latestLoginDate", user.getLatestLoginDate());
+		try {
+			List<UserHabitVo> userHabitVos = userHabitDao.list("FROM UserHabitVo WHERE id=" + user.getId());
+			System.out.println(userHabitVos);
+			info.put("habit", userHabitVos);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		
+		return info;
 	}
 }

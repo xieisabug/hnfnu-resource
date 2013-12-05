@@ -11,4 +11,5 @@ public interface ILoginService {
 	ValidateMessege validateUser(UserDto user);
 	ValidateMessege validateStudent(StudentDto student);
 	List<Map<String,Object>> welcomeChart(int id);
+	Map<String, Object> welcomeInfo();
 }
