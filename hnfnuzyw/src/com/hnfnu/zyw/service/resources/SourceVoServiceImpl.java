@@ -15,7 +15,7 @@ import com.hnfnu.zyw.vo.CourseGradeSubjectVo;
 import com.hnfnu.zyw.vo.SourceVo;
 
 @Service("sourceVoService")
-public class SourceVoService implements ISourceVoService {
+public class SourceVoServiceImpl implements ISourceVoService {
 	@Autowired
 	@Qualifier("sourceVoDao")
 	public ISourceVoDao sourceVoDao;

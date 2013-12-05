@@ -2,7 +2,9 @@ var topicGrid = null;// 专题表格
 var topicFrom = null;// 专题表单
 var topicWin = null;// 专题窗口
 var joinWin = null;//挂接窗口
-
+var topicSubtitleFrom = null;//新增二级标题的表单
+var subtitleGrid = null;//用于显示二级标题的表格
+var subtitleWin = null;//用于显示二级标题的窗口
 // 增加专题的函数
 function add_topic() {
     formInit();
@@ -50,6 +52,68 @@ function add_save() {
 function add_cancel() {
     topicWin.close();
 }
+//增加专题的二级标题
+function add_topic_subtille(){
+    if (!topicGrid.getSelected()) {
+        $.ligerDialog.warn('请选择您要添加的专题.');
+        return;
+    }
+    topicSubtitleFromInit();
+    topicWin = $.ligerDialog.open({
+        width :400,
+        height : 200,
+        title : '新增二级标题',
+        target : topicSubtitleFrom,
+        buttons : [ {
+            text : '提交',
+            width : 80,
+            onclick : add_subtitle_save
+        }, {
+            text : '取消',
+            width : 80,
+            onclick : add_subtitle_cancel
+        } ]
+    });
+
+}
+
+// 增加专题的二级标题的保存按钮事件
+function add_subtitle_save() {
+    if (topicSubtitleFrom.valid()) {
+        var row_data = Form.parseJSON(topicSubtitleFrom);
+        var data2 = topicGrid.getSelected();
+        // 发往服务器，返回成功后再添加到表格中
+        $.ajax({
+            url : '../../../resources/addTopicSubtitle.action',
+            data : {
+                "topicId":data2.id,
+                "subtitle":row_data.subtitle,
+                "remark":row_data.remark
+            },
+            type : 'post',
+            success : function(data) {
+                if (data.success) {
+                    $.ligerDialog.tip({
+                        title : '提示信息',
+                        content : data.message
+                    });
+                    topicWin.close();
+                } else {
+                    $.ligerDialog.error(data.message);
+                }
+            }
+        });
+    }
+}
+// 增加专题的二级标题的取消按钮事件
+function add_subtitle_cancel() {
+    topicWin.close();
+}
+//给专题上传资源
+function upload(){
+    alert(upload);
+}
+
 // 修改专题的函数
 function edit_topic() {
         formInit();
@@ -135,10 +199,64 @@ function delete_topic() {
 }
 function topic_source_join() {
 	if (!topicGrid.getSelected()) {
-        $.ligerDialog.warn('请选择您要删除的行.');
+        $.ligerDialog.warn('请选择您要挂接的专题.');
         return;
     }
-    joinWin = $.ligerDialog.open({
+
+    var topic = topicGrid.getSelected();
+    $.ajax({
+        url:'../../../resources/listTopicSubtitle.action',
+        type:'post',
+        data:{
+            "topicId":topic.id
+        },
+        success:function (data) {
+            var s = $('#subtitleGrid');
+            subtitleGrid = s.ligerGrid({
+                columns:[
+                    {
+                        display:'二级标题名称',
+                        name:'subtitle',
+                        width:300
+                    },  {
+                        display:'备注',
+                        name:'remark',
+                        width:300
+                    }
+                ],
+                width:560,
+                height:400,
+                pageSize:30,
+                data:data.topicSubtitleList
+            });
+            subtitleWin = $.ligerDialog.open({
+                width:600,
+                height:400,
+                title:topic.name +'的二级标题',
+                target:s,
+                buttons:[
+                    {
+                        text:'下一步',
+                        width:80,
+                        onclick:select_source
+                    },
+                    {
+                        text:'取消',
+                        width:80,
+                        onclick:select_source_cancel
+                    }
+                ]
+            });
+            console.log(subtitleGrid);
+            console.log(subtitleWin);
+            $(".l-grid2",subtitleWin.element).css({width:600});
+            $("#pageloading").hide();
+        }
+    });
+
+
+
+    /*joinWin = $.ligerDialog.open({
         width : 1000,
         height : 550,
         title : '挂接资源',
@@ -152,11 +270,44 @@ function topic_source_join() {
             width : 80,
             onclick : join_cancel
         } ]
-    });
+    });*/
 }
+
+//给专题挂接资源选择了二级标题后的下一步，也就是接下来是给专题选择资源
+function select_source(){
+    var topic = topicGrid.getSelected();
+
+    if (!subtitleGrid.getSelected()) {
+        $.ligerDialog.warn('请选择'+topic.name+'二级标题');
+        return;
+    }
+    var subtitleId = subtitleGrid.getSelected().id;
+    joinWin = $.ligerDialog.open({
+        width : 1000,
+        height : 550,
+        title : '挂接资源',
+        url : "JoinSource.html?subtitleId="+subtitleId,
+        buttons : [ {
+            text : '提交',
+            width : 80,
+            onclick : join_save
+        }, {
+            text : '取消',
+            width : 80,
+            onclick : join_cancel
+        } ]
+    });
+
+
+}
+//给专题挂接资源选择了二级标题后的放弃挂接资源
+function select_source_cancel(){
+    subtitleWin.hide();
+}
+
 function join_save(){
     var seletedSourceIds = joinWin.frame.joinSelectData;
-    var topicId = topicGrid.getSelected().id;
+    var subtitleId = subtitleGrid.getSelected().id;
     var sendIds = '';
     for(var i = 0; i<seletedSourceIds.length; i++){
         if(i==0){
@@ -169,16 +320,27 @@ function join_save(){
         url : '../../../resources/updateTopicSourceJoins.action',
         type : 'post',
         data : {
-            topicId : topicId,
+            subtitleId : subtitleId,
             seletedSourceIds : sendIds
         },
-        success : function() {
-            joinWin.close();
+        success : function(data) {
+            if (data.success) {
+                $.ligerDialog.tip({
+                    title : '提示信息',
+                    content : data.message
+                });
+                joinWin.close();
+                subtitleWin.hide();
+            } else {
+                $.ligerDialog.error(data.message);
+            }
+
         }
     });
 }
 function join_cancel(){
     joinWin.close();
+    subtitleWin.hide();
 }
 // 初始化表单，生成form标签
 function formInit() {
@@ -244,6 +406,48 @@ function formInit() {
         }
     });
 }
+
+// 初始化表单，生成form标签
+function topicSubtitleFromInit() {
+    topicSubtitleFrom = $('<form></form>');
+    topicSubtitleFrom.ligerForm({
+        inputWidth : 280,
+        fields : [ {
+            name : 'id',
+            type : "hidden"
+        }, {
+            display : '二级标题',
+            name : 'subtitle',
+            type : 'text',
+            space : 30,
+            labelWidth : 100,
+            width : 100,
+            newline : true,
+            validate : {
+                required : true,
+                maxlength : 100
+            }
+        },{
+                display : '备注',
+                name : 'remark',
+                type : 'text',
+                space : 30,
+                labelWidth : 100,
+                width : 100,
+                newline : true
+            } ]
+    });
+    $.metadata.setType("attr", "validate");
+    topicSubtitleFrom.validate({
+        debug : true,
+        onkeyup : false,
+        errorPlacement : function(error,element) {
+            error.appendTo(element.parent().parent().parent().parent());
+        }
+    });
+}
+
+
 // 初始化表格
 $(function() {
     var toolbarItems = [ {
@@ -266,7 +470,18 @@ $(function() {
             click:topic_source_join,
             icon:'config',
             key:'join'
-    }];
+    },
+        {
+            text:'增加二级标题',
+            click:add_topic_subtille,
+            icon:'add',
+            key:'add_subtitle'
+        },{
+            text:'给专题上传资源',
+            click:upload,
+            icon:'add',
+            key:'upload'
+        }];
     var menuId = window.parent.tab.getSelectedTabItemID();
     $.ajax({
         url : '../../../system/listFunctionIdList.action',

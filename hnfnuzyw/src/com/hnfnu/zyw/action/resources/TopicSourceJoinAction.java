@@ -31,7 +31,6 @@ public class TopicSourceJoinAction extends AopNoSuchMethodErrorSolveBaseAction i
 	private Map<String, Object> topicSourceJoinList;
 	// 用户挂接角色，用；好隔开。
 	private String seletedSourceIds;
-	//private int topicId;
 	private int[] sourceIds;
 
 	@Autowired
@@ -46,7 +45,7 @@ public class TopicSourceJoinAction extends AopNoSuchMethodErrorSolveBaseAction i
 	@Action(value = "updateTopicSourceJoins")
 	public String updateTopicSourceJoins() {
 		success = topicSourceJoinService.addTopicSourceJoins(seletedSourceIds,
-				topicSourceJoin.getTopicId());
+				topicSourceJoin.getSubtitleId());
 		if (success) {
 			message = "专题更新资源成功！";
 		} else {
@@ -56,12 +55,13 @@ public class TopicSourceJoinAction extends AopNoSuchMethodErrorSolveBaseAction i
 	}
 
 	/**
-	 * 通过topicId得到改主题已经挂接的资源ids。
+	 * 通过subtitleId得到改主题已经挂接的资源ids。
 	 * @return
 	 */
 	@Action(value = "querySourceIdsByTopicId")
 	public String querySourceIdsByTopicId() {
-		sourceIds = topicSourceJoinService.QueryAllSourceidsByTopicId(topicSourceJoin.getTopicId());
+		//System.out.println("topicSourceJoin.getSubtitleId()"+topicSourceJoin.getSubtitleId());
+		sourceIds = topicSourceJoinService.QueryAllSourceidsByTopicId(topicSourceJoin.getSubtitleId());
 		return SUCCESS;
 	}
 

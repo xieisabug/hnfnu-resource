@@ -284,7 +284,7 @@ $(function () {
         {
             text:'排序类别',
             click:sort_category,
-            icon:'load',
+            icon:'modify',
             key:'sort'
         }
     ];

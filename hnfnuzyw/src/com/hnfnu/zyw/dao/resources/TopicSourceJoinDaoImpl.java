@@ -15,15 +15,15 @@ public class TopicSourceJoinDaoImpl extends BaseDao<TopicSourceJoinDto> implemen
 ITopicSourceJoinDao{
 	
 	
-	public boolean  deleteByTopicId(int topicId) throws Exception {
+	public boolean  deleteByTopicId(int subtitleId) throws Exception {
 
 		Session session = this.getSession();
-		String hql = "delete TopicSourceJoinDto where topicId=:topicId";
+		String hql = "delete TopicSourceJoinDto where subtitleId=:subtitleId";
 		Transaction t = null;
 		try {
 			t = session.beginTransaction();
 			Query q = session.createQuery(hql);
-			q.setParameter("topicId", topicId);
+			q.setParameter("subtitleId", subtitleId);
 			q.executeUpdate();
 			t.commit();
 		} catch (Exception ex) {
@@ -39,9 +39,9 @@ ITopicSourceJoinDao{
 
 	}
 
-	public boolean addTopicSourceJoins(int topicId,List<TopicSourceJoinDto> topicSourceJoins) {
+	public boolean addTopicSourceJoins(int subtitleId,List<TopicSourceJoinDto> topicSourceJoins) {
 		
-		String hql = "delete TopicSourceJoinDto where topicId=:topicId";
+		String hql = "delete TopicSourceJoinDto where subtitleId=:subtitleId";
 		// 打开Session
 		Session session = this.getSession();
 		// 开始事务
@@ -49,7 +49,7 @@ ITopicSourceJoinDao{
 		try {
 			t = session.beginTransaction();
 			Query q = session.createQuery(hql);
-			q.setParameter("topicId", topicId);
+			q.setParameter("subtitleId", subtitleId);
 			q.executeUpdate();
 			if(topicSourceJoins != null){
 			// 循环，插入记录
