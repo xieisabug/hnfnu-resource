@@ -23,7 +23,8 @@ public class LogAspect {
 	
 	private static final Log log = LogFactory.getLog(LogAspect.class);	
 	
-	@After("execution(* com.hnfnu.zyw.dao..*.add(..))")
+	@After("execution(* com.hnfnu.zyw.dao..*.add(..)) " +
+			"&& execution(!* com.hnfnu.zyw.dao.website..*.add(..))")
 	public void logAdd(JoinPoint jp){
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		UserDto user = (UserDto) session.get("user");

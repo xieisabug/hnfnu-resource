@@ -152,7 +152,7 @@ public class LoginAction extends AopNoSuchMethodErrorSolveBaseAction{
 	@Action(value = "welcomeInfo")
 	public String welcomeInfo() {
 		info = loginService.welcomeInfo();
-		System.out.println(info.get("habit"));
+		//System.out.println(info.get("habit"));
 		if (info != null) {
 			success = true;
 			message = "获取用户信息成功";

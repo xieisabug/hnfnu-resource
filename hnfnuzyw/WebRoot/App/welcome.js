@@ -12,6 +12,7 @@ $(function () {
                 var habit = info.habit;
                 var habitLen = habit.length;
                 infoHtml += '<div id="habit">';
+                infoHtml += '<p>您是否想要：</p>';
                 for(var hi = 0; hi < habitLen; hi++) {
                     infoHtml += '<a menuName='+habit[hi].name+' url='+habit[hi].url+' menuNo='+habit[hi].menuId+'>'+habit[hi].name+'</a>';
                 }
@@ -38,7 +39,7 @@ $(function () {
 
             if(!supports_canvas()) {
                 var info = '';
-                info = '<table style="width:90%; height: 30px; margin-bottom: 10px;"><tr><td>请使用更高级的浏览器，以获得更好的用户体验。推荐：Chrome 。</td></tr></table>'
+                info = '<table style="width:90%; height: 30px; margin-bottom: 10px;"><tr><td>请使用更高级的浏览器，以获得更好的用户体验。推荐：<a style="color:red;" href="https://www.google.com/intl/zh-CN/chrome/browser/" target="_blank">Chrome</a> 。</td></tr></table>'
                 wrapDiv.append(info);
             }
 
