@@ -1,14 +1,14 @@
-﻿package com.hnfnu.zyw.dto.website.chart;
+﻿package com.hnfnu.zyw.vo.chart;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "v_chart_subject_count")
-public class SubjectCount {
+@Table(name = "v_chart_user_count")
+public class UserCount {
 	private int num;
-	private String name;
+	private int month;
 
 	public int getNum() {
 		return num;
@@ -19,12 +19,11 @@ public class SubjectCount {
 	}
 
 	@Id
-	public String getName() {
-		return name;
+	public int getMonth() {
+		return month;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setMonth(int month) {
+		this.month = month;
 	}
-
 }

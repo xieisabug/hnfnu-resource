@@ -36,6 +36,7 @@ public class LoginAction extends AopNoSuchMethodErrorSolveBaseAction{
 	private boolean success;
 	private String message;
 	private List<Map<String, Object>> data;
+	private Map<String, Object> info;
 
 	@Autowired
 	@Qualifier("loginService")
@@ -146,6 +147,21 @@ public class LoginAction extends AopNoSuchMethodErrorSolveBaseAction{
 		}
 		return SUCCESS;
 	}
+	
+	//获取用户登录信息
+	@Action(value = "welcomeInfo")
+	public String welcomeInfo() {
+		info = loginService.welcomeInfo();
+		System.out.println(info.get("habit"));
+		if (info != null) {
+			success = true;
+			message = "获取用户信息成功";
+		} else {
+			success = false;
+			message = "用户信息获取失败，请与管理员联系";
+		}
+		return SUCCESS;
+	}
 
 	/* get set */
 	public String getUsername() {
@@ -182,6 +198,10 @@ public class LoginAction extends AopNoSuchMethodErrorSolveBaseAction{
 
 	public List<Map<String, Object>> getData() {
 		return data;
+	}
+
+	public Map<String, Object> getInfo() {
+		return info;
 	}
 
 }

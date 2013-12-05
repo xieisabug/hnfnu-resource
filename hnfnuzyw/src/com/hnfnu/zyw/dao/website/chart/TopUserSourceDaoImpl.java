@@ -4,7 +4,7 @@ import org.springframework.stereotype.Repository;
 
 import com.hnfnu.zyw.dao.base.BaseDao;
 import com.hnfnu.zyw.dao.website.IChartDao;
-import com.hnfnu.zyw.dto.website.chart.TopUserSource;
+import com.hnfnu.zyw.vo.chart.TopUserSource;
 
 @Repository("topUserSourceDao")
 public class TopUserSourceDaoImpl extends BaseDao<TopUserSource> implements

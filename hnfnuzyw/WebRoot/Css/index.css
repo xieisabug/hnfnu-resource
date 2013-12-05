@@ -18,25 +18,47 @@ body {
 	width: 70px;
 	margin-top:2px;
 	margin-right:15px;
-	border: 0px;
+	border: 0;
 	background-color: rgb(73,116,164);
 	color:white;
 }
 #top_page button:hover {
 	background-color: #01AAEE;
 	cursor: pointer;
-	
 }
 
 #welcome {
     height: 92%;
     overflow-y:scroll;
+    background: #fafafa;
 }
 
-#chart div {
+#chart{
+    margin: 50px;
+}
+
+#chart table {
+    border: 0;
+    background: #ffffff;
+    text-align: center;
+}
+#chart table td {
+    width: 50%;
+    border: 1px solid #aaaaaa;
+}
+#chart div{
     float: left;
-    /*margin-left: 40px;*/
-    /*margin-top: 20px;*/
+}
+
+#chart div[id],#info {
+    -moz-box-shadow: 0 0 4px #aaaaaa;
+    -webkit-box-shadow: 0 0 4px #aaaaaa;
+    box-shadow: 0 0 4px #aaaaaa;
+}
+
+#info {
+    margin: 50px;
+    padding: 30px;
 }
 
 #main_menu {
@@ -67,10 +89,10 @@ body {
     height: 16px;
 }
 .menulist li.over {
-    background: url('../App/Lib/images/index/menuitem.gif') repeat-x 0px 0px;
+    background: url('../App/Lib/images/index/menuitem.gif') repeat-x 0 0;
 }
 .menulist li.over .menuitem-l {
-    background: url('../App/Lib/images/index/menuitem.gif') repeat-x 0px -24px;
+    background: url('../App/Lib/images/index/menuitem.gif') repeat-x 0 -24px;
     width: 2px;
     height: 24px;
     position: absolute;
