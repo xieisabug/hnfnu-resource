@@ -57,8 +57,47 @@ body {
 }
 
 #info {
+	font-size: 0.7rem;
     margin: 50px;
     padding: 30px;
+    background: #ffffff;
+}
+
+#info a {
+	background-color: #D95C5C;
+	color: #FFF;
+	cursor: pointer;
+	display: inline-block;
+	vertical-align: middle;
+	min-height: 1em;
+	outline: 0;
+	border: 0;
+	margin: 0 8px 0 0;
+	padding: .8em 1.5em;
+	font-size: 0.7rem;
+	text-transform: uppercase;
+	line-height: 1;
+	font-weight: 700;
+	font-style: normal;
+	text-align: center;
+	text-decoration: none;
+	background-image: -webkit-gradient(linear,top left,bottom left,from(rgba(0,0,0,0)),to(rgba(0,0,0,.05)));
+	background-image: -webkit-linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.05));
+	background-image: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.05));
+	border-radius: .25em;
+	-webkit-box-shadow: 0 0 0 1px rgba(0,0,0,.08) inset;
+	box-shadow: 0 0 0 1px rgba(0,0,0,.08) inset;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-transition: opacity .25s ease,background-color .25s ease,color .25s ease,background .25s ease,-webkit-box-shadow .25s ease;
+	transition: opacity .25s ease,background-color .25s ease,color .25s ease,background .25s ease,box-shadow .25s ease;
 }
 
 #main_menu {

@@ -438,7 +438,7 @@ public class LoginServiceImpl implements ILoginService {
 		info.put("latestLoginDate", user.getLatestLoginDate());
 		try {
 			List<UserHabitVo> userHabitVos = userHabitDao.list("FROM UserHabitVo WHERE id=" + user.getId());
-			System.out.println(userHabitVos);
+			//System.out.println(userHabitVos);
 			info.put("habit", userHabitVos);
 		} catch (Exception e) {
 			e.printStackTrace();
