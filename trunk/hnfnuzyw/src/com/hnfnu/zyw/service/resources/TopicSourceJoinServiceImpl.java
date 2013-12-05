@@ -65,26 +65,26 @@ public class TopicSourceJoinServiceImpl implements ITopicSourceJoinService {
 		}
 	}
 
-	public boolean addTopicSourceJoins(String topicSourceIds, int topicId) {
+	public boolean addTopicSourceJoins(String topicSourceIds, int subtitleId) {
 		// if (topicSourceIds != null && !topicSourceIds.equals("")) {
 
 		// int topicId = Integer.parseInt(ids[0]);
 
 		List<TopicSourceJoinDto> topicSourceJoins = new ArrayList<TopicSourceJoinDto>();
-		// 当该用户没有角色时
+		// 当该用户没有选择时
 		if (topicSourceIds == null || topicSourceIds.equals("")) {
 			topicSourceJoins = null;
 		} else {
 			String[] ids = topicSourceIds.split(",");
 			for (int i = 0; i < ids.length; i++) {
-				TopicSourceJoinDto dto = new TopicSourceJoinDto(null, topicId,
+				TopicSourceJoinDto dto = new TopicSourceJoinDto(null, subtitleId,
 						Integer.parseInt(ids[i]));
 				topicSourceJoins.add(dto);
 			}
 		}
 
 		try {
-			return topicSourceJoinDao.addTopicSourceJoins(topicId,
+			return topicSourceJoinDao.addTopicSourceJoins(subtitleId,
 					topicSourceJoins);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -92,9 +92,9 @@ public class TopicSourceJoinServiceImpl implements ITopicSourceJoinService {
 		}
 	}
 
-	public int[] QueryAllSourceidsByTopicId(int topicId) {
+	public int[] QueryAllSourceidsByTopicId(int subtitleId) {
 		
-		String hql = "from TopicSourceJoinDto where topicId ="+topicId;
+		String hql = "from TopicSourceJoinDto where subtitleId ="+subtitleId;
 		List<TopicSourceJoinDto> list;
 		try {
 			list = topicSourceJoinDao.list(hql);

@@ -13,17 +13,17 @@ import javax.persistence.Table;
 public class TopicSourceJoinDto 
 {	
 	private Integer id;
-	private Integer topicId;
+	private Integer subtitleId;
 	private Integer sourceId;
 
 	public TopicSourceJoinDto()
 	{
 
 	}
-	public TopicSourceJoinDto(Integer id, Integer topicId, Integer sourceId) {
+	public TopicSourceJoinDto(Integer id, Integer subtitleId, Integer sourceId) {
 		super();
 		this.id = id;
-		this.topicId = topicId;
+		this.subtitleId = subtitleId;
 		this.sourceId = sourceId;
 	}
 	public void setId(Integer id)
@@ -36,13 +36,12 @@ public class TopicSourceJoinDto
 	{
 		return this.id;
 	}
-	public void setTopicId(Integer topicId)
-	{
-		this.topicId = topicId;
+	
+	public Integer getSubtitleId() {
+		return subtitleId;
 	}
-	public Integer getTopicId()
-	{
-		return this.topicId;
+	public void setSubtitleId(Integer subtitleId) {
+		this.subtitleId = subtitleId;
 	}
 	public void setsourceId(Integer sourceId)
 	{
@@ -55,7 +54,7 @@ public class TopicSourceJoinDto
 	@Override
 	public String toString() {
 		return "TopicSourceJoinDto [id=" + id + ", sourceId=" + sourceId
-				+ ", topicId=" + topicId + "]";
+				+ ", subtitleId=" + subtitleId + "]";
 	}
 	
 	

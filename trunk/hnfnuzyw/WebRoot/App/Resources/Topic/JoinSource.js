@@ -1,7 +1,8 @@
 var joinGrid = null;//右侧表格
 var joinTree = null;//左侧树
 var joinSelectData = null;//表格选择的数据
-var topicId = null;//当前选择的topic的id
+var subtitleId = null;//当前选择的topic的二级标题id
+
 
 //判断选择的是否是课程
 function isCourse(obj){
@@ -20,16 +21,16 @@ function getParentId(obj){
 // 页面加载完成后就开始调用
 $(function() {
     $("#joinLayout").ligerLayout({leftWidth:250});
-    topicId = window.parent.topicGrid.getSelected().id;
+    subtitleId = Url.getArgs().subtitleId;
     $.ajax( {
         url : '../../../resources/querySourceIdsByTopicId.action',
         type : 'post',
         data : {
-            topicId : topicId
+            subtitleId : subtitleId
         },
         success : function(data) {
             joinSelectData = data.sourceIds;
-            console.log(joinSelectData);
+           // console.log(joinSelectData);
         }
     });
     $.ajax( {

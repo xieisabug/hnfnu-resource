@@ -30,7 +30,7 @@ public class BuildDTO {
 	}
 
 	/**
-	 * ��ø��û���������б�
+	 * 
 	 */
 	public void getAllTableList(String schemaName) {
 		getDatabaseMetaData();
@@ -39,7 +39,6 @@ public class BuildDTO {
 			ResultSet rs = dbMetaData.getTables(null, schemaName, "%", types);
 			while (rs.next()) {
 				String tableName = rs.getString("TABLE_NAME");
-				//��ʼ���Dto
 				build(schemaName, tableName);
 			}
 		} catch (SQLException e) {
@@ -60,14 +59,11 @@ public class BuildDTO {
 				className += classNameT[i].substring(0,1).toUpperCase();
 				className += classNameT[i].substring(1);
 			}
-			
-			
 			//String _className = tableName.substring(2);
 			//className = _className.substring(0,1);
 			//className = className.toUpperCase();
 			//className += _className.substring(1);
 			
-			//��ɺ��Dto���ڵ��ļ�
 			pw = new PrintWriter(new File("e:\\javaDto\\" + className + "Dto.java"));
 
 			pw.println("/**");

@@ -11,7 +11,7 @@ import com.hnfnu.zyw.dao.base.BaseDao;
 import com.hnfnu.zyw.dto.system.StudentDto;
 
 @Repository("studentDao")
-public class StudnetDaoImpl extends BaseDao<StudentDto> implements
+public class StudentDaoImpl extends BaseDao<StudentDto> implements
 IStudentDao{
 	
 	public int addStudnetBalance(int count,String studentIds) {
