@@ -35,7 +35,7 @@ public class UserOperateAspect {
 	public IUserOperateDao userOperateDao;
 	
 	@After("execution(* com.hnfnu.zyw.service..*.*(..))")
-	public void logTest(JoinPoint jp){
+	public void userOperate(JoinPoint jp){
 		if(menuMap == null) {
 			List<MenuDto> menuDtos = null;
 			try {
