@@ -1,4 +1,4 @@
-﻿package com.hnfnu.zyw.dao.system;
+package com.hnfnu.zyw.dao.system;
 
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;

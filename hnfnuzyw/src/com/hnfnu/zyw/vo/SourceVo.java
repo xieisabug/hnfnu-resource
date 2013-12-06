@@ -1,4 +1,4 @@
-﻿package com.hnfnu.zyw.vo;
+package com.hnfnu.zyw.vo;
 
 import java.sql.Timestamp;
 

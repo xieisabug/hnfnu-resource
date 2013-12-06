@@ -1,4 +1,4 @@
-﻿package com.hnfnu.zyw.action.website;
+package com.hnfnu.zyw.action.website;
 
 import java.util.Date;
 import java.util.List;

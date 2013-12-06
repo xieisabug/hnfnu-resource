@@ -1,4 +1,4 @@
-﻿package com.hnfnu.zyw.vo.chart;
+package com.hnfnu.zyw.vo.chart;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

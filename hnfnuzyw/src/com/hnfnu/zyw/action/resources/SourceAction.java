@@ -1,4 +1,4 @@
-﻿package com.hnfnu.zyw.action.resources;
+package com.hnfnu.zyw.action.resources;
 
 import java.sql.Timestamp;
 import java.util.Date;

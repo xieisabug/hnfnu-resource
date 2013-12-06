@@ -1,4 +1,4 @@
-﻿package com.hnfnu.zyw.service.resources;
+package com.hnfnu.zyw.service.resources;
 
 import java.util.List;
 

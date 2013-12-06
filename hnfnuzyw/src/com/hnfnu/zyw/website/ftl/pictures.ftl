@@ -1,4 +1,4 @@
-﻿<div id="idContainer2" class="container">
+<div id="idContainer2" class="container">
     <table id="idSlider2" cellSpacing=0 cellPadding=0>
         <tr>
         	<#list picturesList?if_exists as picture>

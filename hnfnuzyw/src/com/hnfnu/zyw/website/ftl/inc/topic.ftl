@@ -1,4 +1,4 @@
-﻿<#macro topic num topicList>
+<#macro topic num topicList>
 	<div id="topic">
         	<a href="#"><div id="topic_title"></div></a>
             <div id="topic_content">

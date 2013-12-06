@@ -1,4 +1,4 @@
-﻿package com.hnfnu.zyw.dao.system;
+package com.hnfnu.zyw.dao.system;
 
 import com.hnfnu.zyw.dao.base.IBaseDao;
 import com.hnfnu.zyw.vo.MenuVo;

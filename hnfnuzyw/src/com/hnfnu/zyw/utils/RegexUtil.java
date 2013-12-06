@@ -1,4 +1,4 @@
-﻿package com.hnfnu.zyw.utils;
+package com.hnfnu.zyw.utils;
 
 import java.util.ArrayList;
 import java.util.List;
