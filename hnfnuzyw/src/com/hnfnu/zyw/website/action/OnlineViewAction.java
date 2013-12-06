@@ -13,7 +13,6 @@ import org.springframework.stereotype.Controller;
 
 import com.hnfnu.zyw.dto.resources.SourceDto;
 import com.hnfnu.zyw.service.resources.ISourceService;
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 @Controller("onlineViewAction")
@@ -54,6 +53,8 @@ public class OnlineViewAction extends ActionSupport{
 		HttpServletRequest request = ServletActionContext.getRequest();
 		
 		request.setAttribute("source", s);
+        request.setAttribute("message", message);
+        request.setAttribute("success", success);
 		//ActionContext.getContext().put("aaaa", s);
 		return SUCCESS;
 	}

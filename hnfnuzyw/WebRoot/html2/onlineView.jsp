@@ -1,11 +1,13 @@
 <%@ page import="com.hnfnu.zyw.dto.resources.SourceDto" %>
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java" pageEncoding="utf-8"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 	SourceDto s = (SourceDto)request.getAttribute("source");
+    boolean success = (Boolean) request.getAttribute("success");
+    String message = (String) request.getAttribute("message");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -26,10 +28,11 @@
 </head>
 
 <body>
+<div><%=s.getMediaFormat()%></div>
 	<div id="myElement">Loading the player...</div>
 </body>
 <% 
-	if(s != null) {
+	if(success) {
 		if(s.getMediaFormat().equals("mp4") || s.getMediaFormat().equals("flv")) {
 %>
 <script type="text/javascript" src="html2/js/jwplayer.js"></script>
@@ -66,6 +69,6 @@
 		}
 	} else {
 %>
-<h1>错误！</h1>
+<h1><%=message %></h1>
 <% 	} %>
 </html>

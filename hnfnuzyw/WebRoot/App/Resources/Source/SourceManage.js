@@ -151,7 +151,7 @@ function edit_save() {
 					$.ligerDialog.tip({
 						title : '提示信息',
 						content : data.message
-					})
+					});
 					refresh_info();
 					sourceWin.close();
 				} else {
@@ -196,7 +196,7 @@ function all_info() {
 		name : 'winSelector',
 		width : 1024,
 		height : 650,
-		url : '../../../html2/source_view.html?id=' + sourceGridData.id
+		url : 'SourceView.html?id=' + sourceGridData.id
 	});
 }
 // 打开一个选择资源的树形结构的对话框
@@ -479,7 +479,7 @@ $(function() {
                 if(data.name == "super_query"){
                     super_query = true;
                 }
-            })
+            });
             if(super_query){
                 treeUrl = "../../../resources/allTree.action";
                 selectUrl = "../../../resources/sourceMoreVoList.action";
