@@ -1,4 +1,4 @@
-﻿package com.hnfnu.zyw.website.utils;
+package com.hnfnu.zyw.website.utils;
 
 import java.io.File;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-﻿package com.hnfnu.zyw.dao.resources;
+package com.hnfnu.zyw.dao.resources;
 
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-﻿package com.hnfnu.zyw.filter;
+package com.hnfnu.zyw.filter;
 
 import java.util.ArrayList;
 import java.util.HashMap;

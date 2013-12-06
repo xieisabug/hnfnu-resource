@@ -1,4 +1,4 @@
-﻿package com.hnfnu.zyw.dto.system.pk;
+package com.hnfnu.zyw.dto.system.pk;
 
 import java.io.Serializable;
 

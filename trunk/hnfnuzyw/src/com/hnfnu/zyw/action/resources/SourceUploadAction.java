@@ -1,4 +1,4 @@
-﻿package com.hnfnu.zyw.action.resources;
+package com.hnfnu.zyw.action.resources;
 
 import java.io.File;
 import java.io.FileInputStream;

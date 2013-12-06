@@ -1,4 +1,4 @@
-﻿package com.hnfnu.zyw.dao.website;
+package com.hnfnu.zyw.dao.website;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

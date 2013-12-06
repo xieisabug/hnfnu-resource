@@ -1,4 +1,4 @@
-﻿package com.hnfnu.zyw.dto.system;
+package com.hnfnu.zyw.dto.system;
 
 import java.util.Date;
 
