@@ -25,9 +25,55 @@
 
     <div class="row">
         <div id="login">
+            <div class="panel-head">
+                <div class="panel-head-icon"></div>
+                <span>用户登陆</span>
+            </div>
+            <div class="panel-content">
+                <div>
+                    <label for="username">用户名</label>
+                    <!--<span>用户名：</span>-->
+                    <input class="form-control" type="text" id="username"
+                           name="username" placeholder="请输入用户名">
+                </div>
+                <div>
+                    <label for="password">密&nbsp;&nbsp;码</label>
+                    <!--<span>密码：</span>-->
+                    <input class="form-control" type="password" id="password"
+                           name="password" placeholder="请输入密码">
+                </div>
+                <div style="position: relative;">
+                    <label for="role">身&nbsp;&nbsp;份</label>
+                    <button type="button" class="btn btn-default dropdown-toggle btn-ie67"
+                            data-toggle="dropdown" id="role" style="width: 128px;">
+                        学生 <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="javascript:void(0)">老师</a></li>
+                        <li><a href="javascript:void(0)">学生</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <label for="captcha">验证码</label>
+                    <!--<span>密码：</span>-->
+                    <input class="form-control" type="text" id="captcha"
+                           name="captcha" placeholder="输入弹出的验证码">
+                </div>
+            </div>
+        </div>
+        <div id="gallery">
 
         </div>
+        <div id="source-count">
+            <div class="panel-head">
+
+            </div>
+            <div class="panel-content">
+
+            </div>
+        </div>
     </div>
+
 
 </div>
 </body>
