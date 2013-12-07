@@ -1,0 +1,71 @@
+/****for header.html****/
+* {
+    padding:0;
+    margin: 0;
+}
+#headContent {
+    width:960px;
+    margin: 20px auto;
+}
+#headLogo {
+    width: 380px;
+    height: 90px;
+    float: left;
+    background: url("../image/header_logo.jpg");
+}
+#headSearch{
+    margin-top: 30px;
+    width: 455px;
+    float: right;
+}
+#headMenu{
+    width: 500px;
+    float: right;
+    border-color: #75ADE8;
+    text-align: right;
+}
+
+#allContent{
+    width:960px;
+    margin: 0 auto;
+}
+
+.navbar{
+    width: 100%;
+    height: 50px;
+    *height: 34px;
+    padding: 14px 0 0 20px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    /*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#75ade7', endColorstr = '#9ac4ee');
+    /*INNER ELEMENTS MUST NOT BREAK THIS ELEMENTS BOUNDARIES*/
+    /*Element must have a height (not auto)*/
+    /*All filters must be placed together*/
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr = '#75ade7', endColorstr = '#9ac4ee')";
+    /*Element must have a height (not auto)*/
+    /*All filters must be placed together*/
+    background-image: -moz-linear-gradient(top, #75ade7, #9ac4ee);
+    background-image: -ms-linear-gradient(top, #75ade7, #9ac4ee);
+    background-image: -o-linear-gradient(top, #75ade7, #9ac4ee);
+    background-image: -webkit-gradient(linear, center top, center bottom, from(#75ade7), to(#9ac4ee));
+    background-image: -webkit-linear-gradient(top, #75ade7, #9ac4ee);
+    background-image: linear-gradient(top, #75ade7, #9ac4ee);
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    /*Use "background-clip: padding-box" when using rounded corners to avoid the gradient bleeding through the corners*/
+    /*--IE9 WILL PLACE THE FILTER ON TOP OF THE ROUNDED CORNERS--*/
+}
+.nav {
+}
+.nav>li {
+    display: block;
+    float: left;
+    margin-left: 30px;
+}
+.nav>li>a {
+    color: #fff;
+    font-size: 0.9em;
+}
