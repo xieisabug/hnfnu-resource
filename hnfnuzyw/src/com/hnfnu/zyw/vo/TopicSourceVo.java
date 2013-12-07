@@ -64,9 +64,6 @@ public class TopicSourceVo {
 
 	private String approvalStatus;
 
-	// 质量等级
-
-	private String quality;
 
 	// 价格
 
@@ -86,6 +83,9 @@ public class TopicSourceVo {
 	
 	//id
 	private Integer topicId;
+	private Integer subtitleId;
+	
+	
 	//专题名称
 	private String topicName;
 	//专题简介
@@ -107,7 +107,7 @@ public class TopicSourceVo {
 			Integer courseId, String keyWords, String mediaType,
 			String mediaFormat, String playTime, String fileSize,
 			String sourceAuthor, String publisher, String sourceDescription,
-			Timestamp createDate, String approvalStatus, String quality,
+			Timestamp createDate, String approvalStatus, 
 			double price, Integer viewTimes, Integer useTimes, String url,
 			Integer createUserId, Integer topicId, String topicName,
 			String topicDescription, String topicAuthor, String remark) {
@@ -126,7 +126,6 @@ public class TopicSourceVo {
 		this.sourceDescription = sourceDescription;
 		this.createDate = createDate;
 		this.approvalStatus = approvalStatus;
-		this.quality = quality;
 		this.price = price;
 		this.viewTimes = viewTimes;
 		this.useTimes = useTimes;
@@ -308,16 +307,14 @@ public class TopicSourceVo {
 		this.approvalStatus = approvalStatus;
 	}
 
-
-
-	public String getQuality() {
-		return quality;
+	public Integer getSubtitleId() {
+		return subtitleId;
 	}
 
 
 
-	public void setQuality(String quality) {
-		this.quality = quality;
+	public void setSubtitleId(Integer subtitleId) {
+		this.subtitleId = subtitleId;
 	}
 
 
@@ -450,7 +447,7 @@ public class TopicSourceVo {
 				+ ", id=" + id + ", keyWords=" + keyWords + ", mediaFormat="
 				+ mediaFormat + ", mediaType=" + mediaType + ", playTime="
 				+ playTime + ", price=" + price + ", publisher=" + publisher
-				+ ", quality=" + quality + ", remark=" + remark
+				+ ", subtitleId=" + subtitleId + ", remark=" + remark
 				+ ", sourceAuthor=" + sourceAuthor + ", sourceDescription="
 				+ sourceDescription + ", sourceId=" + sourceId
 				+ ", sourceName=" + sourceName + ", topicAuthor=" + topicAuthor

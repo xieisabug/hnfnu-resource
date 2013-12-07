@@ -11,6 +11,9 @@
        <action name="fileUpload" class="com.hnfnu.zyw.action.resources.SourceUploadAction" method="upload">
            <param name="savePath">/uploads</param> 
        </action>
+       <action name="fileTopicUpload" class="com.hnfnu.zyw.action.resources.TopicSourceUploadAction" method="upload">
+           <param name="savePath">/uploads/topic</param> 
+       </action>
         <!-- 初始文件名 
        <action name="download" class="com.hnfnu.zyw.action.resources.SourceDownloadAction" >  
            

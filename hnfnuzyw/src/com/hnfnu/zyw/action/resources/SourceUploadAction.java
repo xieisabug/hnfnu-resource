@@ -59,7 +59,15 @@ public class SourceUploadAction extends ActionSupport implements
 			String fn = df.format(new Date()) + Math.round(Math.random() * 10);
 			//加上文件后缀名
 			fn = fn+getFileNameFileName().get(i);
-			FileOutputStream fos = new FileOutputStream(getSavePath() + "\\"
+			//根据文件的后缀名创建文件夹，并且该文件放入该文件夹
+			String ss = getFileNameFileName().get(i);
+			String[] aStrings = ss.split("\\.");
+			
+			String temp = aStrings[aStrings.length-1];
+			File f = new File(getSavePath() +"\\"+temp);
+			f.mkdirs();
+			
+			FileOutputStream fos = new FileOutputStream(getSavePath()+"\\"+temp + "\\"
 					+ fn);
 			FileInputStream fis = new FileInputStream(getFileName().get(i));
 

@@ -16,8 +16,6 @@ import org.springframework.stereotype.Controller;
 import com.hnfnu.zyw.action.base.AopNoSuchMethodErrorSolveBaseAction;
 import com.hnfnu.zyw.dto.resources.TopicDto;
 import com.hnfnu.zyw.service.resources.ITopicService;
-import com.hnfnu.zyw.service.resources.ITopicSourceVoService;
-import com.hnfnu.zyw.vo.TopicSourceVo;
 import com.opensymphony.xwork2.ModelDriven;
 
 
@@ -35,7 +33,7 @@ ModelDriven<TopicDto>{
 	private String message;
 	private Map<String, Object> topicList;
 	private List<Map<String, String>> topicTree;
-	private List<TopicSourceVo> topicSourceList;
+	//private List<TopicSourceVo> topicSourceList;
 
 	@Autowired
 	@Qualifier("topicService")
@@ -43,7 +41,7 @@ ModelDriven<TopicDto>{
 
 	@Autowired
 	@Qualifier("topicSourceVoService")
-	private ITopicSourceVoService topicSourceVoService;
+	//private ITopicSourceVoService topicSourceVoService;
 
 	// 添加专题
 	@Action(value = "addTopic")
@@ -104,13 +102,13 @@ ModelDriven<TopicDto>{
 		return SUCCESS;
 	}
 	
-	// 获取表中所有专题，用Map装，为了分页的需要加上Rows和Total
+	/*// 获取表中所有专题，用Map装，为了分页的需要加上Rows和Total
 	@Action(value = "listSourceByTopicId")
 	public String listSourceByTopicId() {
 		topicSourceList = topicSourceVoService.listByTopicId(topic.getId());
 		return SUCCESS;
 	}
-
+*/
 	// 获取表中所有专题，用Map装，为了分页的需要加上Rows和Total
 	@Action(value = "topicTree")
 	public String topicTree() {
@@ -143,10 +141,10 @@ ModelDriven<TopicDto>{
 		return topicTree;
 	}
 
-	public List<TopicSourceVo> getTopicSourceList() {
-		return topicSourceList;
-	}
-	
+/*//	public List<TopicSourceVo> getTopicSourceList() {
+//		return topicSourceList;
+//	}
+*/	
 	
 
 }
