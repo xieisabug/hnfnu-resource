@@ -69,3 +69,76 @@
     color: #fff;
     font-size: 0.9em;
 }
+
+#login,#source-count {
+    width: 210px;
+    height: 280px;
+    float: left;
+}
+#gallery {
+    width: 510px;
+    height: 280px;
+    margin: 0 15px 0 15px;
+    float: left;
+}
+.panel-head {
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#fcfeff', endColorstr = '#d5edfd');
+    /*INNER ELEMENTS MUST NOT BREAK THIS ELEMENTS BOUNDARIES*/
+    /*Element must have a height (not auto)*/
+    /*All filters must be placed together*/
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr = '#fcfeff', endColorstr = '#d5edfd')";
+    /*Element must have a height (not auto)*/
+    /*All filters must be placed together*/
+    background-image: -moz-linear-gradient(top, #fcfeff, #d5edfd);
+    background-image: -ms-linear-gradient(top, #fcfeff, #d5edfd);
+    background-image: -o-linear-gradient(top, #fcfeff, #d5edfd);
+    background-image: -webkit-gradient(linear, center top, center bottom, from(#fcfeff), to(#d5edfd));
+    background-image: -webkit-linear-gradient(top, #fcfeff, #d5edfd);
+    background-image: linear-gradient(top, #fcfeff, #d5edfd);
+    /*--IE9 DOES NOT SUPPORT CSS3 GRADIENT BACKGROUNDS--*/
+
+    -moz-border-radius: 4px 4px 0 0;
+    -webkit-border-radius: 4px 4px 0 0;
+    border-radius: 4px 4px 0 0;
+    border:1px solid #75ade7;
+    height: 33px;
+    line-height: 30px;
+    font-size: 0.9em;
+}
+.panel-head-icon {
+    background: url('../image/panel-head-icon.png');
+    margin: 6px 15px 0 10px;
+    height: 16px;
+    width: 16px;
+    float: left;
+}
+label {
+    margin: 0 0 .3em;
+    /*display: block;*/
+    color: #555;
+    font-family: "宋体",sans-serif;
+    font-size: .875em;
+}
+input[type=text]:focus,input[type=password]:focus {
+    border-left: 0.35em solid #afafaf;
+    outline: none;
+    border-radius: 0;
+}
+.panel-content {
+    -moz-border-radius: 0 0 4px 4px;
+    -webkit-border-radius: 0 0 4px 4px;
+    border-radius: 0 0 4px 4px;
+    border:1px solid #75ade7;
+    border-top: 0;
+    height: 243px;
+    padding: 15px;
+}
+.panel-content div{
+    margin-top: 5px;
+}
+.panel-content input{
+    width: 128px;
+    height: 34px;
+    display: inline;
+    *padding:0;
+}
