@@ -2,6 +2,8 @@ var topicGrid = null;// 专题表格
 var topicFrom = null;// 专题表单
 var topicWin = null;// 专题窗口
 var joinWin = null;//挂接窗口
+var sourceWin = null;//添加资源的窗口
+var sourceForm = null;//添加资源的表单
 var topicSubtitleFrom = null;//新增二级标题的表单
 var subtitleGrid = null;//用于显示二级标题的表格
 var subtitleWin = null;//用于显示二级标题的窗口
@@ -111,8 +113,190 @@ function add_subtitle_cancel() {
 }
 //给专题上传资源
 function upload(){
-    alert(upload);
+    if (!topicGrid.getSelected()) {
+        $.ligerDialog.warn('请选择您要添加资源的专题.');
+        return;
+    }
+    var topic = topicGrid.getSelected();
+    select_subtitle('下一步',add_file_save,add_file_cancel,topic);
+
+   /* $.ajax({
+        url:'../../../resources/listTopicSubtitle.action',
+        type:'post',
+        data:{
+            "topicId":topic.id
+        },
+        success:function (data) {
+            var s = $('#subtitleGrid');
+            subtitleGrid = s.ligerGrid({
+                columns:[
+                    {
+                        display:'二级标题名称',
+                        name:'subtitle',
+                        width:300
+                    },  {
+                        display:'备注',
+                        name:'remark',
+                        width:300
+                    }
+                ],
+                width:560,
+                height:400,
+                pageSize:30,
+                data:data.topicSubtitleList
+            });
+            subtitleWin = $.ligerDialog.open({
+                width:600,
+                height:400,
+                title:topic.name +'的二级标题',
+                target:s,
+                buttons:[
+                    {
+                        text:'下一步',
+                        width:80,
+                        onclick:add_file_save                    },
+                    {
+                        text:'取消',
+                        width:80,
+                        onclick:add_file_cancel
+                    }
+                ]
+            });
+            console.log(subtitleGrid);
+            console.log(subtitleWin);
+            $(".l-grid2",subtitleWin.element).css({width:600});
+            $("#pageloading").hide();
+        }
+    });*/
 }
+function add_file_save(){
+   // alert("add_file_save");
+    if (!subtitleGrid.getSelected()) {
+        $.ligerDialog.warn('请选择您要添加资源的专题的二级标题.');
+        return;
+    }
+    var subtitle = subtitleGrid.getSelected();
+    sourceWin = $.ligerDialog.open({
+        width : 400,
+        height : 550,
+        title : "上传资源",
+        url : 'AddForm.html?topicSubtitleId='+subtitle.id,
+        allowClose : false,
+        buttons : [ {
+            text : "提交",
+            width : 80,
+            onclick : topic_source_save
+        }, {
+            text : "取消",
+            width : 80,
+            onclick : topic_source_cancel
+        } ]
+    });
+}
+function add_file_cancel(){
+    subtitleWin.hide();
+}
+
+function topic_source_save(){
+    sourceForm = sourceWin.frame.sourceForm;
+    // 把表单转化为数组
+    if (sourceForm.valid()) {
+        var row_data = Form.parseJSON(sourceForm);
+        if (row_data.url == "" || row_data.url == null) {
+            $.ligerDialog.error("未上传文件");
+            return;
+        }
+        //todo 最后得删除，调试用
+        if (row_data.topicSubtitleId == "" || row_data.topicSubtitleId == null) {
+            $.ligerDialog.error("没有成功获取二级标题的id");
+            return;
+        }
+
+        // 发往服务器，返回成功后再添加到表格中
+        $.ajax({
+            url : '../../../resources/addTopicSource.action',
+            data : row_data,
+            type : 'post',
+            success : function(data) {
+                if (data.success) {
+                    // courseGrid.addRow(data.model);
+                    $.ligerDialog.tip({
+                        title : '提示信息',
+                        content : data.message
+                    });
+                   // refresh_info();
+                    sourceWin.close();
+                } else {
+                    $.ligerDialog.error(data.message);
+                }
+            }
+        });
+
+    }
+
+
+}
+function topic_source_cancel(){
+    //subtitleWin.hide();
+    sourceWin.close();
+}
+
+
+
+//在该界面有挂接资源和添加资源用到的选择二级标题的win，text是确定按钮叫什么名字，有叫下一步，也有叫确定，onclick_name则是调用的函数的名字
+function select_subtitle(text,onclick_save,onclick_cancel,topic){
+    $.ajax({
+        url:'../../../resources/listTopicSubtitle.action',
+        type:'post',
+        data:{
+            "topicId":topic.id
+        },
+        success:function (data) {
+            var s = $('#subtitleGrid');
+            subtitleGrid = s.ligerGrid({
+                columns:[
+                    {
+                        display:'二级标题名称',
+                        name:'subtitle',
+                        width:300
+                    },  {
+                        display:'备注',
+                        name:'remark',
+                        width:300
+                    }
+                ],
+                width:560,
+                height:400,
+                pageSize:30,
+                data:data.topicSubtitleList
+            });
+            subtitleWin = $.ligerDialog.open({
+                width:600,
+                height:400,
+                title:topic.name +'的二级标题',
+                target:s,
+                buttons:[
+                    {
+                        text:text,
+                        width:80,
+                        onclick:onclick_save
+                    },
+                    {
+                        text:'取消',
+                        width:80,
+                        onclick:onclick_cancel
+                    }
+                ]
+            });
+           // console.log(subtitleGrid);
+          //  console.log(subtitleWin);
+            $(".l-grid2",subtitleWin.element).css({width:600});
+            $("#pageloading").hide();
+        }
+    });
+}
+
+
 
 // 修改专题的函数
 function edit_topic() {
@@ -204,7 +388,8 @@ function topic_source_join() {
     }
 
     var topic = topicGrid.getSelected();
-    $.ajax({
+    select_subtitle('下一步',select_source,select_source_cancel,topic);
+   /* $.ajax({
         url:'../../../resources/listTopicSubtitle.action',
         type:'post',
         data:{
@@ -252,24 +437,6 @@ function topic_source_join() {
             $(".l-grid2",subtitleWin.element).css({width:600});
             $("#pageloading").hide();
         }
-    });
-
-
-
-    /*joinWin = $.ligerDialog.open({
-        width : 1000,
-        height : 550,
-        title : '挂接资源',
-        url : "JoinSource.html",
-        buttons : [ {
-            text : '提交',
-            width : 80,
-            onclick : join_save
-        }, {
-            text : '取消',
-            width : 80,
-            onclick : join_cancel
-        } ]
     });*/
 }
 

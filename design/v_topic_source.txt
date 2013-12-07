@@ -2,12 +2,10 @@ CREATE
     ALGORITHM = UNDEFINED 
     DEFINER = `root`@`localhost` 
     SQL SECURITY DEFINER
-VIEW `hnfnuzyw`.`v_topic_source` AS
+VIEW `hnfnuzyw`.`v_topic_subtitle_source` AS
     select 
         `t3`.`id` AS `id`,
-        `t1`.`id` AS `sourceId`,
         `t1`.`name` AS `sourceName`,
-        `t1`.`courseId` AS `courseId`,
         `t1`.`keyWords` AS `keyWords`,
         `t1`.`mediaType` AS `mediaType`,
         `t1`.`mediaFormat` AS `mediaFormat`,
@@ -17,18 +15,19 @@ VIEW `hnfnuzyw`.`v_topic_source` AS
         `t1`.`publisher` AS `publisher`,
         `t1`.`description` AS `sourceDescription`,
         `t1`.`createDate` AS `createDate`,
-        `t1`.`approvalStatus` AS `approvalStatus`,
         `t1`.`price` AS `price`,
         `t1`.`viewTimes` AS `viewTimes`,
         `t1`.`useTimes` AS `useTimes`,
         `t1`.`url` AS `url`,
         `t1`.`createUserId` AS `createUserId`,
-        `t2`.`id` AS `topicId`,
-        `t2`.`name` AS `topicName`,
-        `t2`.`description` AS `topicDescription`,
-        `t2`.`author` AS `topicAuthor`,
-        `t2`.`remark` AS `remark`
+        `t3`.`id` AS `topicId`,
+        `t2`.`id` AS `subtitleId`,
+        `t2`.`subtitle` AS `subtitleName`,
+        `t3`.`name` AS `topicName`,
+        `t3`.`description` AS `topicDescription`,
+        `t3`.`author` AS `topicAuthor`,
+        `t3`.`remark` AS `remark`
     from
-        ((`hnfnuzyw`.`r_topic_source_join` `t3`
-        join `hnfnuzyw`.`r_topic` `t2` ON ((`t3`.`topicId` = `t2`.`id`)))
-        join `hnfnuzyw`.`r_source` `t1` ON ((`t3`.`sourceId` = `t1`.`id`)))
+        ((`hnfnuzyw`.`r_topic_source` `t1`
+        join `hnfnuzyw`.`r_topic_subtitle` `t2` ON ((`t1`.`topicSubtitleId` = `t2`.`id`)))
+        join `hnfnuzyw`.`r_topic` `t3` ON ((`t2`.`topicId` = `t2`.`id`)))
