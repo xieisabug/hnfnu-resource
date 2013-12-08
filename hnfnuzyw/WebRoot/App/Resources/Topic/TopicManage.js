@@ -1,5 +1,5 @@
 var topicGrid = null;// 专题表格
-var topicFrom = null;// 专题表单
+var topicForm = null;// 专题表单
 var topicWin = null;// 专题窗口
 var joinWin = null;//挂接窗口
 var sourceWin = null;//添加资源的窗口
@@ -9,12 +9,12 @@ var subtitleGrid = null;//用于显示二级标题的表格
 var subtitleWin = null;//用于显示二级标题的窗口
 // 增加专题的函数
 function add_topic() {
-    formInit();
     topicWin = $.ligerDialog.open({
         width : 400,
-        height : 200,
+        height : 280,
         title : '新增专题',
-        target : topicFrom,
+        url : 'AddTopicImageForm.html',
+        allowClose : false,
         buttons : [ {
             text : '提交',
             width : 80,
@@ -28,8 +28,9 @@ function add_topic() {
 }
 // 增加专题的保存按钮事件
 function add_save() {
-    if (topicFrom.valid()) {
-        var row_data = Form.parseJSON(topicFrom);
+    topicForm = topicWin.frame.sourceForm;
+    if (topicForm.valid()) {
+        var row_data = Form.parseJSON(topicForm);
         // 发往服务器，返回成功后再添加到表格中
         $.ajax({
             url : '../../../resources/addTopic.action',
@@ -119,55 +120,6 @@ function upload(){
     }
     var topic = topicGrid.getSelected();
     select_subtitle('下一步',add_file_save,add_file_cancel,topic);
-
-   /* $.ajax({
-        url:'../../../resources/listTopicSubtitle.action',
-        type:'post',
-        data:{
-            "topicId":topic.id
-        },
-        success:function (data) {
-            var s = $('#subtitleGrid');
-            subtitleGrid = s.ligerGrid({
-                columns:[
-                    {
-                        display:'二级标题名称',
-                        name:'subtitle',
-                        width:300
-                    },  {
-                        display:'备注',
-                        name:'remark',
-                        width:300
-                    }
-                ],
-                width:560,
-                height:400,
-                pageSize:30,
-                data:data.topicSubtitleList
-            });
-            subtitleWin = $.ligerDialog.open({
-                width:600,
-                height:400,
-                title:topic.name +'的二级标题',
-                target:s,
-                buttons:[
-                    {
-                        text:'下一步',
-                        width:80,
-                        onclick:add_file_save                    },
-                    {
-                        text:'取消',
-                        width:80,
-                        onclick:add_file_cancel
-                    }
-                ]
-            });
-            console.log(subtitleGrid);
-            console.log(subtitleWin);
-            $(".l-grid2",subtitleWin.element).css({width:600});
-            $("#pageloading").hide();
-        }
-    });*/
 }
 function add_file_save(){
    // alert("add_file_save");
@@ -180,7 +132,7 @@ function add_file_save(){
         width : 400,
         height : 550,
         title : "上传资源",
-        url : 'AddForm.html?topicSubtitleId='+subtitle.id,
+        url : 'AddTopicFileForm.html?topicSubtitleId='+subtitle.id,
         allowClose : false,
         buttons : [ {
             text : "提交",
@@ -204,11 +156,6 @@ function topic_source_save(){
         var row_data = Form.parseJSON(sourceForm);
         if (row_data.url == "" || row_data.url == null) {
             $.ligerDialog.error("未上传文件");
-            return;
-        }
-        //todo 最后得删除，调试用
-        if (row_data.topicSubtitleId == "" || row_data.topicSubtitleId == null) {
-            $.ligerDialog.error("没有成功获取二级标题的id");
             return;
         }
 
@@ -288,8 +235,6 @@ function select_subtitle(text,onclick_save,onclick_cancel,topic){
                     }
                 ]
             });
-           // console.log(subtitleGrid);
-          //  console.log(subtitleWin);
             $(".l-grid2",subtitleWin.element).css({width:600});
             $("#pageloading").hide();
         }
@@ -305,12 +250,12 @@ function edit_topic() {
         $.ligerDialog.warn('请选择您要修改的行.');
         return;
     }
-    Form.loadForm(topicFrom, topicGrid.getSelected());
+    Form.loadForm(topicForm, topicGrid.getSelected());
     topicWin = $.ligerDialog.open({
         width : 400,
         height : 200,
         title : '编辑专题',
-        target : topicFrom,
+        target : topicForm,
         buttons : [ {
             text : '提交',
             width : 80,
@@ -324,8 +269,8 @@ function edit_topic() {
 }
 // 修改专题的保存按钮事件
 function edit_save() {
-    if (topicFrom.valid()) {
-        var row_data = Form.parseJSON(topicFrom);
+    if (topicForm.valid()) {
+        var row_data = Form.parseJSON(topicForm);
         // todo 需要发往服务器，返回成功后再修改到表格中
         $ .ajax({
                 url : '../../../resources/updateTopic.action',
@@ -389,55 +334,6 @@ function topic_source_join() {
 
     var topic = topicGrid.getSelected();
     select_subtitle('下一步',select_source,select_source_cancel,topic);
-   /* $.ajax({
-        url:'../../../resources/listTopicSubtitle.action',
-        type:'post',
-        data:{
-            "topicId":topic.id
-        },
-        success:function (data) {
-            var s = $('#subtitleGrid');
-            subtitleGrid = s.ligerGrid({
-                columns:[
-                    {
-                        display:'二级标题名称',
-                        name:'subtitle',
-                        width:300
-                    },  {
-                        display:'备注',
-                        name:'remark',
-                        width:300
-                    }
-                ],
-                width:560,
-                height:400,
-                pageSize:30,
-                data:data.topicSubtitleList
-            });
-            subtitleWin = $.ligerDialog.open({
-                width:600,
-                height:400,
-                title:topic.name +'的二级标题',
-                target:s,
-                buttons:[
-                    {
-                        text:'下一步',
-                        width:80,
-                        onclick:select_source
-                    },
-                    {
-                        text:'取消',
-                        width:80,
-                        onclick:select_source_cancel
-                    }
-                ]
-            });
-            console.log(subtitleGrid);
-            console.log(subtitleWin);
-            $(".l-grid2",subtitleWin.element).css({width:600});
-            $("#pageloading").hide();
-        }
-    });*/
 }
 
 //给专题挂接资源选择了二级标题后的下一步，也就是接下来是给专题选择资源
@@ -509,71 +405,6 @@ function join_cancel(){
     joinWin.close();
     subtitleWin.hide();
 }
-// 初始化表单，生成form标签
-function formInit() {
-    topicFrom = $('<form></form>');
-    topicFrom.ligerForm({
-        inputWidth : 280,
-        fields : [ {
-            name : 'id',
-            type : "hidden"
-        }, {
-            display : '专题名称',
-            name : 'name',
-            type : 'text',
-            space : 30,
-            labelWidth : 100,
-            width : 220,
-            newline : true,
-            validate : {
-                required : true,
-                maxlength : 22
-            }
-        },
-            {
-                display : '专题简介',
-                name : 'description',
-                type : 'text',
-                space : 30,
-                labelWidth : 100,
-                width : 220,
-                newline : true,
-                validate : {
-                    required : true
-                }
-            },
-            {
-                display : '专题作者',
-                name : 'author',
-                type : 'text',
-                space : 30,
-                labelWidth : 100,
-                width : 220,
-                newline : true,
-                validate : {
-                    required : true,
-                    maxlength : 22
-                }
-            },{
-            display : '备注',
-            name : 'remark',
-            type : 'text',
-            space : 30,
-            labelWidth : 100,
-            width : 220,
-            newline : true
-        } ]
-    });
-    $.metadata.setType("attr", "validate");
-    topicFrom.validate({
-        debug : true,
-        onkeyup : false,
-        errorPlacement : function(error,element) {
-            error.appendTo(element.parent().parent().parent().parent());
-        }
-    });
-}
-
 // 初始化表单，生成form标签
 function topicSubtitleFromInit() {
     topicSubtitleFrom = $('<form></form>');
@@ -686,6 +517,12 @@ $(function() {
                     {
                         display : '专题作者',
                         name : 'author',
+                        align : 'left',
+                        width : 200
+                    },
+                    {
+                        display : '专题图片地址',
+                        name : 'imageUrl',
                         align : 'left',
                         width : 200
                     },

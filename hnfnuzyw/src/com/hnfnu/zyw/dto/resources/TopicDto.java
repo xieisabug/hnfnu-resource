@@ -20,6 +20,8 @@ public class TopicDto
 	private String description;
 	//专题作者
 	private String author;
+	//专题图片url
+	private String imageUrl;
 	//备注
 	private String remark;
 
@@ -27,15 +29,18 @@ public class TopicDto
 	{
 
 	}
+	
 	public TopicDto(Integer id, String name, String description, String author,
-			String remark) {
+			String imageUrl, String remark) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.author = author;
+		this.imageUrl = imageUrl;
 		this.remark = remark;
 	}
+
 	public void setId(Integer id)
 	{
 		this.id = id;
@@ -75,13 +80,24 @@ public class TopicDto
 	{
 		this.remark = remark;
 	}
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
 	public String getRemark()
 	{
 		return this.remark;
 	}
+
 	@Override
 	public String toString() {
-		return "TopicDto [author=" + author + ", description=" + description
-				+ ", id=" + id + ", name=" + name + ", remark=" + remark + "]";
+		return "TopicDto [id=" + id + ", name=" + name + ", description="
+				+ description + ", author=" + author + ", imageUrl=" + imageUrl
+				+ ", remark=" + remark + "]";
 	}
+	
 }
