@@ -131,7 +131,7 @@ input[type=text]:focus,input[type=password]:focus {
     border:1px solid #75ade7;
     border-top: 0;
     height: 243px;
-    padding: 15px;
+    padding: 13px;
 }
 .panel-content div{
     margin-top: 5px;
@@ -142,3 +142,103 @@ input[type=text]:focus,input[type=password]:focus {
     display: inline;
     *padding:0;
 }
+.btn-login-icon,.btn-register-icon {
+    display: inline-block;
+    float: left;
+    width: 23px;
+    height: 18px;
+    margin-top: 1px;
+}
+.btn-login-icon {
+    background: url("../image/btn-login-icon.png");
+}
+.btn-register-icon{
+    background: url("../image/btn-register-icon.png");
+    width: 18px;
+    margin-right: 5px;
+}
+.p-small-font {
+    font-size: 0.7em;
+}
+.align-right {
+    text-align: right;
+}
+#source-count ul li{
+    font-family: "微软雅黑",Yahei,"宋体",sans-serif;
+    list-style: none;
+    margin-bottom: 20px;
+    font-size: 0.9em;
+}
+
+/**gallery**/
+#n {
+    margin: 10px auto;
+    width: 920px;
+    border: 1px solid #CCC;
+    font-size: 12px;
+    line-height: 30px;
+}
+
+#n a {
+    padding: 0 4px;
+    color: #333
+}
+
+.container {
+    width: 510px;
+    height: 280px;
+    overflow: hidden;
+}
+
+.container A IMG {
+    width: 510px;
+    height: 280px;
+}
+
+.container IMG {
+    border-bottom-style: none;
+    border-right-style: none;
+    border-top-style: none;
+    border-left-style: none
+}
+
+.td_f A IMG {
+    padding-bottom: 0;
+    margin: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+}
+
+.num {
+    position: absolute;
+    width: 90px;
+    float: right;
+    top: 245px;
+    left: 368px;
+    height: 19px;
+}
+
+.num LI {
+    text-align: center;
+    line-height: 15px;
+    list-style-type: none;
+    margin: 1px;
+    width: 15px;
+    background: url(../image/flashbutton.gif) no-repeat -15px 0;
+    float: left;
+    height: 15px;
+    color: #86a2b8;
+    font-size: 12px;
+    cursor: pointer
+}
+
+.num LI.on {
+    line-height: 15px;
+    width: 15px;
+    background: url(../image/flashbutton.gif) no-repeat;
+    height: 15px;
+    color: #ffffff;
+}
+
+/**gallery**/
