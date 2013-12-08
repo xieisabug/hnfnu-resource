@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import com.hnfnu.zyw.action.base.AopNoSuchMethodErrorSolveBaseAction;
 import com.hnfnu.zyw.dto.resources.TopicDto;
 import com.hnfnu.zyw.service.resources.ITopicService;
+import com.hnfnu.zyw.service.resources.ITopicSourceVoService;
 import com.opensymphony.xwork2.ModelDriven;
 
 
@@ -39,13 +40,14 @@ ModelDriven<TopicDto>{
 	@Qualifier("topicService")
 	private ITopicService topicService;
 
-	@Autowired
-	@Qualifier("topicSourceVoService")
-	//private ITopicSourceVoService topicSourceVoService;
+//	@Autowired
+//	@Qualifier("topicSourceVoService")
+//	private ITopicSourceVoService topicSourceVoService;
 
 	// 添加专题
 	@Action(value = "addTopic")
 	public String add() {
+		System.out.println("add");
 		success = topicService.add(topic);
 		if (success) {
 			message = "添加专题成功！";
@@ -58,6 +60,7 @@ ModelDriven<TopicDto>{
 	// 修改专题
 	@Action(value = "updateTopic")
 	public String update() {
+		System.out.println("update");
 		success = topicService.update(topic);
 		if (success) {
 			message = "修改专题成功！";
@@ -74,6 +77,7 @@ ModelDriven<TopicDto>{
 	 */
 	@Action(value = "loadTopic")
 	public String load() {
+		System.out.println("load");
 		topic = topicService.load(topic.getId());
 		return SUCCESS;
 	}
@@ -86,6 +90,7 @@ ModelDriven<TopicDto>{
 
 	@Action(value = "deleteTopic")
 	public String delete() {
+		System.out.println("delete");
 		success = topicService.delete(topic.getId());
 		if (success) {
 			message = "删除专题成功！";
@@ -98,7 +103,15 @@ ModelDriven<TopicDto>{
 	// 获取表中所有专题，用Map装，为了分页的需要加上Rows和Total
 	@Action(value = "listTopic")
 	public String list() {
+		System.out.println("list");
 		topicList = topicService.listTopic();
+		if (topicList != null) {
+			success = true;
+			message = "获取专题列表成功！";
+		} else {
+			success = false;
+			message = "获取专题列表失败！";
+		}
 		return SUCCESS;
 	}
 	
@@ -112,6 +125,7 @@ ModelDriven<TopicDto>{
 	// 获取表中所有专题，用Map装，为了分页的需要加上Rows和Total
 	@Action(value = "topicTree")
 	public String topicTree() {
+		System.out.println("tree");
 		topicTree = topicService.topicTree();
 		return SUCCESS;
 	}
