@@ -22,6 +22,7 @@ public class TopicServiceImpl implements ITopicService {
 	public boolean add(TopicDto topic) {
 		try {
 			topicDao.add(topic);
+			System.out.println(topic);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
