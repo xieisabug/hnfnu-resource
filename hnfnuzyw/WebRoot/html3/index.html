@@ -9,6 +9,7 @@
     <script src="http://cdn.bootcss.com/jquery/1.8.2/jquery.min.js"></script>
     <script type="text/javascript" src="js/dropdown.min.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/gallery.js"></script>
 </head>
 <body>
 <div id="allContent">
@@ -59,17 +60,81 @@
                     <input class="form-control" type="text" id="captcha"
                            name="captcha" placeholder="输入弹出的验证码">
                 </div>
+                <div>
+                    <div id="login_btn" class="btn btn-default">
+                        <span class="btn-login-icon"></span>
+                        登陆
+                    </div>
+                    <div id="register_btn" class="btn btn-default">
+                        <span class="btn-register-icon"></span>
+                        注册
+                    </div>
+                </div>
+                <div class="p-small-font align-right">
+                    <p>忘记密码？请<a href="#">点击这里</a></p>
+                </div>
             </div>
         </div>
         <div id="gallery">
-
+            <div id="idContainer2" class="container">
+                <table id="idSlider2" cellSpacing=0 cellPadding=0>
+                    <tr>
+                        <td class="td_f">
+                            <a target="_blank" href="http://www.baidu.com">
+                                <IMG src="../uploads/2013111719475571.jpg">
+                            </a>
+                        </td>
+                        <td class="td_f">
+                            <a target="_blank" href="http://www.baidu.com">
+                                <IMG src="../uploads/2013111719481912.jpg">
+                            </a>
+                        </td>
+                        <td class="td_f">
+                            <a target="_blank" href="http://www.baidu.com/">
+                                <IMG src="../uploads/2013111719485623.jpg">
+                            </a>
+                        </td>
+                        <td class="td_f">
+                            <a target="_blank" href="http://www.baidu.com/">
+                                <IMG src="../uploads/2013111719491574.jpg">
+                            </a>
+                        </td>
+                        <td class="td_f">
+                            <a target="_blank" href="http://www.baidu.com/">
+                                <IMG src="../uploads/2013111719505345.jpg">
+                            </a>
+                        </td>
+                        <td class="td_f">
+                            <a target="_blank" href="http://www.baidu.com/">
+                                <IMG src="../uploads/2013111719510311.jpg">
+                            </a>
+                        </td>
+                        <td class="td_f">
+                            <a target="_blank" href="http://www.baidu.com/">
+                                <IMG src="../uploads/2013111719514532.jpg">
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+                <ul id="idNum" class="num"></ul>
+            </div>
         </div>
         <div id="source-count">
             <div class="panel-head">
-
+                <div class="panel-head-icon"></div>
+                <span>资源统计</span>
             </div>
             <div class="panel-content">
-
+                <div>
+                    <ul>
+                        <li>资源总数量：&nbsp;&nbsp;<a href="#">12356 个</a></li>
+                        <li>资源总容量：&nbsp;&nbsp;<a href="#">1235 GB</a></li>
+                        <li>资源总下载：&nbsp;&nbsp;<a href="#">12356 次</a></li>
+                        <li>专题总数量：&nbsp;&nbsp;<a href="#">12356 个</a></li>
+                        <li>注册用户数：&nbsp;&nbsp;<a href="#">12356 人</a></li>
+                        <li>总访问数量：&nbsp;&nbsp;<a href="#">99999 次</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
