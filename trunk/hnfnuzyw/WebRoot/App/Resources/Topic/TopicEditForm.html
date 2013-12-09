@@ -137,6 +137,7 @@
                         error.appendTo(element.parent().parent().parent().parent());
                     }
                 });
+                window.parent.topicSelectData.imageUrl = window.parent.topicSelectData.imageUrl.replaceAll(/\\/g, '\\\\');
                 Form.loadForm(sourceForm, window.parent.topicSelectData);
     }
 </script>

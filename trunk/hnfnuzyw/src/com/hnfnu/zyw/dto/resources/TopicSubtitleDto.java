@@ -14,6 +14,8 @@ public class TopicSubtitleDto
 	private Integer topicId;
 	//二级标题
 	private String subtitle;
+	//是否为系统自动添加，0否1是
+	private Integer isAuto;
 	//备注
 	private String remark;
 
@@ -21,14 +23,19 @@ public class TopicSubtitleDto
 	{
 	}
 	
+	
+
 	public TopicSubtitleDto(Integer id, Integer topicId, String subtitle,
-			String remark) {
+			Integer isAuto, String remark) {
 		super();
 		this.id = id;
 		this.topicId = topicId;
 		this.subtitle = subtitle;
+		this.isAuto = isAuto;
 		this.remark = remark;
 	}
+
+
 
 	public void setId(Integer id)
 	{
@@ -64,12 +71,22 @@ public class TopicSubtitleDto
 	{
 		return this.remark;
 	}
+	public Integer getIsAuto() {
+		return isAuto;
+	}
+	public void setIsAuto(Integer isAuto) {
+		this.isAuto = isAuto;
+	}
+
+
 
 	@Override
 	public String toString() {
 		return "TopicSubtitleDto [id=" + id + ", topicId=" + topicId
-				+ ", subtitle=" + subtitle + ", remark=" + remark + "]";
+				+ ", subtitle=" + subtitle + ", isAuto=" + isAuto + ", remark="
+				+ remark + "]";
 	}
+
 
 	
 	
