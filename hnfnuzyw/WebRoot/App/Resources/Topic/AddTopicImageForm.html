@@ -182,6 +182,45 @@
                     }
                 },
                 {
+                    display:"是否外链",
+                    name:"isOutlink",
+                    type:"select",
+                    width:200,
+                    space:30,
+                    labelWidth:100,
+                    comboboxName:"isOutlink",
+                    textField:"text",
+                    valueField:"id",
+                    newline:true,
+                    options:{
+                        selectBoxHeight:40,
+                        hideOnLoseFocus:true,
+                        initValue:"0",
+                        initText:"否",
+                        valueFieldID:"id",
+                        data:[
+                            {
+                                "id":"0",
+                                "text":"否"
+                            },
+                            {
+                                "id":"1",
+                                "text":"是"
+                            }
+                        ]
+
+                    }
+                },
+                {
+                    display:'外链地址',
+                    name:'outlink',
+                    type:'text',
+                    space:30,
+                    labelWidth:100,
+                    width:220,
+                    newline:true
+                },
+                {
                     display:'备注',
                     name:'remark',
                     type:'text',
@@ -203,8 +242,4 @@
         // }
         //});
     }
-    /*function setCourseData(data) {
-     $("#courseId", sourceForm).val(data.data.id);
-     $("#course", sourceForm).val(data.data.name);
-     }*/
 </script>
