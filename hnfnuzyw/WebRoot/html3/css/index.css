@@ -64,6 +64,7 @@
     display: block;
     float: left;
     margin-left: 30px;
+    margin-right: 50px;
 }
 .nav>li>a {
     color: #fff;
@@ -196,23 +197,17 @@ input[type=text]:focus,input[type=password]:focus {
 }
 
 .container IMG {
-    border-bottom-style: none;
-    border-right-style: none;
-    border-top-style: none;
-    border-left-style: none
+    border-style: none;
 }
 
 .td_f A IMG {
-    padding-bottom: 0;
     margin: 0;
-    padding-left: 0;
-    padding-right: 0;
-    padding-top: 0;
+    padding: 0;
 }
 
 .num {
     position: absolute;
-    width: 90px;
+    width: 120px;
     float: right;
     top: 245px;
     left: 368px;

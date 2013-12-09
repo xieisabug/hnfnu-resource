@@ -38,8 +38,10 @@ $(function () {
             var datas = data.data;
 
             if(!supports_canvas()) {
-                var info = '';
-                info = '<table style="width:90%; height: 30px; margin-bottom: 10px;"><tr><td>请使用更高级的浏览器，以获得更好的用户体验。推荐：<a style="color:red;" href="https://www.google.com/intl/zh-CN/chrome/browser/" target="_blank">Chrome</a> 。</td></tr></table>'
+                var info = '<table style="width:90%; height: 30px; margin-bottom: 10px;"><tr><td>请使用更高级的浏览器，' +
+                    '以获得更好的用户体验。推荐：<a style="color:red;" href="https://www.google.com/intl/zh-CN/chrome/browser/" ' +
+                    'target="_blank">Chrome</a> 或者 如果您是IE浏览器，可以选择 <a style="color:red;" href="http://www.google.com/chromeframe/?prefer' +
+                    'systemlevel=true"> ChromeFrame</a>。</td></tr></table>';
                 wrapDiv.append(info);
             }
 

@@ -158,7 +158,6 @@ $(window)
                         url : '../website/count.action',
                         type : 'post',
                         success : function(data) {
-                            console.log(data);
                             st = new Slidetrans("idContainer2", "idSlider2", data.count, {
                                 Vertical : false
                             });
