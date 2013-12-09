@@ -22,6 +22,13 @@ public class TopicDto
 	private String author;
 	//专题图片url
 	private String imageUrl;
+	//外部链接地址
+	private  String outlink;
+	//是否为外部链接，0否1是
+	private String isOutlink;
+	//样式模板id
+	private int templateId;
+ 	
 	//备注
 	private String remark;
 
@@ -29,17 +36,21 @@ public class TopicDto
 	{
 
 	}
-	
 	public TopicDto(Integer id, String name, String description, String author,
-			String imageUrl, String remark) {
+			String imageUrl, String outlink, String isOutlink, int templateId,
+			String remark) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.author = author;
 		this.imageUrl = imageUrl;
+		this.outlink = outlink;
+		this.isOutlink = isOutlink;
+		this.templateId = templateId;
 		this.remark = remark;
 	}
+
 
 	public void setId(Integer id)
 	{
@@ -92,12 +103,30 @@ public class TopicDto
 	{
 		return this.remark;
 	}
-
+	public String getOutlink() {
+		return outlink;
+	}
+	public void setOutlink(String outlink) {
+		this.outlink = outlink;
+	}
+	public String getIsOutlink() {
+		return isOutlink;
+	}
+	public void setIsOutlink(String isOutlink) {
+		this.isOutlink = isOutlink;
+	}
+	public int getTemplateId() {
+		return templateId;
+	}
+	public void setTemplateId(int templateId) {
+		this.templateId = templateId;
+	}
 	@Override
 	public String toString() {
 		return "TopicDto [id=" + id + ", name=" + name + ", description="
 				+ description + ", author=" + author + ", imageUrl=" + imageUrl
-				+ ", remark=" + remark + "]";
+				+ ", outlink=" + outlink + ", isOutlink=" + isOutlink
+				+ ", templateId=" + templateId + ", remark=" + remark + "]";
 	}
 	
 }

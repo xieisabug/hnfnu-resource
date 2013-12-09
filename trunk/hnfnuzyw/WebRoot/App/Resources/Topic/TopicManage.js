@@ -7,11 +7,12 @@ var sourceForm = null;//添加资源的表单
 var topicSubtitleFrom = null;//新增二级标题的表单
 var subtitleGrid = null;//用于显示二级标题的表格
 var subtitleWin = null;//用于显示二级标题的窗口
+var topicSelectData = null;//用于在修改专题的时候保存的数据
 // 增加专题的函数
 function add_topic() {
     topicWin = $.ligerDialog.open({
         width : 400,
-        height : 280,
+        height : 350,
         title : '新增专题',
         url : 'AddTopicImageForm.html',
         allowClose : false,
@@ -30,7 +31,12 @@ function add_topic() {
 function add_save() {
     topicForm = topicWin.frame.sourceForm;
     if (topicForm.valid()) {
+
         var row_data = Form.parseJSON(topicForm);
+        if (row_data.isOutlink == 1 && (row_data.outlink == null || row_data.outlink == "")) {
+            $.ligerDialog.error("选择了外链之后，必须填写外链地址！");
+            return;
+        }
         // 发往服务器，返回成功后再添加到表格中
         $.ajax({
             url : '../../../resources/addTopic.action',
@@ -39,11 +45,28 @@ function add_save() {
             success : function(data) {
                 if (data.success) {
                     topicGrid.addRow(data.model);
+                    //refresh_info();
                     $.ligerDialog.tip({
                         title : '提示信息',
                         content : data.message
                     });
                     topicWin.close();
+                    //如果不是外链，则里面提示是否添加二级标题，是则立马添加，否则自动添加和标题一模一样的标题
+                    if(data.topic.isOutlink == 0){
+                        var topicDialog = $.ligerDialog.confirm('专题添加成功，专题需要添加二级标题吗？', function (answer) {
+                            if (answer) {
+                                //console.log(topicGrid);
+                                //console.log(data.model);
+                                topicGrid.select(data.model);
+                                add_topic_subtille();
+                            }else{
+                                   alert("不存在二级标题，我来添加。");
+                            }
+
+
+                        });
+                    }
+
                 } else {
                     $.ligerDialog.error(data.message);
                 }
@@ -245,17 +268,21 @@ function select_subtitle(text,onclick_save,onclick_cancel,topic){
 
 // 修改专题的函数
 function edit_topic() {
-        formInit();
     if (!topicGrid.getSelected()) {
         $.ligerDialog.warn('请选择您要修改的行.');
         return;
     }
-    Form.loadForm(topicForm, topicGrid.getSelected());
+    topicSelectData = topicGrid.getSelected();
+    if (topicSelectData.isOutlink == "否") {
+        topicSelectData.isOutlink = 0;
+    } else {
+        topicSelectData.isOutlink = 1;
+    }
     topicWin = $.ligerDialog.open({
         width : 400,
-        height : 200,
+        height : 280,
         title : '编辑专题',
-        target : topicForm,
+        url:'TopicEditForm.html' ,
         buttons : [ {
             text : '提交',
             width : 80,
@@ -269,8 +296,13 @@ function edit_topic() {
 }
 // 修改专题的保存按钮事件
 function edit_save() {
+    topicForm = topicWin.frame.sourceForm;
     if (topicForm.valid()) {
         var row_data = Form.parseJSON(topicForm);
+        if (row_data.isOutlink == 1 && (row_data.outlink == null || row_data.outlink == "")) {
+            $.ligerDialog.error("选择了外链之后，必须填写外链地址！");
+            return;
+        }
         // todo 需要发往服务器，返回成功后再修改到表格中
         $ .ajax({
                 url : '../../../resources/updateTopic.action',
@@ -278,8 +310,7 @@ function edit_save() {
                 type : 'post',
                 success : function(data) {
                     if (data.success) {
-                        topicGrid.update(topicGrid.getSelected(),
-                            data.model);
+                        refresh_info();
                         $.ligerDialog.tip({
                             title : '提示信息',
                             content : data.message
@@ -316,7 +347,7 @@ function delete_topic() {
                             title : '提示信息',
                             content : data.message
                         });
-                        topicGrid.deleteSelectedRow();
+                        refresh_info();
                         topicWin.close();
                     } else {
                         $.ligerDialog.error(data.message);
@@ -444,7 +475,18 @@ function topicSubtitleFromInit() {
         }
     });
 }
+// 刷新专题的函数
+function refresh_info() {
+    $.ajax({
+        url:'../../../resources/listTopic.action',
+        type:'post',
+        success:function (data) {
+            topicGrid.loadData(data.topicList);
+        }
+    });
+    $("#pageloading").hide();
 
+}
 
 // 初始化表格
 $(function() {
@@ -527,6 +569,18 @@ $(function() {
                         width : 200
                     },
                     {
+                        display : '是否外链',
+                        name : 'isOutlink',
+                        align : 'left',
+                        width : 200
+                    },
+                    {
+                        display : '外链地址',
+                        name : 'outlink',
+                        align : 'left',
+                        width : 200
+                    },
+                    {
                         display : '备注',
                         name : 'remark',
                         align : 'left',
@@ -538,6 +592,14 @@ $(function() {
                 data : data.topicList,
                 toolbar : {
                     items : toolbarItems
+                },
+                rowAttrRender:function (rowdata) {
+                    if (rowdata.isOutlink == 0) {
+                        rowdata.isOutlink = "否";
+                    } else {
+                        rowdata.isOutlink = "是";
+                    }
+                    return;
                 }
             });
             $("#pageloading").hide();
