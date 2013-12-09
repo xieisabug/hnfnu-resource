@@ -126,3 +126,41 @@ function initListForm(){
         }
     });
 }
+
+$(function(){
+    var b1 = $("#b1").ligerDrag({
+        proxy: 'clone',
+        receive:'#websiteContent'
+    });
+    var b2 = $("#b2").ligerDrag({
+        proxy: 'false',
+        receive:'#websiteContent'
+    });
+    var proxyDiv = '<div class="proxy" style="width: 98%;height: 40px;background-color: #f1f4f5;margin: 1px;border:1px solid #000000;"></div>';
+    b1.bind('DragEnter',function(receive, source, e){
+        console.log("b1!DragEnter");
+        console.log(receive);
+        console.log(source);
+        console.log(e);
+        console.log("b1!DragEnter");
+        $(receive).append(proxyDiv);
+    });
+    b1.bind('DragLeave',function(receive, source, e){
+        console.log("b1!DragLeave");
+        console.log(receive);
+        console.log(source);
+        console.log(e);
+        console.log("b1!DragLeave");
+        $(".proxy",receive).remove();
+    });
+    b1.bind('Drop',function(receive, source, e){
+        console.log("b1!Drop");
+        console.log(receive);
+        console.log(source);
+        console.log(e);
+        console.log("b1!Drop");
+        $(".proxy",receive).remove();
+        $(receive).append('<div style="width: 98%;height: 40px;background-color: #f1f4f5;margin: 1px;border:1px solid #000000;"></div>');
+    })
+
+});
