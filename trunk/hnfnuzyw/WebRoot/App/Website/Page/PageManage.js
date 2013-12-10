@@ -126,7 +126,7 @@ function initListForm(){
         }
     });
 }
-
+/*
 $(function(){
     var b1 = $("#b1").ligerDrag({
         proxy: 'clone',
@@ -163,4 +163,4 @@ $(function(){
         $(receive).append('<div style="width: 98%;height: 40px;background-color: #f1f4f5;margin: 1px;border:1px solid #000000;"></div>');
     })
 
-});
+});      */
