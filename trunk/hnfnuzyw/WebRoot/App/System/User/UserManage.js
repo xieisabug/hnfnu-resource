@@ -6,6 +6,9 @@ var listBox = null;// 用户角色列表
 var userRoleJoinWin = null;// 用户赋予角色窗口
 var pwdForm = null;// 修改密码的表单
 var pwdWin = null;// 修改密码窗口
+var manyWin = null;//批量操作窗口
+var manyForm = null;//批量操作表单
+var manyGrid = null;//批量操作表格
 // 用户赋予角色listBox的初始化
 $.extend($.ligerMethos.ListBox, {
     clearData:function () {
@@ -536,7 +539,7 @@ function add_save() {
                             if (answer) {
                                 userGrid.select(data.model);
                                 user_role_join();
-                            }else{
+                            } else {
                                 refresh_user();
                             }
                         });
@@ -856,7 +859,121 @@ function add_balance() {
  });
  }
  */
+//todo 批量修改的操作
+function manyUserManage(){
+    var toolbarItems = [
+        {
+            text:'多人重置密码',
+            click:edit_password,
+            icon:'modify',
+            key:'modify_pwd'
+        },
+        {
+            text:'资源币充值',
+            click:add_balance,
+            icon:'modify',
+            key:'modify_many'
+        }
+    ];
 
+        $.ajax({
+            async: false,
+            url:'../../../system/listUser.action',
+            type:'post',
+            success:function (data) {
+                console.log(data.userList);
+                var s = $('#manyGrid');
+                manyGrid = s.ligerGrid({
+                    columns:[
+                        {
+                            display:'用户名',
+                            name:'username',
+                            align:'left',
+                            width:100
+                        },
+                        {
+                            display:'姓名',
+                            name:'name',
+                            align:'left',
+                            width:80
+                        },
+                        {
+                            display:'身份证号码',
+                            name:'idcard',
+                            align:'left',
+                            width:100
+                        },
+                        {
+                            display:'性别',
+                            name:'sex',
+                            align:'left',
+                            width:50
+                        },
+                        {
+                            display:'资源币余额',
+                            name:'balance',
+                            align:'left',
+                            width:50
+                        },
+                        {
+                            display:'QQ',
+                            name:'qq',
+                            align:'left',
+                            width:100
+                        },
+                        {
+                            display:'电话号码',
+                            name:'telephone',
+                            align:'left',
+                            width:120
+                        },
+                        {
+                            display:'邮箱',
+                            name:'email',
+                            align:'left',
+                            width:120
+                        },
+                        {
+                            display:'生日',
+                            name:'birth',
+                            align:'left',
+                            width:100
+                        },
+                        {
+                            display:'部门',
+                            name:'department',
+                            align:'left',
+                            width:80
+                        },
+                        {
+                            display:'备注',
+                            name:'remark',
+                            align:'left',
+                            width:50
+                        }
+                    ],
+                    width:560,
+                    height:400,
+                    pageSize:30,
+                    checkbox:true,
+                    data:data.userList,
+                    toolbar:{
+                        items:toolbarItems
+                    }
+                });
+                namyWin = $.ligerDialog.open({
+                    width:600,
+                    height:400,
+                    title:'批量操作',
+                    target:s
+                });
+               // $(".l-grid2", manyWin.element).css({width:600});
+                $("#pageloading").hide();
+            }
+        });
+
+
+}
 
 
 
@@ -894,14 +1011,15 @@ $(function () {
             key:'modify_pwd'
         },
         {
-            text:'资源币充值',
-            click:add_balance,
+            text:'批量操作',
+            click:manyUserManage,
             icon:'modify',
-            key:'modify_many'
+            key:'manyManage'
         }
     ];
     var menuId = window.parent.tab.getSelectedTabItemID();
     $.ajax({
+        async: false,
         url:'../../../system/listFunctionIdList.action',
         type:'post',
         data:{
@@ -917,6 +1035,7 @@ $(function () {
         }
     });
     $.ajax({
+        async: false,
         url:'../../../system/listUser.action',
         type:'post',
         success:function (data) {

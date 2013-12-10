@@ -712,7 +712,7 @@ $(function () {
                 }
             });
             $("#pageloading").hide();
-            console.log(studentGrid.getColumns());
+           // console.log(studentGrid.getColumns());
         }
     });
 });
