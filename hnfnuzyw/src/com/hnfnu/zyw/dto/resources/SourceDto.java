@@ -79,17 +79,18 @@ public class SourceDto {
 	private String url;
 
 	private Integer createUserId;
+	//创建者名字
+	private String createUserName;
 
 	public SourceDto() {
 
 	}
-
 	public SourceDto(Integer id, String name, Integer courseId,
 			String keyWords, String mediaType, String mediaFormat,
 			String playTime, String fileSize, String author, String publisher,
 			String description, Timestamp createDate, String approvalStatus,
-			String quality, double price, Integer viewTimes, Integer useTimes,
-			String url, Integer createUserId) {
+			double price, Integer viewTimes, Integer useTimes, String url,
+			Integer createUserId, String createUserName) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -109,7 +110,9 @@ public class SourceDto {
 		this.useTimes = useTimes;
 		this.url = url;
 		this.createUserId = createUserId;
+		this.createUserName = createUserName;
 	}
+
 
 	public void setId(Integer id) {
 		this.id = id;
@@ -256,18 +259,26 @@ public class SourceDto {
 	public Integer getCreateUserId() {
 		return this.createUserId;
 	}
-
+	
+	public String getCreateUserName() {
+		return createUserName;
+	}
+	public void setCreateUserName(String createUserName) {
+		this.createUserName = createUserName;
+	}
 	@Override
 	public String toString() {
-		return "SourceDto [approvalStatus=" + approvalStatus + ", author="
-				+ author + ", courseId=" + courseId + ", createDate="
-				+ createDate + ", createUserId=" + createUserId
-				+ ", description=" + description + ", fileSize=" + fileSize
-				+ ", id=" + id + ", keyWords=" + keyWords + ", mediaFormat="
-				+ mediaFormat + ", mediaType=" + mediaType + ", name=" + name
-				+ ", playTime=" + playTime + ", price=" + price
-				+ ", publisher=" + publisher 
-				+ ", url=" + url + ", useTimes=" + useTimes + ", viewTimes="
-				+ viewTimes + "]";
+		return "SourceDto [id=" + id + ", name=" + name + ", courseId="
+				+ courseId + ", keyWords=" + keyWords + ", mediaType="
+				+ mediaType + ", mediaFormat=" + mediaFormat + ", playTime="
+				+ playTime + ", fileSize=" + fileSize + ", author=" + author
+				+ ", publisher=" + publisher + ", description=" + description
+				+ ", createDate=" + createDate + ", approvalStatus="
+				+ approvalStatus + ", price=" + price + ", viewTimes="
+				+ viewTimes + ", useTimes=" + useTimes + ", url=" + url
+				+ ", createUserId=" + createUserId + ", createUserName="
+				+ createUserName + "]";
 	}
+
+	
 }

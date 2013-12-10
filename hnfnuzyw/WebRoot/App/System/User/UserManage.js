@@ -150,6 +150,7 @@ function join_save() {
                     } else {
                         $.ligerDialog.error(data.message);
                     }
+                    refresh_user();
                 }
             });
         }
@@ -157,6 +158,7 @@ function join_save() {
 }// 用户赋予角色取消函数
 
 function join_cancel() {
+    refresh_user();
     userRoleJoinWin.close();
 }
 
@@ -185,7 +187,7 @@ function edit_pwd_save() {
 }
 
 function edit_pwd_cancel() {
-    pwdForm.close();
+    pwdWin.close();
 }
 
 // 初始化修改密码的表单
@@ -529,12 +531,13 @@ function add_save() {
                 type:'post',
                 success:function (data) {
                     if (data.success) {
-                        //userGrid.addRow(data.model);
-                        refresh_user();
+                        userGrid.addRow(data.model);
                         var userDialog = $.ligerDialog.confirm('用户添加成功，需要马上为该用户赋予角色吗？', function (answer) {
                             if (answer) {
                                 userGrid.select(data.model);
                                 user_role_join();
+                            }else{
+                                refresh_user();
                             }
                         });
                         userWin.close();
