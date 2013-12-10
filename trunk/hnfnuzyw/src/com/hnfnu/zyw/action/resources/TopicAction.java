@@ -16,7 +16,6 @@ import org.springframework.stereotype.Controller;
 import com.hnfnu.zyw.action.base.AopNoSuchMethodErrorSolveBaseAction;
 import com.hnfnu.zyw.dto.resources.TopicDto;
 import com.hnfnu.zyw.service.resources.ITopicService;
-import com.hnfnu.zyw.service.resources.ITopicSourceVoService;
 import com.opensymphony.xwork2.ModelDriven;
 
 
@@ -47,6 +46,13 @@ ModelDriven<TopicDto>{
 	// 添加专题
 	@Action(value = "addTopic")
 	public String add() {
+		//资源的保存路劲要改成相对路径
+		String[] s= topic.getImageUrl().split("\\\\");
+		//System.out.println(s[s.length-1]);
+		String tPath = s[s.length-1];
+		String[] tt = tPath.split("\\.");
+		tPath = tt[tt.length-1]+"\\"+tPath;
+		topic.setImageUrl(tPath);
 		success = topicService.add(topic);
 		if (success) {
 			message = "添加专题成功！";

@@ -71,16 +71,26 @@ public class SourceAction extends AopNoSuchMethodErrorSolveBaseAction implements
 		Map<String, Object> session = context.getSession();
 		user = (UserDto) session.get("user");
 		source.setCreateUserId(user.getId());
+		source.setCreateUserName(user.getName());
 		source.setApprovalStatus("0");
 		source.setUseTimes(0);
 		String kw = source.getKeyWords();
+		
+		
 		if (kw != null && !"".equals(kw)) {
 			kw += ";" + source.getName();
 		} else {
 			kw += source.getName();
 		}
-
+		//资源的保存路劲要改成相对路径
+		String[] s= source.getUrl().split("\\\\");
+		//System.out.println(s[s.length-1]);
+		String tPath = s[s.length-1];
+		String[] tt = tPath.split("\\.");
+		tPath = tt[tt.length-1]+"\\"+tPath;
+		//System.out.println(tPath);
 		source.setKeyWords(kw);
+		source.setUrl(tPath);
 		success = sourceService.add(source, categoryIdList);
 		if (success) {
 			message = "添加资源成功！";
