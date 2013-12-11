@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.hnfnu.zyw.utils.EncodeUtils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -29,11 +30,13 @@ public class StudentServiceImpl implements IStudentService {
 	/**
 	 * 增加一个学生
 	 * 
-	 * @param 一个学生对象
+	 * @param student 一个学生对象
 	 * @return 成功返回true，失败返回false
 	 */
 	public boolean add(StudentDto student) {
 		try {
+            String pwd = student.getPassword();
+            student.setPassword(EncodeUtils.generatePassword(pwd));
 			//新建用户默认资源币为100
 			student.setBalance(100);
 			Date dt = new Date();
@@ -49,7 +52,7 @@ public class StudentServiceImpl implements IStudentService {
 	/**
 	 * 删除一个学生
 	 * 
-	 * @param 要删除的学生的id
+	 * @param student 要删除的学生的id
 	 * @return 成功返回true，失败返回false
 	 */
 	public boolean delete(StudentDto student) {
@@ -65,7 +68,7 @@ public class StudentServiceImpl implements IStudentService {
 	/**
 	 * 更新一个学生
 	 * 
-	 * @param 已经更新的学生的对象
+	 * @param student 已经更新的学生的对象
 	 * @return 成功返回true，失败返回false
 	 */
 	public boolean update(StudentDto student) {
@@ -81,7 +84,7 @@ public class StudentServiceImpl implements IStudentService {
 	/**
 	 * 读取一个学生
 	 * 
-	 * @param 读取的学生的id
+	 * @param student 读取的学生的id
 	 * @return 返回读取的学生对象
 	 */
 	public StudentDto load(StudentDto student) {
@@ -142,11 +145,12 @@ public class StudentServiceImpl implements IStudentService {
 		try {
 			// WorkbookFactory可以自动根据文档的类型打开一个excel
 			file = new File(url);
+            String pwd = EncodeUtils.generatePassword("123456");
 			Workbook wb = WorkbookFactory.create(file);
 			// 获取excel中的某一个数据表
 			Sheet sheet = wb.getSheetAt(0);
 			// 获取数据表中的某一行
-			Row row = null;
+			Row row;
 			Row titleRow = sheet.getRow(0);
 			//System.out.println("sheet.getLastRowNum():"+sheet.getLastRowNum());
 			for (int i = 1; i <= sheet.getLastRowNum(); i++) {
@@ -179,11 +183,11 @@ public class StudentServiceImpl implements IStudentService {
 						student.setRemark(value);
 					}
 				}
-				student.setPassword("123456");
+				student.setPassword(pwd);
 				student.setBalance(100);
 				Date dt = new Date();
 				student.setCreateDate(dt);
-				if(this.validateStudent(student.getUsername()) == false){
+				if(!this.validateStudent(student.getUsername())){
 					students.add(student);
 				}
 			}
@@ -201,7 +205,7 @@ public class StudentServiceImpl implements IStudentService {
 	}
 
 	private String getCellValue(Cell c) {
-		String o = null;
+		String o;
 		switch (c.getCellType()) {
 		case Cell.CELL_TYPE_BLANK:
 			o = "";

@@ -150,6 +150,7 @@ public class UserServiceImpl implements IUserService {
 		try {
 			// WorkbookFactory可以自动根据文档的类型打开一个excel
 			file = new File(url);
+            String pwd = EncodeUtils.generatePassword("123456");
 			Workbook wb = WorkbookFactory.create(file);
 			// 获取excel中的某一个数据表
 			Sheet sheet = wb.getSheetAt(0);
@@ -194,11 +195,11 @@ public class UserServiceImpl implements IUserService {
 						user.setRemark(value);
 					}
 				}
-				user.setPassword("123456");
+				user.setPassword(pwd);
 				user.setBalance(100);
 				Date dt = new Date();
 				user.setCreateDate(dt);
-				if(this.validateUser(user.getUsername()) == false){
+				if(!this.validateUser(user.getUsername())){
 					users.add(user);
 				}
 			}
