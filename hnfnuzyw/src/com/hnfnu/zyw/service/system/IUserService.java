@@ -28,4 +28,8 @@ public interface IUserService {
 	 */
 	public boolean validateUserName(String username);
 	public int addUserBalance(int balanceCount, String userIds);
+	/*
+	 * 解析excel表批量给用户注册
+	 */
+	public boolean addUsers(String url);
 }

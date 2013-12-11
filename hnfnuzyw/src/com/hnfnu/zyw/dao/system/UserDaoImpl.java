@@ -1,5 +1,7 @@
 package com.hnfnu.zyw.dao.system;
 
+import java.util.ArrayList;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -24,8 +26,6 @@ public class UserDaoImpl extends BaseDao<UserDto> implements IUserDao {
 	}
 
 	public int addUserBalance(int count, String userIds) {
-		System.out.println("count"+count);
-		System.out.println("userIds"+userIds);
 		Session session = this.getSession();
 		String[] ids = null; 
 		if(userIds != null && !userIds.equals("")){
@@ -64,6 +64,68 @@ public class UserDaoImpl extends BaseDao<UserDto> implements IUserDao {
 		}
 		return 1;
 	}
+
+	public boolean addUsers(ArrayList<UserDto> users) {
+		Session session = this.getSession();
+		Transaction t = null;
+		try {
+			t = session.beginTransaction();
+			for(int i = 0; i < users.size(); i++){
+				UserDto s =  users.get(i);
+				this.add(s);
+			}
+			t.commit();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			if (t != null) {
+				t.rollback();
+			}
+			return false;
+		} finally {
+			session.close();
+		}
+		return true;
+	}
+
+/*	public int changeManyPasswd(String passwd, String userIds) {
+		Session session = this.getSession();
+		String[] ids = null; 
+		if(userIds != null && !userIds.equals("")){
+			ids = userIds.split(";");
+		}else{
+			return 0;
+		}
+		Transaction t = null;
+		try {
+			t = session.beginTransaction();
+			for(int i = 0; i < ids.length; i++){
+				int id = Integer.parseInt(ids[i]);
+				UserDto s = this.get(id);
+				s.setPassword(password)
+				
+				//余额不能为负数
+				if(s.getBalance()<0){
+						t.rollback();
+						return -1;
+				}
+				//余额不能超过整数范围
+				if(s.getBalance() > 1000000000){
+					return -2;
+				}
+				this.update(s);
+			}
+			t.commit();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			if (t != null) {
+				t.rollback();
+			}
+			return 0;
+		} finally {
+			session.close();
+		}
+		return 1;
+	}*/
 
 
 }

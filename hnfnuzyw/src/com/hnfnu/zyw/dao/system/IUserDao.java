@@ -1,5 +1,7 @@
 package com.hnfnu.zyw.dao.system;
 
+import java.util.ArrayList;
+
 import com.hnfnu.zyw.dao.base.IBaseDao;
 import com.hnfnu.zyw.dto.system.UserDto;
 
@@ -17,5 +19,22 @@ public interface IUserDao extends IBaseDao<UserDto>{
 	 * @return
 	 */
 	public int addUserBalance(int count,String userIds);
+	/**
+	 * 批量给用户重置密码
+	 * @param count
+	 * @param studentIds
+	 * @return
+	 */
+	/*public int changeManyPasswd(String passwd,String userIds);*/
+	
+	/**
+	 * 批量注册用户
+	 * @param count
+	 * @param studentIds
+	 * @return
+	 */
+	public boolean addUsers(ArrayList<UserDto> users);
+	
+	
 	
 }

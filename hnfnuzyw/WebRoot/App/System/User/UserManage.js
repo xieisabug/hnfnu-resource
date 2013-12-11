@@ -583,6 +583,8 @@ function delete_user() {
                             content:data.message
                         });
                         refresh_user();
+                        //refresh_many_user();
+                        //manyWin.hide();
                         userWin.close();
                     } else {
                         $.ligerDialog.error(data.message);
@@ -662,13 +664,25 @@ function edit_cancel() {
 }
 
 
-// 刷新图片的函数
+// 刷新用户的单选操作的函数
 function refresh_user() {
     $.ajax({
         url:'../../../system/listUser.action',
         type:'post',
         success:function (data) {
             userGrid.loadData(data.userList);
+        }
+    });
+    $("#pageloading").hide();
+
+}
+// // 刷新用户的批量操作的函数
+function refresh_many_user() {
+    $.ajax({
+        url:'../../../system/listUser.action',
+        type:'post',
+        success:function (data) {
+            manyGrid.loadData(data.userList);
         }
     });
     $("#pageloading").hide();
@@ -731,6 +745,8 @@ function add_balance_save() {
                         content:data.message
                     });
                     refresh_user();
+                    refresh_many_user();
+                    //manyWin.hide();
                     balanceWin.close();
                 } else {
                     $.ligerDialog.error(data.message);
@@ -868,7 +884,7 @@ function manyUserManage(){
                         }
                     ],
                     width:560,
-                    height:560,
+                    height:530,
                     pageSize:30,
                     checkbox:true,
                     data:data.userList,
