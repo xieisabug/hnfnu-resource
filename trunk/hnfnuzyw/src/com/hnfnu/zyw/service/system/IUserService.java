@@ -27,4 +27,5 @@ public interface IUserService {
 	 * @return
 	 */
 	public boolean validateUserName(String username);
+	public int addUserBalance(int balanceCount, String userIds);
 }

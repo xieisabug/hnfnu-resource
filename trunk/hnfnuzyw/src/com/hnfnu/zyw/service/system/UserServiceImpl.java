@@ -99,7 +99,7 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	/**
-	 * ��֤�û����Ƿ��Ѿ�����
+	 * 检验用户名是否重复
 	 * 
 	 * @param username
 	 * @return
@@ -120,5 +120,12 @@ public class UserServiceImpl implements IUserService {
 		} else {
 			return true;
 		}
+	}
+	
+	/**
+	 * 给用户批量充值资源币
+	 */
+	public int addUserBalance(int count, String userIds) {
+		return userDao.addUserBalance(count, userIds);
 	}
 }
