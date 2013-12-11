@@ -31,13 +31,27 @@ public class UserAction extends AopNoSuchMethodErrorSolveBaseAction implements M
 	private String newPassword;
 	private String userIds; 
 	private int balanceCount;
+	private String url;
 	@Autowired
 	@Qualifier("userService")
 	private IUserService userService;
 
 	// private String bir;
 	
-	
+	/**
+	 * 批量注册用户
+	 * @return
+	 */
+	@Action(value = "addManyUser")
+	public String addManyUser() {
+		success = userService.addUsers(url);
+		if (success) {
+			message = "给用户们注册成功！";
+		} else {
+			message = "给用户们注册失败！";
+		}
+		return SUCCESS;
+	}
 
 	/**
 	 * 批量给用户充值资源币
@@ -185,6 +199,10 @@ public class UserAction extends AopNoSuchMethodErrorSolveBaseAction implements M
 
 	public void setBalanceCount(int balanceCount) {
 		this.balanceCount = balanceCount;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 	
 

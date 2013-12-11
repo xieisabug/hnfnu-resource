@@ -148,7 +148,7 @@ public class StudentServiceImpl implements IStudentService {
 			// 获取数据表中的某一行
 			Row row = null;
 			Row titleRow = sheet.getRow(0);
-			System.out.println("sheet.getLastRowNum():"+sheet.getLastRowNum());
+			//System.out.println("sheet.getLastRowNum():"+sheet.getLastRowNum());
 			for (int i = 1; i <= sheet.getLastRowNum(); i++) {
 				row = sheet.getRow(i);
 				// 获取一行多少列
