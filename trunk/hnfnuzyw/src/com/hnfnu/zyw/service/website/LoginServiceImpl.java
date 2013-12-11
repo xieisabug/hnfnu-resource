@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.hnfnu.zyw.utils.EncodeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -74,7 +75,7 @@ public class LoginServiceImpl implements ILoginService {
 	
 	public ValidateMessege validateUser(UserDto user) {
 		String hql = "from UserDto where username='" + user.getUsername() + "'";
-		UserDto u = null;
+		UserDto u;
 		ValidateMessege messege = new ValidateMessege();
 		try {
 			u = userDao.getUser(hql);
@@ -89,7 +90,7 @@ public class LoginServiceImpl implements ILoginService {
 			messege.setMessege("用户名不存在");
 			return messege;
 		} else {
-			if (u.getPassword().equals(user.getPassword())) {
+			if (EncodeUtils.validatePassword(u.getPassword(), user.getPassword())) {
 				messege.setO(u);
 				u.setLatestLoginDate(new Date());
 				try {
@@ -114,7 +115,7 @@ public class LoginServiceImpl implements ILoginService {
 	public ValidateMessege validateStudent(StudentDto student) {
 		String hql = "from StudentDto where username='" + student.getUsername()
 				+ "'";
-		StudentDto u = null;
+		StudentDto u;
 		ValidateMessege messege = new ValidateMessege();
 		try {
 			u = studentDao.getStudent(hql);
@@ -129,7 +130,7 @@ public class LoginServiceImpl implements ILoginService {
 			messege.setMessege("用户名不存在");
 			return messege;
 		} else {
-			if (u.getPassword().equals(student.getPassword())) {
+			if (EncodeUtils.validatePassword(u.getPassword(),student.getPassword())) {
 				messege.setO(u);
 				messege.setResult(true);
 				messege.setMessege("登陆成功");

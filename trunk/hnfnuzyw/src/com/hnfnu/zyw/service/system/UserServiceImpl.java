@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.hnfnu.zyw.utils.EncodeUtils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -29,6 +30,8 @@ public class UserServiceImpl implements IUserService {
 
 	public boolean add(UserDto user) {
 		try {
+            String pwd = user.getPassword();
+            user.setPassword(EncodeUtils.generatePassword(pwd));
 			// 老师默认资源币为0
 			user.setBalance(0);
 			Date today = new Date();
