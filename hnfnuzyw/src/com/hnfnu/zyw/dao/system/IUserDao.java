@@ -10,5 +10,12 @@ public interface IUserDao extends IBaseDao<UserDto>{
 	
 	//修改密码
 	public void updatePwd(int id,String newPassword ) throws Exception;
+	/**
+	 * 批量给用户充值资源币
+	 * @param count
+	 * @param studentIds
+	 * @return
+	 */
+	public int addUserBalance(int count,String userIds);
 	
 }

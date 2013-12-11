@@ -9,6 +9,8 @@ var pwdWin = null;// 修改密码窗口
 var manyWin = null;//批量操作窗口
 var manyForm = null;//批量操作表单
 var manyGrid = null;//批量操作表格
+var balanceForm  = null;//批量充值资源币
+var balanceWin = null;//批量充值资源币
 // 用户赋予角色listBox的初始化
 $.extend($.ligerMethos.ListBox, {
     clearData:function () {
@@ -672,193 +674,106 @@ function refresh_user() {
     $("#pageloading").hide();
 
 }
-
 //批量给用户充值资源币
 function add_balance() {
-
-    userGrid.checkBoxIsTrue();
-    //multiple_select_grid();
-    /* var datas = studentGrid.getSelecteds();
-     //console.log(datas);
-     if (datas.length == 0) {
-     $.ligerDialog.warn('请选择您要充值的学生们.');
-     return;
-     }
-     balanceFormInit();
-     balanceWin = $.ligerDialog.open({
-     width:300,
-     height:200,
-     title:'充值资源币',
-     target:balanceForm,
-     buttons:[
-     {
-     text:'提交',
-     width:80,
-     onclick:add_balance_save
-     },
-     {
-     text:'取消',
-     width:80,
-     onclick:add_balance_cancel
-     }
-     ]
-     });*/
+    var datas = manyGrid.getSelecteds();
+    //console.log(datas);
+    if (datas.length == 0) {
+        $.ligerDialog.warn('请选择您要充值的用户们.');
+        return;
+    }
+    balanceFormInit();
+    balanceWin = $.ligerDialog.open({
+        width:300,
+        height:200,
+        title:'充值资源币',
+        target:balanceForm,
+        buttons:[
+            {
+                text:'提交',
+                width:80,
+                onclick:add_balance_save
+            },
+            {
+                text:'取消',
+                width:80,
+                onclick:add_balance_cancel
+            }
+        ]
+    });
 }
 
-
-/*
- function multiple_select_grid(){
- var toolbarItems = [
- {
- text:'新增用户',
- click:add_user,
- icon:'add',
- key:'add'
- },
- {
- text:'删除用户',
- click:delete_user,
- icon:'delete',
- key:'delete'
- },
- {
- text:'修改用户',
- click:edit_user,
- icon:'modify',
- key:'modify'
- },
- {
- text:'角色赋予',
- click:user_role_join,
- icon:'config',
- key:'join'
- },
- {
- text:'修改密码',
- click:edit_password,
- icon:'modify',
- key:'modify_pwd'
- },{
- text:'资源币充值',
- click:add_balance,
- icon:'modify',
- key:'modify_many'
- }
- ];
- var menuId = window.parent.tab.getSelectedTabItemID();
- $.ajax({
- url : '../../../system/listFunctionIdList.action',
- type : 'post',
- data : {
- menuId : menuId.substr(0,menuId.indexOf("t"))
- },
- success : function(data) {
- var idList = data.functionIdList.split(";");
- var ajaxToolbar = [];
- for(var i = 0; i<idList.length; i++){
- ajaxToolbar.push({name:parent.hnfnu.functionList[idList[i]]});
- }
- toolbarItems = Toolbar.confirmToolbar(toolbarItems, ajaxToolbar);
- }
- });
- $.ajax({
- url:'../../../system/listUser.action',
- type:'post',
- success:function (data) {
- userGrid = $("#userGrid").ligerGrid({
- columns:[
- {
- display:'用户名',
- name:'username',
- align:'left',
- width:100
- },
- {
- display:'姓名',
- name:'name',
- align:'left',
- width:80
- },
- {
- display:'身份证号码',
- name:'idcard',
- align:'left',
- width:100
- },
- {
- display:'性别',
- name:'sex',
- align:'left',
- width:50
- },
- {
- display:'资源币余额',
- name:'balance',
- align:'left',
- width:50
- },
- {
- display:'QQ',
- name:'qq',
- align:'left',
- width:100
- },
- {
- display:'电话号码',
- name:'telephone',
- align:'left',
- width:120
- },
- {
- display:'邮箱',
- name:'email',
- align:'left',
- width:120
- },
- {
- display:'生日',
- name:'birth',
- align:'left',
- width:100
- },
- {
- display:'部门',
- name:'department',
- align:'left',
- width:80
- },
- {
- display:'备注',
- name:'remark',
- align:'left',
- width:50
- }
- ],
- width:'99%',
- height:'98%',
- pageSize:20,
- checkbox:true,
- data:data.userList,
- toolbar:{
- items:toolbarItems
- },
- rowAttrRender:function (rowdata) {
- if (rowdata.birth) {
- rowdata.birth = rowdata.birth.substring(0, 10);
- }
- if (rowdata.sex == 0) {
- rowdata.sex = "女";
- } else {
- rowdata.sex = "男";
- }
- return;
- }
- });
- $("#pageloading").hide();
- }
- });
- }
- */
+//批量充值资源币的保存按钮事件
+function add_balance_save() {
+    if (balanceForm.valid()) {
+        var userDatas =manyGrid.getSelecteds();
+        var userIds = "";
+        for (var i = 0; i < userDatas.length; i++) {
+            if (i > 0) {
+                userIds = userIds + ";";
+            }
+            userIds = userIds + userDatas[i].id;
+        }
+        console.log(userIds);
+        var row_data = Form.parseJSON(balanceForm);
+        // 发往服务器，返回成功后再添加到表格中
+        $.ajax({
+            url:'../../../system/addUserBalanceCount.action',
+            data:{
+                userIds:userIds,
+                balanceCount:row_data.addCount
+            },
+            type:'post',
+            success:function (data) {
+                if (data.success) {
+                    $.ligerDialog.tip({
+                        title:'提示信息',
+                        content:data.message
+                    });
+                    refresh_user();
+                    balanceWin.close();
+                } else {
+                    $.ligerDialog.error(data.message);
+                }
+            }
+        });
+    }
+}
+// 批量充值资源币的取消按钮事件
+function add_balance_cancel() {
+    balanceWin.close();
+}
+//初始化批量充值资源币的表单，生成form标签
+function balanceFormInit() {
+    balanceForm = $('<form></form>');
+    balanceForm.ligerForm({
+        inputWidth:80,
+        fields:[
+            {
+                display:'充值资源币数量',
+                name:'addCount',
+                type:'text',
+                space:50,
+                labelWidth:100,
+                width:100,
+                height:50,
+                newline:true,
+                validate:{
+                    required:true,
+                    maxlength:9
+                }
+            }
+        ]
+    });
+    $.metadata.setType("attr", "validate");
+    balanceForm.validate({
+        debug:true,
+        onkeyup:false,
+        errorPlacement:function (error, element) {
+            error.appendTo(element.parent().parent().parent().parent());
+        }
+    });
+}
 //todo 批量修改的操作
 function manyUserManage(){
     var toolbarItems = [
@@ -881,7 +796,7 @@ function manyUserManage(){
             url:'../../../system/listUser.action',
             type:'post',
             success:function (data) {
-                console.log(data.userList);
+                //console.log(data.userList);
                 var s = $('#manyGrid');
                 manyGrid = s.ligerGrid({
                     columns:[
@@ -953,7 +868,7 @@ function manyUserManage(){
                         }
                     ],
                     width:560,
-                    height:400,
+                    height:560,
                     pageSize:30,
                     checkbox:true,
                     data:data.userList,
@@ -961,22 +876,19 @@ function manyUserManage(){
                         items:toolbarItems
                     }
                 });
-                namyWin = $.ligerDialog.open({
+                manyWin = $.ligerDialog.open({
                     width:600,
-                    height:400,
+                    height:600,
                     title:'批量操作',
                     target:s
                 });
-               // $(".l-grid2", manyWin.element).css({width:600});
+                $(".l-grid2", manyWin.element).css({width:560});
                 $("#pageloading").hide();
             }
         });
 
 
 }
-
-
-
 // 初始化表格
 $(function () {
     var toolbarItems = [

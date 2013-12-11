@@ -29,11 +29,41 @@ public class UserAction extends AopNoSuchMethodErrorSolveBaseAction implements M
 	private String message;
 	private Map<String, Object> userList;
 	private String newPassword;
+	private String userIds; 
+	private int balanceCount;
 	@Autowired
 	@Qualifier("userService")
 	private IUserService userService;
 
 	// private String bir;
+	
+	
+
+	/**
+	 * 批量给用户充值资源币
+	 * @return
+	 */
+	@Action(value = "addUserBalanceCount")
+	public String addUserBalanceCount() {
+		int i = userService.addUserBalance(balanceCount, userIds);
+		if (i == 1) {
+			success = true;
+			message = "给用户们充值成功！";
+		} else {
+			success=false;
+			if(i==0){
+				message = "给用户们充值失败！";	
+			}
+			if(i == -1){
+				message = "给用户们充值失败,因为在您选择的学生当中有学生的资源币少于您要减去的资源币！";
+			}
+			if( i == -2){
+				message = "给用户们充值失败,因为每位学生的总余额数不能超过1000000000！";
+			}
+			
+		}
+		return SUCCESS;
+	}
 
 	// 添加
 	@Action(value = "addUser")
@@ -148,6 +178,15 @@ public class UserAction extends AopNoSuchMethodErrorSolveBaseAction implements M
 	public void setNewPassword(String newPassword) {
 		this.newPassword = newPassword;
 	}
+
+	public void setUserIds(String userIds) {
+		this.userIds = userIds;
+	}
+
+	public void setBalanceCount(int balanceCount) {
+		this.balanceCount = balanceCount;
+	}
+	
 
 	
 }
