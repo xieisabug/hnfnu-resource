@@ -23,7 +23,7 @@ public class POITest {
 	public void testRead() {
 		try {
 			// WorkbookFactory可以自动根据文档的类型打开一个excel
-			Workbook wb = WorkbookFactory.create(new File("d:/11.xls"));
+			Workbook wb = WorkbookFactory.create(new File("d:/111.xls"));
 			// 获取excel中的某一个数据表
 			Sheet sheet = wb.getSheetAt(0);
 			// 获取数据表中的某一行
