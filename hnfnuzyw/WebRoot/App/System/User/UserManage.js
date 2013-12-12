@@ -11,6 +11,8 @@ var manyForm = null;//批量操作表单
 var manyGrid = null;//批量操作表格
 var balanceForm  = null;//批量充值资源币
 var balanceWin = null;//批量充值资源币
+var fileWin = null;//批量注册用户的窗口
+var fileForm = null;//批量注册用户的表单
 // 用户赋予角色listBox的初始化
 $.extend($.ligerMethos.ListBox, {
     clearData:function () {
@@ -790,6 +792,64 @@ function balanceFormInit() {
         }
     });
 }
+
+//批量注册用户的函数
+function add_many_user() {
+    fileWin = $.ligerDialog.open({
+        width:400,
+        height:300,
+        title:'批量注册用户',
+        url:'AddForm.html',
+        buttons:[
+            {
+                text:'提交',
+                width:80,
+                onclick:add_many_save
+            },
+            {
+                text:'取消',
+                width:80,
+                onclick:add_many_cancel
+            }
+        ]
+    });
+}
+function add_many_save(){
+    fileForm = fileWin.frame.fileForm;
+
+    if (fileForm.valid()) {
+        var row_data = Form.parseJSON(fileForm);
+
+        if (row_data.url == "" || row_data.url == null) {
+            $.ligerDialog.error("未上传文件");
+            return;
+        }
+
+        // 发往服务器，返回成功后再添加到表格中
+        $.ajax({
+            url:'../../../system/addManyUser.action',
+            data:{
+                url:row_data.url
+            },
+            type:'post',
+            success:function (data) {
+                if (data.success) {
+                    $.ligerDialog.tip({
+                        title:'提示信息',
+                        content:data.message
+                    });
+                    refresh_student();
+                    fileWin.close();
+                } else {
+                    $.ligerDialog.error(data.message);
+                }
+            }
+        });
+    }
+}
+function add_many_cancel(){
+    alert("add_many_cancel");
+}
 //todo 批量修改的操作
 function manyUserManage(){
     var toolbarItems = [
@@ -937,6 +997,12 @@ $(function () {
             click:edit_password,
             icon:'modify',
             key:'modify_pwd'
+        },
+        {
+            text:'通过Excel批量注册',
+            click:add_many_user,
+            icon:'add',
+            key:'add_many'
         },
         {
             text:'批量操作',
