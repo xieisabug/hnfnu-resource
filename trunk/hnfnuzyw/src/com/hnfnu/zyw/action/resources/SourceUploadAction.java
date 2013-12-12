@@ -2,7 +2,9 @@ package com.hnfnu.zyw.action.resources;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -32,10 +34,11 @@ public class SourceUploadAction extends ActionSupport implements
 	/**
 	 * @return
 	 * @author lijf
+	 * @throws IOException 
 	 * @description 上传文件
 	 * @update 2013-1-26 下午02:15:26
 	 */
-	public void upload() throws Exception {// intentionPicture
+	public void upload() throws IOException {// intentionPicture
 
 		String uploadFileName = "";
 
@@ -59,33 +62,43 @@ public class SourceUploadAction extends ActionSupport implements
 			String fn = df.format(new Date()) + Math.round(Math.random() * 10);
 			//加上文件后缀名
 			fn = fn+getFileNameFileName().get(i);
-			//根据文件的后缀名创建文件夹，并且该文件放入该文件夹
-			String ss = getFileNameFileName().get(i);
-			String[] aStrings = ss.split("\\.");
+			System.out.println(fn);
 			
-			String temp = aStrings[aStrings.length-1];
-			File f = new File(getSavePath() +"\\"+temp);
-			f.mkdirs();
-			
-			FileOutputStream fos = new FileOutputStream(getSavePath()+"\\"+temp + "\\"
-					+ fn);
-			FileInputStream fis = new FileInputStream(getFileName().get(i));
+			try {
+				//根据文件的后缀名创建文件夹，并且该文件放入该文件夹
+				String ss = getFileNameFileName().get(i);
+				String[] aStrings = ss.split("\\.");
+				
+				String temp = aStrings[aStrings.length-1];
+				File f = new File(getSavePath() +"\\"+temp);
+				f.mkdirs();
+				setSavePath(getSavePath()+"\\"+temp);
+				FileOutputStream fos;
+				fos = new FileOutputStream(getSavePath()+"\\"
+						+ fn);
+				FileInputStream fis = new FileInputStream(getFileName().get(i));
 
-			byte[] buffers = new byte[1024];
+				byte[] buffers = new byte[1024];
 
-			int len = 0;
+				int len = 0;
 
-			while ((len = fis.read(buffers)) != -1) {
+				while ((len = fis.read(buffers)) != -1) {
 
-				fos.write(buffers, 0, len);
+					fos.write(buffers, 0, len);
 
+				}
+
+				fos.close();
+
+				fis.close();
+
+				uploadFileName = fn;
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}catch (Exception e) {
+				e.printStackTrace();
 			}
-
-			fos.close();
-
-			fis.close();
-
-			uploadFileName = fn;
+			
 
 		}
 
