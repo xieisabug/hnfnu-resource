@@ -1,6 +1,9 @@
 package com.hnfnu.zyw.service.system;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -8,6 +11,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.hnfnu.zyw.utils.EncodeUtils;
+import com.hnfnu.zyw.utils.FileUtils;
+
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -141,12 +147,19 @@ public class StudentServiceImpl implements IStudentService {
 
 	public boolean addStudnets(String url) {
 		ArrayList<StudentDto> students = new ArrayList<StudentDto>();
-		File file = null;
+		InputStream is = null;
 		try {
 			// WorkbookFactory可以自动根据文档的类型打开一个excel
-			file = new File(url);
+			String[] t = url.split("\\.");
+			String[] ss = url.split("\\\\");
+			url = ss[0]+"\\";
+			for(int i = 1;i < ss.length -1; i++){
+			url = url +"\\"+ss[i];
+			}
+			url  = url + "\\"+t[t.length-1]+"\\"+ss[ss.length-1];
             String pwd = EncodeUtils.generatePassword("123456");
-			Workbook wb = WorkbookFactory.create(file);
+            is = new FileInputStream(url);  
+		    HSSFWorkbook wb = new HSSFWorkbook(is);   
 			// 获取excel中的某一个数据表
 			Sheet sheet = wb.getSheetAt(0);
 			// 获取数据表中的某一行
@@ -191,16 +204,18 @@ public class StudentServiceImpl implements IStudentService {
 					students.add(student);
 				}
 			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		} finally {
-			file.delete();
+			try {
+				is.close();
+				FileUtils.deleteOneFile(url);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
-
-		// System.out.println(url);
-		// FileUtils.deleteOneFile(url);
-
 		return studentDao.addStudnets(students);
 	}
 

@@ -1,13 +1,15 @@
 package com.hnfnu.zyw.service.system;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.hnfnu.zyw.utils.EncodeUtils;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -18,8 +20,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.hnfnu.zyw.dao.system.IUserDao;
-import com.hnfnu.zyw.dto.system.StudentDto;
 import com.hnfnu.zyw.dto.system.UserDto;
+import com.hnfnu.zyw.utils.EncodeUtils;
+import com.hnfnu.zyw.utils.FileUtils;
 
 @Service("userService")
 public class UserServiceImpl implements IUserService {
@@ -146,12 +149,25 @@ public class UserServiceImpl implements IUserService {
 	 */
 	public boolean addUsers(String url) {
 		ArrayList<UserDto> users = new ArrayList<UserDto>();
-		File file = null;
+		//File file = null;
 		try {
 			// WorkbookFactory可以自动根据文档的类型打开一个excel
-			file = new File(url);
+			String[] t = url.split("\\.");
+			String[] ss = url.split("\\\\");
+			url = ss[0]+"\\";
+			for(int i = 1;i < ss.length -1; i++){
+			url = url +"\\"+ss[i];
+			}
+			url  = url + "\\"+t[t.length-1]+"\\"+ss[ss.length-1];
+			System.out.println(url);
+			
+			InputStream is = new FileInputStream(url);  
+		    HSSFWorkbook wb = new HSSFWorkbook(is);   
+			
+			
+			//file = new File(url);
             String pwd = EncodeUtils.generatePassword("123456");
-			Workbook wb = WorkbookFactory.create(file);
+			//Workbook wb = WorkbookFactory.create(file);
 			// 获取excel中的某一个数据表
 			Sheet sheet = wb.getSheetAt(0);
 			// 获取数据表中的某一行
@@ -203,15 +219,19 @@ public class UserServiceImpl implements IUserService {
 					users.add(user);
 				}
 			}
+			is.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		} finally {
-			file.delete();
+			try {
+				//System.out.println(file.delete());
+				FileUtils.deleteOneFile(url);
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+				//System.out.println(file.delete());
 		}
-
-		// System.out.println(url);
-		// FileUtils.deleteOneFile(url);
 
 		return userDao.addUsers(users);
 	}

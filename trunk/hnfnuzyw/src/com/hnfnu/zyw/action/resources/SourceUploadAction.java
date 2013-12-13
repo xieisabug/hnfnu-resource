@@ -62,7 +62,6 @@ public class SourceUploadAction extends ActionSupport implements
 			String fn = df.format(new Date()) + Math.round(Math.random() * 10);
 			//加上文件后缀名
 			fn = fn+getFileNameFileName().get(i);
-			System.out.println(fn);
 			
 			try {
 				//根据文件的后缀名创建文件夹，并且该文件放入该文件夹
@@ -72,9 +71,12 @@ public class SourceUploadAction extends ActionSupport implements
 				String temp = aStrings[aStrings.length-1];
 				File f = new File(getSavePath() +"\\"+temp);
 				f.mkdirs();
-				setSavePath(getSavePath()+"\\"+temp);
+				//System.out.println("getSavePath()"+getSavePath());
+				//setSavePath(getSavePath()+"\\"+temp);
+				
+				//System.out.println("getSavePath()"+getSavePath());
 				FileOutputStream fos;
-				fos = new FileOutputStream(getSavePath()+"\\"
+				fos = new FileOutputStream(getSavePath()+"\\"+temp+"\\"
 						+ fn);
 				FileInputStream fis = new FileInputStream(getFileName().get(i));
 

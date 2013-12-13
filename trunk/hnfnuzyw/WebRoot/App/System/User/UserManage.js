@@ -838,7 +838,7 @@ function add_many_save(){
                         title:'提示信息',
                         content:data.message
                     });
-                    refresh_student();
+                    refresh_user();
                     fileWin.close();
                 } else {
                     $.ligerDialog.error(data.message);
@@ -848,7 +848,7 @@ function add_many_save(){
     }
 }
 function add_many_cancel(){
-    alert("add_many_cancel");
+    fileWin.close();
 }
 //todo 批量修改的操作
 function manyUserManage(){
