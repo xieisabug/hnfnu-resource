@@ -20,7 +20,6 @@ import com.hnfnu.zyw.dao.system.IStudentDao;
 import com.hnfnu.zyw.dto.system.StudentDto;
 import com.hnfnu.zyw.dto.system.feedback.AddManyStudentsFB;
 import com.hnfnu.zyw.utils.EncodeUtils;
-import com.hnfnu.zyw.utils.FileUtils;
 
 @Service("studentService")
 public class StudentServiceImpl implements IStudentService {
