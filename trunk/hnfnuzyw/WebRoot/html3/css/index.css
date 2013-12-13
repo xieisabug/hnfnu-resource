@@ -5,6 +5,7 @@
 }
 #headContent {
     width:960px;
+    height:100px;
     margin: 20px auto;
 }
 #headLogo {
@@ -171,6 +172,41 @@ input[type=text]:focus,input[type=password]:focus {
     font-size: 0.9em;
 }
 
+#topic .panel-content{
+    height: 358px;
+    padding: 0;
+}
+#topic table tr{
+    height: 179px
+}
+#topic table tr td{
+    padding: 10px;
+    height: 179px;
+    width: 323px;
+}
+#topic table tr td img {
+    width: 150px;
+    height: 150px;
+    -moz-border-radius: 18px;
+    -webkit-border-radius: 18px;
+    border-radius: 18px;
+}
+.topic-item {
+    float: right;
+    width: 133px
+}
+.topic-title {
+    font-size: 0.9em;
+    font-weight: bolder;
+    color: #333;
+}
+.topic-title:hover {
+    color: #c00;
+}
+.topic-description {
+    font-size: 0.8em;
+    color: #666;
+}
 /**gallery**/
 #n {
     margin: 10px auto;
