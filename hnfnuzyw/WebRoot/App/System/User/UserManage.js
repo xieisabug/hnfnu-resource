@@ -9,10 +9,12 @@ var pwdWin = null;// 修改密码窗口
 var manyWin = null;//批量操作窗口
 var manyForm = null;//批量操作表单
 var manyGrid = null;//批量操作表格
-var balanceForm  = null;//批量充值资源币
+var balanceForm = null;//批量充值资源币
 var balanceWin = null;//批量充值资源币
 var fileWin = null;//批量注册用户的窗口
 var fileForm = null;//批量注册用户的表单
+var addUserFailGrid = null;//批量注册用户的时候反馈失败信息
+var addUserFailWin = null;//批量注册用户的时候反馈失败信息
 // 用户赋予角色listBox的初始化
 $.extend($.ligerMethos.ListBox, {
     clearData:function () {
@@ -722,7 +724,7 @@ function add_balance() {
 //批量充值资源币的保存按钮事件
 function add_balance_save() {
     if (balanceForm.valid()) {
-        var userDatas =manyGrid.getSelecteds();
+        var userDatas = manyGrid.getSelecteds();
         var userIds = "";
         for (var i = 0; i < userDatas.length; i++) {
             if (i > 0) {
@@ -814,7 +816,7 @@ function add_many_user() {
         ]
     });
 }
-function add_many_save(){
+function add_many_save() {
     fileForm = fileWin.frame.fileForm;
 
     if (fileForm.valid()) {
@@ -834,10 +836,14 @@ function add_many_save(){
             type:'post',
             success:function (data) {
                 if (data.success) {
-                    $.ligerDialog.tip({
-                        title:'提示信息',
-                        content:data.message
-                    });
+                    if(data.failUsers.Total > 0){
+                        add_user_fail(data.failUsers);
+                    }else{
+                        $.ligerDialog.tip({
+                            title:'提示信息',
+                            content:data.message
+                        });
+                    }
                     refresh_user();
                     fileWin.close();
                 } else {
@@ -847,11 +853,80 @@ function add_many_save(){
         });
     }
 }
-function add_many_cancel(){
+//显示批量注册用户失败的详细信息
+function add_user_fail(data){
+    var s = $('#addUserFailGrid');
+    addUserFailGrid = s.ligerGrid({
+        columns:[
+            {
+                display:'姓名',
+                name:'name',
+                align:'left',
+                width:50
+            },
+            {
+                display:'身份证号码',
+                name:'idcard',
+                align:'left',
+                width:100
+            },
+            {
+                display:'性别',
+                name:'sex',
+                align:'left',
+                width:20
+            },
+            {
+                display:'QQ',
+                name:'qq',
+                align:'left',
+                width:80
+            },
+            {
+                display:'电话号码',
+                name:'telephone',
+                align:'left',
+                width:80
+            },
+            {
+                display:'邮箱',
+                name:'email',
+                align:'left',
+                width:60
+            },
+            {
+                display:'部门',
+                name:'department',
+                align:'left',
+                width:60
+            }, {
+                display:'失败原因',
+                name:'message',
+                align:'left',
+                width:120
+            }
+        ],
+        width:660,
+        height:500,
+        pageSize:30,
+        data:data
+    });
+    addUserFailWin = $.ligerDialog.open({
+        width:700,
+        height:600,
+        title:'批量注册失败的用户',
+        target:s
+    });
+    $(".l-grid2", addUserFailWin.element).css({width:700});
+    $("#pageloading").hide();
+}
+
+
+function add_many_cancel() {
     fileWin.close();
 }
 //todo 批量修改的操作
-function manyUserManage(){
+function manyUserManage() {
     var toolbarItems = [
         {
             text:'多人重置密码',
@@ -867,101 +942,101 @@ function manyUserManage(){
         }
     ];
 
-        $.ajax({
-            async: false,
-            url:'../../../system/listUser.action',
-            type:'post',
-            success:function (data) {
-                //console.log(data.userList);
-                var s = $('#manyGrid');
-                manyGrid = s.ligerGrid({
-                    columns:[
-                        {
-                            display:'用户名',
-                            name:'username',
-                            align:'left',
-                            width:100
-                        },
-                        {
-                            display:'姓名',
-                            name:'name',
-                            align:'left',
-                            width:80
-                        },
-                        {
-                            display:'身份证号码',
-                            name:'idcard',
-                            align:'left',
-                            width:100
-                        },
-                        {
-                            display:'性别',
-                            name:'sex',
-                            align:'left',
-                            width:50
-                        },
-                        {
-                            display:'资源币余额',
-                            name:'balance',
-                            align:'left',
-                            width:50
-                        },
-                        {
-                            display:'QQ',
-                            name:'qq',
-                            align:'left',
-                            width:100
-                        },
-                        {
-                            display:'电话号码',
-                            name:'telephone',
-                            align:'left',
-                            width:120
-                        },
-                        {
-                            display:'邮箱',
-                            name:'email',
-                            align:'left',
-                            width:120
-                        },
-                        {
-                            display:'生日',
-                            name:'birth',
-                            align:'left',
-                            width:100
-                        },
-                        {
-                            display:'部门',
-                            name:'department',
-                            align:'left',
-                            width:80
-                        },
-                        {
-                            display:'备注',
-                            name:'remark',
-                            align:'left',
-                            width:50
-                        }
-                    ],
-                    width:560,
-                    height:530,
-                    pageSize:30,
-                    checkbox:true,
-                    data:data.userList,
-                    toolbar:{
-                        items:toolbarItems
+    $.ajax({
+        async:false,
+        url:'../../../system/listUser.action',
+        type:'post',
+        success:function (data) {
+            //console.log(data.userList);
+            var s = $('#manyGrid');
+            manyGrid = s.ligerGrid({
+                columns:[
+                    {
+                        display:'用户名',
+                        name:'username',
+                        align:'left',
+                        width:100
+                    },
+                    {
+                        display:'姓名',
+                        name:'name',
+                        align:'left',
+                        width:80
+                    },
+                    {
+                        display:'身份证号码',
+                        name:'idcard',
+                        align:'left',
+                        width:100
+                    },
+                    {
+                        display:'性别',
+                        name:'sex',
+                        align:'left',
+                        width:50
+                    },
+                    {
+                        display:'资源币余额',
+                        name:'balance',
+                        align:'left',
+                        width:50
+                    },
+                    {
+                        display:'QQ',
+                        name:'qq',
+                        align:'left',
+                        width:100
+                    },
+                    {
+                        display:'电话号码',
+                        name:'telephone',
+                        align:'left',
+                        width:120
+                    },
+                    {
+                        display:'邮箱',
+                        name:'email',
+                        align:'left',
+                        width:120
+                    },
+                    {
+                        display:'生日',
+                        name:'birth',
+                        align:'left',
+                        width:100
+                    },
+                    {
+                        display:'部门',
+                        name:'department',
+                        align:'left',
+                        width:80
+                    },
+                    {
+                        display:'备注',
+                        name:'remark',
+                        align:'left',
+                        width:50
                     }
-                });
-                manyWin = $.ligerDialog.open({
-                    width:600,
-                    height:600,
-                    title:'批量操作',
-                    target:s
-                });
-                $(".l-grid2", manyWin.element).css({width:560});
-                $("#pageloading").hide();
-            }
-        });
+                ],
+                width:560,
+                height:530,
+                pageSize:30,
+                checkbox:true,
+                data:data.userList,
+                toolbar:{
+                    items:toolbarItems
+                }
+            });
+            manyWin = $.ligerDialog.open({
+                width:600,
+                height:600,
+                title:'批量操作',
+                target:s
+            });
+            $(".l-grid2", manyWin.element).css({width:560});
+            $("#pageloading").hide();
+        }
+    });
 
 
 }
@@ -1013,7 +1088,7 @@ $(function () {
     ];
     var menuId = window.parent.tab.getSelectedTabItemID();
     $.ajax({
-        async: false,
+        async:false,
         url:'../../../system/listFunctionIdList.action',
         type:'post',
         data:{

@@ -5,7 +5,8 @@ var fileForm = null;//批量学生注册表单
 var fileWin = null;//批量学生注册的窗口
 var balanceWin = null;//批量增加资源币的窗口
 var studentWin = null;// 学生窗口
-
+var addStudentFailGrid = null;//批量添加学生失败的信息
+var addStudentFailWin = null;//批量添加学生失败的信息
 //批量注册学生的函数
 function add_many_student() {
     fileWin = $.ligerDialog.open({
@@ -49,10 +50,14 @@ function add_many_save() {
             type:'post',
             success:function (data) {
                 if (data.success) {
-                    $.ligerDialog.tip({
-                        title:'提示信息',
-                        content:data.message
-                    });
+                    if(data.failStudents.Total > 0){
+                        add_student_fail(data.failStudents);
+                    }else{
+                        $.ligerDialog.tip({
+                            title:'提示信息',
+                            content:data.message
+                        });
+                    }
                     refresh_student();
                     fileWin.close();
                 } else {
@@ -559,7 +564,67 @@ function formInit(func) {
     });
 }
 
-
+//显示批量注册用户失败的详细信息
+function add_student_fail(data){
+    var s = $('#addStudentFailGrid');
+    addStudentFailGrid = s.ligerGrid({
+        columns:[
+            {
+                display:'姓名',
+                name:'name',
+                width:80
+            },
+            {
+                display:'学号',
+                name:'number',
+                align:'left',
+                width:100
+            },
+            {
+                display:'专业',
+                name:'major',
+                align:'left',
+                width:100
+            },
+            {
+                display:'系部',
+                name:'department',
+                align:'left',
+                width:100
+            },
+            {
+                display:'入学年份',
+                name:'entranceTime',
+                align:'left',
+                width:80
+            },
+            {
+                display:'电话号码',
+                name:'telephone',
+                align:'left',
+                width:100
+            },
+           {
+                display:'失败原因',
+                name:'message',
+                align:'left',
+                width:120
+            }
+        ],
+        width:660,
+        height:500,
+        pageSize:30,
+        data:data
+    });
+    addStudentFailWin = $.ligerDialog.open({
+        width:700,
+        height:600,
+        title:'批量注册失败学生',
+        target:s
+    });
+    $(".l-grid2", addStudentFailWin.element).css({width:700});
+    $("#pageloading").hide();
+}
 //初始化批量充值资源币的表单，生成form标签
 function balanceFormInit() {
     balanceForm = $('<form></form>');

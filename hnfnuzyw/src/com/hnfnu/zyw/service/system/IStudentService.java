@@ -37,7 +37,7 @@ public interface IStudentService {
 	/*
 	 * 解析excel表批量给学生注册
 	 */
-	public boolean addStudnets(String url);
+	public Map<String, Object> addStudnets(String url);
 	
 	//public StudentDto getStudent(String sql);
 	/**

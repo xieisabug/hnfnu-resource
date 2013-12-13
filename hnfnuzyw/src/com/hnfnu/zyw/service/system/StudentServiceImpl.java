@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import com.hnfnu.zyw.dao.system.IStudentDao;
 import com.hnfnu.zyw.dto.system.StudentDto;
+import com.hnfnu.zyw.dto.system.feedback.AddManyStudentsFB;
 import com.hnfnu.zyw.utils.EncodeUtils;
 import com.hnfnu.zyw.utils.FileUtils;
 
@@ -140,8 +141,11 @@ public class StudentServiceImpl implements IStudentService {
 		return studentDao.addStudnetBalance(count, studentIds);
 	}
 
-	public boolean addStudnets(String url) {
+	public Map<String, Object> addStudnets(String url) {
 		ArrayList<StudentDto> students = new ArrayList<StudentDto>();
+		ArrayList<AddManyStudentsFB> failStudents = new ArrayList<AddManyStudentsFB>();
+		Map<String, Object> result = new HashMap<String, Object>();
+		Boolean b = true;
 		InputStream is = null;
 		try {
 			// WorkbookFactory可以自动根据文档的类型打开一个excel
@@ -164,26 +168,69 @@ public class StudentServiceImpl implements IStudentService {
 			for (int i = 1; i <= sheet.getLastRowNum(); i++) {
 				row = sheet.getRow(i);
 				// 获取一行多少列
+				Boolean flat = true;
+				String message = "";
 				StudentDto student = new StudentDto();
-				for (int j = row.getFirstCellNum(); j < row.getLastCellNum(); j++) {
-					String title = getCellValue(titleRow.getCell(j));
-					String value = getCellValue(row.getCell(j));
+				for (int j = 0; j < row.getLastCellNum(); j++) {
+					Cell titleCell = titleRow.getCell(j);
+					Cell valueCell = row.getCell(j);
+				
+					// 如果标题栏为空则立即终止添加
+					if (titleCell == null) {
+						return null;
+					}
+					String title = null;
+					String value = null;
+					title = getCellValue(titleCell);
+					if (valueCell == null) {
+						value = null;
+					} else {
 
-					if (title.equals("姓名")) {
-						student.setName(value);
+						value = getCellValue(valueCell);
+
+					}
+
+					if (title.equals("姓名") ||title.equals("名字")) {
+						// 名字不能为空
+						if (value == null || value.equals("")) {
+							flat = false;
+							message = message + " 姓名不能为空 ";
+						}else{
+							student.setName(value);
+						}
+						
+						
 					} else if (title.equals("学号")) {
-						student.setNumber(value);
-						student.setUsername(value);
+						if (value == null || value.equals("")) {
+							flat = false;
+							message = message + " 学号不能为空 ";
+						}else{
+							student.setNumber(value);
+							student.setUsername(value);
+						}
 
 					} else if (title.equals("专业")) {
-						student.setMajor(value);
-
+						if (value == null || value.equals("")) {
+							flat = false;
+							message = message + " 专业不能为空 ";
+						}else{
+							student.setMajor(value);
+						}
+						
 					} else if (title.equals("系部")) {
-						student.setDepartment(value);
-
+						if (value == null || value.equals("")) {
+							flat = false;
+							message = message + " 系部不能为空 ";
+						}else{
+							student.setDepartment(value);
+						}
 					} else if (title.equals("入学年份")) {
-						student.setEntranceTime(value);
-
+						if (value == null || value.equals("")) {
+							flat = false;
+							message = message + " 入学年份不能为空 ";
+						}else{
+							student.setEntranceTime(value);
+						}
 					} else if (title.equals("电话号码") || title.equals("联系电话")) {
 						student.setTelephone(value);
 
@@ -191,27 +238,50 @@ public class StudentServiceImpl implements IStudentService {
 						student.setRemark(value);
 					}
 				}
-				student.setPassword(pwd);
-				student.setBalance(100);
-				Date dt = new Date();
-				student.setCreateDate(dt);
-				if(!this.validateStudent(student.getUsername())){
+				// 验证用户名是否重复
+				if (this.validateStudent(student.getUsername())) {
+					flat = false;
+					message = message + " 该学号已经注册";
+				}
+				
+				// 如果该用户不能添加
+				if (!flat) {
+					AddManyStudentsFB fb = new AddManyStudentsFB(student, message);
+					failStudents.add(fb);
+					continue;
+				}else{
+					student.setPassword(pwd);
+					student.setBalance(100);
+					Date dt = new Date();
+					student.setCreateDate(dt);
 					students.add(student);
 				}
+				
 			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			return false;
+			return null;
 		} finally {
 			try {
 				is.close();
-				FileUtils.deleteOneFile(url);
+				//FileUtils.deleteOneFile(url);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		return studentDao.addStudnets(students);
+		if (students.size() > 0) {
+			b = studentDao.addStudnets(students);
+		}
+		if (!b) {
+			result = null;
+		} else {
+			result.put("Rows", failStudents);
+			result.put("Total", failStudents.size());
+		}
+		return result;
+				
+		 
 	}
 
 	private String getCellValue(Cell c) {
