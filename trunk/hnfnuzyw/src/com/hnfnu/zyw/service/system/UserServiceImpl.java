@@ -1,6 +1,5 @@
 package com.hnfnu.zyw.service.system;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -13,14 +12,13 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.hnfnu.zyw.dao.system.IUserDao;
 import com.hnfnu.zyw.dto.system.UserDto;
+import com.hnfnu.zyw.dto.system.feedback.AddManyUsersFB;
 import com.hnfnu.zyw.utils.EncodeUtils;
 import com.hnfnu.zyw.utils.FileUtils;
 
@@ -33,8 +31,8 @@ public class UserServiceImpl implements IUserService {
 
 	public boolean add(UserDto user) {
 		try {
-            String pwd = user.getPassword();
-            user.setPassword(EncodeUtils.generatePassword(pwd));
+			String pwd = user.getPassword();
+			user.setPassword(EncodeUtils.generatePassword(pwd));
 			// 老师默认资源币为0
 			user.setBalance(0);
 			Date today = new Date();
@@ -122,9 +120,7 @@ public class UserServiceImpl implements IUserService {
 		String hql = "from UserDto where username='" + username + "'";
 		UserDto u = null;
 		try {
-			//System.out.println("***************************" + username);
 			u = userDao.getUser(hql);
-			//System.out.println(u);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -135,69 +131,103 @@ public class UserServiceImpl implements IUserService {
 			return true;
 		}
 	}
-	
+
 	/**
 	 * 给用户批量充值资源币
 	 */
 	public int addUserBalance(int count, String userIds) {
 		return userDao.addUserBalance(count, userIds);
 	}
+
 	/**
-	 * 批量注册用户
-	 * @param url
-	 * @return
+	 * 
 	 */
-	public boolean addUsers(String url) {
+	public Map<String, Object> addUsers(String url) {
 		ArrayList<UserDto> users = new ArrayList<UserDto>();
-		//File file = null;
+		ArrayList<AddManyUsersFB> failUsers = new ArrayList<AddManyUsersFB>();
+		Map<String, Object> result = new HashMap<String, Object>();
+		Boolean b = true;
+		InputStream is = null;
+		// File file = null;
 		try {
 			// WorkbookFactory可以自动根据文档的类型打开一个excel
 			String[] t = url.split("\\.");
 			String[] ss = url.split("\\\\");
-			url = ss[0]+"\\";
-			for(int i = 1;i < ss.length -1; i++){
-			url = url +"\\"+ss[i];
+			url = ss[0] + "\\";
+			for (int i = 1; i < ss.length - 1; i++) {
+				url = url + "\\" + ss[i];
 			}
-			url  = url + "\\"+t[t.length-1]+"\\"+ss[ss.length-1];
-			System.out.println(url);
-			
-			InputStream is = new FileInputStream(url);  
-		    HSSFWorkbook wb = new HSSFWorkbook(is);   
-			
-			
-			//file = new File(url);
-            String pwd = EncodeUtils.generatePassword("123456");
-			//Workbook wb = WorkbookFactory.create(file);
+			url = url + "\\" + t[t.length - 1] + "\\" + ss[ss.length - 1];
+
+			is = new FileInputStream(url);
+			HSSFWorkbook wb = new HSSFWorkbook(is);
+
+			// file = new File(url);
+			String pwd = EncodeUtils.generatePassword("123456");
+			// Workbook wb = WorkbookFactory.create(file);
 			// 获取excel中的某一个数据表
 			Sheet sheet = wb.getSheetAt(0);
 			// 获取数据表中的某一行
 			Row row = null;
 			Row titleRow = sheet.getRow(0);
-			//System.out.println("sheet.getLastRowNum():"+sheet.getLastRowNum());
 			for (int i = 1; i <= sheet.getLastRowNum(); i++) {
 				row = sheet.getRow(i);
 				// 获取一行多少列
 				UserDto user = new UserDto();
-				for (int j = row.getFirstCellNum(); j < row.getLastCellNum(); j++) {
-					String title = getCellValue(titleRow.getCell(j));
-					String value = getCellValue(row.getCell(j));
+				Boolean flat = true;
+				String message = "";
+				for (int j = 0; j < row.getLastCellNum(); j++) {
+					Cell titleCell = titleRow.getCell(j);
+					Cell valueCell = row.getCell(j);
+				
+					// 如果标题栏为空则立即终止添加
+					if (titleCell == null) {
+						return null;
+					}
+					String title = null;
+					String value = null;
+					title = getCellValue(titleCell);
+					if (valueCell == null) {
+						value = null;
+					} else {
 
-					if (title.equals("姓名") ||title.equals("名字")) {
-						user.setName(value);
-					} else if (title.equals("身份证号码") ||title.equals("身份证")) {
-						user.setIdcard(value);
-						user.setUsername(value);
+						value = getCellValue(valueCell);
+
+					}
+
+					if (title.equals("姓名") || title.equals("名字")) {
+						// 名字不能为空
+						if (value == null || value.equals("")) {
+							flat = false;
+							message = message + " 姓名不能为空 ";
+						}else{
+							user.setName(value);
+						}
+					} else if (title.equals("身份证号码") || title.equals("身份证")) {
+						if (value == null || value.equals("")) {
+							flat = false;
+							message = message + "身份证号码不能为空 ";
+						}else
+						{
+							user.setIdcard(value);
+							user.setUsername(value);
+						}
 
 					} else if (title.equals("性别")) {
-						if(value.contains("男")){
+						if (value.contains("男")) {
 							user.setSex("1");
-						}else{
+						} else {
 							user.setSex("0");
 						}
 
 					} else if (title.equals("部门") || title.equals("系部")) {
-						user.setDepartment(value);
-
+						if (value == null || value.equals("")) {
+							flat = false;
+							message = message + "部门不能为空 ";
+						}else
+						{
+							user.setDepartment(value);
+						}
 					} else if (title.equals("电话号码") || title.equals("联系电话")) {
 						user.setTelephone(value);
 
@@ -211,29 +241,48 @@ public class UserServiceImpl implements IUserService {
 						user.setRemark(value);
 					}
 				}
-				user.setPassword(pwd);
-				user.setBalance(100);
-				Date dt = new Date();
-				user.setCreateDate(dt);
-				if(!this.validateUser(user.getUsername())){
+				// 验证用户名是否重复
+				if (this.validateUser(user.getUsername())) {
+					flat = false;
+					message = message + " 身份证号码已经注册";
+				}
+				// 如果该用户不能添加
+				if (!flat) {
+					AddManyUsersFB fb = new AddManyUsersFB(user, message);
+					failUsers.add(fb);
+					continue;
+				}else{
+					user.setPassword(pwd);
+					user.setBalance(100);
+					Date dt = new Date();
+					user.setCreateDate(dt);
 					users.add(user);
 				}
+				
+
 			}
-			is.close();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
-			return false;
+			b = false;
 		} finally {
 			try {
-				//System.out.println(file.delete());
+				is.close();
 				FileUtils.deleteOneFile(url);
 			} catch (Exception e2) {
 				e2.printStackTrace();
 			}
-				//System.out.println(file.delete());
 		}
-
-		return userDao.addUsers(users);
+		if (users.size() > 0) {
+			b = userDao.addUsers(users);
+		}
+		if (!b) {
+			result = null;
+		} else {
+			result.put("Rows", failUsers);
+			result.put("Total", failUsers.size());
+		}
+		return result;
 	}
 
 	private String getCellValue(Cell c) {
@@ -250,7 +299,6 @@ public class UserServiceImpl implements IUserService {
 			break;
 		case Cell.CELL_TYPE_NUMERIC:
 			c.setCellType(Cell.CELL_TYPE_STRING);
-			// o = String.valueOf(c.getNumericCellValue());
 			o = c.getStringCellValue();
 			break;
 		case Cell.CELL_TYPE_STRING:
@@ -262,7 +310,7 @@ public class UserServiceImpl implements IUserService {
 		}
 		return o;
 	}
-	
+
 	public boolean validateUser(String username) {
 		String hql = "from UserDto where username='" + username + "'";
 		UserDto s;
@@ -274,9 +322,9 @@ public class UserServiceImpl implements IUserService {
 		}
 		if (s == null) {
 			return false;
-		}else{
+		} else {
 			return true;
 		}
 	}
-	
+
 }

@@ -32,6 +32,7 @@ public class UserAction extends AopNoSuchMethodErrorSolveBaseAction implements M
 	private String userIds; 
 	private int balanceCount;
 	private String url;
+	private Map<String,Object> failUsers;
 	@Autowired
 	@Qualifier("userService")
 	private IUserService userService;
@@ -44,11 +45,16 @@ public class UserAction extends AopNoSuchMethodErrorSolveBaseAction implements M
 	 */
 	@Action(value = "addManyUser")
 	public String addManyUser() {
-		success = userService.addUsers(url);
+		failUsers = userService.addUsers(url);
+		if(failUsers != null){
+			success = true;	
+		}else{
+			success = false;
+		}
 		if (success) {
 			message = "给用户们注册成功！";
 		} else {
-			message = "给用户们注册失败！";
+			message = "给所有用户们注册失败！";
 		}
 		return SUCCESS;
 	}
@@ -124,6 +130,11 @@ public class UserAction extends AopNoSuchMethodErrorSolveBaseAction implements M
 	@Action(value = "loadUser")
 	public String load() {
 		user = userService.load(user.getId());
+		if(user != null){
+			success = true;
+		}else {
+			success = false;
+		}
 		return SUCCESS;
 	}
 
@@ -164,6 +175,11 @@ public class UserAction extends AopNoSuchMethodErrorSolveBaseAction implements M
 	@Action(value = "listUser")
 	public String list() {
 		userList = userService.list();
+		if(userList != null){
+			success = true;
+		}else {
+			success = false;
+		}
 		return SUCCESS;
 	}
 
@@ -204,6 +220,11 @@ public class UserAction extends AopNoSuchMethodErrorSolveBaseAction implements M
 	public void setUrl(String url) {
 		this.url = url;
 	}
+
+	public Map<String, Object> getFailUsers() {
+		return failUsers;
+	}
+
 	
 
 	

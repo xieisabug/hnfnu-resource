@@ -29,6 +29,7 @@ ModelDriven<StudentDto>{
 	private boolean success;
 	private String message;
 	private Map<String, Object> studentList;
+	private Map<String, Object> failStudents;
 	private String studentIds; 
 	private int balanceCount;
 	private String url;
@@ -70,11 +71,17 @@ ModelDriven<StudentDto>{
 	 */
 	@Action(value = "addManyStudent")
 	public String addManyStudent() {
-		success = studentService.addStudnets(url);
+		
+		failStudents = studentService.addStudnets(url);
+		if(failStudents != null){
+			success = true;	
+		}else{
+			success = false;
+		}
 		if (success) {
-			message = "给学生们注册成功！";
+			message = "给学生们全部注册成功！";
 		} else {
-			message = "给学生们注册失败！";
+			message = "给学生们全部注册失败！";
 		}
 		return SUCCESS;
 	}
@@ -193,8 +200,7 @@ ModelDriven<StudentDto>{
 		this.url = url;
 	}
 
-
-	
-	
-	
+	public Map<String, Object> getFailStudents() {
+		return failStudents;
+	}
 }

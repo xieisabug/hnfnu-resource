@@ -31,5 +31,5 @@ public interface IUserService {
 	/*
 	 * 解析excel表批量给用户注册
 	 */
-	public boolean addUsers(String url);
+	public Map<String, Object> addUsers(String url);
 }
