@@ -1,0 +1,143 @@
+/************    Layout    **************/
+.row {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.row:before,
+.row:after {
+    display: table;
+    content: " ";
+}
+
+.row:after {
+    clear: both;
+}
+
+.row:before,
+.row:after {
+    display: table;
+    content: " ";
+}
+
+.row:after {
+    clear: both;
+}
+
+/************    Layout    **************/
+
+/************    Button    **************/
+.btn {
+    color: #333;
+    background-color: #fff;
+    outline: none;
+    cursor: pointer;
+    display: inline-block;
+    margin-bottom: 0;
+    font-size: 0.8em;
+    font-weight: normal;
+    text-align: center;
+    border: 1px solid  #ccc;
+    border-radius: 4px;
+    -webkit-user-select: none;
+}
+.btn:hover {
+    background: #efefef;
+}
+.abtn {
+    padding: 6px 12px;
+    text-decoration: none;
+}
+.btn-group-left{
+     border-bottom-right-radius: 0;
+     border-top-right-radius: 0;
+}
+.btn-group-right{
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+}
+.btn-group-center{
+    border-radius: 0;
+}
+/************    Button    **************/
+/************    Tab    **************/
+.tabTitles{
+    margin: 0;
+    border-bottom: 1px solid #DDD;
+    height: 33px;
+    width: 100%;
+}
+.tabTitle {
+    text-align: center;
+    margin-right: 5px;
+    font-size: 0.8em;
+    background: #F4F5F5;
+    float: left;
+    background: -moz-linear-gradient(top, #FDFDFD, #F4F5F5);
+    background: -webkit-gradient(linear, left top, left bottom, from(#FDFDFD), to(#F4F5F5));
+    border: 1px solid #CCC;
+    border-bottom: none;
+    color: #777;
+    filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#FDFDFD', EndColorStr='#F4F5F5');
+    padding: 8px 0 0;
+    height: 24px;
+    width: 74px;
+    -moz-border-radius-topleft: 6px;
+    -moz-border-radius-topright: 6px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    list-style: none;
+    cursor: pointer;
+}
+.tabTitle.selected {
+    color: #B86364;
+    height: 25px;
+}
+.tabContent {
+    display: none;
+    background: #F4F5F5;
+    padding: 15px 0;
+}
+.tabContent.selected {
+    display: block;
+}
+/************    Tab    **************/
+/************    Select    **************/
+.caret {
+    display: inline-block;
+    width: 1px;
+    height: 1px;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-top: 4px solid;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+}
+.selectItemDiv {
+    background : #ffffff;
+    display: none;
+    margin: 2px 0 0;
+    list-style: none;
+    border: 1px solid #cccccc;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    background-clip: padding-box;
+}
+.selectItemDiv ul{
+    margin:0;
+    padding: 20px 5px 20px 5px;
+    height: 33px;
+}
+.selectItemDiv li{
+    font-size: 0.8em;
+    list-style: none;
+    height: 20px;
+    padding: 5px;
+    cursor: pointer;
+}
+.selectItemDiv li:hover{
+    background-color: #efefef;
+}
+/************    Select    **************/
