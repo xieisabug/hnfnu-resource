@@ -9,6 +9,7 @@ $(function() {
 	$.ajax({
 		url : '../../../resources/allTree.action',
 		type : 'post',
+        async: false,
 		success : function(data) {
 			tree = $("#tree").ligerTree({
 				nodeWidth : 150,

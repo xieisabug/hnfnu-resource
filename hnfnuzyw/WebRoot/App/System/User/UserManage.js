@@ -1029,7 +1029,7 @@ $(function () {
         }
     });
     $.ajax({
-        async: false,
+        //async: false,
         url:'../../../system/listUser.action',
         type:'post',
         success:function (data) {

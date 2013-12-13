@@ -196,8 +196,7 @@ function formInit(func) {
             width:200,
             validate:{
                 required:true,
-                maxlength:20,
-                //equalTo:"#password"
+                maxlength:20
             }
         });
     } else if (func === "edit") {
@@ -311,6 +310,7 @@ $(function () {
     ];
     var menuId = window.parent.tab.getSelectedTabItemID();
     $.ajax({
+        async: false,
         url:'../../../system/listFunctionIdList.action',
         type:'post',
         data:{

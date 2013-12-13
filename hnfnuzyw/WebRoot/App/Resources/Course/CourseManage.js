@@ -274,6 +274,7 @@ $(function() {
 
     var menuId = window.parent.tab.getSelectedTabItemID();
     $.ajax({
+        async: false,
         url : '../../../system/listFunctionIdList.action',
         type : 'post',
         data : {
