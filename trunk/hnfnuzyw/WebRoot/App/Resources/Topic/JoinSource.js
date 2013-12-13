@@ -23,6 +23,7 @@ $(function() {
     $("#joinLayout").ligerLayout({leftWidth:250});
     subtitleId = Url.getArgs().subtitleId;
     $.ajax( {
+        async: false,
         url : '../../../resources/querySourceIdsByTopicId.action',
         type : 'post',
         data : {

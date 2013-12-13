@@ -1,8 +1,6 @@
 package com.hnfnu.zyw.service.system;
 
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,21 +8,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.hnfnu.zyw.utils.EncodeUtils;
-import com.hnfnu.zyw.utils.FileUtils;
-
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.hnfnu.zyw.dao.system.IStudentDao;
 import com.hnfnu.zyw.dto.system.StudentDto;
+import com.hnfnu.zyw.utils.EncodeUtils;
+import com.hnfnu.zyw.utils.FileUtils;
 
 @Service("studentService")
 public class StudentServiceImpl implements IStudentService {
@@ -233,7 +228,6 @@ public class StudentServiceImpl implements IStudentService {
 			break;
 		case Cell.CELL_TYPE_NUMERIC:
 			c.setCellType(Cell.CELL_TYPE_STRING);
-			// o = String.valueOf(c.getNumericCellValue());
 			o = c.getStringCellValue();
 			break;
 		case Cell.CELL_TYPE_STRING:
@@ -255,9 +249,4 @@ public class StudentServiceImpl implements IStudentService {
 			return true;
 		}
 	}
-
-	/*
-	 * public StudentDto getStudent(String sql) { return
-	 * studentDao.getStudent(sql); }
-	 */
 }
