@@ -23,7 +23,7 @@ public class MenuDaoTest {
 
 	@Before
 	public void setUp() {
-		System.out.println("***************************************");
+		System.out.println("****     ***********************************");
 	}
 
 	@Test
