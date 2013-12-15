@@ -911,6 +911,7 @@ function add_user_fail(data){
         pageSize:30,
         data:data
     });
+    console.log(addUserFailGrid)
     addUserFailWin = $.ligerDialog.open({
         width:700,
         height:600,
