@@ -320,4 +320,25 @@ public class StudentServiceImpl implements IStudentService {
 			return true;
 		}
 	}
+
+	public boolean editManyPassword(String studentIds, String newPassword) {
+			ArrayList<StudentDto> students = new ArrayList<StudentDto>();
+			String[] ids = studentIds.split(";");
+			for (int i = 0; i < ids.length; i++) {
+				int id = Integer.parseInt(ids[i]);
+				StudentDto student;
+				try {
+					student = studentDao.get(id);
+					student.setPassword(EncodeUtils.generatePassword(newPassword));
+					students.add(student);
+				} catch (Exception e) {
+					e.printStackTrace();
+					return false;
+				}
+				
+			}
+			return studentDao.editManyPassword(students);
+
+	}
+
 }

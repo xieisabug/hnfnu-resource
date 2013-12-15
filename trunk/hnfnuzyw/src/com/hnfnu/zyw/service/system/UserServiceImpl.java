@@ -179,7 +179,7 @@ public class UserServiceImpl implements IUserService {
 				for (int j = 0; j < row.getLastCellNum(); j++) {
 					Cell titleCell = titleRow.getCell(j);
 					Cell valueCell = row.getCell(j);
-				
+
 					// 如果标题栏为空则立即终止添加
 					if (titleCell == null) {
 						return null;
@@ -200,15 +200,14 @@ public class UserServiceImpl implements IUserService {
 						if (value == null || value.equals("")) {
 							flat = false;
 							message = message + " 姓名不能为空 ";
-						}else{
+						} else {
 							user.setName(value);
 						}
 					} else if (title.equals("身份证号码") || title.equals("身份证")) {
 						if (value == null || value.equals("")) {
 							flat = false;
 							message = message + "身份证号码不能为空 ";
-						}else
-						{
+						} else {
 							user.setIdcard(value);
 							user.setUsername(value);
 						}
@@ -224,8 +223,7 @@ public class UserServiceImpl implements IUserService {
 						if (value == null || value.equals("")) {
 							flat = false;
 							message = message + "部门不能为空 ";
-						}else
-						{
+						} else {
 							user.setDepartment(value);
 						}
 					} else if (title.equals("电话号码") || title.equals("联系电话")) {
@@ -251,17 +249,16 @@ public class UserServiceImpl implements IUserService {
 					AddManyUsersFB fb = new AddManyUsersFB(user, message);
 					failUsers.add(fb);
 					continue;
-				}else{
+				} else {
 					user.setPassword(pwd);
 					user.setBalance(100);
 					Date dt = new Date();
 					user.setCreateDate(dt);
 					users.add(user);
 				}
-				
 
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			b = false;
@@ -325,6 +322,25 @@ public class UserServiceImpl implements IUserService {
 		} else {
 			return true;
 		}
+	}
+
+	public boolean editManyPassword(String userIds, String newPassword) {
+		ArrayList<UserDto> users = new ArrayList<UserDto>();
+		String[] ids = userIds.split(";");
+		for (int i = 0; i < ids.length; i++) {
+			int id = Integer.parseInt(ids[i]);
+			UserDto user;
+			try {
+				user = userDao.get(id);
+				user.setPassword(EncodeUtils.generatePassword(newPassword));
+				users.add(user);
+			} catch (Exception e) {
+				e.printStackTrace();
+				return false;
+			}
+			
+		}
+		return userDao.editManyPassword(users);
 	}
 
 }

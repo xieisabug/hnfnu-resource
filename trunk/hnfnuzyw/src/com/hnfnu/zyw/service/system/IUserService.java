@@ -32,4 +32,10 @@ public interface IUserService {
 	 * 解析excel表批量给用户注册
 	 */
 	public Map<String, Object> addUsers(String url);
+	/**
+	 * 批量给用户修改密码
+	 * @param users
+	 * @return
+	 */
+	public boolean editManyPassword(String userIds,String newPassword);
 }

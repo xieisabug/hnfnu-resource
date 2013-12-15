@@ -15,6 +15,8 @@ var fileWin = null;//批量注册用户的窗口
 var fileForm = null;//批量注册用户的表单
 var addUserFailGrid = null;//批量注册用户的时候反馈失败信息
 var addUserFailWin = null;//批量注册用户的时候反馈失败信息
+var editManyUserPasswdForm = null;//批量修改密码的表单
+var editManyUserPasswdWin = null;//批量修改密码的窗口
 // 用户赋予角色listBox的初始化
 $.extend($.ligerMethos.ListBox, {
     clearData:function () {
@@ -487,6 +489,73 @@ function edit_password() {
     $("#id", pwdForm).val(data.id);
 }
 
+
+//批量给用户修改密码
+function edit_many_password() {
+    var datas = manyGrid.getSelecteds();
+    //console.log(datas);
+    if (datas.length == 0) {
+        $.ligerDialog.warn('请选择您要修改密码用户们.');
+        return;
+    }
+    editManyUserPasswdFormInit();;
+    editManyUserPasswdWin = $.ligerDialog.open({
+        width:300,
+        height:200,
+        title:'修改密码',
+        target:editManyUserPasswdForm,
+        buttons:[
+            {
+                text:'提交',
+                width:80,
+                onclick:edit_many_password_save
+            },
+            {
+                text:'取消',
+                width:80,
+                onclick:edit_many_password_cancel
+            }
+        ]
+    });
+}
+function edit_many_password_save(){
+    if (editManyUserPasswdForm.valid()) {
+        var userDatas = manyGrid.getSelecteds();
+        var userIds = "";
+        for (var i = 0; i < userDatas.length; i++) {
+            if (i > 0) {
+                userIds = userIds + ";";
+            }
+            userIds = userIds + userDatas[i].id;
+        }
+        //console.log(studentIds);
+        var row_data = Form.parseJSON(editManyUserPasswdForm);
+        // 发往服务器，返回成功后再添加到表格中
+        $.ajax({
+            url:'../../../system/editManyUserPassword.action',
+            data:{
+                userIds:userIds,
+                newPassword:row_data.newPassword
+            },
+            type:'post',
+            success:function (data) {
+                if (data.success) {
+                    $.ligerDialog.tip({
+                        title:'提示信息',
+                        content:data.message
+                    });
+                    refresh_user();
+                    editManyUserPasswdWin.close();
+                } else {
+                    $.ligerDialog.error(data.message);
+                }
+            }
+        });
+    }
+}
+function edit_many_password_cancel(){
+    editManyUserPasswdWin.close();
+}
 // 增加用户的函数
 function add_user() {
     formInit("add");
@@ -675,6 +744,9 @@ function refresh_user() {
         type:'post',
         success:function (data) {
             userGrid.loadData(data.userList);
+            if(manyGrid){
+                manyGrid.loadData(data.userList);
+            }
         }
     });
     $("#pageloading").hide();
@@ -787,6 +859,52 @@ function balanceFormInit() {
     });
     $.metadata.setType("attr", "validate");
     balanceForm.validate({
+        debug:true,
+        onkeyup:false,
+        errorPlacement:function (error, element) {
+            error.appendTo(element.parent().parent().parent().parent());
+        }
+    });
+}
+
+//初始化批量修改密密码的表单，生成form标签
+function editManyUserPasswdFormInit() {
+    editManyUserPasswdForm = $('<form></form>');
+    editManyUserPasswdForm.ligerForm({
+        inputWidth:80,
+        fields:[
+            {
+                display:'修改后的密码',
+                name:'newPassword',
+                type:'text',
+                space:50,
+                labelWidth:100,
+                width:100,
+                height:50,
+                newline:true,
+                validate:{
+                    required:true,
+                    maxlength:20
+                }
+            }, {
+                display:'请确认一次',
+                name:'newPassword2',
+                type:'text',
+                space:50,
+                labelWidth:100,
+                width:100,
+                height:50,
+                newline:true,
+                validate:{
+                    required:true,
+                    maxlength:20,
+                    equalTo:"#newPassword"
+                }
+            }
+        ]
+    });
+    $.metadata.setType("attr", "validate");
+    editManyUserPasswdForm.validate({
         debug:true,
         onkeyup:false,
         errorPlacement:function (error, element) {
@@ -931,7 +1049,7 @@ function manyUserManage() {
     var toolbarItems = [
         {
             text:'多人重置密码',
-            click:edit_password,
+            click:edit_many_password,
             icon:'modify',
             key:'modify_pwd'
         },

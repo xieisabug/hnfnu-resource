@@ -29,5 +29,11 @@ public interface IStudentDao  extends IBaseDao<StudentDto>{
 	 */
 	
 	public StudentDto getStudent(String hql);
+	/**
+	 * 批量给用户修改密码
+	 * @param users
+	 * @return
+	 */
+	public boolean editManyPassword(ArrayList<StudentDto> users);
 	
 }

@@ -87,6 +87,29 @@ public class UserDaoImpl extends BaseDao<UserDto> implements IUserDao {
 		return true;
 	}
 
+	public boolean editManyPassword(ArrayList<UserDto> users) {
+		Session session = this.getSession();
+		Transaction t = null;
+		try {
+			t = session.beginTransaction();
+			for(int i = 0; i < users.size(); i++){
+				UserDto s =  users.get(i);
+				this.update(s);
+			}
+			t.commit();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			if (t != null) {
+				t.rollback();
+			}
+			return false;
+		} finally {
+			session.close();
+		}
+		return true;
+		
+	}
+
 /*	public int changeManyPasswd(String passwd, String userIds) {
 		Session session = this.getSession();
 		String[] ids = null; 
