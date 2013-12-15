@@ -46,5 +46,11 @@ public interface IStudentService {
 	 * @return
 	 */
 	public boolean validateStudent(String username);
+	/**
+	 * 批量给学生修改密码
+	 * @param users
+	 * @return
+	 */
+	public boolean editManyPassword(String studentIds,String newPassword);
 
 }

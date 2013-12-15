@@ -87,4 +87,26 @@ IStudentDao{
 		StudentDto d = (StudentDto) u.uniqueResult();
 		return d;
 	}
+
+	public boolean editManyPassword(ArrayList<StudentDto> students) {
+		Session session = this.getSession();
+		Transaction t = null;
+		try {
+			t = session.beginTransaction();
+			for(int i = 0; i < students.size(); i++){
+				StudentDto s =  students.get(i);
+				this.update(s);
+			}
+			t.commit();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			if (t != null) {
+				t.rollback();
+			}
+			return false;
+		} finally {
+			session.close();
+		}
+		return true;
+	}
 }

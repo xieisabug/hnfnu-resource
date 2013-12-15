@@ -84,6 +84,22 @@ public class UserAction extends AopNoSuchMethodErrorSolveBaseAction implements M
 		}
 		return SUCCESS;
 	}
+	
+	
+	/**
+	 * 批量给用户修改密码
+	 * @return
+	 */
+	@Action(value = "editManyUserPassword")
+	public String editManyPassword() {
+	success = userService.editManyPassword(userIds, newPassword);
+	if(success){
+		message = "批量修改密码成功";
+	}else{
+		message = "批量修改密码失败";
+	}
+		return SUCCESS;
+	}
 
 	// 添加
 	@Action(value = "addUser")
@@ -224,8 +240,4 @@ public class UserAction extends AopNoSuchMethodErrorSolveBaseAction implements M
 	public Map<String, Object> getFailUsers() {
 		return failUsers;
 	}
-
-	
-
-	
 }

@@ -33,6 +33,7 @@ ModelDriven<StudentDto>{
 	private String studentIds; 
 	private int balanceCount;
 	private String url;
+	private String newPassword;
 	@Autowired
 	@Qualifier("studentService")
 	private IStudentService studentService;
@@ -62,6 +63,16 @@ ModelDriven<StudentDto>{
 			}
 			
 		}
+		return SUCCESS;
+	}
+	@Action(value = "editManyStudentPassword")
+	public String editManyPassword() {
+	success = studentService.editManyPassword(studentIds, newPassword);
+	if(success){
+		message = "批量修改密码成功";
+	}else{
+		message = "批量修改密码失败";
+	}
 		return SUCCESS;
 	}
 
@@ -203,4 +214,8 @@ ModelDriven<StudentDto>{
 	public Map<String, Object> getFailStudents() {
 		return failStudents;
 	}
+	public void setNewPassword(String newPassword) {
+		this.newPassword = newPassword;
+	}
+	
 }

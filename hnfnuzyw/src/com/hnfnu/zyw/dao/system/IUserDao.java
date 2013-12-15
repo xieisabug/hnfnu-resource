@@ -35,6 +35,13 @@ public interface IUserDao extends IBaseDao<UserDto>{
 	 */
 	public boolean addUsers(ArrayList<UserDto> users);
 	
+	/**
+	 * 批量给用户修改密码
+	 * @param users
+	 * @return
+	 */
+	public boolean editManyPassword(ArrayList<UserDto> users);
+	
 	
 	
 }
