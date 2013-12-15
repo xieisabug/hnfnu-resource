@@ -11,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.hnfnu.zyw.dao.resources.ISourceVoDao;
+import com.hnfnu.zyw.utils.EncodeUtils;
 import com.hnfnu.zyw.vo.SourceVo;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -31,6 +32,9 @@ public class SourceDaoTest {
 		List<SourceVo> l = null;
 
 		try {
+			
+			
+			System.out.println(EncodeUtils.generatePassword("123456"));
 			l = sourceVoDao.sourceVoList(sql);
 			System.out.println(l.size() + "size");
 			for (int i = 0; i < l.size(); i++) {

@@ -20,6 +20,7 @@ import com.hnfnu.zyw.dao.system.IStudentDao;
 import com.hnfnu.zyw.dto.system.StudentDto;
 import com.hnfnu.zyw.dto.system.feedback.AddManyStudentsFB;
 import com.hnfnu.zyw.utils.EncodeUtils;
+import com.hnfnu.zyw.utils.FileUtils;
 
 @Service("studentService")
 public class StudentServiceImpl implements IStudentService {
@@ -156,6 +157,7 @@ public class StudentServiceImpl implements IStudentService {
 			}
 			url  = url + "\\"+t[t.length-1]+"\\"+ss[ss.length-1];
             String pwd = EncodeUtils.generatePassword("123456");
+            System.out.println(url);
             is = new FileInputStream(url);  
 		    HSSFWorkbook wb = new HSSFWorkbook(is);   
 			// 获取excel中的某一个数据表
@@ -238,7 +240,7 @@ public class StudentServiceImpl implements IStudentService {
 					}
 				}
 				// 验证用户名是否重复
-				if (this.validateStudent(student.getUsername())) {
+				if (this.validateStudent(student.getNumber())) {
 					flat = false;
 					message = message + " 该学号已经注册";
 				}
@@ -260,11 +262,11 @@ public class StudentServiceImpl implements IStudentService {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			return null;
+			b = false;
 		} finally {
 			try {
 				is.close();
-				//FileUtils.deleteOneFile(url);
+				FileUtils.deleteOneFile(url);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
