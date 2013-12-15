@@ -25,48 +25,90 @@
 }
 
 /************    Layout    **************/
+/************    Input    **************/
+.input-text {
+    display: block;
+    padding: 6px 12px;
+    font-size: 0.9em;
+    line-height: 1.428571429;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
 
+.input-text:focus {
+    border-left: 4px solid #B86364;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+}
+
+.input-group-center {
+    float: left;
+    border-radius: 0;
+    margin: 0;
+}
+/************    Input    **************/
 /************    Button    **************/
 .btn {
     color: #333;
     background-color: #fff;
     outline: none;
     cursor: pointer;
-    display: inline-block;
     margin-bottom: 0;
     font-size: 0.8em;
     font-weight: normal;
     text-align: center;
-    border: 1px solid  #ccc;
+    border: 1px solid #ccc;
     border-radius: 4px;
     -webkit-user-select: none;
 }
+
 .btn:hover {
     background: #efefef;
 }
+
 .abtn {
     padding: 6px 12px;
     text-decoration: none;
 }
-.btn-group-left{
-     border-bottom-right-radius: 0;
-     border-top-right-radius: 0;
+
+.btn-group {
+    display: inline-block;
 }
-.btn-group-right{
+
+.btn-group-left {
+    float: left;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.btn-group-right {
+    float:left;
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;
 }
-.btn-group-center{
+
+.btn-group-center {
+    float:left;
     border-radius: 0;
 }
+
 /************    Button    **************/
 /************    Tab    **************/
-.tabTitles{
+.tabTitles {
     margin: 0;
     border-bottom: 1px solid #DDD;
     height: 33px;
     width: 100%;
 }
+
 .tabTitle {
     text-align: center;
     margin-right: 5px;
@@ -89,18 +131,22 @@
     list-style: none;
     cursor: pointer;
 }
+
 .tabTitle.selected {
     color: #B86364;
     height: 25px;
 }
+
 .tabContent {
     display: none;
     background: #F4F5F5;
     padding: 15px 0;
 }
+
 .tabContent.selected {
     display: block;
 }
+
 /************    Tab    **************/
 /************    Select    **************/
 .caret {
@@ -113,8 +159,9 @@
     border-right: 4px solid transparent;
     border-left: 4px solid transparent;
 }
+
 .selectItemDiv {
-    background : #ffffff;
+    background: #ffffff;
     display: none;
     margin: 2px 0 0;
     list-style: none;
@@ -125,19 +172,23 @@
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
     background-clip: padding-box;
 }
-.selectItemDiv ul{
-    margin:0;
+
+.selectItemDiv ul {
+    margin: 0;
     padding: 20px 5px 20px 5px;
     height: 33px;
 }
-.selectItemDiv li{
+
+.selectItemDiv li {
     font-size: 0.8em;
     list-style: none;
     height: 20px;
     padding: 5px;
     cursor: pointer;
 }
-.selectItemDiv li:hover{
+
+.selectItemDiv li:hover {
     background-color: #efefef;
 }
+
 /************    Select    **************/
