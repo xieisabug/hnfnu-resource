@@ -65,6 +65,52 @@ ModelDriven<StudentDto>{
 		}
 		return SUCCESS;
 	}
+	
+	/**
+	 * 批量给学生重置资源币
+	 * @return
+	 */
+	@Action(value = "changeStudentBalance")
+	public String changeStudentBalance() {
+		int i = studentService.setStudnetBalance(balanceCount, studentIds);
+		if (i == 1) {
+			success = true;
+			message = "给学生们重置成功！";
+		} else {
+			success=false;
+			if(i==0){
+				message = "给学生们重置失败！";	
+			}
+			if(i == -1){
+				message = "给学生们充值失败,重置后的资源币不能为负数！";
+			}
+			if( i == -2){
+				message = "给学生们重置失败,因为每位学生的总余额数不能超过1000000000！";
+			}
+			
+		}
+		return SUCCESS;
+	}
+	
+
+	/**
+	 * 批量删除学生
+	 * @return
+	 */
+	@Action(value = "deleteStudents")
+	public String deleteStudents() {
+		int i = studentService.deleteStudents(studentIds);
+		if (i == 1) {
+			success = true;
+			message = "删除学生们成功！";
+		} else {
+			success=false;
+			if(i==0){
+				message = "删除学生们失败！";	
+			}
+		}
+		return SUCCESS;
+	}
 	@Action(value = "editManyStudentPassword")
 	public String editManyPassword() {
 	success = studentService.editManyPassword(studentIds, newPassword);

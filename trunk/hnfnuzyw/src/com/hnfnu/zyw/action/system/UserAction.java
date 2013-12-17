@@ -100,6 +100,53 @@ public class UserAction extends AopNoSuchMethodErrorSolveBaseAction implements M
 	}
 		return SUCCESS;
 	}
+	
+	/**
+	 * 批量给用户重置资源币
+	 * @return
+	 */
+	@Action(value = "changeUserBalance")
+	public String changeUserBalance() {
+		int i = userService.setUserBalance(balanceCount, userIds);
+		if (i == 1) {
+			success = true;
+			message = "给用户们重置成功！";
+		} else {
+			success=false;
+			if(i==0){
+				message = "给用户们重置失败！";	
+			}
+			if(i == -1){
+				message = "给用户们充值失败,重置后的资源币不能为负数！";
+			}
+			if( i == -2){
+				message = "给用户们重置失败,因为每位用户的总余额数不能超过1000000000！";
+			}
+			
+		}
+		return SUCCESS;
+	}
+	
+
+	/**
+	 * 批量删除用户
+	 * @return
+	 */
+	@Action(value = "deleteUsers")
+	public String deleteUsers() {
+		int i = userService.deleteUsers(userIds);
+		if (i == 1) {
+			success = true;
+			message = "删除用户们成功！";
+		} else {
+			success=false;
+			if(i==0){
+				message = "删除用户们失败！";	
+			}
+		}
+		return SUCCESS;
+	}
+	
 
 	// 添加
 	@Action(value = "addUser")

@@ -341,4 +341,12 @@ public class StudentServiceImpl implements IStudentService {
 
 	}
 
+	public int deleteStudents(String studentIds) {
+		return studentDao.deleteStudents(studentIds);
+	}
+
+	public int setStudnetBalance(int count, String studentIds) {
+		return studentDao.setStudnetBalance(count, studentIds);
+	}
+
 }

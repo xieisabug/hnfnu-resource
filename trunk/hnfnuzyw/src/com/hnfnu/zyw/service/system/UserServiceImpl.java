@@ -343,4 +343,12 @@ public class UserServiceImpl implements IUserService {
 		return userDao.editManyPassword(users);
 	}
 
+	public int deleteUsers(String userIds) {
+		return userDao.deleteUsers(userIds);
+	}
+
+	public int setUserBalance(int count, String userIds) {
+		return userDao.setUserBalance(count, userIds);
+	}
+
 }
