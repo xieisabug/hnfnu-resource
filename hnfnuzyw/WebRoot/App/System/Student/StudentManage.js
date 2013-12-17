@@ -417,7 +417,7 @@ function delete_student() {
         return;
     }
     var row_data = studentGrid.getSelected();
-    $.ligerDialog.confirm('该功能不支持批量删除，如果您选择了多个文件，只会删除第一个。确认删除' + row_data.name + '？', '删除学生', function (r) {
+    $.ligerDialog.confirm('确认删除' + row_data.name + '？', '删除学生', function (r) {
         if (r) {
             $.ajax({
                 url:'../../../system/deleteStudent.action',
@@ -791,6 +791,17 @@ function many_student_manage() {
             click:add_balance,
             icon:'modify',
             key:'modify_many'
+        },
+        {
+            text:'资源币重置',
+            click:set_balance,
+            icon:'modify',
+            key:'set_many'
+        },  {
+            text:'删除学生们',
+            click:delete_students,
+            icon:'delete',
+            key:'delete_many'
         }
     ];
 
@@ -879,6 +890,115 @@ function many_student_manage() {
         }
     });
 }
+
+function set_balance(){
+    var datas = manyGrid.getSelecteds();
+    //console.log(datas);
+    if (datas.length == 0) {
+        $.ligerDialog.warn('请选择您要重置的学生们.');
+        return;
+    }
+    balanceFormInit();
+    balanceWin = $.ligerDialog.open({
+        width:300,
+        height:200,
+        title:'重置资源币',
+        target:balanceForm,
+        buttons:[
+            {
+                text:'提交',
+                width:80,
+                onclick:set_balance_save
+            },
+            {
+                text:'取消',
+                width:80,
+                onclick:set_balance_cancel
+            }
+        ]
+    });
+}
+function set_balance_save(){
+    if (balanceForm.valid()) {
+        var studentDatas = manyGrid.getSelecteds();
+        var studentIds = "";
+        for (var i = 0; i < studentDatas.length; i++) {
+            if (i > 0) {
+                studentIds = studentIds + ";";
+            }
+            studentIds = studentIds + studentDatas[i].id;
+        }
+        //console.log(studentIds);
+        var row_data = Form.parseJSON(balanceForm);
+        // 发往服务器，返回成功后再添加到表格中
+        $.ajax({
+            url:'../../../system/changeStudentBalance.action',
+            data:{
+                studentIds:studentIds,
+                balanceCount:row_data.addCount
+            },
+            type:'post',
+            success:function (data) {
+                if (data.success) {
+                    $.ligerDialog.tip({
+                        title:'提示信息',
+                        content:data.message
+                    });
+                    refresh_student();
+                    balanceWin.close();
+                } else {
+                    $.ligerDialog.error(data.message);
+                }
+            }
+        });
+    }
+
+}
+function set_balance_cancel(){
+    balanceWin.close();
+}
+/**
+ * 批量删除学生们
+ */
+function delete_students(){
+    var datas = manyGrid.getSelecteds();
+    //console.log(datas);
+    if (datas.length == 0) {
+        $.ligerDialog.warn('请选择您要删除的学生们.');
+        return;
+    }
+    var studentIds = "";
+    for (var i = 0; i < datas.length; i++) {
+        if (i > 0) {
+            studentIds = studentIds + ";";
+        }
+        studentIds = studentIds + datas[i].id;
+    }
+    $.ligerDialog.confirm('确认删除这些学生们,删除后将无法恢复', function (r) {
+        if (r) {
+            $.ajax({
+                url:'../../../system/deleteStudents.action',
+                data:{
+                    studentIds:studentIds
+                },
+                type:'post',
+                success:function (data) {
+                    if (data.success) {
+                        $.ligerDialog.tip({
+                            title:'提示信息',
+                            content:data.message
+                        });
+                        //studentGrid.deleteSelectedRow();
+                        refresh_student();
+                    } else {
+                        $.ligerDialog.error(data.message);
+                    }
+                }
+            });
+        }
+    });
+}
+
 // 初始化表格
 $(function () {
     var toolbarItems = [

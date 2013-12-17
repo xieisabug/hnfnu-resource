@@ -52,5 +52,15 @@ public interface IStudentService {
 	 * @return
 	 */
 	public boolean editManyPassword(String studentIds,String newPassword);
+	
+	/**
+	 * 批量给学生重置资源币，不管学生原有的资源币
+	 */
+	public int setStudnetBalance(int count,String studentIds);
+	
+	/**
+	 * 批量删除学生,0是删除不成功，1是成功
+	 */
+	public int deleteStudents(String studentIds);
 
 }

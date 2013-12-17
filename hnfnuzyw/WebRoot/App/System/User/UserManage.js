@@ -528,7 +528,7 @@ function edit_many_password_save(){
             }
             userIds = userIds + userDatas[i].id;
         }
-        //console.log(studentIds);
+        //console.log(userIds);
         var row_data = Form.parseJSON(editManyUserPasswdForm);
         // 发往服务器，返回成功后再添加到表格中
         $.ajax({
@@ -913,6 +913,122 @@ function editManyUserPasswdFormInit() {
     });
 }
 
+
+/**
+ * 批量重置用户的资源币
+ */
+function set_balance(){
+    var datas = manyGrid.getSelecteds();
+    //console.log(datas);
+    if (datas.length == 0) {
+        $.ligerDialog.warn('请选择您要重置的用户们.');
+        return;
+    }
+    balanceFormInit();
+    balanceWin = $.ligerDialog.open({
+        width:300,
+        height:200,
+        title:'重置资源币',
+        target:balanceForm,
+        buttons:[
+            {
+                text:'提交',
+                width:80,
+                onclick:set_balance_save
+            },
+            {
+                text:'取消',
+                width:80,
+                onclick:set_balance_cancel
+            }
+        ]
+    });
+}
+function set_balance_save(){
+    if (balanceForm.valid()) {
+        var userDatas = manyGrid.getSelecteds();
+        var userIds = "";
+        for (var i = 0; i < userDatas.length; i++) {
+            if (i > 0) {
+                userIds = userIds + ";";
+            }
+            userIds = userIds + userDatas[i].id;
+        }
+        //console.log(userIds);
+        var row_data = Form.parseJSON(balanceForm);
+        // 发往服务器，返回成功后再添加到表格中
+        $.ajax({
+            url:'../../../system/changeUserBalance.action',
+            data:{
+                userIds:userIds,
+                balanceCount:row_data.addCount
+            },
+            type:'post',
+            success:function (data) {
+                if (data.success) {
+                    $.ligerDialog.tip({
+                        title:'提示信息',
+                        content:data.message
+                    });
+                    refresh_user();
+                    balanceWin.close();
+                } else {
+                    $.ligerDialog.error(data.message);
+                }
+            }
+        });
+    }
+
+}
+function set_balance_cancel(){
+    balanceWin.close();
+}
+/**
+ * 批量删除用户们
+ */
+function delete_users(){
+    var datas = manyGrid.getSelecteds();
+    //console.log(datas);
+    if (datas.length == 0) {
+        $.ligerDialog.warn('请选择您要删除的用户们.');
+        return;
+    }
+    var userIds = "";
+    for (var i = 0; i < datas.length; i++) {
+        if (i > 0) {
+            userIds = userIds + ";";
+        }
+        userIds = userIds + datas[i].id;
+    }
+    $.ligerDialog.confirm('确认删除这些用户们,删除后将无法恢复', function (r) {
+        if (r) {
+            $.ajax({
+                url:'../../../system/deleteUsers.action',
+                data:{
+                    userIds:userIds
+                },
+                type:'post',
+                success:function (data) {
+                    if (data.success) {
+                        $.ligerDialog.tip({
+                            title:'提示信息',
+                            content:data.message
+                        });
+                        //studentGrid.deleteSelectedRow();
+                        refresh_user();
+                    } else {
+                        $.ligerDialog.error(data.message);
+                    }
+                }
+            });
+        }
+    });
+}
+
+    
+
+
+
 //批量注册用户的函数
 function add_many_user() {
     fileWin = $.ligerDialog.open({
@@ -1058,6 +1174,16 @@ function manyUserManage() {
             click:add_balance,
             icon:'modify',
             key:'modify_many'
+        },  {
+            text:'资源币重置',
+            click:set_balance,
+            icon:'modify',
+            key:'set_many'
+        },  {
+            text:'删除学生们',
+            click:delete_users,
+            icon:'delete',
+            key:'delete_many'
         }
     ];
 

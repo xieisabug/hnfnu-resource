@@ -38,4 +38,14 @@ public interface IUserService {
 	 * @return
 	 */
 	public boolean editManyPassword(String userIds,String newPassword);
+	
+	/**
+	 * 批量给用户重置资源币，不管用户原有的资源币
+	 */
+	public int setUserBalance(int count,String userIds);
+	
+	/**
+	 * 批量删除用户,0是删除不成功，1是成功
+	 */
+	public int deleteUsers(String userIds);
 }

@@ -110,7 +110,10 @@ public class UserDaoImpl extends BaseDao<UserDto> implements IUserDao {
 		
 	}
 
-/*	public int changeManyPasswd(String passwd, String userIds) {
+	/**
+	 * 批量给用户重置资源币，不管用户原有的资源币
+	 */
+	public int setUserBalance(int count,String userIds) {
 		Session session = this.getSession();
 		String[] ids = null; 
 		if(userIds != null && !userIds.equals("")){
@@ -124,7 +127,7 @@ public class UserDaoImpl extends BaseDao<UserDto> implements IUserDao {
 			for(int i = 0; i < ids.length; i++){
 				int id = Integer.parseInt(ids[i]);
 				UserDto s = this.get(id);
-				s.setPassword(password)
+					s.setBalance(count);
 				
 				//余额不能为负数
 				if(s.getBalance()<0){
@@ -148,7 +151,39 @@ public class UserDaoImpl extends BaseDao<UserDto> implements IUserDao {
 			session.close();
 		}
 		return 1;
-	}*/
+	}
+
+	
+	/**
+	 * 批量删除用户,0是删除不成功，1是成功
+	 */
+	public int deleteUsers(String userIds) {
+		Session session = this.getSession();
+		String[] ids = null; 
+		if(userIds != null && !userIds.equals("")){
+			ids = userIds.split(";");
+		}else{
+			return 0;
+		}
+		Transaction t = null;
+		try {
+			t = session.beginTransaction();
+			for(int i = 0; i < ids.length; i++){
+				int id = Integer.parseInt(ids[i]);
+				this.delete(id);
+			}
+			t.commit();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			if (t != null) {
+				t.rollback();
+			}
+			return 0;
+		} finally {
+			session.close();
+		}
+		return 1;
+	}
 
 
 }
