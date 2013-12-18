@@ -1,4 +1,7 @@
 window.addEvent('domready',function(){
+    var panel = new Panel($('topic-view-panel'),{
+        contentHeight:250
+    });
     var searchSelect = new Select('searchSelect',[
         {
             name:'站内资源',
@@ -11,7 +14,13 @@ window.addEvent('domready',function(){
     ], {
         height:34
     }).animate().addButtonClass('btn-group-left');
+    if(Browser.ie) {
+        searchSelect.setSelectDivOffset(13,-46);
+    }else {
+        searchSelect.setSelectDivOffset(13,-19);
+    }
     var keyWords = new Input($$('#headSearch input')).addClass('input-group-center');
+
     var searchButton = new Button($$('button')[1]).addClass('btn-group-right');
     new Tab('subtopic_tab', {
         tabChangeEvent:'mouseover',
