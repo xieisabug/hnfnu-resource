@@ -1,3 +1,52 @@
+var Panel = new Class({
+    initialize: function (el,option) {
+        var thiz = this;
+        this.option = Object.merge({
+            panelTitleCss : 'panel-head',
+            panelTitleIcon : 'default',
+            panelContentCss : 'panel-content',
+            contentHeight:'auto',
+            contentWidth:'auto'
+        },option);
+        this.panel = el;
+        var childrens = el.getChildren();
+        if(childrens.length != 2) {
+            throw Error("Panel的格式不对，其中应该只包含两个子div。");
+        }
+        this.panelTitle = childrens[0];
+        this.panelContent = childrens[1];
+        this.panelTitleIcon = this.panelTitle.getElement('.panel-head-icon');
+        if(this.option.panelTitleIcon == 'default') {
+            this.panelTitleIcon.addClass('panel-head-icon-arrow');
+        } else {
+            this.panelTitleIcon.addClass('panel-head-icon-'+this.option.panelTitleIcon);
+        }
+
+        this.panelTitle.addClass(this.option.panelTitleCss);
+        this.panelContent.addClass(this.option.panelContentCss);
+        this.panelContent.setStyles({
+            width:this.option.contentWidth,
+            height:this.option.contentHeight
+        });
+        return this;
+    },
+    addPanelTitleCss:function(className) {
+        this.panelTitle.addClass(className);
+        return this;
+    },
+    removePanelTitleCss : function(className) {
+        this.panelTitle.removeClass(className);
+        return this;
+    },
+    addPanelContentCss : function(className) {
+        this.panelContent.addClass(className);
+        return this;
+    },
+    removePanelContentCss : function(className) {
+        this.panelContent.removeClass(className);
+        return this;
+    }
+});
 var Tab = new Class({
     initialize: function (id, option) {
         var thiz = this;
@@ -91,7 +140,7 @@ var Select = new Class({
                 'class': 'selectItemDiv',
                 html: itemHtml
             });
-            $$('body').grab(thiz.selectDiv);//将选择的面板添加到网页中
+            this.body.getParent().grab(thiz.selectDiv);//将选择的面板添加到网页中
             //对按钮绑定点击事件，使面板可以显示和隐藏
             thiz.clickFunction = function () {
                 if (thiz.selectDiv.getStyle('display') == 'none') {
@@ -190,7 +239,8 @@ var Select = new Class({
         //移除以前的点击事件，覆盖点击方法，增加新的带有动画的点击方法，并绑定事件
         this.body.removeEvent('click', this.clickFunction);
         this.clickFunction = function () {
-            bouncingOut.stop();
+//            bouncingOut.stop();
+            bouncingOut.cancel();
             if (thiz.selectDiv.getStyle('height') != (thiz.itemNames.length * 30 + 40 + 'px')) {
                 thiz.selectDiv.setStyle('display', 'block');
                 bouncingOut.start('height', thiz.itemNames.length * 30 + 40);
@@ -205,12 +255,22 @@ var Select = new Class({
         //移除以前的鼠标移开事件，覆盖方法，并且增加带有动画的鼠标移开方法，并绑定事件
         this.selectDiv.removeEvent('mouseleave', this.mouseLeaveFunction);
         this.mouseLeaveFunction = function () {
-            bouncingOut.stop();
+//            bouncingOut.stop();
+            bouncingOut.cancel();
             bouncingOut.start('height', 0).chain(function () {
                 thiz.selectDiv.setStyle('display', 'none');
             });
         };
         this.selectDiv.addEvent('mouseleave', this.mouseLeaveFunction);
+        return this;
+    },
+    setSelectDivOffset: function (top, left) {
+        var oldT = this.selectDiv.getStyle('top').toInt();
+        var oldL = this.selectDiv.getStyle('left').toInt();
+        this.selectDiv.setStyles({
+            'top': oldT + top,
+            'left': oldL + left
+        });
         return this;
     }
 });
@@ -262,9 +322,10 @@ var Input = new Class({
         this.body = el;
         this.option = Object.merge({
             width: 240,
-            height: 34,
+            height: Browser.ie7? 32:20,
             className: 'input-text'
         }, option);
+
 
         this.body.addClass(this.option.className);
         this.body.setStyles({
