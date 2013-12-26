@@ -16,6 +16,7 @@ public class CategoryDto
 	private Integer id;
 	//类别名称
 	private String name;
+	private int groupId;
 	private int ord;
 	private String remark;
 
@@ -23,10 +24,11 @@ public class CategoryDto
 	{
 
 	}
-	public CategoryDto(Integer id, String name, int ord, String remark) {
+	public CategoryDto(Integer id, String name,int groupId, int ord, String remark) {
 		super();
 		this.id = id;
 		this.name = name;
+		this.groupId = groupId;
 		this.ord = ord;
 		this.remark = remark;
 	}
@@ -50,6 +52,13 @@ public class CategoryDto
 	{
 		return this.name;
 	}
+	
+	public int getGroupId() {
+		return groupId;
+	}
+	public void setGroupId(int groupId) {
+		this.groupId = groupId;
+	}
 	public void setRemark(String remark)
 	{
 		this.remark = remark;
@@ -66,11 +75,10 @@ public class CategoryDto
 	public void setOrd(int ord) {
 		this.ord = ord;
 	}
-
 	@Override
 	public String toString() {
-		return "CategoryDto [id=" + id + ", name=" + name + ", remark="
-				+ remark + "]";
+		return "CategoryDto [id=" + id + ", name=" + name + ", groupId="
+				+ groupId + ", ord=" + ord + ", remark=" + remark + "]";
 	}
-	
+
 }

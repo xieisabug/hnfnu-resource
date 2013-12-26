@@ -32,7 +32,7 @@ function add_save() {
             type : 'post',
             success : function(data) {
                 if (data.success) {
-                    subjectGrid.addRow(data.model);
+                    refresh_subject();
                     $.ligerDialog.tip({
                         title : '提示信息',
                         content : data.message
@@ -135,41 +135,78 @@ function delete_subject() {
 // 初始化表单，生成form标签
 function formInit() {
     subjectFrom = $('<form></form>');
-    subjectFrom.ligerForm({
-        inputWidth : 280,
-        fields : [ {
-            name : 'id',
-            type : "hidden"
-        }, {
-            display : '学科名称',
-            name : 'name',
-            type : 'text',
-            space : 30,
-            labelWidth : 100,
-            width : 220,
-            newline : true,
-            validate : {
-                required : true,
-                maxlength : 22
-            }
-        }, {
-            display : '备注',
-            name : 'remark',
-            type : 'text',
-            space : 30,
-            labelWidth : 100,
-            width : 220,
-            newline : true
-        } ]
-    });
-    $.metadata.setType("attr", "validate");
-    subjectFrom.validate({
-        debug : true,
-        onkeyup : false,
-        errorPlacement : function(error,element) {
-            error.appendTo(element.parent().parent().parent().parent());
+    $.ajax( {
+        url : '../../../resources/listGroups.action',
+        type : 'post',
+        async : false,
+        success : function(data) {
+            subjectFrom.ligerForm({
+                inputWidth : 280,
+                fields : [ {
+                    name : 'id',
+                    type : "hidden"
+                }, {
+                    display : '学科名称',
+                    name : 'name',
+                    type : 'text',
+                    space : 30,
+                    labelWidth : 100,
+                    width : 220,
+                    newline : true,
+                    validate : {
+                        required : true,
+                        maxlength : 22
+                    }
+                }, {
+                    display:"所属分组",
+                    name:"groupId",
+                    type:"select",
+                    space:30,
+                    labelWidth:100,
+                    width:220,
+                    newline:true,
+                    comboboxName:"group",
+                    options:{
+                        textField:"name",
+                        valueField:"id",
+                        hideOnLoseFocus:true,
+                        valueFieldID:"groupId",
+                        data:data.groups
+                    }
+                },
+                    {
+                    display : '备注',
+                    name : 'remark',
+                    type : 'text',
+                    space : 30,
+                    labelWidth : 100,
+                    width : 220,
+                    newline : true
+                } ]
+            });
+            $.metadata.setType("attr", "validate");
+            subjectFrom.validate({
+                debug : true,
+                onkeyup : false,
+                errorPlacement : function(error,element) {
+                    error.appendTo(element.parent().parent().parent().parent());
+                }
+            });
         }
     });
+}
+
+// 刷新科目的函数
+function refresh_subject() {
+    $.ajax({
+        url:'../../../resources/listSubject.action',
+        type:'post',
+        success:function (data) {
+            subjectGrid.loadData(data.subjectList);
+        }
+    });
+    $("#pageloading").hide();
+
 }
 // 初始化表格
 $(function() {
@@ -227,6 +264,8 @@ $(function() {
                 width : '99%',
                 height : '98%',
                 pageSize : 20,
+                groupColumnName:'groupName',
+                groupColumnDisplay:'分组',
                 data : data.subjectList,
                 toolbar : {
                     items : toolbarItems

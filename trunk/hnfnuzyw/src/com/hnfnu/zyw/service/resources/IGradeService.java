@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.hnfnu.zyw.dto.resources.GradeDto;
+import com.hnfnu.zyw.vo.GradeGroupVo;
 
 public interface IGradeService {
 
@@ -28,5 +29,12 @@ public interface IGradeService {
 	 * @return
 	 */
 	public Map<String, Object> listGrade();
+	
+	/**
+	 * 根据分组id获得该组下所有年级
+	 * 
+	 * @return
+	 */
+	public List<GradeGroupVo> listGradeByGroupId(int groupId);
 
 }

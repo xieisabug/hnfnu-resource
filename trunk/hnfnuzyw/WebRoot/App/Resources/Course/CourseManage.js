@@ -1,6 +1,7 @@
 var courseGrid = null;
 var courseForm = null;
 var courseWin = null;
+var groupForm = null;
 // 按钮的click事件
 function update_course(item) {
 	$.ligerDialog.alert(item.text);
@@ -163,7 +164,6 @@ function refresh_course() {
 function query_course(){
     courseGrid.showFilter();
 }
-
 // 初始化表单，生成form标签
 function formInit() {
 	var groupicon = "../../../App/Lib/ligerUI/skins/icons/communication.gif";

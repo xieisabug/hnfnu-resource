@@ -1,5 +1,6 @@
 package com.hnfnu.zyw.action.resources;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Action;
@@ -20,15 +21,16 @@ import com.opensymphony.xwork2.ModelDriven;
 @Controller("groupAction")
 @Scope("prototype")
 @ParentPackage("json-default")
-@Results( { @Result(name = "success", type = "json", params = { "root",
-		"action" }) })
+@Results({ @Result(name = "success", type = "json", params = { "root", "action" }) })
 @Namespace("/resources")
-public class GroupAction extends AopNoSuchMethodErrorSolveBaseAction implements ModelDriven<GroupDto> {
+public class GroupAction extends AopNoSuchMethodErrorSolveBaseAction implements
+		ModelDriven<GroupDto> {
 
 	private GroupDto group = new GroupDto();// 获取页面提交参数
 	private boolean success;
 	private String message;
 	private Map<String, Object> groupList;
+	private List<GroupDto> groups;
 
 	@Autowired
 	@Qualifier("groupService")
@@ -93,6 +95,13 @@ public class GroupAction extends AopNoSuchMethodErrorSolveBaseAction implements 
 		return SUCCESS;
 	}
 
+	// 获取表中所有分组，用List装
+	@Action(value = "listGroups")
+	public String listGroups() {
+		groups = groupService.list();
+		return SUCCESS;
+	}
+
 	/* get set */
 	public GroupDto getModel() {
 		return group;
@@ -112,6 +121,10 @@ public class GroupAction extends AopNoSuchMethodErrorSolveBaseAction implements 
 
 	public Map<String, Object> getGroupList() {
 		return groupList;
+	}
+
+	public List<GroupDto> getGroups() {
+		return groups;
 	}
 
 }
