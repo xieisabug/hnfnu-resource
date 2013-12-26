@@ -108,7 +108,7 @@ public class CategoryServiceImpl implements ICategoryService {
 	}
 
 	public List<CategoryGroupVo> listCatecoryByGroupId(int groupId) {
-		String hql = "from CategoryGroupVo where groupId="+groupId;
+		String hql = "from CategoryGroupVo where groupId="+groupId+" order by ord asc";
 		List<CategoryGroupVo> categorys = null;
 		try {
 			categorys = categoryGroupVoDao.list(hql);
