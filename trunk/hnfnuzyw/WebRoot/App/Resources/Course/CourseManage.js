@@ -1,21 +1,23 @@
 var courseGrid = null;
 var courseForm = null;
 var courseWin = null;
-var groupForm = null;
+var groupGrid = null;
+var groupWin = null;
 // 按钮的click事件
 function update_course(item) {
 	$.ligerDialog.alert(item.text);
 }
 // 增加课程的函数
-function add_course() {
+function add_course(groupId) {
 
-	formInit();
+	formInit(groupId);
 
 	courseWin = $.ligerDialog.open( {
 		width : 400,
 		height : 400,
 		title : "新增课程",
 		target : courseForm,
+        modal:true,
 		buttons : [ {
 			text : "提交",
 			width : 80,
@@ -159,13 +161,78 @@ function refresh_course() {
 
 }
 
-
-
+function select_group() {
+    $.ajax({
+        async:false,
+        url:'../../../resources/listGroup.action',
+        type:'post',
+        success:function (data) {
+            var s = $('#groupGrid');
+            groupGrid = s.ligerGrid({
+                columns:[
+                    // { display:'ID', name:'id', align:'left', width:100 },
+                    {
+                        display:'分组名称',
+                        name:'name',
+                        width:200
+                    }, {
+                        display:'分组样式',
+                        name:'style',
+                        width:200
+                    }, {
+                        display:'是否显示',
+                        name:'isDisplay',
+                        width:200
+                    },
+                    {
+                        display:'备注',
+                        name:'remark',
+                        align:'left',
+                        width:800
+                    }
+                ],
+                width:560,
+                height:530,
+                pageSize:30,
+                data:data.groupList
+            });
+            groupWin = $.ligerDialog.open({
+                width:600,
+                height:600,
+                title:'请选择分组',
+                target:s,
+                buttons : [ {
+                    text : "下一步",
+                    width : 80,
+                    onclick : select_group_sure
+                }, {
+                    text : "取消",
+                    width : 80,
+                    onclick : aselect_group_cancel
+                } ]
+            });
+            $(".l-grid2", groupWin.element).css({width:560});
+            $("#pageloading").hide();
+        }
+    });
+}
+function select_group_sure(){
+    if (!groupGrid.getSelected()) {
+        $.ligerDialog.warn("请选择分组！");
+        return;
+    }
+    groupWin.unmask();
+    add_course(groupGrid.getSelected().id);
+}
+function aselect_group_cancel(){
+    groupWin.close();
+}
 function query_course(){
     courseGrid.showFilter();
 }
 // 初始化表单，生成form标签
-function formInit() {
+function formInit(groupId) {
+
 	var groupicon = "../../../App/Lib/ligerUI/skins/icons/communication.gif";
 	courseForm = $('<form></form>');
 
@@ -173,6 +240,9 @@ function formInit() {
 		url : '../../../resources/listGradesAndSubjects.action',
 		type : 'post',
 		async : false,
+        data:{
+            'groupId':groupId
+        },
 		success : function(data) {
 			courseForm.ligerForm( {
 				inputWidth : 200,
@@ -241,7 +311,7 @@ function formInit() {
 $(function() {
 	var toolbarItems = [ {
 		text : '增加',
-		click : add_course,
+		click : select_group,
 		icon : 'add',
 		key : 'add'
 	}, {
@@ -319,6 +389,8 @@ $(function() {
 				data : data.courseGradeSubjectList,
 				height : '98%',
 				width : '100%',
+                groupColumnName:'groupName',
+                groupColumnDisplay:'分组',
                 pageSize:20,
 				toolbar : {
 					items : toolbarItems
