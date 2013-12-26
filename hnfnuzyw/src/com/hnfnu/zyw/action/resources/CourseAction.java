@@ -15,11 +15,11 @@ import org.springframework.stereotype.Controller;
 
 import com.hnfnu.zyw.action.base.AopNoSuchMethodErrorSolveBaseAction;
 import com.hnfnu.zyw.dto.resources.CourseDto;
-import com.hnfnu.zyw.dto.resources.GradeDto;
-import com.hnfnu.zyw.dto.resources.SubjectDto;
 import com.hnfnu.zyw.service.resources.ICourseService;
 import com.hnfnu.zyw.service.resources.IGradeService;
 import com.hnfnu.zyw.service.resources.ISubjectService;
+import com.hnfnu.zyw.vo.GradeGroupVo;
+import com.hnfnu.zyw.vo.SubjectGroupVo;
 import com.opensymphony.xwork2.ModelDriven;
 
 @Controller("courseAction")
@@ -32,11 +32,12 @@ public class CourseAction extends AopNoSuchMethodErrorSolveBaseAction implements
 		ModelDriven<CourseDto> {
 
 	private CourseDto course = new CourseDto();// 获取页面提交参数
-	private List<GradeDto> gradeList;
-	private List<SubjectDto> subjectList;
+	private List<GradeGroupVo> gradeList;
+	private List<SubjectGroupVo> subjectList;
 	private boolean success;
 	private String message;
 	private Map<String, Object> courseList;
+	private int groupId;
 
 	@Autowired
 	@Qualifier("courseService")
@@ -111,33 +112,22 @@ public class CourseAction extends AopNoSuchMethodErrorSolveBaseAction implements
 	
 	@Action(value = "listGradesAndSubjects")
 	public String listGradesAndSubjects() {
-		gradeList = gradeService.list();
-		subjectList = subjectService.list(); 
+		gradeList = gradeService.listGradeByGroupId(groupId);
+		subjectList = subjectService.listSubjectByGroupId(groupId);
 		return SUCCESS;
 	}
 
 	/* get set */
-	
-	
+	public CourseDto getModel() {
+		return course;
+	}
 
-	public List<GradeDto> getGradeList() {
+	public List<GradeGroupVo> getGradeList() {
 		return gradeList;
 	}
 
-	public void setGradeList(List<GradeDto> gradeList) {
-		this.gradeList = gradeList;
-	}
-
-	public List<SubjectDto> getSubjectList() {
+	public List<SubjectGroupVo> getSubjectList() {
 		return subjectList;
-	}
-
-	public void setSubjectList(List<SubjectDto> subjectList) {
-		this.subjectList = subjectList;
-	}
-
-	public CourseDto getModel() {
-		return course;
 	}
 
 	public CourseDto getCourse() {
@@ -154,6 +144,10 @@ public class CourseAction extends AopNoSuchMethodErrorSolveBaseAction implements
 
 	public Map<String, Object> getCourseList() {
 		return courseList;
+	}
+
+	public void setGroupId(int groupId) {
+		this.groupId = groupId;
 	}
 
 }

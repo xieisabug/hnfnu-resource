@@ -12,6 +12,8 @@ public class CourseGradeSubjectVo {
 	private String name;
 	private int gradeId;
 	private String gradeName;
+	private int groupId;
+	private String groupName;
 	private int subjectId;
 	private String subjectName;
 	private String remark; 
@@ -21,16 +23,24 @@ public class CourseGradeSubjectVo {
 		super();
 	}
 
+	
+
 	public CourseGradeSubjectVo(int id, String name, int gradeId,
-			String gradeName, int subjectId, String subjectName) {
+			String gradeName, int groupId, String groupName, int subjectId,
+			String subjectName, String remark) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.gradeId = gradeId;
 		this.gradeName = gradeName;
+		this.groupId = groupId;
+		this.groupName = groupName;
 		this.subjectId = subjectId;
 		this.subjectName = subjectName;
+		this.remark = remark;
 	}
+
+
 
 	@Id
 	@GeneratedValue
@@ -88,6 +98,41 @@ public class CourseGradeSubjectVo {
 
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+
+
+	public int getGroupId() {
+		return groupId;
+	}
+
+
+
+	public void setGroupId(int groupId) {
+		this.groupId = groupId;
+	}
+
+
+
+	public String getGroupName() {
+		return groupName;
+	}
+
+
+
+	public void setGroupName(String groupName) {
+		this.groupName = groupName;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "CourseGradeSubjectVo [id=" + id + ", name=" + name
+				+ ", gradeId=" + gradeId + ", gradeName=" + gradeName
+				+ ", groupId=" + groupId + ", groupName=" + groupName
+				+ ", subjectId=" + subjectId + ", subjectName=" + subjectName
+				+ ", remark=" + remark + "]";
 	}
 	
 	
