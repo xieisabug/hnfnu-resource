@@ -1,5 +1,6 @@
 package com.hnfnu.zyw.action.resources;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Action;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import com.hnfnu.zyw.action.base.AopNoSuchMethodErrorSolveBaseAction;
 import com.hnfnu.zyw.dto.resources.GradeDto;
 import com.hnfnu.zyw.service.resources.IGradeService;
+import com.hnfnu.zyw.vo.GradeGroupVo;
 import com.opensymphony.xwork2.ModelDriven;
 
 @Controller("gradeAction")
@@ -29,7 +31,8 @@ public class GradeAction extends AopNoSuchMethodErrorSolveBaseAction implements 
 	private boolean success;
 	private String message;
 	private Map<String, Object> gradeList;
-
+	private List<GradeGroupVo> grades;
+ 
 	@Autowired
 	@Qualifier("gradeService")
 	private IGradeService gradeService;
@@ -92,6 +95,24 @@ public class GradeAction extends AopNoSuchMethodErrorSolveBaseAction implements 
 		gradeList = gradeService.listGrade();
 		return SUCCESS;
 	}
+	
+
+	// 根据分组Id获得该组下所有的年級
+	@Action(value = "listGradesByGroupId")
+	public String listGradesByGroupId() {
+		grades= gradeService.listGradeByGroupId(grade.getGroupId());
+		if(grades != null){
+			success = true;
+		}else {
+			success = false;
+		}
+		if (success) {
+			message = "获取成功";
+		} else {
+			message = "获取失败！";
+		}
+		return SUCCESS;
+	}
 
 	/* get set */
 	public GradeDto getModel() {
@@ -112,6 +133,10 @@ public class GradeAction extends AopNoSuchMethodErrorSolveBaseAction implements 
 
 	public Map<String, Object> getGradeList() {
 		return gradeList;
+	}
+
+	public List<GradeGroupVo> getGrades() {
+		return grades;
 	}
 
 }

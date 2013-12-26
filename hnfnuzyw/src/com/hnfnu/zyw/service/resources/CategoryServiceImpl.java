@@ -9,13 +9,19 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.hnfnu.zyw.dao.resources.ICategoryDao;
+import com.hnfnu.zyw.dao.resources.ICategoryGroupVoDao;
 import com.hnfnu.zyw.dto.resources.CategoryDto;
+import com.hnfnu.zyw.vo.CategoryGroupVo;
 
 @Service("categoryService")
 public class CategoryServiceImpl implements ICategoryService {
 	@Autowired
 	@Qualifier("categoryDao")
 	public ICategoryDao categoryDao;
+	
+	@Autowired
+	@Qualifier("categoryGroupVoDao")
+	public ICategoryGroupVoDao categoryGroupVoDao;
 
 	public boolean add(CategoryDto category) {
 		try {
@@ -62,12 +68,12 @@ public class CategoryServiceImpl implements ICategoryService {
 	}
 
 	public Map<String, Object> listCategory() {
-		String hql = "from CategoryDto";
+		String hql = "from CategoryGroupVo";
 		Map<String, Object> categoryList = new HashMap<String, Object>();
-		List<CategoryDto> l = null;
+		List<CategoryGroupVo> l = null;
 
 		try {
-			l = categoryDao.list(hql);
+			l = categoryGroupVoDao.list(hql);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -81,12 +87,12 @@ public class CategoryServiceImpl implements ICategoryService {
 	}
 
 	public Map<String, Object> getCategoryDtoOrder() {
-		String hql = "from CategoryDto order by ord asc";
+		String hql = "from CategoryGroupVo order by ord asc";
 		Map<String, Object> categoryList = new HashMap<String, Object>();
-		List<CategoryDto> l = null;
+		List<CategoryGroupVo> l = null;
 
 		try {
-			l = categoryDao.list(hql);
+			l = categoryGroupVoDao.list(hql);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -99,6 +105,17 @@ public class CategoryServiceImpl implements ICategoryService {
 	public boolean setCategoryDtoOrder(String orders) {
 		String[] s = orders.split(";");
 		return categoryDao.setCategorysOrder(s);
+	}
+
+	public List<CategoryGroupVo> listCatecoryByGroupId(int groupId) {
+		String hql = "from CategoryGroupVo where groupId="+groupId;
+		List<CategoryGroupVo> categorys = null;
+		try {
+			categorys = categoryGroupVoDao.list(hql);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return categorys;
 	}
 
 }

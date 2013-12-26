@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.hnfnu.zyw.dto.resources.CategoryDto;
+import com.hnfnu.zyw.vo.CategoryGroupVo;
 
 public interface ICategoryService {
 	public boolean add(CategoryDto category);
@@ -33,5 +34,11 @@ public interface ICategoryService {
 	public Map<String, Object> getCategoryDtoOrder();
 	
 	public boolean setCategoryDtoOrder(String orders);
+	/**
+	 * 根据分组id获得该组下所有类别
+	 * 
+	 * @return
+	 */
+	public List<CategoryGroupVo> listCatecoryByGroupId(int groupId);
 	
 }

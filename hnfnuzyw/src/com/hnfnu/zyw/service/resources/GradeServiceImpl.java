@@ -9,13 +9,19 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.hnfnu.zyw.dao.resources.IGradeDao;
+import com.hnfnu.zyw.dao.resources.IGradeGroupVoDao;
 import com.hnfnu.zyw.dto.resources.GradeDto;
+import com.hnfnu.zyw.vo.GradeGroupVo;
 
 @Service("gradeService")
 public class GradeServiceImpl implements IGradeService{
 	@Autowired
 	@Qualifier("gradeDao")
 	public IGradeDao gradeDao;
+	
+	@Autowired
+	@Qualifier("gradeGroupVoDao")
+	public IGradeGroupVoDao gradeGroupVoDao;
 
 	public boolean add(GradeDto garde) {
 		try {
@@ -68,18 +74,29 @@ public class GradeServiceImpl implements IGradeService{
 	}
 
 	public Map<String, Object> listGrade() {
-		String hql = "from GradeDto";
+		String hql = "from GradeGroupVo";
 		Map<String, Object> gardeList = new HashMap<String, Object>();
-		List<GradeDto> l = null;
+		List<GradeGroupVo> l = null;
 
 		try {
-			l = gradeDao.list(hql);
+			l = gradeGroupVoDao.list(hql);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		gardeList.put("Rows", l);
 		gardeList.put("Total", l.size());
 		return gardeList;
+	}
+
+	public List<GradeGroupVo> listGradeByGroupId(int groupId) {
+		String hql = "from GradeGroupVo where groupId="+groupId;
+		List<GradeGroupVo> gardes = null;
+		try {
+			gardes = gradeGroupVoDao.list(hql);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return gardes;
 	}
 
 }

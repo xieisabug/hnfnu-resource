@@ -16,16 +16,20 @@ public class SubjectDto
 	private Integer id;
 	//科目名称
 	private String name;
+	private int groupId;
 	private String remark;
 
 	public SubjectDto()
 	{
 
 	}
-	public SubjectDto(Integer id, String name, String remark) {
+
+
+	public SubjectDto(Integer id, String name, int groupId, String remark) {
 		super();
 		this.id = id;
 		this.name = name;
+		this.groupId = groupId;
 		this.remark = remark;
 	}
 
@@ -56,12 +60,15 @@ public class SubjectDto
 	{
 		return this.remark;
 	}
-
+	public int getGroupId() {
+		return groupId;
+	}
+	public void setGroupId(int groupId) {
+		this.groupId = groupId;
+	}
 	@Override
 	public String toString() {
-		return "SubjectDto [id=" + id + ", name=" + name + ", remark=" + remark
-				+ "]";
+		return "SubjectDto [id=" + id + ", name=" + name + ", groupId="
+				+ groupId + ", remark=" + remark + "]";
 	}
-	
-	
 }

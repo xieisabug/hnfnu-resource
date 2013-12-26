@@ -1,5 +1,6 @@
 package com.hnfnu.zyw.action.resources;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Action;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import com.hnfnu.zyw.action.base.AopNoSuchMethodErrorSolveBaseAction;
 import com.hnfnu.zyw.dto.resources.CategoryDto;
 import com.hnfnu.zyw.service.resources.ICategoryService;
+import com.hnfnu.zyw.vo.CategoryGroupVo;
 import com.opensymphony.xwork2.ModelDriven;
 
 @Controller("categoryAction")
@@ -30,6 +32,8 @@ public class CategoryAction extends AopNoSuchMethodErrorSolveBaseAction implemen
 	private String message;
 	private String orders;
 	private Map<String, Object> categoryList;
+	private List<CategoryGroupVo> categorys;
+	
 
 	@Autowired
 	@Qualifier("categoryService")
@@ -78,7 +82,7 @@ public class CategoryAction extends AopNoSuchMethodErrorSolveBaseAction implemen
 	}
 
 	/**
-	 * 根据类别id删除一个类别
+	 * 根据分组id删除一个类别
 	 * 
 	 * @return
 	 */
@@ -119,6 +123,24 @@ public class CategoryAction extends AopNoSuchMethodErrorSolveBaseAction implemen
 		}
 		return SUCCESS;
 	}
+	
+	
+		// 根据分组Id获得该组下所有的类别
+		@Action(value = "listCategorysByGroupId")
+		public String listCategorysByGroupId() {
+			categorys = categoryService.listCatecoryByGroupId(category.getGroupId());
+			if(categorys != null){
+				success = true;
+			}else {
+				success = false;
+			}
+			if (success) {
+				message = "获取成功";
+			} else {
+				message = "获取失败！";
+			}
+			return SUCCESS;
+		}
 
 	/* get set */
 
@@ -144,6 +166,10 @@ public class CategoryAction extends AopNoSuchMethodErrorSolveBaseAction implemen
 
 	public void setOrders(String orders) {
 		this.orders = orders;
+	}
+
+	public List<CategoryGroupVo> getCategorys() {
+		return categorys;
 	}
 
 }

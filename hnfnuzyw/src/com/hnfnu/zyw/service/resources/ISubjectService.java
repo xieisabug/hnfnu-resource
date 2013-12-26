@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.hnfnu.zyw.dto.resources.SubjectDto;
+import com.hnfnu.zyw.vo.SubjectGroupVo;
 
 public interface ISubjectService {
 
@@ -28,5 +29,12 @@ public interface ISubjectService {
 	 * @return
 	 */
 	public Map<String, Object> listSub();
+	
+	/**
+	 * 根据分组id获得该组下所有科目
+	 * 
+	 * @return
+	 */
+	public List<SubjectGroupVo> listSubjectByGroupId(int groupId);
 
 }

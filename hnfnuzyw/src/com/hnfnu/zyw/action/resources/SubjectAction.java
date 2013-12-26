@@ -1,5 +1,6 @@
 package com.hnfnu.zyw.action.resources;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Action;
@@ -15,21 +16,22 @@ import org.springframework.stereotype.Controller;
 import com.hnfnu.zyw.action.base.AopNoSuchMethodErrorSolveBaseAction;
 import com.hnfnu.zyw.dto.resources.SubjectDto;
 import com.hnfnu.zyw.service.resources.ISubjectService;
+import com.hnfnu.zyw.vo.SubjectGroupVo;
 import com.opensymphony.xwork2.ModelDriven;
 
 @Controller("subjectAction")
 @Scope("prototype")
 @ParentPackage("json-default")
-@Results( { @Result(name = "success", type = "json", params = { "root",
-		"action" }) })
+@Results({ @Result(name = "success", type = "json", params = { "root", "action" }) })
 @Namespace("/resources")
-public class SubjectAction extends AopNoSuchMethodErrorSolveBaseAction implements
-		ModelDriven<SubjectDto> {
+public class SubjectAction extends AopNoSuchMethodErrorSolveBaseAction
+		implements ModelDriven<SubjectDto> {
 
 	private SubjectDto subject = new SubjectDto();// 获取页面提交参数
 	private boolean success;
 	private String message;
 	private Map<String, Object> subjectList;
+	private List<SubjectGroupVo> subjects;
 
 	@Autowired
 	@Qualifier("subjectService")
@@ -94,6 +96,23 @@ public class SubjectAction extends AopNoSuchMethodErrorSolveBaseAction implement
 		return SUCCESS;
 	}
 
+	// 根据分组Id获得该组下所有的类别
+	@Action(value = "listSubjectsByGroupId")
+	public String listSubjectsByGroupId() {
+		subjects = subjectService.listSubjectByGroupId(subject.getGroupId());
+		if (subjects != null) {
+			success = true;
+		} else {
+			success = false;
+		}
+		if (success) {
+			message = "获取成功";
+		} else {
+			message = "获取失败！";
+		}
+		return SUCCESS;
+	}
+
 	/* get set */
 
 	public SubjectDto getModel() {
@@ -114,6 +133,10 @@ public class SubjectAction extends AopNoSuchMethodErrorSolveBaseAction implement
 
 	public Map<String, Object> getSubjectList() {
 		return subjectList;
+	}
+
+	public List<SubjectGroupVo> getSubjects() {
+		return subjects;
 	}
 
 }

@@ -37,7 +37,7 @@ function add_save() {
             type:'post',
             success:function (data) {
                 if (data.success) {
-                    categoryGrid.addRow(data.model);
+                    refresh_category();
                     $.ligerDialog.tip({
                         title:'提示信息',
                         content:data.message
@@ -91,8 +91,7 @@ function edit_save() {
             type:'post',
             success:function (data) {
                 if (data.success) {
-                    categoryGrid.update(categoryGrid.getSelected(),
-                        data.model);
+                    refresh_category();
                     $.ligerDialog.tip({
                         title:'提示信息',
                         content:data.message
@@ -129,7 +128,7 @@ function delete_category() {
                             title:'提示信息',
                             content:data.message
                         });
-                        categoryGrid.deleteSelectedRow();
+                        refresh_category();
                         categoryWin.close();
                     } else {
                         $.ligerDialog.error(data.message);
@@ -216,49 +215,88 @@ function sort_save(){
 function sort_cancel(){
     sortWin.hide();
 }
+// 刷新分组的函数
+function refresh_category() {
+    $.ajax({
+        url:'../../../resources/listCategory.action',
+        type:'post',
+        success:function (data) {
+            categoryGrid.loadData(data.categoryList);
+        }
+    });
+    $("#pageloading").hide();
+
+}
 
 // 初始化表单，生成form标签
 function formInit() {
     categoryFrom = $('<form></form>');
-    categoryFrom.ligerForm({
-        inputWidth:280,
-        fields:[
-            {
-                name:'id',
-                type:"hidden"
-            },
-            {
-                display:'类别名称',
-                name:'name',
-                type:'text',
-                space:30,
-                labelWidth:100,
-                width:220,
-                newline:true,
-                validate:{
-                    required:true,
-                    maxlength:22
+    $.ajax( {
+        url : '../../../resources/listGroups.action',
+        type : 'post',
+        async : false,
+        success : function(data) {
+            categoryFrom.ligerForm({
+                inputWidth:280,
+                fields:[
+                    {
+                        name:'id',
+                        type:"hidden"
+                    },
+                    {
+                        display:'类别名称',
+                        name:'name',
+                        type:'text',
+                        space:30,
+                        labelWidth:100,
+                        width:220,
+                        newline:true,
+                        validate:{
+                            required:true,
+                            maxlength:22
+                        }
+                    },
+                    {
+                        display:"所属分组",
+                        name:"groupId",
+                        type:"select",
+                        space:30,
+                        labelWidth:100,
+                        width:220,
+                        newline:true,
+                        comboboxName:"group",
+                        options:{
+                            textField:"name",
+                            valueField:"id",
+                            hideOnLoseFocus:true,
+                            valueFieldID:"groupId",
+                            data:data.groups
+                        }
+                    },
+                    {
+                        display:'备注',
+                        name:'remark',
+                        type:'text',
+                        space:30,
+                        labelWidth:100,
+                        width:220,
+                        newline:true
+                    }
+                ]
+            });
+            $.metadata.setType("attr", "validate");
+            categoryFrom.validate({
+                debug:true,
+                onkeyup:false,
+                errorPlacement:function (error, element) {
+                    error.appendTo(element.parent().parent().parent().parent());
                 }
-            },
-            {
-                display:'备注',
-                name:'remark',
-                type:'text',
-                space:30,
-                labelWidth:100,
-                width:220,
-                newline:true
-            }
-        ]
-    });
-    $.metadata.setType("attr", "validate");
-    categoryFrom.validate({
-        debug:true,
-        onkeyup:false,
-        errorPlacement:function (error, element) {
-            error.appendTo(element.parent().parent().parent().parent());
+            });
         }
     });
+
+
+
 }
 // 初始化表格
 $(function () {
@@ -328,6 +366,8 @@ $(function () {
                 width:'99%',
                 height:'98%',
                 pageSize:30,
+                groupColumnName:'groupName',
+                groupColumnDisplay:'分组',
                 data:data.categoryList,
                 toolbar:{
                     items:toolbarItems
