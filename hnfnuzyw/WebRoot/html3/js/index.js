@@ -6,7 +6,7 @@ window.addEvent('domready',function(){
         contentHeight:220
     });
     var topicPanel = new Panel($('topic'),{
-        contentHeight:400
+        contentHeight:358
     });
     var searchSelect = new Select('searchSelect',[
         {
@@ -45,11 +45,12 @@ window.addEvent('domready',function(){
     var searchButton = new Button($$('button')[1]).addClass('btn-group-right');
     var collageSource = new Tab('collageSource', {
         tabChangeEvent:'mouseover',
-        tabTitleCss:'tabTitle index-tab'
+        tabTitleCss:'my-tab',
+        tabContentCss:'my-tabContent'
     });
     var primarySource = new Tab('primarySource', {
         tabChangeEvent:'mouseover',
-        tabTitleCss:'tabTitle index-tab'
+        tabTitleCss:'my-tab'
     });
     $$('#headMenu a').each(function(item,index) {
         var option = {
@@ -64,4 +65,11 @@ window.addEvent('domready',function(){
         }
 
     });
+    $$('#collageSource>div').each(function(item){
+        new Scroll(item,{
+            width:960,
+            height:200
+        }).withAnimate('fadeSlide');
+    });
+
 });
