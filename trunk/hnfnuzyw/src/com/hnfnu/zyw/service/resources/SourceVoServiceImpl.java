@@ -238,14 +238,14 @@ public class SourceVoServiceImpl implements ISourceVoService {
 	
 	
 
-	public List<Map<String, Object>> courseTree() {
+	public List<Map<String, Object>> courseTree(int groupId) {
 		List<Map<String, Object>> ret = new ArrayList<Map<String, Object>>();// 用来返回的map
 		Map<String, Object> grade = null;// 用来存放年级的map
 		List<Map<String, Object>> subjectList = null;
 		Map<String, Object> subject = null;// 用来存放科目的map
 		List<Map<String, Object>> courseList = new ArrayList<Map<String, Object>>();
 		Map<String, Object> course = null;
-		String voHQL = "FROM CourseGradeSubjectVo";
+		String voHQL = "FROM CourseGradeSubjectVo where groupId="+groupId;
 		try {
 			List<CourseGradeSubjectVo> l = courseGradeSubjectDao.list(voHQL);
 			int gradeId = 0;// 当前的年级id

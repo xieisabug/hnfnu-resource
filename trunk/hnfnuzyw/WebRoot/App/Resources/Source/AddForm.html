@@ -12,7 +12,9 @@
     <script src="../../Lib/jquery.form.js" type="text/javascript"></script>
     <script src="../../Lib/Uploadify/jquery.uploadify.min.js" type="text/javascript"></script>
     <script src="../../Util/String.js" type="text/javascript"></script>
+
     <script type="text/javascript" src="../../Lib/Uploadify/swfobject.js"></script>
+    <script src="../../Util/Url.js" type="text/javascript"></script>
 </head>
 <body>
 <form>
@@ -23,7 +25,9 @@
 var sourceForm = null;
 var winManager = null;
 $(function () {
-    formInit();
+    var groupId = Url.getArgs();
+    console.log(groupId);
+    formInit(groupId);
     sourceForm.prepend('<input type="file" id="file_upload" name="fileName"><div id="uploadFileName"></div>');
     $("#file_upload").uploadify({
         debug:false,
@@ -114,13 +118,14 @@ $(function () {
         }
     });
 });
-function formInit() {
+function formInit(groupId) {
     var groupicon = "../../../App/Lib/ligerUI/skins/icons/communication.gif";
     sourceForm = $('form');
 
     $.ajax({
         url:'../../../resources/formSelect.action',
         type:'post',
+        data:groupId,
         success:function (data) {
             sourceForm.ligerForm({
                 inputWidth:200,

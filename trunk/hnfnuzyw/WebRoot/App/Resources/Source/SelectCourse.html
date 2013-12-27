@@ -6,6 +6,7 @@
     <link href="../../Lib/ligerUI/skins/Aqua/css/ligerui-all.css" type="text/css" rel="stylesheet"/>
     <script src="../../Lib/jquery/jquery-1.5.2.min.js" type="text/javascript"></script>
     <script src="../../Lib/ligerUI/js/ligerui.min.js" type="text/javascript"></script>
+    <script src="../../Util/Url.js" type="text/javascript"></script>
 </head>
 <body>
 <div id="selectCourseTree">
@@ -15,9 +16,12 @@
 <script type="text/javascript">
     var selectCourseTree = null;
     $(function(){
+        var groupId = Url.getArgs();
+        console.log(groupId);
         $.ajax({
             url:'../../../resources/courseTree.action',
             type:'post',
+            data:groupId,
             success:function(data){
                 selectCourseTree = $("#selectCourseTree").ligerTree({
                     nodeWidth:200,

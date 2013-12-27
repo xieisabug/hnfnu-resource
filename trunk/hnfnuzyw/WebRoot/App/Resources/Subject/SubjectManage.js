@@ -84,8 +84,7 @@ function edit_save() {
                 type : 'post',
                 success : function(data) {
                     if (data.success) {
-                        subjectGrid.update(subjectGrid.getSelected(),
-                            data.model);
+                        refresh_subject();
                         $.ligerDialog.tip({
                             title : '提示信息',
                             content : data.message
@@ -122,7 +121,7 @@ function delete_subject() {
                             title : '提示信息',
                             content : data.message
                         });
-                        subjectGrid.deleteSelectedRow();
+                        refresh_subject();
                         subjectWin.close();
                     } else {
                         $.ligerDialog.error(data.message);
