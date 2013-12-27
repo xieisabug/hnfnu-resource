@@ -162,11 +162,11 @@
     background: -webkit-gradient(linear, left top, left bottom, from(#FDFDFD), to(#F4F5F5));
     border: 1px solid #CCC;
     border-bottom: none;
-    color: #777;
+    color: #000;
     filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#FDFDFD', EndColorStr='#F4F5F5');
     padding: 8px 0 0;
     height: 24px;
-    width: 74px;
+    /*width: 74px;*/
     -moz-border-radius-topleft: 6px;
     -moz-border-radius-topright: 6px;
     border-top-left-radius: 6px;
@@ -178,6 +178,7 @@
 .tabTitle.selected {
     color: #B86364;
     height: 25px;
+    font-weight: bolder;
 }
 
 .tabContent {
