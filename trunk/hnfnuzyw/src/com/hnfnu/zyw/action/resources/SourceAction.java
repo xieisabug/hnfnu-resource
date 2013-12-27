@@ -180,7 +180,7 @@ public class SourceAction extends AopNoSuchMethodErrorSolveBaseAction implements
 	// 页面上的一颗显示所有数据的树
 	@Action(value = "allTree")
 	public String allTree() {
-		allTree = sourceVoService.allTree();
+		allTree = sourceVoService.allTree(groupId);
 		return SUCCESS;
 	}
 
@@ -191,7 +191,7 @@ public class SourceAction extends AopNoSuchMethodErrorSolveBaseAction implements
 		ActionContext context = ActionContext.getContext();
 		Map<String, Object> session = context.getSession();
 		user = (UserDto) session.get("user");
-		allTree = sourceVoService.treeByUserId(user.getId());
+		allTree = sourceVoService.treeByUserId(user.getId(),groupId);
 		return SUCCESS;
 	}
 

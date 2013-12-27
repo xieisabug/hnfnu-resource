@@ -94,11 +94,7 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	public boolean updatePwd(int id, String newPassword) {
-		// UserDto u = this.load(id);
-		// if (u != null) {
-		// u.setPassword(newPassword);
-		// return this.update(u);
-		// }
+		newPassword = EncodeUtils.generatePassword(newPassword);
 		try {
 			userDao.updatePwd(id, newPassword);
 		} catch (Exception e) {

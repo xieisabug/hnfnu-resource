@@ -26,7 +26,7 @@ public interface ISourceVoService {
 	/**
 	 * 获得特定用户的资源树
 	 */
-	public List<Map<String, Object>> treeByUserId(int userId);
+	public List<Map<String, Object>> treeByUserId(int userId,int groupId);
 	
 	/**
 	 * 根据课程和类别获得资源制定用户的资源
@@ -48,7 +48,7 @@ public interface ISourceVoService {
 	public List<SourceVo> listSourceVoOrder(int gradeId,int subjectId);
 
 
-	public List<Map<String, Object>> allTree();
+	public List<Map<String, Object>> allTree(int groupId);
 
 	public List<Map<String, Object>> courseTree(int groupId);
 
