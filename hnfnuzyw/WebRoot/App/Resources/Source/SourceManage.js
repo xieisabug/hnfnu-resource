@@ -4,13 +4,15 @@ var sourceTree = null;// 左侧树
 var sourceWin = null;// 显示的窗口
 var sourceSelectData = null;// 表格选择的数据
 var treeUrl = "",selectUrl = "";
+var groupGrid = null;//上传资源之前先选择该资源是属于哪个组
+var groupWin = null;
 // 增加资源
-function add_source2() {
+function add_source2(groupId) {
 	sourceWin = $.ligerDialog.open({
 		width : 400,
 		height : 550,
 		title : "上传资源",
-		url : 'AddForm.html',
+		url : 'AddForm.html?groupId='+groupId,
 		allowClose : false,
 		buttons : [ {
 			text : "提交",
@@ -23,6 +25,97 @@ function add_source2() {
 		} ]
 	});
 	// sourceForm = sourceWin.frame.sourceForm;
+}
+
+
+
+//todo 选择分组的win
+
+function select_group(event) {
+    var next_function_name = "";
+    if(event.key == "add"){
+        next_function_name = add_select_group_sure;
+    }else if(event.key =="modify"){
+        if (!sourceGrid.getSelected()) {
+            $.ligerDialog.warn("请选择您要修改的行！");
+            return;
+        }
+        next_function_name = update_select_group_sure;
+    }else if(event.key == "query_group_source"){
+        next_function_name = query_select_group_sure;
+    }
+    $.ajax({
+        async:false,
+        url:'../../../resources/listGroup.action',
+        type:'post',
+        success:function (data) {
+            var s = $('#groupGrid');
+            groupGrid = s.ligerGrid({
+                columns:[
+                    // { display:'ID', name:'id', align:'left', width:100 },
+                    {
+                        display:'分组名称',
+                        name:'name',
+                        width:200
+                    }, {
+                        display:'分组样式',
+                        name:'style',
+                        width:200
+                    }, {
+                        display:'是否显示',
+                        name:'isDisplay',
+                        width:200
+                    },
+                    {
+                        display:'备注',
+                        name:'remark',
+                        align:'left',
+                        width:800
+                    }
+                ],
+                width:560,
+                height:530,
+                pageSize:30,
+                data:data.groupList
+            });
+            groupWin = $.ligerDialog.open({
+                width:600,
+                height:600,
+                title:'请选择分组',
+                target:s,
+                buttons : [ {
+                    text : "下一步",
+                    width : 80,
+                    onclick : next_function_name
+                }, {
+                    text : "取消",
+                    width : 80,
+                    onclick : select_group_cancel
+                } ]
+            });
+            $(".l-grid2", groupWin.element).css({width:560});
+            $("#pageloading").hide();
+        }
+    });
+}
+//增加资源的下一步
+function add_select_group_sure(){
+    add_source2(groupGrid.getSelected().id);
+}
+//修改资源的下一步
+function update_select_group_sure(){
+    if (!groupGrid.getSelected()) {
+        $.ligerDialog.warn("请选择分组！");
+        return;
+    }
+    edit_source(groupGrid.getSelected().id);
+}
+//查看分组资源的下一步
+function query_select_group_sure(){
+    alert("query_select_group_sure");
+}
+function select_group_cancel(){
+    groupWin.hide();
 }
 // 增加资源的保存按钮事件
 function add_save() {
@@ -111,7 +204,7 @@ function delete_source() {
 	});
 }
 // 编辑资源
-function edit_source() {
+function edit_source(groupId) {
 	if (!sourceGrid.getSelected()) {
 		$.ligerDialog.warn("请选择您要修改的行！");
 		return;
@@ -122,7 +215,7 @@ function edit_source() {
 		width : 400,
 		height : 550,
 		title : "修改资源",
-		url : 'EditForm.html',
+		url : 'EditForm.html?groupId='+groupId,
 		allowClose : false,
 		buttons : [ {
 			text : "提交",
@@ -201,12 +294,13 @@ function all_info() {
 }
 // 打开一个选择资源的树形结构的对话框
 function openTreeDialog() {
+    var groupId = groupGrid.getSelected().id;
 	$.ligerDialog.open({
 		title : '选择资源',
 		name : 'winSelector',
 		width : 500,
 		height : 500,
-		url : 'SelectCourse.html',
+		url : 'SelectCourse.html?groupId='+groupId,
 		isHidden : false,
 		buttons : [
 				{
@@ -256,7 +350,7 @@ function getParentId(obj) {
 	return $(sourceTree.getParentTreeItem(obj.target)).attr("id");
 }
 // 初始化表单
-function formInit() {
+function formInit(groupId) {
 	var groupicon = "../../../App/Lib/ligerUI/skins/icons/communication.gif";
 	sourceForm = $('<form></form>');
 
@@ -296,7 +390,7 @@ function formInit() {
 						valueField : "id",
 						hideOnLoseFocus : true,
 						valueFieldID : "courseId",
-						onBeforeOpen : openTreeDialog
+						onBeforeOpen : openTreeDialog(groupId)
 					},
 					validate : {
 						required : true
@@ -426,7 +520,7 @@ $(function() {
 	});
 	var toolbarItems = [ {
 		text : '上传资源',
-		click : add_source2,
+		click : select_group,
 		icon : 'add',
 		key : 'add'
 	}, {
@@ -440,7 +534,7 @@ $(function() {
 		line : true
 	}, {
 		text : '修改资源',
-		click : edit_source,
+		click : select_group,
 		icon : 'modify',
 		key : 'modify'
 	}, {
@@ -455,7 +549,12 @@ $(function() {
 		click : refresh_info,
 		icon : 'refresh',
 		key : 'refresh'
-	} ];
+	} , {
+        text : '查看分组资源',
+        click : select_group,
+        icon : 'refresh',
+        key : 'query_group_source'
+    }];
 
 	var menuId = window.parent.tab.getSelectedTabItemID();
 

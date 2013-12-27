@@ -20,7 +20,7 @@ public interface ICategoryService {
 	 * 
 	 * @return
 	 */
-	public List<CategoryDto> list();
+	public List<CategoryDto> list(int groupId);
 
 	/**
 	 *获取表中所有功能，用Map装，为了分页的需要加上Rows和Total

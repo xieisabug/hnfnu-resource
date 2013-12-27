@@ -56,8 +56,8 @@ public class CategoryServiceImpl implements ICategoryService {
 		return null;
 	}
 
-	public List<CategoryDto> list() {
-		String hql = "from CategoryDto";
+	public List<CategoryDto> list(int groupId) {
+		String hql = "from CategoryDto where groupId="+groupId;
 		List<CategoryDto> categorys = null;
 		try {
 			categorys = categoryDao.list(hql);

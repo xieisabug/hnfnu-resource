@@ -50,6 +50,6 @@ public interface ISourceVoService {
 
 	public List<Map<String, Object>> allTree();
 
-	public List<Map<String, Object>> courseTree();
+	public List<Map<String, Object>> courseTree(int groupId);
 
 }

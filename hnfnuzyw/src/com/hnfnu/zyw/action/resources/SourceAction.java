@@ -45,6 +45,7 @@ public class SourceAction extends AopNoSuchMethodErrorSolveBaseAction implements
 	private List<Map<String, Object>> allTree;
 	private List<Map<String, Object>> courseTree;
 	private List<CategoryDto> categoryList;
+	private int groupId;
 
 	@Autowired
 	@Qualifier("sourceService")
@@ -196,14 +197,14 @@ public class SourceAction extends AopNoSuchMethodErrorSolveBaseAction implements
 
 	@Action(value = "courseTree")
 	public String courseTree() {
-		courseTree = sourceVoService.courseTree();
+		courseTree = sourceVoService.courseTree(groupId);
 		return SUCCESS;
 	}
 
 	// 获取form中的下拉列表值
 	@Action(value = "formSelect")
 	public String formSelect() {
-		categoryList = categoryService.list();
+		categoryList = categoryService.list(groupId);
 		return SUCCESS;
 	}
 
@@ -272,5 +273,17 @@ public class SourceAction extends AopNoSuchMethodErrorSolveBaseAction implements
 	public List<Map<String, Object>> getCourseTree() {
 		return courseTree;
 	}
+
+	public int getGroupId() {
+		return groupId;
+	}
+
+	public void setGroupId(int groupId) {
+		this.groupId = groupId;
+	}
+
+	
+	
+
 
 }

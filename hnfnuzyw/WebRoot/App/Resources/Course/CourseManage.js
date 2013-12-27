@@ -93,8 +93,8 @@ function delete_course() {
 }
 
 // 修改课程的函数
-function edit_course() {
-	formInit();
+function edit_course(groupId) {
+	formInit(groupId);
 	if (!courseGrid.getSelected()) {
 		$.ligerDialog.warn("请选择您要修改的行！");
 		return;
@@ -160,8 +160,18 @@ function refresh_course() {
     $("#pageloading").hide();
 
 }
-
-function select_group() {
+//修改课程的选择分组下一步
+function select_group(event) {
+    var next_function_name = "";
+    if(event.key == "add"){
+        next_function_name = add_select_group_sure;
+    }else if(event.key =="modify"){
+        if (!courseGrid.getSelected()) {
+            $.ligerDialog.warn("请选择您要修改的行！");
+            return;
+        }
+        next_function_name = update_select_group_sure;
+    }
     $.ajax({
         async:false,
         url:'../../../resources/listGroup.action',
@@ -204,11 +214,11 @@ function select_group() {
                 buttons : [ {
                     text : "下一步",
                     width : 80,
-                    onclick : select_group_sure
+                    onclick : next_function_name
                 }, {
                     text : "取消",
                     width : 80,
-                    onclick : aselect_group_cancel
+                    onclick : select_group_cancel
                 } ]
             });
             $(".l-grid2", groupWin.element).css({width:560});
@@ -216,16 +226,25 @@ function select_group() {
         }
     });
 }
-function select_group_sure(){
+//增加课程的下一步函数
+function update_select_group_sure(){
     if (!groupGrid.getSelected()) {
         $.ligerDialog.warn("请选择分组！");
         return;
     }
-    groupWin.unmask();
+
+    edit_course(groupGrid.getSelected().id);
+}
+//增加课程的下一步函数
+function add_select_group_sure(){
+    if (!groupGrid.getSelected()) {
+        $.ligerDialog.warn("请选择分组！");
+        return;
+    }
     add_course(groupGrid.getSelected().id);
 }
-function aselect_group_cancel(){
-    groupWin.close();
+function select_group_cancel(){
+    groupWin.hide();
 }
 function query_course(){
     courseGrid.showFilter();
@@ -325,7 +344,7 @@ $(function() {
 		line : true
 	}, {
 		text : '修改',
-		click : edit_course,
+		click : select_group,
 		icon : 'modify',
 		key : 'modify'
 	}, {
