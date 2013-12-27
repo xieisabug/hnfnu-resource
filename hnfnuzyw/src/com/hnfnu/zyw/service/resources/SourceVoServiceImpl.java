@@ -110,16 +110,26 @@ public class SourceVoServiceImpl implements ISourceVoService {
 	/**
 	 * 获得所有的资源
 	 */
-	public List<Map<String, Object>> allTree() {
-		String sql = "FROM SourceVo ORDER BY gradeId,subjectId,courseId ASC";
+	public List<Map<String, Object>> allTree(int groupId) {
+		String sql = "FROM SourceVo" ;
+				
+		if(groupId > 0){
+			sql = sql + " where groupId="+groupId;
+		}
+		sql = sql + " ORDER BY gradeId,subjectId,courseId ASC";
+		System.out.println(sql);
 		return getTree(sql);
 	}
 	
 	/**
 	 * 获得特定用户的资源树
 	 */
-	public List<Map<String, Object>> treeByUserId(int userId) {
-		String sql = "FROM SourceVo WHERE createUserId=" + userId + "ORDER BY gradeId,subjectId,courseId ASC";
+	public List<Map<String, Object>> treeByUserId(int userId,int groupId) {
+		String sql = "FROM SourceVo WHERE createUserId=" + userId;
+		if(groupId > 0){
+			sql+= " and groupId="+groupId;
+		}
+		sql +=" ORDER BY gradeId,subjectId,courseId ASC";
 		return getTree(sql);
 	}
 	

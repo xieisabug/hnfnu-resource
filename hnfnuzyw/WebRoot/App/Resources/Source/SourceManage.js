@@ -27,9 +27,14 @@ function add_source2(groupId) {
 	// sourceForm = sourceWin.frame.sourceForm;
 }
 
+//获取一个div改变名字
+function changeSourceTreeTitle(name){
+    $('#sourceTree').prev().find('.l-layout-header-inner').text(name);
+}
 
 
-//todo 选择分组的win
+
+// 选择分组的win
 
 function select_group(event) {
     var next_function_name = "";
@@ -110,9 +115,13 @@ function update_select_group_sure(){
     }
     edit_source(groupGrid.getSelected().id);
 }
-//查看分组资源的下一步
+//todo
+// 查看分组资源的下一步
 function query_select_group_sure(){
-    alert("query_select_group_sure");
+    var groupId = groupGrid.getSelected().id;
+    var groupName = groupGrid.getSelected().name;
+    refresh_info(groupId,groupName);
+   // changeSourceTreeTitle(groupName);
 }
 function select_group_cancel(){
     groupWin.hide();
@@ -260,10 +269,18 @@ function edit_cancel() {
 }
 
 // 刷新资源的函数
-function refresh_info() {
+function refresh_info(groupId,groupName) {
+    if(!groupId){
+        groupId = 0;
+        groupName="所有分组资源";
+    }
+
 	$.ajax({
 		url : treeUrl,
 		type : 'post',
+        data:{
+            groupId:groupId
+        },
 		success : function(data) {
 			sourceGrid.loadData({
 				Rows : [],
@@ -274,7 +291,7 @@ function refresh_info() {
 		}
 	});
 	$("#pageloading").hide();
-
+    changeSourceTreeTitle(groupName);
 }
 
 // 查看资源全部的信息
@@ -515,6 +532,9 @@ function formInit(groupId) {
 }
 // 页面加载完成后就开始调用
 $(function() {
+
+
+
 	$("#sourceLayout").ligerLayout({
 		leftWidth : 260
 	});
