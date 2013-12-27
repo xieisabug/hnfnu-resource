@@ -140,8 +140,7 @@ Slidetrans.prototype = {
 		this.MoveTo(this._target);
 	}
 };
-$(window)
-		.load(
+window.addEvent('domready',
 				function() {
 					var forEach = function(array, callback, thisObject) {
 						if (array.forEach) {
@@ -154,10 +153,9 @@ $(window)
 					};
 
                     var st;
-                    $.ajax({
+                    new Request.JSON({
                         url : '../website/count.action',
-                        type : 'post',
-                        success : function(data) {
+                        onSuccess:function(data){
                             st = new Slidetrans("idContainer2", "idSlider2", data.count, {
                                 Vertical : false
                             });
@@ -187,5 +185,5 @@ $(window)
                             };
                             st.Run();
                         }
-                    });
-				});
+                    }).send();
+                });

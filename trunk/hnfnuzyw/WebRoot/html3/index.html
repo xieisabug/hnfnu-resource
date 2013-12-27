@@ -4,14 +4,31 @@
     <meta charset="utf-8">
     <title></title>
     <link href="css/index.css" type="text/css" rel="stylesheet">
-    <link href="css/ui.css" type="text/css" rel="stylesheet">
+    <link href="css/xkui.css" type="text/css" rel="stylesheet">
 
-    <script src="http://cdn.bootcss.com/jquery/1.8.2/jquery.min.js"></script>
-    <script type="text/javascript" src="js/dropdown.min.js"></script>
+    <!--<link href="css/ui.css" type="text/css" rel="stylesheet">-->
+
+    <!--<script src="http://cdn.bootcss.com/jquery/1.8.2/jquery.min.js"></script>-->
+    <!--<script type="text/javascript" src="js/dropdown.min.js"></script>-->
+    <script src="js/mootools.js" type="text/javascript"></script>
+    <script src="js/xkui.js" type="text/javascript"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="js/gallery.js"></script>
 </head>
 <body>
+<div id="headContent" style="height: 90px;">
+    <div id="headLogo"></div>
+    <div id="headMenu">
+        <div class="btn-group">
+            <a href="#">湖南第一师范学院</a><a href="#">公馆实验管理中心</a><a href="#">联系我们</a><a href="#">添加收藏</a>
+        </div>
+    </div>
+    <div id="headSearch">
+        <button id="searchSelect">站内资源</button>
+        <input type="text" style="width: 270px; *padding:0;">
+        <button type="button">搜索</button>
+    </div>
+</div>
 <div id="allContent">
     <div class="navbar">
         <ul class="nav">
@@ -26,11 +43,11 @@
 
     <div class="row">
         <div id="login">
-            <div class="panel-head">
+            <div>
                 <div class="panel-head-icon"></div>
                 <span>用户登陆</span>
             </div>
-            <div class="panel-content">
+            <div>
                 <div>
                     <label for="username">用户名</label>
                     <!--<span>用户名：</span>-->
@@ -43,16 +60,11 @@
                     <input class="form-control" type="password" id="password"
                            name="password" placeholder="请输入密码">
                 </div>
-                <div style="position: relative;">
+                <div>
                     <label for="role">身&nbsp;&nbsp;份</label>
-                    <button type="button" class="btn btn-default dropdown-toggle btn-ie67"
-                            data-toggle="dropdown" id="role" style="width: 128px;">
-                        学生 <span class="caret"></span>
+                    <button type="button" id="role" style="width: 128px;">
+                        学生
                     </button>
-                    <ul class="dropdown-menu">
-                        <li><a href="javascript:void(0)">老师</a></li>
-                        <li><a href="javascript:void(0)">学生</a></li>
-                    </ul>
                 </div>
                 <div>
                     <label for="captcha">验证码</label>
@@ -61,14 +73,14 @@
                            name="captcha" placeholder="输入弹出的验证码">
                 </div>
                 <div>
-                    <div id="login_btn" class="btn btn-default">
+                    <button id="login_btn">
                         <span class="btn-login-icon"></span>
                         登陆
-                    </div>
-                    <div id="register_btn" class="btn btn-default">
+                    </button>
+                    <button id="register_btn">
                         <span class="btn-register-icon"></span>
                         注册
-                    </div>
+                    </button>
                 </div>
                 <div class="p-small-font align-right">
                     <p>忘记密码？请<a href="#">点击这里</a></p>
@@ -120,11 +132,11 @@
             </div>
         </div>
         <div id="source-count">
-            <div class="panel-head">
+            <div>
                 <div class="panel-head-icon"></div>
                 <span>资源统计</span>
             </div>
-            <div class="panel-content">
+            <div>
                 <div>
                     <ul>
                         <li>资源总数量：&nbsp;&nbsp;<a href="#">12356 个</a></li>
@@ -138,13 +150,13 @@
             </div>
         </div>
     </div>
-    <div id="row">
+    <div class="row">
         <div id="topic">
-            <div class="panel-head">
+            <div>
                 <div class="panel-head-icon"></div>
                 <span>专题资源</span>
             </div>
-            <div class="panel-content">
+            <div>
                 <table>
                     <tr>
                         <td>
@@ -159,37 +171,127 @@
                         </td>
                         <td>
                             <a href="#">
-                                    <img src="image/topic_02.jpg">
+                                <img src="image/topic_02.jpg">
 
-                                    <div class="topic-item">
-                                        <div class="topic-title">优秀少儿短片</div>
-                                        <div class="topic-description">大头儿子小头爸爸 小头儿子大头爸爸</div>
-                                    </div>
+                                <div class="topic-item">
+                                    <div class="topic-title">优秀少儿短片</div>
+                                    <div class="topic-description">大头儿子小头爸爸 小头儿子大头爸爸</div>
+                                </div>
                             </a>
                         </td>
                         <td>
                             <a href="#">
-                                    <img src="image/topic_03.jpg">
+                                <img src="image/topic_03.jpg">
 
-                                    <div class="topic-item">
-                                        <div class="topic-title">世界地理知识</div>
-                                        <div class="topic-description">亚洲：希望之旅 非洲：神秘之旅 欧洲：风情之旅......
-                                        </div>
+                                <div class="topic-item">
+                                    <div class="topic-title">世界地理知识</div>
+                                    <div class="topic-description">亚洲：希望之旅 非洲：神秘之旅 欧洲：风情之旅......
                                     </div>
+                                </div>
                             </a>
                         </td>
                     </tr>
                     <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>
+                            <a href="#">
+                                <img src="image/topic_03.jpg">
+
+                                <div class="topic-item">
+                                    <div class="topic-title">世界地理知识</div>
+                                    <div class="topic-description">亚洲：希望之旅 非洲：神秘之旅 欧洲：风情之旅......
+                                    </div>
+                                </div>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#">
+                                <img src="image/topic_03.jpg">
+
+                                <div class="topic-item">
+                                    <div class="topic-title">世界地理知识</div>
+                                    <div class="topic-description">亚洲：希望之旅 非洲：神秘之旅 欧洲：风情之旅......
+                                    </div>
+                                </div>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#">
+                                <img src="image/topic_03.jpg">
+
+                                <div class="topic-item">
+                                    <div class="topic-title">世界地理知识</div>
+                                    <div class="topic-description">亚洲：希望之旅 非洲：神秘之旅 欧洲：风情之旅......
+                                    </div>
+                                </div>
+                            </a>
+                        </td>
                     </tr>
                 </table>
             </div>
         </div>
     </div>
 
+    <div class="row">
+        <div id="collageSource">
+            <ul>
+                <li>大学一年级</li>
+                <li>大学二年级</li>
+                <li>大学三年级</li>
+                <li>大学四年级</li>
+                <li>研究生一年级</li>
+                <li>研究生二年级</li>
+            </ul>
+            <div>
+                1
+            </div>
+            <div>
+                2
+            </div>
+            <div>
+                3
+            </div>
+            <div>
+                4
+            </div>
+            <div>
+                5
+            </div>
+            <div>
+                6
+            </div>
+        </div>
+    </div>
 
+    <div class="row">
+        <div id="primarySource">
+            <ul>
+                <li>小学一年级</li>
+                <li>小学二年级</li>
+                <li>小学三年级</li>
+                <li>小学四年级</li>
+                <li>小学五年级</li>
+                <li>小学六年级</li>
+            </ul>
+            <div>
+                1
+            </div>
+            <div>
+                2
+            </div>
+            <div>
+                3
+            </div>
+            <div>
+                4
+            </div>
+            <div>
+                5
+            </div>
+            <div>
+                6
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>
