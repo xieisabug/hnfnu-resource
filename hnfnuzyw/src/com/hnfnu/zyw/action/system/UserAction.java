@@ -234,7 +234,7 @@ public class UserAction extends AopNoSuchMethodErrorSolveBaseAction implements M
 	}
 	
 	
-	// 获取表中所有功能，用Map装，为了分页的需要加上Rows和Total
+	// 获取表中所有用户，用Map装，为了分页的需要加上Rows和Total
 	@Action(value = "listUser")
 	public String list() {
 		userList = userService.list();

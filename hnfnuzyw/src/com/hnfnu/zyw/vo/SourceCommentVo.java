@@ -1,4 +1,4 @@
-package com.hnfnu.zyw.dto.resources;
+package com.hnfnu.zyw.vo;
 
 import java.util.Date;
 
@@ -11,8 +11,8 @@ import javax.persistence.Table;
 * 通过数据库内表的字段动态生成 SourceCommentDto
 **/
 @Entity
-@Table(name="r_source_comment")
-public class SourceCommentDto 
+@Table(name="v_source_comment")
+public class SourceCommentVo 
 {	
 	//id
 	private Integer id;
@@ -24,25 +24,29 @@ public class SourceCommentDto
 	private String content;
 	//评论的作者id，用于链接评论人员的信息
 	private Integer createId;
+	private Integer createName;
 	//创建日期
 	private Date createDate;
 
-	public SourceCommentDto()
+	public SourceCommentVo()
 	{
 
 	}
-
-	
-	public SourceCommentDto(Integer id, Integer sourceId, Integer parentId,
-			String content, Integer createId, Date createDate) {
+	public SourceCommentVo(Integer id, Integer sourceId, Integer parentId,
+			String content, Integer createId, Integer createName,
+			Date createDate) {
 		super();
 		this.id = id;
 		this.sourceId = sourceId;
 		this.parentId = parentId;
 		this.content = content;
 		this.createId = createId;
+		this.createName = createName;
 		this.createDate = createDate;
 	}
+
+
+
 
 
 	public void setId(Integer id)
@@ -95,10 +99,19 @@ public class SourceCommentDto
 	{
 		return this.createDate;
 	}
+	
+	public Integer getCreateName() {
+		return createName;
+	}
+	public void setCreateName(Integer createName) {
+		this.createName = createName;
+	}
 	@Override
 	public String toString() {
-		return "SourceCommentDto [id=" + id + ", sourceId=" + sourceId
+		return "SourceCommentVo [id=" + id + ", sourceId=" + sourceId
 				+ ", parentId=" + parentId + ", content=" + content
-				+ ", createId=" + createId + ", createDate=" + createDate + "]";
+				+ ", createId=" + createId + ", createName=" + createName
+				+ ", createDate=" + createDate + "]";
 	}
+	
 }
