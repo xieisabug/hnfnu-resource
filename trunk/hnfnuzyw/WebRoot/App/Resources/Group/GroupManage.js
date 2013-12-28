@@ -133,7 +133,7 @@ function delete_group() {
         return;
     }
     var row_data = groupGrid.getSelected();
-    $.ligerDialog.confirm('确认删除' + row_data.name + '？', '删除分组', function (r) {
+    $.ligerDialog.confirm('确认删除' + row_data.name + '？,删除该分组后，该分组下的年级，科目，类别，资源都将级联删除，删除后将不可恢复，请慎重。', '删除分组', function (r) {
         if (r) {
             $.ajax({
                 url:'../../../resources/deleteGroup.action',
