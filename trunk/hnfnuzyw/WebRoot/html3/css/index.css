@@ -476,4 +476,31 @@ label {
 #source-info-panel {
     float: right;
 }
+#webPlayer {
+    width: 600px;
+    height: 500px;
+    padding: 10px;
+}
+.comment-item,.comment-sub-item {
+    margin: 15px 0;
+    font-size: 0.9em;
+    border-bottom: 1px solid #eee;
+}
+.comment-item td,.comment-sub-item td{
+    padding-left: 20px;
+}
+.comment-item a,.comment-sub-item a{
+    margin-left: 50px;
+    visibility: hidden;
+}
+.comment-item:hover a,.comment-sub-item:hover a{
+    visibility: visible;
+}
+.comment-item img,.comment-sub-item img{
+    width: 45px;
+    height: 45px;
+}
+.comment-sub-item {
+    margin-left:40px;
+}
 /**online source view**/
