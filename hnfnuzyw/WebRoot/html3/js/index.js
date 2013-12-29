@@ -50,7 +50,8 @@ window.addEvent('domready',function(){
     });
     var primarySource = new Tab('primarySource', {
         tabChangeEvent:'mouseover',
-        tabTitleCss:'my-tab'
+        tabTitleCss:'my-tab',
+        tabContentCss:'my-tabContent'
     });
     $$('#headMenu a').each(function(item,index) {
         var option = {
