@@ -50,8 +50,6 @@ ModelDriven<TopicDto>{
 		String[] s= topic.getImageUrl().split("\\\\");
 		//System.out.println(s[s.length-1]);
 		String tPath = s[s.length-1];
-		String[] tt = tPath.split("\\.");
-		tPath = tt[tt.length-1]+"\\"+tPath;
 		topic.setImageUrl(tPath);
 		success = topicService.add(topic);
 		if (success) {
