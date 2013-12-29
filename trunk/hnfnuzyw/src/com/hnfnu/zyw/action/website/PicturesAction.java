@@ -53,7 +53,8 @@ ModelDriven<PicturesDto>{
 		pictures.setCreateDate(dt);
 		pictures.setCreateUserId(user.getId());
 		pictures.setCreateUserName(user.getName());
-		System.out.println(pictures);
+		String[] t = pictures.getSrc().split("\\\\");
+		pictures.setSrc(t[t.length-1]);
 		success = picturesService.add(pictures);
 		if (success) {
 			message = "添加图片成功！";
