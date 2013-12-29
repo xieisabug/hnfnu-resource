@@ -278,7 +278,7 @@ a.left {
 a.left,a.right{
     position: absolute;
     height: 99%;
-    width: 25%;
+    width: 50px;
     cursor: pointer;
     z-index: 10;
     filter: alpha(opacity=60);
@@ -287,3 +287,10 @@ a.left,a.right{
     opacity: 0.6;
 }
 /************    Scroll    **************/
+/************    TextArea    **************/
+.textarea {
+    outline: none;
+    border: 1px solid #ccc;
+    padding:10px;
+}
+/************    TextArea    **************/

@@ -83,5 +83,4 @@ window.addEvent('domready',function(){
         width:960,
         height:358
     }).withAnimate('fadeSlide');
-
 });

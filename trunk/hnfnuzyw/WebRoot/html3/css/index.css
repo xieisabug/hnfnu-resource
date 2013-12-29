@@ -481,6 +481,12 @@ label {
     height: 500px;
     padding: 10px;
 }
+#source-info-content {
+     font-size: 0.8em;
+ }
+#source-info-content tr{
+    height: 30px;
+}
 .comment-item,.comment-sub-item {
     margin: 15px 0;
     font-size: 0.9em;
