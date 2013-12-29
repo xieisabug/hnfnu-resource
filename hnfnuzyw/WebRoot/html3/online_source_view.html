@@ -9,7 +9,6 @@
     <script src="js/mootools.js" type="text/javascript"></script>
     <script src="js/xkui.js" type="text/javascript"></script>
     <script src="js/online_source_view.js" type="text/javascript"></script>
-
     <!--<script type="text/javascript" src="js/index.js"></script>-->
     <!--<script type="text/javascript" src="js/gallery.js"></script>-->
 
@@ -64,6 +63,9 @@
             <div>
                 <h3 style="float: left; margin-right: 20px; width: 500px; overflow: hidden;">喜羊羊与灰太狼 精彩画面</h3>
                 <a id="downloadBtn" href="#">下载资源</a>
+                <div id="webPlayer">
+                    网速过慢，正在载入播放器，请稍等。。。。
+                </div>
             </div>
         </div>
         <div id="comment-panel">
@@ -72,7 +74,36 @@
                 <span>评论</span>
             </div>
             <div>
-
+                <div id="comment-content">
+                    <div class="comment-item">
+                        <table>
+                            <tr>
+                                <td rowspan="2">
+                                    <img src="image/user1.jpg">
+                                    <p>admin</p>
+                                </td>
+                                <td>2013-12-17 20:22:36 <a href="javascript:void(0)">回复</a></td>
+                            </tr>
+                            <tr>
+                                <td>不错！很好看！</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="comment-sub-item">
+                        <table>
+                            <tr>
+                                <td rowspan="2">
+                                    <img src="image/user1.jpg">
+                                    <p>guest</p>
+                                </td>
+                                <td>2013-12-17 20:22:36 <a href="javascript:void(0)">回复</a></td>
+                            </tr>
+                            <tr>
+                                <td>//@天秤先森-:你告诉我，四岁小孩会装什么//@原色男装 :他都会装.那你的脑袋里面装的是什么东西呀？ //@ty54138937486 :裝？？？O~M~G .......//@yusimida :真的从一开始就不喜欢kimi 觉得他一点都不懂事不听话，也很装。最喜欢天天和安吉拉，单纯可爱。 心地还很善良。泥马你咋真贱贱啊 他咋装了 四岁小孩装的累不累啊 Kimi一点也不装 可爱死了</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -87,4 +118,11 @@
     </div>
 </div>
 </body>
+<script type="text/javascript" src="js/jwplayer.js"></script>
+<script type="text/javascript">
+    jwplayer("webPlayer").setup({
+        flashplayer : "player.swf",
+        file: '../uploads/201311241909381test.mp4'
+    });
+</script>
 </html>

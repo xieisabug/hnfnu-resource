@@ -32,7 +32,8 @@ window.addEvent('domready', function () {
         }
     });
     var onlinePanel = new Panel($('online-view-panel'), {
-        contentWidth: 622
+        contentWidth: 622,
+        contentHeight: 540
     });
     var commentPanel = new Panel($('comment-panel'), {
         contentWidth:622
@@ -41,4 +42,5 @@ window.addEvent('domready', function () {
         contentWidth:272
     });
     var downloadBtn = new Button($('downloadBtn'));
+
 });
