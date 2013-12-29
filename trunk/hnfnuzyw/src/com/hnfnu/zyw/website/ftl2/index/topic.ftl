@@ -14,7 +14,7 @@
                             <tr>
                                 <td>
                                     <a href="#">
-                                        <img src="../uploads/topic/${topic.imageUrl!"default_topic.png"}">
+                                        <img src="../uploads/topic/image/${topic.imageUrl!"default_topic.png"}">
 
                                         <div class="topic-item">
                                             <div class="topic-title">${topic.name}</div>

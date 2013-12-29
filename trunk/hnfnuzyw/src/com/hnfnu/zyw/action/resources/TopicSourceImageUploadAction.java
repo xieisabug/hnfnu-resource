@@ -17,7 +17,7 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-public class TopicSourceUploadAction extends ActionSupport implements
+public class TopicSourceImageUploadAction extends ActionSupport implements
 		ServletRequestAware {
 	private static final long serialVersionUID = 1L;
 
@@ -62,14 +62,14 @@ public class TopicSourceUploadAction extends ActionSupport implements
 				fn = fn+getFileNameFileName().get(i);
 				//根据文件的后缀名创建文件夹，并且该文件放入该文件夹
 				//String[] aStrings  =(getFileNameFileName().get(i)).split(".");
-				String ss = getFileNameFileName().get(i);
+				/*String ss = getFileNameFileName().get(i);
 				String[] aStrings = ss.split("\\.");
 				
 				String temp = aStrings[aStrings.length-1];
 				File f = new File(getSavePath() +"\\"+temp);
-				f.mkdirs();
+				f.mkdirs();*/
 				FileOutputStream fos;
-				fos = new FileOutputStream(getSavePath() +"\\"+temp+ "\\"
+				fos = new FileOutputStream(getSavePath() + "\\"
 						+ fn);
 				FileInputStream fis = new FileInputStream(getFileName().get(i));
 

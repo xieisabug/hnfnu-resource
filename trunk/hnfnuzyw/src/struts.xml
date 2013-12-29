@@ -14,10 +14,12 @@
        <action name="fileTopicUpload" class="com.hnfnu.zyw.action.resources.TopicSourceUploadAction" method="upload">
            <param name="savePath">/uploads/topic</param> 
        </action>
+        <action name="fileTopicImageUpload" class="com.hnfnu.zyw.action.resources.TopicSourceImageUploadAction" method="upload">
+           <param name="savePath">/uploads/topic/image</param> 
+       </action>
        <action name="pictureUpload" class="com.hnfnu.zyw.action.resources.PictureUploadAction" method="upload">
            <param name="savePath">/uploads/picture</param> 
        </action>
-       
         <!-- 初始文件名 
        <action name="download" class="com.hnfnu.zyw.action.resources.SourceDownloadAction" >  
            
