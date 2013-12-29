@@ -42,5 +42,15 @@ window.addEvent('domready', function () {
         contentWidth:272
     });
     var downloadBtn = new Button($('downloadBtn'));
-
+    new TextArea($('replyTextarea'), {
+        width:600,
+        height:80
+    });
+    var replyBtn = new Button($('replyBtn'),{
+        width:150,
+        height:30,
+        onclick:function(){
+            //TODO 提交表单
+        }
+    })
 });
