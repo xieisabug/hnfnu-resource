@@ -72,5 +72,16 @@ window.addEvent('domready',function(){
             height:200
         }).withAnimate('fadeSlide');
     });
+    $$('#primarySource>div').each(function(item){
+        new Scroll(item,{
+            width:960,
+            height:200
+        }).withAnimate('fadeSlide');
+    });
+    var topicContent = $('topic-content');
+    new Scroll(topicContent, {
+        width:960,
+        height:358
+    }).withAnimate('fadeSlide');
 
 });
