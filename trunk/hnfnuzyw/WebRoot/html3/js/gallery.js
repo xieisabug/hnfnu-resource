@@ -156,6 +156,9 @@ window.addEvent('domready',
                     new Request.JSON({
                         url : '../website/count.action',
                         onSuccess:function(data){
+                            if(data.count > 7) {
+                                data.count = 7;
+                            }
                             st = new Slidetrans("idContainer2", "idSlider2", data.count, {
                                 Vertical : false
                             });
