@@ -33,30 +33,49 @@ public class IndexAction extends ActionSupport {
 	
 	
 	private FreemarkerUtil fu =new FreemarkerUtil();
-	private Map<String,Object> root = null;
+	private Map<String, Object> root;
 	
 	
 	
-	
-	@Action(value = "makeIndex")
-	public String makeIndex() {
+	@Action(value = "makeGallery")
+	public String makeGallery() {
 		String filePath = null;
 		
 		filePath = ServletActionContext.getServletContext().getRealPath("/");
 		// 获得数据模型
-		root = indexService.getDataModel();
-		
+		root = indexService.getPictures();
 		//打印到输出台，以便于测试
-		//fu.print("index.ftl", root);
+		fu.print("index/gallery.ftl", root);
 		//输出到文件
-		success = fu.fprint("index.ftl", root, filePath+"website\\", "index.html");
+		success = fu.fprint("index/gallery.ftl", root, filePath+"website\\", "gallery.html");
 		if(success){
-			message="主页生成成功";
+			message="轮播图片生成成功";
 		}else{
-			message="主页生成失败";
+			message="轮播图片生成失败";
 		}
 		return SUCCESS;
 	}
+	
+	@Action(value = "makeTopic")
+	public String makeTopic() {
+		String filePath = null;
+		
+		filePath = ServletActionContext.getServletContext().getRealPath("/");
+		// 获得数据模型
+		root = indexService.getTopics();
+		//打印到输出台，以便于测试
+		fu.print("index/topic.ftl", root);
+		//输出到文件
+		success = fu.fprint("index/topic.ftl", root, filePath+"website\\", "topic.html");
+		if(success){
+			message="专题生成成功";
+		}else{
+			message="专题生成失败";
+		}
+		return SUCCESS;
+	}
+	
+	
 	public boolean isSuccess() {
 		return success;
 	}

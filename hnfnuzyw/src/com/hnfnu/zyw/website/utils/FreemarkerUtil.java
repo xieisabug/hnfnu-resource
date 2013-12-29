@@ -7,9 +7,6 @@ import java.util.Map;
 
 import org.apache.commons.io.output.FileWriterWithEncoding;
 
-import com.sun.org.apache.bcel.internal.generic.RETURN;
-
-import freemarker.core.ReturnInstruction.Return;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -21,7 +18,7 @@ public class FreemarkerUtil {
 			//通过Freemaker的Configuration读取相应的ftl
 			Configuration cfg = new Configuration();
 			//设定去哪里读取相应的ftl模板文件
-			cfg.setClassForTemplateLoading(this.getClass(),"../ftl");
+			cfg.setClassForTemplateLoading(this.getClass(),"../ftl2");
 			cfg.setDefaultEncoding("utf-8");
 			//在模板文件目录中找到名称为name的文件
 			Template temp = cfg.getTemplate(name);

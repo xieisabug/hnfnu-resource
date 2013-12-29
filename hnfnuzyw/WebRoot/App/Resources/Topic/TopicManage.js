@@ -40,6 +40,11 @@ function add_save() {
             $.ligerDialog.error("选择了外链之后，必须填写外链地址！");
             return;
         }
+
+        if (row_data.imageUrl == null || row_data.imageUrl == "") {
+            $.ligerDialog.error("请上传专题图片");
+            return;
+        }
         // 发往服务器，返回成功后再添加到表格中
         $.ajax({
             url:'../../../resources/addTopic.action',
