@@ -100,7 +100,6 @@ $(function () {
             winManager = $.ligerDialog.waitting('正在上传中,请稍候...');
         },
         onUploadProgress:function (file, fileBytesLoaded, fileTotalBytes) {
-            //console.log(winManager);
             winManager._setContent("正在上传： " + file.name + "<br> 已上传 " + Math.floor(fileBytesLoaded / fileTotalBytes * 100) +
                     "% ,  总大小为 : " + Math.floor(fileTotalBytes / 1024) + "KB ");
             //console.log(fileBytesLoaded);

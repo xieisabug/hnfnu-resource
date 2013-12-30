@@ -26,7 +26,6 @@ public class CourseDto
 	{
 
 	}
-
 	public CourseDto(Integer id, String name, Integer gradeId,
 			Integer subjectId, String remark) {
 		super();
@@ -36,7 +35,7 @@ public class CourseDto
 		this.subjectId = subjectId;
 		this.remark = remark;
 	}
-
+	
 	public void setId(Integer id)
 	{
 		this.id = id;
@@ -79,4 +78,11 @@ public class CourseDto
 	{
 		return this.remark;
 	}
+	@Override
+	public String toString() {
+		return "CourseDto [id=" + id + ", name=" + name + ", gradeId="
+				+ gradeId + ", subjectId=" + subjectId + ", remark=" + remark + "]";
+	}
+	
+	
 }
