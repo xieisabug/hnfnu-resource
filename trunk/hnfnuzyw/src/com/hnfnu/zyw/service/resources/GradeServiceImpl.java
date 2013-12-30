@@ -99,4 +99,16 @@ public class GradeServiceImpl implements IGradeService{
 		return gardes;
 	}
 
+	public List<GradeGroupVo> haveGradeList() {
+		String hql = "FROM GradeGroupVo where id in(select gradeId from SourceVo)"; 
+		List<GradeGroupVo> l  = null;
+		try {
+			l = gradeGroupVoDao.gradeList(hql);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		return l;
+	}
+
 }

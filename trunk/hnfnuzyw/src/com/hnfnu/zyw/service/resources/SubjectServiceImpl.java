@@ -100,4 +100,16 @@ public class SubjectServiceImpl implements ISubjectService {
 		return subjects;
 	}
 
+	public List<SubjectGroupVo> haveSubjectList(){
+		String hql = "FROM SubjectGroupVo where id in(select subjectId from SourceVo)"; 
+		List<SubjectGroupVo> l  = null;
+		try {
+			l = subjectGroupVoDao.subjectList(hql);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		return l;
+	}
+
 }

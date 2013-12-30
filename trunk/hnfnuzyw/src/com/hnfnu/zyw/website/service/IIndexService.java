@@ -6,5 +6,6 @@ public interface IIndexService {
 
 	public Map<String, Object> getPictures();
 	public Map<String, Object> getTopics();
+	public Map<String, Object> makeTabGroups();
 	
 }

@@ -10,6 +10,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
+import com.hnfnu.zyw.vo.GradeGroupVo;
+
 
 
 public class BaseDao<T> extends HibernateDaoSupport implements IBaseDao<T>{
@@ -128,6 +130,10 @@ public class BaseDao<T> extends HibernateDaoSupport implements IBaseDao<T>{
 				query.setParameter(index++, arg);
 			}
 		}
+	}
+
+	public List<T> complexList(String hql) throws Exception {
+		return this.getHibernateTemplate().find(hql);
 	}
 
 	

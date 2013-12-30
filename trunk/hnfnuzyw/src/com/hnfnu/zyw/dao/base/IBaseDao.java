@@ -11,6 +11,8 @@ public interface IBaseDao<T> {
 		public List<T> list(String hql,Object[] args) throws Exception;
 		public List<T> list(String hql) throws Exception;
 		public List<T> list(String hql,Object arg) throws Exception;
+		public List<T> complexList(String hql) throws Exception;
+		
 		
 		public Pager<T> find(String hql, Object arg,int pageOffset,int pageSize) throws Exception;
 

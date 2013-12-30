@@ -30,7 +30,7 @@ public class IndexAction extends ActionSupport {
 	@Autowired
 	@Qualifier("ftl_indexService")
 	private IIndexService indexService;
-	
+
 	
 	private FreemarkerUtil fu =new FreemarkerUtil();
 	private Map<String, Object> root;
@@ -75,7 +75,37 @@ public class IndexAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
+	@Action(value = "makeTabGroup")
+	public String makeTabGroup() {
+		String filePath = null;
+		
+		filePath = ServletActionContext.getServletContext().getRealPath("/");
+		// 获得数据模型
+		root = indexService.getTopics();
+		//打印到输出台，以便于测试
+		fu.print("index/topic.ftl", root);
+		//输出到文件
+		success = fu.fprint("index/topic.ftl", root, filePath+"website\\", "topic.html");
+		if(success){
+			message="专题生成成功";
+		}else{
+			message="专题生成失败";
+		}
+		return SUCCESS;
+	}
 	
+	@Action(value = "makeTabGroupT")
+	public String makeTabGroupT() {
+		root = indexService.makeTabGroups();
+		return SUCCESS;
+	}
+	
+	
+	
+	public Map<String, Object> getRoot() {
+		return root;
+	}
+
 	public boolean isSuccess() {
 		return success;
 	}

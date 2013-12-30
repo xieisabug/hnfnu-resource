@@ -36,5 +36,13 @@ public interface IGradeService {
 	 * @return
 	 */
 	public List<GradeGroupVo> listGradeByGroupId(int groupId);
+	
+	/**
+	 * 获取已有资源的年级
+	 * @param sql
+	 * @return
+	 * @throws Exception
+	 */
+	public List<GradeGroupVo> haveGradeList();
 
 }

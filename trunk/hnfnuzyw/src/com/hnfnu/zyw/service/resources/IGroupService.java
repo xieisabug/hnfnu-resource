@@ -16,7 +16,7 @@ public interface IGroupService {
 	public GroupDto load(int id);
 
 	/**
-	 * 获取表中所有分组，是用List装的
+	 * 获取表中所有要显示的分组，是用List装的
 	 * 
 	 * @return
 	 */
