@@ -28,7 +28,32 @@ window.addEvent('domready',function(){
     var keyWords = new Input($$('#headSearch input'),{width:236}).addClass('input-group-center');
     var username = new Input($('username'),{width:100});
     var password = new Input($('password'),{width:100});
+
     var captcha = new Input($('captcha'),{width:100});
+    var captchaDiv = $('captchaDiv');
+    captcha.body.addEvent('focus',function(){
+        captchaDiv.setStyle('visibility','visible');
+    });
+    captcha.body.addEvent('blur',function(){
+        captchaDiv.setStyle('visibility','hidden');
+    });
+    function changeImg(){
+        var imgSrc = $("imgObj");
+        var src = imgSrc.getAttribute("src");
+        imgSrc.setAttribute("src",chgUrl(src));
+    }
+    //时间戳
+    //为了使每次生成图片不一致，即不让浏览器读缓存，所以需要加上时间戳
+    function chgUrl(url){
+        var timestamp = (new Date()).valueOf();
+        url = url.substring(0,20);
+        if((url.indexOf("&")>=0)){
+            url = url + "×tamp=" + timestamp;
+        }else{
+            url = url + "?timestamp=" + timestamp;
+        }
+        return url;
+    }
     var role = new Select('role',[
         {
             name:'老师',
@@ -41,6 +66,10 @@ window.addEvent('domready',function(){
     ],{width:125}).animate();
     var loginBtn = new Button($('login_btn'),{width:85}).addClass('login-btn');
     var registBtn = new Button($('register_btn'),{width:85}).addClass('login-btn');
+    loginBtn.body.addEvent('click',function(){
+
+    });
+
 
     var searchButton = new Button($$('button')[1]).addClass('btn-group-right');
     var collageSource = new Tab('collageSource', {

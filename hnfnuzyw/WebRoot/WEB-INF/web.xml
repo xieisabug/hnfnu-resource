@@ -35,7 +35,7 @@
 		<filter-name>LoginFilter</filter-name>
 		<url-pattern>*.action</url-pattern>
 	</filter-mapping>
-	<jsp-config>    
+	<jsp-config>
 	    <jsp-property-group>    
 	        <description>    
 	            Special property group for JSP Configuration HTML     

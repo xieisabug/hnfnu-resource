@@ -87,7 +87,12 @@ a {
     height: 280px;
     float: left;
 }
-
+#captchaDiv{
+    visibility: hidden;
+    position: absolute;
+    left: 350px;
+    top: 350px;
+}
 #gallery {
     width: 510px;
     height: 280px;
