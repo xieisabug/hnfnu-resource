@@ -3,6 +3,7 @@ package com.hnfnu.zyw.action.website;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -105,6 +106,13 @@ public class LoginAction extends AopNoSuchMethodErrorSolveBaseAction{
 			message = vm.getMessege();
 			user = (UserDto) vm.getO();
 			ServletActionContext.getContext().getSession().put("user", user);
+            info = new HashMap<String, Object>();
+            info.put("username",user.getUsername());
+            info.put("name",user.getName());
+            info.put("id",user.getId());
+            info.put("icon",user.getIcon());
+            info.put("lastedLoginDate",user.getLatestLoginDate());
+            info.put("balance",user.getBalance());
 			success = true;
 		} else {
 			message = vm.getMessege();
@@ -124,6 +132,13 @@ public class LoginAction extends AopNoSuchMethodErrorSolveBaseAction{
 			student = (StudentDto) vm.getO();
 			ServletActionContext.getContext().getSession()
 					.put("student", student);
+            info = new HashMap<String, Object>();
+            info.put("username",student.getUsername());
+            info.put("name",student.getName());
+            info.put("id",student.getId());
+            info.put("icon",student.getIcon());
+            info.put("lastedLoginDate",student.getEntranceTime());
+            info.put("balance",student.getBalance());
 			success = true;
 		} else {
 			message = vm.getMessege();
