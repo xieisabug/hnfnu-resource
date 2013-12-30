@@ -8,6 +8,6 @@ import com.hnfnu.zyw.vo.SourceVo;
 public interface ISourceVoDao extends IBaseDao<SourceVo> {
 	
 	public List<SourceVo> sourceVoList(String sql) throws Exception;
-	public int getViewTimesBySubjectId(int subjectId);
+	public int getViewTimesBySubjectId(int subjectId,int groupId,int gradeId);
 
 }

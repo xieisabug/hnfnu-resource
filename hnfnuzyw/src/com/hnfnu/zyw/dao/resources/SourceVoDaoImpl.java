@@ -21,8 +21,9 @@ public class SourceVoDaoImpl extends BaseDao<SourceVo> implements ISourceVoDao {
 	}
 
 
-	public int getViewTimesBySubjectId(int subjectId) {
-		String sql = "select sum(viewTimes) as allViewTimes  from v_source where subjectId="+subjectId; 
+	public int getViewTimesBySubjectId(int subjectId,int groupId,int gradeId) {
+		String sql = "select sum(viewTimes) as allViewTimes  from v_source " +
+				"where subjectId="+subjectId+" and gradeId="+gradeId+" and groupId="+groupId; 
 		List l = this.getSession().createSQLQuery(sql).list();
 		return Integer.valueOf(l.get(0).toString());
 	}
