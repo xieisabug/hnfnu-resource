@@ -26,12 +26,17 @@ window.addEvent('domready',function(){
         searchSelect.setSelectDivOffset(13,-19);
     }
     var keyWords = new Input($$('#headSearch input'),{width:236}).addClass('input-group-center');
+
+    //用户名、密码输入
     var username = new Input($('username'),{width:100});
     var password = new Input($('password'),{width:100});
 
+    //验证码输入框
     var captcha = new Input($('captcha'),{width:100});
+    //验证码输入时弹出层
     var captchaDiv = $('captchaDiv');
     captcha.body.addEvent('focus',function(){
+        changeImg();//每次点击输入框，都会重新生成验证码
         captchaDiv.setStyle('visibility','visible');
     });
     captcha.body.addEvent('blur',function(){
@@ -42,18 +47,18 @@ window.addEvent('domready',function(){
         var src = imgSrc.getAttribute("src");
         imgSrc.setAttribute("src",chgUrl(src));
     }
-    //时间戳
-    //为了使每次生成图片不一致，即不让浏览器读缓存，所以需要加上时间戳
     function chgUrl(url){
-        var timestamp = (new Date()).valueOf();
-        url = url.substring(0,20);
+        var timestamp = (new Date()).valueOf();//时间戳
+        url = url.substring(0,21);
         if((url.indexOf("&")>=0)){
+            //为了使每次生成图片不一致，即不让浏览器读缓存，所以需要加上时间戳
             url = url + "×tamp=" + timestamp;
         }else{
             url = url + "?timestamp=" + timestamp;
         }
         return url;
     }
+    //登陆方式的下拉列表
     var role = new Select('role',[
         {
             name:'老师',
@@ -64,10 +69,39 @@ window.addEvent('domready',function(){
             value:'学生'
         }
     ],{width:125}).animate();
+
+    //登陆和注册
     var loginBtn = new Button($('login_btn'),{width:85}).addClass('login-btn');
     var registBtn = new Button($('register_btn'),{width:85}).addClass('login-btn');
+    var loginDialog = new Dialog($('loginDialog'),{
+        width:300,
+        height:100,
+        left:300,
+        top:200,
+        position:'absolute',
+        titleHtml:'<span style="margin-left: 30px;">错误</span>',
+        draggable:true,
+        model:false,
+        closeable:true
+    });
     loginBtn.body.addEvent('click',function(){
-
+        new Request.JSON({
+            url:"../website/login",
+            onSuccess:function(data){
+                if(data.success) {
+                    console.log('success');
+                    console.log(data);
+                } else {
+                    loginDialog.setContentHtml('<div style="padding: 10px">'+data.message+'</div>');
+                    loginDialog.show();
+                }
+            }
+        }).get({
+                username:username.getValue(),
+                password:password.getValue(),
+                loginType:role.getValue()=="老师"?1:0,
+                captcha:captcha.getValue()
+            });
     });
 
 
