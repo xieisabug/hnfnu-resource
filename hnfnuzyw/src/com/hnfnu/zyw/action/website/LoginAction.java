@@ -137,7 +137,8 @@ public class LoginAction extends AopNoSuchMethodErrorSolveBaseAction{
             info.put("name",student.getName());
             info.put("id",student.getId());
             info.put("icon",student.getIcon());
-            info.put("lastedLoginDate",student.getEntranceTime());
+            info.put("department",student.getDepartment());
+            info.put("entranceTime",student.getEntranceTime());
             info.put("balance",student.getBalance());
 			success = true;
 		} else {
