@@ -71,6 +71,10 @@
                     <!--<span>密码：</span>-->
                     <input class="form-control" type="text" id="captcha"
                            name="captcha" placeholder="输入弹出的验证码">
+                    <div id="captchaDiv">
+                        <img id="imgObj" alt="" src="captchaServlet">
+                        <a href="#" onclick="changeImg()" style="font-size: 0.8em;">换一张</a>
+                    </div>
                 </div>
                 <div>
                     <button id="login_btn">
