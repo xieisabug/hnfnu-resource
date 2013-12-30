@@ -60,7 +60,7 @@ public class SourceAction extends AopNoSuchMethodErrorSolveBaseAction implements
 	private ICategoryService categoryService;
 
 	// 添加资源
-	@Action(value = "addSource")
+	@Action(value="addSource")
 	public String add() {
 		// 获取当前时间
 		Date date = new Date();

@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.hnfnu.zyw.dao.resources.IGradeDao;
 import com.hnfnu.zyw.dao.resources.IGradeGroupVoDao;
 import com.hnfnu.zyw.dao.resources.IGroupDao;
 import com.hnfnu.zyw.dao.resources.ISourceVoDao;
@@ -37,9 +36,6 @@ public class IndexServiceImpl implements IIndexService {
 	@Qualifier("groupDao")
 	private IGroupDao groupDao; 
 	
-	@Autowired
-	@Qualifier("gradeDao")
-	private IGradeDao gradeDao; 
 	
 	@Autowired
 	@Qualifier("gradeGroupVoDao")
@@ -91,11 +87,7 @@ public class IndexServiceImpl implements IIndexService {
 		
 		Map<String, Object> subjectMap = null;;
 		List<Map<String,Object>> subjects = null;
-		Integer subjectSize = null;
 		
-		Map<String, Object> t = new HashMap<String, Object>();
-		SubjectGroupVo dto = null;
-		Integer viewTimes = null;
 		
 		//查询后台设置显示并且已经上传了资源的分组
 		String hql = "from GroupDto where isDisplay=1 and id in(select groupId from SourceVo group by groupId)";
@@ -117,7 +109,7 @@ public class IndexServiceImpl implements IIndexService {
 					String hql2 = "from SubjectGroupVo where groupId="+tg.getId()+" and id in(select subjectId from SourceVo " +
 							"where gradeId="+tgv.getId()+" group by subjectId)";
 					List<SubjectGroupVo> subjectGroupVos = subjectGroupVoDao.complexList(hql2); 
-					subjects = this.listToMap(subjectGroupVos);
+					subjects = this.listToMap(subjectGroupVos,tg.getId(),tgv.getId());
 					subjectMap = new HashMap<String, Object>();
 					subjectMap.put("subjects", subjects);
 					subjectMap.put("subjectSize",subjects.size());
@@ -139,14 +131,14 @@ public class IndexServiceImpl implements IIndexService {
  		return root;
 	}
 
-	private  List<Map<String, Object>> listToMap( List<SubjectGroupVo> l){
+	private  List<Map<String, Object>> listToMap( List<SubjectGroupVo> l,int groupId,int gradeId){
 		Map<String, Object> t = null;
 		List<Map<String, Object>> result = new ArrayList<Map<String,Object>>();
 		for(int i = 0; i < l.size();i++){
 			t = new HashMap<String, Object>();
 			SubjectGroupVo ts = l.get(i);
 			t.put("dto", ts);
-			t.put("viewTimes", sourceVoDao.getViewTimesBySubjectId(ts.getId()));
+			t.put("viewTimes", sourceVoDao.getViewTimesBySubjectId(ts.getId(),groupId,gradeId));
 			result.add(t);
 		}
 		return result;
