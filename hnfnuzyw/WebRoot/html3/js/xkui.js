@@ -341,8 +341,10 @@ var Input = new Class({
     removeClass: function (className) {
         this.body.removeClass(className);
         return this;
+    },
+    getValue:function(){
+        return this.body.get('value');
     }
-
 });
 var Scroll = new Class({
     initialize: function (el, option) {
