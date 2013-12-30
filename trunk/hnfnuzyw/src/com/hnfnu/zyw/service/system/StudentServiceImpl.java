@@ -41,6 +41,9 @@ public class StudentServiceImpl implements IStudentService {
             student.setPassword(EncodeUtils.generatePassword(pwd));
 			//新建用户默认资源币为100
 			student.setBalance(100);
+            if(student.getIcon() == null) {
+                student.setIcon("default.png");
+            }
 			Date dt = new Date();
 			student.setCreateDate(dt);
 			studentDao.add(student);
@@ -147,6 +150,7 @@ public class StudentServiceImpl implements IStudentService {
 		Map<String, Object> result = new HashMap<String, Object>();
 		Boolean b = true;
 		InputStream is = null;
+        String icon = "default.png";
 		try {
 			// WorkbookFactory可以自动根据文档的类型打开一个excel
 			String[] t = url.split("\\.");
@@ -255,6 +259,7 @@ public class StudentServiceImpl implements IStudentService {
 					student.setBalance(100);
 					Date dt = new Date();
 					student.setCreateDate(dt);
+                    student.setIcon(icon);
 					students.add(student);
 				}
 				

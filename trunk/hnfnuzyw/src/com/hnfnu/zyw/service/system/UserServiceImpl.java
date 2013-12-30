@@ -33,6 +33,9 @@ public class UserServiceImpl implements IUserService {
 		try {
 			String pwd = user.getPassword();
 			user.setPassword(EncodeUtils.generatePassword(pwd));
+            if(user.getIcon() == null) {
+                user.setIcon("default.png");
+            }
 			// 老师默认资源币为0
 			user.setBalance(0);
 			Date today = new Date();
@@ -144,6 +147,7 @@ public class UserServiceImpl implements IUserService {
 		Map<String, Object> result = new HashMap<String, Object>();
 		Boolean b = true;
 		InputStream is = null;
+        String icon = "default.png";
 		// File file = null;
 		try {
 			// WorkbookFactory可以自动根据文档的类型打开一个excel
@@ -250,6 +254,7 @@ public class UserServiceImpl implements IUserService {
 					user.setBalance(100);
 					Date dt = new Date();
 					user.setCreateDate(dt);
+                    user.setIcon(icon);
 					users.add(user);
 				}
 

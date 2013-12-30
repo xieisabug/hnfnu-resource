@@ -40,6 +40,8 @@ public class UserDto {
 	private Date createDate;
 	// 最后登录时间
 	private Date latestLoginDate;
+    // 头像
+    private String icon;
 	// 设置（用于涉及用户个人的设置）
 	private String setting;
 	// 备注
@@ -52,7 +54,7 @@ public class UserDto {
 	public UserDto(Integer id, String username, String password, String name,
 			String idcard, String sex, String qq, String telephone,
 			String email, Date birth, String department, int balance,
-			Date createDate, Date latestLoginDate, String setting, String remark) {
+			Date createDate, Date latestLoginDate, String icon, String setting, String remark) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -68,6 +70,7 @@ public class UserDto {
 		this.balance = balance;
 		this.createDate = createDate;
 		this.latestLoginDate = latestLoginDate;
+        this.icon = icon;
 		this.setting = setting;
 		this.remark = remark;
 	}
@@ -200,14 +203,34 @@ public class UserDto {
 		this.email = email;
 	}
 
-	@Override
-	public String toString() {
-		return "UserDto [id=" + id + ", username=" + username + ", password="
-				+ password + ", name=" + name + ", idcard=" + idcard + ", sex="
-				+ sex + ", qq=" + qq + ", telephone=" + telephone + ", birth="
-				+ birth + ", department=" + department + ", createDate="
-				+ createDate + ", latestLoginDate=" + latestLoginDate
-				+ ", setting=" + setting + ", remark=" + remark + "]";
-	}
+    public String getIcon() {
+        return icon;
+    }
 
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDto{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", idcard='" + idcard + '\'' +
+                ", sex='" + sex + '\'' +
+                ", qq='" + qq + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", email='" + email + '\'' +
+                ", birth=" + birth +
+                ", department='" + department + '\'' +
+                ", balance=" + balance +
+                ", createDate=" + createDate +
+                ", latestLoginDate=" + latestLoginDate +
+                ", icon='" + icon + '\'' +
+                ", setting='" + setting + '\'' +
+                ", remark='" + remark + '\'' +
+                '}';
+    }
 }
