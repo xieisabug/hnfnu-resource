@@ -45,6 +45,30 @@ var Panel = new Class({
     removePanelContentCss : function(className) {
         this.panelContent.removeClass(className);
         return this;
+    },
+    updateWithAnimate:function(type,html){
+        var thiz = this;
+        var fx = new Fx.Morph(thiz.panelContent, {
+            duration: 1000,
+            transition:Fx.Transitions['Quad']['easeIn']
+        });
+        if(type == 'toggle') {
+            var h = thiz.panelContent.getSize().y-27;
+            fx.start({
+                height:0
+            }).chain(function(){
+                    thiz.panelContent.set('html',html);
+                    fx.start({
+                        height:h
+                    });
+                });
+        } else if(type == 'append') {
+            new Element('div').set('html',html).getChildren().each(function(item){
+                thiz.panelContent.grab(item);
+            });
+            var h = thiz.panelContent.getScrollSize().y-27;
+            fx.start({height:h});
+        }
     }
 });
 var Tab = new Class({

@@ -74,8 +74,8 @@ window.addEvent('domready',function(){
     var loginBtn = new Button($('login_btn'),{width:85}).addClass('login-btn');
     var registBtn = new Button($('register_btn'),{width:85}).addClass('login-btn');
     var loginDialog = new Dialog($('loginDialog'),{
-        width:300,
-        height:100,
+        width:200,
+        height:80,
         left:300,
         top:200,
         position:'absolute',
@@ -91,8 +91,50 @@ window.addEvent('domready',function(){
                 if(data.success) {
                     console.log('success');
                     console.log(data);
+                    var html = '';
+                    html +='<table>	';
+                    html +='	<tr>';
+                    html +='		<td rowspan="4" style="width:75px;" >';
+                    html +='			<img src="'+data.info.icon+'" style="width:75px;height:75px;" >';
+                    html +='			<button>';
+                    html +='				修改头像';
+                    html +='			</button>';
+                    html +='			<button>';
+                    html +='				修改资料';
+                    html +='			</button>';
+                    html +='			<button>';
+                    html +='				退出登录';
+                    html +='			</button>';
+                    html +='		</td>';
+                    html +='		<td>';
+                    html +=data.info.name;
+                    html +='		</td>';
+                    html +='	</tr>';
+                    html +='	<tr>';
+                    html +='		<td>';
+                    html +='			资源币:' + data.info.balance;
+                    html +='		</td>';
+                    html +='	</tr>';
+                    html +='	<tr>';
+                    html +='		<td>';
+                    if(data.info.department) {
+                        html += data.info.entranceTime + "级 " +  data.info.department + "系";
+                        html +='		</td>';
+                        html +='	</tr>';
+                    } else {
+                        html +='			您上次登录的时间是：';
+                        html +='		</td>';
+                        html +='	</tr>';
+                        html +='	<tr>';
+                        html +='		<td>';
+                        html +='		' + data.info.lastedLoginDate;
+                        html +='		</td>';
+                        html +='	</tr>';
+                    }
+                    html +='</table>';
+                    loginPanel.updateWithAnimate('toggle',html);
                 } else {
-                    loginDialog.setContentHtml('<div style="padding: 10px">'+data.message+'</div>');
+                    loginDialog.setContentHtml('<div style="padding: 10px;">'+data.message+'</div>');
                     loginDialog.show();
                 }
             }

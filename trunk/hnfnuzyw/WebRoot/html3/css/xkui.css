@@ -66,6 +66,7 @@
     border:1px solid #75ade7;
     border-top: 0;
     padding: 13px;
+    overflow: hidden;
 }
 /************    Panel    **************/
 /************    Input    **************/
