@@ -22,12 +22,12 @@
 </body>
 </html>
 <script type="text/javascript">
-    var sourceForm = null;
+    var subjectFrom = null;
     var winManager = null;
     $(function () {
-        formInit();
+            formInit();
         //topicSubtitleId = Url.getArgs().topicSubtitleId;
-        sourceForm.prepend('<input type="file" id="file_upload" name="fileName">' +
+        subjectFrom.prepend('<input type="file" id="file_upload" name="fileName">' +
                 '<div id="uploadImage" style="width: 100px;height: 80px; float:right"></div>');
         $("#file_upload").uploadify({
             debug:false,
@@ -38,7 +38,7 @@
             cancelImage:'../../../App/Lib/Uploadify/uploadify-cancel.png',
             swf:'../../../App/Lib/Uploadify/uploadify.swf',
             // expressInstall:'App/Lib/Uploadify/expressInstall.swf',
-            uploader:'../../../file/fileTopicImageUpload.action', //后台处理上传文件的action
+            uploader:'../../../file/subjectImageUpload.action', //后台处理上传文件的action
             width:120,
             multi:false, //是否允许多个文件上传
             queueID:'uploadfileQueue',
@@ -87,20 +87,19 @@
                 var fileNameAndPath = data.split(",");
                 var path = fileNameAndPath[1];
                 path = path.replaceAll(/\\/g, '\\\\');
-                $("#imageUrl", sourceForm).val(path);
-                //$("#uploadImage", sourceForm).css("background-image","url("+path+")");
-                $("#uploadImage", sourceForm).append('<img style="width: 100px;height: 80px;" src="../../../uploads/topic/image/'+fileNameAndPath[0]+'">');
-                $("#file_upload",sourceForm).css("float","left");
+                $("#imageUrl", subjectFrom).val(path);
+                //$("#uploadImage", subjectFrom).css("background-image","url("+path+")");
+                $("#uploadImage", subjectFrom).append('<img style="width: 100px;height: 80px;" src="../../../uploads/subject/image/' + fileNameAndPath[0] + '">');
+                $("#file_upload", subjectFrom).css("float", "left");
                 $.ligerDialog.closeWaitting();
             },
             onSelect:function (file) {
                 //$("#uploadFileName").html(file.name);
-                $("#mediaFormat", sourceForm).val(file.type.substr(1));
-                $("#fileSize", sourceForm).val(file.size);
+                $("#mediaFormat", subjectFrom).val(file.type.substr(1));
+                $("#fileSize", subjectFrom).val(file.size);
                 winManager = $.ligerDialog.waitting('正在上传中,请稍候...');
             },
             onUploadProgress:function (file, fileBytesLoaded, fileTotalBytes) {
-                //console.log(winManager);
                 winManager._setContent("正在上传： " + file.name + "<br> 已上传 " + Math.floor(fileBytesLoaded / fileTotalBytes * 100) +
                         "% ,  总大小为 : " + Math.floor(fileTotalBytes / 1024) + "KB ");
                 //console.log(fileBytesLoaded);
@@ -119,123 +118,73 @@
         });
     });
     function formInit() {
-        var groupicon = "../../../App/Lib/ligerUI/skins/icons/communication.gif";
-        sourceForm = $('form');
-
-        // $.ajax({
-        // url:'../../../resources/formSelect.action',
-        //type:'post',
-        //success:function (data) {
-        sourceForm.ligerForm({
-            inputWidth:200,
-            labelWidth:120,
-            space:40,
-            fields:[
-                {
-                    name:'id',
-                    type:"hidden"
-                },
-                {
-                    name:'imageUrl',
-                    type:"hidden"
-                },
-                {
-                    display:'专题名称',
-                    name:'name',
-                    type:'text',
-                    space:30,
-                    labelWidth:100,
-                    width:220,
-                    newline:true,
-                    validate:{
-                        required:true,
-                        maxlength:22
-                    }
-                },
-                {
-                    display:'专题简介',
-                    name:'description',
-                    type:'text',
-                    space:30,
-                    labelWidth:100,
-                    width:220,
-                    newline:true,
-                    validate:{
-                        required:true
-                    }
-                },
-                {
-                    display:'专题作者',
-                    name:'author',
-                    type:'text',
-                    space:30,
-                    labelWidth:100,
-                    width:220,
-                    newline:true,
-                    validate:{
-                        required:true,
-                        maxlength:22
-                    }
-                },
-                {
-                    display:"是否外链",
-                    name:"isOutlink",
-                    type:"select",
-                    width:200,
-                    space:30,
-                    labelWidth:100,
-                    comboboxName:"isOutlink",
-                    textField:"text",
-                    valueField:"id",
-                    newline:true,
-                    options:{
-                        selectBoxHeight:40,
-                        hideOnLoseFocus:true,
-                        initValue:"0",
-                        initText:"否",
-                        valueFieldID:"id",
-                        data:[
-                            {
-                                "id":"0",
-                                "text":"否"
-                            },
-                            {
-                                "id":"1",
-                                "text":"是"
+        subjectFrom =  $('form');
+        $.ajax({
+            url:'../../../resources/listGroups.action',
+            type:'post',
+            async:false,
+            success:function (data) {
+                subjectFrom.ligerForm({
+                    inputWidth:280,
+                    fields:[
+                        {
+                            name:'id',
+                            type:"hidden"
+                        },
+                        {
+                            name:'imageUrl',
+                            type:"hidden"
+                        },
+                        {
+                            display:'学科名称',
+                            name:'name',
+                            type:'text',
+                            space:30,
+                            labelWidth:100,
+                            width:220,
+                            newline:true,
+                            validate:{
+                                required:true,
+                                maxlength:22
                             }
-                        ]
-
+                        },
+                        {
+                            display:"所属分组",
+                            name:"groupId",
+                            type:"select",
+                            space:30,
+                            labelWidth:100,
+                            width:220,
+                            newline:true,
+                            comboboxName:"group",
+                            options:{
+                                textField:"name",
+                                valueField:"id",
+                                hideOnLoseFocus:true,
+                                valueFieldID:"groupId",
+                                data:data.groups
+                            }
+                        },
+                        {
+                            display:'备注',
+                            name:'remark',
+                            type:'text',
+                            space:30,
+                            labelWidth:100,
+                            width:220,
+                            newline:true
+                        }
+                    ]
+                });
+                $.metadata.setType("attr", "validate");
+                subjectFrom.validate({
+                    debug:true,
+                    onkeyup:false,
+                    errorPlacement:function (error, element) {
+                        error.appendTo(element.parent().parent().parent().parent());
                     }
-                },
-                {
-                    display:'外链地址',
-                    name:'outlink',
-                    type:'text',
-                    space:30,
-                    labelWidth:100,
-                    width:220,
-                    newline:true
-                },
-                {
-                    display:'备注',
-                    name:'remark',
-                    type:'text',
-                    space:30,
-                    labelWidth:100,
-                    width:220,
-                    newline:true
-                }
-            ]
-        });
-        $.metadata.setType("attr", "validate");
-        sourceForm.validate({
-            debug:true,
-            onkeyup:false,
-            errorPlacement:function (error, element) {
-                error.appendTo(element.parent().parent().parent().parent());
+                });
             }
         });
-        // }
-        //});
     }
 </script>

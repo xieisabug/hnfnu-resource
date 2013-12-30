@@ -13,6 +13,7 @@ public class SubjectGroupVo {
 		private Integer id;
 		//科目名称
 		private String name;
+		private String imageUrl;
 		private int groupId;
 		private String groupName;
 		private String remark;
@@ -23,15 +24,21 @@ public class SubjectGroupVo {
 		}
 
 
-		public SubjectGroupVo(Integer id, String name, int groupId,
-				String groupName, String remark) {
+		
+
+		public SubjectGroupVo(Integer id, String name, String imageUrl,
+				int groupId, String groupName, String remark) {
 			super();
 			this.id = id;
 			this.name = name;
+			this.imageUrl = imageUrl;
 			this.groupId = groupId;
 			this.groupName = groupName;
 			this.remark = remark;
 		}
+
+
+
 
 		@Id
 		@GeneratedValue
@@ -83,15 +90,17 @@ public class SubjectGroupVo {
 		public void setRemark(String remark) {
 			this.remark = remark;
 		}
+		public String getImageUrl() {
+			return imageUrl;
+		}
 
-
+		public void setImageUrl(String imageUrl) {
+			this.imageUrl = imageUrl;
+		}
 		@Override
 		public String toString() {
-			return "GradeGroupVo [id=" + id + ", name=" + name + ", groupId="
-					+ groupId + ", groupName=" + groupName + ", remark="
-					+ remark + "]";
+			return "SubjectGroupVo [id=" + id + ", name=" + name
+					+ ", imageUrl=" + imageUrl + ", groupId=" + groupId
+					+ ", groupName=" + groupName + ", remark=" + remark + "]";
 		}
-		
-		
-		
 }

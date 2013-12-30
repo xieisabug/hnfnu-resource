@@ -40,6 +40,8 @@ public class SubjectAction extends AopNoSuchMethodErrorSolveBaseAction
 	// 添加学科
 	@Action(value = "addSubject")
 	public String add() {
+		String[] s = subject.getImageUrl().split("\\\\");
+		subject.setImageUrl(s[s.length-1]);
 		success = subjectService.add(subject);
 		if (success) {
 			message = "添加功能成功！";

@@ -4,12 +4,11 @@ var subjectWin = null;// 学科窗口
 
 // 增加学科的函数
 function add_subject() {
-    formInit();
     subjectWin = $.ligerDialog.open({
         width : 400,
-        height : 200,
+        height :400,
         title : '新增学科',
-        target : subjectFrom,
+        url : 'AddSubjectImageForm.html',
         buttons : [ {
             text : '提交',
             width : 80,
@@ -23,7 +22,9 @@ function add_subject() {
 }
 // 增加学科的保存按钮事件
 function add_save() {
+    subjectFrom = subjectWin.frame.subjectFrom;
     if (subjectFrom.valid()) {
+
         var row_data = Form.parseJSON(subjectFrom);
         // 发往服务器，返回成功后再添加到表格中
         $.ajax({
