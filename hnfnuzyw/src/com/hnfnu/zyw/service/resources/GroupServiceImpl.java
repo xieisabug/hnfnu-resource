@@ -57,6 +57,7 @@ public class GroupServiceImpl implements IGroupService{
 	}
 
 	public List<GroupDto> list() {
+		
 		String hql = "from GroupDto";
 		List<GroupDto> groups = null;
 		try {

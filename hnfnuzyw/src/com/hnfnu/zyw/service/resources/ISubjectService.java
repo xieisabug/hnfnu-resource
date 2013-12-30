@@ -36,5 +36,13 @@ public interface ISubjectService {
 	 * @return
 	 */
 	public List<SubjectGroupVo> listSubjectByGroupId(int groupId);
+	
+	/**
+	 * 获取已有资源的科目
+	 * @param sql
+	 * @return
+	 * @throws Exception
+	 */
+	public List<SubjectGroupVo> haveSubjectList();
 
 }

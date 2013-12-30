@@ -25,8 +25,11 @@ public class SourceVo {
 	private String courseName;
 	private Integer gradeId;
 	private String gradeName;
+	private String gradeRemark;
 	private Integer subjectId;
 	private String subjectName;
+	private String subjectImageUrl;
+	private String subjectRemark;
 
 	// 属于的类别的id,一个资源有多个类别，以；隔开
 
@@ -92,6 +95,9 @@ public class SourceVo {
 
 	private Integer createUserId;
 	private String createUserName;
+	
+	private int groupId;
+	private String groupName;
 
 	public SourceVo() {
 		super();
@@ -101,43 +107,7 @@ public class SourceVo {
 
 	
 
-	public SourceVo(Integer id, String name, Integer courseId,
-			String courseName, Integer gradeId, String gradeName,
-			Integer subjectId, String subjectName, String categoryIdList,
-			String categoryNameList, String keyWords, String mediaType,
-			String mediaFormat, String playTime, String fileSize,
-			String author, String publisher, String description,
-			Timestamp createDate, String approvalStatus, String quality,
-			double price, Integer viewTimes, Integer useTimes, String url,
-			Integer createUserId, String createUserName) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.courseId = courseId;
-		this.courseName = courseName;
-		this.gradeId = gradeId;
-		this.gradeName = gradeName;
-		this.subjectId = subjectId;
-		this.subjectName = subjectName;
-		this.categoryIdList = categoryIdList;
-		this.categoryNameList = categoryNameList;
-		this.keyWords = keyWords;
-		this.mediaType = mediaType;
-		this.mediaFormat = mediaFormat;
-		this.playTime = playTime;
-		this.fileSize = fileSize;
-		this.author = author;
-		this.publisher = publisher;
-		this.description = description;
-		this.createDate = createDate;
-		this.approvalStatus = approvalStatus;
-		this.price = price;
-		this.viewTimes = viewTimes;
-		this.useTimes = useTimes;
-		this.url = url;
-		this.createUserId = createUserId;
-		this.createUserName = createUserName;
-	}
+	
 
 	public Integer getCourseId() {
 		return courseId;
@@ -366,24 +336,57 @@ public class SourceVo {
 		this.categoryNameList = categoryNameList;
 	}
 
-	@Override
-	public String toString() {
-		return "SourceVo [approvalStatus=" + approvalStatus + ", author="
-				+ author + ", categoryIdList=" + categoryIdList
-				+ ", categoryNameList=" + categoryNameList + ", courseId="
-				+ courseId + ", courseName=" + courseName + ", createDate="
-				+ createDate + ", createUserId=" + createUserId
-				+ ", createUserName=" + createUserName + ", description="
-				+ description + ", fileSize=" + fileSize + ", gradeId="
-				+ gradeId + ", gradeName=" + gradeName + ", id=" + id
-				+ ", keyWords=" + keyWords + ", mediaFormat=" + mediaFormat
-				+ ", mediaType=" + mediaType + ", name=" + name + ", playTime="
-				+ playTime + ", price=" + price + ", publisher=" + publisher
-				+ ", subjectId=" + subjectId
-				+ ", subjectName=" + subjectName + ", url=" + url
-				+ ", useTimes=" + useTimes + ", viewTimes=" + viewTimes + "]";
+	
+	public String getGradeRemark() {
+		return gradeRemark;
+	}
+	public void setGradeRemark(String gradeRemark) {
+		this.gradeRemark = gradeRemark;
+	}
+	public String getSubjectImageUrl() {
+		return subjectImageUrl;
+	}
+	public void setSubjectImageUrl(String subjectImageUrl) {
+		this.subjectImageUrl = subjectImageUrl;
 	}
 
-	
+	public String getSubjectRemark() {
+		return subjectRemark;
+	}
+	public void setSubjectRemark(String subjectRemark) {
+		this.subjectRemark = subjectRemark;
+	}
+	public int getGroupId() {
+		return groupId;
+	}
+	public void setGroupId(int groupId) {
+		this.groupId = groupId;
+	}
+	public String getGroupName() {
+		return groupName;
+	}
+	public void setGroupName(String groupName) {
+		this.groupName = groupName;
+	}
+	@Override
+	public String toString() {
+		return "SourceVo [id=" + id + ", name=" + name + ", courseId="
+				+ courseId + ", courseName=" + courseName + ", gradeId="
+				+ gradeId + ", gradeName=" + gradeName + ", gradeRemark="
+				+ gradeRemark + ", subjectId=" + subjectId + ", subjectName="
+				+ subjectName + ", subjectImageUrl=" + subjectImageUrl
+				+ ", subjectRemark=" + subjectRemark + ", categoryIdList="
+				+ categoryIdList + ", categoryNameList=" + categoryNameList
+				+ ", keyWords=" + keyWords + ", mediaType=" + mediaType
+				+ ", mediaFormat=" + mediaFormat + ", playTime=" + playTime
+				+ ", fileSize=" + fileSize + ", author=" + author
+				+ ", publisher=" + publisher + ", description=" + description
+				+ ", createDate=" + createDate + ", approvalStatus="
+				+ approvalStatus + ", price=" + price + ", viewTimes="
+				+ viewTimes + ", useTimes=" + useTimes + ", url=" + url
+				+ ", createUserId=" + createUserId + ", createUserName="
+				+ createUserName + "]";
+	}
+
 	
 }
