@@ -25,7 +25,7 @@ window.addEvent('domready',function(){
     }else {
         searchSelect.setSelectDivOffset(13,-19);
     }
-    var keyWords = new Input($$('#headSearch input')).addClass('input-group-center');
+    var keyWords = new Input($$('#headSearch input'),{width:236}).addClass('input-group-center');
     var username = new Input($('username'),{width:100});
     var password = new Input($('password'),{width:100});
     var captcha = new Input($('captcha'),{width:100});
@@ -64,7 +64,6 @@ window.addEvent('domready',function(){
         } else {
             new Button(item,option).addClass('btn-group-center').addClass('btn-blue-border');
         }
-
     });
     $$('#collageSource>div').each(function(item){
         new Scroll(item,{
@@ -78,8 +77,7 @@ window.addEvent('domready',function(){
             height:200
         }).withAnimate('fadeSlide');
     });
-    var topicContent = $('topic-content');
-    new Scroll(topicContent, {
+    new Scroll($('topic-content'), {
         width:960,
         height:358
     }).withAnimate('fadeSlide');

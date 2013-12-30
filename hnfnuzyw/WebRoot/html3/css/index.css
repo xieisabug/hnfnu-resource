@@ -225,7 +225,7 @@ label {
     font-family: "微软雅黑", Yahei, "宋体", sans-serif;
     list-style: none;
     margin-bottom: 20px;
-    font-size: 0.7em;
+    font-size: 0.8em;
 }
 
 #topic .panel-content {
@@ -233,10 +233,16 @@ label {
     padding: 0;
 }
 
+#topic table {
+    width: 961px;
+}
 #topic table tr td {
     padding: 10px;
     height: 159px;
     width: 323px;
+    border: 1px dashed #aaa;
+    border-top: 0;
+    border-left: 0;
 }
 
 #topic table tr td img {
@@ -275,7 +281,17 @@ label {
     font-size: 0.9em;
     text-align: center;
 }
-
+.subject-item {
+    border: 1px dashed #aaa;
+    border-top: 0;
+    border-left: 0;
+}
+#collageSource>div>div>table{
+    border-collapse:collapse;
+}
+#topic-content>div>table{
+    border-collapse:collapse;
+}
 /**topic view**/
 #topic-view {
     width: 960px;
