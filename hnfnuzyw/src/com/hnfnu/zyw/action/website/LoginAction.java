@@ -141,6 +141,7 @@ public class LoginAction extends AopNoSuchMethodErrorSolveBaseAction{
             if(!captcha.equals(validateCode)) {
                 success = false;
                 message = "对不起，验证码不正确";
+                return SUCCESS;
             }
         }
         if (loginType == STUDENT) {

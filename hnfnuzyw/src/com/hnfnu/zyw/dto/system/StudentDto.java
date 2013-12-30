@@ -28,6 +28,7 @@ public class StudentDto
 	private Integer balance;
 	private String telephone;
 	private Date createDate;
+    private String icon;
 	private String remark;
 
 	public StudentDto()
@@ -37,7 +38,7 @@ public class StudentDto
 	public StudentDto(Integer id, String username, String password,
 			String name, String number, String department, String major,
 			String entranceTime, Integer balance, String telephone,
-			Date createDate, String remark) {
+			Date createDate,String icon, String remark) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -50,6 +51,7 @@ public class StudentDto
 		this.balance = balance;
 		this.telephone = telephone;
 		this.createDate = createDate;
+        this.icon = icon;
 		this.remark = remark;
 	}
 	public void setId(Integer id)
@@ -150,15 +152,31 @@ public class StudentDto
 	{
 		return this.remark;
 	}
-	@Override
-	public String toString() {
-		return "StudentDto [balance=" + balance + ", createDate=" + createDate
-				+ ", department=" + department + ", entranceTime="
-				+ entranceTime + ", id=" + id + ", major=" + major + ", name="
-				+ name + ", number=" + number + ", password=" + password
-				+ ", remark=" + remark + ", telephone=" + telephone
-				+ ", username=" + username + "]";
-	}
-	
-	
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    @Override
+    public String toString() {
+        return "StudentDto{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", number='" + number + '\'' +
+                ", department='" + department + '\'' +
+                ", major='" + major + '\'' +
+                ", entranceTime='" + entranceTime + '\'' +
+                ", balance=" + balance +
+                ", telephone='" + telephone + '\'' +
+                ", createDate=" + createDate +
+                ", icon='" + icon + '\'' +
+                ", remark='" + remark + '\'' +
+                '}';
+    }
 }
