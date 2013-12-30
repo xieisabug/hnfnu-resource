@@ -102,8 +102,8 @@ public class IndexServiceImpl implements IIndexService {
 		
 		try {
 			groups = groupDao.complexList(hql);
-			gradeList = new ArrayList<Map<String,Object>>();
 			for(int i = 0; i < groups.size();i++){
+				gradeList = new ArrayList<Map<String,Object>>();
 				//System.out.println("分组："+i+"分组id="+groups.get(i).getId()+"分组名字="+groups.get(i).getName());
 				groupMap = new HashMap<String, Object>();
 				GroupDto tg = groups.get(i);

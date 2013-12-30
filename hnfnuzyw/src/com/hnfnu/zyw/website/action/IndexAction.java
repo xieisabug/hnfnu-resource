@@ -81,11 +81,11 @@ public class IndexAction extends ActionSupport {
 		
 		filePath = ServletActionContext.getServletContext().getRealPath("/");
 		// 获得数据模型
-		root = indexService.getTopics();
+		root = indexService.makeTabGroups();
 		//打印到输出台，以便于测试
-		fu.print("index/topic.ftl", root);
+		fu.print("index/tabGroup.ftl", root);
 		//输出到文件
-		success = fu.fprint("index/topic.ftl", root, filePath+"website\\", "topic.html");
+		success = fu.fprint("index/tabGroup.ftl", root, filePath+"website\\", "tabGroup.html");
 		if(success){
 			message="专题生成成功";
 		}else{
