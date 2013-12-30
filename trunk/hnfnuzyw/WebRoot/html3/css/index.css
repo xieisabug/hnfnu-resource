@@ -92,6 +92,8 @@ a {
     position: absolute;
     left: 350px;
     top: 350px;
+    background: #fff;
+    z-index: 9999;
 }
 #gallery {
     width: 510px;
