@@ -1,32 +1,35 @@
 window.addEvent('domready',function(){
+    //登陆面板
     var loginPanel = new Panel($('login'),{
         contentHeight:220
     });
+    //统计面板
     var countPanel = new Panel($('source-count'),{
         contentHeight:220
     });
+    //专题面板
     var topicPanel = new Panel($('topic'),{
         contentHeight:358
     });
+    //搜索的下拉框
     var searchSelect = new Select('searchSelect',[
         {
             name:'站内资源',
             value:'站内资源'
-        },
-        {
-            name:'百度网盘',
-            value:'百度网盘'
         }
     ], {
         height:34
     }).animate().addButtonClass('btn-group-left');
+    //为了平衡ie浏览器的bug
     if(Browser.ie) {
         searchSelect.setSelectDivOffset(13,-46);
     }else {
         searchSelect.setSelectDivOffset(13,-19);
     }
+    //搜索输入框
     var keyWords = new Input($$('#headSearch input'),{width:236}).addClass('input-group-center');
-
+    //搜索按钮
+    var searchButton = new Button($$('button')[1]).addClass('btn-group-right');
     //用户名、密码输入
     var username = new Input($('username'),{width:100});
     var password = new Input($('password'),{width:100});
@@ -84,6 +87,7 @@ window.addEvent('domready',function(){
         model:false,
         closeable:true
     });
+    //登陆逻辑
     loginBtn.body.addEvent('click',function(){
         new Request.JSON({
             url:"../website/login",
@@ -92,17 +96,11 @@ window.addEvent('domready',function(){
                     console.log('success');
                     console.log(data);
                     var html = '';
-                    html +='<table>	';
+                    html +='<table style="font-size:0.8em;height:200px;">	';
                     html +='	<tr>';
                     html +='		<td rowspan="4" style="width:75px;" >';
                     html +='			<img src="'+data.info.icon+'" style="width:75px;height:75px;" >';
-                    html +='			<button>';
-                    html +='				修改头像';
-                    html +='			</button>';
-                    html +='			<button>';
-                    html +='				修改资料';
-                    html +='			</button>';
-                    html +='			<button>';
+                    html +='			<button id="logoutBtn">';
                     html +='				退出登录';
                     html +='			</button>';
                     html +='		</td>';
@@ -146,8 +144,6 @@ window.addEvent('domready',function(){
             });
     });
 
-
-    var searchButton = new Button($$('button')[1]).addClass('btn-group-right');
     var collageSource = new Tab('collageSource', {
         tabChangeEvent:'mouseover',
         tabTitleCss:'my-tab',

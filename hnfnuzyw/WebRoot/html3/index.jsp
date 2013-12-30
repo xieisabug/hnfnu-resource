@@ -16,7 +16,7 @@
 <div id="allContent">
 <div class="navbar">
     <ul class="nav">
-        <li class="active"><a href="#">首页</a></li>
+        <li class="active"><a href="index.jsp">首页</a></li>
         <li><a href="#">学科资源</a></li>
         <li><a href="#">专题资源</a></li>
         <li><a href="#">教学视频示范中心</a></li>
@@ -1551,13 +1551,7 @@
 </div>
 </div>
 </div>
-<div class="row">
-    <div style="text-align: center">
-        <p>版权所有：湖南第一师范学院公共实验管理中心·湘ICP备05000548号</p>
-        <p>地址：湖南省长沙市枫林三路1015号·邮编：410205·电话：0731-82841118</p>
-        <p>建议使用IE 8版本以上浏览器浏览</p>
-    </div>
-</div>
+<%@ include file="footer.html"%>
 </div>
 </body>
 </html>

@@ -32,9 +32,24 @@ public class NewsServiceImpl implements INewsService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		root.put("newsList", newsList);
+        if (newsList != null) {
+            for (NewsDto n : newsList) {
+                n.setContent(null);
+            }
+        }
+        root.put("newsList", newsList);
 		return root;
 	}
+
+    @Override
+    public NewsDto get(int id) {
+        try {
+            return newsDao.get(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 
 }
