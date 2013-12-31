@@ -39,7 +39,7 @@
 			                    <td class="subject-item">
 			                        <table>
 			                            <tr>
-			                                <td rowspan="3" style="width: 80px;"><img <img src="../uploads/subject/image/${subject.dto.imageUrl!"default_subject.png"}"  alt="查看学科资源"/></td>
+			                                <td rowspan="3" style="width: 80px;"><img src="../uploads/subject/image/${subject.dto.imageUrl!"default_subject.png"}"  alt="查看学科资源"/></td>
 			                                <td style="font-weight: bolder;">${subject.dto.name}</td>
 			                            </tr>
 			                            <tr>
@@ -55,7 +55,7 @@
 			                    <td class="subject-item">
 			                        <table>
 			                            <tr>
-			                                <td rowspan="3" style="width: 80px;"><img <img src="../uploads/subject/image/${subject.dto.imageUrl!"default_subject.png"}"  alt="查看学科资源"/></td>
+			                                <td rowspan="3" style="width: 80px;"><img src="../uploads/subject/image/${subject.dto.imageUrl!"default_subject.png"}"  alt="查看学科资源"/></td>
 			                                <td style="font-weight: bolder;">${subject.dto.name}</td>
 			                            </tr>
 			                            <tr>

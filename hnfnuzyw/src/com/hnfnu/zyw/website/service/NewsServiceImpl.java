@@ -41,7 +41,6 @@ public class NewsServiceImpl implements INewsService {
 		return root;
 	}
 
-    @Override
     public NewsDto get(int id) {
         try {
             return newsDao.get(id);

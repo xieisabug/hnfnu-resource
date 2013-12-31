@@ -153,6 +153,36 @@
                     }
                 },
                 {
+                    display:"是否显示在主界面",
+                    name:"isDisplay",
+                    type:"select",
+                    width:200,
+                    space:30,
+                    labelWidth:100,
+                    comboboxName:"isDisplay",
+                    textField:"text",
+                    valueField:"id",
+                    newline:true,
+                    options:{
+                        selectBoxHeight:40,
+                        hideOnLoseFocus:true,
+                        valueFieldID:"id",
+                        initValue:"0",
+                        initText:"否",
+                        data:[
+                            {
+                                "id":"1",
+                                "text":"是"
+                            },
+                            {
+                                "id":"0",
+                                "text":"否"
+                            }
+                        ]
+
+                    }
+                },
+                {
                     display:'专题简介',
                     name:'description',
                     type:'text',
@@ -185,23 +215,23 @@
                     space:30,
                     labelWidth:100,
                     comboboxName:"isOutlink",
-                    textField:"text",
-                    valueField:"id",
+                    textField:"a",
+                    valueField:"b",
                     newline:true,
                     options:{
                         selectBoxHeight:40,
                         hideOnLoseFocus:true,
-                        initValue:"0",
-                        initText:"否",
-                        valueFieldID:"id",
+                        initValue:"1",
+                        initText:"是",
+                        valueFieldID:"b",
                         data:[
                             {
-                                "id":"0",
-                                "text":"否"
+                                "b":"0",
+                                "a":"否"
                             },
                             {
-                                "id":"1",
-                                "text":"是"
+                                "b":"1",
+                                "a":"是"
                             }
                         ]
 
@@ -227,6 +257,7 @@
                 }
             ]
         });
+
         $.metadata.setType("attr", "validate");
         sourceForm.validate({
             debug:true,

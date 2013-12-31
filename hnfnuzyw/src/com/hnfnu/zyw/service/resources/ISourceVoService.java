@@ -51,5 +51,13 @@ public interface ISourceVoService {
 	public List<Map<String, Object>> allTree(int groupId);
 
 	public List<Map<String, Object>> courseTree(int groupId);
+	/**
+	 * 判断是否需要重新生成tabGroup.html
+	 * @param groupId
+	 * @param gradeId
+	 * @param subjectId
+	 * @return
+	 */
+	public boolean needMakeTabGroup(int groupId,int gradeId,int subjectId);
 
 }

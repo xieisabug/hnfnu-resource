@@ -23,6 +23,7 @@ import com.hnfnu.zyw.service.resources.ICategoryService;
 import com.hnfnu.zyw.service.resources.ISourceService;
 import com.hnfnu.zyw.service.resources.ISourceVoService;
 import com.hnfnu.zyw.vo.SourceVo;
+import com.hnfnu.zyw.website.service.IIndexService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ModelDriven;
 
@@ -46,6 +47,7 @@ public class SourceAction extends AopNoSuchMethodErrorSolveBaseAction implements
 	private List<Map<String, Object>> courseTree;
 	private List<CategoryDto> categoryList;
 	private int groupId;
+	private boolean needMakeTabGroup;
 
 	@Autowired
 	@Qualifier("sourceService")
@@ -58,6 +60,10 @@ public class SourceAction extends AopNoSuchMethodErrorSolveBaseAction implements
 	@Autowired
 	@Qualifier("categoryService")
 	private ICategoryService categoryService;
+	
+	@Autowired
+	@Qualifier("ftl_indexService")
+	private IIndexService indexService;
 
 	// 添加资源
 	@Action(value="addSource")
@@ -85,16 +91,21 @@ public class SourceAction extends AopNoSuchMethodErrorSolveBaseAction implements
 		}
 		//资源的保存路劲要改成相对路径
 		String[] s= source.getUrl().split("\\\\");
-		//System.out.println(s[s.length-1]);
 		String tPath = s[s.length-1];
 		String[] tt = tPath.split("\\.");
 		tPath = tt[tt.length-1]+"\\"+tPath;
-		//System.out.println(tPath);
 		source.setKeyWords(kw);
 		source.setUrl(tPath);
 		success = sourceService.add(source, categoryIdList);
+		sourceVo = sourceVoService.load(source.getId());
 		if (success) {
 			message = "添加资源成功！";
+			//判断是否重新生成ftl
+			needMakeTabGroup = sourceVoService.needMakeTabGroup(sourceVo.getGroupId(),sourceVo.getGradeId(), sourceVo.getSubjectId());
+			if(needMakeTabGroup){
+				indexService.makeTabGroups();
+			}
+			
 		} else {
 			message = "添加资源失败！";
 		}
@@ -105,8 +116,14 @@ public class SourceAction extends AopNoSuchMethodErrorSolveBaseAction implements
 	@Action(value = "updateSource")
 	public String update() {
 		success = sourceService.update(source, categoryIdList);
+		sourceVo = sourceVoService.load(source.getId());
 		if (success) {
 			message = "修改资源成功！";
+			//判断是否重新生成ftl
+			needMakeTabGroup = sourceVoService.needMakeTabGroup(sourceVo.getGroupId(),sourceVo.getGradeId(), sourceVo.getSubjectId());
+			if(needMakeTabGroup){
+				indexService.makeTabGroups();
+			}
 		} else {
 			message = "修改资源失败！";
 		}
@@ -136,10 +153,14 @@ public class SourceAction extends AopNoSuchMethodErrorSolveBaseAction implements
 	// 删除文件的方法，如果返回的是1说明删除成功，-1说明文件不存在。0说明文件删除错误，2说明文件删除成功，信息删除错误
 	@Action(value = "deleteSource")
 	public String delete() {
-
+		sourceVo = sourceVoService.load(source.getId());
 		success = sourceService.delete(source.getUrl(), source.getId());
 		if (success) {
 			message = "资源删除成功！";
+			needMakeTabGroup = sourceVoService.needMakeTabGroup(sourceVo.getGroupId(),sourceVo.getGradeId(), sourceVo.getSubjectId());
+			if(needMakeTabGroup){
+				indexService.makeTabGroups();
+			}
 		} else {
 			message = "资源删除失败";
 		}
@@ -150,6 +171,7 @@ public class SourceAction extends AopNoSuchMethodErrorSolveBaseAction implements
 	@Action(value = "deleteFile")
 	public String deleteFile() {
 		success = sourceService.deleteFile(source.getUrl());
+		
 		if (success) {
 			message = "文件撤销成功";
 		} else {
@@ -282,8 +304,7 @@ public class SourceAction extends AopNoSuchMethodErrorSolveBaseAction implements
 		this.groupId = groupId;
 	}
 
-	
-	
-
-
+	public boolean isNeedMakeTabGroup() {
+		return needMakeTabGroup;
+	}
 }
