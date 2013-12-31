@@ -87,6 +87,10 @@ a {
     height: 280px;
     float: left;
 }
+#login table {
+    font-size: 0.9em;
+    width: 200px;
+}
 #captchaDiv{
     visibility: hidden;
     position: absolute;
@@ -115,7 +119,7 @@ a {
     float: left;
     list-style: none;
     cursor: pointer;
-    width: 159px;
+    width: 150px;
     height: 21px;
     background: url(../image/my-tab.png);
 }
@@ -293,7 +297,7 @@ label {
     border-top: 0;
     border-left: 0;
 }
-#collageSource>div>div>table{
+.tabGroupItem>div>div>table{
     border-collapse:collapse;
 }
 #topic-content>div>table{

@@ -46,7 +46,7 @@ var Panel = new Class({
         this.panelContent.removeClass(className);
         return this;
     },
-    updateWithAnimate:function(type,html){
+    updateWithAnimate:function(type,html,func){
         var thiz = this;
         var fx = new Fx.Morph(thiz.panelContent, {
             duration: 1000,
@@ -61,6 +61,9 @@ var Panel = new Class({
                     fx.start({
                         height:h
                     });
+                    if(func) {
+                        func();
+                    }
                 });
         } else if(type == 'append') {
             new Element('div').set('html',html).getChildren().each(function(item){
@@ -68,7 +71,11 @@ var Panel = new Class({
             });
             var h = thiz.panelContent.getScrollSize().y-27;
             fx.start({height:h});
+            if(func) {
+                func();
+            }
         }
+
     }
 });
 var Tab = new Class({
@@ -81,11 +88,15 @@ var Tab = new Class({
             tabContentCss: 'tabContent',
             tabContentSelectedCss: 'selected'
         }, option);
-        this.body = $(id);
+        if(instanceOf(id,String)) {
+            this.body = $(id);
+        } else if(instanceOf(id,Element)){
+            this.body = id;
+        }
         this.body.addClass('tab');
-        $$('#' + id + '>ul').addClass('tabTitles');
-        this.tabTitles = $$('#' + id + '>ul>li');
-        this.tabContents = $$('#' + id + '>div');
+        this.body.getChildren("ul").addClass('tabTitles');
+        this.tabTitles = this.body.getChildren("ul>li");
+        this.tabContents = this.body.getChildren("div");
         this.tabTitles.each(function (tab, index) {
             tab.addClass(thiz.option.tabTitleCss);
             tab.addEvent(thiz.option.tabChangeEvent, function () {
@@ -380,7 +391,8 @@ var Scroll = new Class({
             width: 500,
             height: 500,
             leftArrowCss : 'leftArrow',
-            rightArrowCss : 'rightArrow'
+            rightArrowCss : 'rightArrow',
+            arrowAlwaysShow:true
         }, option);
         this.scrollBody = el;
         this.scrollBody.addClass('scroll-content');
@@ -388,24 +400,38 @@ var Scroll = new Class({
             width: this.option.width,
             height: this.option.height
         });
-        this.rightBtn = new Element('a',{
-            'class':'right rightArrow'
-        });
-        this.scrollBody.grab(this.rightBtn,'bottom');
-        this.rightBtn.addEvent('click',function(){
-            thiz.nextPage();
-        });
-        this.leftBtn = new Element('a',{
-            'class':'left leftArrow'
-        });
-        this.leftBtn.addEvent('click',function(){
-            thiz.prePage();
-        });
-        this.scrollBody.grab(this.leftBtn,'bottom');
         this.pages = this.scrollBody.getChildren('div');
         this.pageCount = this.pages.length;
         if (this.pageCount == 0) {
             throw Error('请添加内容，内容不可为空。');
+        }
+        if(this.pageCount > 1) {
+            this.rightBtn = new Element('a',{
+                'class':'right rightArrow'
+            });
+            this.scrollBody.grab(this.rightBtn,'bottom');
+            this.rightBtn.addEvent('click',function(){
+                thiz.nextPage();
+            });
+            this.leftBtn = new Element('a',{
+                'class':'left leftArrow'
+            });
+            this.scrollBody.grab(this.leftBtn,'bottom');
+            this.leftBtn.addEvent('click',function(){
+                thiz.prePage();
+            });
+            if(!this.option.arrowAlwaysShow) {
+                this.rightBtn.addClass('hidden');
+                this.leftBtn.addClass('hidden');
+                this.scrollBody.addEvent('mouseover',function(){
+                    thiz.rightBtn.removeClass('hidden');
+                    thiz.leftBtn.removeClass('hidden');
+                });
+                this.scrollBody.addEvent('mouseleave',function(){
+                    thiz.rightBtn.addClass('hidden');
+                    thiz.leftBtn.addClass('hidden');
+                });
+            }
         }
         this.currentPage = 1;
         this.pages.each(function (item) {
