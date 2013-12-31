@@ -91,7 +91,9 @@ public class UserOperateAspect {
 //				System.out.println(methodName);
 //				System.out.println("**************");
 				try {
-					userOperateDao.add(new UserOperateDto(user.getId(), menuMap.get(className)));
+                    if(user != null) {
+                        userOperateDao.add(new UserOperateDto(user.getId(), menuMap.get(className)));
+                    }
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
