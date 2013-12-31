@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import com.hnfnu.zyw.action.base.AopNoSuchMethodErrorSolveBaseAction;
 import com.hnfnu.zyw.dto.resources.TopicDto;
 import com.hnfnu.zyw.service.resources.ITopicService;
+import com.hnfnu.zyw.website.service.IIndexService;
 import com.opensymphony.xwork2.ModelDriven;
 
 
@@ -39,9 +40,9 @@ ModelDriven<TopicDto>{
 	@Qualifier("topicService")
 	private ITopicService topicService;
 
-//	@Autowired
-//	@Qualifier("topicSourceVoService")
-//	private ITopicSourceVoService topicSourceVoService;
+	@Autowired
+	@Qualifier("ftl_indexService")
+	private IIndexService indexService;
 
 	// 添加专题
 	@Action(value = "addTopic")

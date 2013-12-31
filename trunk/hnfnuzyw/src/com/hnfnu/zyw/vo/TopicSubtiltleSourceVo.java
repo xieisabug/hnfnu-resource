@@ -81,6 +81,7 @@ public class TopicSubtiltleSourceVo {
 	
 	//专题名称
 	private String topicName;
+	private int isDisplay;
 	//专题简介
 	private String topicDescription;
 	//专题作者
@@ -90,43 +91,6 @@ public class TopicSubtiltleSourceVo {
 	public TopicSubtiltleSourceVo() {
 		super();
 	}
-	public TopicSubtiltleSourceVo(Integer id, String sourceName,
-			String keyWords, String mediaType, String mediaFormat,
-			String playTime, String fileSize, String sourceAuthor,
-			String publisher, String sourceDescription, Timestamp createDate,
-			double price, Integer viewTimes, Integer useTimes, String url,
-			Integer createUserId, Integer topicId, Integer subtitleId,
-			String subtitleName, String topicName, String topicDescription,
-			String topicAuthor, String remark) {
-		super();
-		this.id = id;
-		this.sourceName = sourceName;
-		this.keyWords = keyWords;
-		this.mediaType = mediaType;
-		this.mediaFormat = mediaFormat;
-		this.playTime = playTime;
-		this.fileSize = fileSize;
-		this.sourceAuthor = sourceAuthor;
-		this.publisher = publisher;
-		this.sourceDescription = sourceDescription;
-		this.createDate = createDate;
-		this.price = price;
-		this.viewTimes = viewTimes;
-		this.useTimes = useTimes;
-		this.url = url;
-		this.createUserId = createUserId;
-		this.topicId = topicId;
-		this.subtitleId = subtitleId;
-		this.subtitleName = subtitleName;
-		this.topicName = topicName;
-		this.topicDescription = topicDescription;
-		this.topicAuthor = topicAuthor;
-		this.remark = remark;
-	}
-
-
-
-
 
 	@Id
 	@GeneratedValue
@@ -409,6 +373,14 @@ public class TopicSubtiltleSourceVo {
 
 
 
+
+	public int getIsDisplay() {
+		return isDisplay;
+	}
+
+	public void setIsDisplay(int isDisplay) {
+		this.isDisplay = isDisplay;
+	}
 
 	@Override
 	public String toString() {

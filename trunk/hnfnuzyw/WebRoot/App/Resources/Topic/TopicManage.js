@@ -12,7 +12,7 @@ var topicSelectData = null;//用于在修改专题的时候保存的数据
 function add_topic() {
     topicWin = $.ligerDialog.open({
         width:400,
-        height:350,
+        height:400,
         title:'新增专题',
         url:'AddTopicImageForm.html',
         allowClose:false,

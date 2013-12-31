@@ -84,6 +84,8 @@ public class TopicSourceVo {
 	//id
 	private Integer topicId;
 	private Integer subtitleId;
+	private String subtitle;
+	private int isDisplay;
 	
 	
 	//专题名称
@@ -100,44 +102,6 @@ public class TopicSourceVo {
 	public TopicSourceVo() {
 		super();
 	}
-
-
-
-	public TopicSourceVo(Integer id, Integer sourceId, String sourceName,
-			Integer courseId, String keyWords, String mediaType,
-			String mediaFormat, String playTime, String fileSize,
-			String sourceAuthor, String publisher, String sourceDescription,
-			Timestamp createDate, String approvalStatus, 
-			double price, Integer viewTimes, Integer useTimes, String url,
-			Integer createUserId, Integer topicId, String topicName,
-			String topicDescription, String topicAuthor, String remark) {
-		super();
-		this.id = id;
-		this.sourceId = sourceId;
-		this.sourceName = sourceName;
-		this.courseId = courseId;
-		this.keyWords = keyWords;
-		this.mediaType = mediaType;
-		this.mediaFormat = mediaFormat;
-		this.playTime = playTime;
-		this.fileSize = fileSize;
-		this.sourceAuthor = sourceAuthor;
-		this.publisher = publisher;
-		this.sourceDescription = sourceDescription;
-		this.createDate = createDate;
-		this.approvalStatus = approvalStatus;
-		this.price = price;
-		this.viewTimes = viewTimes;
-		this.useTimes = useTimes;
-		this.url = url;
-		this.createUserId = createUserId;
-		this.topicId = topicId;
-		this.topicName = topicName;
-		this.topicDescription = topicDescription;
-		this.topicAuthor = topicAuthor;
-		this.remark = remark;
-	}
-
 
 	@Id
 	@GeneratedValue
@@ -437,7 +401,21 @@ public class TopicSourceVo {
 		this.remark = remark;
 	}
 
+	public String getSubtitle() {
+		return subtitle;
+	}
 
+	public void setSubtitle(String subtitle) {
+		this.subtitle = subtitle;
+	}
+
+	public int getIsDisplay() {
+		return isDisplay;
+	}
+
+	public void setIsDisplay(int isDisplay) {
+		this.isDisplay = isDisplay;
+	}
 
 	@Override
 	public String toString() {

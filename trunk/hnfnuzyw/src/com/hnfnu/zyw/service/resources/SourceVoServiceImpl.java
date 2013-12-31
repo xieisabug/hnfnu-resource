@@ -23,10 +23,6 @@ public class SourceVoServiceImpl implements ISourceVoService {
 	@Qualifier("courseGradeSubjectDao")
 	public ICourseGradeSubjectDao courseGradeSubjectDao;
 
-	// @Autowired
-	// @Qualifier("sourceMoreVoDao")
-	// public ISourceMoreVoDao sourceMoreVoDao;
-
 	public SourceVo load(int id) {
 		try {
 			return sourceVoDao.get(id);
@@ -117,7 +113,6 @@ public class SourceVoServiceImpl implements ISourceVoService {
 			sql = sql + " where groupId="+groupId;
 		}
 		sql = sql + " ORDER BY gradeId,subjectId,courseId ASC";
-		System.out.println(sql);
 		return getTree(sql);
 	}
 	
@@ -343,5 +338,31 @@ public class SourceVoServiceImpl implements ISourceVoService {
 			e.printStackTrace();
 		}
 		return l;
+	}
+
+	public boolean needMakeTabGroup(int groupId, int gradeId, int subjectId) {
+		String hql = "from SourceVo where groupId="+groupId;
+		String hql1 = "from SourceVo where gradeId="+gradeId+" and groupId="+groupId;
+		String hql2 = "from SourceVo " +
+				"where subjectId="+subjectId +" and groupId="+groupId+" and gradeId="+gradeId;
+		List<SourceVo> sv = null;
+		try {
+			sv = sourceVoDao.list(hql);
+			if(sv == null ||sv.size() <= 1){
+				return true;
+			}
+			sv = sourceVoDao.list(hql1);
+			if(sv == null ||sv.size() <= 1){
+				return true;
+			}
+			sv = sourceVoDao.list(hql2);
+			if(sv == null ||sv.size() <= 1){
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return true;
+		}
+		return false;
 	}
 }
