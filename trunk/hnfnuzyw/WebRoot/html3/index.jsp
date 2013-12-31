@@ -397,7 +397,7 @@
     <li>设计学</li>
     <li>经济学</li>
     <a href="#">
-        <div style="height: 33px; width: 60px; background: url(image/tab_left.png); float:left;">更多</div>
+        <div>更多</div>
     </a>
 </ul>
 <div>
@@ -1069,6 +1069,9 @@
     <li>小学四年级</li>
     <li>小学五年级</li>
     <li>小学六年级</li>
+    <a href="#">
+        <div>更多</div>
+    </a>
 </ul>
 <div>
     <div>

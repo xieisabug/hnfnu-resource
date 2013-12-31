@@ -275,19 +275,22 @@ a.right {
     top: 0;
 }
 .rightArrow {
-    background: url('../image/fleche2.png') no-repeat center right;
+    background: url('../image/arrow_right.png') no-repeat center right;
 }
 a.left {
     left: 0;
     top: 0;
 }
 .leftArrow {
-    background: url('../image/fleche1.png') no-repeat center left;
+    background: url('../image/arrow_left.png') no-repeat center left;
+}
+.rightArrow:hover,.leftArrow:hover {
+    background: #ddd;
 }
 a.left,a.right{
     position: absolute;
-    height: 99%;
-    width: 50px;
+    height: 101%;
+    width: 20px;
     cursor: pointer;
     z-index: 10;
     filter: alpha(opacity=60);
