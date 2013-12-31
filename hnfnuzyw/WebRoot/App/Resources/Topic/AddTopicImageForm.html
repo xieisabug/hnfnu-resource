@@ -153,22 +153,21 @@
                     }
                 },
                 {
-                    display:"是否显示在主界面",
+                    display:"是否显示",
                     name:"isDisplay",
                     type:"select",
-                    width:200,
+                    comboboxName:"displayS",
                     space:30,
                     labelWidth:100,
-                    comboboxName:"isDisplay",
-                    textField:"text",
-                    valueField:"id",
+                    width:220,
                     newline:true,
                     options:{
-                        selectBoxHeight:40,
-                        hideOnLoseFocus:true,
-                        valueFieldID:"id",
+                        textField:"text",
+                        valueField:"id",
                         initValue:"0",
                         initText:"否",
+                        hideOnLoseFocus:true,
+                        valueFieldID:"isDisplay",
                         data:[
                             {
                                 "id":"1",
@@ -208,33 +207,28 @@
                     }
                 },
                 {
-                    display:"是否外链",
-                    name:"isOutlink",
-                    type:"select",
-                    width:200,
+                    name : 'isOutlink',
+                    display : '是否外链',
+                    type : "select",
                     space:30,
                     labelWidth:100,
-                    comboboxName:"isOutlink",
-                    textField:"a",
-                    valueField:"b",
+                    width:220,
                     newline:true,
-                    options:{
-                        selectBoxHeight:40,
-                        hideOnLoseFocus:true,
-                        initValue:"1",
-                        initText:"是",
-                        valueFieldID:"b",
-                        data:[
-                            {
-                                "b":"0",
-                                "a":"否"
-                            },
-                            {
-                                "b":"1",
-                                "a":"是"
-                            }
-                        ]
-
+                    comboboxName : "outlinkS",
+                    options : {
+                        textField : "name",
+                        valueField : "id",
+                        hideOnLoseFocus : true,
+                        valueFieldID : "isOutlink",
+                        initValue:"0",
+                        initText:"否",
+                        data : [ {
+                            name : "否",
+                            id : "0"
+                        }, {
+                            name : "是",
+                            id : "1"
+                        }]
                     }
                 },
                 {

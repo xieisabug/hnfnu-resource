@@ -71,7 +71,7 @@ public class TopicServiceImpl implements ITopicService {
 	}
 
 	public Map<String, Object> listTopic() {
-		String hql = "from TopicDto";
+		String hql = "from TopicDto order by isDisPlay desc,id desc";
 		Map<String, Object> topicList = new HashMap<String, Object>();
 		List<TopicDto> l = null;
 

@@ -52,8 +52,8 @@ function add_save() {
             type:'post',
             success:function (data) {
                 if (data.success) {
-                    topicGrid.addRow(data.model);
-                    //refresh_info();
+                   // topicGrid.addRow(data.model);
+                    refresh_info();
                     $.ligerDialog.tip({
                         title:'提示信息',
                         content:data.message
@@ -63,9 +63,6 @@ function add_save() {
                     if (data.topic.isOutlink == 0) {
                         var topicDialog = $.ligerDialog.confirm('专题添加成功，专题需要添加二级标题吗？', function (answer) {
                             if (answer) {
-                                //console.log(topicGrid);
-                                //console.log(data.model);
-                                topicGrid.select(data.model);
                                 add_topic_subtille();
                             } else {
                                 //不存在二级标题，就添加和专题名字一样的二级标题
@@ -676,6 +673,11 @@ $(function () {
                         width:200
                     },
                     {
+                        display:'是否显示',
+                        name:'isDisplay',
+                        width:200
+                    },
+                    {
                         display:'专题介绍',
                         name:'description',
                         align:'left',
@@ -720,6 +722,11 @@ $(function () {
                     items:toolbarItems
                 },
                 rowAttrRender:function (rowdata) {
+                    if (rowdata.isDisplay == 0) {
+                        rowdata.isDisplay = "否";
+                    } else {
+                        rowdata.isDisplay = "是";
+                    }
                     if (rowdata.isOutlink == 0) {
                         rowdata.isOutlink = "否";
                     } else {
