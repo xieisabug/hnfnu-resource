@@ -1,4 +1,41 @@
+<%@ page import="com.hnfnu.zyw.dto.system.UserDto" %>
+<%@ page import="com.hnfnu.zyw.dto.system.StudentDto" %>
+<%@ page import="java.util.Date" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    UserDto user = (UserDto) session.getAttribute("user");
+    boolean login = false;
+    String name = null;
+    String icon = null;
+    int balance = 0;
+    Date latestLoginDate = null;
+    String entranceTime = null;
+    String department = null;
+    String major = null;
+
+    if (user == null) {
+        StudentDto stu = (StudentDto) session.getAttribute("student");
+        if (stu != null) {
+            login = true;
+            name = stu.getName();
+            icon = stu.getIcon();
+            balance = stu.getBalance();
+            entranceTime = stu.getEntranceTime();
+            department = stu.getDepartment();
+            major = stu.getMajor();
+        }
+    } else {
+        login = true;
+        name = user.getName();
+        icon = user.getIcon();
+        balance = user.getBalance();
+        latestLoginDate = user.getLatestLoginDate();
+    }
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://"
+            + request.getServerName() + ":" + request.getServerPort()
+            + path + "/";
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +49,7 @@
     <script type="text/javascript" src="js/gallery.js"></script>
 </head>
 <body>
-<%@ include file="header.html"%>
+<%@ include file="header.html" %>
 <div id="allContent">
 <div class="navbar">
     <ul class="nav">
@@ -33,6 +70,9 @@
             <span>用户登陆</span>
         </div>
         <div>
+            <%
+                if (!login) {
+            %>
             <div>
                 <label for="username">用户名</label>
                 <!--<span>用户名：</span>-->
@@ -56,6 +96,7 @@
                 <!--<span>密码：</span>-->
                 <input class="form-control" type="text" id="captcha"
                        name="captcha" placeholder="输入弹出的验证码">
+
                 <div id="captchaDiv">
                     <img id="imgObj" alt="" src="../website/captchaImg" style="z-index: 9999">
                 </div>
@@ -73,6 +114,59 @@
             <div class="p-small-font align-right">
                 <p>忘记密码？请<a href="#">点击这里</a></p>
             </div>
+            <%
+            } else {
+            %>
+            <table>
+                <tr>
+                    <td rowspan="4" style="width:75px;">
+                        <img src="<%=icon%>" style="width:75px;height:75px;">
+                        <button id="logout_btn">
+                            退出登录
+                        </button>
+                    </td>
+                    <td>
+                        <%=name%>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        资源币:<%=balance%>
+                    </td>
+                </tr>
+                <%
+                    if (entranceTime == null) {
+                %>
+                <tr>
+                    <td>
+                        您上次登录的时间是：
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <%=latestLoginDate%>
+                    </td>
+                </tr>
+                <%
+                } else {
+                %>
+                <tr>
+                    <td>
+                        <%=entranceTime%>级
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <%=department%> 系 <%=major%> 专业
+                    </td>
+                </tr>
+                <%
+                    }
+                %>
+            </table>
+            <%
+                }
+            %>
         </div>
     </div>
     <div id="gallery">
@@ -294,7 +388,7 @@
 </div>
 
 <div class="row">
-<div id="collageSource">
+<div class="tabGroupItem">
 <ul>
     <li>教育学</li>
     <li>心理学</li>
@@ -302,6 +396,9 @@
     <li>美术学</li>
     <li>设计学</li>
     <li>经济学</li>
+    <a href="#">
+        <div style="height: 33px; width: 60px; background: url(image/tab_left.png); float:left;">更多</div>
+    </a>
 </ul>
 <div>
     <!-- 轮转内容的div -->
@@ -311,7 +408,7 @@
                 <td class="subject-item">
                     <table>
                         <tr>
-                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/></td>
                             <td style="font-weight: bolder;">教育心理学</td>
                         </tr>
                         <tr>
@@ -325,7 +422,7 @@
                 <td class="subject-item">
                     <table>
                         <tr>
-                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/></td>
                             <td style="font-weight: bolder;">教育心理学</td>
                         </tr>
                         <tr>
@@ -339,7 +436,7 @@
                 <td class="subject-item">
                     <table>
                         <tr>
-                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/></td>
                             <td style="font-weight: bolder;">教育心理学</td>
                         </tr>
                         <tr>
@@ -355,7 +452,7 @@
                 <td class="subject-item">
                     <table>
                         <tr>
-                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/></td>
                             <td style="font-weight: bolder;">教育心理学</td>
                         </tr>
                         <tr>
@@ -369,7 +466,7 @@
                 <td class="subject-item">
                     <table>
                         <tr>
-                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/></td>
                             <td style="font-weight: bolder;">教育心理学</td>
                         </tr>
                         <tr>
@@ -383,7 +480,7 @@
                 <td class="subject-item">
                     <table>
                         <tr>
-                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/></td>
                             <td style="font-weight: bolder;">教育心理学</td>
                         </tr>
                         <tr>
@@ -403,7 +500,7 @@
                 <td class="subject-item">
                     <table>
                         <tr>
-                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/></td>
                             <td style="font-weight: bolder;">教育心理学</td>
                         </tr>
                         <tr>
@@ -417,7 +514,7 @@
                 <td class="subject-item">
                     <table>
                         <tr>
-                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/></td>
                             <td style="font-weight: bolder;">教育心理学</td>
                         </tr>
                         <tr>
@@ -431,101 +528,7 @@
                 <td class="subject-item">
                     <table>
                         <tr>
-                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
-                            <td style="font-weight: bolder;">教育心理学</td>
-                        </tr>
-                        <tr>
-                            <td>湖南一师一附小</td>
-                        </tr>
-                        <tr>
-                            <td style="color:#0099ff;">浏览次数：123456</td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td class="subject-item">
-                    <table>
-                        <tr>
-                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
-                            <td style="font-weight: bolder;">教育心理学</td>
-                        </tr>
-                        <tr>
-                            <td>湖南一师一附小</td>
-                        </tr>
-                        <tr>
-                            <td style="color:#0099ff;">浏览次数：123456</td>
-                        </tr>
-                    </table>
-                </td>
-                <td class="subject-item">
-                    <table>
-                        <tr>
-                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
-                            <td style="font-weight: bolder;">教育心理学</td>
-                        </tr>
-                        <tr>
-                            <td>湖南一师一附小</td>
-                        </tr>
-                        <tr>
-                            <td style="color:#0099ff;">浏览次数：123456</td>
-                        </tr>
-                    </table>
-                </td>
-                <td class="subject-item">
-                    <table>
-                        <tr>
-                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
-                            <td style="font-weight: bolder;">教育心理学</td>
-                        </tr>
-                        <tr>
-                            <td>湖南一师一附小</td>
-                        </tr>
-                        <tr>
-                            <td style="color:#0099ff;">浏览次数：123456</td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-        </table>
-    </div>
-</div>
-<div>
-    <div>
-        <table>
-            <tr>
-                <td class="subject-item">
-                    <table>
-                        <tr>
-                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
-                            <td style="font-weight: bolder;">教育心理学</td>
-                        </tr>
-                        <tr>
-                            <td>湖南一师一附小</td>
-                        </tr>
-                        <tr>
-                            <td style="color:#0099ff;">浏览次数：123456</td>
-                        </tr>
-                    </table>
-                </td>
-                <td class="subject-item">
-                    <table>
-                        <tr>
-                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
-                            <td style="font-weight: bolder;">教育心理学</td>
-                        </tr>
-                        <tr>
-                            <td>湖南一师一附小</td>
-                        </tr>
-                        <tr>
-                            <td style="color:#0099ff;">浏览次数：123456</td>
-                        </tr>
-                    </table>
-                </td>
-                <td class="subject-item">
-                    <table>
-                        <tr>
-                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/></td>
                             <td style="font-weight: bolder;">教育心理学</td>
                         </tr>
                         <tr>
@@ -541,7 +544,7 @@
                 <td class="subject-item">
                     <table>
                         <tr>
-                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/></td>
                             <td style="font-weight: bolder;">教育心理学</td>
                         </tr>
                         <tr>
@@ -555,7 +558,7 @@
                 <td class="subject-item">
                     <table>
                         <tr>
-                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/></td>
                             <td style="font-weight: bolder;">教育心理学</td>
                         </tr>
                         <tr>
@@ -569,7 +572,7 @@
                 <td class="subject-item">
                     <table>
                         <tr>
-                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/></td>
                             <td style="font-weight: bolder;">教育心理学</td>
                         </tr>
                         <tr>
@@ -591,7 +594,7 @@
                 <td class="subject-item">
                     <table>
                         <tr>
-                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/></td>
                             <td style="font-weight: bolder;">教育心理学</td>
                         </tr>
                         <tr>
@@ -605,7 +608,7 @@
                 <td class="subject-item">
                     <table>
                         <tr>
-                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/></td>
                             <td style="font-weight: bolder;">教育心理学</td>
                         </tr>
                         <tr>
@@ -619,101 +622,7 @@
                 <td class="subject-item">
                     <table>
                         <tr>
-                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
-                            <td style="font-weight: bolder;">教育心理学</td>
-                        </tr>
-                        <tr>
-                            <td>湖南一师一附小</td>
-                        </tr>
-                        <tr>
-                            <td style="color:#0099ff;">浏览次数：123456</td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td class="subject-item">
-                    <table>
-                        <tr>
-                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
-                            <td style="font-weight: bolder;">教育心理学</td>
-                        </tr>
-                        <tr>
-                            <td>湖南一师一附小</td>
-                        </tr>
-                        <tr>
-                            <td style="color:#0099ff;">浏览次数：123456</td>
-                        </tr>
-                    </table>
-                </td>
-                <td class="subject-item">
-                    <table>
-                        <tr>
-                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
-                            <td style="font-weight: bolder;">教育心理学</td>
-                        </tr>
-                        <tr>
-                            <td>湖南一师一附小</td>
-                        </tr>
-                        <tr>
-                            <td style="color:#0099ff;">浏览次数：123456</td>
-                        </tr>
-                    </table>
-                </td>
-                <td class="subject-item">
-                    <table>
-                        <tr>
-                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
-                            <td style="font-weight: bolder;">教育心理学</td>
-                        </tr>
-                        <tr>
-                            <td>湖南一师一附小</td>
-                        </tr>
-                        <tr>
-                            <td style="color:#0099ff;">浏览次数：123456</td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-        </table>
-    </div>
-</div>
-<div>
-    <div>
-        <table>
-            <tr>
-                <td class="subject-item">
-                    <table>
-                        <tr>
-                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
-                            <td style="font-weight: bolder;">教育心理学</td>
-                        </tr>
-                        <tr>
-                            <td>湖南一师一附小</td>
-                        </tr>
-                        <tr>
-                            <td style="color:#0099ff;">浏览次数：123456</td>
-                        </tr>
-                    </table>
-                </td>
-                <td class="subject-item">
-                    <table>
-                        <tr>
-                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
-                            <td style="font-weight: bolder;">教育心理学</td>
-                        </tr>
-                        <tr>
-                            <td>湖南一师一附小</td>
-                        </tr>
-                        <tr>
-                            <td style="color:#0099ff;">浏览次数：123456</td>
-                        </tr>
-                    </table>
-                </td>
-                <td class="subject-item">
-                    <table>
-                        <tr>
-                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/></td>
                             <td style="font-weight: bolder;">教育心理学</td>
                         </tr>
                         <tr>
@@ -729,7 +638,7 @@
                 <td class="subject-item">
                     <table>
                         <tr>
-                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/></td>
                             <td style="font-weight: bolder;">教育心理学</td>
                         </tr>
                         <tr>
@@ -743,7 +652,7 @@
                 <td class="subject-item">
                     <table>
                         <tr>
-                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/></td>
                             <td style="font-weight: bolder;">教育心理学</td>
                         </tr>
                         <tr>
@@ -757,7 +666,7 @@
                 <td class="subject-item">
                     <table>
                         <tr>
-                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/></td>
                             <td style="font-weight: bolder;">教育心理学</td>
                         </tr>
                         <tr>
@@ -779,7 +688,7 @@
                 <td class="subject-item">
                     <table>
                         <tr>
-                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/></td>
                             <td style="font-weight: bolder;">教育心理学</td>
                         </tr>
                         <tr>
@@ -793,7 +702,7 @@
                 <td class="subject-item">
                     <table>
                         <tr>
-                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/></td>
                             <td style="font-weight: bolder;">教育心理学</td>
                         </tr>
                         <tr>
@@ -807,7 +716,7 @@
                 <td class="subject-item">
                     <table>
                         <tr>
-                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/></td>
                             <td style="font-weight: bolder;">教育心理学</td>
                         </tr>
                         <tr>
@@ -823,7 +732,7 @@
                 <td class="subject-item">
                     <table>
                         <tr>
-                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/></td>
                             <td style="font-weight: bolder;">教育心理学</td>
                         </tr>
                         <tr>
@@ -837,7 +746,7 @@
                 <td class="subject-item">
                     <table>
                         <tr>
-                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/></td>
                             <td style="font-weight: bolder;">教育心理学</td>
                         </tr>
                         <tr>
@@ -851,7 +760,7 @@
                 <td class="subject-item">
                     <table>
                         <tr>
-                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/></td>
                             <td style="font-weight: bolder;">教育心理学</td>
                         </tr>
                         <tr>
@@ -873,7 +782,7 @@
                 <td class="subject-item">
                     <table>
                         <tr>
-                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/></td>
                             <td style="font-weight: bolder;">教育心理学</td>
                         </tr>
                         <tr>
@@ -887,7 +796,7 @@
                 <td class="subject-item">
                     <table>
                         <tr>
-                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/></td>
                             <td style="font-weight: bolder;">教育心理学</td>
                         </tr>
                         <tr>
@@ -901,7 +810,7 @@
                 <td class="subject-item">
                     <table>
                         <tr>
-                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/></td>
                             <td style="font-weight: bolder;">教育心理学</td>
                         </tr>
                         <tr>
@@ -917,7 +826,7 @@
                 <td class="subject-item">
                     <table>
                         <tr>
-                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/></td>
                             <td style="font-weight: bolder;">教育心理学</td>
                         </tr>
                         <tr>
@@ -931,7 +840,7 @@
                 <td class="subject-item">
                     <table>
                         <tr>
-                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/></td>
                             <td style="font-weight: bolder;">教育心理学</td>
                         </tr>
                         <tr>
@@ -945,7 +854,195 @@
                 <td class="subject-item">
                     <table>
                         <tr>
-                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/></td>
+                            <td style="font-weight: bolder;">教育心理学</td>
+                        </tr>
+                        <tr>
+                            <td>湖南一师一附小</td>
+                        </tr>
+                        <tr>
+                            <td style="color:#0099ff;">浏览次数：123456</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div>
+    <div>
+        <table>
+            <tr>
+                <td class="subject-item">
+                    <table>
+                        <tr>
+                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/></td>
+                            <td style="font-weight: bolder;">教育心理学</td>
+                        </tr>
+                        <tr>
+                            <td>湖南一师一附小</td>
+                        </tr>
+                        <tr>
+                            <td style="color:#0099ff;">浏览次数：123456</td>
+                        </tr>
+                    </table>
+                </td>
+                <td class="subject-item">
+                    <table>
+                        <tr>
+                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/></td>
+                            <td style="font-weight: bolder;">教育心理学</td>
+                        </tr>
+                        <tr>
+                            <td>湖南一师一附小</td>
+                        </tr>
+                        <tr>
+                            <td style="color:#0099ff;">浏览次数：123456</td>
+                        </tr>
+                    </table>
+                </td>
+                <td class="subject-item">
+                    <table>
+                        <tr>
+                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/></td>
+                            <td style="font-weight: bolder;">教育心理学</td>
+                        </tr>
+                        <tr>
+                            <td>湖南一师一附小</td>
+                        </tr>
+                        <tr>
+                            <td style="color:#0099ff;">浏览次数：123456</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td class="subject-item">
+                    <table>
+                        <tr>
+                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/></td>
+                            <td style="font-weight: bolder;">教育心理学</td>
+                        </tr>
+                        <tr>
+                            <td>湖南一师一附小</td>
+                        </tr>
+                        <tr>
+                            <td style="color:#0099ff;">浏览次数：123456</td>
+                        </tr>
+                    </table>
+                </td>
+                <td class="subject-item">
+                    <table>
+                        <tr>
+                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/></td>
+                            <td style="font-weight: bolder;">教育心理学</td>
+                        </tr>
+                        <tr>
+                            <td>湖南一师一附小</td>
+                        </tr>
+                        <tr>
+                            <td style="color:#0099ff;">浏览次数：123456</td>
+                        </tr>
+                    </table>
+                </td>
+                <td class="subject-item">
+                    <table>
+                        <tr>
+                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/></td>
+                            <td style="font-weight: bolder;">教育心理学</td>
+                        </tr>
+                        <tr>
+                            <td>湖南一师一附小</td>
+                        </tr>
+                        <tr>
+                            <td style="color:#0099ff;">浏览次数：123456</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div>
+    <div>
+        <table>
+            <tr>
+                <td class="subject-item">
+                    <table>
+                        <tr>
+                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/></td>
+                            <td style="font-weight: bolder;">教育心理学</td>
+                        </tr>
+                        <tr>
+                            <td>湖南一师一附小</td>
+                        </tr>
+                        <tr>
+                            <td style="color:#0099ff;">浏览次数：123456</td>
+                        </tr>
+                    </table>
+                </td>
+                <td class="subject-item">
+                    <table>
+                        <tr>
+                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/></td>
+                            <td style="font-weight: bolder;">教育心理学</td>
+                        </tr>
+                        <tr>
+                            <td>湖南一师一附小</td>
+                        </tr>
+                        <tr>
+                            <td style="color:#0099ff;">浏览次数：123456</td>
+                        </tr>
+                    </table>
+                </td>
+                <td class="subject-item">
+                    <table>
+                        <tr>
+                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/></td>
+                            <td style="font-weight: bolder;">教育心理学</td>
+                        </tr>
+                        <tr>
+                            <td>湖南一师一附小</td>
+                        </tr>
+                        <tr>
+                            <td style="color:#0099ff;">浏览次数：123456</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td class="subject-item">
+                    <table>
+                        <tr>
+                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/></td>
+                            <td style="font-weight: bolder;">教育心理学</td>
+                        </tr>
+                        <tr>
+                            <td>湖南一师一附小</td>
+                        </tr>
+                        <tr>
+                            <td style="color:#0099ff;">浏览次数：123456</td>
+                        </tr>
+                    </table>
+                </td>
+                <td class="subject-item">
+                    <table>
+                        <tr>
+                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/></td>
+                            <td style="font-weight: bolder;">教育心理学</td>
+                        </tr>
+                        <tr>
+                            <td>湖南一师一附小</td>
+                        </tr>
+                        <tr>
+                            <td style="color:#0099ff;">浏览次数：123456</td>
+                        </tr>
+                    </table>
+                </td>
+                <td class="subject-item">
+                    <table>
+                        <tr>
+                            <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/></td>
                             <td style="font-weight: bolder;">教育心理学</td>
                         </tr>
                         <tr>
@@ -964,7 +1061,7 @@
 </div>
 
 <div class="row">
-<div id="primarySource">
+<div class="tabGroupItem">
 <ul>
     <li>小学一年级</li>
     <li>小学二年级</li>
@@ -981,7 +1078,8 @@
                     <td class="subject-item">
                         <table>
                             <tr>
-                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/>
+                                </td>
                                 <td style="font-weight: bolder;">教育心理学</td>
                             </tr>
                             <tr>
@@ -995,7 +1093,8 @@
                     <td class="subject-item">
                         <table>
                             <tr>
-                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/>
+                                </td>
                                 <td style="font-weight: bolder;">教育心理学</td>
                             </tr>
                             <tr>
@@ -1009,7 +1108,8 @@
                     <td class="subject-item">
                         <table>
                             <tr>
-                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/>
+                                </td>
                                 <td style="font-weight: bolder;">教育心理学</td>
                             </tr>
                             <tr>
@@ -1025,7 +1125,8 @@
                     <td class="subject-item">
                         <table>
                             <tr>
-                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/>
+                                </td>
                                 <td style="font-weight: bolder;">教育心理学</td>
                             </tr>
                             <tr>
@@ -1039,7 +1140,8 @@
                     <td class="subject-item">
                         <table>
                             <tr>
-                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/>
+                                </td>
                                 <td style="font-weight: bolder;">教育心理学</td>
                             </tr>
                             <tr>
@@ -1053,7 +1155,8 @@
                     <td class="subject-item">
                         <table>
                             <tr>
-                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/>
+                                </td>
                                 <td style="font-weight: bolder;">教育心理学</td>
                             </tr>
                             <tr>
@@ -1077,7 +1180,8 @@
                     <td class="subject-item">
                         <table>
                             <tr>
-                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/>
+                                </td>
                                 <td style="font-weight: bolder;">教育心理学</td>
                             </tr>
                             <tr>
@@ -1091,7 +1195,8 @@
                     <td class="subject-item">
                         <table>
                             <tr>
-                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/>
+                                </td>
                                 <td style="font-weight: bolder;">教育心理学</td>
                             </tr>
                             <tr>
@@ -1105,7 +1210,8 @@
                     <td class="subject-item">
                         <table>
                             <tr>
-                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/>
+                                </td>
                                 <td style="font-weight: bolder;">教育心理学</td>
                             </tr>
                             <tr>
@@ -1121,7 +1227,8 @@
                     <td class="subject-item">
                         <table>
                             <tr>
-                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/>
+                                </td>
                                 <td style="font-weight: bolder;">教育心理学</td>
                             </tr>
                             <tr>
@@ -1135,7 +1242,8 @@
                     <td class="subject-item">
                         <table>
                             <tr>
-                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/>
+                                </td>
                                 <td style="font-weight: bolder;">教育心理学</td>
                             </tr>
                             <tr>
@@ -1149,7 +1257,8 @@
                     <td class="subject-item">
                         <table>
                             <tr>
-                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/>
+                                </td>
                                 <td style="font-weight: bolder;">教育心理学</td>
                             </tr>
                             <tr>
@@ -1173,7 +1282,8 @@
                     <td class="subject-item">
                         <table>
                             <tr>
-                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/>
+                                </td>
                                 <td style="font-weight: bolder;">教育心理学</td>
                             </tr>
                             <tr>
@@ -1187,7 +1297,8 @@
                     <td class="subject-item">
                         <table>
                             <tr>
-                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/>
+                                </td>
                                 <td style="font-weight: bolder;">教育心理学</td>
                             </tr>
                             <tr>
@@ -1201,7 +1312,8 @@
                     <td class="subject-item">
                         <table>
                             <tr>
-                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/>
+                                </td>
                                 <td style="font-weight: bolder;">教育心理学</td>
                             </tr>
                             <tr>
@@ -1217,7 +1329,8 @@
                     <td class="subject-item">
                         <table>
                             <tr>
-                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/>
+                                </td>
                                 <td style="font-weight: bolder;">教育心理学</td>
                             </tr>
                             <tr>
@@ -1231,7 +1344,8 @@
                     <td class="subject-item">
                         <table>
                             <tr>
-                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/>
+                                </td>
                                 <td style="font-weight: bolder;">教育心理学</td>
                             </tr>
                             <tr>
@@ -1245,7 +1359,8 @@
                     <td class="subject-item">
                         <table>
                             <tr>
-                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/>
+                                </td>
                                 <td style="font-weight: bolder;">教育心理学</td>
                             </tr>
                             <tr>
@@ -1269,7 +1384,8 @@
                     <td class="subject-item">
                         <table>
                             <tr>
-                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/>
+                                </td>
                                 <td style="font-weight: bolder;">教育心理学</td>
                             </tr>
                             <tr>
@@ -1283,7 +1399,8 @@
                     <td class="subject-item">
                         <table>
                             <tr>
-                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/>
+                                </td>
                                 <td style="font-weight: bolder;">教育心理学</td>
                             </tr>
                             <tr>
@@ -1297,7 +1414,8 @@
                     <td class="subject-item">
                         <table>
                             <tr>
-                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/>
+                                </td>
                                 <td style="font-weight: bolder;">教育心理学</td>
                             </tr>
                             <tr>
@@ -1313,7 +1431,8 @@
                     <td class="subject-item">
                         <table>
                             <tr>
-                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/>
+                                </td>
                                 <td style="font-weight: bolder;">教育心理学</td>
                             </tr>
                             <tr>
@@ -1327,7 +1446,8 @@
                     <td class="subject-item">
                         <table>
                             <tr>
-                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/>
+                                </td>
                                 <td style="font-weight: bolder;">教育心理学</td>
                             </tr>
                             <tr>
@@ -1341,7 +1461,8 @@
                     <td class="subject-item">
                         <table>
                             <tr>
-                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/>
+                                </td>
                                 <td style="font-weight: bolder;">教育心理学</td>
                             </tr>
                             <tr>
@@ -1365,7 +1486,8 @@
                     <td class="subject-item">
                         <table>
                             <tr>
-                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/>
+                                </td>
                                 <td style="font-weight: bolder;">教育心理学</td>
                             </tr>
                             <tr>
@@ -1379,7 +1501,8 @@
                     <td class="subject-item">
                         <table>
                             <tr>
-                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/>
+                                </td>
                                 <td style="font-weight: bolder;">教育心理学</td>
                             </tr>
                             <tr>
@@ -1393,7 +1516,8 @@
                     <td class="subject-item">
                         <table>
                             <tr>
-                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/>
+                                </td>
                                 <td style="font-weight: bolder;">教育心理学</td>
                             </tr>
                             <tr>
@@ -1409,7 +1533,8 @@
                     <td class="subject-item">
                         <table>
                             <tr>
-                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/>
+                                </td>
                                 <td style="font-weight: bolder;">教育心理学</td>
                             </tr>
                             <tr>
@@ -1423,7 +1548,8 @@
                     <td class="subject-item">
                         <table>
                             <tr>
-                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/>
+                                </td>
                                 <td style="font-weight: bolder;">教育心理学</td>
                             </tr>
                             <tr>
@@ -1437,7 +1563,8 @@
                     <td class="subject-item">
                         <table>
                             <tr>
-                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/>
+                                </td>
                                 <td style="font-weight: bolder;">教育心理学</td>
                             </tr>
                             <tr>
@@ -1461,7 +1588,8 @@
                     <td class="subject-item">
                         <table>
                             <tr>
-                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/>
+                                </td>
                                 <td style="font-weight: bolder;">教育心理学</td>
                             </tr>
                             <tr>
@@ -1475,7 +1603,8 @@
                     <td class="subject-item">
                         <table>
                             <tr>
-                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/>
+                                </td>
                                 <td style="font-weight: bolder;">教育心理学</td>
                             </tr>
                             <tr>
@@ -1489,7 +1618,8 @@
                     <td class="subject-item">
                         <table>
                             <tr>
-                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/>
+                                </td>
                                 <td style="font-weight: bolder;">教育心理学</td>
                             </tr>
                             <tr>
@@ -1505,7 +1635,8 @@
                     <td class="subject-item">
                         <table>
                             <tr>
-                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/>
+                                </td>
                                 <td style="font-weight: bolder;">教育心理学</td>
                             </tr>
                             <tr>
@@ -1519,7 +1650,8 @@
                     <td class="subject-item">
                         <table>
                             <tr>
-                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/>
+                                </td>
                                 <td style="font-weight: bolder;">教育心理学</td>
                             </tr>
                             <tr>
@@ -1533,7 +1665,8 @@
                     <td class="subject-item">
                         <table>
                             <tr>
-                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源" /></td>
+                                <td rowspan="3" style="width: 80px;"><img src="image/subject-item.png" alt="查看学科资源"/>
+                                </td>
                                 <td style="font-weight: bolder;">教育心理学</td>
                             </tr>
                             <tr>
@@ -1551,7 +1684,7 @@
 </div>
 </div>
 </div>
-<%@ include file="footer.html"%>
+<%@ include file="footer.html" %>
 </div>
 </body>
 </html>

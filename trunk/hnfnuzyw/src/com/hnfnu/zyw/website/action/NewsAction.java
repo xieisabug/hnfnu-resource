@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 @Scope("prototype")
 @ParentPackage("json-default")
 @Results({@Result(name = "success", type = "json", params = {"root", "action"})})
-@Namespace("/ftl")
+@Namespace("/")
 public class NewsAction extends ActionSupport {
 
     private static final long serialVersionUID = 8211651083165988085L;
@@ -60,7 +60,7 @@ public class NewsAction extends ActionSupport {
         return SUCCESS;
     }
 
-    @Action(value = "newsView", results = {@Result(name = "success", location = "../../../html3/news.jsp")})
+    @Action(value = "newsView", results = {@Result(name = "success", location = "../../html3/news.jsp")})
     public String newsView() {
         NewsDto news = newsService.get(id);
         HttpServletRequest request = ServletActionContext.getRequest();
