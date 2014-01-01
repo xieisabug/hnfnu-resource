@@ -310,11 +310,11 @@ public class LoginAction extends AopNoSuchMethodErrorSolveBaseAction{
         try {
             sos = res.getOutputStream();
             ImageIO.write(buffImg, "jpeg", sos);
-            sos.close();
+            //sos.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return SUCCESS;
+        return null;
     }
 
 	/* get set */
