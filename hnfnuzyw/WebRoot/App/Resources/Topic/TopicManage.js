@@ -689,12 +689,6 @@ $(function () {
                         width:400
                     },
                     {
-                        display:'专题作者',
-                        name:'author',
-                        align:'left',
-                        width:200
-                    },
-                    {
                         display:'专题图片地址',
                         name:'imageUrl',
                         align:'left',
@@ -713,6 +707,30 @@ $(function () {
                         width:200
                     },
                     {
+                        display:'最近更新时间',
+                        name:'lastUpdateDate',
+                        align:'left',
+                        width:200
+                    },
+                    {
+                        display:'浏览次数',
+                        name:'viewTimes',
+                        align:'left',
+                        width:200
+                    },
+                    {
+                        display:'关键字',
+                        name:'keyWords',
+                        align:'left',
+                        width:200
+                    },
+                    {
+                        display:'创建时间',
+                        name:'createDate',
+                        align:'left',
+                        width:200
+                    },
+                    {
                         display:'备注',
                         name:'remark',
                         align:'left',
@@ -727,15 +745,16 @@ $(function () {
                     items:toolbarItems
                 },
                 rowAttrRender:function (rowdata) {
-                    if (rowdata.isDisplay == 0) {
-                        rowdata.isDisplay = "否";
-                    } else {
-                        rowdata.isDisplay = "是";
-                    }
                     if (rowdata.isOutlink == 0) {
                         rowdata.isOutlink = "否";
                     } else {
                         rowdata.isOutlink = "是";
+                    }
+                    if (rowdata.lastUpdateDate) {
+                        rowdata.lastUpdateDate = rowdata.lastUpdateDate.substring(0, 10);
+                    }
+                    if (rowdata.createDate) {
+                        rowdata.createDate = rowdata.createDate.substring(0, 10);
                     }
                     return;
                 }

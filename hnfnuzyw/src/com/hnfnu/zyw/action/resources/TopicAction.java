@@ -1,5 +1,7 @@
 package com.hnfnu.zyw.action.resources;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -15,26 +17,26 @@ import org.springframework.stereotype.Controller;
 
 import com.hnfnu.zyw.action.base.AopNoSuchMethodErrorSolveBaseAction;
 import com.hnfnu.zyw.dto.resources.TopicDto;
+import com.hnfnu.zyw.dto.system.UserDto;
 import com.hnfnu.zyw.service.resources.ITopicService;
 import com.hnfnu.zyw.website.service.IIndexService;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ModelDriven;
-
 
 @Controller("topicAction")
 @Scope("prototype")
 @ParentPackage("json-default")
-@Results( { @Result(name = "success", type = "json", params = { "root",
-		"action" }) })
+@Results({ @Result(name = "success", type = "json", params = { "root", "action" }) })
 @Namespace("/resources")
 public class TopicAction extends AopNoSuchMethodErrorSolveBaseAction implements
-ModelDriven<TopicDto>{
-	
+		ModelDriven<TopicDto> {
+
 	private TopicDto topic = new TopicDto();// 获取页面提交参数
 	private boolean success;
 	private String message;
 	private Map<String, Object> topicList;
 	private List<Map<String, String>> topicTree;
-	//private List<TopicSourceVo> topicSourceList;
+	// private List<TopicSourceVo> topicSourceList;
 
 	@Autowired
 	@Qualifier("topicService")
@@ -47,10 +49,28 @@ ModelDriven<TopicDto>{
 	// 添加专题
 	@Action(value = "addTopic")
 	public String add() {
-		//资源的保存路劲要改成相对路径
-		String[] s= topic.getImageUrl().split("\\\\");
-		//System.out.println(s[s.length-1]);
-		String tPath = s[s.length-1];
+		// 获取当前时间
+		Date date = new Date();
+		Timestamp timeStamp = new Timestamp(date.getTime());
+		topic.setCreateDate(timeStamp);
+		topic.setLastUpdateDate(timeStamp);
+		// 获取当前用户
+		ActionContext context = ActionContext.getContext();
+		Map<String, Object> session = context.getSession();
+		UserDto u = (UserDto) session.get("user");
+		topic.setCreateUserId(u.getId());
+		String kw = topic.getKeyWords();
+
+		if (kw != null && !"".equals(kw)) {
+			kw += ";" + topic.getName();
+		} else {
+			kw += topic.getName();
+		}
+		topic.setKeyWords(kw);
+		// 资源的保存路劲要改成相对路径
+		String[] s = topic.getImageUrl().split("\\\\");
+		// System.out.println(s[s.length-1]);
+		String tPath = s[s.length - 1];
 		topic.setImageUrl(tPath);
 		success = topicService.add(topic);
 		if (success) {
@@ -114,14 +134,14 @@ ModelDriven<TopicDto>{
 		}
 		return SUCCESS;
 	}
-	
-	/*// 获取表中所有专题，用Map装，为了分页的需要加上Rows和Total
-	@Action(value = "listSourceByTopicId")
-	public String listSourceByTopicId() {
-		topicSourceList = topicSourceVoService.listByTopicId(topic.getId());
-		return SUCCESS;
-	}
-*/
+
+	/*
+	 * // 获取表中所有专题，用Map装，为了分页的需要加上Rows和Total
+	 * 
+	 * @Action(value = "listSourceByTopicId") public String
+	 * listSourceByTopicId() { topicSourceList =
+	 * topicSourceVoService.listByTopicId(topic.getId()); return SUCCESS; }
+	 */
 	// 获取表中所有专题，用Map装，为了分页的需要加上Rows和Total
 	@Action(value = "topicTree")
 	public String topicTree() {
@@ -154,10 +174,9 @@ ModelDriven<TopicDto>{
 		return topicTree;
 	}
 
-/*//	public List<TopicSourceVo> getTopicSourceList() {
-//		return topicSourceList;
-//	}
-*/	
-	
+	/*
+	 * // public List<TopicSourceVo> getTopicSourceList() { // return
+	 * topicSourceList; // }
+	 */
 
 }

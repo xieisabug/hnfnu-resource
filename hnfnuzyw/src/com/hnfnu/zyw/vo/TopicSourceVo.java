@@ -1,5 +1,6 @@
 package com.hnfnu.zyw.vo;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 import javax.persistence.Entity;
@@ -92,8 +93,11 @@ public class TopicSourceVo {
 	private String topicName;
 	//专题简介
 	private String topicDescription;
-	//专题作者
-	private String topicAuthor;
+	private int topicCreateUserId;
+	private String topicKeyWords;
+	private Date lastUpdateDate;
+	private int topicViewTimes;
+	private Date topicCreateDate;
 	//备注
 	private String remark;
 	
@@ -377,20 +381,6 @@ public class TopicSourceVo {
 		this.topicDescription = topicDescription;
 	}
 
-
-
-	public String getTopicAuthor() {
-		return topicAuthor;
-	}
-
-
-
-	public void setTopicAuthor(String topicAuthor) {
-		this.topicAuthor = topicAuthor;
-	}
-
-
-
 	public String getRemark() {
 		return remark;
 	}
@@ -417,23 +407,43 @@ public class TopicSourceVo {
 		this.isDisplay = isDisplay;
 	}
 
-	@Override
-	public String toString() {
-		return "TopicSourceVo [approvalStatus=" + approvalStatus
-				+ ", courseId=" + courseId + ", createDate=" + createDate
-				+ ", createUserId=" + createUserId + ", fileSize=" + fileSize
-				+ ", id=" + id + ", keyWords=" + keyWords + ", mediaFormat="
-				+ mediaFormat + ", mediaType=" + mediaType + ", playTime="
-				+ playTime + ", price=" + price + ", publisher=" + publisher
-				+ ", subtitleId=" + subtitleId + ", remark=" + remark
-				+ ", sourceAuthor=" + sourceAuthor + ", sourceDescription="
-				+ sourceDescription + ", sourceId=" + sourceId
-				+ ", sourceName=" + sourceName + ", topicAuthor=" + topicAuthor
-				+ ", topicDescription=" + topicDescription + ", topicId="
-				+ topicId + ", topicName=" + topicName + ", url=" + url
-				+ ", useTimes=" + useTimes + ", viewTimes=" + viewTimes + "]";
+	public int getTopicCreateUserId() {
+		return topicCreateUserId;
 	}
-	
-	
 
+	public void setTopicCreateUserId(int topicCreateUserId) {
+		this.topicCreateUserId = topicCreateUserId;
+	}
+
+	public String getTopicKeyWords() {
+		return topicKeyWords;
+	}
+
+	public void setTopicKeyWords(String topicKeyWords) {
+		this.topicKeyWords = topicKeyWords;
+	}
+
+	public Date getLastUpdateDate() {
+		return lastUpdateDate;
+	}
+
+	public void setLastUpdateDate(Date lastUpdateDate) {
+		this.lastUpdateDate = lastUpdateDate;
+	}
+
+	public int getTopicViewTimes() {
+		return topicViewTimes;
+	}
+
+	public void setTopicViewTimes(int topicViewTimes) {
+		this.topicViewTimes = topicViewTimes;
+	}
+
+	public Date getTopicCreateDate() {
+		return topicCreateDate;
+	}
+
+	public void setTopicCreateDate(Date topicCreateDate) {
+		this.topicCreateDate = topicCreateDate;
+	}
 }

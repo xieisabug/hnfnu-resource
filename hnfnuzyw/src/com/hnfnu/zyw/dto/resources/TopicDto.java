@@ -1,5 +1,7 @@
 package com.hnfnu.zyw.dto.resources;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -20,8 +22,12 @@ public class TopicDto
 	private int isDisplay;
 	//专题简介
 	private String description;
-	//专题作者
-	private String author;
+	
+	private int createUserId;
+	private String keyWords;
+	private Timestamp lastUpdateDate;
+	private int viewTimes;
+	private Timestamp createDate;
 	//专题图片url
 	private String imageUrl;
 	//外部链接地址
@@ -38,21 +44,7 @@ public class TopicDto
 	{
 
 	}
-	public TopicDto(Integer id, String name, int isDisplay, String description,
-			String author, String imageUrl, String outlink, String isOutlink,
-			int templateId, String remark) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.isDisplay = isDisplay;
-		this.description = description;
-		this.author = author;
-		this.imageUrl = imageUrl;
-		this.outlink = outlink;
-		this.isOutlink = isOutlink;
-		this.templateId = templateId;
-		this.remark = remark;
-	}
+	
 	public void setId(Integer id)
 	{
 		this.id = id;
@@ -79,14 +71,6 @@ public class TopicDto
 	public String getDescription()
 	{
 		return this.description;
-	}
-	public void setAuthor(String author)
-	{
-		this.author = author;
-	}
-	public String getAuthor()
-	{
-		return this.author;
 	}
 	public void setRemark(String remark)
 	{
@@ -128,12 +112,47 @@ public class TopicDto
 	public void setIsDisplay(int isDisplay) {
 		this.isDisplay = isDisplay;
 	}
-	@Override
-	public String toString() {
-		return "TopicDto [id=" + id + ", name=" + name + ", isDisplay="
-				+ isDisplay + ", description=" + description + ", author="
-				+ author + ", imageUrl=" + imageUrl + ", outlink=" + outlink
-				+ ", isOutlink=" + isOutlink + ", templateId=" + templateId
-				+ ", remark=" + remark + "]";
+
+	public int getCreateUserId() {
+		return createUserId;
 	}
+
+	public void setCreateUserId(int createUserId) {
+		this.createUserId = createUserId;
+	}
+
+	public String getKeyWords() {
+		return keyWords;
+	}
+
+	public void setKeyWords(String keyWords) {
+		this.keyWords = keyWords;
+	}
+
+
+	public int getViewTimes() {
+		return viewTimes;
+	}
+
+	public void setViewTimes(int viewTimes) {
+		this.viewTimes = viewTimes;
+	}
+
+	public Timestamp getLastUpdateDate() {
+		return lastUpdateDate;
+	}
+
+	public void setLastUpdateDate(Timestamp lastUpdateDate) {
+		this.lastUpdateDate = lastUpdateDate;
+	}
+
+	public Timestamp getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Timestamp createDate) {
+		this.createDate = createDate;
+	}
+
+	
 }

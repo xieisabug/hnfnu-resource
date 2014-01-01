@@ -31,7 +31,7 @@ public class LoginFilter extends HttpServlet implements Filter {
 		if (user == null) {
 			if (url != null
 					&& (!url.contains("login") && !url.contains("website")) && !url.contains("html2")) {
-				response.sendRedirect("/login.html");
+				response.sendRedirect("/hnfnuzyw/login.html");
 				return;
 			}
 		}
