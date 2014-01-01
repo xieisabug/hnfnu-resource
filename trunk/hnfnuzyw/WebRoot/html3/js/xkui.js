@@ -1079,3 +1079,24 @@ var Dialog = new Class({
         return this;
     }
 });
+var Util = new Class({
+    initialize:function(){
+
+    },
+    getUrlArg:function(){
+        var argsArr = {};
+        var query = window.location.search;
+        query = query.substring(1);
+        var pairs = query.split("&");
+        for ( var i = 0; i < pairs.length; i++) {
+            var sign = pairs[i].indexOf("=");
+            if (sign == -1) {
+                continue;
+            }
+            var aKey = pairs[i].substring(0, sign);
+            var aValue = pairs[i].substring(sign + 1);
+            argsArr[aKey] = aValue;
+        }
+        return argsArr;
+    }
+});
