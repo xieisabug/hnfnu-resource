@@ -128,7 +128,7 @@ public class IndexServiceImpl implements IIndexService {
 		List<Map<String, Object>> subjects = null;
 
 		// 查询后台设置显示并且已经上传了资源的分组
-		String hql = "from GroupDto where isDisplay=1 and id in(select groupId from SourceVo group by groupId)";
+		String hql = "from GroupDto where isDisplay=1 and id in(select groupId from SourceVo group by groupId) order by isDisplay desc,id desc";
 
 		try {
 			groups = groupDao.complexList(hql);
@@ -137,10 +137,10 @@ public class IndexServiceImpl implements IIndexService {
 				// System.out.println("分组："+i+"分组id="+groups.get(i).getId()+"分组名字="+groups.get(i).getName());
 				groupMap = new HashMap<String, Object>();
 				GroupDto tg = groups.get(i);
-				// 查询每个分组下面的年级，并且该年级已经上传过资源
+				// 查询每个分组下面的年级，并且该年级已经上传过资源,根据显示和id降序
 				String hql1 = "from GradeGroupVo where groupId="
 						+ tg.getId()
-						+ " and id in(select gradeId from SourceVo group by gradeId) ";
+						+ " and id in(select gradeId from SourceVo group by gradeId) order by isDisplay desc,id desc ";
 				grades = gradeGroupVoDao.complexList(hql1);
 
 				for (int j = 0; j < grades.size() && j < 6; j++) {
@@ -149,7 +149,7 @@ public class IndexServiceImpl implements IIndexService {
 							+ tg.getId()
 							+ " and id in(select subjectId from SourceVo "
 							+ "where gradeId=" + tgv.getId()
-							+ " group by subjectId)";
+							+ " group by subjectId) order by isDisplay desc,id desc";
 					List<SubjectGroupVo> subjectGroupVos = subjectGroupVoDao
 							.complexList(hql2);
 					subjects = this.listToMap(subjectGroupVos, tg.getId(),
@@ -175,7 +175,7 @@ public class IndexServiceImpl implements IIndexService {
 		return root;
 	}
 	private Map<String, Object> getMakeTopicRoot(){
-		String hql = "from TopicDto order by id desc";
+		String hql = "from TopicDto order by isDisPlay desc,id desc";
 		Map<String, Object> p = new HashMap<String, Object>();
 		try {
 			List<TopicDto> t = topicDao.list(hql);

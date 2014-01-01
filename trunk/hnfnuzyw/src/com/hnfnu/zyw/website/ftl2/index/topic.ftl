@@ -27,7 +27,7 @@
                 <#if (topic_index - 1) % 3 == 0>
                     <td>
                         <a href="#">
-                            <img src="../uploads/topic/${topic.imageUrl}">
+                            <img src="../uploads/topic/image/${topic.imageUrl}">
 
                             <div class="topic-item">
                                 <div class="topic-title">${topic.name}</div>
@@ -39,7 +39,7 @@
                 <#if (topic_index + 1) % 3 == 0>
                     <td>
                         <a href="#">
-                            <img src="../uploads/topic/${topic.imageUrl}">
+                            <img src="../uploads/topic/image/${topic.imageUrl}">
 
                             <div class="topic-item">
                                 <div class="topic-title">${topic.name}</div>

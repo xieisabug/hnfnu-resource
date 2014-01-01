@@ -84,11 +84,11 @@
 			                            </td>
 			                    </#if>
 			                    <#if (y - 1) % 3 == 0>
-			                        <td>
+			                        <td class="subject-item">
 			                        </td>
 			                    </#if>
 			                    <#if (y + 1) % 3 == 0>
-			                        <td>
+			                        <td class="subject-item">
 			                        </td>
 			                        </tr>
 			                    </#if>

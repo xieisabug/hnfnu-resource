@@ -177,6 +177,54 @@ function formInit() {
                         }
                     },
                     {
+                        display:"显示顺序",
+                        name:"isDisplay",
+                        type:"select",
+                        comboboxName:"displayS",
+                        space:30,
+                        labelWidth:100,
+                        width:220,
+                        newline:true,
+                        options:{
+                            textField:"text",
+                            valueField:"id",
+                            initValue:"0",
+                            initText:"否",
+                            hideOnLoseFocus:true,
+                            valueFieldID:"isDisplay",
+                            data:[
+                                {
+                                    "id":"0",
+                                    "text":"0"
+                                },
+                                {
+                                    "id":"1",
+                                    "text":"1"
+                                },
+                                {
+                                    "id":"2",
+                                    "text":"2"
+                                },
+                                {
+                                    "id":"3",
+                                    "text":"3"
+                                },
+                                {
+                                    "id":"4",
+                                    "text":"4"
+                                },
+                                {
+                                    "id":"5",
+                                    "text":"5"
+                                },  {
+                                    "id":"6",
+                                    "text":"6"
+                                }
+                            ]
+
+                        }
+                    },
+                    {
                         display:"所属分组",
                         name:"groupId",
                         type:"select",
@@ -273,6 +321,11 @@ $(function () {
                     {
                         display:'年级名称',
                         name:'name',
+                        width:200
+                    },
+                    {
+                        display:'显示顺序',
+                        name:'isDisplay',
                         width:200
                     },
                     {

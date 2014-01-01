@@ -13,6 +13,7 @@ public class GradeGroupVo {
 		private Integer id;
 		//年级名称
 		private String name;
+		private int isDisplay;
 		private int groupId;
 		private String groupName;
 		private String remark;
@@ -20,17 +21,6 @@ public class GradeGroupVo {
 		
 		public GradeGroupVo() {
 			super();
-		}
-
-
-		public GradeGroupVo(Integer id, String name, int groupId,
-				String groupName, String remark) {
-			super();
-			this.id = id;
-			this.name = name;
-			this.groupId = groupId;
-			this.groupName = groupName;
-			this.remark = remark;
 		}
 
 		@Id
@@ -84,14 +74,11 @@ public class GradeGroupVo {
 			this.remark = remark;
 		}
 
-
-		@Override
-		public String toString() {
-			return "GradeGroupVo [id=" + id + ", name=" + name + ", groupId="
-					+ groupId + ", groupName=" + groupName + ", remark="
-					+ remark + "]";
+		public int getIsDisplay() {
+			return isDisplay;
 		}
-		
-		
-		
+
+		public void setIsDisplay(int isDisplay) {
+			this.isDisplay = isDisplay;
+		}
 }
