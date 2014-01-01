@@ -29,7 +29,10 @@
     <script src="<%=basePath%>website/js/mootools.js" type="text/javascript"></script>
     <script src="<%=basePath%>website/js/xkui.js" type="text/javascript"></script>
     <script src="<%=basePath%>website/js/topic_view.js" type="text/javascript"></script>
-
+    <script type="text/javascript">
+        var basePath = '<%=basePath%>';
+        var onlineViewFormat = '<%=onlineViewFormat%>';
+    </script>
     <!--<script type="text/javascript" src="js/index.js"></script>-->
     <!--<script type="text/javascript" src="js/gallery.js"></script>-->
 
@@ -52,7 +55,7 @@
         </div>
         <div class="topic-info">
             <div class="topic-image">
-                <img src="<%=basePath+"uploads/topic/"+topic.getImageUrl()%>"/>
+                <img src="<%=basePath+"uploads/topic/image/"+topic.getImageUrl()%>"/>
 
                 <div>
                     <p><%=topic.getViewTimes()%> 次浏览</p>
@@ -76,7 +79,7 @@
                 </div>
             </div>
             <div class="topic-user">
-                <img src="<%=basePath+"uploads/user/"+topicUser.getIcon()%>">
+                <img src="<%=basePath+"uploads/user/image/"+topicUser.getIcon()%>">
 
                 <div class="topic-user-info">
                     <p><%=topicUser.getName()%></p>
@@ -173,6 +176,11 @@
                         </tr>
                     </table>
                 </div>
+                <%
+                    }
+                    if(topicSources.size()==8 || joinSources.size() == 8) {
+                %>
+                <div class="more" onclick="more(<%=((TopicSubtitleDto) subTopic.get("subtitle")).getId()%>)" page="1"></div>
                 <%
                     }
                 %>
