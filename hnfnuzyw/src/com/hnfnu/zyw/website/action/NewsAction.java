@@ -1,9 +1,9 @@
 package com.hnfnu.zyw.website.action;
 
-import java.util.List;
 import java.util.Map;
 
-import com.hnfnu.zyw.dto.website.NewsDto;
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
@@ -15,11 +15,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.hnfnu.zyw.dto.website.NewsDto;
 import com.hnfnu.zyw.website.service.INewsService;
 import com.hnfnu.zyw.website.utils.FreemarkerUtil;
 import com.opensymphony.xwork2.ActionSupport;
-
-import javax.servlet.http.HttpServletRequest;
 
 @Controller("ftlNewsAction")
 @Scope("prototype")

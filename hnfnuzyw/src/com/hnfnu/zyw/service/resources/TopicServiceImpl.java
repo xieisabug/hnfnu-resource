@@ -52,7 +52,7 @@ public class TopicServiceImpl implements ITopicService {
 
 	public TopicDto load(int id) {
 		try {
-			return topicDao.load(id);
+			return topicDao.get(id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

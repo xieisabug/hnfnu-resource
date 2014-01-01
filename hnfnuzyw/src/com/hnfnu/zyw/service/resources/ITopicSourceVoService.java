@@ -6,4 +6,5 @@ import com.hnfnu.zyw.vo.TopicSourceVo;
 
 public interface ITopicSourceVoService{
 	public List<TopicSourceVo> listByTopicId(int id);
+	public List<TopicSourceVo> listBySubTitleId(int subTitleId,int startIndex,int pageSize);
 }

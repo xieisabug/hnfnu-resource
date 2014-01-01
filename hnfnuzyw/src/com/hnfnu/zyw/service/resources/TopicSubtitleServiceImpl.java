@@ -67,6 +67,17 @@ public class TopicSubtitleServiceImpl implements ITopicSubtitleService{
 		}
 		return topicSubtitles;
 	}
+	
+	public List<TopicSubtitleDto> listByTopicId(int topicId) {
+		String hql = "from TopicSubtitleDto where topicId="+topicId;
+		List<TopicSubtitleDto> topicSubtitles = null;
+		try {
+			topicSubtitles = topicSubtitleDao.list(hql);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return topicSubtitles;
+	}
 
 	public Map<String, Object> listTopicSubtitle(int topicId) {
 		String hql = "from TopicSubtitleDto where topicId="+topicId;
