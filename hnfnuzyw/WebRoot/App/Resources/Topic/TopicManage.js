@@ -318,6 +318,11 @@ function edit_topic() {
     } else {
         topicSelectData.isOutlink = 1;
     }
+    if (topicSelectData.isDisPlay == "否") {
+        topicSelectData.isDisplay = 0;
+    } else {
+        topicSelectData.isDisplay = 1;
+    }
     topicWin = $.ligerDialog.open({
         width:400,
         height:280,

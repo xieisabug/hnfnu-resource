@@ -55,6 +55,35 @@
                             }
                         },
                         {
+                            display:"是否显示",
+                            name:"isDisplay",
+                            type:"select",
+                            comboboxName:"displayS",
+                            space:30,
+                            labelWidth:100,
+                            width:220,
+                            newline:true,
+                            options:{
+                                textField:"text",
+                                valueField:"id",
+                                initValue:"0",
+                                initText:"否",
+                                hideOnLoseFocus:true,
+                                valueFieldID:"isDisplay",
+                                data:[
+                                    {
+                                        "id":"1",
+                                        "text":"是"
+                                    },
+                                    {
+                                        "id":"0",
+                                        "text":"否"
+                                    }
+                                ]
+
+                            }
+                        },
+                        {
                             display:'专题简介',
                             name:'description',
                             type:'text',

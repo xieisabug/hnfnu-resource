@@ -74,7 +74,7 @@ public class GradeServiceImpl implements IGradeService{
 	}
 
 	public Map<String, Object> listGrade() {
-		String hql = "from GradeGroupVo";
+		String hql = "from GradeGroupVo order by isDisplay desc,id desc";
 		Map<String, Object> gardeList = new HashMap<String, Object>();
 		List<GradeGroupVo> l = null;
 
@@ -89,7 +89,7 @@ public class GradeServiceImpl implements IGradeService{
 	}
 
 	public List<GradeGroupVo> listGradeByGroupId(int groupId) {
-		String hql = "from GradeGroupVo where groupId="+groupId;
+		String hql = "from GradeGroupVo where groupId="+groupId +" order by isDisplay desc ,id desc";
 		List<GradeGroupVo> gardes = null;
 		try {
 			gardes = gradeGroupVoDao.list(hql);
@@ -100,7 +100,7 @@ public class GradeServiceImpl implements IGradeService{
 	}
 
 	public List<GradeGroupVo> haveGradeList() {
-		String hql = "FROM GradeGroupVo where id in(select gradeId from SourceVo)"; 
+		String hql = "FROM GradeGroupVo where id in(select gradeId from SourceVo) order by isDisplay desc,id desc"; 
 		List<GradeGroupVo> l  = null;
 		try {
 			l = gradeGroupVoDao.gradeList(hql);

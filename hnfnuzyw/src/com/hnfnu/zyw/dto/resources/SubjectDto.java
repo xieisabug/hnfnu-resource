@@ -17,6 +17,7 @@ public class SubjectDto
 	//科目名称
 	private String name;
 	private int groupId;
+	private int isDisplay;
 	private String imageUrl;
 	private String remark;
 
@@ -61,6 +62,12 @@ public class SubjectDto
 	}
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
+	}
+	public int getIsDisplay() {
+		return isDisplay;
+	}
+	public void setIsDisplay(int isDisplay) {
+		this.isDisplay = isDisplay;
 	}
 	
 }
