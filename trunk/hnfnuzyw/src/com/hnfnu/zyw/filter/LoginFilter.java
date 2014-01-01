@@ -30,14 +30,13 @@ public class LoginFilter extends HttpServlet implements Filter {
 		//System.out.println(user);
 		if (user == null) {
 			if (url != null
-					&& (url.indexOf("login") < 0 && url.indexOf("website") < 0) && url.indexOf("html2") < 0) {
+					&& (!url.contains("login") && !url.contains("website")) && !url.contains("html2")) {
 				response.sendRedirect("/login.html");
 				return;
 			}
 		}
 		arg2.doFilter(arg0, arg1);
-		return;
-	}
+    }
 
 	public void init(FilterConfig arg0) throws ServletException {
 		//System.out.println("LoginFilter init");
