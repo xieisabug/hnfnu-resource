@@ -25,4 +25,15 @@ public class TopicSourceVoServiceImpl implements ITopicSourceVoService{
 		}
 		return l;
 	}
+
+	public List<TopicSourceVo> listBySubTitleId(int subTitleId, int startIndex,int pageSize) {
+		String hql = "from TopicSourceVo where subTitleId="+subTitleId +" limit "+startIndex+","+pageSize;
+		List<TopicSourceVo> l = null;
+		try {
+			l = topicSourceVoDao.list(hql);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return l;
+	}
 }

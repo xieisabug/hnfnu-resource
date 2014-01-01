@@ -83,4 +83,15 @@ public class TopicSubtiltleSourceVoServiceImpl implements  ITopicSubtiltleSource
 		gardeList.put("Total", l.size());
 		return gardeList;
 	}
+
+	public List<TopicSubtiltleSourceVo> listBySubtileId(int subtitleId,int startIndex,int pageSize) {
+		String hql = "from TopicSubtiltleSourceVo where subtitleId="+subtitleId+" limit "+startIndex+","+pageSize;
+		List<TopicSubtiltleSourceVo> gardes = null;
+		try {
+			gardes = topicSubtiltleSourceVoDao.list(hql);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return gardes;
+	}
 }

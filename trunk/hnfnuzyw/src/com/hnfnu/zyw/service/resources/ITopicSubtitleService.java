@@ -16,16 +16,17 @@ public interface ITopicSubtitleService {
 	public TopicSubtitleDto load(int id);
 
 	/**
-	 * 获取表中所有功能，是用List装的
+	 * 锟斤拷取锟斤拷锟斤拷锟斤拷锟叫癸拷锟杰ｏ拷锟斤拷锟斤拷List装锟斤拷
 	 * 
 	 * @return
 	 */
 	public List<TopicSubtitleDto> list();
 
 	/**
-	 *获取专题下的所有二级标题，用Map装，为了分页的需要加上Rows和Total
+	 *锟斤拷取专锟斤拷锟铰碉拷锟斤拷锟叫讹拷锟斤拷锟斤拷锟解，锟斤拷Map装锟斤拷为锟剿凤拷页锟斤拷锟斤拷要锟斤拷锟斤拷Rows锟斤拷Total
 	 * 
 	 * @return
 	 */
 	public Map<String, Object> listTopicSubtitle(int topicId);
+	public List<TopicSubtitleDto> listByTopicId(int topicId);
 }

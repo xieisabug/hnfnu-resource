@@ -28,4 +28,12 @@ public interface ITopicSubtiltleSourceVoService {
 	 */
 	public Map<String, Object> listTopicSubtiltleSourceVo();
 	
+	/**
+	 * 获取表中前pagerSize条数据，是用List装的
+	 * @return
+	 */
+	public List<TopicSubtiltleSourceVo> listBySubtileId(int subtileId,int startIndex,int pageSize);
+	
+	
+	
 }
