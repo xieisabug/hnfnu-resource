@@ -52,7 +52,7 @@
         </div>
         <div class="topic-info">
             <div class="topic-image">
-                <img src="image/topicview1.jpg"/>
+                <img src="<%=basePath+"uploads/topic/"+topic.getImageUrl()%>"/>
 
                 <div>
                     <p><%=topic.getViewTimes()%> 次浏览</p>
@@ -76,7 +76,7 @@
                 </div>
             </div>
             <div class="topic-user">
-                <img src="<%=topicUser.getIcon()%>">
+                <img src="<%=basePath+"uploads/user/"+topicUser.getIcon()%>">
 
                 <div class="topic-user-info">
                     <p><%=topicUser.getName()%></p>
@@ -111,7 +111,7 @@
                     <table>
                         <tr>
                             <td style="width: 140px; text-align: center" rowspan="3">
-                                <img src="image/topic_01.jpg" style="width:77px; height:77px; display: inline;">
+                                <img src="<%=basePath+"website/image/file_icon_"+tssv.getMediaFormat()+".png"%>" style="width:77px; height:77px; display: inline;">
                             </td>
                             <td style="width: 340px;"><span>资源名</span>：<%=tssv.getSourceName()%></td>
                             <td style="width: 200px;"><span>资源币</span>：<%=tssv.getPrice()==0?"免费":tssv.getPrice()%></td>
@@ -146,7 +146,7 @@
                     <table>
                         <tr>
                             <td style="width: 140px; text-align: center" rowspan="3">
-                                <img src="image/topic_01.jpg" style="width:77px; height:77px; display: inline;">
+                                <img src="<%=basePath+"website/image/file_icon_"+tssv.getMediaFormat()+".png"%>" style="width:77px; height:77px; display: inline;">
                             </td>
                             <td style="width: 340px;"><span>资源名</span>：<%=tsv.getSourceName()%></td>
                             <td style="width: 200px;"><span>资源币</span>：<%=tsv.getPrice()==0?"免费":tsv.getPrice()%></td>
