@@ -1,5 +1,6 @@
 package com.hnfnu.zyw.vo;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 import javax.persistence.Entity;
@@ -84,8 +85,11 @@ public class TopicSubtiltleSourceVo {
 	private int isDisplay;
 	//专题简介
 	private String topicDescription;
-	//专题作者
-	private String topicAuthor;
+	private int topicCreateUserId;
+	private String topicKeyWords;
+	private Date lastUpdateDate;
+	private int topicViewTimes;
+	private Date topicCreateDate;
 	//备注
 	private String remark;
 	public TopicSubtiltleSourceVo() {
@@ -342,12 +346,45 @@ public class TopicSubtiltleSourceVo {
 		this.topicDescription = topicDescription;
 	}
 
-	public String getTopicAuthor() {
-		return topicAuthor;
+
+	public int getTopicCreateUserId() {
+		return topicCreateUserId;
 	}
 
-	public void setTopicAuthor(String topicAuthor) {
-		this.topicAuthor = topicAuthor;
+	public void setTopicCreateUserId(int topicCreateUserId) {
+		this.topicCreateUserId = topicCreateUserId;
+	}
+
+	public String getTopicKeyWords() {
+		return topicKeyWords;
+	}
+
+	public void setTopicKeyWords(String topicKeyWords) {
+		this.topicKeyWords = topicKeyWords;
+	}
+
+	public Date getLastUpdateDate() {
+		return lastUpdateDate;
+	}
+
+	public void setLastUpdateDate(Date lastUpdateDate) {
+		this.lastUpdateDate = lastUpdateDate;
+	}
+
+	public int getTopicViewTimes() {
+		return topicViewTimes;
+	}
+
+	public void setTopicViewTimes(int topicViewTimes) {
+		this.topicViewTimes = topicViewTimes;
+	}
+
+	public Date getTopicCreateDate() {
+		return topicCreateDate;
+	}
+
+	public void setTopicCreateDate(Date topicCreateDate) {
+		this.topicCreateDate = topicCreateDate;
 	}
 
 	public String getRemark() {
@@ -382,19 +419,4 @@ public class TopicSubtiltleSourceVo {
 		this.isDisplay = isDisplay;
 	}
 
-	@Override
-	public String toString() {
-		return "TopicSubtiltleSourceVo [createDate=" + createDate
-				+ ", createUserId=" + createUserId + ", fileSize=" + fileSize
-				+ ", id=" + id + ", keyWords=" + keyWords + ", mediaFormat="
-				+ mediaFormat + ", mediaType=" + mediaType + ", playTime="
-				+ playTime + ", price=" + price + ", publisher=" + publisher
-				+ ", remark=" + remark + ", sourceAuthor=" + sourceAuthor
-				+ ", sourceDescription=" + sourceDescription + ", sourceName="
-				+ sourceName + ", subtitleId=" + subtitleId + ", subtitleName="
-				+ subtitleName + ", topicAuthor=" + topicAuthor
-				+ ", topicDescription=" + topicDescription + ", topicId="
-				+ topicId + ", topicName=" + topicName + ", url=" + url
-				+ ", useTimes=" + useTimes + ", viewTimes=" + viewTimes + "]";
-	}
 }
