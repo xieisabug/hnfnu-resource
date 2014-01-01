@@ -43,6 +43,8 @@ public class TopicAction extends ActionSupport {
 	private String message;
 	private int pageIndex;
 	private int subtitleId;
+	private List<TopicSubtiltleSourceVo> topicSources;
+	private List<TopicSourceVo> joinSources;
 	private final static int pageSize = 8;
 
 	@Autowired
@@ -79,13 +81,12 @@ public class TopicAction extends ActionSupport {
 			subtitleMap = new HashMap<String, Object>();
 			subtitleMap.put("subtitle", topicSubtitleDtos.get(i));
 
-			List<TopicSubtiltleSourceVo> topicSource = new ArrayList<TopicSubtiltleSourceVo>();
-			List<TopicSourceVo> joinSources = new ArrayList<TopicSourceVo>();
-			topicSource = topicSubtiltleSourceVoService.listBySubtileId(
+			
+			topicSources = topicSubtiltleSourceVoService.listBySubtileId(
 					topicSubtitleDtos.get(i).getId(), 0, pageSize);
 			joinSources = topicSourceVoService.listBySubTitleId(
 					topicSubtitleDtos.get(i).getId(), 0, pageSize);
-			subtitleMap.put("topicSource", topicSource);
+			subtitleMap.put("topicSource", topicSources);
 			subtitleMap.put("joinSources", joinSources);
 			subTopics.add(subtitleMap);
 		}
@@ -107,19 +108,12 @@ public class TopicAction extends ActionSupport {
 	@Action(value = "page")
 	public String page() {
 
-		List<TopicSubtiltleSourceVo> topicSource = new ArrayList<TopicSubtiltleSourceVo>();
-		List<TopicSourceVo> joinSources = new ArrayList<TopicSourceVo>();
 		int startIndex = pageIndex * pageSize - 1;
 
-		topicSource = topicSubtiltleSourceVoService.listBySubtileId(subtitleId,
+		topicSources = topicSubtiltleSourceVoService.listBySubtileId(subtitleId,
 				startIndex, pageSize);
 		joinSources = topicSourceVoService.listBySubTitleId(subtitleId,
 				startIndex, pageSize);
-		HttpServletRequest request = ServletActionContext.getRequest();
-		request.setAttribute("topicSource", topicSource);
-		request.setAttribute("joinSources", joinSources);
-		request.setAttribute("message", message);
-		request.setAttribute("success", success);
 		return SUCCESS;
 	}
 
@@ -142,4 +136,14 @@ public class TopicAction extends ActionSupport {
 	public void setSubtitleId(int subtitleId) {
 		this.subtitleId = subtitleId;
 	}
+
+	public List<TopicSubtiltleSourceVo> getTopicSources() {
+		return topicSources;
+	}
+
+	public List<TopicSourceVo> getJoinSources() {
+		return joinSources;
+	}
+	
+	
 }
