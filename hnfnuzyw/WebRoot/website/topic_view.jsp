@@ -8,6 +8,10 @@
 <%@ page import="com.hnfnu.zyw.vo.TopicSubtiltleSourceVo" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://"
+            + request.getServerName() + ":" + request.getServerPort()
+            + path + "/";
     TopicDto topic = (TopicDto) request.getAttribute("topic");
     UserDto topicUser = (UserDto) request.getAttribute("topicUser");
     List<Map<String,Object>> subTopics = (List<Map<String, Object>>) request.getAttribute("subTopics");
@@ -18,18 +22,18 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <link href="css/xkui.css" type="text/css" rel="stylesheet">
-    <link href="css/index.css" type="text/css" rel="stylesheet">
+    <link href="<%=basePath%>website/css/xkui.css" type="text/css" rel="stylesheet">
+    <link href="<%=basePath%>website/css/index.css" type="text/css" rel="stylesheet">
     <!--<link href="css/ui.css" type="text/css" rel="stylesheet">-->
 
-    <script src="js/mootools.js" type="text/javascript"></script>
-    <script src="js/xkui.js" type="text/javascript"></script>
-    <script src="js/topic_view.js" type="text/javascript"></script>
+    <script src="<%=basePath%>website/js/mootools.js" type="text/javascript"></script>
+    <script src="<%=basePath%>website/js/xkui.js" type="text/javascript"></script>
+    <script src="<%=basePath%>website/js/topic_view.js" type="text/javascript"></script>
 
     <!--<script type="text/javascript" src="js/index.js"></script>-->
     <!--<script type="text/javascript" src="js/gallery.js"></script>-->
 
-    <title>专题</title>
+    <title><%=topic.getName()%></title>
 </head>
 <body>
 <%@ include file="header.html" %>
@@ -116,7 +120,7 @@
                                     <%
                                         if(onlineViewFormat.contains(tssv.getMediaFormat()+",")) {
                                     %>
-                                    <button value="在线预览" onclick="">在线预览</button>
+                                    <button value="在线预览" onclick="online/view?topicSourceid=<%=tssv.getId()%>">在线预览</button>
                                     <%
                                         }
                                     %>
@@ -151,7 +155,7 @@
                                     <%
                                         if(onlineViewFormat.contains(tsv.getMediaFormat()+",")) {
                                     %>
-                                    <button value="在线预览" onclick="">在线预览</button>
+                                    <button value="在线预览" onclick="online/view?sourceId=<%=tsv.getSourceId()%>">在线预览</button>
                                     <%
                                         }
                                     %>
@@ -171,9 +175,11 @@
                 </div>
                 <%
                     }
-                }
-            %>
+                %>
         </div>
+        <%
+            }
+        %>
     </div>
 </div>
 <%@ include file="footer.html" %>
