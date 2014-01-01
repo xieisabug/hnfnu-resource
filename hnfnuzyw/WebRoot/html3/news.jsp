@@ -12,13 +12,13 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <link href="<%=basePath%>html3/css/xkui.css" type="text/css" rel="stylesheet">
-    <link href="<%=basePath%>html3/css/index.css" type="text/css" rel="stylesheet">
+    <link href="<%=basePath%>website/css/xkui.css" type="text/css" rel="stylesheet">
+    <link href="<%=basePath%>website/css/index.css" type="text/css" rel="stylesheet">
     <!--<link href="css/ui.css" type="text/css" rel="stylesheet">-->
 
-    <script src="<%=basePath%>html3/js/mootools.js" type="text/javascript"></script>
-    <script src="<%=basePath%>html3/js/xkui.js" type="text/javascript"></script>
-    <script src="<%=basePath%>html3/js/news_view.js" type="text/javascript"></script>
+    <script src="<%=basePath%>website/js/mootools.js" type="text/javascript"></script>
+    <script src="<%=basePath%>website/js/xkui.js" type="text/javascript"></script>
+    <script src="<%=basePath%>website/js/news_view.js" type="text/javascript"></script>
 
     <!--<script type="text/javascript" src="js/index.js"></script>-->
     <!--<script type="text/javascript" src="js/gallery.js"></script>-->
@@ -29,16 +29,7 @@
 <%@ include file="header.html"%>
 <div id="topic-view">
     <div class="row">
-        <div class="navbar">
-            <ul class="nav">
-                <li class="active"><a href="index.jsp">首页</a></li>
-                <li><a href="#">学科资源</a></li>
-                <li><a href="#">专题资源</a></li>
-                <li><a href="#">教学视频示范中心</a></li>
-                <li><a href="#">教师职业技能训练</a></li>
-                <li><a href="#">语言学科平台</a></li>
-            </ul>
-        </div>
+        <%@ include file="navbar.html" %>
         <div style="margin-top: 10px; font-size: 0.8em">
             您的位置：<a href="index.jsp">首页</a> > <a href="#">新闻公告</a>
         </div>
