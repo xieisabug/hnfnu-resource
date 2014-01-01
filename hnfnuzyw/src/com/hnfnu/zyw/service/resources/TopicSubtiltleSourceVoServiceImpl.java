@@ -85,10 +85,10 @@ public class TopicSubtiltleSourceVoServiceImpl implements  ITopicSubtiltleSource
 	}
 
 	public List<TopicSubtiltleSourceVo> listBySubtileId(int subtitleId,int startIndex,int pageSize) {
-		String hql = "from TopicSubtiltleSourceVo where subtitleId="+subtitleId+" limit "+startIndex+","+pageSize;
+		String hql = "from TopicSubtiltleSourceVo where subtitleId="+subtitleId;
 		List<TopicSubtiltleSourceVo> gardes = null;
 		try {
-			gardes = topicSubtiltleSourceVoDao.list(hql);
+			gardes = topicSubtiltleSourceVoDao.queryForPage(hql, startIndex, pageSize);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

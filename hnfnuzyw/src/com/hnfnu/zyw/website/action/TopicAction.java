@@ -80,13 +80,13 @@ public class TopicAction extends ActionSupport {
 		for (int i = 0; i < topicSubtitleDtos.size(); i++) {
 			subtitleMap = new HashMap<String, Object>();
 			subtitleMap.put("subtitle", topicSubtitleDtos.get(i));
-
 			
 			topicSources = topicSubtiltleSourceVoService.listBySubtileId(
 					topicSubtitleDtos.get(i).getId(), 0, pageSize);
+			
 			joinSources = topicSourceVoService.listBySubTitleId(
 					topicSubtitleDtos.get(i).getId(), 0, pageSize);
-			subtitleMap.put("topicSource", topicSources);
+			subtitleMap.put("topicSources", topicSources);
 			subtitleMap.put("joinSources", joinSources);
 			subTopics.add(subtitleMap);
 		}
@@ -98,7 +98,7 @@ public class TopicAction extends ActionSupport {
 			return "error";
 		}
 		request.setAttribute("topic", topic);
-		request.setAttribute("user", user);
+		request.setAttribute("topicUser", user);
 		request.setAttribute("subTopics", subTopics);
 		request.setAttribute("message", message);
 		request.setAttribute("success", success);

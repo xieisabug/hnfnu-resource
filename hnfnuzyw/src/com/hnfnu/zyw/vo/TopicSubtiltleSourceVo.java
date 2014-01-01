@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "v_topic_subtiltle_source")
+@Table(name = "v_topic_subtitle_source")
 public class TopicSubtiltleSourceVo {
 	// id
 	private Integer id;
