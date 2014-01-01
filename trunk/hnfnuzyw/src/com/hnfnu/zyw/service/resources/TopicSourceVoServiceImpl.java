@@ -27,10 +27,10 @@ public class TopicSourceVoServiceImpl implements ITopicSourceVoService{
 	}
 
 	public List<TopicSourceVo> listBySubTitleId(int subTitleId, int startIndex,int pageSize) {
-		String hql = "from TopicSourceVo where subTitleId="+subTitleId +" limit "+startIndex+","+pageSize;
+		String hql = "from TopicSourceVo where subtitleId="+subTitleId;
 		List<TopicSourceVo> l = null;
 		try {
-			l = topicSourceVoDao.list(hql);
+			l = topicSourceVoDao.queryForPage(hql, startIndex, pageSize);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
