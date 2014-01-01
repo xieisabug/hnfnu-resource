@@ -299,6 +299,10 @@ label {
     width: 320px;
     height: 100px;
 }
+.subject-item img{
+    width: 80px;
+    height: 80px;
+}
 .tabGroupItem>div>div>table{
     border-collapse:collapse;
     width: 100%;
