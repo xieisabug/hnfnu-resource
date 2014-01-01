@@ -1,9 +1,12 @@
 package com.hnfnu.zyw.service.resources;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.hnfnu.zyw.dto.system.UserDto;
+import com.opensymphony.xwork2.ActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -19,6 +22,11 @@ public class TopicSourceServiceImpl implements ITopicSourceService{
 
 	public boolean add(TopicSourceDto topicSource) {
 		try {
+            ActionContext context = ActionContext.getContext();
+            Map<String, Object> session = context.getSession();
+            UserDto user = (UserDto) session.get("user");
+            topicSource.setCreateUserId(user.getId());
+            topicSource.setCreateDate(new Date());
 			topicSourceDao.add(topicSource);
 		} catch (Exception e) {
 			e.printStackTrace();
