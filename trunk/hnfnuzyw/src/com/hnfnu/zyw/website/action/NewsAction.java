@@ -24,7 +24,7 @@ import com.opensymphony.xwork2.ActionSupport;
 @Scope("prototype")
 @ParentPackage("json-default")
 @Results({@Result(name = "success", type = "json", params = {"root", "action"})})
-@Namespace("/")
+@Namespace("/news")
 public class NewsAction extends ActionSupport {
 
     private static final long serialVersionUID = 8211651083165988085L;
@@ -37,15 +37,12 @@ public class NewsAction extends ActionSupport {
 
 
     private FreemarkerUtil fu = new FreemarkerUtil();
-    private Map<String, Object> root = null;
 
     @Action(value = "newsIndex")
     public String newsIndex() {
-        String filePath = null;
-
-        filePath = ServletActionContext.getServletContext().getRealPath("/");
+        String filePath = ServletActionContext.getServletContext().getRealPath("/");
         // 获得数据模型
-        root = newsService.getIndexNews();
+        Map<String, Object> root = newsService.getIndexNews();
 
         //打印到输出台，以便于测试
         //fu.print("index.ftl", root);
@@ -59,7 +56,7 @@ public class NewsAction extends ActionSupport {
         return SUCCESS;
     }
 
-    @Action(value = "newsView", results = {@Result(name = "success", location = "../../html3/news.jsp")})
+    @Action(value = "view", results = {@Result(name = "success", location = "../../html3/news.jsp")})
     public String newsView() {
         NewsDto news = newsService.get(id);
         HttpServletRequest request = ServletActionContext.getRequest();
