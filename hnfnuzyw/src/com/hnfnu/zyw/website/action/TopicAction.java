@@ -7,6 +7,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.hnfnu.zyw.service.resources.ITopicSubtitleSourceVoService;
+import com.hnfnu.zyw.vo.TopicSubtitleSourceVo;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
@@ -23,11 +25,9 @@ import com.hnfnu.zyw.dto.resources.TopicSubtitleDto;
 import com.hnfnu.zyw.dto.system.UserDto;
 import com.hnfnu.zyw.service.resources.ITopicService;
 import com.hnfnu.zyw.service.resources.ITopicSourceVoService;
-import com.hnfnu.zyw.service.resources.ITopicSubtiltleSourceVoService;
 import com.hnfnu.zyw.service.resources.ITopicSubtitleService;
 import com.hnfnu.zyw.service.system.IUserService;
 import com.hnfnu.zyw.vo.TopicSourceVo;
-import com.hnfnu.zyw.vo.TopicSubtiltleSourceVo;
 import com.opensymphony.xwork2.ActionSupport;
 
 @Controller("ftlTopicAction")
@@ -43,7 +43,7 @@ public class TopicAction extends ActionSupport {
 	private String message;
 	private int pageIndex;
 	private int subtitleId;
-	private List<TopicSubtiltleSourceVo> topicSources;
+	private List<TopicSubtitleSourceVo> topicSources;
 	private List<TopicSourceVo> joinSources;
 	private final static int pageSize = 8;
 
@@ -60,8 +60,8 @@ public class TopicAction extends ActionSupport {
 	private ITopicSubtitleService topicSubtitleService;
 
 	@Autowired
-	@Qualifier("topicSubtiltleSourceVoService")
-	private ITopicSubtiltleSourceVoService topicSubtiltleSourceVoService;
+	@Qualifier("topicSubtitleSourceVoService")
+	private ITopicSubtitleSourceVoService topicSubtitleSourceVoService;
 
 	@Autowired
 	@Qualifier("topicSourceVoService")
@@ -81,7 +81,7 @@ public class TopicAction extends ActionSupport {
 			subtitleMap = new HashMap<String, Object>();
 			subtitleMap.put("subtitle", topicSubtitleDtos.get(i));
 			
-			topicSources = topicSubtiltleSourceVoService.listBySubtileId(
+			topicSources = topicSubtitleSourceVoService.listBySubtileId(
 					topicSubtitleDtos.get(i).getId(), 0, pageSize);
 			
 			joinSources = topicSourceVoService.listBySubTitleId(
@@ -110,7 +110,7 @@ public class TopicAction extends ActionSupport {
 
 		int startIndex = pageIndex * pageSize - 1;
 
-		topicSources = topicSubtiltleSourceVoService.listBySubtileId(subtitleId,
+		topicSources = topicSubtitleSourceVoService.listBySubtileId(subtitleId,
 				startIndex, pageSize);
 		joinSources = topicSourceVoService.listBySubTitleId(subtitleId,
 				startIndex, pageSize);
@@ -137,7 +137,7 @@ public class TopicAction extends ActionSupport {
 		this.subtitleId = subtitleId;
 	}
 
-	public List<TopicSubtiltleSourceVo> getTopicSources() {
+	public List<TopicSubtitleSourceVo> getTopicSources() {
 		return topicSources;
 	}
 

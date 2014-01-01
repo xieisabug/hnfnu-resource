@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "v_topic_subtitle_source")
-public class TopicSubtiltleSourceVo {
+public class TopicSubtitleSourceVo {
 	// id
 	private Integer id;
 
@@ -92,7 +92,7 @@ public class TopicSubtiltleSourceVo {
 	private Date topicCreateDate;
 	//备注
 	private String remark;
-	public TopicSubtiltleSourceVo() {
+	public TopicSubtitleSourceVo() {
 		super();
 	}
 
