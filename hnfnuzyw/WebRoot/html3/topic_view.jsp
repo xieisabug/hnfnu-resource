@@ -5,7 +5,7 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="com.hnfnu.zyw.dto.resources.TopicSubtitleDto" %>
 <%@ page import="com.hnfnu.zyw.vo.TopicSourceVo" %>
-<%@ page import="com.hnfnu.zyw.vo.TopicSubtiltleSourceVo" %>
+<%@ page import="com.hnfnu.zyw.vo.TopicSubtitleSourceVo" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     TopicDto topic = (TopicDto) request.getAttribute("topic");
@@ -96,12 +96,12 @@
             </ul>
             <%
                 for (Map<String, Object> subTopic : subTopics) {
-                    List<TopicSubtiltleSourceVo> topicSources = (List<TopicSubtiltleSourceVo>) subTopic.get("topicSources");
+                    List<TopicSubtitleSourceVo> topicSources = (List<TopicSubtitleSourceVo>) subTopic.get("topicSources");
                     List<TopicSourceVo> joinSources = (List<TopicSourceVo>) subTopic.get("joinSources");
             %>
             <div>
                 <%
-                    for(TopicSubtiltleSourceVo tssv : topicSources) {
+                    for(TopicSubtitleSourceVo tssv : topicSources) {
                 %>
                 <div class="topic-resource-content">
                     <table>

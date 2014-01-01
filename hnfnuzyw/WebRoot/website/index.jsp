@@ -40,13 +40,13 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title></title>
-    <link href="css/index.css" type="text/css" rel="stylesheet">
-    <link href="css/xkui.css" type="text/css" rel="stylesheet">
-    <script src="js/mootools.js" type="text/javascript"></script>
-    <script src="js/xkui.js" type="text/javascript"></script>
-    <script type="text/javascript" src="js/index.js"></script>
-    <script type="text/javascript" src="js/gallery.js"></script>
+    <title>资源管理首页——湖南第一师范</title>
+    <link href="<%=basePath%>website/css/index.css" type="text/css" rel="stylesheet">
+    <link href="<%=basePath%>website/css/xkui.css" type="text/css" rel="stylesheet">
+    <script src="<%=basePath%>website/js/mootools.js" type="text/javascript"></script>
+    <script src="<%=basePath%>website/js/xkui.js" type="text/javascript"></script>
+    <script type="text/javascript" src="<%=basePath%>website/js/index.js"></script>
+    <script type="text/javascript" src="<%=basePath%>website/js/gallery.js"></script>
 </head>
 <body>
 <%@ include file="header.html" %>
