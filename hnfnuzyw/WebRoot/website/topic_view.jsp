@@ -123,11 +123,11 @@
                                     <%
                                         if(onlineViewFormat.contains(tssv.getMediaFormat()+",")) {
                                     %>
-                                    <button value="在线预览" onclick="online/view?topicSourceid=<%=tssv.getId()%>">在线预览</button>
+                                    <a href="<%=basePath%>online/view?sourceId=<%=tssv.getId()%>">在线预览</a>
                                     <%
                                         }
                                     %>
-                                    <button value="下载资源" onclick="">下载资源</button>
+                                    <a href="<%=basePath%>file/download?id=<%=tssv.getId()%>&type=1">下载资源</a>
                                 </div>
                             </td>
                         </tr>
@@ -158,11 +158,11 @@
                                     <%
                                         if(onlineViewFormat.contains(tsv.getMediaFormat()+",")) {
                                     %>
-                                    <button value="在线预览" onclick="online/view?sourceId=<%=tsv.getSourceId()%>">在线预览</button>
+                                    <a href="<%=basePath%>online/view?sourceId=<%=tsv.getSourceId()%>">在线预览</a>
                                     <%
                                         }
                                     %>
-                                    <button value="下载资源" onclick="">下载资源</button>
+                                    <a href="<%=basePath%>file/download?id=<%=tsv.getSourceId()%>&type=2">下载资源</a>
                                 </div>
                             </td>
                         </tr>
