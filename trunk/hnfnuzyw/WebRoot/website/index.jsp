@@ -1,6 +1,7 @@
 <%@ page import="com.hnfnu.zyw.dto.system.UserDto" %>
 <%@ page import="com.hnfnu.zyw.dto.system.StudentDto" %>
 <%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     UserDto user = (UserDto) session.getAttribute("user");
@@ -35,6 +36,7 @@
     String basePath = request.getScheme() + "://"
             + request.getServerName() + ":" + request.getServerPort()
             + path + "/";
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 %>
 <!DOCTYPE html>
 <html>
@@ -47,6 +49,9 @@
     <script src="<%=basePath%>website/js/xkui.js" type="text/javascript"></script>
     <script type="text/javascript" src="<%=basePath%>website/js/index.js"></script>
     <script type="text/javascript" src="<%=basePath%>website/js/gallery.js"></script>
+    <script type="text/javascript">
+        var basePath = '<%=basePath%>';
+    </script>
 </head>
 <body>
 <%@ include file="header.html" %>
@@ -134,7 +139,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <%=latestLoginDate%>
+                            <% out.print(sdf.format(latestLoginDate));%>
                         </td>
                     </tr>
                     <%

@@ -339,4 +339,8 @@ a.left,a.right{
     border: 1px solid #75ade7;
     background: #fff;
 }
+.dialog{
+    -webkit-box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
 /************    Dialog    **************/
