@@ -412,6 +412,9 @@ label {
     display: none;
 }
 
+.topic-view-btn {
+    display: block;
+}
 /**topic view**/
 /**gallery**/
 #n {

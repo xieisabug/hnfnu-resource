@@ -48,6 +48,7 @@
     <script src="<%=basePath%>website/js/mootools.js" type="text/javascript"></script>
     <script src="<%=basePath%>website/js/xkui.js" type="text/javascript"></script>
     <script type="text/javascript" src="<%=basePath%>website/js/index.js"></script>
+    <script type="text/javascript" src="<%=basePath%>website/js/navbar.js"></script>
     <script type="text/javascript" src="<%=basePath%>website/js/gallery.js"></script>
     <script type="text/javascript">
         var basePath = '<%=basePath%>';

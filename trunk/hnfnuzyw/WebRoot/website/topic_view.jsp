@@ -29,6 +29,7 @@
     <script src="<%=basePath%>website/js/mootools.js" type="text/javascript"></script>
     <script src="<%=basePath%>website/js/xkui.js" type="text/javascript"></script>
     <script src="<%=basePath%>website/js/topic_view.js" type="text/javascript"></script>
+    <script type="text/javascript" src="<%=basePath%>website/js/navbar.js"></script>
     <script type="text/javascript">
         var basePath = '<%=basePath%>';
         var onlineViewFormat = '<%=onlineViewFormat%>';
@@ -123,7 +124,7 @@
                                     <%
                                         if(onlineViewFormat.contains(tssv.getMediaFormat()+",")) {
                                     %>
-                                    <a href="<%=basePath%>online/view?sourceId=<%=tssv.getId()%>">在线预览</a>
+                                    <a href="<%=basePath%>online/view?id=<%=tssv.getId()%>&type=1">在线预览</a>
                                     <%
                                         }
                                     %>
@@ -158,7 +159,7 @@
                                     <%
                                         if(onlineViewFormat.contains(tsv.getMediaFormat()+",")) {
                                     %>
-                                    <a href="<%=basePath%>online/view?sourceId=<%=tsv.getSourceId()%>">在线预览</a>
+                                    <a href="<%=basePath%>online/view?id=<%=tsv.getSourceId()%>$type=2">在线预览</a>
                                     <%
                                         }
                                     %>

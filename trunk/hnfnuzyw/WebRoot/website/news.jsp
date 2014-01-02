@@ -19,6 +19,7 @@
     <script src="<%=basePath%>website/js/mootools.js" type="text/javascript"></script>
     <script src="<%=basePath%>website/js/xkui.js" type="text/javascript"></script>
     <script src="<%=basePath%>website/js/news_view.js" type="text/javascript"></script>
+    <script type="text/javascript" src="<%=basePath%>website/js/navbar.js"></script>
 
     <!--<script type="text/javascript" src="js/index.js"></script>-->
     <!--<script type="text/javascript" src="js/gallery.js"></script>-->

@@ -30,7 +30,7 @@ public class OnlineViewAction extends ActionSupport{
 	private boolean success;
 	private String message;
 	private int id;
-    private String type;
+    private int type;
 
 	@Autowired
 	@Qualifier("sourceVoService")
@@ -48,15 +48,15 @@ public class OnlineViewAction extends ActionSupport{
 	public String viewSource() {
         List<Map<String,Object>> sourceCommentTree = sourceCommentService.sourceCommentTree(id);
 		HttpServletRequest request = ServletActionContext.getRequest();
-        if(type.equals("source")) {
+        if(type == 2) {
             SourceVo s = sourceVoService.load(id);
             request.setAttribute("source", s);
-        } else {
+        } else if(type == 1){
             TopicSubtitleSourceVo topicSubtitleSourceVo = topicSubtitleSourceVoService.load(id);
             request.setAttribute("source", topicSubtitleSourceVo);
         }
 		request.setAttribute("sourceCommentTree", sourceCommentTree);
-        request.setAttribute("type",type);
+        request.setAttribute("type",type==2?"source":"topic");
 		return SUCCESS;
 	}
 	
@@ -69,7 +69,7 @@ public class OnlineViewAction extends ActionSupport{
 	public void setId(int id) {
 		this.id = id;
 	}
-    public void setType(String type) {
+    public void setType(int type) {
         this.type = type;
     }
 }
