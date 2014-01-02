@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -30,6 +31,7 @@ public class SourceDownloadAction extends AopNoSuchMethodErrorSolveBaseAction {
 	private String fileName;
 	private boolean success;
 	private String message;
+	//public static final String FILEPATH = "D:\\ruanjian\\apache-tomcat-7.0.39\\webapps\\hnfnuzyw\\uploads\\"; 
 
 	@Autowired
 	@Qualifier("sourceService")
@@ -53,11 +55,6 @@ public class SourceDownloadAction extends AopNoSuchMethodErrorSolveBaseAction {
 		String f = s[s.length - 1];
 		this.fileName = f;
 	}
-
-	public void setUrl(String url) {
-		this.url = url;
-	}
-
 	public InputStream getInputStream() {
 		try {
 			return new FileInputStream(url);
@@ -68,9 +65,7 @@ public class SourceDownloadAction extends AopNoSuchMethodErrorSolveBaseAction {
 	}
 	@Action(value = "download")
 	public String execute() {
-		System.out.println("id="+id);
 		SourceDto s = sourceService.load(id);
-		System.out.println("SourceDto"+s);
 		if (s != null) {
 			if (s.getUseTimes() == null) {
 				s.setUseTimes(1);
@@ -83,7 +78,10 @@ public class SourceDownloadAction extends AopNoSuchMethodErrorSolveBaseAction {
 	}
 
 	public void setId(int id) {
+		String realpath = ServletActionContext.getServletContext().getRealPath("/uploads");
 		this.id = id;
+		SourceDto s = sourceService.load(id);
+		this.url = realpath+"\\"+s.getUrl();;
 	}
 
 	public boolean isSuccess() {
