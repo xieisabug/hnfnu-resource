@@ -43,7 +43,7 @@ window.addEvent('domready', function () {
 });
 
 function initStyleAndEvent() {
-    $$('.topic-resource-content button').each(function (item) {
+    $$('.topic-resource-content a').each(function (item) {
         new Button(item, {width: 120});
     });
     $$('.topic-resource-content').each(function (item) {
@@ -116,9 +116,17 @@ function generateSourceItem(data) {
     html += '            <td style="width: 130px; text-align: center" rowspan="3">';
     html += '                <div class="topic-resource-btn">';
     if(onlineViewFormat.contains(data.mediaFormat+',')) {
-        html += '                    <button value="在线预览" onclick="online/view?topicSourceid='+ data.id +'">在线预览</button>';
+        if(!data.sourceId) {
+            html += '                    <a href="'+basePath+'online/view?sourceId='+data.id+'">在线预览</a>';
+        } else {
+            html += '                    <a href="'+basePath+'online/view?sourceId='+data.sourceId+'">在线预览</a>';
+        }
     }
-    html += '                    <button value="下载资源" onclick="">下载资源</button>';
+    if(!data.sourceId) {
+        html += '                    <a href="'+basePath+'file/download?id='+data.id+'&type=1">下载资源</a>';
+    } else {
+        html += '                    <a href="'+basePath+'file/download?id='+data.sourceId+'&type=2">下载资源</a>';
+    }
     html += '                </div>';
     html += '            </td>';
     html += '        </tr>';
