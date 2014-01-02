@@ -17,6 +17,7 @@ import com.hnfnu.zyw.action.base.AopNoSuchMethodErrorSolveBaseAction;
 import com.hnfnu.zyw.dto.resources.GradeDto;
 import com.hnfnu.zyw.service.resources.IGradeService;
 import com.hnfnu.zyw.vo.GradeGroupVo;
+import com.hnfnu.zyw.website.service.IIndexService;
 import com.opensymphony.xwork2.ModelDriven;
 
 @Controller("gradeAction")
@@ -36,6 +37,10 @@ public class GradeAction extends AopNoSuchMethodErrorSolveBaseAction implements 
 	@Autowired
 	@Qualifier("gradeService")
 	private IGradeService gradeService;
+	
+	@Autowired
+	@Qualifier("ftl_indexService")
+	private IIndexService indexService;
 
 	// 添加年级
 	@Action(value = "addGrade")
@@ -54,6 +59,7 @@ public class GradeAction extends AopNoSuchMethodErrorSolveBaseAction implements 
 	public String update() {
 		success = gradeService.update(grade);
 		if (success) {
+			indexService.makeTabGroups();
 			message = "修改年级成功！";
 		} else {
 			message = "修改年级失败！";
@@ -81,6 +87,7 @@ public class GradeAction extends AopNoSuchMethodErrorSolveBaseAction implements 
 	@Action(value = "deleteGrade")
 	public String delete() {
 		success = gradeService.delete(grade.getId());
+		indexService.makeTabGroups();
 		if (success) {
 			message = "删除年级成功！";
 		} else {

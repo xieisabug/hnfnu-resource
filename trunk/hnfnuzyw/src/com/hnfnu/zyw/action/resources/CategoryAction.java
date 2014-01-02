@@ -17,6 +17,7 @@ import com.hnfnu.zyw.action.base.AopNoSuchMethodErrorSolveBaseAction;
 import com.hnfnu.zyw.dto.resources.CategoryDto;
 import com.hnfnu.zyw.service.resources.ICategoryService;
 import com.hnfnu.zyw.vo.CategoryGroupVo;
+import com.hnfnu.zyw.website.service.IIndexService;
 import com.opensymphony.xwork2.ModelDriven;
 
 @Controller("categoryAction")
@@ -39,6 +40,9 @@ public class CategoryAction extends AopNoSuchMethodErrorSolveBaseAction implemen
 	@Qualifier("categoryService")
 	private ICategoryService categoryService;
 
+	@Autowired
+	@Qualifier("ftl_indexService")
+	private IIndexService indexService;
 	// 添加类别
 	@Action(value = "addCategory")
 	public String add() {
@@ -91,6 +95,7 @@ public class CategoryAction extends AopNoSuchMethodErrorSolveBaseAction implemen
 	public String delete() {
 		success = categoryService.delete(category.getId());
 		if (success) {
+			indexService.makeTabGroups();
 			message = "删除类别成功,请刷新资源界面或者重新打开资源界面！";
 		} else {
 			message = "删除类别失败！";

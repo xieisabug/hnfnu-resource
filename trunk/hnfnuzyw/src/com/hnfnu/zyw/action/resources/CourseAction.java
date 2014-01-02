@@ -20,6 +20,7 @@ import com.hnfnu.zyw.service.resources.IGradeService;
 import com.hnfnu.zyw.service.resources.ISubjectService;
 import com.hnfnu.zyw.vo.GradeGroupVo;
 import com.hnfnu.zyw.vo.SubjectGroupVo;
+import com.hnfnu.zyw.website.service.IIndexService;
 import com.opensymphony.xwork2.ModelDriven;
 
 @Controller("courseAction")
@@ -50,6 +51,10 @@ public class CourseAction extends AopNoSuchMethodErrorSolveBaseAction implements
 	@Autowired
 	@Qualifier("subjectService")
 	private ISubjectService subjectService;
+	
+	@Autowired
+	@Qualifier("ftl_indexService")
+	private IIndexService indexService;
 
 	// 添加课程
 	@Action(value = "addCourse")
@@ -96,6 +101,7 @@ public class CourseAction extends AopNoSuchMethodErrorSolveBaseAction implements
 	public String delete() {
 		success = courseService.delete(course.getId());
 		if (success) {
+			indexService.makeTabGroups();
 			message = "删除课程成功，资源界面请刷新或者重新打开资源界面！";
 		} else {
 			message = "删除课程失败！";
