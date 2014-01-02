@@ -152,7 +152,7 @@ function formInit() {
 			newline : true,
 			validate : {
 				required : true,
-				maxlength : 20
+				maxlength : 50
 			}
 		}, {
 			display : '功能名称',
@@ -164,7 +164,7 @@ function formInit() {
 			newline : true,
 			validate : {
 				required : true,
-				maxlength : 20
+				maxlength : 50
 			}
 		} ]
 	});

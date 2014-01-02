@@ -17,12 +17,16 @@ import org.springframework.stereotype.Controller;
 
 import com.hnfnu.zyw.action.base.AopNoSuchMethodErrorSolveBaseAction;
 import com.hnfnu.zyw.dto.resources.SourceDto;
+import com.hnfnu.zyw.dto.resources.TopicSourceDto;
 import com.hnfnu.zyw.service.resources.ISourceService;
+import com.hnfnu.zyw.service.resources.ITopicSourceService;
 
 @Controller("sourceDownloadAction")
 @Scope("prototype")
 @ParentPackage("json-default")
-@Results({ @Result(name = "success", type = "stream", params = { "contentType", "application/octet-stream","inputName","inputStream","contentDisposition","filename='${fileName}'","bufferSize","4096" }) })
+@Results({ @Result(name = "success", type = "stream", params = { "contentType",
+		"application/octet-stream", "inputName", "inputStream",
+		"contentDisposition", "filename='${fileName}'", "bufferSize", "4096" }) })
 @Namespace("/file")
 public class SourceDownloadAction extends AopNoSuchMethodErrorSolveBaseAction {
 	// fileName是绝对路径
@@ -30,13 +34,20 @@ public class SourceDownloadAction extends AopNoSuchMethodErrorSolveBaseAction {
 	private int id;
 	private String fileName;
 	private boolean success;
+	private int type;// 0是课程资源，1是挂接资源，2是专题特有资源
 	private String message;
-	//public static final String FILEPATH = "D:\\ruanjian\\apache-tomcat-7.0.39\\webapps\\hnfnuzyw\\uploads\\"; 
+
+	// public static final String FILEPATH =
+	// "D:\\ruanjian\\apache-tomcat-7.0.39\\webapps\\hnfnuzyw\\uploads\\";
 
 	@Autowired
 	@Qualifier("sourceService")
 	private ISourceService sourceService;
-	
+
+	@Autowired
+	@Qualifier("topicSourceService")
+	private ITopicSourceService topicSourceService;
+
 	public String getFileName() {
 		try {
 			String[] s = url.split("\\\\");
@@ -55,6 +66,7 @@ public class SourceDownloadAction extends AopNoSuchMethodErrorSolveBaseAction {
 		String f = s[s.length - 1];
 		this.fileName = f;
 	}
+
 	public InputStream getInputStream() {
 		try {
 			return new FileInputStream(url);
@@ -63,25 +75,37 @@ public class SourceDownloadAction extends AopNoSuchMethodErrorSolveBaseAction {
 			return null;
 		}
 	}
+
 	@Action(value = "download")
 	public String execute() {
 		SourceDto s = sourceService.load(id);
 		if (s != null) {
 			if (s.getUseTimes() == null) {
 				s.setUseTimes(1);
-			} 
-				s.setUseTimes(s.getUseTimes() + 1);
-				success = sourceService.update(s);
+			}
+			s.setUseTimes(s.getUseTimes() + 1);
+			success = sourceService.update(s);
 		}
-		
+
 		return "success";
 	}
 
 	public void setId(int id) {
-		String realpath = ServletActionContext.getServletContext().getRealPath("/uploads");
+		String realpath = ServletActionContext.getServletContext().getRealPath(
+				"/uploads");
 		this.id = id;
-		SourceDto s = sourceService.load(id);
-		this.url = realpath+"\\"+s.getUrl();;
+		if (type < 2) {
+			SourceDto s = sourceService.load(id);
+			this.url = realpath + "\\" + s.getUrl();
+		}else if(type == 2){
+			TopicSourceDto topicSourceDto = topicSourceService.load(id);
+			this.url = realpath + "\\" + topicSourceDto.getUrl();
+		}
+
+	}
+
+	public void setType(int type) {
+		this.type = type;
 	}
 
 	public boolean isSuccess() {

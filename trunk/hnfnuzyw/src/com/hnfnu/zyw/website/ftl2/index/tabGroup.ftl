@@ -80,7 +80,7 @@
 			                <#list x..5 as y>
 			                    <#if y % 3 == 0>
 			                        <tr>
-			                            <td>
+			                            <td class="subject-item">
 			                            </td>
 			                    </#if>
 			                    <#if (y - 1) % 3 == 0>

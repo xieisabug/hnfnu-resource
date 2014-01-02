@@ -199,4 +199,8 @@ public class IndexServiceImpl implements IIndexService {
 		return p;
 	}
 
+	public void run() {
+		makeTabGroups();
+	}
+
 }

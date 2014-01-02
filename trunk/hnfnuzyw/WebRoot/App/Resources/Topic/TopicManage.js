@@ -351,7 +351,6 @@ function edit_save() {
             $.ligerDialog.error("选择了外链之后，必须填写外链地址！");
             return;
         }
-        // todo 需要发往服务器，返回成功后再修改到表格中
         $.ajax({
             url:'../../../resources/updateTopic.action',
             data:row_data,
@@ -544,6 +543,10 @@ function refresh_info() {
 }
 
 //todo
+function query_subtitle_source(){
+
+}
+
 function query_topic_subtille() {
     if (!topicGrid.getSelected()) {
         $.ligerDialog.warn('请选择您要查看的专题.');
@@ -562,6 +565,11 @@ function query_topic_subtille() {
             click:add_topic_subtille,
             icon:'add',
             key:'modify'
+        },{
+            text:'查看资源',
+            click:query_subtitle_source,
+            icon:'refresh',
+            key:'query_subtitle_source'
         }
     ];
     select_subtitle("确定", toolbarItems, oquery_topic_subtille_cancel, oquery_topic_subtille_cancel, topic)
