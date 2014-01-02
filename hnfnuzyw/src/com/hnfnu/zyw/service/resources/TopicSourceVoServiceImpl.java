@@ -1,6 +1,8 @@
 package com.hnfnu.zyw.service.resources;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,15 +17,18 @@ public class TopicSourceVoServiceImpl implements ITopicSourceVoService{
 	@Qualifier("topicSourceVoDao")
 	public ITopicSourceVoDao topicSourceVoDao;
 	
-	public List<TopicSourceVo> listByTopicId(int id){
-		String hql = "from TopicSourceVo where topicId="+id;
+	public Map<String, Object> listBySubTitleId(int id){
+		Map<String, Object> t = new HashMap<String, Object>();
 		List<TopicSourceVo> l = null;
+		String hql = "from TopicSourceVo where subtitleId="+id;
 		try {
 			l = topicSourceVoDao.list(hql);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return l;
+		t.put("Rows", l);
+		t.put("Total", l.size());
+		return t;
 	}
 
 	public List<TopicSourceVo> listBySubTitleId(int subTitleId, int startIndex,int pageSize) {

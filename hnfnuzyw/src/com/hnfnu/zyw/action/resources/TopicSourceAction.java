@@ -15,24 +15,34 @@ import org.springframework.stereotype.Controller;
 import com.hnfnu.zyw.action.base.AopNoSuchMethodErrorSolveBaseAction;
 import com.hnfnu.zyw.dto.resources.TopicSourceDto;
 import com.hnfnu.zyw.service.resources.ITopicSourceService;
+import com.hnfnu.zyw.service.resources.ITopicSourceVoService;
+import com.hnfnu.zyw.service.resources.ITopicSubtitleSourceVoService;
 import com.opensymphony.xwork2.ModelDriven;
 
 @Controller("topicSourceAction")
 @Scope("prototype")
 @ParentPackage("json-default")
-@Results( { @Result(name = "success", type = "json", params = { "root",
-		"action" }) })
+@Results({ @Result(name = "success", type = "json", params = { "root", "action" }) })
 @Namespace("/resources")
-public class TopicSourceAction extends AopNoSuchMethodErrorSolveBaseAction implements ModelDriven<TopicSourceDto>{
+public class TopicSourceAction extends AopNoSuchMethodErrorSolveBaseAction
+		implements ModelDriven<TopicSourceDto> {
 
 	private TopicSourceDto topicSource = new TopicSourceDto();// 获取页面提交参数
 	private boolean success;
 	private String message;
 	private Map<String, Object> topicSourceList;
-
+	private Map<String, Object> topicJoinSourceList;
 	@Autowired
 	@Qualifier("topicSourceService")
 	private ITopicSourceService topicSourceService;
+
+	@Autowired
+	@Qualifier("topicSubtitleSourceVoService")
+	private ITopicSubtitleSourceVoService topicSubtitleSourceVoService;
+
+	@Autowired
+	@Qualifier("topicSourceVoService")
+	private ITopicSourceVoService topicSourceVoService;
 
 	// 添加专题独有资源
 	@Action(value = "addTopicSource")
@@ -89,7 +99,16 @@ public class TopicSourceAction extends AopNoSuchMethodErrorSolveBaseAction imple
 	// 获取表中所有专题独有资源，用Map装，为了分页的需要加上Rows和Total
 	@Action(value = "listTopicSource")
 	public String list() {
-		topicSourceList = topicSourceService.listTopicSource();
+		topicSourceList = topicSubtitleSourceVoService
+				.listTopicSubtitleSourceVo(topicSource.getTopicSubtitleId());
+		return SUCCESS;
+	}
+
+	// 获取表中所有专题独有资源，用Map装，为了分页的需要加上Rows和Total
+	@Action(value = "listTopicJoinSource")
+	public String listTopicJoinSource() {
+		topicJoinSourceList = topicSourceVoService.listBySubTitleId(topicSource
+				.getTopicSubtitleId());
 		return SUCCESS;
 	}
 
@@ -113,5 +132,9 @@ public class TopicSourceAction extends AopNoSuchMethodErrorSolveBaseAction imple
 	public Map<String, Object> getTopicSourceList() {
 		return topicSourceList;
 	}
-	
+
+	public Map<String, Object> getTopicJoinSourceList() {
+		return topicJoinSourceList;
+	}
+
 }

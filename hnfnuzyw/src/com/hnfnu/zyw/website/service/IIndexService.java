@@ -5,6 +5,6 @@ public interface IIndexService {
 
 	public boolean getPictures();
 	public boolean getTopics();
-	public boolean makeTabGroups();
+	public void makeTabGroups();
 	
 }

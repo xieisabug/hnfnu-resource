@@ -26,7 +26,7 @@ public interface ITopicSubtitleSourceVoService {
 	 * 
 	 * @return
 	 */
-	public Map<String, Object> listTopicSubtitleSourceVo();
+	public Map<String, Object> listTopicSubtitleSourceVo(int id);
 	
 	/**
 	 * 获取表中前pagerSize条数据，是用List装的

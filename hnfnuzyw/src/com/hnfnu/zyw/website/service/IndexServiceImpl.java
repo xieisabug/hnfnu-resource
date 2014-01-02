@@ -8,6 +8,8 @@ import java.util.Map;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.hnfnu.zyw.dao.resources.IGradeGroupVoDao;
@@ -79,22 +81,31 @@ public class IndexServiceImpl implements IIndexService {
 		return fu.fprint("index/topic.ftl", root, filePath + "website\\",
 				"topic.html");
 	}
-
-	public boolean makeTabGroups() {
+	
+//	@Scheduled(cron = "*/10 * * * * ?")
+	@Scheduled(cron = "0 0 0,8,10,12,14,16,18,20 * * ?")
+	@Async
+	public void makeTabGroups() {
+		try {
+		
 		FreemarkerUtil fu =new FreemarkerUtil();
 		Map<String, Object> root = null;
 		String filePath = null;
 
-		filePath = ServletActionContext.getServletContext().getRealPath("/");
+//		filePath = ServletActionContext.getServletContext().getRealPath("/");
+		filePath = "F:\\workspaces\\hnfnu-resource\\trunk\\hnfnuzyw\\WebRoot\\";
 		// 获得数据模型
 		root = this.getMakeTabGroupRoot();
 		// 打印到输出台，以便于测试
-		fu.print("index/tabGroup.ftl", root);
+//		fu.print("index/tabGroup.ftl", root);
 		// 输出到文件
 		System.out.println(filePath + "website\\");
-		return fu.fprint("index/tabGroup.ftl", root, filePath + "website\\",
+		fu.fprint("index/tabGroup.ftl", root, filePath + "website\\",
 				"tabGroup.html");
-
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	private List<Map<String, Object>> listToMap(List<SubjectGroupVo> l,
@@ -198,9 +209,5 @@ public class IndexServiceImpl implements IIndexService {
 		}
 		return p;
 	}
-
-	public void run() {
-		makeTabGroups();
-	}
-
+	
 }
