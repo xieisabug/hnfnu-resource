@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import com.hnfnu.zyw.action.base.AopNoSuchMethodErrorSolveBaseAction;
 import com.hnfnu.zyw.dto.resources.GroupDto;
 import com.hnfnu.zyw.service.resources.IGroupService;
+import com.hnfnu.zyw.website.service.IIndexService;
 import com.opensymphony.xwork2.ModelDriven;
 
 @Controller("groupAction")
@@ -35,6 +36,10 @@ public class GroupAction extends AopNoSuchMethodErrorSolveBaseAction implements
 	@Autowired
 	@Qualifier("groupService")
 	private IGroupService groupService;
+	
+	@Autowired
+	@Qualifier("ftl_indexService")
+	private IIndexService indexService;
 
 	// 添加分组
 	@Action(value = "addGroup")
@@ -53,6 +58,7 @@ public class GroupAction extends AopNoSuchMethodErrorSolveBaseAction implements
 	public String update() {
 		success = groupService.update(group);
 		if (success) {
+			indexService.makeTabGroups();
 			message = "修改分组成功！";
 		} else {
 			message = "修改分组失败！";
@@ -81,6 +87,7 @@ public class GroupAction extends AopNoSuchMethodErrorSolveBaseAction implements
 	public String delete() {
 		success = groupService.delete(group.getId());
 		if (success) {
+			indexService.makeTabGroups();
 			message = "删除分组成功！";
 		} else {
 			message = "删除分组失败！";

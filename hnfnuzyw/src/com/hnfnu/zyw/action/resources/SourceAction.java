@@ -119,7 +119,6 @@ public class SourceAction extends AopNoSuchMethodErrorSolveBaseAction implements
 		sourceVo = sourceVoService.load(source.getId());
 		if (success) {
 			message = "修改资源成功！";
-			//判断是否重新生成ftl
 			indexService.makeTabGroups();
 		} else {
 			message = "修改资源失败！";

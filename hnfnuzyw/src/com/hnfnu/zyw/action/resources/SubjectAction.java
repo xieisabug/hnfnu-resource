@@ -17,6 +17,7 @@ import com.hnfnu.zyw.action.base.AopNoSuchMethodErrorSolveBaseAction;
 import com.hnfnu.zyw.dto.resources.SubjectDto;
 import com.hnfnu.zyw.service.resources.ISubjectService;
 import com.hnfnu.zyw.vo.SubjectGroupVo;
+import com.hnfnu.zyw.website.service.IIndexService;
 import com.opensymphony.xwork2.ModelDriven;
 
 @Controller("subjectAction")
@@ -36,6 +37,10 @@ public class SubjectAction extends AopNoSuchMethodErrorSolveBaseAction
 	@Autowired
 	@Qualifier("subjectService")
 	private ISubjectService subjectService;
+	
+	@Autowired
+	@Qualifier("ftl_indexService")
+	private IIndexService indexService;
 
 	// 添加学科
 	@Action(value = "addSubject")
@@ -55,6 +60,7 @@ public class SubjectAction extends AopNoSuchMethodErrorSolveBaseAction
 	@Action(value = "updateSubject")
 	public String update() {
 		success = subjectService.update(subject);
+		indexService.makeTabGroups();
 		if (success) {
 			message = "修改功能成功！";
 		} else {
@@ -83,6 +89,7 @@ public class SubjectAction extends AopNoSuchMethodErrorSolveBaseAction
 	@Action(value = "deleteSubject")
 	public String delete() {
 		success = subjectService.delete(subject.getId());
+		indexService.makeTabGroups();
 		if (success) {
 			message = "删除功能成功！";
 		} else {
