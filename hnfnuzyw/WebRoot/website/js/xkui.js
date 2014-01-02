@@ -927,6 +927,7 @@ var Dialog = new Class({
             show:false
         }, option);
         this.dialog = el;
+        this.dialog.addClass('dialog');
         //如果不是自己确定的绝对定位，那么不允许拖拽
         if(this.option.position!='absolute') {
             this.option.draggable = false;
@@ -969,12 +970,13 @@ var Dialog = new Class({
         //如果可以关闭，则添加关闭按钮
         if(this.option.closeable) {
             this.title.grab(new Element('div',{
-                html:'x',
                 styles:{
                     float:'right',
                     height:20,
                     width:20,
-                    'cursor':'pointer'
+                    'cursor':'pointer',
+                    background:'url(image/mini_close_btn.gif) no-repeat',
+                    'margin-top': 8
                 },
                 events:{
                     click:function(){

@@ -217,7 +217,7 @@ window.addEvent('domready',function(){
         html +='<table style="font-size:0.8em;height:200px;">	';
         html +='	<tr>';
         html +='		<td rowspan="4" style="width:75px;" >';
-        html +='			<img src="'+data.info.icon+'" style="width:75px;height:75px;" >';
+        html +='			<img src="'+basePath + 'uploads/user/image/'+data.info.icon+'" style="width:75px;height:75px;" >';
         html +='			<button id="logout_btn">';
         html +='				退出登录';
         html +='			</button>';
