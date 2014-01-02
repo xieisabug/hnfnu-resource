@@ -24,7 +24,10 @@ public class SourceCommentVo
 	private String content;
 	//评论的作者id，用于链接评论人员的信息
 	private Integer createId;
-	private Integer createName;
+    //作者姓名
+	private String createName;
+    //作者头像
+    private String createIcon;
 	//创建日期
 	private Date createDate;
 
@@ -33,7 +36,7 @@ public class SourceCommentVo
 
 	}
 	public SourceCommentVo(Integer id, Integer sourceId, Integer parentId,
-			String content, Integer createId, Integer createName,
+			String content, Integer createId, String createName,String createIcon,
 			Date createDate) {
 		super();
 		this.id = id;
@@ -43,6 +46,7 @@ public class SourceCommentVo
 		this.createId = createId;
 		this.createName = createName;
 		this.createDate = createDate;
+        this.createIcon = createIcon;
 	}
 
 
@@ -100,18 +104,32 @@ public class SourceCommentVo
 		return this.createDate;
 	}
 	
-	public Integer getCreateName() {
+	public String getCreateName() {
 		return createName;
 	}
-	public void setCreateName(Integer createName) {
+	public void setCreateName(String createName) {
 		this.createName = createName;
 	}
-	@Override
-	public String toString() {
-		return "SourceCommentVo [id=" + id + ", sourceId=" + sourceId
-				+ ", parentId=" + parentId + ", content=" + content
-				+ ", createId=" + createId + ", createName=" + createName
-				+ ", createDate=" + createDate + "]";
-	}
-	
+
+    public String getCreateIcon() {
+        return createIcon;
+    }
+
+    public void setCreateIcon(String createIcon) {
+        this.createIcon = createIcon;
+    }
+
+    @Override
+    public String toString() {
+        return "SourceCommentVo{" +
+                "id=" + id +
+                ", sourceId=" + sourceId +
+                ", parentId=" + parentId +
+                ", content='" + content + '\'' +
+                ", createId=" + createId +
+                ", createName='" + createName + '\'' +
+                ", createIcon='" + createIcon + '\'' +
+                ", createDate=" + createDate +
+                '}';
+    }
 }

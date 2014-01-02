@@ -23,7 +23,7 @@ import com.opensymphony.xwork2.ActionContext;
 
 
 @Component("userOperateAspect")
-@Aspect
+//@Aspect
 public class UserOperateAspect {
 	
 	private static Map<String, Integer> menuMap = null;

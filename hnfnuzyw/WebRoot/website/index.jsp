@@ -110,7 +110,7 @@
                 <table>
                     <tr>
                         <td rowspan="4" style="width:75px;">
-                            <img src="<%=icon%>" style="width:75px;height:75px;">
+                            <img src="<%=basePath+"uploads/user/image/"+icon%>" style="width:75px;height:75px;">
                             <button id="logout_btn">
                                 退出登录
                             </button>
