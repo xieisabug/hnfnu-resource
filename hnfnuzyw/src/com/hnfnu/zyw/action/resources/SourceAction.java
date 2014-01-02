@@ -104,6 +104,9 @@ public class SourceAction extends AopNoSuchMethodErrorSolveBaseAction implements
 			needMakeTabGroup = sourceVoService.needMakeTabGroup(sourceVo.getGroupId(),sourceVo.getGradeId(), sourceVo.getSubjectId());
 			if(needMakeTabGroup){
 				indexService.makeTabGroups();
+				
+				//Thread a = new Thread(indexService);
+				
 			}
 			
 		} else {

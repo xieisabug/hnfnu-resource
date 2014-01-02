@@ -57,7 +57,7 @@ public class TopicSourceServiceImpl implements ITopicSourceService{
 
 	public TopicSourceDto load(int id) {
 		try {
-			return topicSourceDao.load(id);
+			return topicSourceDao.get(id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
