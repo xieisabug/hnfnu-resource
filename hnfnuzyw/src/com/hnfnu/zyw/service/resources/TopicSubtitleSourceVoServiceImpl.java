@@ -50,7 +50,7 @@ public class TopicSubtitleSourceVoServiceImpl implements ITopicSubtitleSourceVoS
 
 	public TopicSubtitleSourceVo load(int id) {
 		try {
-			return topicSubtitleSourceVoDao.load(id);
+			return topicSubtitleSourceVoDao.get(id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
