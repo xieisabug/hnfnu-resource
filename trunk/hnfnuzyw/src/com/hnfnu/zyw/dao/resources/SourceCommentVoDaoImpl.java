@@ -28,7 +28,7 @@ ISourceCommentVoDao  {
 			t = session.beginTransaction();
 			List<SourceCommentVo> l = this.list(hql);
 			for(int i = 0;i<l.size();i++){
-				String childHql = "from SourceCommentVo where parentId="+l.get(i).getParentId();
+				String childHql = "from SourceCommentVo where parentId="+l.get(i).getId();
 				children = this.list(childHql);
 				map = new HashMap<String, Object>();
 				map.put("children", children);

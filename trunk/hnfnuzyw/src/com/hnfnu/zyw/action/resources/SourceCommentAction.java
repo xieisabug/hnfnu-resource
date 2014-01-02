@@ -1,8 +1,11 @@
 package com.hnfnu.zyw.action.resources;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.hnfnu.zyw.dto.system.UserDto;
+import com.opensymphony.xwork2.ActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -30,6 +33,8 @@ public class SourceCommentAction extends AopNoSuchMethodErrorSolveBaseAction
 	private String message;
 	private List<Map<String, Object>> sourceCommentTree;
 	private List<SourceCommentDto> sourceComments;
+    private String name;
+    private String icon;
 
 	@Autowired
 	@Qualifier("sourceCommentService")
@@ -46,7 +51,14 @@ public class SourceCommentAction extends AopNoSuchMethodErrorSolveBaseAction
 			if (parentComment.getParentId() > 0) {
 				sourceComment.setParentId(parentComment.getParentId());
 			}
-		}
+        }
+        ActionContext context = ActionContext.getContext();
+        Map<String, Object> session = context.getSession();
+        UserDto user = (UserDto) session.get("user");
+        sourceComment.setCreateDate(new Date());
+        sourceComment.setCreateId(user.getId());
+        name = user.getName();
+        icon = user.getIcon();
 		success = sourceCommentService.add(sourceComment);
 		if (success) {
 			message = "添加评论成功！";
@@ -135,4 +147,11 @@ public class SourceCommentAction extends AopNoSuchMethodErrorSolveBaseAction
 		return sourceComments;
 	}
 
+    public String getName() {
+        return name;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
 }

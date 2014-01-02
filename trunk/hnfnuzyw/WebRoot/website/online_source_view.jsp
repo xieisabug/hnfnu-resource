@@ -2,13 +2,18 @@
 <%@ page import="com.hnfnu.zyw.vo.TopicSubtitleSourceVo" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.hnfnu.zyw.vo.SourceCommentVo" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://"
             + request.getServerName() + ":" + request.getServerPort()
             + path + "/";
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     String type = (String) request.getAttribute("type");
+    boolean couldComment = false;
+    int sourceId;
     String sourceName;
     String keyWords;
     String mediaFormat;
@@ -18,9 +23,16 @@
     Integer viewTimes;
     Integer useTimes;
     double price;
+    String url;
+    boolean login = false;
+    if(session.getAttribute("user") != null) {
+        login = true;
+    }
 
     if(type.equals("source")) {
+        couldComment = true;
         SourceVo source = (SourceVo) request.getAttribute("source");
+        sourceId = source.getId();
         sourceName = source.getName();
         keyWords = source.getKeyWords();
         mediaFormat = source.getMediaFormat();
@@ -30,8 +42,10 @@
         viewTimes = source.getViewTimes();
         useTimes = source.getUseTimes();
         price = source.getPrice();
+        url = source.getUrl();
     } else {
         TopicSubtitleSourceVo topicSubtitleSourceVo = (TopicSubtitleSourceVo) request.getAttribute("source");
+        sourceId = topicSubtitleSourceVo.getId();
         sourceName = topicSubtitleSourceVo.getSourceName();
         keyWords = topicSubtitleSourceVo.getKeyWords();
         mediaFormat = topicSubtitleSourceVo.getMediaFormat();
@@ -41,52 +55,36 @@
         viewTimes = topicSubtitleSourceVo.getViewTimes();
         useTimes = topicSubtitleSourceVo.getUseTimes();
         price = topicSubtitleSourceVo.getPrice();
+        url = topicSubtitleSourceVo.getUrl();
     }
+    url = url.replace("\\","/");
+
     List<Map<String,Object>> sourceCommentTree = (List<Map<String, Object>>) request.getAttribute("sourceCommentTree");
 %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
-    <link href="css/xkui.css" type="text/css" rel="stylesheet">
-    <link href="css/index.css" type="text/css" rel="stylesheet">
+    <link href="<%=basePath%>website/css/xkui.css" type="text/css" rel="stylesheet">
+    <link href="<%=basePath%>website/css/index.css" type="text/css" rel="stylesheet">
     <!--<link href="css/ui.css" type="text/css" rel="stylesheet">-->
 
-    <script src="js/mootools.js" type="text/javascript"></script>
-    <script src="js/xkui.js" type="text/javascript"></script>
-    <script src="js/online_source_view.js" type="text/javascript"></script>
+    <script src="<%=basePath%>website/js/mootools.js" type="text/javascript"></script>
+    <script src="<%=basePath%>website/js/xkui.js" type="text/javascript"></script>
+    <script src="<%=basePath%>website/js/online_source_view.js" type="text/javascript"></script>
     <!--<script type="text/javascript" src="js/index.js"></script>-->
-    <!--<script type="text/javascript" src="js/gallery.js"></script>-->
+    <script type="text/javascript">
+        var basePath='<%=basePath%>';
+    </script>
 
     <title>在线预览</title>
 </head>
 <body>
-<div id="headContent" style="height: 90px;">
-    <div id="headLogo"></div>
-    <div id="headMenu">
-        <div class="btn-group">
-            <a href="#">湖南第一师范学院</a><a href="#">公馆实验管理中心</a><a href="#">联系我们</a><a href="#">添加收藏</a>
-        </div>
-    </div>
-    <div id="headSearch">
-        <button id="searchSelect">站内资源</button>
-        <input type="text" style="width: 270px; *padding:0;">
-        <button type="button">搜索</button>
-    </div>
-</div>
+<%@ include file="header.html"%>
 
 <div id="topic-view">
     <div class="row">
-        <div class="navbar">
-            <ul class="nav">
-                <li class="active"><a href="#">首页</a></li>
-                <li><a href="#">学科资源</a></li>
-                <li><a href="#">专题资源</a></li>
-                <li><a href="#">教学视频示范中心</a></li>
-                <li><a href="#">教师职业技能训练</a></li>
-                <li><a href="#">语言学科平台</a></li>
-            </ul>
-        </div>
+        <%@ include file="navbar.html"%>
         <div style="margin-top: 10px; font-size: 0.8em">
             您的位置：<a href="#">首页</a> > <a href="javascript:void(0)">在线预览</a>
         </div>
@@ -101,6 +99,7 @@
                 <div id="source-info-content">
                     <table>
                         <tr>
+                            <input type="hidden" id="sourceId" value="<%=sourceId%>">
                             <td>资源名：</td>
                             <td><%=sourceName%></td>
                         </tr>
@@ -161,60 +160,108 @@
             <div>
                 <div id="comment-content">
                     <%
-                        for (Map<String,Object> comments:sourceCommentTree) {
-
+                        if(couldComment) {
+                            for (Map<String,Object> comments:sourceCommentTree) {
+                                SourceCommentVo sourceCommentVo = (SourceCommentVo) comments.get("sourceComment");
+                    %>
+                        <div class="comment-item">
+                            <table>
+                                <tr>
+                                    <td rowspan="2">
+                                        <img src="<%=basePath+"uploads/user/image/"+sourceCommentVo.getCreateIcon()%>">
+                                        <p><%=sourceCommentVo.getCreateName()%></p>
+                                    </td>
+                                    <td><% out.print(sdf.format(sourceCommentVo.getCreateDate()));%>
+                                        <a href="javascript:reply(<%=sourceCommentVo.getId()%>)">回复</a></td>
+                                </tr>
+                                <tr>
+                                    <td><%=sourceCommentVo.getContent()%></td>
+                                </tr>
+                            </table>
+                        </div>
+                            <%
+                                List<SourceCommentVo> children = (List<SourceCommentVo>) comments.get("children");
+                                for(SourceCommentVo scv : children) {
+                            %>
+                                <div class="comment-sub-item">
+                                    <table>
+                                        <tr>
+                                            <td rowspan="2">
+                                                <img src="<%=basePath+"uploads/user/image/"+scv.getCreateIcon()%>">
+                                                <p><%=scv.getCreateName()%></p>
+                                            </td>
+                                            <td><% out.print(sdf.format(scv.getCreateDate()));%>
+                                                <a href="javascript:reply(<%=scv.getId()%>)">回复</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><%=scv.getContent()%></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                    <%
+                                }
+                            }
+                        } else {
+                    %>
+                    <div>此资源不允许评论。</div>
+                    <%
                         }
                     %>
-                    <div class="comment-item">
-                        <table>
-                            <tr>
-                                <td rowspan="2">
-                                    <img src="image/user1.jpg">
-                                    <p>admin</p>
-                                </td>
-                                <td>2013-12-17 20:22:36 <a href="javascript:void(0)">回复</a></td>
-                            </tr>
-                            <tr>
-                                <td>不错！很好看！</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="comment-sub-item">
-                        <table>
-                            <tr>
-                                <td rowspan="2">
-                                    <img src="image/user1.jpg">
-                                    <p>guest</p>
-                                </td>
-                                <td>2013-12-17 20:22:36 <a href="javascript:void(0)">回复</a></td>
-                            </tr>
-                            <tr>
-                                <td>//@天秤先森-:你告诉我，四岁小孩会装什么//@原色男装 :他都会装.那你的脑袋里面装的是什么东西呀？ //@ty54138937486 :裝？？？O~M~G .......//@yusimida :真的从一开始就不喜欢kimi 觉得他一点都不懂事不听话，也很装。最喜欢天天和安吉拉，单纯可爱。 心地还很善良。泥马你咋真贱贱啊 他咋装了 四岁小孩装的累不累啊 Kimi一点也不装 可爱死了</td>
-                            </tr>
-                        </table>
-                    </div>
                 </div>
-                <textarea id="replyTextarea"></textarea>
-                <button id="replyBtn" value="发表评论">发表评论</button>
+                <%
+                    if(login && couldComment) {
+                %>
+                <input type="hidden" id="parentId" value="0">
+                <textarea id="replyTextarea" <%=couldComment ? "" : "readonly"%>></textarea>
+                <button id="replyBtn" value="发表评论" <%=couldComment ? "" : "disable"%>>发表评论</button>
+                <a name="commentA"></a>
+                <%
+                    } else {
+                %>
+                <div>您没有登录，请登录后再评论。</div>
+                <%
+                    }
+                %>
             </div>
         </div>
     </div>
 </div>
-<div class="row">
-    <div style="text-align: center">
-        <p>版权所有：湖南第一师范学院公共实验管理中心·湘ICP备05000548号</p>
-
-        <p>地址：湖南省长沙市枫林三路1015号·邮编：410205·电话：0731-82841118</p>
-
-        <p>建议使用IE 8版本以上浏览器浏览</p>
-    </div>
-</div>
+<%@include file="footer.html"%>
 </body>
-<script type="text/javascript" src="js/jwplayer.js"></script>
+<%
+    if(mediaFormat.equals("mp4") || mediaFormat.equals("flv")) {
+%>
+<script type="text/javascript" src="<%=basePath%>website/js/jwplayer.js"></script>
 <script type="text/javascript">
     jwplayer("webPlayer").setup({
-        flashplayer : "player.swf",
-        file: '../uploads/201311241909381test.mp4'
+        flashplayer : "<%=basePath%>website/player.swf",
+        file: '../uploads/<%=url%>'
     });
 </script>
+<%
+} else if(mediaFormat.equals("wmv")) {
+%>
+<script type="text/javascript" src="<%=basePath%>website/js/silverlight.js"></script>
+<script type="text/javascript" src="<%=basePath%>website/js/wmvplayer.js"></script>
+<script type="text/javascript">
+    var elm = document.getElementById("myElement");
+    var src = '<%=basePath%>website/js/wmvplayer.xaml';
+    var cfg = {
+        file: '../uploads/<%=url%>',
+        //image: 'preview.jpg',   //封面
+        //logo: 'ruanko_logo.png',
+        //link: 'http://www.ruanko.com/main', //logo的链接
+        //linktarget: '_blank',   //新页面打开链接
+        width: '500',
+        height: '340',
+        autostart: 'true',
+        //start:'10',   //从第10秒开始播放
+        backcolor: '000000',   //背景颜色
+        frontcolor: 'FFFFFF'   //字体颜色
+    };
+    var ply = new jeroenwijering.Player(elm,src,cfg);
+</script>
+<%
+}
+%>
 </html>
