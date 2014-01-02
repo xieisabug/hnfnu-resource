@@ -52,7 +52,7 @@ public class IndexAction extends ActionSupport {
 	
 	@Action(value = "makeTabGroup")
 	public String makeTabGroup() {
-		success = indexService.makeTabGroups();
+		indexService.makeTabGroups();
 		if(success){
 			message="专题生成成功";
 		}else{

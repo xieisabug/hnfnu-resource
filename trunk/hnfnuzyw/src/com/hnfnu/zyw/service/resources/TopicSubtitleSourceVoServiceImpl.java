@@ -68,8 +68,8 @@ public class TopicSubtitleSourceVoServiceImpl implements ITopicSubtitleSourceVoS
 		return gardes;
 	}
 
-	public Map<String, Object> listTopicSubtitleSourceVo() {
-		String hql = "from TopicSubtitleSourceVo";
+	public Map<String, Object> listTopicSubtitleSourceVo(int id) {
+		String hql = "from TopicSubtitleSourceVo where subtitleId="+id;
 		Map<String, Object> gardeList = new HashMap<String, Object>();
 		List<TopicSubtitleSourceVo> l = null;
 

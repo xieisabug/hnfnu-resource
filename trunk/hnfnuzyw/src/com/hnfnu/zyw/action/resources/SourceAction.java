@@ -104,9 +104,6 @@ public class SourceAction extends AopNoSuchMethodErrorSolveBaseAction implements
 			needMakeTabGroup = sourceVoService.needMakeTabGroup(sourceVo.getGroupId(),sourceVo.getGradeId(), sourceVo.getSubjectId());
 			if(needMakeTabGroup){
 				indexService.makeTabGroups();
-				
-				//Thread a = new Thread(indexService);
-				
 			}
 			
 		} else {
@@ -123,10 +120,7 @@ public class SourceAction extends AopNoSuchMethodErrorSolveBaseAction implements
 		if (success) {
 			message = "修改资源成功！";
 			//判断是否重新生成ftl
-			needMakeTabGroup = sourceVoService.needMakeTabGroup(sourceVo.getGroupId(),sourceVo.getGradeId(), sourceVo.getSubjectId());
-			if(needMakeTabGroup){
-				indexService.makeTabGroups();
-			}
+			indexService.makeTabGroups();
 		} else {
 			message = "修改资源失败！";
 		}

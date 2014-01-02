@@ -7,6 +7,9 @@ var sourceForm = null;//添加资源的表单
 var topicSubtitleFrom = null;//新增二级标题的表单
 var subtitleGrid = null;//用于显示二级标题的表格
 var subtitleWin = null;//用于显示二级标题的窗口
+var qeurySourceGrid = null;//用于显示二级标题的表格
+var qeurySourceWin = null;//用于显示二级标题的窗口
+
 var topicSelectData = null;//用于在修改专题的时候保存的数据
 // 增加专题的函数
 function add_topic() {
@@ -543,8 +546,223 @@ function refresh_info() {
 }
 
 //todo
-function query_subtitle_source(){
+function query_join_source(){
+    if (!subtitleGrid.getSelected()) {
+        $.ligerDialog.warn('请选择您要查看资源的二级标题.');
+        return;
+    }
+    var subtitle =  subtitleGrid.getSelected();
+    $.ajax({
+        url:'../../../resources/listTopicJoinSource.action',
+        type:'post',
+        data:{
 
+            "topicSubtitleId":subtitle.id
+        },
+        success:function (data) {
+            var s = $('#querySourceGrid');
+            querySourceGrid = s.ligerGrid({
+                columns : [ {
+                    display : '资源名',
+                    name : 'sourceName',
+                    align : 'left',
+                    minWidth : 120
+                }, {
+                    display : '关键字',
+                    name : 'keyWords',
+                    align : 'left',
+                    hide : true,
+                    minWidth : 100
+                }, {
+                    display : '媒体类型',
+                    name : 'mediaType',
+                    align : 'left',
+                    minWidth : 60
+                }, {
+                    display : '媒体格式',
+                    name : 'mediaFormat',
+                    align : 'left',
+                    minWidth : 60
+                }, {
+                    display : '播放时间',
+                    name : 'playTime',
+                    align : 'left',
+                    hide : true,
+                    minWidth : 100
+                }, {
+                    display : '文件大小',
+                    name : 'fileSize',
+                    align : 'left',
+                    minWidth : 60
+                }, {
+                    display : '作者',
+                    name : 'author',
+                    align : 'left',
+                    minWidth : 60
+                }, {
+                    display : '出版社',
+                    name : 'publisher',
+                    align : 'left',
+                    hide : true,
+                    minWidth : 100
+                }, {
+                    display : '描述',
+                    name : 'description',
+                    align : 'left',
+                    hide : true,
+                    minWidth : 100
+                }, {
+                    display : '创建时间',
+                    name : 'createDate',
+                    align : 'left',
+                    hide : true,
+                    minWidth : 100
+                }, {
+                    display : '审核状态',
+                    name : 'approvalStatus',
+                    align : 'left',
+                    minWidth : 60
+                }, {
+                    display : '价格',
+                    name : 'price',
+                    align : 'left',
+                    hide : true,
+                    minWidth : 100
+                }, {
+                    display : '访问次数',
+                    name : 'viewTimes',
+                    align : 'left',
+                    minWidth : 60
+                }, {
+                    display : '使用次数',
+                    name : 'useTimes',
+                    align : 'left',
+                    minWidth : 60
+                } ],
+                width:760,
+                height:680,
+                pageSize:30,
+                data:data.topicJoinSourceList
+            });
+            querySourceWin = $.ligerDialog.open({
+                width:800,
+                height:700,
+                title:subtitle.subtitle + '的资源',
+                target:s
+            });
+            $(".l-grid2", querySourceWin.element).css({width:800});
+            $("#pageloading").hide();
+        }
+    });
+}
+function query_subtitle_source(){
+    if (!subtitleGrid.getSelected()) {
+        $.ligerDialog.warn('请选择您要查看资源的二级标题.');
+        return;
+    }
+    var subtitle =  subtitleGrid.getSelected();
+    $.ajax({
+        url:'../../../resources/listTopicSource.action',
+        type:'post',
+        data:{
+
+            "topicSubtitleId":subtitle.id
+        },
+        success:function (data) {
+            var s = $('#querySourceGrid');
+            querySourceGrid = s.ligerGrid({
+                columns : [ {
+                    display : '资源名',
+                    name : 'sourceName',
+                    align : 'left',
+                    minWidth : 120
+                }, {
+                    display : '关键字',
+                    name : 'keyWords',
+                    align : 'left',
+                    hide : true,
+                    minWidth : 100
+                }, {
+                    display : '媒体类型',
+                    name : 'mediaType',
+                    align : 'left',
+                    minWidth : 60
+                }, {
+                    display : '媒体格式',
+                    name : 'mediaFormat',
+                    align : 'left',
+                    minWidth : 60
+                }, {
+                    display : '播放时间',
+                    name : 'playTime',
+                    align : 'left',
+                    hide : true,
+                    minWidth : 100
+                }, {
+                    display : '文件大小',
+                    name : 'fileSize',
+                    align : 'left',
+                    minWidth : 60
+                }, {
+                    display : '作者',
+                    name : 'author',
+                    align : 'left',
+                    minWidth : 60
+                }, {
+                    display : '出版社',
+                    name : 'publisher',
+                    align : 'left',
+                    hide : true,
+                    minWidth : 100
+                }, {
+                    display : '描述',
+                    name : 'description',
+                    align : 'left',
+                    hide : true,
+                    minWidth : 100
+                }, {
+                    display : '创建时间',
+                    name : 'createDate',
+                    align : 'left',
+                    hide : true,
+                    minWidth : 100
+                }, {
+                    display : '审核状态',
+                    name : 'approvalStatus',
+                    align : 'left',
+                    minWidth : 60
+                }, {
+                    display : '价格',
+                    name : 'price',
+                    align : 'left',
+                    hide : true,
+                    minWidth : 100
+                }, {
+                    display : '访问次数',
+                    name : 'viewTimes',
+                    align : 'left',
+                    minWidth : 60
+                }, {
+                    display : '使用次数',
+                    name : 'useTimes',
+                    align : 'left',
+                    minWidth : 60
+                } ],
+                width:760,
+                height:680,
+                pageSize:30,
+                data:data.topicSourceList
+            });
+            querySourceWin = $.ligerDialog.open({
+                width:800,
+                height:700,
+                title:subtitle.subtitle + '的资源',
+                target:s
+            });
+            $(".l-grid2", querySourceWin.element).css({width:800});
+            $("#pageloading").hide();
+        }
+    });
 }
 
 function query_topic_subtille() {
@@ -566,8 +784,14 @@ function query_topic_subtille() {
             icon:'add',
             key:'modify'
         },{
-            text:'查看资源',
+            text:'查看专题专有资源',
             click:query_subtitle_source,
+            icon:'refresh',
+            key:'query_subtitle_source'
+        },
+        {
+            text:'查看专题挂接资源',
+            click:query_join_source,
             icon:'refresh',
             key:'query_subtitle_source'
         }
