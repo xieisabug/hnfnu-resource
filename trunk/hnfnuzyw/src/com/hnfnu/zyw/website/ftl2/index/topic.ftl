@@ -14,9 +14,9 @@
                     <tr>
                         <td>
                         <#if (topic.isOutlink?number == 0)>
-                        	<a href="../topic/view?topicId=${topic.id}">
+                        	<a target="_blank" href="../topic/view?topicId=${topic.id}">
                         <#else>
-                        	<a href="${topic.outlink}">
+                        	<a target="_blank" href="${topic.outlink}">
                         </#if>
                            
                                 <img src="../uploads/topic/image/${topic.imageUrl!" default_topic.png"}">
@@ -31,10 +31,10 @@
                 </#if>
                 <#if (topic_index - 1) % 3 == 0>
                     <td>
-                        <#if (topic.isOutlink?number == 0)>
-                        	<a href="../topic/view?topicId=${topic.id}">
+                       <#if (topic.isOutlink?number == 0)>
+                        	<a target="_blank" href="../topic/view?topicId=${topic.id}">
                         <#else>
-                        	<a href="${topic.outlink}">
+                        	<a target="_blank" href="${topic.outlink}">
                         </#if>
                             <img src="../uploads/topic/image/${topic.imageUrl}">
 
@@ -48,9 +48,9 @@
                 <#if (topic_index + 1) % 3 == 0>
                     <td>
                         <#if (topic.isOutlink?number == 0)>
-                        	<a href="../topic/view?topicId=${topic.id}">
+                        	<a target="_blank" href="../topic/view?topicId=${topic.id}">
                         <#else>
-                        	<a href="${topic.outlink}">
+                        	<a target="_blank" href="${topic.outlink}">
                         </#if>
                             <img src="../uploads/topic/image/${topic.imageUrl}">
 

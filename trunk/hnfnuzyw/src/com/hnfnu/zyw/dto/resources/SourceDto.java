@@ -43,7 +43,7 @@ public class SourceDto {
 
 	// 文件大小
 
-	private String fileSize;
+	private Float fileSize;
 
 	// 作者
 

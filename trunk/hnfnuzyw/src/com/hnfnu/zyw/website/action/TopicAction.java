@@ -69,39 +69,43 @@ public class TopicAction extends ActionSupport {
 
 	@Action(value = "view", results = { @Result(name = "success", location = "../../../website/topic_view.jsp") })
 	public String topicView() {
-		TopicDto topic = topicService.load(topicId);
-		UserDto user = userService.load(topic.getCreateUserId());
-		//System.out.println("user="+user);
-		List<Map<String, Object>> subTopics = new ArrayList<Map<String, Object>>();
-		Map<String, Object> subtitleMap = null;
+		try {
+			TopicDto topic = topicService.load(topicId);
+			UserDto user = userService.load(topic.getCreateUserId());
+			List<Map<String, Object>> subTopics = new ArrayList<Map<String, Object>>();
+			Map<String, Object> subtitleMap = null;
 
-		List<TopicSubtitleDto> topicSubtitleDtos = topicSubtitleService
-				.listByTopicId(topicId);
-		for (int i = 0; i < topicSubtitleDtos.size(); i++) {
-			subtitleMap = new HashMap<String, Object>();
-			subtitleMap.put("subtitle", topicSubtitleDtos.get(i));
-			
-			topicSources = topicSubtitleSourceVoService.listBySubtileId(
-					topicSubtitleDtos.get(i).getId(), 0, pageSize);
-			
-			joinSources = topicSourceVoService.listBySubTitleId(
-					topicSubtitleDtos.get(i).getId(), 0, pageSize);
-			subtitleMap.put("topicSources", topicSources);
-			subtitleMap.put("joinSources", joinSources);
-			subTopics.add(subtitleMap);
-		}
+			List<TopicSubtitleDto> topicSubtitleDtos = topicSubtitleService
+					.listByTopicId(topicId);
+			for (int i = 0; i < topicSubtitleDtos.size(); i++) {
+				subtitleMap = new HashMap<String, Object>();
+				subtitleMap.put("subtitle", topicSubtitleDtos.get(i));
+				
+				topicSources = topicSubtitleSourceVoService.listBySubtileId(
+						topicSubtitleDtos.get(i).getId(), 0, pageSize);
+				
+				joinSources = topicSourceVoService.listBySubTitleId(
+						topicSubtitleDtos.get(i).getId(), 0, pageSize);
+				subtitleMap.put("topicSources", topicSources);
+				subtitleMap.put("joinSources", joinSources);
+				subTopics.add(subtitleMap);
+			}
 
-		HttpServletRequest request = ServletActionContext.getRequest();
-		if (topic == null || user == null || subTopics == null) {
+			HttpServletRequest request = ServletActionContext.getRequest();
+			if (topic == null || user == null || subTopics == null) {
+				request.setAttribute("message", message);
+				request.setAttribute("success", success);
+				return "error";
+			}
+			request.setAttribute("topic", topic);
+			request.setAttribute("topicUser", user);
+			request.setAttribute("subTopics", subTopics);
 			request.setAttribute("message", message);
 			request.setAttribute("success", success);
-			return "error";
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		request.setAttribute("topic", topic);
-		request.setAttribute("topicUser", user);
-		request.setAttribute("subTopics", subTopics);
-		request.setAttribute("message", message);
-		request.setAttribute("success", success);
+		
 		return SUCCESS;
 	}
 

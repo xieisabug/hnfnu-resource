@@ -80,6 +80,23 @@ public class SourceDownloadAction extends AopNoSuchMethodErrorSolveBaseAction {
 
 	@Action(value = "download")
 	public String execute() {
+		String realpath = ServletActionContext.getServletContext().getRealPath(
+				"/uploads");
+		try {
+			if (type == JOIN_SOURCE_TYPE) {
+				SourceDto s = sourceService.load(id);
+				this.url = realpath + "\\" + s.getUrl();
+			}else if(type == TOPIC_SOURCE_TYPE){
+				TopicSourceDto topicSourceDto = topicSourceService.load(id);
+				this.url = realpath + "\\topic\\"+ topicSourceDto.getUrl();
+			}else{
+				SourceDto s = sourceService.load(id);
+				this.url = realpath + "\\" + s.getUrl();
+			}
+		} catch (Exception e) {
+				e.printStackTrace();
+		}
+		
 		SourceDto s = sourceService.load(id);
 		if (s != null) {
 			if (s.getUseTimes() == null) {
@@ -88,27 +105,11 @@ public class SourceDownloadAction extends AopNoSuchMethodErrorSolveBaseAction {
 			s.setUseTimes(s.getUseTimes() + 1);
 			success = sourceService.update(s);
 		}
-
 		return "success";
 	}
 
 	public void setId(int id) {
-		String realpath = ServletActionContext.getServletContext().getRealPath(
-				"/uploads");
-		System.out.println(realpath);
 		this.id = id;
-		if (type == JOIN_SOURCE_TYPE) {
-			SourceDto s = sourceService.load(id);
-			this.url = realpath + "\\" + s.getUrl();
-		}else if(type == TOPIC_SOURCE_TYPE){
-			TopicSourceDto topicSourceDto = topicSourceService.load(id);
-			this.url = realpath + "\\topic\\"+ topicSourceDto.getUrl();
-		}else{
-			SourceDto s = sourceService.load(id);
-			this.url = realpath + "\\" + s.getUrl();
-		}
-		System.out.println(url);
-
 	}
 
 	public void setType(int type) {
