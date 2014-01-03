@@ -64,7 +64,7 @@
                         for(NewsDto n : hotNews) {
                     %>
                         <li>
-                            <a href="<%=basePath%>ftl/newsView?id=<%=n.getId()%>"><%=n.getTitle()%></a>
+                            <a href="<%=basePath%>news/view?id=<%=n.getId()%>"><%=n.getTitle()%></a>
                         </li>
                     <%
                         }

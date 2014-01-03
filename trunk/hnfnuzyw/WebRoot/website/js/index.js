@@ -46,6 +46,34 @@ window.addEvent('domready',function(){
         model:false,
         closeable:true
     });
+    //新闻弹出窗口
+    var newsDialog = new Dialog($('newsDialog'),{
+        width:300,
+        height:200,
+        position:'right_bottom',
+        titleHtml:'<span style="margin-left: 30px;">最近新闻</span>',
+        //contentHtml:'<ul class="hot-news-content"><li><a href="#">测试1</a></li><li><a href="#">测试2</a></li><li><a href="#">测试3</a></li></ul>',
+        draggable:false,
+        model:false,
+        closeable:true
+    });
+    new Request.JSON({
+        url : basePath + 'news/newsIndex',
+        onSuccess : function(data){
+            var list = data.root.newsList;
+            var html = '<ul class="hot-news-content">';
+            for(var i = 0; i < list.length; i++) {
+                html += '<li>';
+                html += '<a href="' + basePath + 'news/view?id='+ list[i].id +'">';
+                html += list[i].title;
+                html += '</a>';
+                html += '</li>';
+            }
+            html += '</ul>';
+            newsDialog.setContentHtml(html);
+            newsDialog.show();
+        }
+    }).get();
     //生成所有tab
     $$(".tabGroupItem").each(function(item){
         new Tab(item, {
@@ -121,7 +149,6 @@ window.addEvent('domready',function(){
                 });
         });
     }
-
     //登录后的初始化
     function registLoginEvent(){
         var logoutBtn = new Button($('logout_btn'),{width:85});
@@ -180,7 +207,6 @@ window.addEvent('domready',function(){
             registNoLoginEvent();
         });
     }
-
     //登录时显示
     function loginShow(data){
         var html = '';
