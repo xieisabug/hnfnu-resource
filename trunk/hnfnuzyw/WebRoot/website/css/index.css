@@ -416,6 +416,38 @@ label {
     display: block;
 }
 /**topic view**/
+/**topic source**/
+#topic-source {
+    width:960px;
+    margin: 0 auto;
+}
+#topic-source-content {
+    padding: 0;
+}
+#topic-source-content div{
+    margin: 0;
+}
+#topic-source-content>div>table {
+    border-collapse:collapse;
+    width: 101%;
+}
+#topic-source-content>div>table tr>td{
+    padding: 15px;
+    height: 85px;
+    width: 210px;
+    border: 1px dashed #aaa;
+    border-top: 0;
+    border-left: 0;
+}
+#topic-source-content img {
+    width: 70px;
+    height: 70px;
+}
+.topic-source-item {
+    float: right;
+    width: 130px;
+}
+/**topic source**/
 /**gallery**/
 #n {
     margin: 10px auto;
