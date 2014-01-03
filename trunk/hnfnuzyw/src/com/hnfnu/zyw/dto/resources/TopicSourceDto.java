@@ -22,7 +22,7 @@ public class TopicSourceDto
 	//播放时间，只有视频拥有这个属性
 	private String playTime;
 	//文件大小
-	private String fileSize;
+	private Float fileSize;
 	//作者
 	private String author;
 	//出版社
@@ -46,7 +46,7 @@ public class TopicSourceDto
 	}
 	public TopicSourceDto(Integer id, Integer topicSubtitleId, String name,
 			String keyWords, String mediaType, String mediaFormat,
-			String playTime, String fileSize, String author, String publisher,
+			String playTime, Float fileSize, String author, String publisher,
 			String description, Date createDate, double price,
 			Integer viewTimes, Integer useTimes, String url,
 			Integer createUserId) {
@@ -129,11 +129,11 @@ public class TopicSourceDto
 	{
 		return this.playTime;
 	}
-	public void setFileSize(String fileSize)
+	public void setFileSize(Float fileSize)
 	{
 		this.fileSize = fileSize;
 	}
-	public String getFileSize()
+	public Float getFileSize()
 	{
 		return this.fileSize;
 	}

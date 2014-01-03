@@ -31,4 +31,9 @@ public interface ISourceService {
 	public Map<String, Object> listSource();
 
 	public boolean delete(String url,int id);
+	/**
+	 * 得到所有资源个数
+	 * @return
+	 */
+	public int getTotalCount();
 }

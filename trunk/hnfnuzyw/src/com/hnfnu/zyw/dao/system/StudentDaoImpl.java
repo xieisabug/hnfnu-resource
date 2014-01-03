@@ -58,29 +58,29 @@ public class StudentDaoImpl extends BaseDao<StudentDto> implements IStudentDao {
 	/**
 	 * 批量给学生重置资源币，不管学生原有的资源币
 	 */
-	public int setStudnetBalance(int count,String studentIds) {
+	public int setStudnetBalance(int count, String studentIds) {
 		Session session = this.getSession();
-		String[] ids = null; 
-		if(studentIds != null && !studentIds.equals("")){
+		String[] ids = null;
+		if (studentIds != null && !studentIds.equals("")) {
 			ids = studentIds.split(";");
-		}else{
+		} else {
 			return 0;
 		}
 		Transaction t = null;
 		try {
 			t = session.beginTransaction();
-			for(int i = 0; i < ids.length; i++){
+			for (int i = 0; i < ids.length; i++) {
 				int id = Integer.parseInt(ids[i]);
 				StudentDto s = this.get(id);
-					s.setBalance(count);
-				
-				//余额不能为负数
-				if(s.getBalance()<0){
-						t.rollback();
-						return -1;
+				s.setBalance(count);
+
+				// 余额不能为负数
+				if (s.getBalance() < 0) {
+					t.rollback();
+					return -1;
 				}
-				//余额不能超过整数范围
-				if(s.getBalance() > 1000000000){
+				// 余额不能超过整数范围
+				if (s.getBalance() > 1000000000) {
 					return -2;
 				}
 				this.update(s);
@@ -98,22 +98,21 @@ public class StudentDaoImpl extends BaseDao<StudentDto> implements IStudentDao {
 		return 1;
 	}
 
-	
 	/**
 	 * 批量删除学生,0是删除不成功，1是成功
 	 */
 	public int deleteStudents(String studentIds) {
 		Session session = this.getSession();
-		String[] ids = null; 
-		if(studentIds != null && !studentIds.equals("")){
+		String[] ids = null;
+		if (studentIds != null && !studentIds.equals("")) {
 			ids = studentIds.split(";");
-		}else{
+		} else {
 			return 0;
 		}
 		Transaction t = null;
 		try {
 			t = session.beginTransaction();
-			for(int i = 0; i < ids.length; i++){
+			for (int i = 0; i < ids.length; i++) {
 				int id = Integer.parseInt(ids[i]);
 				this.delete(id);
 			}
@@ -129,6 +128,7 @@ public class StudentDaoImpl extends BaseDao<StudentDto> implements IStudentDao {
 		}
 		return 1;
 	}
+
 	/**
 	 * 批量注册学生
 	 */
@@ -183,5 +183,12 @@ public class StudentDaoImpl extends BaseDao<StudentDto> implements IStudentDao {
 			session.close();
 		}
 		return true;
+	}
+
+	public int getTotalCount(String hql) {
+
+		Query query = this.getSession().createQuery(hql);
+		int count = ((Number) query.iterate().next()).intValue();
+		return count;
 	}
 }

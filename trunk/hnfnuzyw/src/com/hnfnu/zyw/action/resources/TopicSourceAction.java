@@ -50,7 +50,7 @@ public class TopicSourceAction extends AopNoSuchMethodErrorSolveBaseAction
 		String[] t = topicSource.getUrl().split("\\\\");
 		String[] s = t[t.length-1].split("\\.");
 		topicSource.setUrl(s[s.length-1]+"\\"+t[t.length-1]);
-		
+		topicSource.setFileSize(topicSource.getFileSize()/1024);
 		success = topicSourceService.add(topicSource);
 		if (success) {
 			message = "添加专题独有资源成功！";

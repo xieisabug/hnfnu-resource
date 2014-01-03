@@ -13,9 +13,13 @@ import org.springframework.stereotype.Service;
 
 import com.hnfnu.zyw.dao.resources.IGradeGroupVoDao;
 import com.hnfnu.zyw.dao.resources.IGroupDao;
+import com.hnfnu.zyw.dao.resources.ISourceDao;
 import com.hnfnu.zyw.dao.resources.ISourceVoDao;
 import com.hnfnu.zyw.dao.resources.ISubjectGroupVoDao;
 import com.hnfnu.zyw.dao.resources.ITopicDao;
+import com.hnfnu.zyw.dao.resources.ITopicSourceDao;
+import com.hnfnu.zyw.dao.system.IStudentDao;
+import com.hnfnu.zyw.dao.system.IUserDao;
 import com.hnfnu.zyw.dao.website.IPicturesDao;
 import com.hnfnu.zyw.dto.resources.GroupDto;
 import com.hnfnu.zyw.dto.resources.TopicDto;
@@ -50,6 +54,22 @@ public class IndexServiceImpl implements IIndexService {
     @Autowired
     @Qualifier("sourceVoDao")
     private ISourceVoDao sourceVoDao;
+    
+    @Autowired
+    @Qualifier("topicSourceDao")
+    private ITopicSourceDao topicSourceDao;
+    
+    @Autowired
+    @Qualifier("sourceDao")
+    private ISourceDao sourceDao;
+    
+    @Autowired
+    @Qualifier("userDao")
+    private IUserDao userDao;
+    
+    @Autowired
+    @Qualifier("studentDao")
+    private IStudentDao studentDao;
 
     //@Scheduled(cron = "0 0 0,8,10,12,14,16,18,20 * * ?")
     @Async
@@ -120,8 +140,7 @@ public class IndexServiceImpl implements IIndexService {
             e.printStackTrace();
         }
     }
-
-    @Override
+    @Async
     public void makeSourceCount() {
         try {
             FreemarkerUtil fu = new FreemarkerUtil();
@@ -132,18 +151,61 @@ public class IndexServiceImpl implements IIndexService {
             // 获得数据模型
             root = this.getMakeSourceCount();
             // 打印到输出台，以便于测试
-            //		fu.print("index/tabGroup.ftl", root);
+            		fu.print("index/sourceCount.ftl", root);
             // 输出到文件
 //            System.out.println(filePath + "website\\");
-            fu.fprint("index/tabGroup.ftl", root, FILE_PATH + "website\\",
-                    "tabGroup.html");
+            fu.fprint("index/sourceCount.ftl", root, FILE_PATH + "website\\",
+                    "sourceCount.html");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     private Map<String,Object> getMakeSourceCount() {
-        return null;
+    	Map<String, Object> root = new HashMap<String, Object>();
+    	String hql = "select count(*) as count from TopicSourceDto";
+    	String hql2 = "select count(*) as count from SourceDto";
+    	
+    	String hql3 = "select sum(fileSize) from SourceDto";
+    	String hql4 = "select sum(fileSize) from TopicSourceDto";
+    	
+    	
+    	String hql5 = "select sum(useTimes) from SourceDto";
+    	String hql6 = "select sum(useTimes) from TopicSourceDto";
+    	
+    	String hql7 = "select count(*) from TopicDto";
+    	
+    	String hql8 = "select count(*) as count from UserDto";
+    	String hql9 = "select count(*) as count from StudentDto";
+    	
+    	
+    	String hql10 = "select sum(viewTimes) from SourceDto";
+    	String hql11 = "select sum(viewTimes) from TopicSourceDto";
+    	try {
+    		Float sourceCapacity = sourceDao.getTotalCapacity(hql3);
+        	int topicSourceDownloads = topicSourceDao.getTotalCount(hql5);
+        	
+    		int topicSourceCount = topicSourceDao.getTotalCount(hql);
+        	int sourceCount = sourceDao.getTotalCount(hql2);
+        	Float topicSourceCapacity = topicSourceDao.getTotalCapacity(hql4);
+        	
+        	int sourceDownloads= sourceDao.getTotalCount(hql6);
+        	int topicTotalCount= topicDao.getTotalCount(hql7);
+        	int userCount = userDao.getTotalCount(hql8);
+        	int stduentCount = studentDao.getTotalCount(hql9);
+        	int sourceViews= sourceDao.getTotalCount(hql10);
+        	int topicSourceViews= topicDao.getTotalCount(hql11);
+        	root.put("totalCount", topicSourceCount+sourceCount);
+        	root.put("totalCapacity", (topicSourceCapacity+sourceCapacity)/1024);
+        	root.put("totalDownloads", topicSourceDownloads+sourceDownloads);
+        	root.put("topicTotalCount", topicTotalCount);
+        	root.put("userCount", userCount+stduentCount);
+        	root.put("totalVisits", sourceViews+topicSourceViews);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	
+    	return root;
     }
 
     private List<Map<String, Object>> listToMap(List<SubjectGroupVo> l,

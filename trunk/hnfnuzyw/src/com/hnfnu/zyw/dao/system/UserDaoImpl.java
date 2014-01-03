@@ -19,35 +19,35 @@ public class UserDaoImpl extends BaseDao<UserDto> implements IUserDao {
 		return d;
 	}
 
-	public void updatePwd(int id,String newPassword) throws Exception {
-		UserDto userDto =  this.get(id);
+	public void updatePwd(int id, String newPassword) throws Exception {
+		UserDto userDto = this.get(id);
 		userDto.setPassword(newPassword);
 		this.update(userDto);
 	}
 
 	public int addUserBalance(int count, String userIds) {
 		Session session = this.getSession();
-		String[] ids = null; 
-		if(userIds != null && !userIds.equals("")){
+		String[] ids = null;
+		if (userIds != null && !userIds.equals("")) {
 			ids = userIds.split(";");
-		}else{
+		} else {
 			return 0;
 		}
 		Transaction t = null;
 		try {
 			t = session.beginTransaction();
-			for(int i = 0; i < ids.length; i++){
+			for (int i = 0; i < ids.length; i++) {
 				int id = Integer.parseInt(ids[i]);
 				UserDto s = this.get(id);
 				s.setBalance(s.getBalance() + count);
-				
-				//余额不能为负数
-				if(s.getBalance()<0){
-						t.rollback();
-						return -1;
+
+				// 余额不能为负数
+				if (s.getBalance() < 0) {
+					t.rollback();
+					return -1;
 				}
-				//余额不能超过整数范围
-				if(s.getBalance() > 1000000000){
+				// 余额不能超过整数范围
+				if (s.getBalance() > 1000000000) {
 					return -2;
 				}
 				this.update(s);
@@ -70,8 +70,8 @@ public class UserDaoImpl extends BaseDao<UserDto> implements IUserDao {
 		Transaction t = null;
 		try {
 			t = session.beginTransaction();
-			for(int i = 0; i < users.size(); i++){
-				UserDto s =  users.get(i);
+			for (int i = 0; i < users.size(); i++) {
+				UserDto s = users.get(i);
 				this.add(s);
 			}
 			t.commit();
@@ -92,8 +92,8 @@ public class UserDaoImpl extends BaseDao<UserDto> implements IUserDao {
 		Transaction t = null;
 		try {
 			t = session.beginTransaction();
-			for(int i = 0; i < users.size(); i++){
-				UserDto s =  users.get(i);
+			for (int i = 0; i < users.size(); i++) {
+				UserDto s = users.get(i);
 				this.update(s);
 			}
 			t.commit();
@@ -107,35 +107,35 @@ public class UserDaoImpl extends BaseDao<UserDto> implements IUserDao {
 			session.close();
 		}
 		return true;
-		
+
 	}
 
 	/**
 	 * 批量给用户重置资源币，不管用户原有的资源币
 	 */
-	public int setUserBalance(int count,String userIds) {
+	public int setUserBalance(int count, String userIds) {
 		Session session = this.getSession();
-		String[] ids = null; 
-		if(userIds != null && !userIds.equals("")){
+		String[] ids = null;
+		if (userIds != null && !userIds.equals("")) {
 			ids = userIds.split(";");
-		}else{
+		} else {
 			return 0;
 		}
 		Transaction t = null;
 		try {
 			t = session.beginTransaction();
-			for(int i = 0; i < ids.length; i++){
+			for (int i = 0; i < ids.length; i++) {
 				int id = Integer.parseInt(ids[i]);
 				UserDto s = this.get(id);
-					s.setBalance(count);
-				
-				//余额不能为负数
-				if(s.getBalance()<0){
-						t.rollback();
-						return -1;
+				s.setBalance(count);
+
+				// 余额不能为负数
+				if (s.getBalance() < 0) {
+					t.rollback();
+					return -1;
 				}
-				//余额不能超过整数范围
-				if(s.getBalance() > 1000000000){
+				// 余额不能超过整数范围
+				if (s.getBalance() > 1000000000) {
 					return -2;
 				}
 				this.update(s);
@@ -153,22 +153,21 @@ public class UserDaoImpl extends BaseDao<UserDto> implements IUserDao {
 		return 1;
 	}
 
-	
 	/**
 	 * 批量删除用户,0是删除不成功，1是成功
 	 */
 	public int deleteUsers(String userIds) {
 		Session session = this.getSession();
-		String[] ids = null; 
-		if(userIds != null && !userIds.equals("")){
+		String[] ids = null;
+		if (userIds != null && !userIds.equals("")) {
 			ids = userIds.split(";");
-		}else{
+		} else {
 			return 0;
 		}
 		Transaction t = null;
 		try {
 			t = session.beginTransaction();
-			for(int i = 0; i < ids.length; i++){
+			for (int i = 0; i < ids.length; i++) {
 				int id = Integer.parseInt(ids[i]);
 				this.delete(id);
 			}
@@ -185,5 +184,11 @@ public class UserDaoImpl extends BaseDao<UserDto> implements IUserDao {
 		return 1;
 	}
 
+	public int getTotalCount(String hql) {
+
+		Query query = this.getSession().createQuery(hql);
+		int count = ((Number) query.iterate().next()).intValue();
+		return count;
+	}
 
 }
