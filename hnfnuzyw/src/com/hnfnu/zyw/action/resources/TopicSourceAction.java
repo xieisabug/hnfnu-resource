@@ -47,6 +47,10 @@ public class TopicSourceAction extends AopNoSuchMethodErrorSolveBaseAction
 	// 添加专题独有资源
 	@Action(value = "addTopicSource")
 	public String add() {
+		String[] t = topicSource.getUrl().split("\\\\");
+		String[] s = t[t.length-1].split("\\.");
+		topicSource.setUrl(s[s.length-1]+"\\"+t[t.length-1]);
+		
 		success = topicSourceService.add(topicSource);
 		if (success) {
 			message = "添加专题独有资源成功！";

@@ -83,7 +83,7 @@ public class IndexServiceImpl implements IIndexService {
 			// 获得数据模型
 			root = this.getMakeTopicRoot();
 			// 打印到输出台，以便于测试
-			fu.print("index/topic.ftl", root);
+			//fu.print("index/topic.ftl", root);
 			// 输出到文件
 			//System.out.println(filePath + "website\\");
 			fu.fprint("index/topic.ftl", root, filePath + "website\\",
