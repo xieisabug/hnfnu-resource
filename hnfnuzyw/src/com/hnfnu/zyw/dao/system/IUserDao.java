@@ -52,4 +52,6 @@ public interface IUserDao extends IBaseDao<UserDto>{
 	 */
 	public int deleteUsers(String userIds);
 	
+	public int getTotalCount(String hql);
+	
 }

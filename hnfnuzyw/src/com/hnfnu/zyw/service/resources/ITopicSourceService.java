@@ -16,17 +16,19 @@ public interface ITopicSourceService {
 	public TopicSourceDto load(int id);
 
 	/**
-	 * »ñÈ¡±íÖĞËùÓĞ¹¦ÄÜ£¬ÊÇÓÃList×°µÄ
+	 * è·å–æ‰€æœ‰èµ„æº
 	 * 
 	 * @return
 	 */
 	public List<TopicSourceDto> list();
 
 	/**
-	 *»ñÈ¡±íÖĞËùÓĞ¹¦ÄÜ£¬ÓÃMap×°£¬ÎªÁË·ÖÒ³µÄĞèÒª¼ÓÉÏRowsºÍTotal
+	 *ç”¨äºåˆ†é¡µçš„è·å–æ‰€æœ‰èµ„æº
 	 * 
 	 * @return
 	 */
 	public Map<String, Object> listTopicSource();
+	
+	public int getTotalCount();
 	
 }

@@ -160,4 +160,9 @@ public class SourcesServiceImpl implements ISourceService {
 		}
 	}
 
+	public int getTotalCount() {
+		String hql="select count(*) as count from SourceDto";
+		return sourceDao.getTotalCount(hql);
+	}
+
 }

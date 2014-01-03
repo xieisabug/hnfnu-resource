@@ -46,4 +46,6 @@ public interface IStudentDao  extends IBaseDao<StudentDto>{
 	 */
 	public int deleteStudents(String studentIds);
 	
+	public int getTotalCount(String hql);
+	
 }

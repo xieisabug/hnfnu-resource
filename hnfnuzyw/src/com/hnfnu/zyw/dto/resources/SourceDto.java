@@ -87,7 +87,7 @@ public class SourceDto {
 	}
 	public SourceDto(Integer id, String name, Integer courseId,
 			String keyWords, String mediaType, String mediaFormat,
-			String playTime, String fileSize, String author, String publisher,
+			String playTime, Float fileSize, String author, String publisher,
 			String description, Timestamp createDate, String approvalStatus,
 			double price, Integer viewTimes, Integer useTimes, String url,
 			Integer createUserId, String createUserName) {
@@ -172,11 +172,11 @@ public class SourceDto {
 		return this.playTime;
 	}
 
-	public void setFileSize(String fileSize) {
+	public void setFileSize(Float fileSize) {
 		this.fileSize = fileSize;
 	}
 
-	public String getFileSize() {
+	public Float getFileSize() {
 		return this.fileSize;
 	}
 

@@ -65,7 +65,7 @@ public class IndexAction extends ActionSupport {
         indexService.makeSourceCount();
         return SUCCESS;
     }
-
+    
 	public boolean isSuccess() {
 		return success;
 	}

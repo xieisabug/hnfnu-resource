@@ -21,6 +21,9 @@ import static org.junit.Assert.fail;
 public class SourceCommentVoDaoTest {
 	@Autowired
 	private ISourceCommentVoDao sourceCommentVoDao;
+	
+	@Autowired
+	private ISourceDao sourceDao;
 
 	@Before
 	public void setUp() {
@@ -30,8 +33,8 @@ public class SourceCommentVoDaoTest {
 	@Test
 	public void testSourceCommentTree() {
         try {
-            List<Map<String,Object>> maps = sourceCommentVoDao.sourceCommentTree(38);
-            System.out.println(maps);
+        	
+            System.out.println(sourceDao.getTotalCount("select count(*) from SourceDto union select count(*) from TopicSourceDto)"));
         } catch (Exception e) {
             e.printStackTrace();
             fail();

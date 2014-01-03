@@ -41,7 +41,7 @@ public class TopicSubtitleSourceVo {
 
 	// 文件大小
 
-	private String fileSize;
+	private Float fileSize;
 
 	// 作者
 
@@ -179,13 +179,13 @@ public class TopicSubtitleSourceVo {
 
 
 
-	public String getFileSize() {
+	public Float  getFileSize() {
 		return fileSize;
 	}
 
 
 
-	public void setFileSize(String fileSize) {
+	public void setFileSize(Float fileSize) {
 		this.fileSize = fileSize;
 	}
 

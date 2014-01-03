@@ -89,4 +89,9 @@ public class TopicSourceServiceImpl implements ITopicSourceService{
 		topicSourceList.put("Total", l.size());
 		return topicSourceList;
 	}
+	
+	public int getTotalCount() {
+		String hql="select count(*) as count from TopicSourceDto";
+		return topicSourceDao.getTotalCount(hql);
+	}
 }
