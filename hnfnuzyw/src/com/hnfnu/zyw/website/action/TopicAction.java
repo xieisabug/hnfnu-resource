@@ -71,7 +71,7 @@ public class TopicAction extends ActionSupport {
 	public String topicView() {
 		TopicDto topic = topicService.load(topicId);
 		UserDto user = userService.load(topic.getCreateUserId());
-		System.out.println("user="+user);
+		//System.out.println("user="+user);
 		List<Map<String, Object>> subTopics = new ArrayList<Map<String, Object>>();
 		Map<String, Object> subtitleMap = null;
 

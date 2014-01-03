@@ -18,6 +18,7 @@ import com.hnfnu.zyw.action.base.AopNoSuchMethodErrorSolveBaseAction;
 import com.hnfnu.zyw.dto.system.UserDto;
 import com.hnfnu.zyw.dto.website.PicturesDto;
 import com.hnfnu.zyw.service.website.IPicturesService;
+import com.hnfnu.zyw.website.service.IIndexService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ModelDriven;
 
@@ -38,6 +39,10 @@ ModelDriven<PicturesDto>{
 	@Autowired
 	@Qualifier("picturesService")
 	private IPicturesService picturesService;
+	
+	@Autowired
+	@Qualifier("ftl_indexService")
+	private IIndexService indexService;
 
 	/**
 	 * 添加图片
@@ -57,6 +62,7 @@ ModelDriven<PicturesDto>{
 		pictures.setSrc(t[t.length-1]);
 		success = picturesService.add(pictures);
 		if (success) {
+			indexService.getPictures();
 			message = "添加图片成功！";
 		} else {
 			message = "添加图片失败！";
@@ -74,10 +80,12 @@ ModelDriven<PicturesDto>{
 		pictures.setSrc(p.getSrc());
 		success = picturesService.update(pictures);
 		if (success) {
+			indexService.getPictures();
 			message = "修改图片成功，刷新之后可查看！";
 		} else {
 			message = "修改图片失败！";
 		}
+		
 		return SUCCESS;
 	}
 
@@ -107,6 +115,7 @@ ModelDriven<PicturesDto>{
 	public String delete() {
 		success = picturesService.delete(pictures);
 		if (success) {
+			indexService.getPictures();
 			message = "删除图片成功！";
 		} else {
 			message = "删除图片失败！";

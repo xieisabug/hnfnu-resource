@@ -161,7 +161,7 @@ public class StudentServiceImpl implements IStudentService {
 			}
 			url  = url + "\\"+t[t.length-1]+"\\"+ss[ss.length-1];
             String pwd = EncodeUtils.generatePassword("123456");
-            System.out.println(url);
+            //System.out.println(url);
             is = new FileInputStream(url);  
 		    HSSFWorkbook wb = new HSSFWorkbook(is);   
 			// 获取excel中的某一个数据表

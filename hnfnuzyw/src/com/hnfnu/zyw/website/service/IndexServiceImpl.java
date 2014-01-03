@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.annotation.Async;
@@ -49,37 +48,50 @@ public class IndexServiceImpl implements IIndexService {
 	@Autowired
 	@Qualifier("sourceVoDao")
 	private ISourceVoDao sourceVoDao;
+	//@Scheduled(cron = "0 0 0,8,10,12,14,16,18,20 * * ?")
+	@Async
+	public void getPictures() {
+		try {
+			FreemarkerUtil fu =new FreemarkerUtil();
+			Map<String, Object> root = null;
+			String filePath = null;
 
-	public boolean getPictures() {
-		FreemarkerUtil fu =new FreemarkerUtil();
-		Map<String, Object> root = null;
-		String filePath = null;
-
-		filePath = ServletActionContext.getServletContext().getRealPath("/");
-		// 获得数据模型
-		root = this.getPicturesRoot();
-		// 打印到输出台，以便于测试
-		fu.print("index/gallery.ftl", root);
-		// 输出到文件
-		System.out.println(filePath + "website\\");
-		return fu.fprint("index/gallery.ftl", root, filePath + "website\\",
-				"gallery.html");
+			//filePath = ServletActionContext.getServletContext().getRealPath("/");
+			filePath = "F:\\workspaces\\hnfnu-resource\\trunk\\hnfnuzyw\\WebRoot\\";
+			// 获得数据模型
+			root = this.getPicturesRoot();
+			// 打印到输出台，以便于测试
+			//fu.print("index/gallery.ftl", root);
+			// 输出到文件
+			fu.fprint("index/gallery.ftl", root, filePath + "website\\",
+					"gallery.html");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
+	//@Scheduled(cron = "0 0 0,8,10,12,14,16,18,20 * * ?")
+	@Async
+	public void getTopics() {
+		try {
+			FreemarkerUtil fu =new FreemarkerUtil();
+			Map<String, Object> root = null;
+			String filePath = null;
 
-	public boolean getTopics() {
-		FreemarkerUtil fu =new FreemarkerUtil();
-		Map<String, Object> root = null;
-		String filePath = null;
-
-		filePath = ServletActionContext.getServletContext().getRealPath("/");
-		// 获得数据模型
-		root = this.getMakeTopicRoot();
-		// 打印到输出台，以便于测试
-		fu.print("index/topic.ftl", root);
-		// 输出到文件
-		System.out.println(filePath + "website\\");
-		return fu.fprint("index/topic.ftl", root, filePath + "website\\",
-				"topic.html");
+			//filePath = ServletActionContext.getServletContext().getRealPath("/");
+			filePath = "F:\\workspaces\\hnfnu-resource\\trunk\\hnfnuzyw\\WebRoot\\";
+			// 获得数据模型
+			root = this.getMakeTopicRoot();
+			// 打印到输出台，以便于测试
+			fu.print("index/topic.ftl", root);
+			// 输出到文件
+			//System.out.println(filePath + "website\\");
+			fu.fprint("index/topic.ftl", root, filePath + "website\\",
+					"topic.html");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 //	@Scheduled(cron = "*/10 * * * * ?")
