@@ -29,7 +29,7 @@ public class IndexAction extends ActionSupport {
 	
 	@Action(value = "makeGallery")
 	public String makeGallery() {
-		success = indexService.getPictures();
+		indexService.getPictures();
 		if(success){
 			message="轮播图片生成成功";
 		}else{
@@ -41,7 +41,7 @@ public class IndexAction extends ActionSupport {
 	@Action(value = "makeTopic")
 	public String makeTopic() {
 		
-		success = indexService.getTopics();
+		indexService.getTopics();
 		if(success){
 			message="专题生成成功";
 		}else{

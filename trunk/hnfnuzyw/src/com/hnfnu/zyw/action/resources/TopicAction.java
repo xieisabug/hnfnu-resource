@@ -74,6 +74,7 @@ public class TopicAction extends AopNoSuchMethodErrorSolveBaseAction implements
 		topic.setImageUrl(tPath);
 		success = topicService.add(topic);
 		if (success) {
+			indexService.getTopics();
 			message = "添加专题成功！";
 		} else {
 			message = "添加专题失败！";
@@ -86,6 +87,7 @@ public class TopicAction extends AopNoSuchMethodErrorSolveBaseAction implements
 	public String update() {
 		success = topicService.update(topic);
 		if (success) {
+			indexService.getTopics();
 			message = "修改专题成功！";
 		} else {
 			message = "修改专题失败！";
@@ -114,6 +116,7 @@ public class TopicAction extends AopNoSuchMethodErrorSolveBaseAction implements
 	public String delete() {
 		success = topicService.delete(topic.getId());
 		if (success) {
+			indexService.getTopics();
 			message = "删除专题成功！";
 		} else {
 			message = "删除专题失败！";

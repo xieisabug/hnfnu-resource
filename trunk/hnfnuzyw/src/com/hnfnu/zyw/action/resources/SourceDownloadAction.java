@@ -36,6 +36,8 @@ public class SourceDownloadAction extends AopNoSuchMethodErrorSolveBaseAction {
 	private boolean success;
 	private int type;// 0是课程资源，1是挂接资源，2是专题特有资源
 	private String message;
+	public final static int JOIN_SOURCE_TYPE = 2;
+	public final static int TOPIC_SOURCE_TYPE = 1;
 
 	// public static final String FILEPATH =
 	// "D:\\ruanjian\\apache-tomcat-7.0.39\\webapps\\hnfnuzyw\\uploads\\";
@@ -93,14 +95,19 @@ public class SourceDownloadAction extends AopNoSuchMethodErrorSolveBaseAction {
 	public void setId(int id) {
 		String realpath = ServletActionContext.getServletContext().getRealPath(
 				"/uploads");
+		System.out.println(realpath);
 		this.id = id;
-		if (type < 2) {
+		if (type == JOIN_SOURCE_TYPE) {
 			SourceDto s = sourceService.load(id);
 			this.url = realpath + "\\" + s.getUrl();
-		}else if(type == 2){
+		}else if(type == TOPIC_SOURCE_TYPE){
 			TopicSourceDto topicSourceDto = topicSourceService.load(id);
-			this.url = realpath + "\\" + topicSourceDto.getUrl();
+			this.url = realpath + "\\topic\\"+ topicSourceDto.getUrl();
+		}else{
+			SourceDto s = sourceService.load(id);
+			this.url = realpath + "\\" + s.getUrl();
 		}
+		System.out.println(url);
 
 	}
 
