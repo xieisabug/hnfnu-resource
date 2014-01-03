@@ -31,7 +31,10 @@
 .row:after {
     clear: both;
 }
-
+.center {
+    margin: 0 auto;
+    width: 960px;
+}
 /************    Layout    **************/
 /************    Panel    **************/
 .panel-head {
