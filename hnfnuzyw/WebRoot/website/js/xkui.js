@@ -463,7 +463,13 @@ var Scroll = new Class({
         if (type == 'fadeSlide') {
             this.pages.removeClass('show');
             this.pages.addClass('visible');
-            this.pages[this.currentPage - 1].setStyle('opacity', 1);
+            this.pages.setStyles({
+                left:this.option.width
+            });
+            this.pages[this.currentPage - 1].setStyles({
+                'opacity' : 1,
+                left:0
+            });
 
             this.scrollTo = function (to) {
                 this.animate = new Fx.Morph(this.pages[to - 1], {
