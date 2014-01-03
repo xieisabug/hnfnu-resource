@@ -90,8 +90,8 @@
                         </#if>
                         <#if (y + 1) % 6 == 0>
                             </table>
-    </div>
-    </#if>
+    						</div>
+   				 </#if>
     </#list>
     </#if>
 </div>
