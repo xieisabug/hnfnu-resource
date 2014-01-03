@@ -7,8 +7,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.hnfnu.zyw.service.resources.ITopicSubtitleSourceVoService;
-import com.hnfnu.zyw.vo.TopicSubtitleSourceVo;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
@@ -26,8 +24,11 @@ import com.hnfnu.zyw.dto.system.UserDto;
 import com.hnfnu.zyw.service.resources.ITopicService;
 import com.hnfnu.zyw.service.resources.ITopicSourceVoService;
 import com.hnfnu.zyw.service.resources.ITopicSubtitleService;
+import com.hnfnu.zyw.service.resources.ITopicSubtitleSourceVoService;
 import com.hnfnu.zyw.service.system.IUserService;
 import com.hnfnu.zyw.vo.TopicSourceVo;
+import com.hnfnu.zyw.vo.TopicSubtitleSourceVo;
+import com.hnfnu.zyw.website.service.FtlITopicService;
 import com.opensymphony.xwork2.ActionSupport;
 
 @Controller("ftlTopicAction")
@@ -66,6 +67,10 @@ public class TopicAction extends ActionSupport {
 	@Autowired
 	@Qualifier("topicSourceVoService")
 	private ITopicSourceVoService topicSourceVoService;
+	
+	@Autowired
+	@Qualifier("ftl_topicService")
+	private FtlITopicService ftl_topicService;
 
 	@Action(value = "view", results = { @Result(name = "success", location = "../../../website/topic_view.jsp") })
 	public String topicView() {
@@ -121,6 +126,13 @@ public class TopicAction extends ActionSupport {
 		return SUCCESS;
 	}
 
+
+	@Action(value = "makeBigTopic")
+	public String makeBigTopic() {
+		ftl_topicService.getTopics();
+		return SUCCESS;
+	}
+	
 	public boolean isSuccess() {
 		return success;
 	}

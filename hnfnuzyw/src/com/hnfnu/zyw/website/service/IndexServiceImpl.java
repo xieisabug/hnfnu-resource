@@ -30,7 +30,7 @@ import com.hnfnu.zyw.website.utils.FreemarkerUtil;
 @Service("ftl_indexService")
 public class IndexServiceImpl implements IIndexService {
 
-    private static String FILE_PATH = "F:\\workspaces\\hnfnu-resource\\trunk\\hnfnuzyw\\WebRoot\\";
+    public final static String FILE_PATH = "F:\\workspaces\\hnfnu-resource\\trunk\\hnfnuzyw\\WebRoot\\";
 
     @Autowired
     @Qualifier("picturesDao")
