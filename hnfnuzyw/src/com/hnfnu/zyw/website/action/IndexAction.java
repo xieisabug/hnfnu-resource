@@ -26,7 +26,7 @@ public class IndexAction extends ActionSupport {
 	@Autowired
 	@Qualifier("ftl_indexService")
 	private IIndexService indexService;
-	
+
 	@Action(value = "makeGallery")
 	public String makeGallery() {
 		indexService.getPictures();
@@ -40,7 +40,6 @@ public class IndexAction extends ActionSupport {
 	
 	@Action(value = "makeTopic")
 	public String makeTopic() {
-		
 		indexService.getTopics();
 		if(success){
 			message="专题生成成功";
@@ -60,6 +59,13 @@ public class IndexAction extends ActionSupport {
 		}
 		return SUCCESS;
 	}
+
+    @Action(value = "makeSourceCount")
+    public String makeSourceCount(){
+        indexService.makeSourceCount();
+        return SUCCESS;
+    }
+
 	public boolean isSuccess() {
 		return success;
 	}

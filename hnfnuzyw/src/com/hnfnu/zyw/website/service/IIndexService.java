@@ -6,5 +6,6 @@ public interface IIndexService {
 	public void getPictures();
 	public void getTopics();
 	public void makeTabGroups();
-	
+    public void makeSourceCount();
+
 }

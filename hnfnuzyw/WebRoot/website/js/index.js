@@ -64,7 +64,7 @@ window.addEvent('domready',function(){
             var html = '<ul class="hot-news-content">';
             for(var i = 0; i < list.length; i++) {
                 html += '<li>';
-                html += '<a href="' + basePath + 'news/view?id='+ list[i].id +'">';
+                html += '<a target="_blank" href="' + basePath + 'news/view?id='+ list[i].id +'">';
                 html += list[i].title;
                 html += '</a>';
                 html += '</li>';
@@ -129,6 +129,10 @@ window.addEvent('domready',function(){
         //登陆和注册
         var loginBtn = new Button($('login_btn'),{width:85}).addClass('login-btn');
         var registBtn = new Button($('register_btn'),{width:85}).addClass('login-btn');
+        //注册暂时不开放
+        registBtn.body.addEvent('click',function(){
+            alert('对不起，暂时不开放注册。');
+        });
         //登陆逻辑
         loginBtn.body.addEvent('click',function(){
             new Request.JSON({
