@@ -56,7 +56,7 @@ public class NewsAction extends ActionSupport {
         return SUCCESS;
     }
 
-    @Action(value = "view", results = {@Result(name = "success", location = "../../html3/news.jsp")})
+    @Action(value = "view", results = {@Result(name = "success", location = "../../../website/news.jsp")})
     public String newsView() {
         NewsDto news = newsService.get(id);
         HttpServletRequest request = ServletActionContext.getRequest();
