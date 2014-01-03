@@ -187,6 +187,7 @@
     </div>
     <%@ include file="topic.html" %>
     <%@ include file="tabGroup.html" %>
+    <div id="newsDialog"></div>
     <%@ include file="footer.html" %>
 </div>
 </body>

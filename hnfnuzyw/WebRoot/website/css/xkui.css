@@ -333,6 +333,9 @@ a.left,a.right{
     margin: 0;
     padding: 0;
 }
+.ie-title {
+    background: url(../image/ie_title.png) repeat-x;
+}
 .dialog-content {
     margin: 0;
     padding: 0;

@@ -31,6 +31,8 @@ public class NewsAction extends ActionSupport {
     private int id;
     private boolean success;
     private String message;
+    private Map<String, Object> root;
+
     @Autowired
     @Qualifier("ftl_newsService")
     private INewsService newsService;
@@ -42,17 +44,8 @@ public class NewsAction extends ActionSupport {
     public String newsIndex() {
         String filePath = ServletActionContext.getServletContext().getRealPath("/");
         // 获得数据模型
-        Map<String, Object> root = newsService.getIndexNews();
+        root = newsService.getIndexNews();
 
-        //打印到输出台，以便于测试
-        //fu.print("index.ftl", root);
-        //输出到文件
-        success = fu.fprint("news.ftl", root, filePath + "website\\", "news.html");
-        if (success) {
-            message = "新闻模块生成成功";
-        } else {
-            message = "新闻模块生成失败";
-        }
         return SUCCESS;
     }
 
@@ -77,5 +70,9 @@ public class NewsAction extends ActionSupport {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Map<String, Object> getRoot() {
+        return root;
     }
 }
