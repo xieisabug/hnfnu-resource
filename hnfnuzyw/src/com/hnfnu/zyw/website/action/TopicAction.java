@@ -76,6 +76,9 @@ public class TopicAction extends ActionSupport {
 	public String topicView() {
 		try {
 			TopicDto topic = topicService.load(topicId);
+			//访问次数加1
+//			topic.setViewTimes(topic.getViewTimes()+1);
+//			topicService.update(topic);
 			UserDto user = userService.load(topic.getCreateUserId());
 			List<Map<String, Object>> subTopics = new ArrayList<Map<String, Object>>();
 			Map<String, Object> subtitleMap = null;
@@ -110,7 +113,7 @@ public class TopicAction extends ActionSupport {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+		System.out.println(topicService.topicAddViewTimes(topicId));
 		return SUCCESS;
 	}
 

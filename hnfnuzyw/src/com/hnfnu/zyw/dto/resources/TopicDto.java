@@ -154,5 +154,15 @@ public class TopicDto
 		this.createDate = createDate;
 	}
 
-	
+	@Override
+	public String toString() {
+		return "TopicDto [id=" + id + ", name=" + name + ", isDisplay="
+				+ isDisplay + ", description=" + description
+				+ ", createUserId=" + createUserId + ", keyWords=" + keyWords
+				+ ", lastUpdateDate=" + lastUpdateDate + ", viewTimes="
+				+ viewTimes + ", createDate=" + createDate + ", imageUrl="
+				+ imageUrl + ", outlink=" + outlink + ", isOutlink="
+				+ isOutlink + ", templateId=" + templateId + ", remark="
+				+ remark + "]";
+	}
 }

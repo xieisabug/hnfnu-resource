@@ -101,4 +101,19 @@ public class TopicServiceImpl implements ITopicService {
 		}
 		return ret;
 	}
+
+	public boolean topicAddViewTimes(int id) {
+		TopicDto t = null;
+		try {
+			t = topicDao.get(id);
+			t.setViewTimes(t.getViewTimes()+1);
+			topicDao.update(t);
+			System.out.println(t);
+			System.out.println(t.getViewTimes());
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
 }
