@@ -25,6 +25,15 @@ public class SourceDaoTest {
 		System.out.println("***************************************");
 	}
 
+    @Test
+    public void testSearch(){
+        try {
+            System.out.println(sourceVoDao.list("FROM SourceVo WHERE keyWords like '%" + 1 + "%'"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 	@Test
 	public void testList() {
 		String sql = "from SourceVo where id in(select t2.id from SourceCategoryJoinDto as t1,SourceDto as t2,CategoryDto as t3 where t1.sourceId = t2.id and t1.categoryId = t3.id and t2.courseId = 4 and t3.id = 1)";
