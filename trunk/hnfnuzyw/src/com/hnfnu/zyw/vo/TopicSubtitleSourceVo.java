@@ -179,17 +179,17 @@ public class TopicSubtitleSourceVo {
 
 
 
-	public Float  getFileSize() {
+
+
+
+
+	public Float getFileSize() {
 		return fileSize;
 	}
-
-
 
 	public void setFileSize(Float fileSize) {
 		this.fileSize = fileSize;
 	}
-
-
 
 	public String getSourceAuthor() {
 		return sourceAuthor;

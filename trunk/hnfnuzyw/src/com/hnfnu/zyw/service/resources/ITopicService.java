@@ -30,5 +30,11 @@ public interface ITopicService {
 	 * @return
 	 */
 	public List<Map<String,String>> topicTree();
+	/**
+	 * 专题每被访问一次viewTimes就加1
+	 * @param topic
+	 * @return
+	 */
+	public boolean topicAddViewTimes(int id);
 
 }

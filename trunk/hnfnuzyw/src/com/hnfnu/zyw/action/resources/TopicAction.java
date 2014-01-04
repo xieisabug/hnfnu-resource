@@ -85,6 +85,9 @@ public class TopicAction extends AopNoSuchMethodErrorSolveBaseAction implements
 	// 修改专题
 	@Action(value = "updateTopic")
 	public String update() {
+		Date date = new Date();
+		Timestamp timeStamp = new Timestamp(date.getTime());
+		topic.setLastUpdateDate(timeStamp);
 		success = topicService.update(topic);
 		if (success) {
 			indexService.getTopics();
@@ -95,6 +98,22 @@ public class TopicAction extends AopNoSuchMethodErrorSolveBaseAction implements
 		return SUCCESS;
 	}
 
+	/*// 浏览一次浏览次数就加1
+	@Action(value = "topicAddViewTimes")
+	public String topicAddViewTimes() {
+		TopicDto t  =  topicService.load(topic.getId());
+		t.setViewTimes(t.getViewTimes()+1);
+		success = topicService.update(t);
+		if (success) {
+			indexService.getTopics();
+			message = "专题浏览次数增加成功！";
+		} else {
+			message = "专题浏览次数增加失败！";
+		}
+		return SUCCESS;
+	}*/
+
+	
 	/**
 	 * 根据专题ID查询一个专题
 	 * 
