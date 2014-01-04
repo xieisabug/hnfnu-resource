@@ -121,7 +121,12 @@ public class TopicAction extends AopNoSuchMethodErrorSolveBaseAction implements
 	 */
 	@Action(value = "loadTopic")
 	public String load() {
+		
 		topic = topicService.load(topic.getId());
+		if (topic != null) {
+			topic.setViewTimes(topic.getViewTimes() + 1);
+			topicService.update(topic);
+		}
 		return SUCCESS;
 	}
 

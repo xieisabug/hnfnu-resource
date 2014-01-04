@@ -35,7 +35,7 @@ public class SourceCommentService implements ISourceCommentService{
 
 	public boolean delete(int id) {
 		try {
-			sourceCommentDao.delete(id);
+			sourceCommentDao.deleteByIdAndParentId(id);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;

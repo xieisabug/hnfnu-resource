@@ -117,7 +117,7 @@ public class SourceAction extends AopNoSuchMethodErrorSolveBaseAction implements
 	@Action(value = "updateSource")
 	public String update() {
 		success = sourceService.update(source, categoryIdList);
-		sourceVo = sourceVoService.load(source.getId());
+		//sourceVo = sourceVoService.load(source.getId());
 		if (success) {
 			message = "修改资源成功！";
 			indexService.makeTabGroups();
