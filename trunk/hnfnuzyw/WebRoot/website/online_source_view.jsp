@@ -18,7 +18,7 @@
     String keyWords;
     String mediaFormat;
     String mediaType;
-    String fileSize;
+    Float fileSize;
     String description;
     Integer viewTimes;
     Integer useTimes;
