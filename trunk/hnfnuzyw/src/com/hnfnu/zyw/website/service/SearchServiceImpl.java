@@ -1,11 +1,10 @@
 package com.hnfnu.zyw.website.service;
 
+import com.hnfnu.zyw.dao.base.Pager;
 import com.hnfnu.zyw.dao.resources.ISourceVoDao;
 import com.hnfnu.zyw.dao.resources.ITopicDao;
-import com.hnfnu.zyw.dao.resources.ITopicSubtitleDao;
 import com.hnfnu.zyw.dao.resources.ITopicSubtitleSourceVoDao;
-import com.hnfnu.zyw.dao.website.INewsDao;
-import com.hnfnu.zyw.dto.website.NewsDto;
+import com.hnfnu.zyw.dto.resources.TopicDto;
 import com.hnfnu.zyw.vo.SourceVo;
 import com.hnfnu.zyw.vo.TopicSubtitleSourceVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Service("searchService")
@@ -30,18 +28,20 @@ public class SearchServiceImpl implements ISearchService {
     private ITopicDao topicDao;
 
     @Override
-    public Map<String, Object> listSource(String keyWord) {
-        Map<String, Object> ret = new HashMap<String, Object>();
+    public Map<String, Object> listSource(String keyWord, int page, int pageSize) {
+        Map<String, Object> ret = new HashMap<>();
 
         String hql = "FROM SourceVo WHERE keyWords like '%" + keyWord + "%'";
         String hql2 = "FROM TopicSubtitleSourceVo WHERE keyWords like '%" + keyWord + "%'";
-        System.out.println(hql);
+        Pager<SourceVo> sourceVoPager;
+        Pager<TopicSubtitleSourceVo> topicSubtitleSourceVoPager;
         try {
-            List<SourceVo> sourceVoList = sourceVoDao.list(hql);
-            ret.put("sourceVoList", sourceVoList);
+            int pageOffset = (page - 1) * pageSize;
+            sourceVoPager = sourceVoDao.find(hql, pageOffset, pageSize);
+            ret.put("sourceVoPager", sourceVoPager);
 
-            List<TopicSubtitleSourceVo> topicSubtitleSourceVoList = topicSubtitleSourceVoDao.list(hql2);
-            ret.put("topicSubtitleSourceVoList", topicSubtitleSourceVoList);
+            topicSubtitleSourceVoPager = topicSubtitleSourceVoDao.find(hql2,pageOffset,pageSize);
+            ret.put("topicSubtitleSourceVoPager", topicSubtitleSourceVoPager);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -50,9 +50,21 @@ public class SearchServiceImpl implements ISearchService {
     }
 
     @Override
-    public Map<String, Object> listTopic(String keyWord) {
-
-        return null;
+    public Map<String, Object> listTopic(String keyWord, int page, int pageSize) {
+        Map<String, Object> ret = new HashMap<>();
+        String hql = "FROM TopicDto WHERE keyWords like '%" + keyWord + "%'";
+        Pager<TopicDto> topicDtoPager;
+        try {
+            int pageOffset = (page - 1) * pageSize;
+            topicDtoPager = topicDao.find(hql, pageOffset, pageSize);
+            ret.put("topicDtoPager",topicDtoPager);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return ret;
     }
+
+
 
 }

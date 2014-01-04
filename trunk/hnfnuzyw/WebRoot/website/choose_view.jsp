@@ -67,8 +67,32 @@
             您的位置：<a href="#">首页</a> > <a href="#">学科资源</a>
         </div>
     </div>
-    <div class="row" id="choose-panel">
-        <div>
+    <div class="row" id="choose-accordion">
+        <div class="choose-type">
+            <div class="panel-head-icon"></div>
+            <span>选择学科</span>
+        </div>
+        <div class="choose-list">
+            <ul>
+                <li><a href="#">数学</a></li>
+                <li><a href="#">语文</a></li>
+                <li><a href="#">英语</a></li>
+                <li><a href="#">自然</a></li>
+                <li><a href="#">数学</a></li>
+                <li><a href="#">语文</a></li>
+                <li><a href="#">英语</a></li>
+                <li><a href="#">自然</a></li>
+                <li><a href="#">数学</a></li>
+                <li><a href="#">语文</a></li>
+                <li><a href="#">英语</a></li>
+                <li><a href="#">自然</a></li>
+                <li><a href="#">数学</a></li>
+                <li><a href="#">语文</a></li>
+                <li><a href="#">英语</a></li>
+                <li><a href="#">自然</a></li>
+            </ul>
+        </div>
+        <div class="choose-type">
             <div class="panel-head-icon"></div>
             <span>选择学科</span>
         </div>
