@@ -35,8 +35,11 @@ import java.util.Map;
 public class SearchAction extends ActionSupport {
 
 	private static final long serialVersionUID = 2222487976006742410L;
+    private static final int PAGE_SIZE = 8;
+    private int page;
     private String keyWord;
     private Map<String,Object> sourceList;
+    private Map<String,Object> topicList;
 
 	@Autowired
 	@Qualifier("searchService")
@@ -44,17 +47,27 @@ public class SearchAction extends ActionSupport {
 
 	@Action(value = "source", results = { @Result(name = "success", location = "../../../website/source_search_result.jsp") })
 	public String source() {
-        sourceList = searchService.listSource(keyWord);
-        System.out.println(sourceList);
+        sourceList = searchService.listSource(keyWord, 1, PAGE_SIZE);
         return SUCCESS;
 	}
 
 	@Action(value = "topic", results = { @Result(name = "success", location = "../../../website/topic_search_result.jsp") })
-	public String topci() {
-        sourceList = searchService.listTopic(keyWord);
-        System.out.println(sourceList);
+	public String topic() {
+        topicList = searchService.listTopic(keyWord,1,PAGE_SIZE);
         return SUCCESS;
 	}
+
+    @Action(value = "sourcePage")
+    public String sourcePage(){
+        sourceList = searchService.listSource(keyWord, page, PAGE_SIZE);
+        return SUCCESS;
+    }
+
+    @Action(value = "topicPage")
+    public String topicPage(){
+        topicList = searchService.listTopic(keyWord, 1, PAGE_SIZE);
+        return SUCCESS;
+    }
 
     public void setKeyWord(String keyWord) {
         this.keyWord = keyWord;
@@ -62,5 +75,13 @@ public class SearchAction extends ActionSupport {
 
     public Map<String, Object> getSourceList() {
         return sourceList;
+    }
+
+    public Map<String, Object> getTopicList() {
+        return topicList;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
     }
 }

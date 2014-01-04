@@ -1,7 +1,7 @@
 window.addEvent('domready', function () {
     var page = 1;
     var util = new Util();
-    var choosePanel = new Panel($('choose-panel'));
+    //var choosePanel = new Panel($('choose-panel'));
     var showPanel = new Panel($('show-panel'));
     var searchSelect = new Select('searchSelect', [
         {
@@ -36,6 +36,8 @@ window.addEvent('domready', function () {
         }
 
     });
+    new Fx.Accordion($('choose-accordion'),'.choose-type','.choose-list');
+//    new Mouseover($('choose-accordion'), Function.from(function(){alert('鼠标悬停3秒后触发')}), 3000);
     /*
     var page = 1;
     $('more').addEvent('click',function(){

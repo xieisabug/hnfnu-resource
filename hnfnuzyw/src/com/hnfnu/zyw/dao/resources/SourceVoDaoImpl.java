@@ -27,6 +27,5 @@ public class SourceVoDaoImpl extends BaseDao<SourceVo> implements ISourceVoDao {
 		List l = this.getSession().createSQLQuery(sql).list();
 		return Integer.valueOf(l.get(0).toString());
 	}
-	
-	
+
 }
