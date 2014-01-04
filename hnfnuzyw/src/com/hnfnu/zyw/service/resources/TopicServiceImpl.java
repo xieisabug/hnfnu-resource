@@ -107,7 +107,7 @@ public class TopicServiceImpl implements ITopicService {
 		try {
 			t = topicDao.get(id);
 			t.setViewTimes(t.getViewTimes()+1);
-			topicDao.update(t);
+			topicDao.updateByTran(id, t.getViewTimes());
 			System.out.println(t);
 			System.out.println(t.getViewTimes());
 		} catch (Exception e) {

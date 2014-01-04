@@ -83,9 +83,9 @@
                                         <div class="topic-description" style="height: 71px;">${topic.description}</div>
                                         <div style="font-size: 0.7em;">
                                             <span style="color: gray;">
-                                                更新时间：
+                                                更新
                                             </span>
-                                            ${topic.lastUpdateDate}
+                                            ${topic.lastUpdateDate?substring(0,9)}
                                         </div>
                                     </div>
                                		 </a>
@@ -114,9 +114,9 @@
                                         <div class="topic-description" style="height: 71px;">${topic.description}</div>
                                         <div style="font-size: 0.7em;">
                                             <span style="color: gray;">
-                                                更新时间：
+                                                更新
                                             </span>
-                                        ${topic.lastUpdateDate}
+                                            ${topic.lastUpdateDate?substring(0,9)}
                                         </div>
                                     </div>
                                     </a>
@@ -144,11 +144,11 @@
                                             <div class="topic-title">${topic.name}</div>
                                             <div class="topic-description" style="height: 71px;">${topic.description}</div>
                                             <div style="font-size: 0.7em;">
-                                                <span style="color: gray;">
-                                                    更新时间：
-                                                </span>
-                                            ${topic.lastUpdateDate}
-                                            </div>
+                                            <span style="color: gray;">
+                                                更新
+                                            </span>
+                                            ${topic.lastUpdateDate?substring(0,9)}
+                                        </div>
                                         </div>
                                     </a>
 	                            </td>
@@ -174,11 +174,11 @@
                                     <div class="topic-source-item">
                                         <div class="topic-title">${topic.name}</div>
                                         <div class="topic-description" style="height: 71px;">${topic.description}</div>
-                                        <div style="font-size: 0.7em;">
-                                                <span style="color: gray;">
-                                                    更新时间：
-                                                </span>
-                                        ${topic.lastUpdateDate}
+                                         <div style="font-size: 0.7em;">
+                                            <span style="color: gray;">
+                                                更新
+                                            </span>
+                                            ${topic.lastUpdateDate?substring(0,9)}
                                         </div>
                                     </div>
                                 </a>

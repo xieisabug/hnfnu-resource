@@ -1,6 +1,8 @@
 package com.hnfnu.zyw.dao.resources;
 
 import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
 import com.hnfnu.zyw.dao.base.BaseDao;
@@ -16,4 +18,25 @@ public int getTotalCount(String hql) {
 		int count=((Number)query.iterate().next()).intValue();
 		return count;
 	}
+
+public boolean updateByTran(int id,int viewTimes) {
+	Session session = this.getSession();
+	String hql = "update TopicDto set viewTimes="+viewTimes + " where id="+id;
+	Transaction t = null;
+	try {
+		t = session.beginTransaction();
+		Query q = session.createQuery(hql);
+		q.executeUpdate();
+		t.commit();
+	} catch (Exception ex) {
+		ex.printStackTrace();
+		if (t != null) {
+			t.rollback();
+		}
+		return false;
+	} finally {
+		session.close();
+	}
+	return true;
+}
 }
