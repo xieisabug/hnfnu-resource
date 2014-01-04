@@ -432,8 +432,8 @@ label {
     width: 101%;
 }
 #topic-source-content>div>table tr>td{
-    padding: 15px;
-    height: 85px;
+    padding:0 25px;
+    height: 116px;
     width: 210px;
     border: 1px dashed #aaa;
     border-top: 0;
@@ -445,7 +445,7 @@ label {
 }
 .topic-source-item {
     float: right;
-    width: 130px;
+    width: 105px;
 }
 /**topic source**/
 /**gallery**/

@@ -67,57 +67,121 @@
                         			<#else>
 			                        	<a target="_blank" href="${topic.outlink}">
 			                        </#if>
-                                	<img src="../uploads/topic/image/${topic.imageUrl!" default_topic.png"}">
+                                    <div style="float: left;">
+                                	    <img src="../uploads/topic/image/${topic.imageUrl!" default_topic.png"}">
+                                        <div style="font-size: 0.7em;width: 70px;text-align: center;">
+                                            <p style="color: gray;">
+                                                浏览次数
+                                            </p>
+                                            <p>
+                                                ${topic.viewTimes}
+                                            </p>
+                                        </div>
+                                    </div>
                                     <div class="topic-source-item">
                                         <div class="topic-title">${topic.name}</div>
-                                        <div class="topic-description">${topic.description}</div>
+                                        <div class="topic-description" style="height: 71px;">${topic.description}</div>
+                                        <div style="font-size: 0.7em;">
+                                            <span style="color: gray;">
+                                                更新时间：
+                                            </span>
+                                            ${topic.lastUpdateDate}
+                                        </div>
                                     </div>
                                		 </a>
 	                            </td>
 	            	</#if>
 	            	<#if ((topic_index-1)%4)==0>
 	            				<td>
-	                                <#if (topic.isOutlink?number == 0)>
-                        				<a target="_blank" href="../topic/view?topicId=${topic.id}">
-                        			<#else>
-			                        	<a target="_blank" href="${topic.outlink}">
-			                        </#if>
-                                	<img src="../uploads/topic/image/${topic.imageUrl!" default_topic.png"}">
+                                    <#if (topic.isOutlink?number == 0)>
+                                        <a target="_blank" href="../topic/view?topicId=${topic.id}">
+                                    <#else>
+                                        <a target="_blank" href="${topic.outlink}">
+                                    </#if>
+                                    <div style="float: left;">
+                                        <img src="../uploads/topic/image/${topic.imageUrl!" default_topic.png"}">
+                                        <div style="font-size: 0.7em;width: 70px;text-align: center;">
+                                            <p style="color: gray;">
+                                                浏览次数
+                                            </p>
+                                            <p>
+                                            ${topic.viewTimes}
+                                            </p>
+                                        </div>
+                                    </div>
                                     <div class="topic-source-item">
                                         <div class="topic-title">${topic.name}</div>
-                                        <div class="topic-description">${topic.description}</div>
+                                        <div class="topic-description" style="height: 71px;">${topic.description}</div>
+                                        <div style="font-size: 0.7em;">
+                                            <span style="color: gray;">
+                                                更新时间：
+                                            </span>
+                                        ${topic.lastUpdateDate}
+                                        </div>
                                     </div>
-                               		 </a>
+                                    </a>
 	                            </td>
 	            	</#if>
 	            	<#if ((topic_index-2)%4)==0>
 	            				<td>
-	                                <#if (topic.isOutlink?number == 0)>
-                        				<a target="_blank" href="../topic/view?topicId=${topic.id}">
-                        			<#else>
-			                        	<a target="_blank" href="${topic.outlink}">
-			                        </#if>
-                                	<img src="../uploads/topic/image/${topic.imageUrl!" default_topic.png"}">
-                                    <div class="topic-source-item">
-                                        <div class="topic-title">${topic.name}</div>
-                                        <div class="topic-description">${topic.description}</div>
-                                    </div>
-                               		 </a>
+                                    <#if (topic.isOutlink?number == 0)>
+                                    <a target="_blank" href="../topic/view?topicId=${topic.id}">
+                                    <#else>
+                                    <a target="_blank" href="${topic.outlink}">
+                                    </#if>
+                                        <div style="float: left;">
+                                            <img src="../uploads/topic/image/${topic.imageUrl!" default_topic.png"}">
+                                            <div style="font-size: 0.7em;width: 70px;text-align: center;">
+                                                <p style="color: gray;">
+                                                    浏览次数
+                                                </p>
+                                                <p>
+                                                ${topic.viewTimes}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="topic-source-item">
+                                            <div class="topic-title">${topic.name}</div>
+                                            <div class="topic-description" style="height: 71px;">${topic.description}</div>
+                                            <div style="font-size: 0.7em;">
+                                                <span style="color: gray;">
+                                                    更新时间：
+                                                </span>
+                                            ${topic.lastUpdateDate}
+                                            </div>
+                                        </div>
+                                    </a>
 	                            </td>
 	            	</#if>
 	            	<#if ((topic_index+1)%4)==0 >
 	            		    <td>
-	                                <#if (topic.isOutlink?number == 0)>
-                        				<a target="_blank" href="../topic/view?topicId=${topic.id}">
-                        			<#else>
-			                        	<a target="_blank" href="${topic.outlink}">
-			                        </#if>
-                                	<img src="../uploads/topic/image/${topic.imageUrl!" default_topic.png"}">
+                                <#if (topic.isOutlink?number == 0)>
+                                <a target="_blank" href="../topic/view?topicId=${topic.id}">
+                                <#else>
+                                <a target="_blank" href="${topic.outlink}">
+                                </#if>
+                                    <div style="float: left;">
+                                        <img src="../uploads/topic/image/${topic.imageUrl!" default_topic.png"}">
+                                        <div style="font-size: 0.7em;width: 70px;text-align: center;">
+                                            <p style="color: gray;">
+                                                浏览次数
+                                            </p>
+                                            <p>
+                                            ${topic.viewTimes}
+                                            </p>
+                                        </div>
+                                    </div>
                                     <div class="topic-source-item">
                                         <div class="topic-title">${topic.name}</div>
-                                        <div class="topic-description">${topic.description}</div>
+                                        <div class="topic-description" style="height: 71px;">${topic.description}</div>
+                                        <div style="font-size: 0.7em;">
+                                                <span style="color: gray;">
+                                                    更新时间：
+                                                </span>
+                                        ${topic.lastUpdateDate}
+                                        </div>
                                     </div>
-                               		 </a>
+                                </a>
 	                            </td>
 	                        </tr>
 	            	</#if>
