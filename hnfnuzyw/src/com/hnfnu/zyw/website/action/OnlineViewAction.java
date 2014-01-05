@@ -2,6 +2,7 @@ package com.hnfnu.zyw.website.action;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.hnfnu.zyw.action.resources.SourceDownloadAction;
 import com.hnfnu.zyw.service.resources.ISourceCommentService;
 import com.hnfnu.zyw.service.resources.ISourceVoService;
 import com.hnfnu.zyw.service.resources.ITopicSubtitleSourceVoService;
@@ -48,10 +49,10 @@ public class OnlineViewAction extends ActionSupport{
 	public String viewSource() {
         List<Map<String,Object>> sourceCommentTree = sourceCommentService.sourceCommentTree(id);
 		HttpServletRequest request = ServletActionContext.getRequest();
-        if(type == 2) {
+        if(type == SourceDownloadAction.JOIN_SOURCE_TYPE) {
             SourceVo s = sourceVoService.load(id);
             request.setAttribute("source", s);
-        } else if(type == 1){
+        } else if(type == SourceDownloadAction.TOPIC_SOURCE_TYPE){
             TopicSubtitleSourceVo topicSubtitleSourceVo = topicSubtitleSourceVoService.load(id);
             request.setAttribute("source", topicSubtitleSourceVo);
         }

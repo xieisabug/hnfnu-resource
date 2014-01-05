@@ -399,7 +399,7 @@ label {
 .topic-resource-content {
     border-bottom: 1px dotted #ddd;
     border-top: 1px dotted #ddd;
-    padding: 3px 60px;
+    padding: 17px 60px;
     font-size: 0.8em;
 }
 
@@ -616,6 +616,39 @@ label {
 }
 /**online source view**/
 /**choose view**/
+#choose-accordion {
+    width: 700px;
+    float: left;
+}
+.choose-type {
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fcfeff', endColorstr='#d5edfd');
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr = '#fcfeff', endColorstr = '#d5edfd')";
+    background-image: -moz-linear-gradient(top, #fcfeff, #d5edfd);
+    background-image: -ms-linear-gradient(top, #fcfeff, #d5edfd);
+    background-image: -o-linear-gradient(top, #fcfeff, #d5edfd);
+    background-image: -webkit-gradient(linear, center top, center bottom, from(#fcfeff), to(#d5edfd));
+    background-image: -webkit-linear-gradient(top, #fcfeff, #d5edfd);
+    background-image: linear-gradient(top, #fcfeff, #d5edfd);
+    border: 1px solid #75ade7;
+    height: 33px;
+    line-height: 30px;
+    font-size: 0.9em;
+    cursor: pointer;
+}
+.choose-list {
+    border: 1px solid #75ade7;
+    border-top: 0;
+    padding: 13px;
+    overflow: hidden;
+}
+#show-panel {
+    float: left;
+    width: 960px;
+}
+#hot-grade-panel {
+    width: 250px;
+    float: right;
+}
 .choose-list>ul>li {
     float: left;
     margin-left: 25px;

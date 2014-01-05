@@ -146,12 +146,23 @@
                 <div class="topic-resource-content">
                     <table>
                         <tr>
-                            <td style="width: 140px; text-align: center" rowspan="3">
+                            <td style="width: 120px; text-align: center" rowspan="4">
                                 <img src="<%=basePath+"website/image/file_icon_"+tssv.getMediaFormat()+".png"%>" style="width:77px; height:77px; display: inline;">
                             </td>
-                            <td style="width: 340px;"><span>资源名</span>：<%=tssv.getSourceName()%></td>
-                            <td style="width: 200px;"><span>资源币</span>：<%=tssv.getPrice()==0?"免费":tssv.getPrice()%></td>
-                            <td style="width: 130px; text-align: center" rowspan="3">
+                            <td style="width: 200px;"><span>资源名</span>：<%=tssv.getSourceName()%></td>
+                            <td style="width: 150px;"><span>资源币</span>：<%=tssv.getPrice()==0?"免费":tssv.getPrice()%></td>
+                            <td style="width: 200px;"><span>关键字</span>：
+                                <%
+                                    String k = tssv.getKeyWords();
+                                    String[] kws = k.split(";");
+                                    for (String kw : kws) {
+                                %>
+                                <a href="<%=basePath%>search/source?keyword=<%=kw%>"><%=kw%> </a>
+                                <%
+                                    }
+                                %>
+                            </td>
+                            <td style="width: 130px; text-align: center" rowspan="4">
                                 <div class="topic-resource-btn">
                                     <%
                                         if(onlineViewFormat.contains(tssv.getMediaFormat()+",")) {
@@ -165,12 +176,17 @@
                             </td>
                         </tr>
                         <tr>
-                            <td><span>媒体类型</span>：<%=tssv.getMediaType()%></td>
-                            <td><span>文件大小</span>：<%=tssv.getFileSize()%>M</td>
+                            <td><span>作者</span>：<%=tssv.getSourceAuthor()%></td>
+                            <td><span>资源类型</span>：<%=tssv.getMediaType()%></td>
+                            <td rowspan="3"><span>资源描述</span>：<%=tssv.getSourceDescription()%></td>
                         </tr>
                         <tr>
                             <td><span>出品方</span>：<%=tssv.getPublisher()%></td>
-                            <td>&nbsp;</td>
+                            <td><span>文件大小</span>：<%=tssv.getFileSize()%>M</td>
+                        </tr>
+                        <tr>
+                            <td><span>访问次数</span>：<%=tssv.getViewTimes()%></td>
+                            <td><span>下载次数</span>：<%=tssv.getUseTimes()%></td>
                         </tr>
                     </table>
                 </div>
@@ -181,12 +197,23 @@
                 <div class="topic-resource-content">
                     <table>
                         <tr>
-                            <td style="width: 140px; text-align: center" rowspan="3">
+                            <td style="width: 120px; text-align: center" rowspan="4">
                                 <img src="<%=basePath+"website/image/file_icon_"+tsv.getMediaFormat()+".png"%>" style="width:77px; height:77px; display: inline;">
                             </td>
-                            <td style="width: 340px;"><span>资源名</span>：<%=tsv.getSourceName()%></td>
-                            <td style="width: 200px;"><span>资源币</span>：<%=tsv.getPrice()==0?"免费":tsv.getPrice()%></td>
-                            <td style="width: 130px; text-align: center" rowspan="3">
+                            <td style="width: 200px;"><span>资源名</span>：<%=tsv.getSourceName()%></td>
+                            <td style="width: 150px;"><span>资源币</span>：<%=tsv.getPrice()==0?"免费":tsv.getPrice()%></td>
+                            <td style="width: 200px;"><span>关键字</span>：
+                                <%
+                                    String k = tsv.getKeyWords();
+                                    String[] kws = k.split(";");
+                                    for (String kw : kws) {
+                                %>
+                                <a href="<%=basePath%>search/source?keyword=<%=kw%>"><%=kw%> </a>
+                                <%
+                                    }
+                                %>
+                            </td>
+                            <td style="width: 130px; text-align: center" rowspan="4">
                                 <div class="topic-resource-btn">
                                     <%
                                         if(onlineViewFormat.contains(tsv.getMediaFormat()+",")) {
@@ -200,12 +227,17 @@
                             </td>
                         </tr>
                         <tr>
-                            <td><span>媒体类型</span>：<%=tsv.getMediaType()%></td>
-                            <td><span>文件大小</span>：<%=tsv.getFileSize()%>M</td>
+                            <td><span>作者</span>：<%=tsv.getSourceAuthor()%></td>
+                            <td><span>资源类型</span>：<%=tsv.getMediaType()%></td>
+                            <td rowspan="3"><span>资源描述</span>：<%=tsv.getSourceDescription()%></td>
                         </tr>
                         <tr>
                             <td><span>出品方</span>：<%=tsv.getPublisher()%></td>
-                            <td>&nbsp;</td>
+                            <td><span>文件大小</span>：<%=tsv.getFileSize()%>M</td>
+                        </tr>
+                        <tr>
+                            <td><span>访问次数</span>：<%=tsv.getViewTimes()%></td>
+                            <td><span>下载次数</span>：<%=tsv.getUseTimes()%></td>
                         </tr>
                     </table>
                 </div>
