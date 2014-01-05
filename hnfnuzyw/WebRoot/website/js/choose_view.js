@@ -3,6 +3,7 @@ window.addEvent('domready', function () {
     var util = new Util();
     //var choosePanel = new Panel($('choose-panel'));
     var showPanel = new Panel($('show-panel'));
+    var hotGradePanel = new Panel($('hot-grade-panel'));
     var searchSelect = new Select('searchSelect', [
         {
             name: '站内资源',

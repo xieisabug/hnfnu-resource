@@ -1255,7 +1255,7 @@ Fx.Accordion = new Class({
         toggler.store('accordion:display', displayer)
             .addEvent(options.trigger, displayer);
 
-        if (options.height) element.setStyles({'padding-top': 0, 'border-top': 'none', 'padding-bottom': 0, 'border-bottom': 'none'});
+        if (options.height) element.setStyles({'padding-top': 0, 'border-top': 'none', 'padding-bottom': 0});
         if (options.width) element.setStyles({'padding-left': 0, 'border-left': 'none', 'padding-right': 0, 'border-right': 'none'});
 
         element.fullOpacity = 1;

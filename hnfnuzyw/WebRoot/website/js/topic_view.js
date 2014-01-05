@@ -3,6 +3,10 @@ window.addEvent('domready', function () {
         contentHeight: 250
     });
 
+    var hotTopicList = new Panel($('hot-topic-panel'), {
+        contentHeight: 263
+    });
+
     new Tab('subtopic_tab', {
         tabChangeEvent: 'mouseover',
         tabTitleCss: 'tabTitle subtopic'
