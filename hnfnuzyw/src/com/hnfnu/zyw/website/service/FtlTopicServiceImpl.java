@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.hnfnu.zyw.dao.base.Pager;
 import com.hnfnu.zyw.dao.resources.ITopicDao;
 import com.hnfnu.zyw.dto.resources.TopicDto;
 import com.hnfnu.zyw.website.utils.FreemarkerUtil;
@@ -41,6 +42,22 @@ public class FtlTopicServiceImpl implements FtlITopicService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+		
+	}
+
+	/**
+	 * 得到最热的前10个专题
+	 */
+	public List<TopicDto> getTenHotTopics() {
+		String hql ="from TopicDto order by viewTimes"; 
+		Pager<TopicDto> tPager;
+		try {
+			tPager = topicDao.find(hql, 0, 10);
+			return tPager.getDatas();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 		
 	}
 
