@@ -5,17 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.hnfnu.zyw.dao.resources.*;
+import com.hnfnu.zyw.dto.resources.CourseDto;
+import com.hnfnu.zyw.dto.resources.SubjectDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.hnfnu.zyw.dao.base.Pager;
-import com.hnfnu.zyw.dao.resources.ICourseGradeSubjectDao;
-import com.hnfnu.zyw.dao.resources.IGradeDao;
-import com.hnfnu.zyw.dao.resources.IGroupDao;
-import com.hnfnu.zyw.dao.resources.ISourceVoDao;
-import com.hnfnu.zyw.dao.resources.ISubjectDao;
-import com.hnfnu.zyw.dao.resources.ITopicDao;
 import com.hnfnu.zyw.dto.resources.GradeDto;
 import com.hnfnu.zyw.dto.resources.GroupDto;
 import com.hnfnu.zyw.vo.CourseGradeSubjectVo;
@@ -43,11 +40,17 @@ public class SourceListServiceImpl implements ISourceListService{
 	@Autowired
 	@Qualifier("topicDao")
 	public ITopicDao topicDao;
+
+    @Autowired
+    @Qualifier("courseDao")
+    public ICourseDao courseDao;
+
 	@Autowired
 	@Qualifier("courseGradeSubjectDao")
 	public ICourseGradeSubjectDao courseGradeSubjectDao;
 
-	public Map<String, Object> getGroupsAndGrades() {
+
+    public Map<String, Object> getGroupsAndGrades() {
 		Map<String, Object> root = new HashMap<String, Object>();
 		List<Map<String, Object>> list =new ArrayList<Map<String,Object>>();
 		Map<String, Object> groupMap = null;
@@ -77,8 +80,7 @@ public class SourceListServiceImpl implements ISourceListService{
 	public Pager<SourceVo> indexPage(int pagerIndex) {
 		int pageOffset = (pagerIndex -1)* PAGE_SIZE;
 		try {
-			Pager<SourceVo> sourcePager = sourceVoDao.find("from SourceVo order by id desc", pageOffset, PAGE_SIZE);
-			return sourcePager;
+            return sourceVoDao.find("from SourceVo order by id desc", pageOffset, PAGE_SIZE);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
@@ -87,10 +89,14 @@ public class SourceListServiceImpl implements ISourceListService{
 
 	public Map<String, Object> getSubjectByGroupAndGrade(int groupId,
 			int gradeId) {
-		Map<String, Object> root = new HashMap<String, Object>();
-		String hql = "FROM CourseGradeSubjectVo  where groupId="+groupId+" and gradeId="+gradeId+" group by subjectId";
-		try {
-			List<CourseGradeSubjectVo> courseGradeSubjectList =courseGradeSubjectDao.list(hql);
+		Map<String, Object> root = new HashMap<>();
+        String hql = "FROM CourseGradeSubjectVo  where groupId="+groupId+" and gradeId="+gradeId+" group by subjectId";
+        try {
+            GradeDto grade = gradeDao.get(gradeId);
+            root.put("grade",grade);
+            GroupDto group = groupDao.get(groupId);
+            root.put("group",group);
+            List<CourseGradeSubjectVo> courseGradeSubjectList =courseGradeSubjectDao.list(hql);
 			root.put("courseGradeSubjectList", courseGradeSubjectList);
 			Pager<SourceVo> sourcePager = sourceVoDao.find("from SourceVo where groupId="+groupId+" and gradeId="+gradeId+" order by id desc", 0, PAGE_SIZE);
 			root.put("sourcePager", sourcePager);
@@ -117,6 +123,12 @@ public class SourceListServiceImpl implements ISourceListService{
 		Map<String, Object> root = new HashMap<String, Object>();
 		String hql = "FROM CourseGradeSubjectVo where groupId="+groupId+" and gradeId="+gradeId+" and subjectId="+subjectId;
 		try {
+            GradeDto grade = gradeDao.get(gradeId);
+            root.put("grade",grade);
+            GroupDto group = groupDao.get(groupId);
+            root.put("group",group);
+            SubjectDto subject = subjectDao.get(subjectId);
+            root.put("subject", subject);
 			List<CourseGradeSubjectVo> courseGradeSubjectList =courseGradeSubjectDao.list(hql);
 			root.put("courseGradeSubjectList", courseGradeSubjectList);
 			Pager<SourceVo> sourcePager = sourceVoDao.find("from SourceVo where groupId="+groupId+" and gradeId="+gradeId+" and subjectId="+subjectId+"  order by id desc", 0, PAGE_SIZE);
@@ -133,6 +145,43 @@ public class SourceListServiceImpl implements ISourceListService{
 		int pageOffset = (pagerIndex -1)* PAGE_SIZE;
 		try {
 			Pager<SourceVo> sourcePager = sourceVoDao.find("from SourceVo where groupId="+groupId+" and gradeId="+gradeId+" and subjectId="+subjectId+"  order by id desc", pageOffset, PAGE_SIZE);
+			return sourcePager;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	public Map<String, Object> getFinalByGroupAndGradeAndSubjectAndCourse(int groupId,
+			int gradeId, int subjectId, int courseId) {
+		Map<String, Object> root = new HashMap<>();
+		String hql = "FROM CourseGradeSubjectVo where groupId="+groupId+" and gradeId="+gradeId+" and subjectId="+subjectId+" and id="+courseId;
+		try {
+            GradeDto grade = gradeDao.get(gradeId);
+            root.put("grade",grade);
+            GroupDto group = groupDao.get(groupId);
+            root.put("group",group);
+            SubjectDto subject = subjectDao.get(subjectId);
+            root.put("subject", subject);
+            CourseDto course = courseDao.get(courseId);
+            root.put("course", course);
+            List<CourseGradeSubjectVo> courseGradeSubjectList =courseGradeSubjectDao.list(hql);
+			root.put("courseGradeSubjectList", courseGradeSubjectList);
+			Pager<SourceVo> sourcePager = sourceVoDao.find("from SourceVo where groupId="+groupId+" and gradeId="
+                    +gradeId+" and subjectId="+subjectId+" and courseId="+ courseId + "  order by id desc", 0, PAGE_SIZE);
+			root.put("sourcePager", sourcePager);
+			return root;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public Pager<SourceVo> indexPage(int pagerIndex, int groupId, int gradeId,
+			int subjectId, int courseId) {
+		int pageOffset = (pagerIndex -1)* PAGE_SIZE;
+		try {
+			Pager<SourceVo> sourcePager = sourceVoDao.find("from SourceVo where groupId="+groupId+" and gradeId="
+                    +gradeId+" and subjectId="+subjectId+" and courseId="+ courseId + "  order by id desc", pageOffset, PAGE_SIZE);
 			return sourcePager;
 		} catch (Exception e) {
 			e.printStackTrace();

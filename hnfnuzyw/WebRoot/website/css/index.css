@@ -616,7 +616,7 @@ label {
 }
 /**online source view**/
 /**choose view**/
-#choose-accordion {
+#choose-accordion,#choose-panel {
     width: 700px;
     float: left;
 }
