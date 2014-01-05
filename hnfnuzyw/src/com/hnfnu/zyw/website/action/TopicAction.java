@@ -81,6 +81,7 @@ public class TopicAction extends ActionSupport {
 //			topicService.update(topic);
 			UserDto user = userService.load(topic.getCreateUserId());
 			List<Map<String, Object>> subTopics = new ArrayList<Map<String, Object>>();
+			List<TopicDto> tenHotTopics = ftl_topicService.getTenHotTopics();
 			Map<String, Object> subtitleMap = null;
 
 			List<TopicSubtitleDto> topicSubtitleDtos = topicSubtitleService
@@ -105,6 +106,7 @@ public class TopicAction extends ActionSupport {
 				request.setAttribute("success", success);
 				return "error";
 			}
+			request.setAttribute("tenHotTopics", tenHotTopics);
 			request.setAttribute("topic", topic);
 			request.setAttribute("topicUser", user);
 			request.setAttribute("subTopics", subTopics);
