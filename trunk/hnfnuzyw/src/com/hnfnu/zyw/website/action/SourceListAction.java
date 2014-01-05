@@ -33,6 +33,7 @@ public class SourceListAction extends ActionSupport {
 	private static final long serialVersionUID = -6797136426456854163L;
 	private boolean success;
 	private String message;
+	private int groupId;
 	private int subjectId;
 	private int gradeId;
 	// 当前是第几页,从1开始
@@ -159,6 +160,82 @@ public class SourceListAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
+	/**
+	 * 根据分组id和年级id获得CourseGradeSubjectVo的列表和前八个SourceVo
+	 * @return
+	 */
+	@Action(value = "subject")
+	public String subjectByGroupAndGrade() {
+		Map<String, Object> subjectMap = sourceListService.getSubjectByGroupAndGrade(groupId, gradeId);
+		HttpServletRequest request = ServletActionContext.getRequest();
+		if (subjectMap == null) {
+			request.setAttribute("message", message);
+			request.setAttribute("success", success);
+			return "error";
+		}
+		request.setAttribute("subjectMap", subjectMap);
+		request.setAttribute("message", message);
+		request.setAttribute("success", success);
+		return SUCCESS;
+	}
+	
+	/**
+	 * 根据分组id和年级id和第几页获得该页的八个SourceVo
+	 * @return
+	 */
+	@Action(value = "subjectPage")
+	public String subjectByGroupAndGradePage() {
+		Pager<SourceVo> pager = sourceListService.indexPage(pagerIndex, groupId, gradeId);
+		HttpServletRequest request = ServletActionContext.getRequest();
+		if (pager == null) {
+			request.setAttribute("message", message);
+			request.setAttribute("success", success);
+			return "error";
+		}
+		request.setAttribute("pager", pager);
+		request.setAttribute("message", message);
+		request.setAttribute("success", success);
+		return SUCCESS;
+	}
+	/**
+	 * 根据分组id和年级id和科目id获得和CourseGradeSubjectVo的列表和前八个SourceVo
+	 * @return
+	 */
+	@Action(value = "course")
+	public String courseByGroupAndGradeAndSubject() {
+		Map<String, Object> courseMap = sourceListService.getCourseByGroupAndGradeAndSubject(groupId, gradeId, subjectId);
+		HttpServletRequest request = ServletActionContext.getRequest();
+		if (courseMap == null) {
+			request.setAttribute("message", message);
+			request.setAttribute("success", success);
+			return "error";
+		}
+		request.setAttribute("courseMap", courseMap);
+		request.setAttribute("message", message);
+		request.setAttribute("success", success);
+		return SUCCESS;
+	}
+
+	/**
+	 * 根据分组id和年级id和科目id和第几页获得该页的八个SourceVo
+	 * @return
+	 */
+	@Action(value = "coursePage")
+	public String courseByGroupAndGradeAndSubjectPage() {
+		Pager<SourceVo> pager = sourceListService.indexPage(pagerIndex, groupId, gradeId, subjectId);
+		HttpServletRequest request = ServletActionContext.getRequest();
+		if (pager == null) {
+			request.setAttribute("message", message);
+			request.setAttribute("success", success);
+			return "error";
+		}
+		request.setAttribute("pager", pager);
+		request.setAttribute("message", message);
+		request.setAttribute("success", success);
+		return SUCCESS;
+	}
+	
+	
 	// get set
 	public boolean isSuccess() {
 		return success;
@@ -212,6 +289,9 @@ public class SourceListAction extends ActionSupport {
 
 	public void setGradeService(IGradeService gradeService) {
 		this.gradeService = gradeService;
+	}
+	public void setGroupId(int groupId) {
+		this.groupId = groupId;
 	}
 
 }

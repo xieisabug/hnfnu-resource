@@ -135,6 +135,25 @@ public class TopicAction extends ActionSupport {
 		ftl_topicService.getTopics();
 		return SUCCESS;
 	}
+	/**
+	 * 得到最热的前10个专题
+	 */
+	@Action(value = "tenHotTopics")
+	public String tenHotTopics() {
+		List<TopicDto> tenHotTopics = ftl_topicService.getTenHotTopics();
+		
+		HttpServletRequest request = ServletActionContext.getRequest();
+		if (tenHotTopics == null) {
+			request.setAttribute("message", message);
+			request.setAttribute("success", success);
+			return "error";
+		}
+		request.setAttribute("tenHotTopics", tenHotTopics);
+		request.setAttribute("message", message);
+		request.setAttribute("success", success);
+		return SUCCESS;
+	}
+	
 	
 	public boolean isSuccess() {
 		return success;
