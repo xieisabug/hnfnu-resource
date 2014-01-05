@@ -49,7 +49,7 @@ public class FtlTopicServiceImpl implements FtlITopicService {
 	 * 得到最热的前10个专题
 	 */
 	public List<TopicDto> getTenHotTopics() {
-		String hql ="from TopicDto order by viewTimes"; 
+		String hql ="from TopicDto order by viewTimes desc"; 
 		Pager<TopicDto> tPager;
 		try {
 			tPager = topicDao.find(hql, 0, 10);
