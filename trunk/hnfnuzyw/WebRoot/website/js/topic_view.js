@@ -108,7 +108,7 @@ function generateSourceItem(data) {
     html += '            <td><span>文件大小</span>：'+data.fileSize+'M</td>';
     html += '        </tr>';
     html += '        <tr>';
-    html += '            <td><span>出版社</span>：'+data.publisher+'</td>';
+    html += '            <td><span>出品方</span>：'+data.publisher+'</td>';
     html += '            <td>&nbsp;</td>';
     html += '        </tr>';
     html += '    </table>';

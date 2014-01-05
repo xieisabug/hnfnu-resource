@@ -501,7 +501,7 @@ function formInit(groupId) {
 					}
 				}, {
 					name : 'publisher',
-					display : '出版社',
+					display : '出品方',
 					type : 'text',
 					newline : true,
 					width : 200
@@ -727,7 +727,7 @@ $(function() {
 			align : 'left',
 			minWidth : 60
 		}, {
-			display : '出版社',
+			display : '出品方',
 			name : 'publisher',
 			align : 'left',
 			hide : true,

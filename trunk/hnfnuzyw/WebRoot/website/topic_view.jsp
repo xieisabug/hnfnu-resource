@@ -169,7 +169,7 @@
                             <td><span>文件大小</span>：<%=tssv.getFileSize()%>M</td>
                         </tr>
                         <tr>
-                            <td><span>出版社</span>：<%=tssv.getPublisher()%></td>
+                            <td><span>出品方</span>：<%=tssv.getPublisher()%></td>
                             <td>&nbsp;</td>
                         </tr>
                     </table>
@@ -204,7 +204,7 @@
                             <td><span>文件大小</span>：<%=tsv.getFileSize()%>M</td>
                         </tr>
                         <tr>
-                            <td><span>出版社</span>：<%=tsv.getPublisher()%></td>
+                            <td><span>出品方</span>：<%=tsv.getPublisher()%></td>
                             <td>&nbsp;</td>
                         </tr>
                     </table>
