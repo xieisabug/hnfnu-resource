@@ -3,6 +3,8 @@ package com.hnfnu.zyw.website.action;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
@@ -15,8 +17,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.hnfnu.zyw.dao.base.Pager;
-import com.hnfnu.zyw.dto.resources.GradeDto;
-import com.hnfnu.zyw.dto.resources.SubjectDto;
 import com.hnfnu.zyw.service.resources.IGradeService;
 import com.hnfnu.zyw.service.resources.ISubjectService;
 import com.hnfnu.zyw.vo.SourceVo;
@@ -28,15 +28,15 @@ import com.opensymphony.xwork2.ActionSupport;
 @Scope("prototype")
 @ParentPackage("json-default")
 @Results({ @Result(name = "success", type = "json", params = { "root", "action" }) })
-@Namespace("/ftl")
+@Namespace("/source")
 public class SourceListAction extends ActionSupport {
 	private static final long serialVersionUID = -6797136426456854163L;
 	private boolean success;
 	private String message;
 	private int subjectId;
 	private int gradeId;
-	// 当前是第几页
-	private int page;
+	// 当前是第几页,从1开始
+	private int pagerIndex;
 	// 资源类型
 	private String type;
 	// 关键字
@@ -59,7 +59,7 @@ public class SourceListAction extends ActionSupport {
 	private FreemarkerUtil fu = new FreemarkerUtil();
 	private Map<String, Object> root = null;
 
-	@Action(value = "makeListFtl")
+	/*@Action(value = "makeListFtl")
 	public String makeList() {
 		String filePath = null;
 
@@ -121,8 +121,44 @@ public class SourceListAction extends ActionSupport {
 		sourcePager = sourceListService.getPager(subjectId, gradeId, type,
 				keyWords, page, 10);
 		return SUCCESS;
+	}*/
+	/**
+	 * 学科资源的第一个界面
+	 * @return
+	 */
+	@Action(value = "index")
+	public String index() {
+		Map<String, Object> indexRoot = sourceListService.getGroupsAndGrades();
+		HttpServletRequest request = ServletActionContext.getRequest();
+		if (indexRoot == null) {
+			request.setAttribute("message", message);
+			request.setAttribute("success", success);
+			return "error";
+		}
+		request.setAttribute("indexRoot", indexRoot);
+		request.setAttribute("message", message);
+		request.setAttribute("success", success);
+		return SUCCESS;
 	}
-
+	/**
+	 * 学科资源的第一个界面的分页方法
+	 * @return
+	 */
+	@Action(value = "indexPage")
+	public String indexPage() {
+		Pager<SourceVo> pager = sourceListService.indexPage(pagerIndex);
+		HttpServletRequest request = ServletActionContext.getRequest();
+		if (pager == null) {
+			request.setAttribute("message", message);
+			request.setAttribute("success", success);
+			return "error";
+		}
+		request.setAttribute("pager", pager);
+		request.setAttribute("message", message);
+		request.setAttribute("success", success);
+		return SUCCESS;
+	}
+	
 	// get set
 	public boolean isSuccess() {
 		return success;
@@ -155,11 +191,9 @@ public class SourceListAction extends ActionSupport {
 	public void setGradeId(int gradeId) {
 		this.gradeId = gradeId;
 	}
-
-	public void setPage(int page) {
-		this.page = page;
+	public void setPagerIndex(int pagerIndex) {
+		this.pagerIndex = pagerIndex;
 	}
-
 	public void setType(String type) {
 		this.type = type;
 	}
