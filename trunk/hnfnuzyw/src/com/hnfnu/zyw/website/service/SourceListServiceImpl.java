@@ -23,7 +23,7 @@ import com.hnfnu.zyw.vo.SourceVo;
 
 @Service("ftl_sourceListService")
 public class SourceListServiceImpl implements ISourceListService{
-	public static final int PAGE_SIXE = 8;
+	public static final int PAGE_SIZE = 8;
 	@Autowired
 	@Qualifier("sourceVoDao")
 	public ISourceVoDao sourceVoDao;
@@ -63,7 +63,7 @@ public class SourceListServiceImpl implements ISourceListService{
 				groupMap.put("gradeList", grades);
 				list.add(groupMap);
 			}
-			Pager<SourceVo> sourcePager = sourceVoDao.find("from SourceVo order by id desc", 0, PAGE_SIXE);
+			Pager<SourceVo> sourcePager = sourceVoDao.find("from SourceVo order by id desc", 0, PAGE_SIZE);
 			root.put("groupList", list);
 			root.put("sourcePager", sourcePager);
 			return root;
@@ -75,9 +75,9 @@ public class SourceListServiceImpl implements ISourceListService{
 	}
 
 	public Pager<SourceVo> indexPage(int pagerIndex) {
-		int pageOffset = (pagerIndex -1)*PAGE_SIXE;
+		int pageOffset = (pagerIndex -1)* PAGE_SIZE;
 		try {
-			Pager<SourceVo> sourcePager = sourceVoDao.find("from SourceVo order by id desc", pageOffset, PAGE_SIXE);
+			Pager<SourceVo> sourcePager = sourceVoDao.find("from SourceVo order by id desc", pageOffset, PAGE_SIZE);
 			return sourcePager;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -92,7 +92,7 @@ public class SourceListServiceImpl implements ISourceListService{
 		try {
 			List<CourseGradeSubjectVo> courseGradeSubjectList =courseGradeSubjectDao.list(hql);
 			root.put("courseGradeSubjectList", courseGradeSubjectList);
-			Pager<SourceVo> sourcePager = sourceVoDao.find("from SourceVo where groupId="+groupId+" and gradeId="+gradeId+" order by id desc", 0, PAGE_SIXE);
+			Pager<SourceVo> sourcePager = sourceVoDao.find("from SourceVo where groupId="+groupId+" and gradeId="+gradeId+" order by id desc", 0, PAGE_SIZE);
 			root.put("sourcePager", sourcePager);
 			return root;
 		} catch (Exception e) {
@@ -102,9 +102,9 @@ public class SourceListServiceImpl implements ISourceListService{
 	}
 
 	public Pager<SourceVo> indexPage(int pagerIndex, int groupId, int gradeId) {
-		int pageOffset = (pagerIndex -1)*PAGE_SIXE;
+		int pageOffset = (pagerIndex -1)* PAGE_SIZE;
 		try {
-			Pager<SourceVo> sourcePager = sourceVoDao.find("from SourceVo where groupId="+groupId+" and gradeId="+gradeId+" order by id desc", pageOffset, PAGE_SIXE);
+			Pager<SourceVo> sourcePager = sourceVoDao.find("from SourceVo where groupId="+groupId+" and gradeId="+gradeId+" order by id desc", pageOffset, PAGE_SIZE);
 			return sourcePager;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -119,7 +119,7 @@ public class SourceListServiceImpl implements ISourceListService{
 		try {
 			List<CourseGradeSubjectVo> courseGradeSubjectList =courseGradeSubjectDao.list(hql);
 			root.put("courseGradeSubjectList", courseGradeSubjectList);
-			Pager<SourceVo> sourcePager = sourceVoDao.find("from SourceVo where groupId="+groupId+" and gradeId="+gradeId+" and subjectId="+subjectId+"  order by id desc", 0, PAGE_SIXE);
+			Pager<SourceVo> sourcePager = sourceVoDao.find("from SourceVo where groupId="+groupId+" and gradeId="+gradeId+" and subjectId="+subjectId+"  order by id desc", 0, PAGE_SIZE);
 			root.put("sourcePager", sourcePager);
 			return root;
 		} catch (Exception e) {
@@ -130,9 +130,9 @@ public class SourceListServiceImpl implements ISourceListService{
 
 	public Pager<SourceVo> indexPage(int pagerIndex, int groupId, int gradeId,
 			int subjectId) {
-		int pageOffset = (pagerIndex -1)*PAGE_SIXE;
+		int pageOffset = (pagerIndex -1)* PAGE_SIZE;
 		try {
-			Pager<SourceVo> sourcePager = sourceVoDao.find("from SourceVo where groupId="+groupId+" and gradeId="+gradeId+" and subjectId="+subjectId+"  order by id desc", pageOffset, PAGE_SIXE);
+			Pager<SourceVo> sourcePager = sourceVoDao.find("from SourceVo where groupId="+groupId+" and gradeId="+gradeId+" and subjectId="+subjectId+"  order by id desc", pageOffset, PAGE_SIZE);
 			return sourcePager;
 		} catch (Exception e) {
 			e.printStackTrace();

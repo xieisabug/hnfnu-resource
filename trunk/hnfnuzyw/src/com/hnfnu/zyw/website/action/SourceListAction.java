@@ -1,6 +1,5 @@
 package com.hnfnu.zyw.website.action;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,7 +36,7 @@ public class SourceListAction extends ActionSupport {
 	private int subjectId;
 	private int gradeId;
 	// 当前是第几页,从1开始
-	private int pagerIndex;
+	private int pageIndex;
 	// 资源类型
 	private String type;
 	// 关键字
@@ -127,7 +126,7 @@ public class SourceListAction extends ActionSupport {
 	 * 学科资源的第一个界面
 	 * @return
 	 */
-	@Action(value = "index")
+	@Action(value = "index", results = { @Result(name = "success", location = "../../../website/choose_index.jsp") })
 	public String index() {
 		Map<String, Object> indexRoot = sourceListService.getGroupsAndGrades();
 		HttpServletRequest request = ServletActionContext.getRequest();
@@ -147,16 +146,14 @@ public class SourceListAction extends ActionSupport {
 	 */
 	@Action(value = "indexPage")
 	public String indexPage() {
-		Pager<SourceVo> pager = sourceListService.indexPage(pagerIndex);
-		HttpServletRequest request = ServletActionContext.getRequest();
-		if (pager == null) {
-			request.setAttribute("message", message);
-			request.setAttribute("success", success);
+        sourcePager = sourceListService.indexPage(pageIndex);
+		if (sourcePager == null) {
+			message = "读取分页错误";
+			success = false;
 			return "error";
 		}
-		request.setAttribute("pager", pager);
-		request.setAttribute("message", message);
-		request.setAttribute("success", success);
+        success = true;
+        message = "读取分页成功";
 		return SUCCESS;
 	}
 	
@@ -185,7 +182,7 @@ public class SourceListAction extends ActionSupport {
 	 */
 	@Action(value = "subjectPage")
 	public String subjectByGroupAndGradePage() {
-		Pager<SourceVo> pager = sourceListService.indexPage(pagerIndex, groupId, gradeId);
+		Pager<SourceVo> pager = sourceListService.indexPage(pageIndex, groupId, gradeId);
 		HttpServletRequest request = ServletActionContext.getRequest();
 		if (pager == null) {
 			request.setAttribute("message", message);
@@ -222,7 +219,7 @@ public class SourceListAction extends ActionSupport {
 	 */
 	@Action(value = "coursePage")
 	public String courseByGroupAndGradeAndSubjectPage() {
-		Pager<SourceVo> pager = sourceListService.indexPage(pagerIndex, groupId, gradeId, subjectId);
+		Pager<SourceVo> pager = sourceListService.indexPage(pageIndex, groupId, gradeId, subjectId);
 		HttpServletRequest request = ServletActionContext.getRequest();
 		if (pager == null) {
 			request.setAttribute("message", message);
@@ -241,24 +238,8 @@ public class SourceListAction extends ActionSupport {
 		return success;
 	}
 
-	public void setSuccess(boolean success) {
-		this.success = success;
-	}
-
 	public String getMessage() {
 		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
-	}
-
-	public ISourceListService getSourceListService() {
-		return sourceListService;
-	}
-
-	public void setSourceListService(ISourceListService sourceListService) {
-		this.sourceListService = sourceListService;
 	}
 
 	public void setSubjectId(int subjectId) {
@@ -268,8 +249,8 @@ public class SourceListAction extends ActionSupport {
 	public void setGradeId(int gradeId) {
 		this.gradeId = gradeId;
 	}
-	public void setPagerIndex(int pagerIndex) {
-		this.pagerIndex = pagerIndex;
+	public void setPageIndex(int pageIndex) {
+		this.pageIndex = pageIndex;
 	}
 	public void setType(String type) {
 		this.type = type;
@@ -283,13 +264,6 @@ public class SourceListAction extends ActionSupport {
 		return sourcePager;
 	}
 
-	public void setSubjectService(ISubjectService subjectService) {
-		this.subjectService = subjectService;
-	}
-
-	public void setGradeService(IGradeService gradeService) {
-		this.gradeService = gradeService;
-	}
 	public void setGroupId(int groupId) {
 		this.groupId = groupId;
 	}

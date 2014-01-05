@@ -1,21 +1,11 @@
 window.addEvent('domready', function () {
-    var panel = new Panel($('topic-view-panel'), {
-        contentHeight: 250
-    });
-
-    var hotTopicList = new Panel($('hot-topic-panel'), {
-        contentHeight: 263
-    });
-
-    new Tab('subtopic_tab', {
-        tabChangeEvent: 'mouseover',
-        tabTitleCss: 'tabTitle subtopic'
-    });
-
+    var showPanel = new Panel($('show-panel'));
+    var hotGradePanel = new Panel($('hot-grade-panel'));
+    new Fx.Accordion($('choose-accordion'),'.choose-type','.choose-list');
     initStyleAndEvent();
 });
 
-function initStyleAndEvent() {
+function initStyleAndEvent(){
     $$('.topic-resource-btn a').each(function (item) {
         new Button(item).addClass('topic-view-btn');
     });
@@ -29,23 +19,20 @@ function initStyleAndEvent() {
 }
 
 function more(subtitleId){
-    var move = $$('.tabContent.selected>.more');
-    var content =  $$('.tabContent.selected')[0];
+    var move = $$('#source-list div.more')[0];
+    var content =  $('source-list');
     var page = move.getProperty("page");
     page++;
     new Request.JSON({
-        url:"../topic/page",
+        url:basePath + "source/indexPage",
         onSuccess:function(data){
             var oldH = content.getScrollSize().y;
-            var topicSources = data.topicSources;
-            var joinSources = data.joinSources;
+            var datas = data.sourcePager.datas;
             var html = '',i = 0;
-            for(i = 0; i<topicSources.length; i++) {
-                html += generateSourceItem(topicSources[i]);
+            for(i = 0; i<datas.length; i++) {
+                html += generateSourceItem(datas[i]);
             }
-            for(i = 0; i<joinSources.length; i++) {
-                html += generateSourceItem(joinSources[i]);
-            }
+            console.log(html);
             new Element('div',{
                 html:html
             }).getChildren().each(function(item){
@@ -61,12 +48,11 @@ function more(subtitleId){
             fx.start({
                 height:[oldH, h]
             });
-            if( (topicSources.length<8 && joinSources.length<8 ) ) {
+            if( data.sourcePager.size < 8 ) {
                 move.destroy();
             }
         }
     }).get({
-            subtitleId : subtitleId,
             pageIndex:page
         });
 
@@ -80,7 +66,7 @@ function generateSourceItem(data) {
     html += '            <td style="width: 120px; text-align: center" rowspan="4">';
     html += '                <img src="' + basePath + 'website/image/file_icon_'+data.mediaFormat+'.png" style="width:77px; height:77px; display: inline;">';
     html += '            </td>';
-    html += '            <td style="width: 200px;"><span>资源名</span>：'+data.sourceName+'</td>';
+    html += '            <td style="width: 200px;"><span>资源名</span>：'+data.name+'</td>';
     if(data.price == 0) {
         html += '            <td style="width: 150px;"><span>资源币</span>：免费</td>';
     } else {
@@ -95,24 +81,16 @@ function generateSourceItem(data) {
     html += '            <td style="width: 130px; text-align: center" rowspan="4">';
     html += '                <div class="topic-resource-btn">';
     if(onlineViewFormat.contains(data.mediaFormat+',')) {
-        if(!data.sourceId) {
-            html += '                    <a href="'+basePath+'online/view?id='+data.id+'&type=1">在线预览</a>';
-        } else {
-            html += '                    <a href="'+basePath+'online/view?id='+data.sourceId+'&type=2">在线预览</a>';
-        }
+        html += '                    <a href="'+basePath+'online/view?id='+data.id+'&type=1">在线预览</a>';
     }
-    if(!data.sourceId) {
-        html += '                    <a href="'+basePath+'file/download?id='+data.id+'&type=1">下载资源</a>';
-    } else {
-        html += '                    <a href="'+basePath+'file/download?id='+data.sourceId+'&type=2">下载资源</a>';
-    }
+    html += '                    <a href="'+basePath+'file/download?id='+data.id+'&type=2">下载资源</a>';
     html += '                </div>';
     html += '            </td>';
     html += '        </tr>';
     html += '        <tr>';
-    html += '            <td><span>作者</span>：'+data.sourceAuthor+'</td>';
+    html += '            <td><span>作者</span>：'+data.author+'</td>';
     html += '            <td><span>资源类型</span>：'+data.mediaType+'</td>';
-    html += '            <td rowspan="3"><span>资源描述</span>：'+data.sourceDescription+'M</td>';
+    html += '            <td rowspan="3"><span>资源描述</span>：'+data.description+'M</td>';
     html += '        </tr>';
     html += '        <tr>';
     html += '            <td><span>出品方</span>：'+data.publisher+'</td>';
