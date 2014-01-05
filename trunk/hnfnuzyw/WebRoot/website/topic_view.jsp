@@ -15,6 +15,7 @@
     TopicDto topic = (TopicDto) request.getAttribute("topic");
     UserDto topicUser = (UserDto) request.getAttribute("topicUser");
     List<Map<String,Object>> subTopics = (List<Map<String, Object>>) request.getAttribute("subTopics");
+    List<TopicDto> tenHotTopics = (List<TopicDto>) request.getAttribute("tenHotTopics");
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
     String onlineViewFormat = "mp4,flv,wmv,";
 %>
@@ -49,48 +50,79 @@
             您的位置：<a href="#">首页</a> > <a href="#">专题</a>
         </div>
     </div>
-    <div class="row" id="topic-view-panel">
-        <div>
-            <div class="panel-head-icon"></div>
-            <span><%=topic.getName()%></span>
-        </div>
-        <div class="topic-info">
-            <div class="topic-image">
-                <img src="<%=basePath+"uploads/topic/image/"+topic.getImageUrl()%>"/>
+    <div class="row">
+        <div id="topic-view-panel">
+            <div>
+                <div class="panel-head-icon"></div>
+                <span><%=topic.getName()%></span>
+            </div>
+            <div class="topic-info">
+                <div class="topic-image">
+                    <img src="<%=basePath+"uploads/topic/image/"+topic.getImageUrl()%>"/>
 
-                <div>
-                    <p><%=topic.getViewTimes()%> 次浏览</p>
+                    <div>
+                        <p><%=topic.getViewTimes()%> 次浏览</p>
+                        <p>发布时间：<%out.print(sdf.format(topic.getCreateDate()));%></p>
+                        <p>更新时间：<%out.print(sdf.format(topic.getLastUpdateDate()));%> </p>
+                        <div>关键字：
+                            <%
+                                String keyWords = topic.getKeyWords();
+                                String[] keyWordArray = keyWords.split(";");
+                                for (String k : keyWordArray) {
+                            %>
+                            <a href="search?keyword=<%=k%>"><%=k%> </a>
+                            <%
+                                }
+                            %>
+                        </div>
+                    </div>
+                </div>
+                <div class="topic-view-description">
+                    <div>
+                        <div style="float: left;width: 180px;height: 120px;overflow: hidden;">
+                            <h3><%=topic.getName()%></h3>
+                            <div><%=topic.getRemark()%></div>
+                        </div>
+                        <div class="topic-user">
+                            <img src="<%=basePath+"uploads/user/image/"+topicUser.getIcon()%>">
+
+                            <div class="topic-user-info">
+                                <p><%=topicUser.getName()%></p>
+                                <p>资源币：<%=topicUser.getBalance()%></p>
+                                <p>上次登录时间：<%out.print(sdf.format(topicUser.getLatestLoginDate()));%></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="clear: both;overflow: hidden;">
+                        <%=topic.getDescription()%>
+                    </div>
                 </div>
             </div>
-            <div class="topic-view-description">
-                <div>关键字：
+        </div>
+        <div id="hot-topic-panel">
+            <div>
+                <div class="panel-head-icon"></div>
+                <span>最热专题</span>
+            </div>
+            <div class="hot-topic-list">
+                <ul>
                     <%
-                        String keyWords = topic.getKeyWords();
-                        String[] keyWordArray = keyWords.split(";");
-                        for (String k : keyWordArray) {
+                        for (TopicDto t : tenHotTopics) {
                     %>
-                    <a href="search?keyword=<%=k%>"><%=k%> </a>
+                    <li>
+                        <a href="<%=basePath+"topic/view?topicId="+t.getId()%>">
+                            <div style="width: 180px;float: left;margin: 0;"><%=t.getName()%></div>
+                            <div style="width: 50px;float: right;margin: 0;text-align: right;"><%=t.getViewTimes()%></div>
+                        </a>
+                    </li>
                     <%
                         }
                     %>
-                </div>
-                <div>时间：<%out.print(sdf.format(topic.getCreateDate()));%> 发布 | <%out.print(sdf.format(topic.getLastUpdateDate()));%> 更新</div>
-                <div>
-                    <%=topic.getDescription()%>
-                </div>
-            </div>
-            <div class="topic-user">
-                <img src="<%=basePath+"uploads/user/image/"+topicUser.getIcon()%>">
-
-                <div class="topic-user-info">
-                    <p><%=topicUser.getName()%></p>
-
-                    <%--<p><%=topicUser%></p>--%>
-                </div>
+                </ul>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row" style="clear: both;">
         <div id="subtopic_tab">
             <ul>
                 <%
