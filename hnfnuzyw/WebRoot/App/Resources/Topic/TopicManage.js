@@ -600,7 +600,7 @@ function query_join_source(){
                     align : 'left',
                     minWidth : 60
                 }, {
-                    display : '出版社',
+                    display : '出品方',
                     name : 'publisher',
                     align : 'left',
                     hide : true,
@@ -709,7 +709,7 @@ function query_subtitle_source(){
                     align : 'left',
                     minWidth : 60
                 }, {
-                    display : '出版社',
+                    display : '出品方',
                     name : 'publisher',
                     align : 'left',
                     hide : true,

@@ -83,7 +83,7 @@ $(function() {
                     align : 'left',
                     minWidth : 60
                 }, {
-                    display : '出版社',
+                    display : '出品方',
                     name : 'publisher',
                     align : 'left',
                     hide : true,
@@ -176,7 +176,7 @@ function sourceViewTable(data){
     html += '<td>'+data.author+'</td>';
     html += '</tr>';
     html += '<tr>';
-    html += '<td class="attrName">出版社</td>';
+    html += '<td class="attrName">出品方</td>';
     html += '<td>'+data.publisher+'</td>';
     html += '<td class="attrName">描述</td>';
     html += '<td>'+data.sourceDescription+'</td>';
