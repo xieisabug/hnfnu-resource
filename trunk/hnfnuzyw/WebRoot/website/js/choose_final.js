@@ -1,7 +1,5 @@
 window.addEvent('domready', function () {
     var showPanel = new Panel($('show-panel'));
-    var hotGradePanel = new Panel($('hot-grade-panel'));
-    new Fx.Accordion($('choose-accordion'),'.choose-type','.choose-list');
     initStyleAndEvent();
 });
 
@@ -18,13 +16,13 @@ function initStyleAndEvent(){
     });
 }
 
-function more(){
+function more(groupId, gradeId,subjectId,courseId){
     var move = $$('#source-list div.more')[0];
     var content =  $('source-list');
     var page = move.getProperty("page");
     page++;
     new Request.JSON({
-        url:basePath + "source/indexPage",
+        url:basePath + "source/finalPage",
         onSuccess:function(data){
             var oldH = content.getScrollSize().y;
             var datas = data.sourcePager.datas;
@@ -53,7 +51,11 @@ function more(){
             }
         }
     }).get({
-            pageIndex:page
+            pageIndex:page,
+            gradeId: gradeId,
+            groupId : groupId,
+            subjectId: subjectId,
+            courseId : courseId
         });
 
     move.setProperty("page",page);
