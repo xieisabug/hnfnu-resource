@@ -87,7 +87,8 @@ public class TopicSubtitleSourceVoServiceImpl implements ITopicSubtitleSourceVoS
 		String hql = "from TopicSubtitleSourceVo where subtitleId="+subtitleId;
 		List<TopicSubtitleSourceVo> gardes = null;
 		try {
-			gardes = topicSubtitleSourceVoDao.queryForPage(hql, startIndex, pageSize);
+			gardes = topicSubtitleSourceVoDao.find(hql, startIndex, pageSize).getDatas();
+					//queryForPage(hql, startIndex, pageSize);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

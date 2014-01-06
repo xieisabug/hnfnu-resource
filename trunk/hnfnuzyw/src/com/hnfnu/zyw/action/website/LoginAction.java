@@ -1,12 +1,20 @@
 package com.hnfnu.zyw.action.website;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+
+import javax.imageio.ImageIO;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
@@ -17,7 +25,6 @@ import org.apache.struts2.convention.annotation.Results;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 
 import com.hnfnu.zyw.action.base.AopNoSuchMethodErrorSolveBaseAction;
@@ -26,12 +33,6 @@ import com.hnfnu.zyw.dto.system.UserDto;
 import com.hnfnu.zyw.dto.system.ValidateMessege;
 import com.hnfnu.zyw.service.website.ILoginService;
 import com.opensymphony.xwork2.ActionContext;
-
-import javax.imageio.ImageIO;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 @Controller("loginAction")
 @Scope("prototype")

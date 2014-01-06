@@ -16,11 +16,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.hnfnu.zyw.dao.base.Pager;
-import com.hnfnu.zyw.service.resources.IGradeService;
-import com.hnfnu.zyw.service.resources.ISubjectService;
 import com.hnfnu.zyw.vo.SourceVo;
 import com.hnfnu.zyw.website.service.ISourceListService;
-import com.hnfnu.zyw.website.utils.FreemarkerUtil;
 import com.opensymphony.xwork2.ActionSupport;
 
 @Controller("ftlSourceListAction")
@@ -39,9 +36,9 @@ public class SourceListAction extends ActionSupport {
     // 当前是第几页,从1开始
     private int pageIndex;
     // 资源类型
-    private String type;
+    //private String type;
     // 关键字
-    private String keyWords;
+    //private String keyWords;
     // 返回给界面的一页的数据
     private Pager<SourceVo> sourcePager;
 
@@ -49,16 +46,16 @@ public class SourceListAction extends ActionSupport {
     @Qualifier("ftl_sourceListService")
     private ISourceListService sourceListService;
 
-    @Autowired
+    /*@Autowired
     @Qualifier("subjectService")
-    private ISubjectService subjectService;
+    private ISubjectService subjectService;*/
 
-    @Autowired
+    /*@Autowired
     @Qualifier("gradeService")
-    private IGradeService gradeService;
+    private IGradeService gradeService;*/
 
-    private FreemarkerUtil fu = new FreemarkerUtil();
-    private Map<String, Object> root = null;
+    /*private FreemarkerUtil fu = new FreemarkerUtil();
+    private Map<String, Object> root = null;*/
 
 	/*@Action(value = "makeListFtl")
     public String makeList() {
@@ -296,14 +293,6 @@ public class SourceListAction extends ActionSupport {
 
     public void setPageIndex(int pageIndex) {
         this.pageIndex = pageIndex;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public void setKeyWords(String keyWords) {
-        this.keyWords = keyWords;
     }
 
     public Pager<SourceVo> getSourcePager() {

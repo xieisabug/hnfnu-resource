@@ -1,19 +1,14 @@
 package com.hnfnu.zyw.dao.base;
 
 import java.lang.reflect.ParameterizedType;
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
-
-import com.sun.istack.internal.FinalArrayList;
 
 public class BaseDao<T> extends HibernateDaoSupport implements IBaseDao<T> {
 	/**
@@ -85,7 +80,7 @@ public class BaseDao<T> extends HibernateDaoSupport implements IBaseDao<T> {
 	}
 
 
-	public List<T> queryForPage(final String hql, final int offset,
+	/*public List<T> queryForPage(final String hql, final int offset,
 			final int length) throws Exception {
 		List list = this.getHibernateTemplate().executeFind(
 				new HibernateCallback() {
@@ -100,7 +95,7 @@ public class BaseDao<T> extends HibernateDaoSupport implements IBaseDao<T> {
 
 				});
 		return list;
-	}
+	}*/
 
 	
 	public Pager<T> find(String hql, Object arg,int pageOffset,int pageSize) throws Exception {

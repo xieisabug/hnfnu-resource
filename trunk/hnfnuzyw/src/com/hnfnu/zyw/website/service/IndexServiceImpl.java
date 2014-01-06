@@ -140,6 +140,7 @@ public class IndexServiceImpl implements IIndexService {
             e.printStackTrace();
         }
     }
+    @Scheduled(cron = "0 0 0 * * ?")
     @Async
     public void makeSourceCount() {
         try {
