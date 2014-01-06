@@ -16,7 +16,7 @@
     <div id="headLogo"></div>
     <div id="headMenu">
         <div class="btn-group">
-            <a href="#">湖南第一师范学院</a><a href="#">公馆实验管理中心</a><a href="#">联系我们</a><a href="#">添加收藏</a>
+            <a href="http://www.hnfnu.edu.cn/" target="_blank">湖南第一师范学院</a><a href="#">公馆实验管理中心</a><a href="#">联系我们</a><a href="#">添加收藏</a>
         </div>
     </div>
     <div id="headSearch">
@@ -30,16 +30,17 @@
     <div class="row">
         <div class="navbar">
             <ul class="nav">
-                <li class="active"><a href="#">首页</a></li>
-                <li><a href="#">学科资源</a></li>
-                <li><a href="#">专题资源</a></li>
+                <li class="active"><a href="/website/index.jsp">首页</a></li>
                 <li><a href="#">教学视频示范中心</a></li>
                 <li><a href="#">教师职业技能训练</a></li>
                 <li><a href="#">语言学科平台</a></li>
+                <li><a href="/source/index">学科资源</a></li>
+                <li><a href="/website/topic_source.html">专题资源</a></li>
+                <li><a href="#">帮助</a></li>
             </ul>
         </div>
         <div style="margin-top: 10px; font-size: 0.8em">
-            您的位置：<a href="#">首页</a> > <a href="#">专题</a>
+            您的位置：<a href="/website/index.jsp">首页</a> > <a href="/website/topic_source.html">专题</a>
         </div>
     </div>
     <div class="row">
@@ -219,12 +220,10 @@
         </div>
     </div>
 </div>
-<div class="row">
+<div class="row" style="clear: both">
     <div style="text-align: center">
         <p>版权所有：湖南第一师范学院公共实验管理中心·湘ICP备05000548号</p>
-
         <p>地址：湖南省长沙市枫林三路1015号·邮编：410205·电话：0731-82841118</p>
-
         <p>建议使用IE 8版本以上浏览器浏览</p>
     </div>
 </div>
