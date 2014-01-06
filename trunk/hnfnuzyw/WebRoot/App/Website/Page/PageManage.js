@@ -18,44 +18,6 @@ function generateIndex(){
     });
 }
 
-function generateAllList(){
-    $.ligerDialog.confirm('确认生成所有列表页么（将会覆盖您上次生成的所有的列表页，并且会耗用较长的时间）?', '生成所有列表页', function(r) {
-        if (r) {
-            $.ajax({
-                //todo url没有更改
-                url : '../../../ftl/makeAllListFtl.action',
-                type : 'post',
-                success : function(data) {
-                    if (data.success) {
-                        $.ligerDialog.tip({title:'提示信息', content:data.message});
-                    }else{
-                        $.ligerDialog.error(data.message);
-                    }
-                }
-            })
-        }
-    });
-}
-
-function generateOneList(){
-    initListForm();
-    listWin = $.ligerDialog.open( {
-        width : 400,
-        height : 400,
-        title : "生成单一列表",
-        target : listForm,
-        buttons : [ {
-            text : "提交",
-            width : 80,
-            onclick : generate
-        }, {
-            text : "取消",
-            width : 80,
-            onclick : cancel
-        } ]
-    });
-}
-
 function generate(){
     var gradeId = $("div.l-text-wrapper #gradeId").val();
     var subjectId = $("div.l-text-wrapper #subjectId").val();
