@@ -18,7 +18,7 @@
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
     String onlineViewFormat = "mp4,flv,wmv,";
     Map<String, Object> indexRoot = (Map<String, Object>) request.getAttribute("sourceList");
-    String keyWord = (String)request.getAttribute("keyWord");
+    String keyWord = (String)indexRoot.get("keyWord");
 %>
 <!DOCTYPE html>
 <html>

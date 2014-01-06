@@ -7,6 +7,9 @@
 			            <li>${grade.name}</li>
 			        </#if>
 			    </#list>
+                <a href="/source/index">
+                    <div>更多</div>
+                </a>
 			</ul>
 			<#list groupMap.gradeList as subjectMap>
 			    <#if (subjectMap_index<6)>

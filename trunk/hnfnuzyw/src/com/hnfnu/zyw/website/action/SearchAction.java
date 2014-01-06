@@ -2,6 +2,7 @@ package com.hnfnu.zyw.website.action;
 
 import java.util.Map;
 
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -15,6 +16,8 @@ import org.springframework.stereotype.Controller;
 import com.hnfnu.zyw.website.service.ISearchService;
 import com.opensymphony.xwork2.ActionSupport;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller("WebsiteSearchAction")
 @Scope("prototype")
 @ParentPackage("json-default")
@@ -24,7 +27,7 @@ public class SearchAction extends ActionSupport {
 
 	private static final long serialVersionUID = 2222487976006742410L;
     private static final int PAGE_SIZE = 8;
-    private int page;
+    private int pageIndex;
     private String keyWord;
     private Map<String,Object> sourceList;
     private Map<String,Object> topicList;
@@ -36,24 +39,29 @@ public class SearchAction extends ActionSupport {
 	@Action(value = "source", results = { @Result(name = "success", location = "../../../website/source_search_result.jsp") })
 	public String source() {
         sourceList = searchService.listSource(keyWord, 1, PAGE_SIZE);
+        System.out.println(sourceList);
+        HttpServletRequest request = ServletActionContext.getRequest();
+        request.setAttribute("sourceList",sourceList);
         return SUCCESS;
 	}
 
 	@Action(value = "topic", results = { @Result(name = "success", location = "../../../website/topic_search_result.jsp") })
 	public String topic() {
         topicList = searchService.listTopic(keyWord,1,PAGE_SIZE);
+        HttpServletRequest request = ServletActionContext.getRequest();
+        request.setAttribute("topicList",topicList);
         return SUCCESS;
 	}
 
     @Action(value = "sourcePage")
     public String sourcePage(){
-        sourceList = searchService.listSource(keyWord, page, PAGE_SIZE);
+        sourceList = searchService.listSource(keyWord, pageIndex, PAGE_SIZE);
         return SUCCESS;
     }
 
     @Action(value = "topicPage")
     public String topicPage(){
-        topicList = searchService.listTopic(keyWord, 1, PAGE_SIZE);
+        topicList = searchService.listTopic(keyWord, pageIndex, PAGE_SIZE);
         return SUCCESS;
     }
 
@@ -69,7 +77,7 @@ public class SearchAction extends ActionSupport {
         return topicList;
     }
 
-    public void setPage(int page) {
-        this.page = page;
+    public void setPageIndex(int pageIndex) {
+        this.pageIndex = pageIndex;
     }
 }

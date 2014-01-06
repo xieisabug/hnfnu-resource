@@ -31,17 +31,17 @@ public class SearchServiceImpl implements ISearchService {
     public Map<String, Object> listSource(String keyWord, int page, int pageSize) {
         Map<String, Object> ret = new HashMap<>();
 
-        String hql = "FROM SourceVo WHERE keyWords like '%" + keyWord + "%'";
-        String hql2 = "FROM TopicSubtitleSourceVo WHERE keyWords like '%" + keyWord + "%'";
+        String hql = "from SourceVo WHERE keyWords like '%" + keyWord + "%'";
+        String hql2 = "from TopicSubtitleSourceVo WHERE keyWords like '%" + keyWord + "%'";
         Pager<SourceVo> sourceVoPager;
         Pager<TopicSubtitleSourceVo> topicSubtitleSourceVoPager;
         try {
             int pageOffset = (page - 1) * pageSize;
             sourceVoPager = sourceVoDao.find(hql, pageOffset, pageSize);
             ret.put("sourceVoPager", sourceVoPager);
-
             topicSubtitleSourceVoPager = topicSubtitleSourceVoDao.find(hql2,pageOffset,pageSize);
             ret.put("topicSubtitleSourceVoPager", topicSubtitleSourceVoPager);
+            ret.put("keyWord",keyWord);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -64,7 +64,5 @@ public class SearchServiceImpl implements ISearchService {
         }
         return ret;
     }
-
-
 
 }
