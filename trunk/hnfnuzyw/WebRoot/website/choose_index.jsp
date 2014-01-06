@@ -100,8 +100,8 @@
                     <td style="width: 120px; text-align: center" rowspan="4">
                         <img src="<%=basePath+"website/image/file_icon_"+sourceVo.getMediaFormat()+".png"%>" style="width:77px; height:77px; display: inline;">
                     </td>
-                    <td style="width: 200px;"><span>资源名</span>：<%=sourceVo.getName()%></td>
-                    <td style="width: 150px;"><span>资源币</span>：<%=sourceVo.getPrice()==0?"免费":sourceVo.getPrice()%></td>
+                    <td style="width: 200px;"><span>名称</span>：<%=sourceVo.getName()%></td>
+                    <td style="width: 150px;"><span>资源价格</span>：<%=sourceVo.getPrice()==0?"免费":sourceVo.getPrice()%></td>
                     <td style="width: 200px;"><span>关键字</span>：
                         <%
                             String k = sourceVo.getKeyWords();
@@ -118,11 +118,11 @@
                             <%
                                 if(onlineViewFormat.contains(sourceVo.getMediaFormat()+",")) {
                             %>
-                            <a href="<%=basePath%>online/view?id=<%=sourceVo.getId()%>$type=2">在线预览</a>
+                            <a href="<%=basePath%>online/view?id=<%=sourceVo.getId()%>">在线预览</a>
                             <%
                                 }
                             %>
-                            <a href="<%=basePath%>file/download?id=<%=sourceVo.getId()%>&type=2">下载资源</a>
+                            <a href="<%=basePath%>file/download?id=<%=sourceVo.getId()%>">下载资源</a>
                         </div>
                     </td>
                 </tr>
@@ -152,14 +152,6 @@
     </div>
 </div>
 </div>
-<div class="row"  style="clear: both">
-    <div style="text-align: center">
-        <p>版权所有：湖南第一师范学院公共实验管理中心·湘ICP备05000548号</p>
-
-        <p>地址：湖南省长沙市枫林三路1015号·邮编：410205·电话：0731-82841118</p>
-
-        <p>建议使用IE 8版本以上浏览器浏览</p>
-    </div>
-</div>
+<%@include file="footer.html"%>
 </body>
 </html>

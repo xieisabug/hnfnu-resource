@@ -4,21 +4,15 @@
 <%@ page import="com.hnfnu.zyw.dto.resources.GradeDto" %>
 <%@ page import="com.hnfnu.zyw.vo.SourceVo" %>
 <%@ page import="com.hnfnu.zyw.dao.base.Pager" %>
-<%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="com.hnfnu.zyw.vo.CourseGradeSubjectVo" %>
-<%@ page import="com.hnfnu.zyw.dto.resources.SubjectDto" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://"
             + request.getServerName() + ":" + request.getServerPort()
             + path + "/";
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
     String onlineViewFormat = "mp4,flv,wmv,";
-    Map<String, Object> indexRoot = (Map<String, Object>) request.getAttribute("courseMap");
-    GradeDto grade = (GradeDto) indexRoot.get("grade");
-    GroupDto group = (GroupDto) indexRoot.get("group");
-    SubjectDto subject = (SubjectDto) indexRoot.get("subject");
+    Map<String, Object> indexRoot = (Map<String, Object>) request.getAttribute("indexRoot");
+
 %>
 <!DOCTYPE html>
 <html>
@@ -29,7 +23,7 @@
     <script src="<%=basePath%>website/js/mootools.js" type="text/javascript"></script>
     <script src="<%=basePath%>website/js/xkui.js" type="text/javascript"></script>
     <script type="text/javascript" src="<%=basePath%>website/js/navbar.js"></script>
-    <script type="text/javascript" src="<%=basePath%>website/js/choose_course.js"></script>
+    <script type="text/javascript" src="<%=basePath%>website/js/search_result.js"></script>
     <script type="text/javascript">
         var basePath = '<%=basePath%>';
         var onlineViewFormat = '<%=onlineViewFormat%>';
@@ -42,25 +36,29 @@
 <div class="row">
     <%@ include file="navbar.html" %>
     <div style="margin-top: 10px; font-size: 0.8em">
-        您的位置：<a href="<%=basePath%>website/index.jsp">首页</a>
-        > <a href="<%=basePath%>source/index"><%=group.getName()%> <%=grade.getName()%></a>
-        > <a href="<%=basePath%>source/subject?groupId=<%=group.getId()%>&gradeId=<%=grade.getId()%>"><%=subject.getName()%></a>
+        您的位置：<a href="#">首页</a> > <a href="#">学科资源</a>
     </div>
 </div>
-<div id="choose-panel" class="row">
+<div id="choose-accordion" class="row">
+    <%
+        List<Map<String, Object>> groupList = (List<Map<String, Object>>) indexRoot.get("groupList");
+        for(int i = groupList.size()-1; i >=0; i--) {
+            Map<String, Object> g = groupList.get(i);
+            GroupDto groupDto = (GroupDto) g.get("group");
+            List<GradeDto> gradeList = (List<GradeDto>) g.get("gradeList");
+    %>
     <div class="choose-type">
         <div class="panel-head-icon"></div>
-        <span>选择课程</span>
+        <span><%=groupDto.getName()%></span>
     </div>
     <div class="choose-list">
         <ul>
             <%
-                List<CourseGradeSubjectVo> courseGradeSubjectList = (List<CourseGradeSubjectVo>) indexRoot.get("courseGradeSubjectList");
-                for (CourseGradeSubjectVo cgs : courseGradeSubjectList) {
+                for (GradeDto grade : gradeList) {
             %>
             <li>
-                <a href="<%=basePath+"source/final?groupId="+group.getId()+"&gradeId="+grade.getId()+"&subjectId="+subject.getId()+"&courseId="+cgs.getId()%>">
-                    <%=cgs.getName()%>
+                <a href="<%=basePath+"source/subject?groupId="+groupDto.getId()+"&gradeId="+grade.getId()%>">
+                    <%=grade.getName()%>
                 </a>
             </li>
             <%
@@ -68,15 +66,9 @@
             %>
         </ul>
     </div>
-</div>
-<div id="hot-grade-panel" class="row">
-    <div>
-        <div class="panel-head-icon"></div>
-        <span>最热课程</span>
-    </div>
-    <div>
-        <%@include file="hot-source.html"%>
-    </div>
+    <%
+        }
+    %>
 </div>
 <div class="row" id="show-panel">
     <div>
@@ -142,7 +134,7 @@
             }
             if(sources.getDatas().size()==8) {
         %>
-        <div class="more" onclick="more(<%=group.getId()%>,<%=grade.getId()%>,<%=subject.getId()%>)" page="1"></div>
+        <div class="more" onclick="more()" page="1"></div>
         <%
             }
         %>
