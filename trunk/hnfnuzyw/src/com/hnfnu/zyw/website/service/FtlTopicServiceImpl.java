@@ -6,6 +6,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.hnfnu.zyw.dao.base.Pager;
@@ -19,7 +21,9 @@ public class FtlTopicServiceImpl implements FtlITopicService {
 	@Autowired
 	@Qualifier("topicDao")
 	private ITopicDao topicDao;
-
+	
+	@Scheduled(cron = "0 0 0 * * ?")
+    @Async
 	public void getTopics() {
 		String hql = "from TopicDto";
 		Map<String, Object> root = new HashMap<String, Object>();

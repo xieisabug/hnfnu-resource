@@ -167,7 +167,18 @@ public class SourceAction extends AopNoSuchMethodErrorSolveBaseAction implements
 	// 撤销上传文件的方法
 	@Action(value = "deleteFile")
 	public String deleteFile() {
+		//System.out.println(source.getUrl());
+		/*String[] s = source.getUrl().split("\\\\");
+		String[] temp = s[s.length-1].split("\\.");
+		String fileFormat = temp[temp.length-1];
+		//System.out.println(fileFormat);
+		String path =s[0];
+		for (int i = 1; i < s.length-1; i++) {
+			path = path +"\\"  + s[i];
+		}
+		path = path + "\\" + fileFormat+"\\"+s[s.length-1];*/
 		success = sourceService.deleteFile(source.getUrl());
+		//System.out.println(path);
 		
 		if (success) {
 			message = "文件撤销成功";

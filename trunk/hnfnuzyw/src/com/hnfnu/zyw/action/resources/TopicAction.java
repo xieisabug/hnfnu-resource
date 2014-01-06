@@ -138,7 +138,7 @@ public class TopicAction extends AopNoSuchMethodErrorSolveBaseAction implements
 
 	@Action(value = "deleteTopic")
 	public String delete() {
-		success = topicService.delete(topic.getId());
+		success = topicService.delete(topic.getImageUrl(),topic.getId());
 		if (success) {
 			indexService.getTopics();
 			message = "删除专题成功！";

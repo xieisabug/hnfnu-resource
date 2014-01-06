@@ -88,7 +88,7 @@ public class SubjectAction extends AopNoSuchMethodErrorSolveBaseAction
 
 	@Action(value = "deleteSubject")
 	public String delete() {
-		success = subjectService.delete(subject.getId());
+		success = subjectService.delete(subject.getImageUrl(),subject.getId());
 		indexService.makeTabGroups();
 		if (success) {
 			message = "删除功能成功！";

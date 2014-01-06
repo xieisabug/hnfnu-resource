@@ -9,7 +9,7 @@ public interface ITopicService {
 
 	public boolean add(TopicDto topic);
 
-	public boolean delete(int id);
+	public boolean delete(String url,int id);
 
 	public boolean update(TopicDto topic);
 

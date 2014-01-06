@@ -1,7 +1,7 @@
 package com.hnfnu.zyw.dao.resources;
 
-import com.hnfnu.zyw.dao.system.IMenuDao;
-import com.hnfnu.zyw.dto.system.MenuDto;
+import static org.junit.Assert.fail;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,11 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.List;
-import java.util.Map;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import com.hnfnu.zyw.dao.base.Pager;
+import com.hnfnu.zyw.vo.SourceVo;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({ "/beans.xml" })
@@ -25,6 +22,9 @@ public class SourceCommentVoDaoTest {
 	@Autowired
 	private ISourceDao sourceDao;
 
+	@Autowired
+	public ISourceVoDao sourceVoDao;
+	
 	@Before
 	public void setUp() {
 		System.out.println("***************************************");
@@ -40,6 +40,20 @@ public class SourceCommentVoDaoTest {
             fail();
         }
     }
+	@Test
+	public void testSourceVoPager() {
+        try {
+        	Pager<SourceVo> sourcePager = sourceVoDao.find("from SourceVo order by id desc", 0, 8);
+        	System.out.println(sourcePager.getDatas().size());
+        	for(int i = 0;i < sourcePager.getDatas().size();i++){
+        		System.out.println(sourcePager.getDatas().get(i));
+        	}
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail();
+        }
+    }
+	
 	@After
 	public void setDown() {
 		System.out.println("***************************************");

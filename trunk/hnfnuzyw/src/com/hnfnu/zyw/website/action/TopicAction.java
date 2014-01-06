@@ -115,7 +115,6 @@ public class TopicAction extends ActionSupport {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println(topicService.topicAddViewTimes(topicId));
 		return SUCCESS;
 	}
 

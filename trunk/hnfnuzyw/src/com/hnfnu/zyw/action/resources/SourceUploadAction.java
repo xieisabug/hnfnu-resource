@@ -45,7 +45,6 @@ public class SourceUploadAction extends ActionSupport implements
 		File dir = new File(getSavePath());
 
 		String savePath = getSavePath();// 保存上传文件的地址
-		//System.out.println("savePath"+savePath);
 		
 
 		if (!dir.exists()) {
@@ -71,10 +70,8 @@ public class SourceUploadAction extends ActionSupport implements
 				String temp = aStrings[aStrings.length-1];
 				File f = new File(getSavePath() +"\\"+temp);
 				f.mkdirs();
-				//System.out.println("getSavePath()"+getSavePath());
 				//setSavePath(getSavePath()+"\\"+temp);
 				
-				//System.out.println("getSavePath()"+getSavePath());
 				FileOutputStream fos;
 				fos = new FileOutputStream(getSavePath()+"\\"+temp+"\\"
 						+ fn);

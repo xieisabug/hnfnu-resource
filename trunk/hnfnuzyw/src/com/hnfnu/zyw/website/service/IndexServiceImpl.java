@@ -72,6 +72,37 @@ public class IndexServiceImpl implements IIndexService {
     private IStudentDao studentDao;
 
     //@Scheduled(cron = "0 0 0,8,10,12,14,16,18,20 * * ?")
+    
+    public boolean makeIndex(){
+    	try {
+    		FreemarkerUtil fu = new FreemarkerUtil();
+            Map<String, Object> root = null;
+            root = this.getPicturesRoot();
+            fu.fprint("index/gallery.ftl", root, FILE_PATH + "website\\",
+                    "gallery.html");
+
+            
+            root = this.getMakeTabGroupRoot();
+            // 打印到输出台，以便于测试
+            //		fu.print("index/tabGroup.ftl", root);
+            // 输出到文件
+//            System.out.println(filePath + "website\\");
+            fu.fprint("index/tabGroup.ftl", root, FILE_PATH + "website\\",
+                    "tabGroup.html");
+            
+            root = this.getMakeTopicRoot();
+            return fu.fprint("index/topic.ftl", root, FILE_PATH + "website\\",
+                    "topic.html");
+            
+            
+            
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+    	 
+    }
+    
     @Async
     public void getPictures() {
         try {

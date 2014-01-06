@@ -5,12 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.hnfnu.zyw.dao.resources.ITopicDao;
 import com.hnfnu.zyw.dto.resources.TopicDto;
+import com.hnfnu.zyw.utils.FileUtils;
 
 @Service("topicService")
 public class TopicServiceImpl implements ITopicService {
@@ -29,9 +31,14 @@ public class TopicServiceImpl implements ITopicService {
 		return true;
 	}
 
-	public boolean delete(int id) {
+	public boolean delete(String url,int id) {
 		try {
-			topicDao.delete(id);
+			String filePath = ServletActionContext.getServletContext().getRealPath("/");
+			filePath = filePath + "uploads\\topic\\image\\"+url;
+			if (FileUtils.deleteOneFile(filePath)) {
+				topicDao.delete(id);
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -108,8 +115,6 @@ public class TopicServiceImpl implements ITopicService {
 			t = topicDao.get(id);
 			t.setViewTimes(t.getViewTimes()+1);
 			topicDao.updateByTran(id, t.getViewTimes());
-			System.out.println(t);
-			System.out.println(t.getViewTimes());
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;

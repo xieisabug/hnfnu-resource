@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.hnfnu.zyw.dao.resources.ISubjectDao;
 import com.hnfnu.zyw.dao.resources.ISubjectGroupVoDao;
 import com.hnfnu.zyw.dto.resources.SubjectDto;
+import com.hnfnu.zyw.utils.FileUtils;
 import com.hnfnu.zyw.vo.SubjectGroupVo;
 
 @Service("subjectService")
@@ -34,9 +36,13 @@ public class SubjectServiceImpl implements ISubjectService {
 		return true;
 	}
 
-	public boolean delete(int id) {
+	public boolean delete(String url,int id) {
 		try {
-			subjectDao.delete(id);
+			String filePath = ServletActionContext.getServletContext().getRealPath("/");
+			filePath = filePath + "uploads\\subject\\image\\"+url;
+			if (FileUtils.deleteOneFile(filePath)) {
+				subjectDao.delete(id);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
