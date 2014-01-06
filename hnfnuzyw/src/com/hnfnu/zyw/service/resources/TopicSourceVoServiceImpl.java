@@ -35,7 +35,8 @@ public class TopicSourceVoServiceImpl implements ITopicSourceVoService{
 		String hql = "from TopicSourceVo where subtitleId="+subTitleId;
 		List<TopicSourceVo> l = null;
 		try {
-			l = topicSourceVoDao.queryForPage(hql, startIndex, pageSize);
+			l = topicSourceVoDao.find(hql, startIndex, pageSize).getDatas();
+					//queryForPage(hql, startIndex, pageSize);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

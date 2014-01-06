@@ -37,8 +37,8 @@ public class UserRoleMenuVoServiceImpl implements IUserRoleMenuVoService{
 				t.put(s[j], s[j]);
 			}
 		}
-		Set set =t.keySet();
-		Iterator it=set.iterator();
+		Set<String> set =t.keySet();
+		Iterator<String> it=set.iterator();
 		String re = "";
 		while(it.hasNext()){
           String s= (String) it.next();

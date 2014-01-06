@@ -17,7 +17,6 @@ import org.springframework.stereotype.Controller;
 
 import com.hnfnu.zyw.dto.website.NewsDto;
 import com.hnfnu.zyw.website.service.INewsService;
-import com.hnfnu.zyw.website.utils.FreemarkerUtil;
 import com.opensymphony.xwork2.ActionSupport;
 
 @Controller("ftlNewsAction")
@@ -38,11 +37,11 @@ public class NewsAction extends ActionSupport {
     private INewsService newsService;
 
 
-    private FreemarkerUtil fu = new FreemarkerUtil();
+    //private FreemarkerUtil fu = new FreemarkerUtil();
 
     @Action(value = "newsIndex")
     public String newsIndex() {
-        String filePath = ServletActionContext.getServletContext().getRealPath("/");
+        //String filePath = ServletActionContext.getServletContext().getRealPath("/");
         // 获得数据模型
         root = newsService.getIndexNews();
 

@@ -1,31 +1,19 @@
 package com.hnfnu.zyw.website.action;
 
-import com.hnfnu.zyw.dto.resources.TopicDto;
-import com.hnfnu.zyw.dto.resources.TopicSubtitleDto;
-import com.hnfnu.zyw.dto.system.UserDto;
-import com.hnfnu.zyw.service.resources.ITopicService;
-import com.hnfnu.zyw.service.resources.ITopicSourceVoService;
-import com.hnfnu.zyw.service.resources.ITopicSubtitleService;
-import com.hnfnu.zyw.service.resources.ITopicSubtitleSourceVoService;
-import com.hnfnu.zyw.service.system.IUserService;
-import com.hnfnu.zyw.vo.SourceVo;
-import com.hnfnu.zyw.vo.TopicSourceVo;
-import com.hnfnu.zyw.vo.TopicSubtitleSourceVo;
-import com.hnfnu.zyw.website.service.FtlITopicService;
-import com.hnfnu.zyw.website.service.ISearchService;
-import com.opensymphony.xwork2.ActionSupport;
-import org.apache.struts2.ServletActionContext;
-import org.apache.struts2.convention.annotation.*;
+import java.util.Map;
+
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.hnfnu.zyw.website.service.ISearchService;
+import com.opensymphony.xwork2.ActionSupport;
 
 @Controller("WebsiteSearchAction")
 @Scope("prototype")
