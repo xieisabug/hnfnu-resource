@@ -66,11 +66,11 @@ function generateSourceItem(data) {
     html += '            <td style="width: 120px; text-align: center" rowspan="4">';
     html += '                <img src="' + basePath + 'website/image/file_icon_'+data.mediaFormat+'.png" style="width:77px; height:77px; display: inline;">';
     html += '            </td>';
-    html += '            <td style="width: 200px;"><span>资源名</span>：'+data.name+'</td>';
+    html += '            <td style="width: 200px;"><span>名称</span>：'+data.name+'</td>';
     if(data.price == 0) {
-        html += '            <td style="width: 150px;"><span>资源币</span>：免费</td>';
+        html += '            <td style="width: 150px;"><span>资源价格</span>：免费</td>';
     } else {
-        html += '            <td style="width: 150px;"><span>资源币</span>：'+data.price+'</td>';
+        html += '            <td style="width: 150px;"><span>资源价格</span>：'+data.price+'</td>';
     }
     html += '<td style="width: 200px;"><span>关键字</span>：';
     var a = data.keyWords.split(";");
@@ -81,9 +81,9 @@ function generateSourceItem(data) {
     html += '            <td style="width: 130px; text-align: center" rowspan="4">';
     html += '                <div class="topic-resource-btn">';
     if(onlineViewFormat.contains(data.mediaFormat+',')) {
-        html += '                    <a href="'+basePath+'online/view?id='+data.id+'&type=1">在线预览</a>';
+        html += '                    <a href="'+basePath+'online/view?id='+data.id+'">在线预览</a>';
     }
-    html += '                    <a href="'+basePath+'file/download?id='+data.id+'&type=2">下载资源</a>';
+    html += '                    <a href="'+basePath+'file/download?id='+data.id+'">下载资源</a>';
     html += '                </div>';
     html += '            </td>';
     html += '        </tr>';

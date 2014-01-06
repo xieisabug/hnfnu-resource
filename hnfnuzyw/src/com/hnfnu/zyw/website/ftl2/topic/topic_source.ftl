@@ -8,6 +8,7 @@
 
     <script src="js/mootools.js" type="text/javascript"></script>
     <script src="js/xkui.js" type="text/javascript"></script>
+    <script src="js/navbar.js" type="text/javascript"></script>
     <script src="js/topic_source.js" type="text/javascript"></script>
     <title>专题</title>
 </head>
