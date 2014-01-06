@@ -389,7 +389,10 @@ function delete_topic() {
         if (r) {
             $.ajax({
                 url:'../../../resources/deleteTopic.action',
-                data:row_data,
+                data:{
+                    id:row_data.id,
+                    imageUrl:row_data.imageUrl
+                },
                 type:'post',
                 success:function (data) {
                     if (data.success) {

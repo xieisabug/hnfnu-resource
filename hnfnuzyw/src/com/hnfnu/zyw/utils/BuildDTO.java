@@ -161,7 +161,6 @@ public class BuildDTO {
 			// ����
 			pw.flush();
 			pw.close();
-			System.out.println(className+"Dto.java�����ɹ���");
 
 		} catch (Exception e) {
 			e.printStackTrace();

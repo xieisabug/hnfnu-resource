@@ -60,7 +60,6 @@ public class TopicSourceJoinAction extends AopNoSuchMethodErrorSolveBaseAction i
 	 */
 	@Action(value = "querySourceIdsByTopicId")
 	public String querySourceIdsByTopicId() {
-		//System.out.println("topicSourceJoin.getSubtitleId()"+topicSourceJoin.getSubtitleId());
 		sourceIds = topicSourceJoinService.QueryAllSourceidsByTopicId(topicSourceJoin.getSubtitleId());
 		return SUCCESS;
 	}

@@ -27,6 +27,17 @@ public class IndexAction extends ActionSupport {
 	@Qualifier("ftl_indexService")
 	private IIndexService indexService;
 
+	@Action(value = "makeIndex")
+	public String makeIndex() {
+		success  = indexService.makeIndex();
+		if(success){
+			message="主界面生成成功";
+		}else{
+			message="主界面生成失败";
+		}
+		return SUCCESS;
+	}
+	
 	@Action(value = "makeGallery")
 	public String makeGallery() {
 		indexService.getPictures();
@@ -53,9 +64,9 @@ public class IndexAction extends ActionSupport {
 	public String makeTabGroup() {
 		indexService.makeTabGroups();
 		if(success){
-			message="专题生成成功";
+			message="学科生成成功";
 		}else{
-			message="专题生成失败";
+			message="学科生成失败";
 		}
 		return SUCCESS;
 	}
