@@ -7,9 +7,7 @@
 			            <li>${grade.name}</li>
 			        </#if>
 			    </#list>
-                <a href="/source/index">
-                    <div>更多</div>
-                </a>
+
 			</ul>
 			<#list groupMap.gradeList as subjectMap>
 			    <#if (subjectMap_index<6)>
@@ -23,51 +21,60 @@
 			                <#if subject_index % 3 == 0>
 			                    <tr>
 			                        <td class="subject-item">
-			                            <table>
-			                                <tr>
-			                                    <td rowspan="3" style="width: 80px;"><img src="../uploads/subject/image/${subject.dto.imageUrl!"default_subject.png"}" alt="查看学科资源"/></td>
-			                                    <td style="font-weight: bolder;">${subject.dto.name}</td>
-			                                </tr>
-			                                <tr>
-			                                    <td>${subject.dto.remark}</td>
-			                                </tr>
-			                                <tr>
-			                                    <td style="color:#0099ff;">浏览次数：${subject.viewTimes}</td>
-			                                </tr>
-			                            </table>
+                                        <a href="/source/course?groupId=${groups[groupMap_index].id}&gradeId=${groupMap.grades[subjectMap_index].id}&subjectId=${subject.dto.id}"
+                                           style="color:black;">
+                                            <table>
+                                                <tr>
+                                                    <td rowspan="3" style="width: 80px;"><img src="../uploads/subject/image/${subject.dto.imageUrl!"default_subject.png"}" alt="查看学科资源"/></td>
+                                                    <td style="font-weight: bolder;">${subject.dto.name}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>${subject.dto.remark}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="color:#0099ff;">浏览次数：${subject.viewTimes}</td>
+                                                </tr>
+                                            </table>
+                                        </a>
 			                        </td>
 			
 			                </#if>
 			                <#if (subject_index - 1) % 3 == 0>
 			                    <td class="subject-item">
-			                        <table>
-			                            <tr>
-			                                <td rowspan="3" style="width: 80px;"><img src="../uploads/subject/image/${subject.dto.imageUrl!"default_subject.png"}"  alt="查看学科资源"/></td>
-			                                <td style="font-weight: bolder;">${subject.dto.name}</td>
-			                            </tr>
-			                            <tr>
-			                                <td>${subject.dto.remark}</td>
-			                            </tr>
-			                            <tr>
-			                                <td style="color:#0099ff;">浏览次数：${subject.viewTimes}</td>
-			                            </tr>
-			                        </table>
+                                    <a href="/source/course?groupId=${groups[groupMap_index].id}&gradeId=${groupMap.grades[subjectMap_index].id}&subjectId=${subject.dto.id}"
+                                       style="color:black;">
+                                        <table>
+                                            <tr>
+                                                <td rowspan="3" style="width: 80px;"><img src="../uploads/subject/image/${subject.dto.imageUrl!"default_subject.png"}"  alt="查看学科资源"/></td>
+                                                <td style="font-weight: bolder;">${subject.dto.name}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>${subject.dto.remark}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="color:#0099ff;">浏览次数：${subject.viewTimes}</td>
+                                            </tr>
+                                        </table>
+                                    </a>
 			                    </td>
 			                </#if>
 			                <#if (subject_index + 1) % 3 == 0>
 			                    <td class="subject-item">
-			                        <table>
-			                            <tr>
-			                                <td rowspan="3" style="width: 80px;"><img src="../uploads/subject/image/${subject.dto.imageUrl!"default_subject.png"}"  alt="查看学科资源"/></td>
-			                                <td style="font-weight: bolder;">${subject.dto.name}</td>
-			                            </tr>
-			                            <tr>
-			                                <td>${subject.dto.remark}</td>
-			                            </tr>
-			                            <tr>
-			                                <td style="color:#0099ff;">浏览次数：${subject.viewTimes}</td>
-			                            </tr>
-			                        </table>
+                                    <a href="/source/course?groupId=${groups[groupMap_index].id}&gradeId=${groupMap.grades[subjectMap_index].id}&subjectId=${subject.dto.id}"
+                                       style="color:black;">
+                                        <table>
+                                            <tr>
+                                                <td rowspan="3" style="width: 80px;"><img src="../uploads/subject/image/${subject.dto.imageUrl!"default_subject.png"}"  alt="查看学科资源"/></td>
+                                                <td style="font-weight: bolder;">${subject.dto.name}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>${subject.dto.remark}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="color:#0099ff;">浏览次数：${subject.viewTimes}</td>
+                                            </tr>
+                                        </table>
+                                    </a>
 			                    </td>
 			                     </tr>
 			                </#if>

@@ -68,35 +68,35 @@ function generateSourceItem(data) {
     html += '            <td style="width: 120px; text-align: center" rowspan="4">';
     html += '                <img src="' + basePath + 'website/image/file_icon_'+data.mediaFormat+'.png" style="width:77px; height:77px; display: inline;">';
     html += '            </td>';
-    html += '            <td style="width: 200px;"><span>名称</span>：'+data.name+'</td>';
+    html += '            <td style="width: 200px;"><div style="width: 190px; height: 15px;margin-top: 0;word-break: break-all;overflow: hidden;"><span>名称</span>：'+data.name+'</div></td>';
     if(data.price == 0) {
         html += '            <td style="width: 150px;"><span>资源价格</span>：免费</td>';
     } else {
         html += '            <td style="width: 150px;"><span>资源价格</span>：'+data.price+'</td>';
     }
-    html += '<td style="width: 200px;"><span>关键字</span>：';
+    html += '<td style="width: 200px;"><div style="width: 190px; height: 15px;margin-top: 0;word-break: break-all;overflow: hidden;"><span>关键字</span>：';
     var a = data.keyWords.split(";");
     a.forEach(function(item){
-        html += '<a href="'+basePath+'search/source?keyword="'+item+'></a>';
+        html += '<a href="'+basePath+'search/source?keyword="'+item+'>'+item+'</a>';
     });
-    html += '</td>';
+    html += '</div></td>';
     html += '            <td style="width: 130px; text-align: center" rowspan="4">';
     html += '                <div class="topic-resource-btn">';
     if(onlineViewFormat.contains(data.mediaFormat+',')) {
-        html += '                    <a href="'+basePath+'online/view?id='+data.id+'">在线预览</a>';
+        html += '                    <a href="'+basePath+'online/view?id='+data.id+'&type=2">在线预览</a>';
     }
-    html += '                    <a href="'+basePath+'file/download?id='+data.id+'">下载资源</a>';
+    html += '                    <a href="'+basePath+'file/download?id='+data.id+'&type=2">下载资源</a>';
     html += '                </div>';
     html += '            </td>';
     html += '        </tr>';
     html += '        <tr>';
     html += '            <td><span>作者</span>：'+data.author+'</td>';
     html += '            <td><span>资源类型</span>：'+data.mediaType+'</td>';
-    html += '            <td rowspan="3"><span>资源描述</span>：'+data.description+'M</td>';
+    html += '            <td rowspan="3"><div style="height: 58px;word-break: break-all;overflow: hidden;"><span>资源描述</span>：'+data.description+'</div></td>';
     html += '        </tr>';
     html += '        <tr>';
     html += '            <td><span>出品方</span>：'+data.publisher+'</td>';
-    html += '            <td><span>文件大小</span>：'+data.fileSize+'</td>';
+    html += '            <td><span>文件大小</span>：'+data.fileSize+'M</td>';
     html += '        </tr>';
     html += '        <tr>';
     html += '            <td><span>访问次数</span>：'+data.viewTimes+'</td>';

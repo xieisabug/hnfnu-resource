@@ -84,11 +84,11 @@
                                 <%
                                     if(onlineViewFormat.contains(sourceVo.getMediaFormat()+",")) {
                                 %>
-                                <a href="<%=basePath%>online/view?id=<%=sourceVo.getId()%>">在线预览</a>
+                                <a href="<%=basePath%>online/view?id=<%=sourceVo.getId()%>&type=2">在线预览</a>
                                 <%
                                     }
                                 %>
-                                <a href="<%=basePath%>file/download?id=<%=sourceVo.getId()%>">下载资源</a>
+                                <a href="<%=basePath%>file/download?id=<%=sourceVo.getId()%>&type=2">下载资源</a>
                             </div>
                         </td>
                     </tr>
