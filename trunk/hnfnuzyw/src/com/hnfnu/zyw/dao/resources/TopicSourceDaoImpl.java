@@ -19,9 +19,9 @@ public class TopicSourceDaoImpl extends BaseDao<TopicSourceDto> implements
 			query = session.createQuery(hql);
 			int count = ((Number) query.iterate().next()).intValue();
 			return count;
-		} catch (Exception e) {
-			//System.out.println("session 可能有问题！　");
-			//System.out.println("我们来看看session吧：" + session);
+		} catch (NullPointerException e) {
+			return 0;
+		}catch (Exception e) {
 			e.printStackTrace();
 			return 0;
 		}finally{
@@ -31,8 +31,15 @@ public class TopicSourceDaoImpl extends BaseDao<TopicSourceDto> implements
 	}
 
 	public Float getTotalCapacity(String hql) {
-		Query query = this.getSession().createQuery(hql);
-		Float count = (float) ((Double) query.iterate().next()).intValue();
+		Float count = null;
+		try {
+			Query query = this.getSession().createQuery(hql);
+			count = (float) ((Double) query.iterate().next()).intValue();
+		} catch (NullPointerException e) {
+			return 0.0f;
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		return count;
 	}
 }

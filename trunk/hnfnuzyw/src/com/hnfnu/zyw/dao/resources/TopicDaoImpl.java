@@ -13,9 +13,15 @@ import com.hnfnu.zyw.dto.resources.TopicDto;
 public class TopicDaoImpl extends BaseDao<TopicDto> implements ITopicDao {
 
 public int getTotalCount(String hql) {
-		
-		Query query= this.getSession().createQuery(hql);
-		int count=((Number)query.iterate().next()).intValue();
+		int count = 0;
+		try {
+			Query query= this.getSession().createQuery(hql);
+			count=((Number)query.iterate().next()).intValue();
+		} catch (NullPointerException e) {
+			return 0;
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		return count;
 	}
 
