@@ -19,6 +19,7 @@ import com.hnfnu.zyw.action.base.AopNoSuchMethodErrorSolveBaseAction;
 import com.hnfnu.zyw.dto.resources.TopicDto;
 import com.hnfnu.zyw.dto.system.UserDto;
 import com.hnfnu.zyw.service.resources.ITopicService;
+import com.hnfnu.zyw.website.service.FtlITopicService;
 import com.hnfnu.zyw.website.service.IIndexService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ModelDriven;
@@ -45,6 +46,10 @@ public class TopicAction extends AopNoSuchMethodErrorSolveBaseAction implements
 	@Autowired
 	@Qualifier("ftl_indexService")
 	private IIndexService indexService;
+	
+	@Autowired
+	@Qualifier("ftl_topicService")
+	private FtlITopicService ftl_topicService;
 
 	// 添加专题
 	@Action(value = "addTopic")
@@ -75,6 +80,7 @@ public class TopicAction extends AopNoSuchMethodErrorSolveBaseAction implements
 		success = topicService.add(topic);
 		if (success) {
 			indexService.getTopics();
+			ftl_topicService.getTopics();
 			message = "添加专题成功！";
 		} else {
 			message = "添加专题失败！";

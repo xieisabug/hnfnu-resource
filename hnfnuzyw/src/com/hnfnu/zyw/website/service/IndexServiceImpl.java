@@ -90,6 +90,15 @@ public class IndexServiceImpl implements IIndexService {
             fu.fprint("index/tabGroup.ftl", root, FILE_PATH + "website\\",
                     "tabGroup.html");
             
+            root = this.getMakeSourceCount();
+            // 打印到输出台，以便于测试
+            		//fu.print("index/sourceCount.ftl", root);
+            // 输出到文件
+//            System.out.println(filePath + "website\\");
+            fu.fprint("index/sourceCount.ftl", root, FILE_PATH + "website\\",
+                    "sourceCount.html");
+            
+            
             root = this.getMakeTopicRoot();
             return fu.fprint("index/topic.ftl", root, FILE_PATH + "website\\",
                     "topic.html");

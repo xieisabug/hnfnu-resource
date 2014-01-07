@@ -28,6 +28,10 @@ function add_grade() {
 function add_save() {
     if (gradeFrom.valid()) {
         var row_data = Form.parseJSON(gradeFrom);
+        if (row_data.groupId == "" || row_data.groupId == null) {
+            $.ligerDialog.error("未选择分组");
+            return;
+        }
         // 发往服务器，返回成功后再添加到表格中
         $.ajax({
             url:'../../../resources/addGrade.action',

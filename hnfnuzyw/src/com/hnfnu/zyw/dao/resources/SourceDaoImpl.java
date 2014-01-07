@@ -9,15 +9,29 @@ import com.hnfnu.zyw.dto.resources.SourceDto;
 @Repository("sourceDao")
 public class SourceDaoImpl extends BaseDao<SourceDto> implements ISourceDao {
 	public int getTotalCount(String hql) {
-		
-		Query query= this.getSession().createQuery(hql);
-		int count=((Number)query.iterate().next()).intValue();
+		int count = 0;
+		try {
+			Query query= this.getSession().createQuery(hql);
+			 count=((Number)query.iterate().next()).intValue();
+		} catch (NullPointerException e) {
+			return 0;
+		}catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
 		return count;
 	}
 
 	public Float getTotalCapacity(String hql) {
-		Query query= this.getSession().createQuery(hql);
-		Float count=(float) ((Double)query.iterate().next()).intValue();
+		Float count =null;
+		try {
+			Query query= this.getSession().createQuery(hql);
+			count=(float) ((Double)query.iterate().next()).intValue();
+		} catch (NullPointerException e) {
+			return 0.0f;
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		return count;
 	}
 
