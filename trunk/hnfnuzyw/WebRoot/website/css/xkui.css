@@ -99,7 +99,7 @@
 }
 
 .input-text:focus {
-    border-left: 4px solid #B86364;
+    border-left: 4px solid #75ade7;
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;
 }

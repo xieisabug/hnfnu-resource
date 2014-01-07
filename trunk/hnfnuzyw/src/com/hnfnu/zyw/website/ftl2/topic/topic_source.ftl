@@ -82,8 +82,8 @@
                                     </div>
                                     <div class="topic-source-item">
                                         <div class="topic-title">${topic.name}</div>
-                                        <div class="topic-description" style="height: 71px;">${topic.description}</div>
-                                        <div style="font-size: 0.7em;">
+                                        <div class="topic-description" style="height: 71px; margin-top:4px; overflow: hidden;">${topic.description}</div>
+                                        <div style="font-size: 0.7em;margin-top: 5px;">
                                             <span style="color: gray;">
                                                 更新
                                             </span>

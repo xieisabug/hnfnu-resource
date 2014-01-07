@@ -246,6 +246,11 @@ window.addEvent('domready',function(){
             html +='		' + data.info.lastedLoginDate;
             html +='		</td>';
             html +='	</tr>';
+            html +='	<tr>';
+            html +='		<td>';
+            html +='		<a href="' + basePath + 'index.html'+'">上传资源</a>';
+            html +='		</td>';
+            html +='	</tr>'
         }
         html +='</table>';
         //面板伸缩后更新html

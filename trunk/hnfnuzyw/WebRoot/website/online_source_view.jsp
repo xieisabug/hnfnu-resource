@@ -147,7 +147,7 @@
             </div>
             <div>
                 <h3 style="float: left; margin-right: 20px; width: 500px; overflow: hidden;"><%=sourceName%></h3>
-                <a id="downloadBtn" href="#">下载资源</a>
+                <a id="downloadBtn" href="<%=basePath%>file/download?id=<%=sourceId%>&type=<%=type.equals("source")?2:1%>">下载资源</a>
                 <div id="webPlayer">
                     网速过慢，正在载入播放器，请稍等。。。。
                 </div>
