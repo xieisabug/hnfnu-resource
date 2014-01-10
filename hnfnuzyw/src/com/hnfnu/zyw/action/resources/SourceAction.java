@@ -96,7 +96,7 @@ public class SourceAction extends AopNoSuchMethodErrorSolveBaseAction implements
 		tPath = tt[tt.length-1]+"\\"+tPath;
 		source.setKeyWords(kw);
 		source.setUrl(tPath);
-		source.setFileSize(source.getFileSize()/1024);
+		source.setFileSize(source.getFileSize()/(1024*1024));
 		success = sourceService.add(source, categoryIdList);
 		sourceVo = sourceVoService.load(source.getId());
 		if (success) {
