@@ -121,7 +121,7 @@ a {
     float: left;
     list-style: none;
     cursor: pointer;
-    width: 152px;
+    width: 151px;
     height: 21px;
     background: url(../image/my-tab.png);
 }
@@ -309,17 +309,12 @@ label {
 }
 .tabGroupItem>div>div>table{
     border-collapse:collapse;
-    width: 100%;
+    width: 101%;
     height: 101%;
 }
-.tabGroupItem a>div {
-    height: 24px;
-    width: 34px;
-    /*background: url(../image/tab_left.png);*/
-    float: left;
-    padding-top: 10px;
-    font-size: 0.9em;
-    color: #000;
+.tabTitles>div:hover {
+    background: #eee;
+    color:#B86364;
 }
 #topic-content>div>table{
     border-collapse:collapse;

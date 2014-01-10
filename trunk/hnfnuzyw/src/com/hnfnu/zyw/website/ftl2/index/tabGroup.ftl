@@ -7,7 +7,9 @@
 			            <li>${grade.name}</li>
 			        </#if>
 			    </#list>
-
+                <div style="float: right;line-height: 34px; font-size: 0.9em;width: 48px;text-align: center;">
+                    <a href="/source/index" style="color:black;">更多</a>
+                </div>
 			</ul>
 			<#list groupMap.gradeList as subjectMap>
 			    <#if (subjectMap_index<6)>

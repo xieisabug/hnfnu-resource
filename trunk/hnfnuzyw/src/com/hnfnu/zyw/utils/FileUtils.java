@@ -7,6 +7,9 @@ import org.apache.struts2.ServletActionContext;
 public class FileUtils {
 	
 	public static boolean deleteOneFile(String url){
+        if(url == null||url.equals("")){
+            return true;
+        }
 		File file = new File(url);
 		String filePath = null;
 		//System.out.println(url);
