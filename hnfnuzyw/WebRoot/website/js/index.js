@@ -9,6 +9,7 @@ window.addEvent('domready',function(){
     });
     //专题面板
     var topicPanel = new Panel($('topic'),{
+        contentWidth:956,
         contentHeight:358
     });
 
