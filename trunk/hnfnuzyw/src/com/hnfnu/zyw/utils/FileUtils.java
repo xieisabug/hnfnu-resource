@@ -54,4 +54,17 @@ public class FileUtils {
 		}
 	}
 
+	
+	public static boolean delete(String url){
+        if(url == null||url.equals("")){
+            return true;
+        }
+		File file = new File(url);
+		if (file.delete()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+		
 }

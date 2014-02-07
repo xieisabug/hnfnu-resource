@@ -154,6 +154,18 @@ public class TopicAction extends AopNoSuchMethodErrorSolveBaseAction implements
 		return SUCCESS;
 	}
 
+	@Action(value = "clearTopicImage")
+	public String clearTopicImage() {
+		success = topicService.clearTopicImage();
+		if (success) {
+			indexService.getTopics();
+			message = "清除专题图片成功！";
+		} else {
+			message = "清除专题图片失败！";
+		}
+		return SUCCESS;
+	}
+
 	// 获取表中所有专题，用Map装，为了分页的需要加上Rows和Total
 	@Action(value = "listTopic")
 	public String list() {

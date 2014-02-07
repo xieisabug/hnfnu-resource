@@ -36,5 +36,10 @@ public interface ITopicService {
 	 * @return
 	 */
 	public boolean topicAddViewTimes(int id);
+	/**
+	 * 清除专题的冗余文件
+	 * @return
+	 */
+	public boolean clearTopicImage();
 
 }
