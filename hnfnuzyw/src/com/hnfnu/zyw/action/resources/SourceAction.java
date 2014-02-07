@@ -188,6 +188,17 @@ public class SourceAction extends AopNoSuchMethodErrorSolveBaseAction implements
 		return SUCCESS;
 	}
 
+	// 撤销上传文件的方法
+		@Action(value = "clearSourceFile")
+		public String clearFile() {
+			success = sourceService.clearFile();
+			if (success) {
+				message = "冗余文件清除成功";
+			} else {
+				message = "冗余文件清除失败";
+			}
+			return SUCCESS;
+		}
 	// 根据courceId和categoryId获取表中所有资源，用Map装，为了分页的需要加上Rows和Total
 	@Action(value = "sourceMoreVoList")
 	public String list() {

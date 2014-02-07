@@ -44,5 +44,11 @@ public interface ISubjectService {
 	 * @throws Exception
 	 */
 	public List<SubjectGroupVo> haveSubjectList();
+	
+	/**
+	 * 清楚冗余的课程图片
+	 * @return
+	 */
+	public boolean clearImage();
 
 }

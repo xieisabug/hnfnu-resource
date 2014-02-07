@@ -36,4 +36,6 @@ public interface ISourceService {
 	 * @return
 	 */
 	public int getTotalCount();
+	
+	public boolean clearFile();
 }

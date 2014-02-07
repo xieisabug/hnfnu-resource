@@ -121,6 +121,16 @@ public class SubjectAction extends AopNoSuchMethodErrorSolveBaseAction
 		}
 		return SUCCESS;
 	}
+	@Action(value = "clearSubjectImage")
+	public String clearImage() {
+		success = subjectService.clearImage();
+		if (success) {
+			message = "冗余图片清除成功！";
+		} else {
+			message = "冗余图片清除失败！";
+		}
+		return SUCCESS;
+	}
 
 	/* get set */
 
