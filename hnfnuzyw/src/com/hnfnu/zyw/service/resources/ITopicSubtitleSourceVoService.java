@@ -33,7 +33,10 @@ public interface ITopicSubtitleSourceVoService {
 	 * @return
 	 */
 	public List<TopicSubtitleSourceVo> listBySubtileId(int subtileId,int startIndex,int pageSize);
-	
-	
+	/**
+	 * 清除专题中的冗余文件
+	 * @return
+	 */
+	public boolean clearFile();
 	
 }

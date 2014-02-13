@@ -1,6 +1,6 @@
 var listForm = null;
 var listWin = null;
-function generateIndex(){
+function clearAll(){
     $.ligerDialog.confirm('确认清除全部冗余文件么？清除时间可能会比较长，请耐心等待', '清除全部', function(r) {
         if (r) {
             $.ajax({
@@ -18,77 +18,63 @@ function generateIndex(){
     });
 }
 
-function generate(){
-    var gradeId = $("div.l-text-wrapper #gradeId").val();
-    var subjectId = $("div.l-text-wrapper #subjectId").val();
-    $.ajax( {
-        //todo url不对
-        url : '../../../ftl/makeListFtl.action',
-        data : {
-            gradeId:gradeId,
-            subjectId:subjectId
-        },
-        type : 'post',
-        success : function(data) {
-            if (data.success) {
-                $.ligerDialog.tip( {
-                    title : '提示信息',
-                    content : data.message
-                });
-                listWin.close();
-            } else {
-                $.ligerDialog.error(data.message);
-            }
+function clearSource(){
+    $.ligerDialog.confirm('确认清除全部资源的冗余文件么？清除时间可能会比较长，请耐心等待', '清除全部', function(r) {
+        if (r) {
+            $.ajax({
+                url : '../../../resources/clearSourceFile.action',
+                type : 'post',
+                success : function(data) {
+                    if (data.success) {
+                        $.ligerDialog.tip({title:'提示信息', content:data.message});
+                    }else{
+                        $.ligerDialog.error(data.message);
+                    }
+                }
+            })
         }
     });
 }
 
-function cancel(){
-    listWin.close();
+function clearSubjectImage(){
+    $.ligerDialog.confirm('确认清除学科的冗余图片么？清除时间可能会比较长，请耐心等待', '清除全部', function(r) {
+        if (r) {
+            $.ajax({
+                url : '../../../resources/clearSubjectImage.action',
+                type : 'post',
+                success : function(data) {
+                    if (data.success) {
+                        $.ligerDialog.tip({title:'提示信息', content:data.message});
+                    }else{
+                        $.ligerDialog.error(data.message);
+                    }
+                }
+            })
+        }
+    });
 }
-
-function initListForm(){
-    listForm = $('<form></form>');
-
-    $.ajax( {
-        url : '../../../resources/listGradesAndSubjects.action',
-        type : 'post',
-        async : false,
-        success : function(data) {
-            listForm.ligerForm( {
-                inputWidth : 200,
-                labelWidth : 90,
-                space : 40,
-                fields : [  {
-                    display : "年级",
-                    name : "gradeId",
-                    type : "select",
-                    comboboxName : "grade",
-                    options : {
-                        textField : "name",
-                        valueField : "id",
-                        hideOnLoseFocus : true,
-                        valueFieldID : "gradeId",
-                        data : data.gradeList
+function clearTopicSourceFile(){
+    $.ligerDialog.confirm('确认清除专题的冗余图片么？清除时间可能会比较长，请耐心等待', '清除全部', function(r) {
+        if (r) {
+            $.ajax({
+                url : '../../../resources/clearTopicSourceFile.action',
+                type : 'post',
+                success : function(data) {
+                    if (data.success) {
+                        $.ligerDialog.tip({title:'提示信息', content:data.message});
+                    }else{
+                        $.ligerDialog.error(data.message);
                     }
-                }, {
-                    display : "学科",
-                    name : "subjectId",
-                    type : "select",
-                    comboboxName : "subject",
-                    options : {
-                        textField : "name",
-                        valueField : "id",
-                        hideOnLoseFocus : true,
-                        valueFieldID : "id",
-                        data : data.subjectList
-                    }
-                }]
-            });
+                }
+            })
         }
     });
 }
 /*
+function cancel(){
+    listWin.close();
+}
+
 $(function(){
     var b1 = $("#b1").ligerDrag({
         proxy: 'clone',

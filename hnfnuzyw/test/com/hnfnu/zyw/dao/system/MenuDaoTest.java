@@ -5,6 +5,7 @@ import static org.junit.Assert.fail;
 
 import java.util.List;
 
+import org.apache.struts2.ServletActionContext;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,6 +19,7 @@ import com.hnfnu.zyw.dto.system.MenuDto;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({ "/beans.xml" })
 public class MenuDaoTest {
+	
 	@Autowired
 	private IMenuDao menuDao;
 
@@ -28,33 +30,15 @@ public class MenuDaoTest {
 
 	@Test
 	public void testAdd() {
-		MenuDto p = new MenuDto();
-		p.setName("ÏµÍ³¹ÜÀí");
-		p.setUrl("rtertretyr");
-		p.setParentId(5);
-		p.setIcon("ertert");
-		p.setFunctionIdList("urye");
-		try {
-			menuDao.add(p);
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail("testAdd:²Ëµ¥Ìí¼Ó³É¹¦");
-		}
-
-		try {
-			List<MenuDto> l = menuDao.list("from MenuDto where name='ÏµÍ³¹ÜÀí'");
-			menuDao.delete(l.get(0).getId());
-		} catch (Exception e) {
-			fail("testAdd£ºÉ¾³ý²âÊÔÊý¾ÝÊ§°Ü¡£");
-			e.printStackTrace();
-		}
-		System.out.println("£¡£¡testAdd£ºÌí¼ÓÊý¾Ý²âÊÔ³É¹¦¡£");
+		 System.out.println("1111111111111111111");
+		 String filePath = ServletActionContext.getServletContext().getRealPath("/");
+		 System.out.println("filePath"+filePath);
 	}
 
 	@Test
 	public void testLoad() {
 		MenuDto p = new MenuDto();
-		p.setName("ÏµÍ³¹ÜÀí");
+		p.setName("ÏµÍ³ï¿½ï¿½ï¿½ï¿½");
 		p.setUrl("rtertretyr");
 		p.setParentId(5);
 		p.setIcon("ertert");
@@ -63,14 +47,14 @@ public class MenuDaoTest {
 			menuDao.add(p);
 		} catch (Exception e) {
 			e.printStackTrace();
-			fail("testAdd:²Ëµ¥Ìí¼Ó³É¹¦");
+			fail("testAdd:ï¿½Ëµï¿½ï¿½ï¿½Ó³É¹ï¿½");
 		}
 		List<MenuDto> l = null;
 		try {
-			l = menuDao.list("from MenuDto where name='ÏµÍ³¹ÜÀí'");
+			l = menuDao.list("from MenuDto where name='ÏµÍ³ï¿½ï¿½ï¿½ï¿½'");
 			menuDao.load(l.get(0).getId());
 		} catch (Exception e) {
-			fail("testAdd£º²éÑ¯²âÊÔÊý¾ÝÊ§°Ü¡£");
+			fail("testAddï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½Ü¡ï¿½");
 			e.printStackTrace();
 		}
 
@@ -78,16 +62,16 @@ public class MenuDaoTest {
 			menuDao.delete(l.get(0).getId());
 		} catch (Exception e) {
 			e.printStackTrace();
-			fail("testLoad£ºÉ¾³ý²âÊÔÊý¾ÝÊ±³ö´í¡£");
+			fail("testLoadï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½?");
 		}
-		System.out.println("£¡£¡testLoad£º²éÑ¯Êý¾Ý²âÊÔ³É¹¦¡£");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½testLoadï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½Ý²ï¿½ï¿½Ô³É¹ï¿½ï¿½ï¿½");
 
 	}
 
 	@Test
 	public void testDelete() {
 		MenuDto p = new MenuDto();
-		p.setName("ÏµÍ³¹ÜÀí");
+		p.setName("ÏµÍ³ï¿½ï¿½ï¿½ï¿½");
 		p.setUrl("rtertretyr");
 		p.setParentId(5);
 		p.setIcon("ertert");
@@ -96,23 +80,23 @@ public class MenuDaoTest {
 			menuDao.add(p);
 		} catch (Exception e) {
 			e.printStackTrace();
-			fail("testDelete:²Ëµ¥Ìí¼ÓÊ§°Ü");
+			fail("testDelete:ï¿½Ëµï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½");
 		}
 		List<MenuDto> l = null;
 		try {
-			l = menuDao.list("from MenuDto where name='ÏµÍ³¹ÜÀí'");
+			l = menuDao.list("from MenuDto where name='ÏµÍ³ï¿½ï¿½ï¿½ï¿½'");
 			menuDao.delete(l.get(0).getId());
 		} catch (Exception e) {
-			fail("testDelete£ºÉ¾³ý²âÊÔÊý¾ÝÊ§°Ü¡£");
+			fail("testDeleteï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½Ü¡ï¿½");
 			e.printStackTrace();
 		}
-		System.out.println("£¡£¡testDelete£ºÉ¾³ýÊý¾Ý²âÊÔ³É¹¦¡£");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½testDeleteï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½Ý²ï¿½ï¿½Ô³É¹ï¿½ï¿½ï¿½");
 	}
 
 	@Test
 	public void testUpdate() {
 		MenuDto p = new MenuDto();
-		p.setName("ÏµÍ³¹ÜÀí");
+		p.setName("ÏµÍ³ï¿½ï¿½ï¿½ï¿½");
 		p.setUrl("rtertretyr");
 		p.setParentId(5);
 		p.setIcon("ertert");
@@ -123,40 +107,40 @@ public class MenuDaoTest {
 			menuDao.add(p);
 		} catch (Exception e) {
 			e.printStackTrace();
-			fail("testAdd:²Ëµ¥Ìí¼ÓÊ§°Ü");
+			fail("testAdd:ï¿½Ëµï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½");
 		}
-		p.setName("ÏµÍ³¹ÜÀí2ºÅ");
+		p.setName("ÏµÍ³ï¿½ï¿½ï¿½ï¿½2ï¿½ï¿½");
 		List<MenuDto> l = null;
 		try {
-			l = menuDao.list("from MenuDto where name='ÏµÍ³¹ÜÀí'");
+			l = menuDao.list("from MenuDto where name='ÏµÍ³ï¿½ï¿½ï¿½ï¿½'");
 			p.setId(l.get(0).getId());
 			menuDao.update(p);
 		} catch (Exception e) {
 			e.printStackTrace();
-			fail("testUpdate:²Ëµ¥¸üÐÂ³É¹¦");
+			fail("testUpdate:ï¿½Ëµï¿½ï¿½ï¿½ï¿½Â³É¹ï¿½");
 		}
 
 		try {
 			menuDao.delete(l.get(0).getId());
 		} catch (Exception e) {
-			fail("testAdd£ºÉ¾³ý²âÊÔÊý¾ÝÊ§°Ü¡£");
+			fail("testAddï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½Ü¡ï¿½");
 			e.printStackTrace();
 		}
-		System.out.println("£¡£¡testUpdate£ºÊý¾Ý²âÊÔ³É¹¦¡£");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½testUpdateï¿½ï¿½ï¿½ï¿½Ý²ï¿½ï¿½Ô³É¹ï¿½ï¿½ï¿½");
 
 	}
 
 	@Test
 	public void testList() {
 		MenuDto p = new MenuDto();
-		p.setName("ÏµÍ³¹ÜÀí");
+		p.setName("ÏµÍ³ï¿½ï¿½ï¿½ï¿½");
 		p.setUrl("rtertretyr");
 		p.setParentId(5);
 		p.setIcon("ertert");
 		p.setFunctionIdList("urye");
 
 		MenuDto pp = new MenuDto();
-		pp.setName("ÏµÍ³¹ÜÀí");
+		pp.setName("ÏµÍ³ï¿½ï¿½ï¿½ï¿½");
 		pp.setUrl("rtertretyr");
 		pp.setParentId(5);
 		pp.setIcon("ertert");
@@ -166,22 +150,22 @@ public class MenuDaoTest {
 			menuDao.add(pp);
 		} catch (Exception e) {
 			e.printStackTrace();
-			fail("testList:²Ëµ¥Ìí¼ÓÊ§°Ü");
+			fail("testList:ï¿½Ëµï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½");
 		}
 
 		String hql = "from MenuDto where name=?";
 		List<MenuDto> menus = null;
 
 		try {
-			menus = menuDao.list(hql, new String[] { "ÏµÍ³¹ÜÀí" });
+			menus = menuDao.list(hql, new String[] { "ÏµÍ³ï¿½ï¿½ï¿½ï¿½" });
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			fail("testList;²éÑ¯Êý¾Ý×éÊ§°Ü¡£");
+			fail("testList;ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½Ü¡ï¿½");
 		}
 		assertEquals(2, menus.size());
 
-		System.out.println("£¡£¡testList£º²éÑ¯Êý¾ÝÊý×é²âÊÔ³É¹¦¡£");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½testListï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô³É¹ï¿½ï¿½ï¿½");
 	}
 
 	@After
