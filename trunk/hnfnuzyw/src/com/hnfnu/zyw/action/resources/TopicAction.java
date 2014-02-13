@@ -19,6 +19,7 @@ import com.hnfnu.zyw.action.base.AopNoSuchMethodErrorSolveBaseAction;
 import com.hnfnu.zyw.dto.resources.TopicDto;
 import com.hnfnu.zyw.dto.system.UserDto;
 import com.hnfnu.zyw.service.resources.ITopicService;
+import com.hnfnu.zyw.service.resources.ITopicSubtitleSourceVoService;
 import com.hnfnu.zyw.website.service.FtlITopicService;
 import com.hnfnu.zyw.website.service.IIndexService;
 import com.opensymphony.xwork2.ActionContext;
@@ -42,6 +43,10 @@ public class TopicAction extends AopNoSuchMethodErrorSolveBaseAction implements
 	@Autowired
 	@Qualifier("topicService")
 	private ITopicService topicService;
+	
+	@Autowired
+	@Qualifier("topicSubtitleSourceVoService")
+	private ITopicSubtitleSourceVoService topicSubtitleSourceVoService;
 
 	@Autowired
 	@Qualifier("ftl_indexService")
@@ -51,6 +56,8 @@ public class TopicAction extends AopNoSuchMethodErrorSolveBaseAction implements
 	@Qualifier("ftl_topicService")
 	private FtlITopicService ftl_topicService;
 
+	
+	
 	// 添加专题
 	@Action(value = "addTopic")
 	public String add() {
@@ -193,7 +200,16 @@ public class TopicAction extends AopNoSuchMethodErrorSolveBaseAction implements
 		topicTree = topicService.topicTree();
 		return SUCCESS;
 	}
-
+	@Action(value = "clearTopicSourceFile")
+	public String clearFile() {
+		success = topicSubtitleSourceVoService.clearFile();
+		if (success) {
+			message = "冗余文件清除成功";
+		} else {
+			message = "冗余文件清除失败";
+		}
+		return SUCCESS;
+	}
 	/* get set */
 	public TopicDto getModel() {
 		return topic;
