@@ -87,9 +87,9 @@ public class LoginAction extends AopNoSuchMethodErrorSolveBaseAction{
     /**
      * codeSequence
      */
-    char[] codeSequence = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
-            'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W',
-            'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+    char[] codeSequence = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
+            'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w',
+            'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
     /**************************************************************************************/
 
 	@Autowired
@@ -155,7 +155,7 @@ public class LoginAction extends AopNoSuchMethodErrorSolveBaseAction{
         HttpSession session = ServletActionContext.getRequest().getSession();
         String validateCode = (String)session.getAttribute("validateCode");
         if(validateCode != null) {
-            if(!captcha.equals(validateCode)) {
+            if(!captcha.toLowerCase().equals(validateCode)) {
                 success = false;
                 message = "对不起，验证码不正确";
                 return SUCCESS;

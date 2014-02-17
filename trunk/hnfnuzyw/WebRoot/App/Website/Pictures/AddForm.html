@@ -25,6 +25,7 @@
     $(function(){
         formInit();
         fileForm.prepend('<input type="file" id="file_upload" name="fileName"><div id="uploadFileName"></div>');
+        fileForm.prepend('<p>上传的图片分辨率为510(宽度)*280(高度)</p>');
         $("#file_upload").uploadify({
             debug:false,
             auto:true,//是否自动上传
