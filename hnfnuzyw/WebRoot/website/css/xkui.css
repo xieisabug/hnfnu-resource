@@ -130,7 +130,7 @@
 }
 
 .abtn {
-    padding: 6px 12px;
+    padding: 8px 12px;
     text-decoration: none;
 }
 
@@ -154,7 +154,9 @@
     float:left;
     border-radius: 0;
 }
-
+.btn-blue-border {
+    border: 1px solid #75ade7;
+}
 /************    Button    **************/
 /************    Tab    **************/
 .tabTitles {

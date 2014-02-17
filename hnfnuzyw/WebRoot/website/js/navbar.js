@@ -7,18 +7,19 @@ window.addEvent('domready', function () {
             value:'站内资源'
         }
     ], {
-        height:34
-    }).animate().addButtonClass('btn-group-left');
+        height:34,
+        width:130
+    }).animate().addButtonClass('btn-group-left').addButtonClass('btn-blue-border');
     //为了平衡ie浏览器的bug
     if(Browser.ie) {
-        searchSelect.setSelectDivOffset(13,-46);
+        searchSelect.setSelectDivOffset(-55,8);
     }else {
-        searchSelect.setSelectDivOffset(13,-19);
+        searchSelect.setSelectDivOffset(-55,35);
     }
     //搜索输入框
-    var keyWords = new Input($$('#headSearch input'),{width:236}).addClass('input-group-center');
+    var keyWords = new Input($$('#headSearch input'),{width:182}).addClass('input-group-center').addClass('btn-blue-border');
     //搜索按钮
-    var searchButton = new Button($$('button')[1]).addClass('btn-group-right');
+    var searchButton = new Button($$('button')[1],{width:78}).addClass('btn-group-right').addClass('btn-blue-border');
     $$('#headMenu a').each(function(item,index) {
         var option = {
             width:120

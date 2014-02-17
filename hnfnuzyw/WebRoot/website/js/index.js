@@ -94,7 +94,7 @@ window.addEvent('domready',function(){
 
     //生成专题的滚动
     new Scroll($('topic-content'), {
-        width:960,
+        width:'auto',
         height:358
     }).withAnimate('fadeSlide');
 
@@ -239,7 +239,7 @@ window.addEvent('domready',function(){
             html +='		</td>';
             html +='	</tr>';
         } else {
-            html +='			您上次登录的时间是：';
+            html +='			上次登录时间：';
             html +='		</td>';
             html +='	</tr>';
             html +='	<tr>';
