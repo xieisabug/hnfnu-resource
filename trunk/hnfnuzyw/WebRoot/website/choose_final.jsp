@@ -36,7 +36,7 @@
         var basePath = '<%=basePath%>';
         var onlineViewFormat = '<%=onlineViewFormat%>';
     </script>
-    <title>专题</title>
+    <title>数字资源中心-学科资源</title>
 </head>
 <body>
 <%@ include file="header.html" %>

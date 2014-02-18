@@ -42,7 +42,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>数字资源中心首页——湖南第一师范学院</title>
+    <title>湖南一师-数字资源中心首页</title>
     <link href="<%=basePath%>website/css/index.css" type="text/css" rel="stylesheet">
     <link href="<%=basePath%>website/css/xkui.css" type="text/css" rel="stylesheet">
     <script src="<%=basePath%>website/js/mootools.js" type="text/javascript"></script>
