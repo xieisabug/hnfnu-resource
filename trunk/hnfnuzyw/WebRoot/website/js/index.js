@@ -239,6 +239,7 @@ window.addEvent('domready',function(){
             html +='		</td>';
             html +='	</tr>';
         } else {
+            var lld = data.info.lastedLoginDate;
             html +='			上次登录时间：';
             html +='		</td>';
             html +='	</tr>';
