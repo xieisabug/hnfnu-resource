@@ -10,7 +10,7 @@
     <script src="js/xkui.js" type="text/javascript"></script>
     <script src="js/navbar.js" type="text/javascript"></script>
     <script src="js/topic_source.js" type="text/javascript"></script>
-    <title>专题</title>
+    <title>数字资源中心-专题资源</title>
 </head>
 <body>
 <div id="headContent" style="height: 90px;">
