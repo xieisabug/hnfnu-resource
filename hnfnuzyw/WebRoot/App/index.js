@@ -3,7 +3,9 @@ var tab, layout, accordion;
 var hnfnu = {};
 //tabid计数器，保证tabid不会重复
 //var tabidcounter = 0;
-
+function supports_canvas() {
+    return !!document.createElement('canvas').getContext;
+}
 function f_heightChanged(options) {
     if (tab)
         tab.addHeight(options.diff);
@@ -18,6 +20,11 @@ function f_addTab(tabid, text, url) {
         tabid = "tabid"; //+ tabidcounter;
     }
     tab.addTabItem({ tabid:tabid, text:text, url:url });
+    if(!supports_canvas()) {
+        //console.log( $(".l-tab-content").height());
+        $("#welcome").css('height', $(".l-tab-content").height() );
+        window.tab.addHeight(0);
+    }
 }
 
 
