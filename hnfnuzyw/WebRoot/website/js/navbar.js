@@ -7,7 +7,7 @@ window.addEvent('domready', function () {
             value:'站内资源'
         }
     ], {
-        height:34,
+        height:35,
         width:130
     }).animate().addButtonClass('btn-group-left').addButtonClass('btn-blue-border');
     //为了平衡ie浏览器的bug
@@ -17,9 +17,9 @@ window.addEvent('domready', function () {
         searchSelect.setSelectDivOffset(-55,35);
     }
     //搜索输入框
-    var keyWords = new Input($$('#headSearch input'),{width:182}).addClass('input-group-center').addClass('btn-blue-border');
+    var keyWords = new Input($$('#headSearch input'),{width:182,height:Browser.ie7?33:21}).addClass('input-group-center').addClass('btn-blue-border');
     //搜索按钮
-    var searchButton = new Button($$('button')[1],{width:78}).addClass('btn-group-right').addClass('btn-blue-border');
+    var searchButton = new Button($$('button')[1],{width:78,height:35}).addClass('btn-group-right').addClass('btn-blue-border');
     $$('#headMenu a').each(function(item,index) {
         var option = {
             width:120

@@ -42,7 +42,7 @@ window.addEvent('domready',function(){
         left:300,
         top:200,
         position:'absolute',
-        titleHtml:'<span style="margin-left: 30px;">错误</span>',
+        titleHtml:'<span style="margin-left: 30px;color:red;">错误提示</span>',
         draggable:true,
         model:false,
         closeable:true
@@ -153,6 +153,11 @@ window.addEvent('domready',function(){
                     captcha:captcha.getValue()
                 });
         });
+        window.addEvent('keydown', function(event){
+            if (event.key == 'enter') {
+                loginBtn.body.fireEvent('click');
+            }
+        });
     }
     //登录后的初始化
     function registLoginEvent(){
@@ -214,6 +219,11 @@ window.addEvent('domready',function(){
     }
     //登录时显示
     function loginShow(data){
+        //登陆成功后移除window绑定的回车键事件
+        window.removeEvents('keydown');
+        //关闭之前发生错误的对话框
+        loginDialog.close();
+
         var html = '';
         html +='<table style="font-size:0.8em;height:200px;">	';
         html +='	<tr>';
