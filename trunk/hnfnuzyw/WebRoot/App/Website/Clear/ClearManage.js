@@ -1,7 +1,7 @@
 var listForm = null;
 var listWin = null;
 function clearAll(){
-    $.ligerDialog.confirm('确认清除全部冗余文件么？清除时间可能会比较长，请耐心等待', '清除全部', function(r) {
+  /*  $.ligerDialog.confirm('确认清除全部冗余文件么？清除时间可能会比较长，请耐心等待', '清除全部', function(r) {
         if (r) {
             $.ajax({
                 url : '../../../resources/clearTopicImage.action',
@@ -15,7 +15,11 @@ function clearAll(){
                 }
             })
         }
-    });
+    });*/
+    clearSource();
+    clearSubjectImage();
+    clearTopicSourceFile();
+    clearTopicImage();
 }
 
 function clearSource(){
@@ -54,10 +58,28 @@ function clearSubjectImage(){
     });
 }
 function clearTopicSourceFile(){
-    $.ligerDialog.confirm('确认清除专题的冗余图片么？清除时间可能会比较长，请耐心等待', '清除全部', function(r) {
+    $.ligerDialog.confirm('确认清除专题的冗余文件么？清除时间可能会比较长，请耐心等待', '清除全部', function(r) {
         if (r) {
             $.ajax({
                 url : '../../../resources/clearTopicSourceFile.action',
+                type : 'post',
+                success : function(data) {
+                    if (data.success) {
+                        $.ligerDialog.tip({title:'提示信息', content:data.message});
+                    }else{
+                        $.ligerDialog.error(data.message);
+                    }
+                }
+            })
+        }
+    });
+}
+
+function clearTopicImage(){
+    $.ligerDialog.confirm('确认清除专题的冗余图片么？清除时间可能会比较长，请耐心等待', '清除全部', function(r) {
+        if (r) {
+            $.ajax({
+                url : '../../../resources/clearTopicImage.action',
                 type : 'post',
                 success : function(data) {
                     if (data.success) {
