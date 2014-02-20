@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.hnfnu.zyw.dao.system.IUserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,11 @@ public class NewsServiceImpl implements INewsService {
 	@Autowired
 	@Qualifier("newsDao")
 	public INewsDao newsDao;
-	
+
+    @Autowired
+    @Qualifier("userDao")
+    public IUserDao userDao;
+
 	public Map<String, Object> getIndexNews() {
 		Map<String, Object> root = new HashMap<String, Object>();
 		String hql1 = "from NewsDto order by id desc limit 0," + MAX_NEWS;
@@ -43,7 +48,9 @@ public class NewsServiceImpl implements INewsService {
 
     public NewsDto get(int id) {
         try {
-            return newsDao.get(id);
+            NewsDto n = newsDao.get(id);
+            n.setCreateUserName(userDao.get(n.getCreateUserId()).getName());
+            return n;
         } catch (Exception e) {
             e.printStackTrace();
             return null;

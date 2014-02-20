@@ -1,12 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.hnfnu.zyw.dto.website.NewsDto" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%
     NewsDto news = (NewsDto) request.getAttribute("news");
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://"
             + request.getServerName() + ":" + request.getServerPort()
             + path + "/";
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 %>
 <!DOCTYPE html>
 <html>
@@ -44,8 +46,11 @@
             <div>
                 <div class="news-title">
                     <h3><%=news.getTitle()%></h3>
-                    <h5><%=news.getDate()%></h5>
-                    <h5>编辑：<%=news.getCreateUserId()%></h5>
+                    <h5>
+                        <%
+                            out.print(sdf.format(news.getDate()));
+                        %></h5>
+                    <h5>编辑：<%=news.getCreateUserName()%></h5>
                 </div>
                 <div class="news-content">
                     <%=news.getContent()%>

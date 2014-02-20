@@ -21,6 +21,8 @@ public class NewsDto
 	private Date date;
 	//创建者用户id
 	private int createUserId;
+    //创建者姓名（不放到表中）
+    private String createUserName;
 	//优先级，默认为0
 	private Integer priority;
 
@@ -90,7 +92,16 @@ public class NewsDto
 	{
 		return this.priority;
 	}
-	@Override
+
+    public String getCreateUserName() {
+        return createUserName;
+    }
+
+    public void setCreateUserName(String createUserName) {
+        this.createUserName = createUserName;
+    }
+
+    @Override
 	public String toString() {
 		return "NewsDto [id=" + id + ", title=" + title + ", content="
 				+ content + ", date=" + date + ", createUserId=" + createUserId
