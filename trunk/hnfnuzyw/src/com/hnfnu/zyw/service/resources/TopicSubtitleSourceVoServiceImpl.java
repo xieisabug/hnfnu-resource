@@ -106,13 +106,14 @@ public class TopicSubtitleSourceVoServiceImpl implements ITopicSubtitleSourceVoS
 		String hql = "from TopicSubtitleSourceVo";
 		List<TopicSubtitleSourceVo> s = null;
 		String filePath = Url.realPath;
-		filePath += "topic";
+		filePath += "uploads//topic";
 		HashSet<String> set = new HashSet<String>();
 		try {
 			s = topicSubtitleSourceVoDao.list(hql);
 			for (int i = 0; i < s.size(); i++) {
 				set.add(s.get(i).getUrl());
 			}
+            System.out.println("filePath"+filePath);
 			File file = new File(filePath);
 			String filePakege[];
 			filePakege = file.list();
