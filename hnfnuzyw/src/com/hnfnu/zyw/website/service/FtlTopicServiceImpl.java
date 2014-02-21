@@ -21,7 +21,7 @@ public class FtlTopicServiceImpl implements FtlITopicService {
 	@Autowired
 	@Qualifier("topicDao")
 	private ITopicDao topicDao;
-	
+
 	@Scheduled(cron = "0 0 0 * * ?")
     @Async
 	public void getTopics() {
