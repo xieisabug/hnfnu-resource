@@ -166,7 +166,7 @@ $(function() {
                 width : '100%',
                 data:{Rows:[data.sourceVo]},
                 onDblClickRow:function(data){
-                    console.log(data);
+                    //console.log(data);
                     sourceViewTable(data);
                 }
             });
