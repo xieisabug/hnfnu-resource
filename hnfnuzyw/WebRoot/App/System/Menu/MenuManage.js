@@ -31,14 +31,14 @@ function add_save() {
 	// 把表单转化为数组
 	if (menuForm.valid()) {
 		var row_data = Form.parseJSON(menuForm);
-		console.log(row_data);
+//		console.log(row_data);
 		// 发往服务器，返回成功后再添加到表格中
 		$.ajax({
 			url : '../../../system/addMenu.action',
 			data : row_data,
 			type : 'post',
 			success : function(data) {
-				console.log(data);
+//				console.log(data);
 				if (data.success) {
 					refresh_menu();
 					$.ligerDialog.tip({
@@ -137,7 +137,7 @@ function edit_save() {
 			data : row_data,
 			type : 'post',
 			success : function(data) {
-				console.log(data);
+//				console.log(data);
 				if (data.success) {
 					refresh_menu();
 					$.ligerDialog.tip({title:'提示信息', content:data.message});
