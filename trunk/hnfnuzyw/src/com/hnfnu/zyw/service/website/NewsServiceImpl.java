@@ -107,7 +107,7 @@ public class NewsServiceImpl implements INewsService {
 	 */
 	public Map<String, Object> listNews() {
 		String hql = "from NewsDto";
-		Map<String, Object> newsList = new HashMap<String, Object>();
+		Map<String, Object> newsList = new HashMap<>();
 		List<NewsDto> l = null;
 		
 		try {
@@ -116,7 +116,7 @@ public class NewsServiceImpl implements INewsService {
 			e.printStackTrace();
 		}
 		newsList.put("Rows", l);
-		newsList.put("Total", l.size());
+		newsList.put("Total", l != null ? l.size() : 0);
 		return newsList;
 	}
 }

@@ -27,7 +27,7 @@ public class NewsServiceImpl implements INewsService {
 
 	public Map<String, Object> getIndexNews() {
 		Map<String, Object> root = new HashMap<String, Object>();
-		String hql1 = "from NewsDto order by id desc limit 0," + MAX_NEWS;
+		String hql1 = "from NewsDto order by priority desc,id desc limit 0," + MAX_NEWS;
 		List<NewsDto> newsList = null;
 		try {
 			newsList = newsDao.list(hql1);
