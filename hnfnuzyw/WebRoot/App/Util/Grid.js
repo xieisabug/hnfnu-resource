@@ -103,7 +103,7 @@ $.ligerui.controls.Grid.prototype.checkBoxIsTrue = function (){
         });
         g._setColumns(p.columns);
         g.reRender();
-        console.log(p.columns);
+//        console.log(p.columns);
         //this._bulid();
         //this.reRender();
     }

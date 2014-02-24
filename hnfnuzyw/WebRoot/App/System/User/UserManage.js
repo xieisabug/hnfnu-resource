@@ -804,7 +804,7 @@ function add_balance_save() {
             }
             userIds = userIds + userDatas[i].id;
         }
-        console.log(userIds);
+//        console.log(userIds);
         var row_data = Form.parseJSON(balanceForm);
         // 发往服务器，返回成功后再添加到表格中
         $.ajax({
@@ -1145,7 +1145,7 @@ function add_user_fail(data){
         pageSize:30,
         data:data
     });
-    console.log(addUserFailGrid)
+//    console.log(addUserFailGrid)
     addUserFailWin = $.ligerDialog.open({
         width:700,
         height:600,
