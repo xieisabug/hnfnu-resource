@@ -70,7 +70,7 @@ function sort_news(){
         return;
     }
     sortFormInit();
-
+    //Form.loadForm(sortForm, newsGrid.getSelected());
     sortFormWin = $.ligerDialog.open({
         width : 400,
         height : 100,
@@ -122,14 +122,16 @@ function sortFormInit(){
         labelWidth : 90,
         space : 40,
         fields : [{
-            display : "功能列表",
+            display : "优先级列表",
             name : "priorityList",
             type : "select",
-            value : newsGrid.getSelected().priority,
+            //value : newsGrid.getSelected().priority,
             //comboboxName : "priority",
             options : {
                 textField : "priority",
                 valueField : "num",
+                initValue : newsGrid.getSelected().priority,
+                initText : newsGrid.getSelected().priority,
                 hideOnLoseFocus:true,
                 isMultiSelect : false,
                 isShowCheckBox : false,
