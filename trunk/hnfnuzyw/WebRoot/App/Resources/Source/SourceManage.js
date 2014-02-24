@@ -577,7 +577,6 @@ $(function() {
     }];
 
 	var menuId = window.parent.tab.getSelectedTabItemID();
-    alert(123123);
 	$.ajax({
         //async: false,
 		url : '../../../system/listFunctionIdList.action',
@@ -615,13 +614,11 @@ $(function() {
                 selectUrl = "../../../resources/sourceMoreVoListByUserId.action";
             }
 			toolbarItems = Toolbar.confirmToolbar(toolbarItems, ajaxToolbar);
-            alert(treeUrl);
             //console.log("treeUrl : " + treeUrl + ", selectUrl : " + selectUrl);
             $.ajax({
                 url : treeUrl,
                 type : 'post',
                 success : function(data) {
-                    alert("进入内层ajax");
                     sourceTree = $("#sourceTree").ligerTree({
                         nodeWidth : 150,
                         textFieldName : 'name',

@@ -34,7 +34,7 @@ function more(){
             for(i = 0; i<datas.length; i++) {
                 html += generateSourceItem(datas[i]);
             }
-            console.log(html);
+//            console.log(html);
             new Element('div',{
                 html:html
             }).getChildren().each(function(item){

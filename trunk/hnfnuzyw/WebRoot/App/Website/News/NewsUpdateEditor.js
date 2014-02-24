@@ -57,7 +57,7 @@ function update_save() {
         type:'post',
         success:function (data) {
             if (data.success) {
-                console.log(data.newsList);
+//                console.log(data.newsList);
 
                 $.ligerDialog.tip({
                     title:'提示信息',
@@ -67,7 +67,7 @@ function update_save() {
                 for(var i = 0; i < frameLen; i++){
                     if(top.frames[i].newsGrid){
                         top.frames[i].newsGrid.loadData(data.newsList);
-                        console.log(top.frames[i].newsGrid);
+//                        console.log(top.frames[i].newsGrid);
                         window.parent.window.tab.removeTabItem("update_news");
                         return;
                     }
