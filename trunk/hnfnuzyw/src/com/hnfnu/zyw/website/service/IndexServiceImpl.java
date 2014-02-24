@@ -23,6 +23,7 @@ import com.hnfnu.zyw.dao.system.IUserDao;
 import com.hnfnu.zyw.dao.website.IPicturesDao;
 import com.hnfnu.zyw.dto.resources.GroupDto;
 import com.hnfnu.zyw.dto.resources.TopicDto;
+import com.hnfnu.zyw.utils.Url;
 import com.hnfnu.zyw.vo.GradeGroupVo;
 import com.hnfnu.zyw.vo.SubjectGroupVo;
 import com.hnfnu.zyw.website.utils.FreemarkerUtil;
@@ -30,7 +31,7 @@ import com.hnfnu.zyw.website.utils.FreemarkerUtil;
 @Service("ftl_indexService")
 public class IndexServiceImpl implements IIndexService {
 
-    public final static String FILE_PATH = "E:\\WebWorkspace\\hnfnu-resource\\trunk\\hnfnuzyw\\WebRoot\\";
+   // public final static String FILE_PATH = "E:\\WebWorkspace\\hnfnu-resource\\trunk\\hnfnuzyw\\WebRoot\\";
 
     @Autowired
     @Qualifier("picturesDao")
@@ -78,7 +79,7 @@ public class IndexServiceImpl implements IIndexService {
     		FreemarkerUtil fu = new FreemarkerUtil();
             Map<String, Object> root = null;
             root = this.getPicturesRoot();
-            fu.fprint("index/gallery.ftl", root, FILE_PATH + "website\\",
+            fu.fprint("index/gallery.ftl", root, Url.FREEMRAK_FILE_PATH + "website\\",
                     "gallery.html");
 
             
@@ -87,7 +88,7 @@ public class IndexServiceImpl implements IIndexService {
             //		fu.print("index/tabGroup.ftl", root);
             // 输出到文件
 //            System.out.println(filePath + "website\\");
-            fu.fprint("index/tabGroup.ftl", root, FILE_PATH + "website\\",
+            fu.fprint("index/tabGroup.ftl", root, Url.FREEMRAK_FILE_PATH + "website\\",
                     "tabGroup.html");
             
             root = this.getMakeSourceCount();
@@ -95,12 +96,12 @@ public class IndexServiceImpl implements IIndexService {
             		//fu.print("index/sourceCount.ftl", root);
             // 输出到文件
 //            System.out.println(filePath + "website\\");
-            fu.fprint("index/sourceCount.ftl", root, FILE_PATH + "website\\",
+            fu.fprint("index/sourceCount.ftl", root, Url.FREEMRAK_FILE_PATH + "website\\",
                     "sourceCount.html");
             
             
             root = this.getMakeTopicRoot();
-            return fu.fprint("index/topic.ftl", root, FILE_PATH + "website\\",
+            return fu.fprint("index/topic.ftl", root, Url.FREEMRAK_FILE_PATH + "website\\",
                     "topic.html");
             
             
@@ -126,7 +127,7 @@ public class IndexServiceImpl implements IIndexService {
             // 打印到输出台，以便于测试
             //fu.print("index/gallery.ftl", root);
             // 输出到文件
-            fu.fprint("index/gallery.ftl", root, FILE_PATH + "website\\",
+            fu.fprint("index/gallery.ftl", root, Url.FREEMRAK_FILE_PATH + "website\\",
                     "gallery.html");
         } catch (Exception e) {
             e.printStackTrace();
@@ -150,7 +151,7 @@ public class IndexServiceImpl implements IIndexService {
             //fu.print("index/topic.ftl", root);
             // 输出到文件
             //System.out.println(filePath + "website\\");
-            fu.fprint("index/topic.ftl", root, FILE_PATH + "website\\",
+            fu.fprint("index/topic.ftl", root, Url.FREEMRAK_FILE_PATH + "website\\",
                     "topic.html");
         } catch (Exception e) {
             e.printStackTrace();
@@ -174,7 +175,7 @@ public class IndexServiceImpl implements IIndexService {
             //		fu.print("index/tabGroup.ftl", root);
             // 输出到文件
 //            System.out.println(filePath + "website\\");
-            fu.fprint("index/tabGroup.ftl", root, FILE_PATH + "website\\",
+            fu.fprint("index/tabGroup.ftl", root, Url.FREEMRAK_FILE_PATH + "website\\",
                     "tabGroup.html");
         } catch (Exception e) {
             e.printStackTrace();
@@ -195,7 +196,7 @@ public class IndexServiceImpl implements IIndexService {
             		fu.print("index/sourceCount.ftl", root);
             // 输出到文件
 //            System.out.println(filePath + "website\\");
-            fu.fprint("index/sourceCount.ftl", root, FILE_PATH + "website\\",
+            fu.fprint("index/sourceCount.ftl", root, Url.FREEMRAK_FILE_PATH + "website\\",
                     "sourceCount.html");
         } catch (Exception e) {
             e.printStackTrace();

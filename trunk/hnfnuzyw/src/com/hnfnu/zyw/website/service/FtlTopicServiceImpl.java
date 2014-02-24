@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.hnfnu.zyw.dao.base.Pager;
 import com.hnfnu.zyw.dao.resources.ITopicDao;
 import com.hnfnu.zyw.dto.resources.TopicDto;
+import com.hnfnu.zyw.utils.Url;
 import com.hnfnu.zyw.website.utils.FreemarkerUtil;
 
 @Service("ftl_topicService")
@@ -41,7 +42,7 @@ public class FtlTopicServiceImpl implements FtlITopicService {
             fu.print("topic/topic_source.ftl", root);
             // 输出到文件
 //            System.out.println(filePath + "website\\");
-            fu.fprint("topic/topic_source.ftl", root, IndexServiceImpl.FILE_PATH + "website\\",
+            fu.fprint("topic/topic_source.ftl", root, Url.FREEMRAK_FILE_PATH + "website\\",
                     "topic_source.html");
         } catch (Exception e) {
             e.printStackTrace();

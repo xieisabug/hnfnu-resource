@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.hnfnu.zyw.dto.system.UserDto;
+import com.hnfnu.zyw.utils.Url;
 
 public class LoginFilter extends HttpServlet implements Filter {
 
@@ -31,7 +32,7 @@ public class LoginFilter extends HttpServlet implements Filter {
 		if (user == null) {
 			if (url != null
 					&& (!url.contains("login") && !url.contains("website")) && !url.contains("html2")) {
-				response.sendRedirect("/hnfnuzyw/login.html");
+				response.sendRedirect(Url.LOGINPATH);
 				return;
 			}
 		}
