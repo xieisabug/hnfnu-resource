@@ -577,9 +577,9 @@ $(function() {
     }];
 
 	var menuId = window.parent.tab.getSelectedTabItemID();
-
+    alert(123123);
 	$.ajax({
-        async: false,
+        //async: false,
 		url : '../../../system/listFunctionIdList.action',
 		type : 'post',
 		data : {
@@ -595,12 +595,18 @@ $(function() {
 			}
             //console.log(parent.hnfnu);
             var super_query = false;
-            ajaxToolbar.forEach(function(data){
+            for(var a = 0; a<ajaxToolbar.length; a++) {
+                var d = ajaxToolbar[a];
+                if(d.name == "super_query"){
+                    super_query = true;
+                }
+            }
+            /*ajaxToolbar.forEach(function(data){
                 //console.log(data);
                 if(data.name == "super_query"){
                     super_query = true;
                 }
-            });
+            });*/
             if(super_query){
                 treeUrl = "../../../resources/allTree.action";
                 selectUrl = "../../../resources/sourceMoreVoList.action";
@@ -609,11 +615,13 @@ $(function() {
                 selectUrl = "../../../resources/sourceMoreVoListByUserId.action";
             }
 			toolbarItems = Toolbar.confirmToolbar(toolbarItems, ajaxToolbar);
+            alert(treeUrl);
             //console.log("treeUrl : " + treeUrl + ", selectUrl : " + selectUrl);
             $.ajax({
                 url : treeUrl,
                 type : 'post',
                 success : function(data) {
+                    alert("进入内层ajax");
                     sourceTree = $("#sourceTree").ligerTree({
                         nodeWidth : 150,
                         textFieldName : 'name',

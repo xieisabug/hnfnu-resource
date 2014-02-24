@@ -30,7 +30,7 @@ import com.hnfnu.zyw.website.utils.FreemarkerUtil;
 @Service("ftl_indexService")
 public class IndexServiceImpl implements IIndexService {
 
-    public final static String FILE_PATH = "E:\\Workspaces\\MyEclipse 8.51\\hnfnu-resource\\trunk\\hnfnuzyw\\WebRoot\\";
+    public final static String FILE_PATH = "E:\\WebWorkspace\\hnfnu-resource\\trunk\\hnfnuzyw\\WebRoot\\";
 
     @Autowired
     @Qualifier("picturesDao")
