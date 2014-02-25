@@ -66,7 +66,12 @@ window.addEvent('domready',function(){
             for(var i = 0; i < list.length; i++) {
                 html += '<li>';
                 html += '<a target="_blank" href="' + basePath + 'news/view?id='+ list[i].id +'">';
-                html += list[i].title;
+                if(list[i].title.length > 11) {
+                    html += list[i].title.substring(0,10) + '...';
+                } else {
+                    html += list[i].title;
+                }
+                html += '<span style="float: right;">'+ new Date(list[i].date).Format('yyyy-MM-dd')+'</span>'
                 html += '</a>';
                 html += '</li>';
             }
