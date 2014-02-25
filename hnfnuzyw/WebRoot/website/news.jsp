@@ -69,7 +69,18 @@
                         for(NewsDto n : hotNews) {
                     %>
                         <li>
-                            <a href="<%=basePath%>news/view?id=<%=n.getId()%>"><%=n.getTitle()%></a>
+                            <a href="<%=basePath%>news/view?id=<%=n.getId()%>">
+                                <%
+                                    if(n.getTitle().length() > 11) {
+                                        out.print(n.getTitle().substring(0,10) + "...");
+                                    } else {
+                                        out.print(n.getTitle());
+                                    }
+                                %>
+                                <span style="float:right;">
+                                    <% out.print(sdf.format(n.getDate()));%>
+                                </span>
+                            </a>
                         </li>
                     <%
                         }

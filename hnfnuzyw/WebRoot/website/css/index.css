@@ -568,8 +568,8 @@ label {
     height: 26px;
     overflow: hidden;
     line-height:26px;
-    padding-left: 10px;
-    background: url(../image/icon.jpg) no-repeat;
+    padding-left: 20px;
+    background: url(../image/icon.png) no-repeat;
 }
 /**news view**/
 /**online source view**/
