@@ -297,7 +297,7 @@ a.left,a.right{
     height: 101%;
     width: 20px;
     cursor: pointer;
-    z-index: 10;
+    z-index: 101;
     filter: alpha(opacity=60);
     -moz-opacity: 0.6;
     -khtml-opacity: 0.6;

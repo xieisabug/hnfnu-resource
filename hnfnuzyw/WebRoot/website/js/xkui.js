@@ -464,10 +464,12 @@ var Scroll = new Class({
             this.pages.removeClass('show');
             this.pages.addClass('visible');
             this.pages.setStyles({
-                left:this.option.width
+                left:this.option.width,
+                'z-index':1
             });
             this.pages[this.currentPage - 1].setStyles({
                 'opacity' : 1,
+                'z-index':100,
                 left:0
             });
 
@@ -480,21 +482,29 @@ var Scroll = new Class({
                     duration: 1000
                 });
                 this.out.transition = Fx.Transitions.Cubic.easeOut;
-                if (to > this.currentPage) {
+                if (to > this.currentPage){
+                    this.animate.cancel();
+                    this.out.cancel();
                     this.animate.start({
                         left: [this.option.width, 0],
-                        opacity: [0, 1]
-                    });
-                    this.out.start({
-                        opacity: [1, 0]
-                    });
-                } else {
-                    this.animate.start({
-                        opacity: [0, 1]
+                        opacity: [0, 1],
+                        'z-index': [1, 100]
                     });
                     this.out.start({
                         opacity: [1, 0],
-                        left: [0, this.option.width]
+                        'z-index': [100,1]
+                    });
+                } else {
+                    this.animate.cancel();
+                    this.out.cancel();
+                    this.animate.start({
+                        opacity: [0, 1],
+                        'z-index': [1,100]
+                    });
+                    this.out.start({
+                        opacity: [1, 0],
+                        left: [0, this.option.width],
+                        'z-index': [100,1]
                     });
                 }
                 this.currentPage = to;
