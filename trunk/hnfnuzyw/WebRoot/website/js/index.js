@@ -99,7 +99,7 @@ window.addEvent('domready',function(){
 
     //生成专题的滚动
     new Scroll($('topic-content'), {
-        width:'auto',
+        width:958,
         height:358
     }).withAnimate('fadeSlide');
 
