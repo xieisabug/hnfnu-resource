@@ -89,7 +89,7 @@
             <table>
                 <tr>
                     <td style="width: 120px; text-align: center" rowspan="4">
-                        <img src="<%=basePath+"website/image/file_icon_"+sourceVo.getMediaFormat()+".png"%>" style="width:77px; height:77px; display: inline;">
+                        <img src="<%=basePath+"website/image/file_icon_"+sourceVo.getMediaFormat().toLowerCase()+".png"%>" style="width:77px; height:77px; display: inline;">
                     </td>
                     <td style="width: 200px;">
                         <div style="width: 190px; height: 15px;margin-top: 0;word-break: break-all;overflow: hidden;">

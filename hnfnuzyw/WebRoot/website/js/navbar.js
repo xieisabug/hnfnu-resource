@@ -24,6 +24,9 @@ window.addEvent('domready', function () {
         var option = {
             width:120
         };
+        if(Browser.ie && !Browser.ie8) {
+            option.width = 122;
+        }
         if(index == 0){
             new Button(item,option).addClass('btn-group-left').addClass('btn-blue-border');
         } else if(index == 3) {
