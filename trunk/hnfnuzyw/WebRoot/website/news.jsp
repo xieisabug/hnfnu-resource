@@ -62,8 +62,8 @@
                 <div class="panel-head-icon"></div>
                 <span>最近新闻</span>
             </div>
-            <div>
-                <ul class="hot-news-content">
+            <div style="padding-left:0px;">
+                <ul class="hot-news-content" >
                     <%
                         List<NewsDto> hotNews = (List<NewsDto>)request.getAttribute("hotNews");
                         for(NewsDto n : hotNews) {
@@ -71,8 +71,8 @@
                         <li>
                             <a href="<%=basePath%>news/view?id=<%=n.getId()%>">
                                 <%
-                                    if(n.getTitle().length() > 11) {
-                                        out.print(n.getTitle().substring(0,10) + "...");
+                                    if(n.getTitle().length() > 12) {
+                                        out.print(n.getTitle().substring(0,11) + "...");
                                     } else {
                                         out.print(n.getTitle());
                                     }
