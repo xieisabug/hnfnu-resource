@@ -104,7 +104,7 @@
                 <div class="panel-head-icon"></div>
                 <span>最热专题</span>
             </div>
-            <div class="hot-topic-list">
+            <div class="hot-topic-list" style="width:282px; padding-left:0px;">
                 <ul>
                     <%
                         for (TopicDto t : tenHotTopics) {
