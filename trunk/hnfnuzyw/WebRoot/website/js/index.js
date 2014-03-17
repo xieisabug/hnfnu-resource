@@ -66,12 +66,12 @@ window.addEvent('domready',function(){
             for(var i = 0; i < list.length; i++) {
                 html += '<li>';
                 html += '<a target="_blank" href="' + basePath + 'news/view?id='+ list[i].id +'">';
-                if(list[i].title.length > 11) {
-                    html += list[i].title.substring(0,10) + '...';
+                if(list[i].title.length > 12) {
+                    html += list[i].title.substring(0,11) + '...';
                 } else {
                     html += list[i].title;
                 }
-                html += '<span style="float: right;">'+ new Date(list[i].date).Format('yyyy-MM-dd')+'</span>'
+                html += '<span style="float: right;margin-right:5px;">'+ new Date(list[i].date).Format('yyyy-MM-dd')+'</span>'
                 html += '</a>';
                 html += '</li>';
             }
