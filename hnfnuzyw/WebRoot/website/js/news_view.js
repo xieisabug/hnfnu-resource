@@ -3,6 +3,6 @@ window.addEvent('domready', function () {
         contentWidth: 622
     });
     var hotNewsPanel = new Panel($('hot-news-panel'), {
-        contentWidth:272
+        contentWidth:285
     })
 });
