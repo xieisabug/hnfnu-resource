@@ -654,9 +654,12 @@ label {
 }
 .choose-list>ul>li {
     float: left;
-    margin-left: 25px;
+    margin-left: 5px;
+    padding-left: 20px;
+    background: url(../image/icon.png) no-repeat;
+    list-style: none;
     width: 109px;
-    height: 20px;
+    height: 26px;
     padding-top: 5px;
     font-size: 0.9em;
 }
