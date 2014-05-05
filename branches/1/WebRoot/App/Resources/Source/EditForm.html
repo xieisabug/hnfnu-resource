@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <link href="../../Lib/ligerUI/skins/Aqua/css/ligerui-all.css" type="text/css" rel="stylesheet"/>
+    <script src="../../Lib/jquery/jquery-1.5.2.min.js" type="text/javascript"></script>
+    <script src="../../Lib/ligerUI/js/ligerui.min.js" type="text/javascript"></script>
+    <script src="../../Lib/jquery-validation/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="../../Lib/jquery-validation/jquery.metadata.js" type="text/javascript"></script>
+    <script src="../../Lib/jquery-validation/messages_cn.js" type="text/javascript"></script>
+    <script src="../../Lib/jquery.form.js" type="text/javascript"></script>
+    <script src="../../Lib/Uploadify/jquery.uploadify.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="../../Lib/Uploadify/swfobject.js"></script>
+    <script src="../../Util/Form.js" type="text/javascript"></script>
+    <script src="../../Util/String.js" type="text/javascript"></script>
+    <script src="../../Util/Url.js" type="text/javascript"></script>
+</head>
+<body>
+<form>
+</form>
+</body>
+</html>
+<script type="text/javascript">
+    var sourceForm = null;
+    $(function () {
+        var groupId = Url.getArgs();
+        formInit(groupId);
+    });
+    function formInit(groupId) {
+        var groupicon = "../../../App/Lib/ligerUI/skins/icons/communication.gif";
+        sourceForm = $('form');
+
+        $.ajax({
+            url:'../../../resources/formSelect.action',
+            type:'post',
+            data:groupId,
+            success:function (data) {
+                sourceForm.ligerForm({
+                    inputWidth:200,
+                    labelWidth:120,
+                    space:40,
+                    fields:[
+                        {
+                            name:"id",
+                            type:"hidden"
+                        },
+                        {
+                            display:"资源名字",
+                            name:"name",
+                            newline:true,
+                            type:"text",
+                            group:"必填信息",
+                            groupicon:groupicon,
+                            validate:{
+                                required:true,
+                                maxlength:30
+                            }
+                        },
+                        {
+                            display:"所属课程",
+                            name:"courseId",
+                            type:"select",
+                            comboboxName:"courseName",
+                            options:{
+                                textField:"name",
+                                valueField:"id",
+                                hideOnLoseFocus:true,
+                                valueFieldID:"courseId",
+                                onBeforeOpen:window.parent.openTreeDialog
+                            },
+                            validate:{
+                                required:true
+                            }
+                        },
+                        {
+                            display:"所属分类",
+                            name:"categoryIdList",
+                            type:"select",
+                            comboboxName:"categoryNameList",
+                            options:{
+                                textField:"name",
+                                valueField:"id",
+                                hideOnLoseFocus:true,
+                                isMultiSelect:true,
+                                isShowCheckBox:true,
+                                valueFieldID:"categoryIdList",
+                                data:data.categoryList
+                            }
+                        },
+                        {
+                            name:'keyWords',
+                            display:'关键字(用;分割)',
+                            type:'text',
+                            group:"选填信息",
+                            groupicon:groupicon,
+                            newline:true,
+                            width:200
+                        },
+                        {
+                            name:'mediaType',
+                            display:'媒体类型',
+                            type:"select",
+                            comboboxName:"mediaTypeName",
+                            options:{
+                                textField:"name",
+                                valueField:"id",
+                                hideOnLoseFocus:true,
+                                isMultiSelect:false,
+                                isShowCheckBox:false,
+                                valueFieldID:"mediaType",
+                                data:[
+                                    {name:"图片", id:"图片"},
+                                    {name:"动画", id:"动画"},
+                                    {name:"声音", id:"声音"},
+                                    {name:"视频", id:"视频"},
+                                    {name:"文档", id:"文档"},
+                                    {name:"程序", id:"程序"}
+                                ]
+                            }
+                        },
+                        {
+                            name:'mediaFormat',
+                            display:'媒体格式',
+                            type:'text',
+                            newline:true,
+                            width:200
+                        },
+                        {
+                            name:'playTime',
+                            display:'播放时间',
+                            type:'text',
+                            newline:true,
+                            width:200,
+                            validate:{
+                                maxlength:20
+                            }
+                        },
+                        {
+                            name:'fileSize',
+                            type:'hidden'
+                        },
+                        {
+                            name:'author',
+                            display:'作者',
+                            type:'text',
+                            newline:true,
+                            width:200,
+                            validate:{
+                                maxlength:100
+                            }
+                        },
+                        {
+                            name:'publisher',
+                            display:'出品方',
+                            type:'text',
+                            newline:true,
+                            width:200
+                        },
+                        {
+                            name:'description',
+                            display:'描述',
+                            type:'text',
+                            newline:true,
+                            width:200
+                        },
+                        {
+                            name:'price',
+                            display:'价格',
+                            type:'number',
+                            newline:true,
+                            width:200
+                        }
+                    ]
+                });
+                $.metadata.setType("attr", "validate");
+                sourceForm.validate({
+                    debug:true,
+                    onkeyup:false,
+                    errorPlacement:function (error, element) {
+                        error.appendTo(element.parent().parent().parent().parent());
+                    }
+                });
+                Form.loadForm(sourceForm, window.parent.sourceSelectData);
+                var idList = window.parent.sourceSelectData.categoryIdList.replaceAll(/,/g, ';');
+                liger.get("categoryNameList").selectValue(idList);
+            }
+        });
+    }
+    function setCourseData(data) {
+        $("#courseId", sourceForm).val(data.data.id);
+        $("#course", sourceForm).val(data.data.name);
+    }
+</script>

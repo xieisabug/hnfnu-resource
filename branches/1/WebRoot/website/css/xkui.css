@@ -1,0 +1,358 @@
+/************    Common    **************/
+.visible {
+    visibility: visible;
+}
+.hidden {
+    visibility: hidden;
+}
+/************    Common    **************/
+/************    Layout    **************/
+.row {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.row:before,
+.row:after {
+    display: table;
+    content: " ";
+}
+
+.row:after {
+    clear: both;
+}
+
+.row:before,
+.row:after {
+    display: table;
+    content: " ";
+}
+
+.row:after {
+    clear: both;
+}
+.center {
+    margin: 0 auto;
+    width: 960px;
+}
+/************    Layout    **************/
+/************    Panel    **************/
+.panel-head {
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#fcfeff', endColorstr = '#d5edfd');
+    /*INNER ELEMENTS MUST NOT BREAK THIS ELEMENTS BOUNDARIES*/
+    /*Element must have a height (not auto)*/
+    /*All filters must be placed together*/
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr = '#fcfeff', endColorstr = '#d5edfd')";
+    /*Element must have a height (not auto)*/
+    /*All filters must be placed together*/
+    background-image: -moz-linear-gradient(top, #fcfeff, #d5edfd);
+    background-image: -ms-linear-gradient(top, #fcfeff, #d5edfd);
+    background-image: -o-linear-gradient(top, #fcfeff, #d5edfd);
+    background-image: -webkit-gradient(linear, center top, center bottom, from(#fcfeff), to(#d5edfd));
+    background-image: -webkit-linear-gradient(top, #fcfeff, #d5edfd);
+    background-image: linear-gradient(top, #fcfeff, #d5edfd);
+    /*--IE9 DOES NOT SUPPORT CSS3 GRADIENT BACKGROUNDS--*/
+
+    -moz-border-radius: 4px 4px 0 0;
+    -webkit-border-radius: 4px 4px 0 0;
+    border-radius: 4px 4px 0 0;
+    border:1px solid #75ade7;
+    height: 33px;
+    line-height: 30px;
+    font-size: 0.9em;
+}
+.panel-head-icon {
+    margin: 6px 15px 0 10px;
+    height: 16px;
+    width: 16px;
+    float: left;
+}
+.panel-head-icon-arrow {
+    background-image: url(../image/panel-head-icon-arrow.png);
+}
+.panel-content {
+    -moz-border-radius: 0 0 4px 4px;
+    -webkit-border-radius: 0 0 4px 4px;
+    border-radius: 0 0 4px 4px;
+    border:1px solid #75ade7;
+    border-top: 0;
+    padding: 13px;
+    overflow: hidden;
+}
+/************    Panel    **************/
+/************    Input    **************/
+.input-text {
+    display: block;
+    padding: 6px 12px;
+    font-size: 0.9em;
+    line-height: 1.428571429;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.input-text:focus {
+    border-left: 4px solid #75ade7;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+}
+
+.input-group-center {
+    float: left;
+    border-radius: 0;
+    margin: 0;
+}
+/************    Input    **************/
+/************    Button    **************/
+.btn {
+    color: #333;
+    background-color: #fff;
+    outline: none;
+    cursor: pointer;
+    margin-bottom: 0;
+    font-size: 0.8em;
+    font-weight: normal;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-user-select: none;
+}
+
+.btn:hover {
+    background: #efefef;
+}
+
+.abtn {
+    padding: 9px 12px;
+    text-decoration: none;
+}
+:root .abtn {
+    padding-right:12px  \0/IE9;
+    padding-left:13px \0/IE9;
+}
+
+.btn-group {
+    display: inline-block;
+}
+
+.btn-group-left {
+    float: left;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.btn-group-right {
+    float:left;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+}
+
+.btn-group-center {
+    float:left;
+    border-radius: 0;
+}
+.btn-blue-border {
+    border: 1px solid #75ade7;
+}
+/************    Button    **************/
+/************    Tab    **************/
+.tabTitles {
+    margin: 0;
+    border-bottom: 1px solid #DDD;
+    height: 33px;
+    width: 100%;
+}
+
+.tabTitle {
+    text-align: center;
+    margin-right: 5px;
+    font-size: 0.8em;
+    background: #F4F5F5;
+    float: left;
+    background: -moz-linear-gradient(top, #FDFDFD, #F4F5F5);
+    background: -webkit-gradient(linear, left top, left bottom, from(#FDFDFD), to(#F4F5F5));
+    border: 1px solid #CCC;
+    border-bottom: none;
+    color: #000;
+    filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#FDFDFD', EndColorStr='#F4F5F5');
+    padding: 8px 0 0;
+    height: 24px;
+    /*width: 74px;*/
+    -moz-border-radius-topleft: 6px;
+    -moz-border-radius-topright: 6px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    list-style: none;
+    cursor: pointer;
+}
+
+.tabTitle.selected {
+    color: #B86364;
+    height: 25px;
+    font-weight: bolder;
+}
+
+.tabContent {
+    display: none;
+    background: #F4F5F5;
+    padding: 15px;
+    border: 1px solid #75ade7;
+    border-top: none;
+}
+
+.tabContent.selected {
+    display: block;
+}
+
+/************    Tab    **************/
+/************    Select    **************/
+.caret {
+    display: inline-block;
+    width: 1px;
+    height: 1px;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-top: 4px solid;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+}
+
+.selectItemDiv {
+    background: #ffffff;
+    display: none;
+    margin: 2px 0 0;
+    list-style: none;
+    border: 1px solid #cccccc;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    background-clip: padding-box;
+}
+
+.selectItemDiv ul {
+    margin: 0;
+    padding: 20px 5px 20px 5px;
+    height: 33px;
+}
+
+.selectItemDiv li {
+    font-size: 0.8em;
+    list-style: none;
+    height: 20px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.selectItemDiv li:hover {
+    background-color: #efefef;
+}
+
+/************    Select    **************/
+/************    Scroll    **************/
+.scroll-content {
+    position: relative;
+    overflow: hidden;
+}
+.scroll-item {
+    position: absolute;
+    opacity: 0;
+    left:0;
+    right:0;
+    visibility: hidden;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+.show {
+    visibility: visible;
+    opacity: 1;
+}
+.visible {
+    visibility: visible;
+}
+a.right {
+    right: 0;
+    top: 0;
+}
+.rightArrow {
+    background: url('../image/arrow_right.png') no-repeat center right;
+}
+a.left {
+    left: 0;
+    top: 0;
+}
+.leftArrow {
+    background: url('../image/arrow_left.png') no-repeat center left;
+}
+.rightArrow:hover,.leftArrow:hover {
+    background: #ddd;
+}
+a.left,a.right{
+    position: absolute;
+    height: 101%;
+    width: 20px;
+    cursor: pointer;
+    z-index: 101;
+    filter: alpha(opacity=60);
+    -moz-opacity: 0.6;
+    -khtml-opacity: 0.6;
+    opacity: 0.6;
+}
+/************    Scroll    **************/
+/************    TextArea    **************/
+.textarea {
+    outline: none;
+    border: 1px solid #ccc;
+    padding:10px;
+}
+/************    TextArea    **************/
+/************    Dialog    **************/
+.dialog-title {
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#fcfeff', endColorstr = '#d5edfd');
+    /*INNER ELEMENTS MUST NOT BREAK THIS ELEMENTS BOUNDARIES*/
+    /*Element must have a height (not auto)*/
+    /*All filters must be placed together*/
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr = '#fcfeff', endColorstr = '#d5edfd')";
+    /*Element must have a height (not auto)*/
+    /*All filters must be placed together*/
+    background-image: -moz-linear-gradient(top, #fcfeff, #d5edfd);
+    background-image: -ms-linear-gradient(top, #fcfeff, #d5edfd);
+    background-image: -o-linear-gradient(top, #fcfeff, #d5edfd);
+    background-image: -webkit-gradient(linear, center top, center bottom, from(#fcfeff), to(#d5edfd));
+    background-image: -webkit-linear-gradient(top, #fcfeff, #d5edfd);
+    background-image: linear-gradient(top, #fcfeff, #d5edfd);
+    /*--IE9 DOES NOT SUPPORT CSS3 GRADIENT BACKGROUNDS--*/
+
+    -moz-border-radius: 4px 4px 0 0;
+    -webkit-border-radius: 4px 4px 0 0;
+    border-radius: 4px 4px 0 0;
+    border:1px solid #75ade7;
+    height: 33px;
+    line-height: 30px;
+    font-size: 0.9em;
+    margin: 0;
+    padding: 0;
+}
+.ie-title {
+    background: url(../image/ie_title.png) repeat-x;
+}
+.dialog-content {
+    margin: 0;
+    padding: 0;
+    border: 1px solid #75ade7;
+    background: #fff;
+}
+.dialog{
+    -webkit-box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+/************    Dialog    **************/

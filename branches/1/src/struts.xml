@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.i18n.encoding" value="UTF-8"/>
+	<constant name="struts.objectFactory" value="spring" />
+	<constant name="struts.multipart.maxSize" value="1024000000"/> 
+	
+	 <package name="upload" namespace="/file" extends="struts-default">
+       <action name="fileUpload" class="com.hnfnu.zyw.action.resources.SourceUploadAction" method="upload">
+           <param name="savePath">/uploads</param> 
+       </action>
+       <action name="fileTopicUpload" class="com.hnfnu.zyw.action.resources.TopicSourceUploadAction" method="upload">
+           <param name="savePath">/uploads/topic</param> 
+       </action>
+        <action name="fileTopicImageUpload" class="com.hnfnu.zyw.action.resources.TopicSourceImageUploadAction" method="upload">
+           <param name="savePath">/uploads/topic/image</param> 
+       </action>
+       <action name="subjectImageUpload" class="com.hnfnu.zyw.action.resources.SubjectImageUploadAction" method="upload">
+           <param name="savePath">/uploads/subject/image</param> 
+       </action>
+       <action name="pictureUpload" class="com.hnfnu.zyw.action.resources.PictureUploadAction" method="upload">
+           <param name="savePath">/uploads/picture</param> 
+       </action>
+        <!-- 初始文件名 
+       <action name="download" class="com.hnfnu.zyw.action.resources.SourceDownloadAction" >  
+           
+            	contentType 指定下载文件的文件类型 —— application/octet-stream 表示无限制
+            	inputName 流对象名 —— 比如这里写inputStream，它就会自动去找Action中的getInputStream方法。
+            	contentDisposition 使用经过转码的文件名作为下载文件名 —— 默认格式是attachment;filename="${fileName}"，将调用该Action中的getFileName方法。
+            	bufferSize 下载文件的缓冲大小
+           
+            <result name="success" type="stream">  
+                                <param name="contentType">application/octet-stream</param>
+                                <param name="inputName">inputStream</param>
+                                <param name="contentDisposition">attachment;filename="${fileName}"</param>
+                                <param name="bufferSize">4096</param>
+           </result>
+        </action>  
+         -->  
+    </package>
+</struts>

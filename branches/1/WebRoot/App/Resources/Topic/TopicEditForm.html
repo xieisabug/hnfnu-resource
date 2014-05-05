@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <link href="../../Lib/ligerUI/skins/Aqua/css/ligerui-all.css" type="text/css" rel="stylesheet"/>
+    <script src="../../Lib/jquery/jquery-1.5.2.min.js" type="text/javascript"></script>
+    <script src="../../Lib/ligerUI/js/ligerui.min.js" type="text/javascript"></script>
+    <script src="../../Lib/jquery-validation/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="../../Lib/jquery-validation/jquery.metadata.js" type="text/javascript"></script>
+    <script src="../../Lib/jquery-validation/messages_cn.js" type="text/javascript"></script>
+    <script src="../../Lib/jquery.form.js" type="text/javascript"></script>
+    <script src="../../Lib/Uploadify/jquery.uploadify.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="../../Lib/Uploadify/swfobject.js"></script>
+    <script src="../../Util/Form.js" type="text/javascript"></script>
+    <script src="../../Util/String.js" type="text/javascript"></script>
+</head>
+<body>
+<form>
+</form>
+</body>
+</html>
+<script type="text/javascript">
+    var sourceForm = null;
+    $(function () {
+        formInit();
+    });
+    function formInit() {
+        var groupicon = "../../../App/Lib/ligerUI/skins/icons/communication.gif";
+        sourceForm = $('form');
+                sourceForm.ligerForm({
+                    inputWidth:200,
+                    labelWidth:120,
+                    space:40,
+                    fields:[
+                        {
+                            name:'id',
+                            type:"hidden"
+                        },
+                        {
+                            name:'imageUrl',
+                            type:"hidden"
+                        },
+                        {
+                            display:'专题名称',
+                            name:'name',
+                            type:'text',
+                            space:30,
+                            labelWidth:100,
+                            width:220,
+                            newline:true,
+                            validate:{
+                                required:true,
+                                maxlength:22
+                            }
+                        },
+                        {
+                            display:"是否显示",
+                            name:"isDisplay",
+                            type:"select",
+                            comboboxName:"displayS",
+                            space:30,
+                            labelWidth:100,
+                            width:220,
+                            newline:true,
+                            options:{
+                                textField:"text",
+                                valueField:"id",
+                                initValue:"0",
+                                initText:"0",
+                                hideOnLoseFocus:true,
+                                valueFieldID:"isDisplay",
+                                data:[
+                                    {
+                                        "id":"0",
+                                        "text":"0"
+                                    },
+                                    {
+                                        "id":"1",
+                                        "text":"1"
+                                    },
+                                    {
+                                        "id":"2",
+                                        "text":"2"
+                                    },
+                                    {
+                                        "id":"3",
+                                        "text":"3"
+                                    },
+                                    {
+                                        "id":"4",
+                                        "text":"4"
+                                    },
+                                    {
+                                        "id":"5",
+                                        "text":"5"
+                                    },  {
+                                        "id":"6",
+                                        "text":"6"
+                                    }
+                                ]
+
+                            }
+                        },
+                        {
+                            display:'专题简介',
+                            name:'description',
+                            type:'text',
+                            space:30,
+                            labelWidth:100,
+                            width:220,
+                            newline:true,
+                            validate:{
+                                required:true
+                            }
+                        },
+                        {
+                            display:'关键字',
+                            name:'keyWords',
+                            type:'text',
+                            space:30,
+                            labelWidth:100,
+                            width:220,
+                            newline:true
+                        },
+                        {
+                            display:"是否外链",
+                            name:"isOutlink",
+                            type:"select",
+                            width:200,
+                            space:30,
+                            labelWidth:100,
+                            comboboxName:"isOutlink",
+                            textField:"text",
+                            valueField:"id",
+                            newline:true,
+                            options:{
+                                selectBoxHeight:40,
+                                hideOnLoseFocus:true,
+                                initValue:"0",
+                                initText:"否",
+                                valueFieldID:"id",
+                                data:[
+                                    {
+                                        "id":"0",
+                                        "text":"否"
+                                    },
+                                    {
+                                        "id":"1",
+                                        "text":"是"
+                                    }
+                                ]
+
+                            }
+                        },
+                        {
+                            display:'外链地址',
+                            name:'outlink',
+                            type:'text',
+                            space:30,
+                            labelWidth:100,
+                            width:220,
+                            newline:true
+                        },
+                        {
+                            display:'备注',
+                            name:'remark',
+                            type:'text',
+                            space:30,
+                            labelWidth:100,
+                            width:220,
+                            newline:true
+                        }
+                    ]
+                });
+                $.metadata.setType("attr", "validate");
+                sourceForm.validate({
+                    debug:true,
+                    onkeyup:false,
+                    errorPlacement:function (error, element) {
+                        error.appendTo(element.parent().parent().parent().parent());
+                    }
+                });
+                window.parent.topicSelectData.imageUrl = window.parent.topicSelectData.imageUrl.replaceAll(/\\/g, '\\\\');
+                Form.loadForm(sourceForm, window.parent.topicSelectData);
+    }
+</script>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+         http://www.springframework.org/schema/context
+         http://www.springframework.org/schema/context/spring-context-3.0.xsd
+         http://www.springframework.org/schema/aop
+         http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+         http://www.springframework.org/schema/tx 
+         http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+         http://www.springframework.org/schema/task
+         http://www.springframework.org/schema/task/spring-task.xsd">
+	<!-- 使用annotation 自动注册bean,并检查@Required,@Autowired的属性已被注入 -->
+	<context:component-scan base-package="com.hnfnu.zyw" />
+	<context:annotation-config />
+    <task:annotation-driven executor="myExecutor" scheduler="myScheduler"/>
+    <task:executor id="myExecutor" pool-size="5"/>
+    <task:scheduler id="myScheduler" pool-size="10"/>
+	<!-- 数据库连接池 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+		<property name="url" value="jdbc:mysql://localhost:3306/hnfnuzyw"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="640310"></property>
+		<property name="maxActive">
+			<value>0</value>
+		</property>
+
+
+		<property name="maxWait">
+
+			<value>1000</value>
+
+		</property>
+
+		<!--自动回收连接池，避免连接池泄露 -->
+
+		<property name="removeAbandoned">
+
+			<value>false</value>
+
+		</property>
+
+		<!--超时时间(以秒数为单位)超时时间=现在的时间-程序中创建Connection的时间，如果 maxActive比较大，比如超过100，那么removeAbandonedTimeout可以设置长一点比如180，也就是三分钟无响应的连接进行回收，当然应用的不同设置长度也不同。 -->
+
+		<property name="removeAbandonedTimeout">
+
+			<value>10</value>
+
+		</property>
+
+		<!--输出回收的日志，可以详细打印出异常从而发现是在那里发生了泄漏 -->
+
+		<property name="logAbandoned">
+
+			<value>true</value>
+
+		</property>
+		
+	
+
+	</bean>
+	<!-- 导入Src目录下的jdbc.properties文件 -->
+	<context:property-placeholder location="classpath:jdbc.properties" />
+	<!--hibernate sessionFactory 创建 -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<!-- 注入数据源 -->
+		<property name="dataSource" ref="dataSource" />
+		<!-- 设置Spring取那个包中查找相应的实体类 -->
+		<property name="packagesToScan">
+			<value>com.hnfnu.zyw.*</value>
+		</property>
+		<property name="hibernateProperties">
+			<!-- <value> hibernate.dialect=org.hibernate.dialect.HSQLDialect </value> -->
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.format_sql">false</prop>
+			</props>
+		</property>
+		<!-- 配置所有PO映射文件 -->
+		<!--
+		<property name="mappingResources">
+			<list>
+				<value>com/hnfnu/zyw/vo/RoleMenuVo.hbm.xml</value>
+			</list>
+		</property>
+		 -->
+	</bean>
+
+
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory">
+		</property>
+	</bean>
+
+
+	<aop:aspectj-autoproxy/>
+</beans>

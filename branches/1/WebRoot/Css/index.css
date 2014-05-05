@@ -1,0 +1,148 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+}
+#main_body {
+    width: 99.2%;
+    margin: 0 auto;
+}
+#top_page {
+    height: 25px;
+    text-align: right;
+    background: rgb(73,116,164);
+}
+#top_page button{
+	height: 20px;
+	width: 70px;
+	margin-top:2px;
+	margin-right:15px;
+	border: 0;
+	background-color: rgb(73,116,164);
+	color:white;
+}
+#top_page button:hover {
+	background-color: #01AAEE;
+	cursor: pointer;
+}
+
+#welcome {
+    height: 92%;
+    overflow-y:scroll;
+    background: #fafafa;
+}
+
+#chart{
+    margin: 50px;
+}
+
+#chart table {
+    border: 0;
+    background: #ffffff;
+    text-align: center;
+}
+#chart table td {
+    width: 50%;
+    border: 1px solid #aaaaaa;
+}
+#chart div{
+    float: left;
+}
+
+#chart div[id],#info {
+    -moz-box-shadow: 0 0 4px #aaaaaa;
+    -webkit-box-shadow: 0 0 4px #aaaaaa;
+    box-shadow: 0 0 4px #aaaaaa;
+}
+
+#info {
+	font-size: 0.7rem;
+    margin: 50px;
+    padding: 30px;
+    background: #ffffff;
+}
+
+#info a {
+	background-color: #D95C5C;
+	color: #FFF;
+	cursor: pointer;
+	display: inline-block;
+	vertical-align: middle;
+	min-height: 1em;
+	outline: 0;
+	border: 0;
+	margin: 0 8px 0 0;
+	padding: .8em 1.5em;
+	font-size: 0.7rem;
+	text-transform: uppercase;
+	line-height: 1;
+	font-weight: 700;
+	font-style: normal;
+	text-align: center;
+	text-decoration: none;
+	background-image: -webkit-gradient(linear,top left,bottom left,from(rgba(0,0,0,0)),to(rgba(0,0,0,.05)));
+	background-image: -webkit-linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.05));
+	background-image: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.05));
+	border-radius: .25em;
+	-webkit-box-shadow: 0 0 0 1px rgba(0,0,0,.08) inset;
+	box-shadow: 0 0 0 1px rgba(0,0,0,.08) inset;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-transition: opacity .25s ease,background-color .25s ease,color .25s ease,background .25s ease,-webkit-box-shadow .25s ease;
+	transition: opacity .25s ease,background-color .25s ease,color .25s ease,background .25s ease,box-shadow .25s ease;
+}
+
+#main_menu {
+    width: 100%;
+}
+
+.menulist {
+    margin-left: 2px;
+    margin-right: 2px;
+    margin-top: 2px;
+    text-align: left;
+    color: #000;
+}
+.menulist li {
+    height: 24px;
+    line-height: 24px;
+    padding-left: 24px;
+    display: block;
+    position: relative;
+    cursor: pointer;
+    text-align: left;
+}
+.menulist li img {
+    position: absolute;
+    left: 4px;
+    top: 4px;
+    width: 16px;
+    height: 16px;
+}
+.menulist li.over {
+    background: url('../App/Lib/images/index/menuitem.gif') repeat-x 0 0;
+}
+.menulist li.over .menuitem-l {
+    background: url('../App/Lib/images/index/menuitem.gif') repeat-x 0 -24px;
+    width: 2px;
+    height: 24px;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.menulist li.over .menuitem-r {
+    background: url('../App/Lib/images/index/menuitem.gif') repeat-x -1px -24px;
+    width: 2px;
+    height: 24px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
