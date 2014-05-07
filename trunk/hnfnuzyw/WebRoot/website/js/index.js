@@ -47,7 +47,7 @@ window.addEvent('domready',function(){
         model:false,
         closeable:true
     });
-    //新闻弹出窗口
+    /*//新闻弹出窗口
     var newsDialog = new Dialog($('newsDialog'),{
         width:300,
         height:200,
@@ -79,7 +79,7 @@ window.addEvent('domready',function(){
             newsDialog.setContentHtml(html);
             newsDialog.show();
         }
-    }).get();
+    }).get();*/
     //生成所有tab
     $$(".tabGroupItem").each(function(item){
         new Tab(item, {
