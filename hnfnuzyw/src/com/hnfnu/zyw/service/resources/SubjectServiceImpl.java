@@ -41,12 +41,20 @@ public class SubjectServiceImpl implements ISubjectService {
 
 	public boolean delete(String url, int id) {
 		try {
-			String filePath = ServletActionContext.getServletContext()
+			 if(url == null||url.equals("")){
+				 subjectDao.delete(id);
+		     }else{
+		    	 String filePath = ServletActionContext.getServletContext()
 					.getRealPath("/");
 			filePath = filePath + "uploads\\subject\\image\\" + url;
+			//System.out.println("FileUtils.deleteOneFile(filePath)"+FileUtils.deleteOneFile(filePath));
+			//System.out.println("filePath"+filePath);
+		
 			if (FileUtils.deleteOneFile(filePath)) {
 				subjectDao.delete(id);
 			}
+		     }
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
