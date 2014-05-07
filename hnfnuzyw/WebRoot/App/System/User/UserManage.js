@@ -1180,7 +1180,7 @@ function manyUserManage() {
             icon:'modify',
             key:'set_many'
         },  {
-            text:'删除学生们',
+            text:'删除用户们',
             click:delete_users,
             icon:'delete',
             key:'delete_many'
