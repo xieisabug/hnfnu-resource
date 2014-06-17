@@ -43,13 +43,15 @@ public class OnlineViewAction extends ActionSupport{
 	@Qualifier("sourceCommentService")
 	private ISourceCommentService sourceCommentService;
 
-	@Action(value = "view", results={
+	@Action(value = "viewSource", results={
 			@Result(name="success", location="../../../website/online_source_view.jsp")
 			})
 	public String viewSource() {
         List<Map<String,Object>> sourceCommentTree = sourceCommentService.sourceCommentTree(id);
 		HttpServletRequest request = ServletActionContext.getRequest();
-        if(type == SourceDownloadAction.JOIN_SOURCE_TYPE) {
+		System.out.println("type==="+type);
+        if(type == SourceDownloadAction.JOIN_SOURCE_TYPE || type == 0) {
+        	System.out.println("type===JOIN_SOURCE_TYPE");
             SourceVo s = sourceVoService.load(id);
             request.setAttribute("source", s);
         } else if(type == SourceDownloadAction.TOPIC_SOURCE_TYPE){
@@ -57,7 +59,8 @@ public class OnlineViewAction extends ActionSupport{
             request.setAttribute("source", topicSubtitleSourceVo);
         }
 		request.setAttribute("sourceCommentTree", sourceCommentTree);
-        request.setAttribute("type",type==2?"source":"topic");
+		System.out.println("type"+type);
+        request.setAttribute("type",type==2?"topic":"source");
 		return SUCCESS;
 	}
 	
