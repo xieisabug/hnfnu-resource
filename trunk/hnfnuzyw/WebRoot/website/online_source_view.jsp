@@ -28,7 +28,7 @@
     if(session.getAttribute("user") != null) {
         login = true;
     }
-
+	
     if(type.equals("source")) {
         couldComment = true;
         SourceVo source = (SourceVo) request.getAttribute("source");
