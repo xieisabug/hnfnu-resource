@@ -23,6 +23,68 @@ function add_subject() {
         ]
     });
 }
+
+//修改图片
+function change_picture() {
+	subjectWin = $.ligerDialog.open({
+        width:400,
+        height:200,
+        title:'更改图片',
+        url:'ChangeSubjectImageForm.html',
+        buttons:[
+            {
+                text:'提交',
+                width:80,
+                onclick:changeSubjectImage_save
+            },
+            {
+                text:'取消',
+                width:80,
+                onclick:changeSubjectImage_cancel
+            }
+        ]
+    });
+}
+function changeSubjectImage_save() {
+	subjectFrom = subjectWin.frame.subjectFrom;
+
+    if (subjectFrom.valid()) {
+
+        var row_data = Form.parseJSON(subjectFrom);
+        var changeData = subjectGrid.getSelected();
+       /* if (row_data.groupId == "" || row_data.groupId == null) {
+            $.ligerDialog.error("未选择分组");
+            return;
+        }*/
+        // 发往服务器，返回成功后再添加到表格中
+        $.ajax({
+            url:'../../../resources/changeSubjectImage.action',
+            data:{
+            	'id':changeData.id,
+            	'imageUrl':row_data.imageUrl,
+            	'name':changeData.name,
+            	'groupId':changeData.groupId,
+            	'remark':changeData.remark
+            },
+            type:'post',
+            success:function (data) {
+                if (data.success) {
+                    refresh_subject();
+                    $.ligerDialog.tip({
+                        title:'提示信息',
+                        content:data.message
+                    });
+                    subjectWin.close();
+                } else {
+                    $.ligerDialog.error(data.message);
+                }
+            }
+        });
+    }
+}
+function changeSubjectImage_cancel() {
+}
+
 // 增加学科的保存按钮事件
 function add_save() {
     subjectFrom = subjectWin.frame.subjectFrom;
@@ -272,6 +334,8 @@ function refresh_subject() {
     $("#pageloading").hide();
 
 }
+
+
 // 初始化表格
 $(function () {
     var toolbarItems = [
@@ -292,6 +356,11 @@ $(function () {
             click:delete_subject,
             icon:'delete',
             key:'delete'
+        },{
+            text:'更改图片',
+            click:change_picture,
+            icon:'modify',
+            key:'change_picture'
         }
     ];
     var menuId = window.parent.tab.getSelectedTabItemID();
