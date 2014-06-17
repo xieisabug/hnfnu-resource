@@ -67,7 +67,11 @@ public class NewsAction extends AopNoSuchMethodErrorSolveBaseAction implements
      */
     @Action(value = "updateNews")
     public String update() {
-
+    	// 获取当前用户
+        ActionContext context = ActionContext.getContext();
+        Map<String, Object> session = context.getSession();
+        UserDto user = (UserDto) session.get("user");
+        news.setCreateUserId(user.getId());
         success = newsService.update(news);
         newsList = newsService.listNews();
         if (success) {
