@@ -56,6 +56,20 @@ public class SubjectAction extends AopNoSuchMethodErrorSolveBaseAction
 		return SUCCESS;
 	}
 
+
+	// 改变图片
+	@Action(value = "changeSubjectImage")
+	public String changeSubjectImage() {
+		String[] s = subject.getImageUrl().split("\\\\");
+		subject.setImageUrl(s[s.length-1]);
+		success = subjectService.update(subject);
+		if (success) {
+			message = "图片修改成功！";
+		} else {
+			message = "图片修改失败！";
+		}
+		return SUCCESS;
+	}
 	// 修改学科
 	@Action(value = "updateSubject")
 	public String update() {

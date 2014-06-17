@@ -49,6 +49,8 @@ public class NewsServiceImpl implements INewsService {
     public NewsDto get(int id) {
         try {
             NewsDto n = newsDao.get(id);
+            System.out.println("n"+n);
+            System.out.println("userDao.get(n.getCreateUserId())"+userDao.get(n.getCreateUserId()));
             n.setCreateUserName(userDao.get(n.getCreateUserId()).getName());
             return n;
         } catch (Exception e) {

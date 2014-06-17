@@ -66,6 +66,7 @@ public class FreemarkerUtil {
 		FileWriterWithEncoding out = null;
 		try {
 			//通过一个文件输出流，就可以写到相应的文件中
+			//System.out.println("filePath"+filePath);
 			out = new FileWriterWithEncoding(new File(filePath+fileName),"utf-8");
 			Template temp = this.getTemplate(name);
 			temp.process(root, out);
