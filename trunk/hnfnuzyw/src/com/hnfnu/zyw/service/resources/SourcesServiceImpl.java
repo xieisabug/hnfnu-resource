@@ -182,7 +182,7 @@ public class SourcesServiceImpl implements ISourceService {
 			for (int i = 0; i < filePakege.length; i++) {
 				//System.out.println(filePakege[i]);
 				if(!filePakege[i].equals("subject") && !filePakege[i].equals("topic")
-						&& !filePakege[i].equals("user")){
+						&& !filePakege[i].equals("user") && !filePakege[i].equals("picture")){
 					//如果数据库不存在这个图片的记录则删除该图片
 					File file2 = new File(filePath
 						+ "\\"+filePakege[i]);
