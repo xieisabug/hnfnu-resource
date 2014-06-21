@@ -138,7 +138,106 @@ function add_topic_subtille() {
     });
 
 }
-
+//修改专题的二级标题
+function update_topic_subtille() {
+	
+	 /*if (!topicGrid.getSelected()) {
+	        $.ligerDialog.warn('请选择您要修改的行.');
+	        return;
+	    }
+	    topicSelectData = topicGrid.getSelected();
+	    if (topicSelectData.isOutlink == "否") {
+	        topicSelectData.isOutlink = 0;
+	    } else {
+	        topicSelectData.isOutlink = 1;
+	    }
+	    if (topicSelectData.isDisPlay == "否") {
+	        topicSelectData.isDisplay = 0;
+	    } else {
+	        topicSelectData.isDisplay = 1;
+	    }
+	    topicWin = $.ligerDialog.open({
+	        width:400,
+	        height:280,
+	        title:'编辑专题',
+	        url:'TopicEditForm.html',
+	        buttons:[
+	            {
+	                text:'提交',
+	                width:80,
+	                onclick:edit_save
+	            },
+	            {
+	                text:'取消',
+	                width:80,
+	                onclick:edit_cancel
+	            }
+	        ]
+	    });*/
+	 
+    if (!subtitleGrid.getSelected()) {
+        $.ligerDialog.warn('请选择您要修改的二级标题.');
+        return;
+    }
+    
+    subtitleSelectData = subtitleGrid.getSelected();
+    topicSubtitleFromInit();
+    Form.loadForm(topicSubtitleFrom, subtitleSelectData);
+    
+    topicWin = $.ligerDialog.open({
+        width:400,
+        height:200,
+        title:'修改二级标题',
+        target:topicSubtitleFrom,
+        buttons:[
+            {
+                text:'提交',
+                width:80,
+                onclick:update_subtitle_save
+            },
+            {
+                text:'取消',
+                width:80,
+                onclick:update_subtitle_cancel
+            }
+        ]
+    });
+}
+//修改专题的二级标题的保存按钮事件
+function update_subtitle_save() {
+    if (topicSubtitleFrom.valid()) {
+        var row_data = Form.parseJSON(topicSubtitleFrom);
+        var data2 = topicGrid.getSelected();
+        // 发往服务器，返回成功后再添加到表格中
+        $.ajax({
+            url:'../../../resources/updateTopicSubtitle.action',
+            data:{
+            	"id":row_data.id,
+                "topicId":data2.id,
+                "subtitle":row_data.subtitle,
+                "isAuto":0,
+                "remark":row_data.remark
+            },
+            type:'post',
+            success:function (data) {
+                if (data.success) {
+                	subtitleGrid.update(subtitleGrid.getSelected(), data.model);
+                	topicWin.close();
+                    $.ligerDialog.tip({
+                        title:'提示信息',
+                        content:data.message
+                    });
+                } else {
+                    $.ligerDialog.error(data.message);
+                }
+            }
+        });
+    }
+}
+// 修改专题的二级标题的取消按钮事件
+function update_subtitle_cancel() {
+	topicWin.close();
+}
 // 增加专题的二级标题的保存按钮事件
 function add_subtitle_save() {
     if (topicSubtitleFrom.valid()) {
@@ -785,6 +884,12 @@ function query_topic_subtille() {
             text:'增加二级标题',
             click:add_topic_subtille,
             icon:'add',
+            key:'add'
+        },
+        {
+            text:'修改二级标题',
+            click:update_topic_subtille,
+            icon:'modify',
             key:'modify'
         },{
             text:'查看专题专有资源',
