@@ -137,6 +137,7 @@ public class TopicServiceImpl implements ITopicService {
 			for (int i = 0; i < s.size(); i++) {
 				set.add(s.get(i).getImageUrl());
 			}
+			System.out.println("filePath"+filePath);
 			File file = new File(filePath);
 			String images[];
 			images = file.list();
