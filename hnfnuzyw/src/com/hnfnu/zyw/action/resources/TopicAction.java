@@ -43,7 +43,7 @@ public class TopicAction extends AopNoSuchMethodErrorSolveBaseAction implements
 	@Autowired
 	@Qualifier("topicService")
 	private ITopicService topicService;
-	
+
 	@Autowired
 	@Qualifier("topicSubtitleSourceVoService")
 	private ITopicSubtitleSourceVoService topicSubtitleSourceVoService;
@@ -51,13 +51,11 @@ public class TopicAction extends AopNoSuchMethodErrorSolveBaseAction implements
 	@Autowired
 	@Qualifier("ftl_indexService")
 	private IIndexService indexService;
-	
+
 	@Autowired
 	@Qualifier("ftl_topicService")
 	private FtlITopicService ftl_topicService;
 
-	
-	
 	// 添加专题
 	@Action(value = "addTopic")
 	public String add() {
@@ -98,9 +96,18 @@ public class TopicAction extends AopNoSuchMethodErrorSolveBaseAction implements
 	// 修改专题
 	@Action(value = "updateTopic")
 	public String update() {
+
+		// 获取当前时间
 		Date date = new Date();
 		Timestamp timeStamp = new Timestamp(date.getTime());
+		topic.setCreateDate(timeStamp);
 		topic.setLastUpdateDate(timeStamp);
+		// 获取当前用户
+		ActionContext context = ActionContext.getContext();
+		Map<String, Object> session = context.getSession();
+		UserDto u = (UserDto) session.get("user");
+		topic.setCreateUserId(u.getId());
+
 		success = topicService.update(topic);
 		if (success) {
 			indexService.getTopics();
@@ -111,22 +118,16 @@ public class TopicAction extends AopNoSuchMethodErrorSolveBaseAction implements
 		return SUCCESS;
 	}
 
-	/*// 浏览一次浏览次数就加1
-	@Action(value = "topicAddViewTimes")
-	public String topicAddViewTimes() {
-		TopicDto t  =  topicService.load(topic.getId());
-		t.setViewTimes(t.getViewTimes()+1);
-		success = topicService.update(t);
-		if (success) {
-			indexService.getTopics();
-			message = "专题浏览次数增加成功！";
-		} else {
-			message = "专题浏览次数增加失败！";
-		}
-		return SUCCESS;
-	}*/
+	/*
+	 * // 浏览一次浏览次数就加1
+	 * 
+	 * @Action(value = "topicAddViewTimes") public String topicAddViewTimes() {
+	 * TopicDto t = topicService.load(topic.getId());
+	 * t.setViewTimes(t.getViewTimes()+1); success = topicService.update(t); if
+	 * (success) { indexService.getTopics(); message = "专题浏览次数增加成功！"; } else {
+	 * message = "专题浏览次数增加失败！"; } return SUCCESS; }
+	 */
 
-	
 	/**
 	 * 根据专题ID查询一个专题
 	 * 
@@ -134,7 +135,7 @@ public class TopicAction extends AopNoSuchMethodErrorSolveBaseAction implements
 	 */
 	@Action(value = "loadTopic")
 	public String load() {
-		
+
 		topic = topicService.load(topic.getId());
 		if (topic != null) {
 			topic.setViewTimes(topic.getViewTimes() + 1);
@@ -151,7 +152,7 @@ public class TopicAction extends AopNoSuchMethodErrorSolveBaseAction implements
 
 	@Action(value = "deleteTopic")
 	public String delete() {
-		success = topicService.delete(topic.getImageUrl(),topic.getId());
+		success = topicService.delete(topic.getImageUrl(), topic.getId());
 		if (success) {
 			indexService.getTopics();
 			message = "删除专题成功！";
@@ -200,6 +201,7 @@ public class TopicAction extends AopNoSuchMethodErrorSolveBaseAction implements
 		topicTree = topicService.topicTree();
 		return SUCCESS;
 	}
+
 	@Action(value = "clearTopicSourceFile")
 	public String clearFile() {
 		success = topicSubtitleSourceVoService.clearFile();
@@ -210,6 +212,7 @@ public class TopicAction extends AopNoSuchMethodErrorSolveBaseAction implements
 		}
 		return SUCCESS;
 	}
+
 	/* get set */
 	public TopicDto getModel() {
 		return topic;
